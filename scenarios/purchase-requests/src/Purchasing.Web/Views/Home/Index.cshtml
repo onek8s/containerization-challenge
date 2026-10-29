@@ -1,0 +1,27 @@
+@model DashboardModel
+@{
+    ViewBag.Title = "Overview";
+}
+<h1>Hello @Model.User.DisplayName</h1>
+
+@if (Model.Approvals.Any())
+{
+    <section>
+        <h2>Waiting for your approval (@Model.Approvals.Count)</h2>
+        @Html.Partial("_RequestTable", Model.Approvals)
+    </section>
+}
+
+@if (Model.ReadyToOrder.Any())
+{
+    <section>
+        <h2>Approved and ready to order (@Model.ReadyToOrder.Count)</h2>
+        @Html.Partial("_RequestTable", Model.ReadyToOrder)
+    </section>
+}
+
+<section>
+    <h2>My recent requests</h2>
+    <p><a class="button" href="@Url.Action("Create", "Requests")">New purchase request</a></p>
+    @Html.Partial("_RequestTable", Model.MyRequests.Take(10))
+</section>

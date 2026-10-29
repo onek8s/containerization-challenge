@@ -1,0 +1,25 @@
+@model VanArsdel.Integration.Tracking.Models.UserEditModel
+@{ ViewBag.Title = Model.IsNew ? "New user" : Model.UserName; }
+<p>@Html.ActionLink("← Users", "Index")</p>
+<h2>@ViewBag.Title</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.IsNew)
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="col-md-5" style="float:none">
+        <div class="form-group">
+            @Html.LabelFor(m => m.UserName)
+            @if (Model.IsNew) { @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" }) } else { @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @readonly = "readonly" }) }
+            @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">@Html.LabelFor(m => m.DisplayName) @Html.TextBoxFor(m => m.DisplayName, new { @class = "form-control" }) @Html.ValidationMessageFor(m => m.DisplayName, "", new { @class = "text-danger" })</div>
+        <div class="form-group">@Html.LabelFor(m => m.Email) @Html.TextBoxFor(m => m.Email, new { @class = "form-control" }) @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })</div>
+        <div class="form-group">@Html.LabelFor(m => m.PartnerId) @Html.TextBoxFor(m => m.PartnerId, new { @class = "form-control" }) @Html.ValidationMessageFor(m => m.PartnerId, "", new { @class = "text-danger" })</div>
+        <div class="checkbox"><label>@Html.CheckBoxFor(m => m.CustomerService) Customer service (all partners)</label></div>
+        <div class="checkbox"><label>@Html.CheckBoxFor(m => m.Admin) Manages portal users</label></div>
+        <div class="checkbox"><label>@Html.CheckBoxFor(m => m.Locked) Locked</label></div>
+        <div class="form-group">@Html.LabelFor(m => m.InitialPassword) @Html.PasswordFor(m => m.InitialPassword, new { @class = "form-control" }) @Html.ValidationMessageFor(m => m.InitialPassword, "", new { @class = "text-danger" })</div>
+        <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+}

@@ -1,0 +1,37 @@
+<?xml version="1.0" ?>
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
+  <s:Body>
+    <GetApprovedTimesheetLinesResponse xmlns="http://schemas.lucerne-eng.example/erp/projects/2016/03">
+      <GetApprovedTimesheetLinesResult xmlns:a="http://schemas.lucerne-eng.example/erp/projects/2016/03/data" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+        <a:ErpTimesheetLine>
+          <a:LineId>900377</a:LineId>
+          <a:EmployeeNo>10109</a:EmployeeNo>
+          <a:ProjectNo>P18007</a:ProjectNo>
+          <a:ActivityCode>DSGN</a:ActivityCode>
+          <a:WorkDate>2019-06-04T00:00:00</a:WorkDate>
+          <a:Quantity>7</a:Quantity>
+          <a:ApprovalState>Approved</a:ApprovalState>
+        </a:ErpTimesheetLine>
+        <a:ErpTimesheetLine>
+          <a:LineId>900378</a:LineId>
+          <a:EmployeeNo>10109</a:EmployeeNo>
+          <a:ProjectNo>P18007</a:ProjectNo>
+          <a:ActivityCode>DSGN</a:ActivityCode>
+          <a:WorkDate>2019-06-05T00:00:00</a:WorkDate>
+          <a:Quantity>6</a:Quantity>
+          <a:ApprovalState>Approved</a:ApprovalState>
+        </a:ErpTimesheetLine>
+        <a:ErpTimesheetLine>
+          <a:LineId>900379</a:LineId>
+          <a:EmployeeNo>10109</a:EmployeeNo>
+          <a:ProjectNo>P18007</a:ProjectNo>
+          <a:ActivityCode>MEET</a:ActivityCode>
+          <a:WorkDate>2019-06-07T00:00:00</a:WorkDate>
+          <a:Quantity>9.5</a:Quantity>
+          <a:ApprovalState>Approved</a:ApprovalState>
+        </a:ErpTimesheetLine>
+        <!-- further lines omitted -->
+      </GetApprovedTimesheetLinesResult>
+    </GetApprovedTimesheetLinesResponse>
+  </s:Body>
+</s:Envelope>

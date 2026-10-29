@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>7.3</LangVersion>
+    <RootNamespace>Contoso.Purchasing.Core</RootNamespace>
+    <Version>2.4.1</Version>
+    <Company>Contoso Manufacturing</Company>
+    <Product>Purchase Requests</Product>
+  </PropertyGroup>
+
+</Project>

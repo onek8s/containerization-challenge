@@ -1,0 +1,13 @@
+@model SignModel
+@{ ViewData["Title"] = "Sign casebook"; }
+<div class="narrow">
+    <h1>Sign casebook @Model.SubjectNumber</h1>
+    <p>@Model.Forms forms are complete and will be signed.</p>
+    <form method="post">
+        <div asp-validation-summary="All" class="validation"></div>
+        <input type="hidden" asp-for="SubjectNumber" />
+        <label class="check"><input asp-for="Confirm" /> I approve the data in this casebook as accurate and complete. This electronic signature is the legally binding equivalent of my handwritten signature.</label>
+        <label>Password <input asp-for="Password" autocomplete="current-password" /></label>
+        <button type="submit">Sign</button>
+    </form>
+</div>

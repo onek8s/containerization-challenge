@@ -1,0 +1,22 @@
+@page
+@model FreightRates.Admin.Pages.Customers.IndexModel
+@{
+    ViewData["Title"] = "Customers";
+}
+<h1>Customers</h1>
+<p><a asp-page="Edit">New customer</a></p>
+<table>
+    <tr><th>Code</th><th>Name</th><th class="num">Discount %</th><th class="num">Minimum</th><th class="num">FSC override %</th><th>Active</th><th></th></tr>
+    @foreach (var c in Model.Customers)
+    {
+        <tr>
+            <td>@c.Code</td>
+            <td>@c.Name</td>
+            <td class="num">@c.DiscountPercent.ToString("0.##")</td>
+            <td class="num">@(c.MinimumCharge > 0 ? c.MinimumCharge.ToString("N2") : "tariff")</td>
+            <td class="num">@(c.FuelSurchargeOverridePercent?.ToString("0.##") ?? "")</td>
+            <td>@(c.Active ? "yes" : "no")</td>
+            <td><a asp-page="Edit" asp-route-id="@c.Id">Edit</a></td>
+        </tr>
+    }
+</table>

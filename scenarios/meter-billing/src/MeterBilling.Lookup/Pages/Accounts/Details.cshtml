@@ -1,0 +1,57 @@
+@page "/accounts/{accountNumber}"
+@model DetailsModel
+@{
+    ViewData["Title"] = Model.Account.AccountNumber;
+    var a = Model.Account;
+}
+<h1>@a.CustomerName <span class="muted">@a.AccountNumber</span></h1>
+
+<div class="panel grid">
+    <span class="muted">Address</span><span>@a.AddressLine1@(a.AddressLine2 != null ? ", " + a.AddressLine2 : ""), @a.PostalCode @a.City</span>
+    <span class="muted">Tariff</span><span>@a.TariffCode &ndash; @a.TariffName</span>
+    <span class="muted">Billing cycle</span><span>@a.CycleName (next cut-off @a.NextCutOff.ToString("d"))</span>
+    <span class="muted">Meter</span><span>@a.MeterSerial (@a.SizeCode)</span>
+    <span class="muted">Average use</span><span>@a.AverageDailyUse.ToString("0.000") m&sup3;/day</span>
+    <span class="muted">Payment</span><span>@(a.PaymentMethod == 1 ? "Direct debit, mandate " + a.MandateId + ", " + DetailsModel.Mask(a.Iban) : "Invoice")</span>
+    @if (!a.Active) { <span class="muted">Status</span><span>Closed</span> }
+</div>
+
+<h2>Bills</h2>
+@if (Model.Bills.Count == 0)
+{
+    <p class="muted">No bills yet.</p>
+}
+else
+{
+    <table>
+        <tr><th>Bill</th><th>Date</th><th>Period</th><th class="num">m&sup3;</th><th class="num">Total EUR</th><th>Due</th><th></th></tr>
+        @foreach (var b in Model.Bills)
+        {
+            <tr>
+                <td><a asp-page="/Bills/Details" asp-route-billNumber="@b.BillNumber">@b.BillNumber</a></td>
+                <td>@b.BillDate.ToString("d")</td>
+                <td>@b.PeriodFrom.ToString("d") &ndash; @b.PeriodTo.AddDays(-1).ToString("d")</td>
+                <td class="num">@b.Consumption.ToString("0.0")</td>
+                <td class="num">@b.TotalAmount.ToString("N2")</td>
+                <td>@b.DueDate.ToString("d")</td>
+                <td>@if (b.Estimated) { <span class="badge est">Estimated</span> } @if (b.Status == 2) { <span class="badge">@b.StatusText</span> }</td>
+            </tr>
+        }
+    </table>
+}
+
+<h2>Meter reads</h2>
+<table>
+    <tr><th>Date</th><th class="num">Reading</th><th>Type</th><th>Source</th><th>Code</th><th>Status</th></tr>
+    @foreach (var r in Model.Reads)
+    {
+        <tr>
+            <td>@r.ReadDate.ToString("d")</td>
+            <td class="num">@r.Reading.ToString("0.0")</td>
+            <td>@r.TypeText</td>
+            <td>@r.SourceText</td>
+            <td>@r.ReaderCode</td>
+            <td>@r.StatusText</td>
+        </tr>
+    }
+</table>

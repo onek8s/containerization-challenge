@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "FurnaceRecords.Worker": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

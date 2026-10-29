@@ -1,0 +1,24 @@
+@model IEnumerable<CustomerEntity>
+@{
+    ViewBag.Title = "Customers";
+}
+<h1>Customers</h1>
+@using (Html.BeginForm("Index", "Customers", FormMethod.Get, new { @class = "filters" }))
+{
+    <label>Search <input type="text" name="q" value="@ViewBag.Query" /></label>
+    <label>Rep <input type="text" name="rep" value="@ViewBag.Rep" size="5" /></label>
+    <button type="submit" class="btn">Search</button>
+}
+<div class="panel">
+    <table class="table">
+        <tr><th>No</th><th>Name</th><th>City</th><th>Group</th><th>Rep</th><th>Delivery days</th><th></th></tr>
+        @foreach (var c in Model)
+        {
+            <tr>
+                <td>@c.CustomerNo</td><td>@c.Name</td><td>@c.City</td><td>@c.PriceGroup</td><td>@c.RepCode</td>
+                <td>@(((Wingtip.FieldSales.Core.DeliveryDays)c.DeliveryDays).ToShortText())</td>
+                <td>@if (c.CreditBlocked) { <span class="label label-3">Blocked</span> } <a href="@Url.Action("Edit", new { id = c.CustomerId })">Edit</a></td>
+            </tr>
+        }
+    </table>
+</div>

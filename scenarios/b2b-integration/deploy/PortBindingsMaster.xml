@@ -1,0 +1,1249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Master port bindings of the BizTalk application VanArsdel.Integration. The setting tokens and ifdef/ifndef
+  blocks are filled per environment from EnvironmentSettings\SettingsFileGenerator.xml:
+
+  Deploy-B2BIntegration.ps1 exports one settings file per environment (b2bdeploy export-settings), expands this
+  file with it (b2bdeploy expand) and refuses to import the result when b2bdeploy inspect reports a problem.
+
+  Passwords of the SFTP/FTP locations are never in this file: Install-BizTalkApplication.ps1 sets them after the
+  import from the deployment secrets file. Keep the port names in sync with the OpsPortal resubmit folders.
+-->
+<BindingInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Assembly="Microsoft.BizTalk.Deployment, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Version="3.5.1.0" BindingStatus="FullyBound" BoundEndpoints="17" TotalEndpoints="17">
+  <Timestamp>2019-05-21T10:44:12.5730000+02:00</Timestamp>
+  <ModuleRefCollection>
+    <ModuleRef Name="[Application:VanArsdel.Integration]" Version="" Culture="" PublicKeyToken="" FullName="[Application:VanArsdel.Integration], Version=, Culture=, PublicKeyToken=">
+      <Services />
+      <TrackedSchemas>
+        <Schema FullName="VanArsdel.Integration.Schemas.Canonical.CanonicalOrder" RootName="Order" AssemblyQualifiedName="VanArsdel.Integration.Schemas.Canonical.CanonicalOrder, VanArsdel.Integration.Schemas, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cfedfd825850e71" AlwaysTrackAllProperties="false">
+          <TrackedPropertyNames>
+            <PropertyName>VanArsdel.Integration.Schemas.PartnerId</PropertyName>
+            <PropertyName>VanArsdel.Integration.Schemas.OrderNumber</PropertyName>
+          </TrackedPropertyNames>
+        </Schema>
+      </TrackedSchemas>
+    </ModuleRef>
+    <ModuleRef Name="VanArsdel.Integration.Orchestrations" Version="4.0.0.0" Culture="" PublicKeyToken="7cfedfd825850e71" FullName="VanArsdel.Integration.Orchestrations, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cfedfd825850e71">
+      <Services>
+        <Service Name="VanArsdel.Integration.Orchestrations.ProcessCustomerOrder" State="Started" TrackingOption="ServiceStartEnd MessageSendReceive OrchestrationEvents">
+          <Ports>
+            <Port Name="OrderIn" Modifier="1" BindingOption="0"></Port>
+            <Port Name="ErpOrderService" Modifier="2" BindingOption="1">
+            <SendPortRef Name="sp_ERP_OrderManagement_WCF" />
+            </Port>
+            <Port Name="ErpIDocOut" Modifier="2" BindingOption="1">
+            <SendPortRef Name="sp_ERP_IDoc_FILE" />
+            </Port>
+            <Port Name="CreditHoldOut" Modifier="2" BindingOption="1">
+            <SendPortRef Name="sp_CreditHold_FILE" />
+            </Port>
+            <Port Name="Notify" Modifier="2" BindingOption="5">
+            <SendPortRef Name="VanArsdel.Integration.Orchestrations_4.0.0.0_VanArsdel.Integration.Orchestrations.ProcessCustomerOrder_Notify_7cfedfd825850e71" />
+            </Port>
+          </Ports>
+          <Roles />
+          <Host Name="${ProcessingHost}" NTGroupName="${HostUsersGroup}" Type="1" TrustLevel="Trusted" />
+        </Service>
+        <Service Name="VanArsdel.Integration.Orchestrations.ProcessFunctionalAck" State="Started" TrackingOption="ServiceStartEnd MessageSendReceive OrchestrationEvents">
+          <Ports>
+            <Port Name="AckIn" Modifier="1" BindingOption="0"></Port>
+            <Port Name="Notify" Modifier="2" BindingOption="5">
+            <SendPortRef Name="VanArsdel.Integration.Orchestrations_4.0.0.0_VanArsdel.Integration.Orchestrations.ProcessFunctionalAck_Notify_7cfedfd825850e71" />
+            </Port>
+          </Ports>
+          <Roles />
+          <Host Name="${ProcessingHost}" NTGroupName="${HostUsersGroup}" Type="1" TrustLevel="Trusted" />
+        </Service>
+        <Service Name="VanArsdel.Integration.Orchestrations.ProcessSupplierInvoice" State="Started" TrackingOption="ServiceStartEnd MessageSendReceive OrchestrationEvents">
+          <Ports>
+            <Port Name="InvoiceIn" Modifier="1" BindingOption="0"></Port>
+            <Port Name="ErpIDocOut" Modifier="2" BindingOption="1">
+            <SendPortRef Name="sp_ERP_IDoc_FILE" />
+            </Port>
+            <Port Name="Notify" Modifier="2" BindingOption="5">
+            <SendPortRef Name="VanArsdel.Integration.Orchestrations_4.0.0.0_VanArsdel.Integration.Orchestrations.ProcessSupplierInvoice_Notify_7cfedfd825850e71" />
+            </Port>
+          </Ports>
+          <Roles />
+          <Host Name="${ProcessingHost}" NTGroupName="${HostUsersGroup}" Type="1" TrustLevel="Trusted" />
+        </Service>
+        <Service Name="VanArsdel.Integration.Orchestrations.SendCustomerDocument" State="Started" TrackingOption="ServiceStartEnd MessageSendReceive OrchestrationEvents">
+          <Ports>
+            <Port Name="DespatchIn" Modifier="1" BindingOption="0"></Port>
+            <Port Name="PartnerOut" Modifier="2" BindingOption="0"></Port>
+          </Ports>
+          <Roles />
+          <Host Name="${ProcessingHost}" NTGroupName="${HostUsersGroup}" Type="1" TrustLevel="Trusted" />
+        </Service>
+        <Service Name="VanArsdel.Integration.Orchestrations.SendCustomerInvoice" State="Started" TrackingOption="ServiceStartEnd MessageSendReceive OrchestrationEvents">
+          <Ports>
+            <Port Name="InvoiceIn" Modifier="1" BindingOption="0"></Port>
+            <Port Name="PartnerOut" Modifier="2" BindingOption="0"></Port>
+          </Ports>
+          <Roles />
+          <Host Name="${ProcessingHost}" NTGroupName="${HostUsersGroup}" Type="1" TrustLevel="Trusted" />
+        </Service>
+        <Service Name="VanArsdel.Integration.Orchestrations.SupplierPurchaseOrder" State="Started" TrackingOption="ServiceStartEnd MessageSendReceive OrchestrationEvents">
+          <Ports>
+            <Port Name="PurchaseOrderIn" Modifier="1" BindingOption="0"></Port>
+            <Port Name="SupplierOut" Modifier="2" BindingOption="0"></Port>
+            <Port Name="AckIn" Modifier="1" BindingOption="0"></Port>
+            <Port Name="Notify" Modifier="2" BindingOption="5">
+            <SendPortRef Name="VanArsdel.Integration.Orchestrations_4.0.0.0_VanArsdel.Integration.Orchestrations.SupplierPurchaseOrder_Notify_7cfedfd825850e71" />
+            </Port>
+          </Ports>
+          <Roles />
+          <Host Name="${ProcessingHost}" NTGroupName="${HostUsersGroup}" Type="1" TrustLevel="Trusted" />
+        </Service>
+      </Services>
+      <TrackedSchemas xsi:nil="true" />
+    </ModuleRef>
+  </ModuleRefCollection>
+  <SendPortCollection>
+    <SendPort Name="sp_AS2_C1001" IsStatic="true" IsTwoWay="true" BindingOption="1">
+      <Description>Synchronous MDN comes back on this port and is archived by sp_AS2_MDN_Archive.</Description>
+      <TransmitPipeline Name="VanArsdel.Integration.Pipelines.As2EdiSend" FullyQualifiedName="VanArsdel.Integration.Pipelines.As2EdiSend, VanArsdel.Integration.Pipelines, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cfedfd825850e71" Type="2" TrackingOption="None" Description="" />
+      <PrimaryTransport>
+        <Address>${C1001_As2Url}</Address>
+        <TransportType Name="HTTP" Capabilities="387" ConfigurationClsid="1c56d157-0553-4345-8a1f-55d2d1a3ffb6" />
+        <TransportTypeData>&lt;CustomProps&gt;&lt;ContentType vt="8"&gt;application/edi-x12&lt;/ContentType&gt;&lt;RequestTimeout vt="19"&gt;120&lt;/RequestTimeout&gt;&lt;MaxRedirects vt="19"&gt;0&lt;/MaxRedirects&gt;&lt;UseSSO vt="11"&gt;0&lt;/UseSSO&gt;&lt;AuthenticationScheme vt="8"&gt;Anonymous&lt;/AuthenticationScheme&gt;&lt;UseHandlerProxySettings vt="11"&gt;-1&lt;/UseHandlerProxySettings&gt;&lt;UseProxy vt="11"&gt;0&lt;/UseProxy&gt;&lt;EnableChunkedEncoding vt="11"&gt;0&lt;/EnableChunkedEncoding&gt;&lt;MaxBatchSize vt="19"&gt;1&lt;/MaxBatchSize&gt;&lt;UseHandlerSetting vt="11"&gt;-1&lt;/UseHandlerSetting&gt;&lt;/CustomProps&gt;</TransportTypeData>
+        <RetryCount>5</RetryCount>
+        <RetryInterval>15</RetryInterval>
+        <ServiceWindowEnabled>false</ServiceWindowEnabled>
+        <FromTime>2000-01-01T00:00:00</FromTime>
+        <ToTime>2000-01-01T23:59:59</ToTime>
+        <Primary>true</Primary>
+        <OrderedDelivery>false</OrderedDelivery>
+        <DeliveryNotification>1</DeliveryNotification>
+        <SendHandler Name="${SendHost}" HostTrusted="false">
+          <TransportType Name="HTTP" Capabilities="387" ConfigurationClsid="1c56d157-0553-4345-8a1f-55d2d1a3ffb6" />
+        </SendHandler>
+      </PrimaryTransport>
+      <SecondaryTransport>
+        <Address />
+        <RetryCount>3</RetryCount>
+        <RetryInterval>5</RetryInterval>
+        <ServiceWindowEnabled>false</ServiceWindowEnabled>
+        <FromTime>2000-01-01T00:00:00</FromTime>
+        <ToTime>2000-01-01T23:59:59</ToTime>
+        <Primary>false</Primary>
+        <OrderedDelivery>false</OrderedDelivery>
+        <DeliveryNotification>1</DeliveryNotification>
+        <SendHandler xsi:nil="true" />
+      </SecondaryTransport>
+      <ReceivePipeline Name="Microsoft.BizTalk.EdiInt.DefaultPipelines.AS2Receive" FullyQualifiedName="Microsoft.BizTalk.EdiInt.DefaultPipelines.AS2Receive, Microsoft.BizTalk.Edi.EdiIntPipelines, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Type="1" TrackingOption="None" Description="" />
+      <ReceivePipelineData />
+      <Tracking>${SendPortTracking}</Tracking>
+      <Filter>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;Filter xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;&lt;Group&gt;&lt;Statement Property="VanArsdel.Integration.Schemas.Endpoint" Operator="0" Value="AS2.C1001" /&gt;&lt;/Group&gt;&lt;/Filter&gt;</Filter>
+      <Transforms />
+      <OrderedDelivery>false</OrderedDelivery>
+      <Priority>5</Priority>
+      <StopSendingOnFailure>false</StopSendingOnFailure>
+      <RouteFailedMessage>false</RouteFailedMessage>
+      <ApplicationName>VanArsdel.Integration</ApplicationName>
+    </SendPort>
+    <SendPort Name="sp_AS2_C2001" IsStatic="true" IsTwoWay="true" BindingOption="1">
+      <Description>Synchronous MDN comes back on this port and is archived by sp_AS2_MDN_Archive.</Description>
+      <TransmitPipeline Name="VanArsdel.Integration.Pipelines.As2EdiSend" FullyQualifiedName="VanArsdel.Integration.Pipelines.As2EdiSend, VanArsdel.Integration.Pipelines, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cfedfd825850e71" Type="2" TrackingOption="None" Description="" />
+      <PrimaryTransport>
+        <Address>${C2001_As2Url}</Address>
+        <TransportType Name="HTTP" Capabilities="387" ConfigurationClsid="1c56d157-0553-4345-8a1f-55d2d1a3ffb6" />
+        <TransportTypeData>&lt;CustomProps&gt;&lt;ContentType vt="8"&gt;application/edifact&lt;/ContentType&gt;&lt;RequestTimeout vt="19"&gt;120&lt;/RequestTimeout&gt;&lt;MaxRedirects vt="19"&gt;0&lt;/MaxRedirects&gt;&lt;UseSSO vt="11"&gt;0&lt;/UseSSO&gt;&lt;AuthenticationScheme vt="8"&gt;Anonymous&lt;/AuthenticationScheme&gt;&lt;UseHandlerProxySettings vt="11"&gt;-1&lt;/UseHandlerProxySettings&gt;&lt;UseProxy vt="11"&gt;0&lt;/UseProxy&gt;&lt;EnableChunkedEncoding vt="11"&gt;0&lt;/EnableChunkedEncoding&gt;&lt;MaxBatchSize vt="19"&gt;1&lt;/MaxBatchSize&gt;&lt;UseHandlerSetting vt="11"&gt;-1&lt;/UseHandlerSetting&gt;&lt;/CustomProps&gt;</TransportTypeData>
+        <RetryCount>5</RetryCount>
+        <RetryInterval>15</RetryInterval>
+        <ServiceWindowEnabled>false</ServiceWindowEnabled>
+        <FromTime>2000-01-01T00:00:00</FromTime>
+        <ToTime>2000-01-01T23:59:59</ToTime>
+        <Primary>true</Primary>
+        <OrderedDelivery>false</OrderedDelivery>
+        <DeliveryNotification>1</DeliveryNotification>
+        <SendHandler Name="${SendHost}" HostTrusted="false">
+          <TransportType Name="HTTP" Capabilities="387" ConfigurationClsid="1c56d157-0553-4345-8a1f-55d2d1a3ffb6" />
+        </SendHandler>
+      </PrimaryTransport>
+      <SecondaryTransport>
+        <Address />
+        <RetryCount>3</RetryCount>
+        <RetryInterval>5</RetryInterval>
+        <ServiceWindowEnabled>false</ServiceWindowEnabled>
+        <FromTime>2000-01-01T00:00:00</FromTime>
+        <ToTime>2000-01-01T23:59:59</ToTime>
+        <Primary>false</Primary>
+        <OrderedDelivery>false</OrderedDelivery>
+        <DeliveryNotification>1</DeliveryNotification>
+        <SendHandler xsi:nil="true" />
+      </SecondaryTransport>
+      <ReceivePipeline Name="Microsoft.BizTalk.EdiInt.DefaultPipelines.AS2Receive" FullyQualifiedName="Microsoft.BizTalk.EdiInt.DefaultPipelines.AS2Receive, Microsoft.BizTalk.Edi.EdiIntPipelines, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Type="1" TrackingOption="None" Description="" />
+      <ReceivePipelineData />
+      <Tracking>${SendPortTracking}</Tracking>
+      <Filter>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;Filter xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;&lt;Group&gt;&lt;Statement Property="VanArsdel.Integration.Schemas.Endpoint" Operator="0" Value="AS2.C2001" /&gt;&lt;/Group&gt;&lt;/Filter&gt;</Filter>
+      <Transforms />
+      <OrderedDelivery>false</OrderedDelivery>
+      <Priority>5</Priority>
+      <StopSendingOnFailure>false</StopSendingOnFailure>
+      <RouteFailedMessage>false</RouteFailedMessage>
+      <ApplicationName>VanArsdel.Integration</ApplicationName>
+    </SendPort>
+    <SendPort Name="sp_AS2_S5002" IsStatic="true" IsTwoWay="true" BindingOption="1">
+      <Description>Synchronous MDN comes back on this port and is archived by sp_AS2_MDN_Archive.</Description>
+      <TransmitPipeline Name="VanArsdel.Integration.Pipelines.As2EdiSend" FullyQualifiedName="VanArsdel.Integration.Pipelines.As2EdiSend, VanArsdel.Integration.Pipelines, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cfedfd825850e71" Type="2" TrackingOption="None" Description="" />
+      <PrimaryTransport>
+        <Address>${S5002_As2Url}</Address>
+        <TransportType Name="HTTP" Capabilities="387" ConfigurationClsid="1c56d157-0553-4345-8a1f-55d2d1a3ffb6" />
+        <TransportTypeData>&lt;CustomProps&gt;&lt;ContentType vt="8"&gt;application/edi-x12&lt;/ContentType&gt;&lt;RequestTimeout vt="19"&gt;120&lt;/RequestTimeout&gt;&lt;MaxRedirects vt="19"&gt;0&lt;/MaxRedirects&gt;&lt;UseSSO vt="11"&gt;0&lt;/UseSSO&gt;&lt;AuthenticationScheme vt="8"&gt;Anonymous&lt;/AuthenticationScheme&gt;&lt;UseHandlerProxySettings vt="11"&gt;-1&lt;/UseHandlerProxySettings&gt;&lt;UseProxy vt="11"&gt;0&lt;/UseProxy&gt;&lt;EnableChunkedEncoding vt="11"&gt;0&lt;/EnableChunkedEncoding&gt;&lt;MaxBatchSize vt="19"&gt;1&lt;/MaxBatchSize&gt;&lt;UseHandlerSetting vt="11"&gt;-1&lt;/UseHandlerSetting&gt;&lt;/CustomProps&gt;</TransportTypeData>
+        <RetryCount>5</RetryCount>
+        <RetryInterval>15</RetryInterval>
+        <ServiceWindowEnabled>false</ServiceWindowEnabled>
+        <FromTime>2000-01-01T00:00:00</FromTime>
+        <ToTime>2000-01-01T23:59:59</ToTime>
+        <Primary>true</Primary>
+        <OrderedDelivery>false</OrderedDelivery>
+        <DeliveryNotification>1</DeliveryNotification>
+        <SendHandler Name="${SendHost}" HostTrusted="false">
+          <TransportType Name="HTTP" Capabilities="387" ConfigurationClsid="1c56d157-0553-4345-8a1f-55d2d1a3ffb6" />
+        </SendHandler>
+      </PrimaryTransport>
+      <SecondaryTransport>
+        <Address />
+        <RetryCount>3</RetryCount>
+        <RetryInterval>5</RetryInterval>
+        <ServiceWindowEnabled>false</ServiceWindowEnabled>
+        <FromTime>2000-01-01T00:00:00</FromTime>
+        <ToTime>2000-01-01T23:59:59</ToTime>
+        <Primary>false</Primary>
+        <OrderedDelivery>false</OrderedDelivery>
+        <DeliveryNotification>1</DeliveryNotification>
+        <SendHandler xsi:nil="true" />
+      </SecondaryTransport>
+      <ReceivePipeline Name="Microsoft.BizTalk.EdiInt.DefaultPipelines.AS2Receive" FullyQualifiedName="Microsoft.BizTalk.EdiInt.DefaultPipelines.AS2Receive, Microsoft.BizTalk.Edi.EdiIntPipelines, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Type="1" TrackingOption="None" Description="" />
+      <ReceivePipelineData />
+      <Tracking>${SendPortTracking}</Tracking>
+      <Filter>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;Filter xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;&lt;Group&gt;&lt;Statement Property="VanArsdel.Integration.Schemas.Endpoint" Operator="0" Value="AS2.S5002" /&gt;&lt;/Group&gt;&lt;/Filter&gt;</Filter>
+      <Transforms />
+      <OrderedDelivery>false</OrderedDelivery>
+      <Priority>5</Priority>
+      <StopSendingOnFailure>false</StopSendingOnFailure>
+      <RouteFailedMessage>false</RouteFailedMessage>
+      <ApplicationName>VanArsdel.Integration</ApplicationName>
+    </SendPort>
+    <SendPort Name="sp_AS2_MDN_Archive" IsStatic="true" IsTwoWay="false" BindingOption="1">
+      <Description></Description>
+      <TransmitPipeline Name="Microsoft.BizTalk.DefaultPipelines.PassThruTransmit" FullyQualifiedName="Microsoft.BizTalk.DefaultPipelines.PassThruTransmit, Microsoft.BizTalk.DefaultPipelines, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Type="2" TrackingOption="None" Description="" />
+      <PrimaryTransport>
+        <Address>\\${FileServer}\${FileShare}\archive\mdn\%MessageID%.mdn</Address>
+        <TransportType Name="FILE" Capabilities="11" ConfigurationClsid="5e49e3a6-b4fc-4077-b44c-22f34a242fdb" />
+        <TransportTypeData>&lt;CustomProps&gt;&lt;UseTempFileOnWrite vt="11"&gt;-1&lt;/UseTempFileOnWrite&gt;&lt;AllowCacheOnWrite vt="11"&gt;0&lt;/AllowCacheOnWrite&gt;&lt;CopyMode vt="19"&gt;1&lt;/CopyMode&gt;&lt;FileName vt="8"&gt;%MessageID%.mdn&lt;/FileName&gt;&lt;/CustomProps&gt;</TransportTypeData>
+        <RetryCount>3</RetryCount>
+        <RetryInterval>5</RetryInterval>
+        <ServiceWindowEnabled>false</ServiceWindowEnabled>
+        <FromTime>2000-01-01T00:00:00</FromTime>
+        <ToTime>2000-01-01T23:59:59</ToTime>
+        <Primary>true</Primary>
+        <OrderedDelivery>false</OrderedDelivery>
+        <DeliveryNotification>1</DeliveryNotification>
+        <SendHandler Name="${SendHost}" HostTrusted="false">
+          <TransportType Name="FILE" Capabilities="11" ConfigurationClsid="5e49e3a6-b4fc-4077-b44c-22f34a242fdb" />
+        </SendHandler>
+      </PrimaryTransport>
+      <SecondaryTransport>
+        <Address />
+        <RetryCount>3</RetryCount>
+        <RetryInterval>5</RetryInterval>
+        <ServiceWindowEnabled>false</ServiceWindowEnabled>
+        <FromTime>2000-01-01T00:00:00</FromTime>
+        <ToTime>2000-01-01T23:59:59</ToTime>
+        <Primary>false</Primary>
+        <OrderedDelivery>false</OrderedDelivery>
+        <DeliveryNotification>1</DeliveryNotification>
+        <SendHandler xsi:nil="true" />
+      </SecondaryTransport>
+      
+      <ReceivePipelineData />
+      <Tracking>${SendPortTracking}</Tracking>
+      <Filter>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;Filter xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;&lt;Group&gt;&lt;Statement Property="BTS.SPName" Operator="0" Value="sp_AS2_C1001" /&gt;&lt;/Group&gt;&lt;Group&gt;&lt;Statement Property="BTS.SPName" Operator="0" Value="sp_AS2_C2001" /&gt;&lt;/Group&gt;&lt;Group&gt;&lt;Statement Property="BTS.SPName" Operator="0" Value="sp_AS2_S5002" /&gt;&lt;/Group&gt;&lt;/Filter&gt;</Filter>
+      <Transforms />
+      <OrderedDelivery>false</OrderedDelivery>
+      <Priority>5</Priority>
+      <StopSendingOnFailure>false</StopSendingOnFailure>
+      <RouteFailedMessage>false</RouteFailedMessage>
+      <ApplicationName>VanArsdel.Integration</ApplicationName>
+    </SendPort>
+<!-- ifdef ${UsePartnerFolders} -->
+    <SendPort Name="sp_SFTP_C1002" IsStatic="true" IsTwoWay="false" BindingOption="1">
+      <Description></Description>
+      <TransmitPipeline Name="VanArsdel.Integration.Pipelines.FileEdiSend" FullyQualifiedName="VanArsdel.Integration.Pipelines.FileEdiSend, VanArsdel.Integration.Pipelines, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cfedfd825850e71" Type="2" TrackingOption="None" Description="" />
+      <PrimaryTransport>
+        <Address>\\${FileServer}\${FileShare}\sftp\C1002\outbound\%SourceFileName%</Address>
+        <TransportType Name="FILE" Capabilities="11" ConfigurationClsid="5e49e3a6-b4fc-4077-b44c-22f34a242fdb" />
+        <TransportTypeData>&lt;CustomProps&gt;&lt;UseTempFileOnWrite vt="11"&gt;-1&lt;/UseTempFileOnWrite&gt;&lt;AllowCacheOnWrite vt="11"&gt;0&lt;/AllowCacheOnWrite&gt;&lt;CopyMode vt="19"&gt;1&lt;/CopyMode&gt;&lt;FileName vt="8"&gt;%SourceFileName%&lt;/FileName&gt;&lt;/CustomProps&gt;</TransportTypeData>
+        <RetryCount>3</RetryCount>
+        <RetryInterval>5</RetryInterval>
+        <ServiceWindowEnabled>false</ServiceWindowEnabled>
+        <FromTime>2000-01-01T00:00:00</FromTime>
+        <ToTime>2000-01-01T23:59:59</ToTime>
+        <Primary>true</Primary>
+        <OrderedDelivery>false</OrderedDelivery>
+        <DeliveryNotification>1</DeliveryNotification>
+        <SendHandler Name="${SendHost}" HostTrusted="false">
+          <TransportType Name="FILE" Capabilities="11" ConfigurationClsid="5e49e3a6-b4fc-4077-b44c-22f34a242fdb" />
+        </SendHandler>
+      </PrimaryTransport>
+      <SecondaryTransport>
+        <Address />
+        <RetryCount>3</RetryCount>
+        <RetryInterval>5</RetryInterval>
+        <ServiceWindowEnabled>false</ServiceWindowEnabled>
+        <FromTime>2000-01-01T00:00:00</FromTime>
+        <ToTime>2000-01-01T23:59:59</ToTime>
+        <Primary>false</Primary>
+        <OrderedDelivery>false</OrderedDelivery>
+        <DeliveryNotification>1</DeliveryNotification>
+        <SendHandler xsi:nil="true" />
+      </SecondaryTransport>
+      
+      <ReceivePipelineData />
+      <Tracking>${SendPortTracking}</Tracking>
+      <Filter>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;Filter xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;&lt;Group&gt;&lt;Statement Property="VanArsdel.Integration.Schemas.Endpoint" Operator="0" Value="SFTP.C1002" /&gt;&lt;/Group&gt;&lt;/Filter&gt;</Filter>
+      <Transforms />
+      <OrderedDelivery>false</OrderedDelivery>
+      <Priority>5</Priority>
+      <StopSendingOnFailure>false</StopSendingOnFailure>
+      <RouteFailedMessage>false</RouteFailedMessage>
+      <ApplicationName>VanArsdel.Integration</ApplicationName>
+    </SendPort>
+<!-- endif --><!-- ifndef ${UsePartnerFolders} -->
+    <SendPort Name="sp_SFTP_C1002" IsStatic="true" IsTwoWay="false" BindingOption="1">
+      <Description></Description>
+      <TransmitPipeline Name="VanArsdel.Integration.Pipelines.FileEdiSend" FullyQualifiedName="VanArsdel.Integration.Pipelines.FileEdiSend, VanArsdel.Integration.Pipelines, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cfedfd825850e71" Type="2" TrackingOption="None" Description="" />
+      <PrimaryTransport>
+        <Address>sftp://${C1002_SftpHost}:22/inbound/vanarsdel/%SourceFileName%</Address>
+        <TransportType Name="SFTP" Capabilities="523" ConfigurationClsid="f75aef7c-a3e7-4c9e-8ba3-2a41c8ad4a6b" />
+        <TransportTypeData>&lt;CustomProps&gt;&lt;ServerAddress vt="8"&gt;${C1002_SftpHost}&lt;/ServerAddress&gt;&lt;ServerPort vt="3"&gt;22&lt;/ServerPort&gt;&lt;FolderPath vt="8"&gt;/inbound/vanarsdel/&lt;/FolderPath&gt;&lt;TargetFileName vt="8"&gt;%SourceFileName%&lt;/TargetFileName&gt;&lt;UserName vt="8"&gt;${C1002_SftpUser}&lt;/UserName&gt;&lt;Password vt="1" /&gt;&lt;ClientAuthenticationMode vt="8"&gt;Password&lt;/ClientAuthenticationMode&gt;&lt;SSHServerHostKeyFingerPrint vt="8"&gt;${C1002_SftpHostKey}&lt;/SSHServerHostKeyFingerPrint&gt;&lt;AccessAnySSHServerHostKey vt="11"&gt;0&lt;/AccessAnySSHServerHostKey&gt;&lt;EncryptionCipher vt="8"&gt;Auto&lt;/EncryptionCipher&gt;&lt;ConnectionLimit vt="19"&gt;5&lt;/ConnectionLimit&gt;&lt;TemporaryFolder vt="8"&gt;/inbound/vanarsdel/tmp/&lt;/TemporaryFolder&gt;&lt;AppendIfExists vt="11"&gt;0&lt;/AppendIfExists&gt;&lt;/CustomProps&gt;</TransportTypeData>
+        <RetryCount>6</RetryCount>
+        <RetryInterval>10</RetryInterval>
+        <ServiceWindowEnabled>false</ServiceWindowEnabled>
+        <FromTime>2000-01-01T00:00:00</FromTime>
+        <ToTime>2000-01-01T23:59:59</ToTime>
+        <Primary>true</Primary>
+        <OrderedDelivery>false</OrderedDelivery>
+        <DeliveryNotification>1</DeliveryNotification>
+        <SendHandler Name="${SendHost}" HostTrusted="false">
+          <TransportType Name="SFTP" Capabilities="523" ConfigurationClsid="f75aef7c-a3e7-4c9e-8ba3-2a41c8ad4a6b" />
+        </SendHandler>
+      </PrimaryTransport>
+      <SecondaryTransport>
+        <Address />
+        <RetryCount>3</RetryCount>
+        <RetryInterval>5</RetryInterval>
+        <ServiceWindowEnabled>false</ServiceWindowEnabled>
+        <FromTime>2000-01-01T00:00:00</FromTime>
+        <ToTime>2000-01-01T23:59:59</ToTime>
+        <Primary>false</Primary>
+        <OrderedDelivery>false</OrderedDelivery>
+        <DeliveryNotification>1</DeliveryNotification>
+        <SendHandler xsi:nil="true" />
+      </SecondaryTransport>
+      
+      <ReceivePipelineData />
+      <Tracking>${SendPortTracking}</Tracking>
+      <Filter>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;Filter xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;&lt;Group&gt;&lt;Statement Property="VanArsdel.Integration.Schemas.Endpoint" Operator="0" Value="SFTP.C1002" /&gt;&lt;/Group&gt;&lt;/Filter&gt;</Filter>
+      <Transforms />
+      <OrderedDelivery>false</OrderedDelivery>
+      <Priority>5</Priority>
+      <StopSendingOnFailure>false</StopSendingOnFailure>
+      <RouteFailedMessage>false</RouteFailedMessage>
+      <ApplicationName>VanArsdel.Integration</ApplicationName>
+    </SendPort>
+<!-- endif --><!-- ifdef ${UsePartnerFolders} -->
+    <SendPort Name="sp_SFTP_S5001" IsStatic="true" IsTwoWay="false" BindingOption="1">
+      <Description></Description>
+      <TransmitPipeline Name="VanArsdel.Integration.Pipelines.FileEdiSend" FullyQualifiedName="VanArsdel.Integration.Pipelines.FileEdiSend, VanArsdel.Integration.Pipelines, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cfedfd825850e71" Type="2" TrackingOption="None" Description="" />
+      <PrimaryTransport>
+        <Address>\\${FileServer}\${FileShare}\sftp\S5001\outbound\%SourceFileName%</Address>
+        <TransportType Name="FILE" Capabilities="11" ConfigurationClsid="5e49e3a6-b4fc-4077-b44c-22f34a242fdb" />
+        <TransportTypeData>&lt;CustomProps&gt;&lt;UseTempFileOnWrite vt="11"&gt;-1&lt;/UseTempFileOnWrite&gt;&lt;AllowCacheOnWrite vt="11"&gt;0&lt;/AllowCacheOnWrite&gt;&lt;CopyMode vt="19"&gt;1&lt;/CopyMode&gt;&lt;FileName vt="8"&gt;%SourceFileName%&lt;/FileName&gt;&lt;/CustomProps&gt;</TransportTypeData>
+        <RetryCount>3</RetryCount>
+        <RetryInterval>5</RetryInterval>
+        <ServiceWindowEnabled>false</ServiceWindowEnabled>
+        <FromTime>2000-01-01T00:00:00</FromTime>
+        <ToTime>2000-01-01T23:59:59</ToTime>
+        <Primary>true</Primary>
+        <OrderedDelivery>false</OrderedDelivery>
+        <DeliveryNotification>1</DeliveryNotification>
+        <SendHandler Name="${SendHost}" HostTrusted="false">
+          <TransportType Name="FILE" Capabilities="11" ConfigurationClsid="5e49e3a6-b4fc-4077-b44c-22f34a242fdb" />
+        </SendHandler>
+      </PrimaryTransport>
+      <SecondaryTransport>
+        <Address />
+        <RetryCount>3</RetryCount>
+        <RetryInterval>5</RetryInterval>
+        <ServiceWindowEnabled>false</ServiceWindowEnabled>
+        <FromTime>2000-01-01T00:00:00</FromTime>
+        <ToTime>2000-01-01T23:59:59</ToTime>
+        <Primary>false</Primary>
+        <OrderedDelivery>false</OrderedDelivery>
+        <DeliveryNotification>1</DeliveryNotification>
+        <SendHandler xsi:nil="true" />
+      </SecondaryTransport>
+      
+      <ReceivePipelineData />
+      <Tracking>${SendPortTracking}</Tracking>
+      <Filter>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;Filter xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;&lt;Group&gt;&lt;Statement Property="VanArsdel.Integration.Schemas.Endpoint" Operator="0" Value="SFTP.S5001" /&gt;&lt;/Group&gt;&lt;/Filter&gt;</Filter>
+      <Transforms />
+      <OrderedDelivery>false</OrderedDelivery>
+      <Priority>5</Priority>
+      <StopSendingOnFailure>false</StopSendingOnFailure>
+      <RouteFailedMessage>false</RouteFailedMessage>
+      <ApplicationName>VanArsdel.Integration</ApplicationName>
+    </SendPort>
+<!-- endif --><!-- ifndef ${UsePartnerFolders} -->
+    <SendPort Name="sp_SFTP_S5001" IsStatic="true" IsTwoWay="false" BindingOption="1">
+      <Description></Description>
+      <TransmitPipeline Name="VanArsdel.Integration.Pipelines.FileEdiSend" FullyQualifiedName="VanArsdel.Integration.Pipelines.FileEdiSend, VanArsdel.Integration.Pipelines, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cfedfd825850e71" Type="2" TrackingOption="None" Description="" />
+      <PrimaryTransport>
+        <Address>sftp://${S5001_SftpHost}:22/from_vanarsdel/%SourceFileName%</Address>
+        <TransportType Name="SFTP" Capabilities="523" ConfigurationClsid="f75aef7c-a3e7-4c9e-8ba3-2a41c8ad4a6b" />
+        <TransportTypeData>&lt;CustomProps&gt;&lt;ServerAddress vt="8"&gt;${S5001_SftpHost}&lt;/ServerAddress&gt;&lt;ServerPort vt="3"&gt;22&lt;/ServerPort&gt;&lt;FolderPath vt="8"&gt;/from_vanarsdel/&lt;/FolderPath&gt;&lt;TargetFileName vt="8"&gt;%SourceFileName%&lt;/TargetFileName&gt;&lt;UserName vt="8"&gt;${S5001_SftpUser}&lt;/UserName&gt;&lt;Password vt="1" /&gt;&lt;ClientAuthenticationMode vt="8"&gt;Password&lt;/ClientAuthenticationMode&gt;&lt;SSHServerHostKeyFingerPrint vt="8"&gt;${S5001_SftpHostKey}&lt;/SSHServerHostKeyFingerPrint&gt;&lt;AccessAnySSHServerHostKey vt="11"&gt;0&lt;/AccessAnySSHServerHostKey&gt;&lt;EncryptionCipher vt="8"&gt;Auto&lt;/EncryptionCipher&gt;&lt;ConnectionLimit vt="19"&gt;5&lt;/ConnectionLimit&gt;&lt;TemporaryFolder vt="8"&gt;/from_vanarsdel/tmp/&lt;/TemporaryFolder&gt;&lt;AppendIfExists vt="11"&gt;0&lt;/AppendIfExists&gt;&lt;/CustomProps&gt;</TransportTypeData>
+        <RetryCount>6</RetryCount>
+        <RetryInterval>10</RetryInterval>
+        <ServiceWindowEnabled>false</ServiceWindowEnabled>
+        <FromTime>2000-01-01T00:00:00</FromTime>
+        <ToTime>2000-01-01T23:59:59</ToTime>
+        <Primary>true</Primary>
+        <OrderedDelivery>false</OrderedDelivery>
+        <DeliveryNotification>1</DeliveryNotification>
+        <SendHandler Name="${SendHost}" HostTrusted="false">
+          <TransportType Name="SFTP" Capabilities="523" ConfigurationClsid="f75aef7c-a3e7-4c9e-8ba3-2a41c8ad4a6b" />
+        </SendHandler>
+      </PrimaryTransport>
+      <SecondaryTransport>
+        <Address />
+        <RetryCount>3</RetryCount>
+        <RetryInterval>5</RetryInterval>
+        <ServiceWindowEnabled>false</ServiceWindowEnabled>
+        <FromTime>2000-01-01T00:00:00</FromTime>
+        <ToTime>2000-01-01T23:59:59</ToTime>
+        <Primary>false</Primary>
+        <OrderedDelivery>false</OrderedDelivery>
+        <DeliveryNotification>1</DeliveryNotification>
+        <SendHandler xsi:nil="true" />
+      </SecondaryTransport>
+      
+      <ReceivePipelineData />
+      <Tracking>${SendPortTracking}</Tracking>
+      <Filter>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;Filter xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;&lt;Group&gt;&lt;Statement Property="VanArsdel.Integration.Schemas.Endpoint" Operator="0" Value="SFTP.S5001" /&gt;&lt;/Group&gt;&lt;/Filter&gt;</Filter>
+      <Transforms />
+      <OrderedDelivery>false</OrderedDelivery>
+      <Priority>5</Priority>
+      <StopSendingOnFailure>false</StopSendingOnFailure>
+      <RouteFailedMessage>false</RouteFailedMessage>
+      <ApplicationName>VanArsdel.Integration</ApplicationName>
+    </SendPort>
+<!-- endif --><!-- ifdef ${UsePartnerFolders} -->
+    <SendPort Name="sp_FTP_C2002" IsStatic="true" IsTwoWay="false" BindingOption="1">
+      <Description></Description>
+      <TransmitPipeline Name="VanArsdel.Integration.Pipelines.FileEdiSend" FullyQualifiedName="VanArsdel.Integration.Pipelines.FileEdiSend, VanArsdel.Integration.Pipelines, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cfedfd825850e71" Type="2" TrackingOption="None" Description="" />
+      <PrimaryTransport>
+        <Address>\\${FileServer}\${FileShare}\ftp\C2002\outbound\%SourceFileName%</Address>
+        <TransportType Name="FILE" Capabilities="11" ConfigurationClsid="5e49e3a6-b4fc-4077-b44c-22f34a242fdb" />
+        <TransportTypeData>&lt;CustomProps&gt;&lt;UseTempFileOnWrite vt="11"&gt;-1&lt;/UseTempFileOnWrite&gt;&lt;AllowCacheOnWrite vt="11"&gt;0&lt;/AllowCacheOnWrite&gt;&lt;CopyMode vt="19"&gt;1&lt;/CopyMode&gt;&lt;FileName vt="8"&gt;%SourceFileName%&lt;/FileName&gt;&lt;/CustomProps&gt;</TransportTypeData>
+        <RetryCount>3</RetryCount>
+        <RetryInterval>5</RetryInterval>
+        <ServiceWindowEnabled>false</ServiceWindowEnabled>
+        <FromTime>2000-01-01T00:00:00</FromTime>
+        <ToTime>2000-01-01T23:59:59</ToTime>
+        <Primary>true</Primary>
+        <OrderedDelivery>false</OrderedDelivery>
+        <DeliveryNotification>1</DeliveryNotification>
+        <SendHandler Name="${SendHost}" HostTrusted="false">
+          <TransportType Name="FILE" Capabilities="11" ConfigurationClsid="5e49e3a6-b4fc-4077-b44c-22f34a242fdb" />
+        </SendHandler>
+      </PrimaryTransport>
+      <SecondaryTransport>
+        <Address />
+        <RetryCount>3</RetryCount>
+        <RetryInterval>5</RetryInterval>
+        <ServiceWindowEnabled>false</ServiceWindowEnabled>
+        <FromTime>2000-01-01T00:00:00</FromTime>
+        <ToTime>2000-01-01T23:59:59</ToTime>
+        <Primary>false</Primary>
+        <OrderedDelivery>false</OrderedDelivery>
+        <DeliveryNotification>1</DeliveryNotification>
+        <SendHandler xsi:nil="true" />
+      </SecondaryTransport>
+      
+      <ReceivePipelineData />
+      <Tracking>${SendPortTracking}</Tracking>
+      <Filter>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;Filter xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;&lt;Group&gt;&lt;Statement Property="VanArsdel.Integration.Schemas.Endpoint" Operator="0" Value="FTP.C2002" /&gt;&lt;/Group&gt;&lt;/Filter&gt;</Filter>
+      <Transforms />
+      <OrderedDelivery>false</OrderedDelivery>
+      <Priority>5</Priority>
+      <StopSendingOnFailure>false</StopSendingOnFailure>
+      <RouteFailedMessage>false</RouteFailedMessage>
+      <ApplicationName>VanArsdel.Integration</ApplicationName>
+    </SendPort>
+<!-- endif --><!-- ifndef ${UsePartnerFolders} -->
+    <SendPort Name="sp_FTP_C2002" IsStatic="true" IsTwoWay="false" BindingOption="1">
+      <Description></Description>
+      <TransmitPipeline Name="VanArsdel.Integration.Pipelines.FileEdiSend" FullyQualifiedName="VanArsdel.Integration.Pipelines.FileEdiSend, VanArsdel.Integration.Pipelines, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cfedfd825850e71" Type="2" TrackingOption="None" Description="" />
+      <PrimaryTransport>
+        <Address>ftp://${C2002_FtpHost}:21/in/%SourceFileName%</Address>
+        <TransportType Name="FTP" Capabilities="80907" ConfigurationClsid="3979ffed-0067-4cc6-9f5a-859a5db6c9bb" />
+        <TransportTypeData>&lt;CustomProps&gt;&lt;ServerAddress vt="8"&gt;${C2002_FtpHost}&lt;/ServerAddress&gt;&lt;ServerPort vt="19"&gt;21&lt;/ServerPort&gt;&lt;UserName vt="8"&gt;${C2002_FtpUser}&lt;/UserName&gt;&lt;Password vt="1" /&gt;&lt;FolderPath vt="8"&gt;/in/&lt;/FolderPath&gt;&lt;TargetFileName vt="8"&gt;%SourceFileName%&lt;/TargetFileName&gt;&lt;RepresentationType vt="8"&gt;binary&lt;/RepresentationType&gt;&lt;Mode vt="19"&gt;1&lt;/Mode&gt;&lt;AllocateStorage vt="11"&gt;0&lt;/AllocateStorage&gt;&lt;UseSsl vt="11"&gt;0&lt;/UseSsl&gt;&lt;TemporaryFolder vt="8"&gt;/tmp/&lt;/TemporaryFolder&gt;&lt;ConnectionLimit vt="19"&gt;2&lt;/ConnectionLimit&gt;&lt;/CustomProps&gt;</TransportTypeData>
+        <RetryCount>6</RetryCount>
+        <RetryInterval>10</RetryInterval>
+        <ServiceWindowEnabled>false</ServiceWindowEnabled>
+        <FromTime>2000-01-01T00:00:00</FromTime>
+        <ToTime>2000-01-01T23:59:59</ToTime>
+        <Primary>true</Primary>
+        <OrderedDelivery>false</OrderedDelivery>
+        <DeliveryNotification>1</DeliveryNotification>
+        <SendHandler Name="${SendHost}" HostTrusted="false">
+          <TransportType Name="FTP" Capabilities="80907" ConfigurationClsid="3979ffed-0067-4cc6-9f5a-859a5db6c9bb" />
+        </SendHandler>
+      </PrimaryTransport>
+      <SecondaryTransport>
+        <Address />
+        <RetryCount>3</RetryCount>
+        <RetryInterval>5</RetryInterval>
+        <ServiceWindowEnabled>false</ServiceWindowEnabled>
+        <FromTime>2000-01-01T00:00:00</FromTime>
+        <ToTime>2000-01-01T23:59:59</ToTime>
+        <Primary>false</Primary>
+        <OrderedDelivery>false</OrderedDelivery>
+        <DeliveryNotification>1</DeliveryNotification>
+        <SendHandler xsi:nil="true" />
+      </SecondaryTransport>
+      
+      <ReceivePipelineData />
+      <Tracking>${SendPortTracking}</Tracking>
+      <Filter>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;Filter xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;&lt;Group&gt;&lt;Statement Property="VanArsdel.Integration.Schemas.Endpoint" Operator="0" Value="FTP.C2002" /&gt;&lt;/Group&gt;&lt;/Filter&gt;</Filter>
+      <Transforms />
+      <OrderedDelivery>false</OrderedDelivery>
+      <Priority>5</Priority>
+      <StopSendingOnFailure>false</StopSendingOnFailure>
+      <RouteFailedMessage>false</RouteFailedMessage>
+      <ApplicationName>VanArsdel.Integration</ApplicationName>
+    </SendPort>
+<!-- endif -->    <SendPort Name="sp_ERP_IDoc_FILE" IsStatic="true" IsTwoWay="false" BindingOption="1">
+      <Description>IDoc inbound folder of the ERP file port (ORDERS05, INVOIC02).</Description>
+      <TransmitPipeline Name="VanArsdel.Integration.Pipelines.IDocSend" FullyQualifiedName="VanArsdel.Integration.Pipelines.IDocSend, VanArsdel.Integration.Pipelines, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cfedfd825850e71" Type="2" TrackingOption="None" Description="" />
+      <PrimaryTransport>
+        <Address>\\${FileServer}\${FileShare}\erp\inbound\B2B_%MessageID%.xml</Address>
+        <TransportType Name="FILE" Capabilities="11" ConfigurationClsid="5e49e3a6-b4fc-4077-b44c-22f34a242fdb" />
+        <TransportTypeData>&lt;CustomProps&gt;&lt;UseTempFileOnWrite vt="11"&gt;-1&lt;/UseTempFileOnWrite&gt;&lt;AllowCacheOnWrite vt="11"&gt;0&lt;/AllowCacheOnWrite&gt;&lt;CopyMode vt="19"&gt;1&lt;/CopyMode&gt;&lt;FileName vt="8"&gt;B2B_%MessageID%.xml&lt;/FileName&gt;&lt;/CustomProps&gt;</TransportTypeData>
+        <RetryCount>3</RetryCount>
+        <RetryInterval>5</RetryInterval>
+        <ServiceWindowEnabled>false</ServiceWindowEnabled>
+        <FromTime>2000-01-01T00:00:00</FromTime>
+        <ToTime>2000-01-01T23:59:59</ToTime>
+        <Primary>true</Primary>
+        <OrderedDelivery>false</OrderedDelivery>
+        <DeliveryNotification>1</DeliveryNotification>
+        <SendHandler Name="${SendHost}" HostTrusted="false">
+          <TransportType Name="FILE" Capabilities="11" ConfigurationClsid="5e49e3a6-b4fc-4077-b44c-22f34a242fdb" />
+        </SendHandler>
+      </PrimaryTransport>
+      <SecondaryTransport>
+        <Address />
+        <RetryCount>3</RetryCount>
+        <RetryInterval>5</RetryInterval>
+        <ServiceWindowEnabled>false</ServiceWindowEnabled>
+        <FromTime>2000-01-01T00:00:00</FromTime>
+        <ToTime>2000-01-01T23:59:59</ToTime>
+        <Primary>false</Primary>
+        <OrderedDelivery>false</OrderedDelivery>
+        <DeliveryNotification>1</DeliveryNotification>
+        <SendHandler xsi:nil="true" />
+      </SecondaryTransport>
+      
+      <ReceivePipelineData />
+      <Tracking>${SendPortTracking}</Tracking>
+      <Filter></Filter>
+      <Transforms />
+      <OrderedDelivery>false</OrderedDelivery>
+      <Priority>5</Priority>
+      <StopSendingOnFailure>false</StopSendingOnFailure>
+      <RouteFailedMessage>false</RouteFailedMessage>
+      <ApplicationName>VanArsdel.Integration</ApplicationName>
+    </SendPort>
+    <SendPort Name="sp_ERP_OrderManagement_WCF" IsStatic="true" IsTwoWay="true" BindingOption="1">
+      <Description>ERP credit check (SOAP gateway in front of the ERP). Client id and secret are added by the vanArsdelErpHeaders behavior from SSO.</Description>
+      <TransmitPipeline Name="Microsoft.BizTalk.DefaultPipelines.XMLTransmit" FullyQualifiedName="Microsoft.BizTalk.DefaultPipelines.XMLTransmit, Microsoft.BizTalk.DefaultPipelines, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Type="2" TrackingOption="None" Description="" />
+      <PrimaryTransport>
+        <Address>${ErpOrderServiceUrl}</Address>
+        <TransportType Name="WCF-Custom" Capabilities="907" ConfigurationClsid="af081f69-38ca-4d5b-87df-f0344b12557a" />
+        <TransportTypeData>&lt;CustomProps&gt;&lt;BindingType vt="8"&gt;basicHttpBinding&lt;/BindingType&gt;<!-- ifdef ${UseHttps} -->&lt;BindingConfiguration vt="8"&gt;&amp;lt;binding name="basicHttpBinding" sendTimeout="00:01:30" maxReceivedMessageSize="1048576"&amp;gt;&amp;lt;security mode="Transport"&amp;gt;&amp;lt;transport clientCredentialType="None" /&amp;gt;&amp;lt;/security&amp;gt;&amp;lt;/binding&amp;gt;&lt;/BindingConfiguration&gt;<!-- endif --><!-- ifndef ${UseHttps} -->&lt;BindingConfiguration vt="8"&gt;&amp;lt;binding name="basicHttpBinding" sendTimeout="00:01:30" maxReceivedMessageSize="1048576"&amp;gt;&amp;lt;security mode="None" /&amp;gt;&amp;lt;/binding&amp;gt;&lt;/BindingConfiguration&gt;<!-- endif -->&lt;EndpointBehaviorConfiguration vt="8"&gt;&amp;lt;behavior name="EndpointBehavior"&amp;gt;&amp;lt;vanArsdelErpHeaders clientIdSetting="ErpClientId" secretSetting="ErpClientSecret" /&amp;gt;&amp;lt;/behavior&amp;gt;&lt;/EndpointBehaviorConfiguration&gt;&lt;StaticAction vt="8"&gt;&amp;lt;BtsActionMapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&amp;gt;&amp;lt;Operation Name="CheckCredit" Action="http://erp.vanarsdel.com/services/orders/2014/OrderManagementService/CheckCredit" /&amp;gt;&amp;lt;/BtsActionMapping&amp;gt;&lt;/StaticAction&gt;&lt;UseSSO vt="11"&gt;0&lt;/UseSSO&gt;&lt;InboundBodyLocation vt="8"&gt;UseBodyElement&lt;/InboundBodyLocation&gt;&lt;InboundNodeEncoding vt="8"&gt;Xml&lt;/InboundNodeEncoding&gt;&lt;OutboundBodyLocation vt="8"&gt;UseBodyElement&lt;/OutboundBodyLocation&gt;&lt;OutboundXmlTemplate vt="8"&gt;&amp;lt;bts-msg-body xmlns="http://www.microsoft.com/schemas/bts2007" encoding="xml"/&amp;gt;&lt;/OutboundXmlTemplate&gt;&lt;PropagateFaultMessage vt="11"&gt;-1&lt;/PropagateFaultMessage&gt;&lt;EnableTransaction vt="11"&gt;0&lt;/EnableTransaction&gt;&lt;IsolationLevel vt="8"&gt;Serializable&lt;/IsolationLevel&gt;&lt;AffiliateApplicationName vt="8" /&gt;&lt;/CustomProps&gt;</TransportTypeData>
+        <RetryCount>3</RetryCount>
+        <RetryInterval>1</RetryInterval>
+        <ServiceWindowEnabled>false</ServiceWindowEnabled>
+        <FromTime>2000-01-01T00:00:00</FromTime>
+        <ToTime>2000-01-01T23:59:59</ToTime>
+        <Primary>true</Primary>
+        <OrderedDelivery>false</OrderedDelivery>
+        <DeliveryNotification>1</DeliveryNotification>
+        <SendHandler Name="${SendHost}" HostTrusted="false">
+          <TransportType Name="WCF-Custom" Capabilities="907" ConfigurationClsid="af081f69-38ca-4d5b-87df-f0344b12557a" />
+        </SendHandler>
+      </PrimaryTransport>
+      <SecondaryTransport>
+        <Address />
+        <RetryCount>3</RetryCount>
+        <RetryInterval>5</RetryInterval>
+        <ServiceWindowEnabled>false</ServiceWindowEnabled>
+        <FromTime>2000-01-01T00:00:00</FromTime>
+        <ToTime>2000-01-01T23:59:59</ToTime>
+        <Primary>false</Primary>
+        <OrderedDelivery>false</OrderedDelivery>
+        <DeliveryNotification>1</DeliveryNotification>
+        <SendHandler xsi:nil="true" />
+      </SecondaryTransport>
+      <ReceivePipeline Name="Microsoft.BizTalk.DefaultPipelines.XMLReceive" FullyQualifiedName="Microsoft.BizTalk.DefaultPipelines.XMLReceive, Microsoft.BizTalk.DefaultPipelines, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Type="1" TrackingOption="None" Description="" />
+      <ReceivePipelineData />
+      <Tracking>${SendPortTracking}</Tracking>
+      <Filter></Filter>
+      <Transforms />
+      <OrderedDelivery>false</OrderedDelivery>
+      <Priority>5</Priority>
+      <StopSendingOnFailure>false</StopSendingOnFailure>
+      <RouteFailedMessage>false</RouteFailedMessage>
+      <ApplicationName>VanArsdel.Integration</ApplicationName>
+    </SendPort>
+    <SendPort Name="sp_CreditHold_FILE" IsStatic="true" IsTwoWay="false" BindingOption="1">
+      <Description>Orders held for credit control; released through the operations portal.</Description>
+      <TransmitPipeline Name="Microsoft.BizTalk.DefaultPipelines.XMLTransmit" FullyQualifiedName="Microsoft.BizTalk.DefaultPipelines.XMLTransmit, Microsoft.BizTalk.DefaultPipelines, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Type="2" TrackingOption="None" Description="" />
+      <PrimaryTransport>
+        <Address>\\${FileServer}\${FileShare}\credithold\%MessageID%.xml</Address>
+        <TransportType Name="FILE" Capabilities="11" ConfigurationClsid="5e49e3a6-b4fc-4077-b44c-22f34a242fdb" />
+        <TransportTypeData>&lt;CustomProps&gt;&lt;UseTempFileOnWrite vt="11"&gt;-1&lt;/UseTempFileOnWrite&gt;&lt;AllowCacheOnWrite vt="11"&gt;0&lt;/AllowCacheOnWrite&gt;&lt;CopyMode vt="19"&gt;1&lt;/CopyMode&gt;&lt;FileName vt="8"&gt;%MessageID%.xml&lt;/FileName&gt;&lt;/CustomProps&gt;</TransportTypeData>
+        <RetryCount>3</RetryCount>
+        <RetryInterval>5</RetryInterval>
+        <ServiceWindowEnabled>false</ServiceWindowEnabled>
+        <FromTime>2000-01-01T00:00:00</FromTime>
+        <ToTime>2000-01-01T23:59:59</ToTime>
+        <Primary>true</Primary>
+        <OrderedDelivery>false</OrderedDelivery>
+        <DeliveryNotification>1</DeliveryNotification>
+        <SendHandler Name="${SendHost}" HostTrusted="false">
+          <TransportType Name="FILE" Capabilities="11" ConfigurationClsid="5e49e3a6-b4fc-4077-b44c-22f34a242fdb" />
+        </SendHandler>
+      </PrimaryTransport>
+      <SecondaryTransport>
+        <Address />
+        <RetryCount>3</RetryCount>
+        <RetryInterval>5</RetryInterval>
+        <ServiceWindowEnabled>false</ServiceWindowEnabled>
+        <FromTime>2000-01-01T00:00:00</FromTime>
+        <ToTime>2000-01-01T23:59:59</ToTime>
+        <Primary>false</Primary>
+        <OrderedDelivery>false</OrderedDelivery>
+        <DeliveryNotification>1</DeliveryNotification>
+        <SendHandler xsi:nil="true" />
+      </SecondaryTransport>
+      
+      <ReceivePipelineData />
+      <Tracking>${SendPortTracking}</Tracking>
+      <Filter></Filter>
+      <Transforms />
+      <OrderedDelivery>false</OrderedDelivery>
+      <Priority>5</Priority>
+      <StopSendingOnFailure>false</StopSendingOnFailure>
+      <RouteFailedMessage>false</RouteFailedMessage>
+      <ApplicationName>VanArsdel.Integration</ApplicationName>
+    </SendPort>
+    <SendPort Name="sp_Suspended_Archive_FILE" IsStatic="true" IsTwoWay="false" BindingOption="1">
+      <Description>Failed message routing copy for the operations portal resubmit page.</Description>
+      <TransmitPipeline Name="Microsoft.BizTalk.DefaultPipelines.PassThruTransmit" FullyQualifiedName="Microsoft.BizTalk.DefaultPipelines.PassThruTransmit, Microsoft.BizTalk.DefaultPipelines, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Type="2" TrackingOption="None" Description="" />
+      <PrimaryTransport>
+        <Address>\\${FileServer}\${FileShare}\suspended\%MessageID%.xml</Address>
+        <TransportType Name="FILE" Capabilities="11" ConfigurationClsid="5e49e3a6-b4fc-4077-b44c-22f34a242fdb" />
+        <TransportTypeData>&lt;CustomProps&gt;&lt;UseTempFileOnWrite vt="11"&gt;-1&lt;/UseTempFileOnWrite&gt;&lt;AllowCacheOnWrite vt="11"&gt;0&lt;/AllowCacheOnWrite&gt;&lt;CopyMode vt="19"&gt;1&lt;/CopyMode&gt;&lt;FileName vt="8"&gt;%MessageID%.xml&lt;/FileName&gt;&lt;/CustomProps&gt;</TransportTypeData>
+        <RetryCount>3</RetryCount>
+        <RetryInterval>5</RetryInterval>
+        <ServiceWindowEnabled>false</ServiceWindowEnabled>
+        <FromTime>2000-01-01T00:00:00</FromTime>
+        <ToTime>2000-01-01T23:59:59</ToTime>
+        <Primary>true</Primary>
+        <OrderedDelivery>false</OrderedDelivery>
+        <DeliveryNotification>1</DeliveryNotification>
+        <SendHandler Name="${SendHost}" HostTrusted="false">
+          <TransportType Name="FILE" Capabilities="11" ConfigurationClsid="5e49e3a6-b4fc-4077-b44c-22f34a242fdb" />
+        </SendHandler>
+      </PrimaryTransport>
+      <SecondaryTransport>
+        <Address />
+        <RetryCount>3</RetryCount>
+        <RetryInterval>5</RetryInterval>
+        <ServiceWindowEnabled>false</ServiceWindowEnabled>
+        <FromTime>2000-01-01T00:00:00</FromTime>
+        <ToTime>2000-01-01T23:59:59</ToTime>
+        <Primary>false</Primary>
+        <OrderedDelivery>false</OrderedDelivery>
+        <DeliveryNotification>1</DeliveryNotification>
+        <SendHandler xsi:nil="true" />
+      </SecondaryTransport>
+      
+      <ReceivePipelineData />
+      <Tracking>${SendPortTracking}</Tracking>
+      <Filter>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;Filter xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;&lt;Group&gt;&lt;Statement Property="ErrorReport.ErrorType" Operator="0" Value="FailedMessage" /&gt;&lt;Statement Property="ErrorReport.ReceivePortName" Operator="6" /&gt;&lt;/Group&gt;&lt;/Filter&gt;</Filter>
+      <Transforms />
+      <OrderedDelivery>false</OrderedDelivery>
+      <Priority>5</Priority>
+      <StopSendingOnFailure>false</StopSendingOnFailure>
+      <RouteFailedMessage>false</RouteFailedMessage>
+      <ApplicationName>VanArsdel.Integration</ApplicationName>
+    </SendPort>
+    <SendPort Name="sp_Integration_AckOverdue_SMTP" IsStatic="true" IsTwoWay="false" BindingOption="1">
+      <Description></Description>
+      <TransmitPipeline Name="Microsoft.BizTalk.DefaultPipelines.PassThruTransmit" FullyQualifiedName="Microsoft.BizTalk.DefaultPipelines.PassThruTransmit, Microsoft.BizTalk.DefaultPipelines, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Type="2" TrackingOption="None" Description="" />
+      <PrimaryTransport>
+        <Address>mailto:${IntegrationSupportMail}</Address>
+        <TransportType Name="SMTP" Capabilities="11" ConfigurationClsid="9cfa8fb4-2e5f-4b51-a2db-08d3a4a2f2fe" />
+        <TransportTypeData>&lt;CustomProps&gt;&lt;SMTPHost vt="8"&gt;${SmtpHost}&lt;/SMTPHost&gt;&lt;From vt="8"&gt;${AlertFromAddress}&lt;/From&gt;&lt;Subject vt="8"&gt;[B2B] Acknowledgements overdue (%MessageID%)&lt;/Subject&gt;&lt;SMTPAuthenticate vt="19"&gt;0&lt;/SMTPAuthenticate&gt;&lt;MessagePartsAttachments vt="19"&gt;1&lt;/MessagePartsAttachments&gt;&lt;EmailBodyFile vt="8" /&gt;&lt;EmailBodyText vt="8"&gt;Interchanges without a 997/CONTRL inside the partner agreement window are attached. Check the operations portal, Interchanges page.&lt;/EmailBodyText&gt;&lt;EmailBodyTextCharset vt="8"&gt;utf-8&lt;/EmailBodyTextCharset&gt;&lt;UseSSO vt="11"&gt;0&lt;/UseSSO&gt;&lt;/CustomProps&gt;</TransportTypeData>
+        <RetryCount>3</RetryCount>
+        <RetryInterval>5</RetryInterval>
+        <ServiceWindowEnabled>false</ServiceWindowEnabled>
+        <FromTime>2000-01-01T00:00:00</FromTime>
+        <ToTime>2000-01-01T23:59:59</ToTime>
+        <Primary>true</Primary>
+        <OrderedDelivery>false</OrderedDelivery>
+        <DeliveryNotification>1</DeliveryNotification>
+        <SendHandler Name="${SendHost}" HostTrusted="false">
+          <TransportType Name="SMTP" Capabilities="11" ConfigurationClsid="9cfa8fb4-2e5f-4b51-a2db-08d3a4a2f2fe" />
+        </SendHandler>
+      </PrimaryTransport>
+      <SecondaryTransport>
+        <Address />
+        <RetryCount>3</RetryCount>
+        <RetryInterval>5</RetryInterval>
+        <ServiceWindowEnabled>false</ServiceWindowEnabled>
+        <FromTime>2000-01-01T00:00:00</FromTime>
+        <ToTime>2000-01-01T23:59:59</ToTime>
+        <Primary>false</Primary>
+        <OrderedDelivery>false</OrderedDelivery>
+        <DeliveryNotification>1</DeliveryNotification>
+        <SendHandler xsi:nil="true" />
+      </SecondaryTransport>
+      
+      <ReceivePipelineData />
+      <Tracking>${SendPortTracking}</Tracking>
+      <Filter>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;Filter xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;&lt;Group&gt;&lt;Statement Property="BTS.ReceivePortName" Operator="0" Value="rp_Integration_AckOverdue" /&gt;&lt;/Group&gt;&lt;/Filter&gt;</Filter>
+      <Transforms />
+      <OrderedDelivery>false</OrderedDelivery>
+      <Priority>5</Priority>
+      <StopSendingOnFailure>false</StopSendingOnFailure>
+      <RouteFailedMessage>false</RouteFailedMessage>
+      <ApplicationName>VanArsdel.Integration</ApplicationName>
+    </SendPort>
+  </SendPortCollection>
+  <DistributionListCollection />
+  <ReceivePortCollection>
+    <ReceivePort Name="rp_Customer_EDI_AS2" IsTwoWay="true" BindingOption="1">
+      <Description>AS2 from all AS2 partners (customers and Pellham Valves); synchronous MDN.</Description>
+      <ReceiveLocations>
+        <ReceiveLocation Name="rl_Customer_EDI_AS2">
+          <Description />
+          <Address>${As2ReceivePath}</Address>
+          <PublicAddress />
+          <Primary>true</Primary>
+          <ReceiveLocationServiceWindowEnabled>false</ReceiveLocationServiceWindowEnabled>
+          <ReceiveLocationFromTime>2000-01-01T00:00:00</ReceiveLocationFromTime>
+          <ReceiveLocationToTime>2000-01-01T23:59:59</ReceiveLocationToTime>
+          <ReceiveLocationStartDateEnabled>false</ReceiveLocationStartDateEnabled>
+          <ReceiveLocationStartDate>2000-01-01T00:00:00</ReceiveLocationStartDate>
+          <ReceiveLocationEndDateEnabled>false</ReceiveLocationEndDateEnabled>
+          <ReceiveLocationEndDate>2000-01-01T23:59:59</ReceiveLocationEndDate>
+          <ReceiveLocationTransportType Name="HTTP" Capabilities="387" ConfigurationClsid="1c56d157-0553-4345-8a1f-55d2d1a3ffb6" />
+          <ReceiveLocationTransportTypeData>&lt;CustomProps&gt;&lt;ReturnCorrelationHandle vt="11"&gt;0&lt;/ReturnCorrelationHandle&gt;&lt;LoosenRequestResponseCorrelation vt="11"&gt;0&lt;/LoosenRequestResponseCorrelation&gt;&lt;ResponseContentType vt="8"&gt;multipart/report&lt;/ResponseContentType&gt;&lt;UseSSO vt="11"&gt;0&lt;/UseSSO&gt;&lt;SuspendFailedRequests vt="11"&gt;-1&lt;/SuspendFailedRequests&gt;&lt;/CustomProps&gt;</ReceiveLocationTransportTypeData>
+          <ReceivePipeline Name="VanArsdel.Integration.Pipelines.As2EdiReceive" FullyQualifiedName="VanArsdel.Integration.Pipelines.As2EdiReceive, VanArsdel.Integration.Pipelines, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cfedfd825850e71" Type="1" TrackingOption="None" Description="" />
+          <ReceivePipelineData />
+          <SendPipeline Name="Microsoft.BizTalk.EdiInt.DefaultPipelines.AS2Send" FullyQualifiedName="Microsoft.BizTalk.EdiInt.DefaultPipelines.AS2Send, Microsoft.BizTalk.Edi.EdiIntPipelines, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Type="2" TrackingOption="None" Description="" />
+          <SendPipelineData />
+          <Enable>true</Enable>
+          <ReceiveHandler Name="${IsolatedHost}" HostTrusted="false">
+            <TransportType Name="HTTP" Capabilities="387" ConfigurationClsid="1c56d157-0553-4345-8a1f-55d2d1a3ffb6" />
+          </ReceiveHandler>
+          <ScheduleTimeZone>UTC</ScheduleTimeZone>
+          <ScheduleAutoAdjustToDaylightSaving>true</ScheduleAutoAdjustToDaylightSaving>
+          <ScheduleStartDateEnabled>false</ScheduleStartDateEnabled>
+          <ScheduleStopDateEnabled>false</ScheduleStopDateEnabled>
+          <ScheduleStartTimeEnabled>false</ScheduleStartTimeEnabled>
+          <ScheduleStopTimeEnabled>false</ScheduleStopTimeEnabled>
+        </ReceiveLocation>
+      </ReceiveLocations>
+      
+      <SendPipelineData />
+      <Authentication>0</Authentication>
+      <Tracking>${ReceivePortTracking}</Tracking>
+      <Transforms>
+        <Transform FullName="VanArsdel.Integration.Maps.X12_00401_850_to_Order" AssemblyQualifiedName="VanArsdel.Integration.Maps.X12_00401_850_to_Order, VanArsdel.Integration.Maps, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cfedfd825850e71" />
+        <Transform FullName="VanArsdel.Integration.Maps.EFACT_D96A_ORDERS_to_Order" AssemblyQualifiedName="VanArsdel.Integration.Maps.EFACT_D96A_ORDERS_to_Order, VanArsdel.Integration.Maps, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cfedfd825850e71" />
+        <Transform FullName="VanArsdel.Integration.Maps.X12_00401_997_to_FunctionalAck" AssemblyQualifiedName="VanArsdel.Integration.Maps.X12_00401_997_to_FunctionalAck, VanArsdel.Integration.Maps, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cfedfd825850e71" />
+        <Transform FullName="VanArsdel.Integration.Maps.EFACT_D3_CONTRL_to_FunctionalAck" AssemblyQualifiedName="VanArsdel.Integration.Maps.EFACT_D3_CONTRL_to_FunctionalAck, VanArsdel.Integration.Maps, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cfedfd825850e71" />
+        <Transform FullName="VanArsdel.Integration.Maps.X12_00401_810_to_Invoice" AssemblyQualifiedName="VanArsdel.Integration.Maps.X12_00401_810_to_Invoice, VanArsdel.Integration.Maps, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cfedfd825850e71" />
+      </Transforms>
+      <RouteFailedMessage>true</RouteFailedMessage>
+      <ApplicationName>VanArsdel.Integration</ApplicationName>
+    </ReceivePort>
+    <ReceivePort Name="rp_Customer_EDI_FILE" IsTwoWay="false" BindingOption="1">
+      <Description></Description>
+      <ReceiveLocations>
+<!-- ifdef ${UsePartnerFolders} -->
+        <ReceiveLocation Name="rl_Customer_EDI_SFTP_C1002">
+          <Description />
+          <Address>\\${FileServer}\${FileShare}\sftp\C1002\inbound\*.x12</Address>
+          <PublicAddress />
+          <Primary>true</Primary>
+          <ReceiveLocationServiceWindowEnabled>false</ReceiveLocationServiceWindowEnabled>
+          <ReceiveLocationFromTime>2000-01-01T00:00:00</ReceiveLocationFromTime>
+          <ReceiveLocationToTime>2000-01-01T23:59:59</ReceiveLocationToTime>
+          <ReceiveLocationStartDateEnabled>false</ReceiveLocationStartDateEnabled>
+          <ReceiveLocationStartDate>2000-01-01T00:00:00</ReceiveLocationStartDate>
+          <ReceiveLocationEndDateEnabled>false</ReceiveLocationEndDateEnabled>
+          <ReceiveLocationEndDate>2000-01-01T23:59:59</ReceiveLocationEndDate>
+          <ReceiveLocationTransportType Name="FILE" Capabilities="11" ConfigurationClsid="5e49e3a6-b4fc-4077-b44c-22f34a242fdb" />
+          <ReceiveLocationTransportTypeData>&lt;CustomProps&gt;&lt;FileMask vt="8"&gt;*.x12&lt;/FileMask&gt;&lt;BatchSize vt="19"&gt;20&lt;/BatchSize&gt;&lt;BatchSizeInBytes vt="19"&gt;102400&lt;/BatchSizeInBytes&gt;&lt;PollingInterval vt="19"&gt;${PartnerPollingSeconds}000&lt;/PollingInterval&gt;&lt;FileNetFailRetryCount vt="19"&gt;5&lt;/FileNetFailRetryCount&gt;&lt;FileNetFailRetryInt vt="19"&gt;5&lt;/FileNetFailRetryInt&gt;&lt;RemoveReceivedFileDelay vt="19"&gt;10&lt;/RemoveReceivedFileDelay&gt;&lt;RemoveReceivedFileMaxInterval vt="19"&gt;300000&lt;/RemoveReceivedFileMaxInterval&gt;&lt;RemoveReceivedFileRetryCount vt="19"&gt;5&lt;/RemoveReceivedFileRetryCount&gt;&lt;RenameReceivedFiles vt="11"&gt;0&lt;/RenameReceivedFiles&gt;&lt;/CustomProps&gt;</ReceiveLocationTransportTypeData>
+          <ReceivePipeline Name="VanArsdel.Integration.Pipelines.FileEdiReceive" FullyQualifiedName="VanArsdel.Integration.Pipelines.FileEdiReceive, VanArsdel.Integration.Pipelines, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cfedfd825850e71" Type="1" TrackingOption="None" Description="" />
+          <ReceivePipelineData />
+          <SendPipeline xsi:nil="true" />
+          <SendPipelineData />
+          <Enable>true</Enable>
+          <ReceiveHandler Name="${ReceiveHost}" HostTrusted="false">
+            <TransportType Name="FILE" Capabilities="11" ConfigurationClsid="5e49e3a6-b4fc-4077-b44c-22f34a242fdb" />
+          </ReceiveHandler>
+          <ScheduleTimeZone>UTC</ScheduleTimeZone>
+          <ScheduleAutoAdjustToDaylightSaving>true</ScheduleAutoAdjustToDaylightSaving>
+          <ScheduleStartDateEnabled>false</ScheduleStartDateEnabled>
+          <ScheduleStopDateEnabled>false</ScheduleStopDateEnabled>
+          <ScheduleStartTimeEnabled>false</ScheduleStartTimeEnabled>
+          <ScheduleStopTimeEnabled>false</ScheduleStopTimeEnabled>
+        </ReceiveLocation>
+<!-- endif --><!-- ifndef ${UsePartnerFolders} -->
+        <ReceiveLocation Name="rl_Customer_EDI_SFTP_C1002">
+          <Description />
+          <Address>sftp://${C1002_SftpHost}:22/outbound/vanarsdel/*.x12</Address>
+          <PublicAddress />
+          <Primary>true</Primary>
+          <ReceiveLocationServiceWindowEnabled>false</ReceiveLocationServiceWindowEnabled>
+          <ReceiveLocationFromTime>2000-01-01T00:00:00</ReceiveLocationFromTime>
+          <ReceiveLocationToTime>2000-01-01T23:59:59</ReceiveLocationToTime>
+          <ReceiveLocationStartDateEnabled>false</ReceiveLocationStartDateEnabled>
+          <ReceiveLocationStartDate>2000-01-01T00:00:00</ReceiveLocationStartDate>
+          <ReceiveLocationEndDateEnabled>false</ReceiveLocationEndDateEnabled>
+          <ReceiveLocationEndDate>2000-01-01T23:59:59</ReceiveLocationEndDate>
+          <ReceiveLocationTransportType Name="SFTP" Capabilities="523" ConfigurationClsid="f75aef7c-a3e7-4c9e-8ba3-2a41c8ad4a6b" />
+          <ReceiveLocationTransportTypeData>&lt;CustomProps&gt;&lt;ServerAddress vt="8"&gt;${C1002_SftpHost}&lt;/ServerAddress&gt;&lt;ServerPort vt="3"&gt;22&lt;/ServerPort&gt;&lt;FolderPath vt="8"&gt;/outbound/vanarsdel/&lt;/FolderPath&gt;&lt;FileMask vt="8"&gt;*.x12&lt;/FileMask&gt;&lt;UserName vt="8"&gt;${C1002_SftpUser}&lt;/UserName&gt;&lt;Password vt="1" /&gt;&lt;ClientAuthenticationMode vt="8"&gt;Password&lt;/ClientAuthenticationMode&gt;&lt;SSHServerHostKeyFingerPrint vt="8"&gt;${C1002_SftpHostKey}&lt;/SSHServerHostKeyFingerPrint&gt;&lt;AccessAnySSHServerHostKey vt="11"&gt;0&lt;/AccessAnySSHServerHostKey&gt;&lt;EncryptionCipher vt="8"&gt;Auto&lt;/EncryptionCipher&gt;&lt;ConnectionLimit vt="19"&gt;5&lt;/ConnectionLimit&gt;&lt;PollingInterval vt="19"&gt;${PartnerPollingSeconds}&lt;/PollingInterval&gt;&lt;PollingIntervalUnit vt="8"&gt;Seconds&lt;/PollingIntervalUnit&gt;&lt;MaximumNumberOfFiles vt="19"&gt;20&lt;/MaximumNumberOfFiles&gt;&lt;MaximumBatchSize vt="19"&gt;102400&lt;/MaximumBatchSize&gt;&lt;Log vt="8" /&gt;&lt;/CustomProps&gt;</ReceiveLocationTransportTypeData>
+          <ReceivePipeline Name="VanArsdel.Integration.Pipelines.FileEdiReceive" FullyQualifiedName="VanArsdel.Integration.Pipelines.FileEdiReceive, VanArsdel.Integration.Pipelines, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cfedfd825850e71" Type="1" TrackingOption="None" Description="" />
+          <ReceivePipelineData />
+          <SendPipeline xsi:nil="true" />
+          <SendPipelineData />
+          <Enable>true</Enable>
+          <ReceiveHandler Name="${ReceiveHost}" HostTrusted="false">
+            <TransportType Name="SFTP" Capabilities="523" ConfigurationClsid="f75aef7c-a3e7-4c9e-8ba3-2a41c8ad4a6b" />
+          </ReceiveHandler>
+          <ScheduleTimeZone>UTC</ScheduleTimeZone>
+          <ScheduleAutoAdjustToDaylightSaving>true</ScheduleAutoAdjustToDaylightSaving>
+          <ScheduleStartDateEnabled>false</ScheduleStartDateEnabled>
+          <ScheduleStopDateEnabled>false</ScheduleStopDateEnabled>
+          <ScheduleStartTimeEnabled>false</ScheduleStartTimeEnabled>
+          <ScheduleStopTimeEnabled>false</ScheduleStopTimeEnabled>
+        </ReceiveLocation>
+<!-- endif --><!-- ifdef ${UsePartnerFolders} -->
+        <ReceiveLocation Name="rl_Customer_EDI_FTP_C2002">
+          <Description />
+          <Address>\\${FileServer}\${FileShare}\ftp\C2002\inbound\*.edi</Address>
+          <PublicAddress />
+          <Primary>true</Primary>
+          <ReceiveLocationServiceWindowEnabled>false</ReceiveLocationServiceWindowEnabled>
+          <ReceiveLocationFromTime>2000-01-01T00:00:00</ReceiveLocationFromTime>
+          <ReceiveLocationToTime>2000-01-01T23:59:59</ReceiveLocationToTime>
+          <ReceiveLocationStartDateEnabled>false</ReceiveLocationStartDateEnabled>
+          <ReceiveLocationStartDate>2000-01-01T00:00:00</ReceiveLocationStartDate>
+          <ReceiveLocationEndDateEnabled>false</ReceiveLocationEndDateEnabled>
+          <ReceiveLocationEndDate>2000-01-01T23:59:59</ReceiveLocationEndDate>
+          <ReceiveLocationTransportType Name="FILE" Capabilities="11" ConfigurationClsid="5e49e3a6-b4fc-4077-b44c-22f34a242fdb" />
+          <ReceiveLocationTransportTypeData>&lt;CustomProps&gt;&lt;FileMask vt="8"&gt;*.edi&lt;/FileMask&gt;&lt;BatchSize vt="19"&gt;20&lt;/BatchSize&gt;&lt;BatchSizeInBytes vt="19"&gt;102400&lt;/BatchSizeInBytes&gt;&lt;PollingInterval vt="19"&gt;${PartnerPollingSeconds}000&lt;/PollingInterval&gt;&lt;FileNetFailRetryCount vt="19"&gt;5&lt;/FileNetFailRetryCount&gt;&lt;FileNetFailRetryInt vt="19"&gt;5&lt;/FileNetFailRetryInt&gt;&lt;RemoveReceivedFileDelay vt="19"&gt;10&lt;/RemoveReceivedFileDelay&gt;&lt;RemoveReceivedFileMaxInterval vt="19"&gt;300000&lt;/RemoveReceivedFileMaxInterval&gt;&lt;RemoveReceivedFileRetryCount vt="19"&gt;5&lt;/RemoveReceivedFileRetryCount&gt;&lt;RenameReceivedFiles vt="11"&gt;0&lt;/RenameReceivedFiles&gt;&lt;/CustomProps&gt;</ReceiveLocationTransportTypeData>
+          <ReceivePipeline Name="VanArsdel.Integration.Pipelines.FileEdiReceive" FullyQualifiedName="VanArsdel.Integration.Pipelines.FileEdiReceive, VanArsdel.Integration.Pipelines, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cfedfd825850e71" Type="1" TrackingOption="None" Description="" />
+          <ReceivePipelineData />
+          <SendPipeline xsi:nil="true" />
+          <SendPipelineData />
+          <Enable>true</Enable>
+          <ReceiveHandler Name="${ReceiveHost}" HostTrusted="false">
+            <TransportType Name="FILE" Capabilities="11" ConfigurationClsid="5e49e3a6-b4fc-4077-b44c-22f34a242fdb" />
+          </ReceiveHandler>
+          <ScheduleTimeZone>UTC</ScheduleTimeZone>
+          <ScheduleAutoAdjustToDaylightSaving>true</ScheduleAutoAdjustToDaylightSaving>
+          <ScheduleStartDateEnabled>false</ScheduleStartDateEnabled>
+          <ScheduleStopDateEnabled>false</ScheduleStopDateEnabled>
+          <ScheduleStartTimeEnabled>false</ScheduleStartTimeEnabled>
+          <ScheduleStopTimeEnabled>false</ScheduleStopTimeEnabled>
+        </ReceiveLocation>
+<!-- endif --><!-- ifndef ${UsePartnerFolders} -->
+        <ReceiveLocation Name="rl_Customer_EDI_FTP_C2002">
+          <Description />
+          <Address>ftp://${C2002_FtpHost}:21/out/*.edi</Address>
+          <PublicAddress />
+          <Primary>true</Primary>
+          <ReceiveLocationServiceWindowEnabled>false</ReceiveLocationServiceWindowEnabled>
+          <ReceiveLocationFromTime>2000-01-01T00:00:00</ReceiveLocationFromTime>
+          <ReceiveLocationToTime>2000-01-01T23:59:59</ReceiveLocationToTime>
+          <ReceiveLocationStartDateEnabled>false</ReceiveLocationStartDateEnabled>
+          <ReceiveLocationStartDate>2000-01-01T00:00:00</ReceiveLocationStartDate>
+          <ReceiveLocationEndDateEnabled>false</ReceiveLocationEndDateEnabled>
+          <ReceiveLocationEndDate>2000-01-01T23:59:59</ReceiveLocationEndDate>
+          <ReceiveLocationTransportType Name="FTP" Capabilities="80907" ConfigurationClsid="3979ffed-0067-4cc6-9f5a-859a5db6c9bb" />
+          <ReceiveLocationTransportTypeData>&lt;CustomProps&gt;&lt;ServerAddress vt="8"&gt;${C2002_FtpHost}&lt;/ServerAddress&gt;&lt;ServerPort vt="19"&gt;21&lt;/ServerPort&gt;&lt;UserName vt="8"&gt;${C2002_FtpUser}&lt;/UserName&gt;&lt;Password vt="1" /&gt;&lt;FolderPath vt="8"&gt;/out/&lt;/FolderPath&gt;&lt;FileMask vt="8"&gt;*.edi&lt;/FileMask&gt;&lt;RepresentationType vt="8"&gt;binary&lt;/RepresentationType&gt;&lt;Mode vt="19"&gt;1&lt;/Mode&gt;&lt;PollingInterval vt="19"&gt;${PartnerPollingSeconds}&lt;/PollingInterval&gt;&lt;PollingUnitOfMeasure vt="8"&gt;Seconds&lt;/PollingUnitOfMeasure&gt;&lt;MaximumBatchSize vt="19"&gt;0&lt;/MaximumBatchSize&gt;&lt;MaximumNumberOfFiles vt="19"&gt;0&lt;/MaximumNumberOfFiles&gt;&lt;MaxFileSize vt="19"&gt;100&lt;/MaxFileSize&gt;&lt;UseSsl vt="11"&gt;0&lt;/UseSsl&gt;&lt;ReceiveDataChannelProtectionLevel vt="8"&gt;Clear&lt;/ReceiveDataChannelProtectionLevel&gt;&lt;RedownloadInterval vt="19"&gt;-1&lt;/RedownloadInterval&gt;&lt;ErrorThreshold vt="19"&gt;10&lt;/ErrorThreshold&gt;&lt;SpoolingFolder vt="8" /&gt;&lt;/CustomProps&gt;</ReceiveLocationTransportTypeData>
+          <ReceivePipeline Name="VanArsdel.Integration.Pipelines.FileEdiReceive" FullyQualifiedName="VanArsdel.Integration.Pipelines.FileEdiReceive, VanArsdel.Integration.Pipelines, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cfedfd825850e71" Type="1" TrackingOption="None" Description="" />
+          <ReceivePipelineData />
+          <SendPipeline xsi:nil="true" />
+          <SendPipelineData />
+          <Enable>true</Enable>
+          <ReceiveHandler Name="${ReceiveHost}" HostTrusted="false">
+            <TransportType Name="FTP" Capabilities="80907" ConfigurationClsid="3979ffed-0067-4cc6-9f5a-859a5db6c9bb" />
+          </ReceiveHandler>
+          <ScheduleTimeZone>UTC</ScheduleTimeZone>
+          <ScheduleAutoAdjustToDaylightSaving>true</ScheduleAutoAdjustToDaylightSaving>
+          <ScheduleStartDateEnabled>false</ScheduleStartDateEnabled>
+          <ScheduleStopDateEnabled>false</ScheduleStopDateEnabled>
+          <ScheduleStartTimeEnabled>false</ScheduleStartTimeEnabled>
+          <ScheduleStopTimeEnabled>false</ScheduleStopTimeEnabled>
+        </ReceiveLocation>
+<!-- endif -->        <ReceiveLocation Name="rl_Customer_EDI_Resubmit_FILE">
+          <Description />
+          <Address>\\${FileServer}\${FileShare}\resubmit\customer-edi\*.*</Address>
+          <PublicAddress />
+          <Primary>true</Primary>
+          <ReceiveLocationServiceWindowEnabled>false</ReceiveLocationServiceWindowEnabled>
+          <ReceiveLocationFromTime>2000-01-01T00:00:00</ReceiveLocationFromTime>
+          <ReceiveLocationToTime>2000-01-01T23:59:59</ReceiveLocationToTime>
+          <ReceiveLocationStartDateEnabled>false</ReceiveLocationStartDateEnabled>
+          <ReceiveLocationStartDate>2000-01-01T00:00:00</ReceiveLocationStartDate>
+          <ReceiveLocationEndDateEnabled>false</ReceiveLocationEndDateEnabled>
+          <ReceiveLocationEndDate>2000-01-01T23:59:59</ReceiveLocationEndDate>
+          <ReceiveLocationTransportType Name="FILE" Capabilities="11" ConfigurationClsid="5e49e3a6-b4fc-4077-b44c-22f34a242fdb" />
+          <ReceiveLocationTransportTypeData>&lt;CustomProps&gt;&lt;FileMask vt="8"&gt;*.*&lt;/FileMask&gt;&lt;BatchSize vt="19"&gt;20&lt;/BatchSize&gt;&lt;BatchSizeInBytes vt="19"&gt;102400&lt;/BatchSizeInBytes&gt;&lt;PollingInterval vt="19"&gt;${PartnerPollingSeconds}000&lt;/PollingInterval&gt;&lt;FileNetFailRetryCount vt="19"&gt;5&lt;/FileNetFailRetryCount&gt;&lt;FileNetFailRetryInt vt="19"&gt;5&lt;/FileNetFailRetryInt&gt;&lt;RemoveReceivedFileDelay vt="19"&gt;10&lt;/RemoveReceivedFileDelay&gt;&lt;RemoveReceivedFileMaxInterval vt="19"&gt;300000&lt;/RemoveReceivedFileMaxInterval&gt;&lt;RemoveReceivedFileRetryCount vt="19"&gt;5&lt;/RemoveReceivedFileRetryCount&gt;&lt;RenameReceivedFiles vt="11"&gt;0&lt;/RenameReceivedFiles&gt;&lt;/CustomProps&gt;</ReceiveLocationTransportTypeData>
+          <ReceivePipeline Name="VanArsdel.Integration.Pipelines.FileEdiReceive" FullyQualifiedName="VanArsdel.Integration.Pipelines.FileEdiReceive, VanArsdel.Integration.Pipelines, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cfedfd825850e71" Type="1" TrackingOption="None" Description="" />
+          <ReceivePipelineData />
+          <SendPipeline xsi:nil="true" />
+          <SendPipelineData />
+          <Enable>true</Enable>
+          <ReceiveHandler Name="${ReceiveHost}" HostTrusted="false">
+            <TransportType Name="FILE" Capabilities="11" ConfigurationClsid="5e49e3a6-b4fc-4077-b44c-22f34a242fdb" />
+          </ReceiveHandler>
+          <ScheduleTimeZone>UTC</ScheduleTimeZone>
+          <ScheduleAutoAdjustToDaylightSaving>true</ScheduleAutoAdjustToDaylightSaving>
+          <ScheduleStartDateEnabled>false</ScheduleStartDateEnabled>
+          <ScheduleStopDateEnabled>false</ScheduleStopDateEnabled>
+          <ScheduleStartTimeEnabled>false</ScheduleStartTimeEnabled>
+          <ScheduleStopTimeEnabled>false</ScheduleStopTimeEnabled>
+        </ReceiveLocation>
+      </ReceiveLocations>
+      
+      <SendPipelineData />
+      <Authentication>0</Authentication>
+      <Tracking>${ReceivePortTracking}</Tracking>
+      <Transforms>
+        <Transform FullName="VanArsdel.Integration.Maps.X12_00401_850_to_Order" AssemblyQualifiedName="VanArsdel.Integration.Maps.X12_00401_850_to_Order, VanArsdel.Integration.Maps, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cfedfd825850e71" />
+        <Transform FullName="VanArsdel.Integration.Maps.EFACT_D96A_ORDERS_to_Order" AssemblyQualifiedName="VanArsdel.Integration.Maps.EFACT_D96A_ORDERS_to_Order, VanArsdel.Integration.Maps, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cfedfd825850e71" />
+        <Transform FullName="VanArsdel.Integration.Maps.X12_00401_997_to_FunctionalAck" AssemblyQualifiedName="VanArsdel.Integration.Maps.X12_00401_997_to_FunctionalAck, VanArsdel.Integration.Maps, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cfedfd825850e71" />
+        <Transform FullName="VanArsdel.Integration.Maps.EFACT_D3_CONTRL_to_FunctionalAck" AssemblyQualifiedName="VanArsdel.Integration.Maps.EFACT_D3_CONTRL_to_FunctionalAck, VanArsdel.Integration.Maps, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cfedfd825850e71" />
+      </Transforms>
+      <RouteFailedMessage>true</RouteFailedMessage>
+      <ApplicationName>VanArsdel.Integration</ApplicationName>
+    </ReceivePort>
+    <ReceivePort Name="rp_Supplier_EDI" IsTwoWay="false" BindingOption="1">
+      <Description></Description>
+      <ReceiveLocations>
+<!-- ifdef ${UsePartnerFolders} -->
+        <ReceiveLocation Name="rl_Supplier_EDI_SFTP_S5001">
+          <Description />
+          <Address>\\${FileServer}\${FileShare}\sftp\S5001\inbound\*.edi</Address>
+          <PublicAddress />
+          <Primary>true</Primary>
+          <ReceiveLocationServiceWindowEnabled>false</ReceiveLocationServiceWindowEnabled>
+          <ReceiveLocationFromTime>2000-01-01T00:00:00</ReceiveLocationFromTime>
+          <ReceiveLocationToTime>2000-01-01T23:59:59</ReceiveLocationToTime>
+          <ReceiveLocationStartDateEnabled>false</ReceiveLocationStartDateEnabled>
+          <ReceiveLocationStartDate>2000-01-01T00:00:00</ReceiveLocationStartDate>
+          <ReceiveLocationEndDateEnabled>false</ReceiveLocationEndDateEnabled>
+          <ReceiveLocationEndDate>2000-01-01T23:59:59</ReceiveLocationEndDate>
+          <ReceiveLocationTransportType Name="FILE" Capabilities="11" ConfigurationClsid="5e49e3a6-b4fc-4077-b44c-22f34a242fdb" />
+          <ReceiveLocationTransportTypeData>&lt;CustomProps&gt;&lt;FileMask vt="8"&gt;*.edi&lt;/FileMask&gt;&lt;BatchSize vt="19"&gt;20&lt;/BatchSize&gt;&lt;BatchSizeInBytes vt="19"&gt;102400&lt;/BatchSizeInBytes&gt;&lt;PollingInterval vt="19"&gt;${PartnerPollingSeconds}000&lt;/PollingInterval&gt;&lt;FileNetFailRetryCount vt="19"&gt;5&lt;/FileNetFailRetryCount&gt;&lt;FileNetFailRetryInt vt="19"&gt;5&lt;/FileNetFailRetryInt&gt;&lt;RemoveReceivedFileDelay vt="19"&gt;10&lt;/RemoveReceivedFileDelay&gt;&lt;RemoveReceivedFileMaxInterval vt="19"&gt;300000&lt;/RemoveReceivedFileMaxInterval&gt;&lt;RemoveReceivedFileRetryCount vt="19"&gt;5&lt;/RemoveReceivedFileRetryCount&gt;&lt;RenameReceivedFiles vt="11"&gt;0&lt;/RenameReceivedFiles&gt;&lt;/CustomProps&gt;</ReceiveLocationTransportTypeData>
+          <ReceivePipeline Name="VanArsdel.Integration.Pipelines.FileEdiReceive" FullyQualifiedName="VanArsdel.Integration.Pipelines.FileEdiReceive, VanArsdel.Integration.Pipelines, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cfedfd825850e71" Type="1" TrackingOption="None" Description="" />
+          <ReceivePipelineData />
+          <SendPipeline xsi:nil="true" />
+          <SendPipelineData />
+          <Enable>true</Enable>
+          <ReceiveHandler Name="${ReceiveHost}" HostTrusted="false">
+            <TransportType Name="FILE" Capabilities="11" ConfigurationClsid="5e49e3a6-b4fc-4077-b44c-22f34a242fdb" />
+          </ReceiveHandler>
+          <ScheduleTimeZone>UTC</ScheduleTimeZone>
+          <ScheduleAutoAdjustToDaylightSaving>true</ScheduleAutoAdjustToDaylightSaving>
+          <ScheduleStartDateEnabled>false</ScheduleStartDateEnabled>
+          <ScheduleStopDateEnabled>false</ScheduleStopDateEnabled>
+          <ScheduleStartTimeEnabled>false</ScheduleStartTimeEnabled>
+          <ScheduleStopTimeEnabled>false</ScheduleStopTimeEnabled>
+        </ReceiveLocation>
+<!-- endif --><!-- ifndef ${UsePartnerFolders} -->
+        <ReceiveLocation Name="rl_Supplier_EDI_SFTP_S5001">
+          <Description />
+          <Address>sftp://${S5001_SftpHost}:22/to_vanarsdel/*.edi</Address>
+          <PublicAddress />
+          <Primary>true</Primary>
+          <ReceiveLocationServiceWindowEnabled>false</ReceiveLocationServiceWindowEnabled>
+          <ReceiveLocationFromTime>2000-01-01T00:00:00</ReceiveLocationFromTime>
+          <ReceiveLocationToTime>2000-01-01T23:59:59</ReceiveLocationToTime>
+          <ReceiveLocationStartDateEnabled>false</ReceiveLocationStartDateEnabled>
+          <ReceiveLocationStartDate>2000-01-01T00:00:00</ReceiveLocationStartDate>
+          <ReceiveLocationEndDateEnabled>false</ReceiveLocationEndDateEnabled>
+          <ReceiveLocationEndDate>2000-01-01T23:59:59</ReceiveLocationEndDate>
+          <ReceiveLocationTransportType Name="SFTP" Capabilities="523" ConfigurationClsid="f75aef7c-a3e7-4c9e-8ba3-2a41c8ad4a6b" />
+          <ReceiveLocationTransportTypeData>&lt;CustomProps&gt;&lt;ServerAddress vt="8"&gt;${S5001_SftpHost}&lt;/ServerAddress&gt;&lt;ServerPort vt="3"&gt;22&lt;/ServerPort&gt;&lt;FolderPath vt="8"&gt;/to_vanarsdel/&lt;/FolderPath&gt;&lt;FileMask vt="8"&gt;*.edi&lt;/FileMask&gt;&lt;UserName vt="8"&gt;${S5001_SftpUser}&lt;/UserName&gt;&lt;Password vt="1" /&gt;&lt;ClientAuthenticationMode vt="8"&gt;Password&lt;/ClientAuthenticationMode&gt;&lt;SSHServerHostKeyFingerPrint vt="8"&gt;${S5001_SftpHostKey}&lt;/SSHServerHostKeyFingerPrint&gt;&lt;AccessAnySSHServerHostKey vt="11"&gt;0&lt;/AccessAnySSHServerHostKey&gt;&lt;EncryptionCipher vt="8"&gt;Auto&lt;/EncryptionCipher&gt;&lt;ConnectionLimit vt="19"&gt;5&lt;/ConnectionLimit&gt;&lt;PollingInterval vt="19"&gt;${PartnerPollingSeconds}&lt;/PollingInterval&gt;&lt;PollingIntervalUnit vt="8"&gt;Seconds&lt;/PollingIntervalUnit&gt;&lt;MaximumNumberOfFiles vt="19"&gt;20&lt;/MaximumNumberOfFiles&gt;&lt;MaximumBatchSize vt="19"&gt;102400&lt;/MaximumBatchSize&gt;&lt;Log vt="8" /&gt;&lt;/CustomProps&gt;</ReceiveLocationTransportTypeData>
+          <ReceivePipeline Name="VanArsdel.Integration.Pipelines.FileEdiReceive" FullyQualifiedName="VanArsdel.Integration.Pipelines.FileEdiReceive, VanArsdel.Integration.Pipelines, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cfedfd825850e71" Type="1" TrackingOption="None" Description="" />
+          <ReceivePipelineData />
+          <SendPipeline xsi:nil="true" />
+          <SendPipelineData />
+          <Enable>true</Enable>
+          <ReceiveHandler Name="${ReceiveHost}" HostTrusted="false">
+            <TransportType Name="SFTP" Capabilities="523" ConfigurationClsid="f75aef7c-a3e7-4c9e-8ba3-2a41c8ad4a6b" />
+          </ReceiveHandler>
+          <ScheduleTimeZone>UTC</ScheduleTimeZone>
+          <ScheduleAutoAdjustToDaylightSaving>true</ScheduleAutoAdjustToDaylightSaving>
+          <ScheduleStartDateEnabled>false</ScheduleStartDateEnabled>
+          <ScheduleStopDateEnabled>false</ScheduleStopDateEnabled>
+          <ScheduleStartTimeEnabled>false</ScheduleStartTimeEnabled>
+          <ScheduleStopTimeEnabled>false</ScheduleStopTimeEnabled>
+        </ReceiveLocation>
+<!-- endif -->        <ReceiveLocation Name="rl_Supplier_EDI_Resubmit_FILE">
+          <Description />
+          <Address>\\${FileServer}\${FileShare}\resubmit\supplier-edi\*.*</Address>
+          <PublicAddress />
+          <Primary>true</Primary>
+          <ReceiveLocationServiceWindowEnabled>false</ReceiveLocationServiceWindowEnabled>
+          <ReceiveLocationFromTime>2000-01-01T00:00:00</ReceiveLocationFromTime>
+          <ReceiveLocationToTime>2000-01-01T23:59:59</ReceiveLocationToTime>
+          <ReceiveLocationStartDateEnabled>false</ReceiveLocationStartDateEnabled>
+          <ReceiveLocationStartDate>2000-01-01T00:00:00</ReceiveLocationStartDate>
+          <ReceiveLocationEndDateEnabled>false</ReceiveLocationEndDateEnabled>
+          <ReceiveLocationEndDate>2000-01-01T23:59:59</ReceiveLocationEndDate>
+          <ReceiveLocationTransportType Name="FILE" Capabilities="11" ConfigurationClsid="5e49e3a6-b4fc-4077-b44c-22f34a242fdb" />
+          <ReceiveLocationTransportTypeData>&lt;CustomProps&gt;&lt;FileMask vt="8"&gt;*.*&lt;/FileMask&gt;&lt;BatchSize vt="19"&gt;20&lt;/BatchSize&gt;&lt;BatchSizeInBytes vt="19"&gt;102400&lt;/BatchSizeInBytes&gt;&lt;PollingInterval vt="19"&gt;${PartnerPollingSeconds}000&lt;/PollingInterval&gt;&lt;FileNetFailRetryCount vt="19"&gt;5&lt;/FileNetFailRetryCount&gt;&lt;FileNetFailRetryInt vt="19"&gt;5&lt;/FileNetFailRetryInt&gt;&lt;RemoveReceivedFileDelay vt="19"&gt;10&lt;/RemoveReceivedFileDelay&gt;&lt;RemoveReceivedFileMaxInterval vt="19"&gt;300000&lt;/RemoveReceivedFileMaxInterval&gt;&lt;RemoveReceivedFileRetryCount vt="19"&gt;5&lt;/RemoveReceivedFileRetryCount&gt;&lt;RenameReceivedFiles vt="11"&gt;0&lt;/RenameReceivedFiles&gt;&lt;/CustomProps&gt;</ReceiveLocationTransportTypeData>
+          <ReceivePipeline Name="VanArsdel.Integration.Pipelines.FileEdiReceive" FullyQualifiedName="VanArsdel.Integration.Pipelines.FileEdiReceive, VanArsdel.Integration.Pipelines, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cfedfd825850e71" Type="1" TrackingOption="None" Description="" />
+          <ReceivePipelineData />
+          <SendPipeline xsi:nil="true" />
+          <SendPipelineData />
+          <Enable>true</Enable>
+          <ReceiveHandler Name="${ReceiveHost}" HostTrusted="false">
+            <TransportType Name="FILE" Capabilities="11" ConfigurationClsid="5e49e3a6-b4fc-4077-b44c-22f34a242fdb" />
+          </ReceiveHandler>
+          <ScheduleTimeZone>UTC</ScheduleTimeZone>
+          <ScheduleAutoAdjustToDaylightSaving>true</ScheduleAutoAdjustToDaylightSaving>
+          <ScheduleStartDateEnabled>false</ScheduleStartDateEnabled>
+          <ScheduleStopDateEnabled>false</ScheduleStopDateEnabled>
+          <ScheduleStartTimeEnabled>false</ScheduleStartTimeEnabled>
+          <ScheduleStopTimeEnabled>false</ScheduleStopTimeEnabled>
+        </ReceiveLocation>
+      </ReceiveLocations>
+      
+      <SendPipelineData />
+      <Authentication>0</Authentication>
+      <Tracking>${ReceivePortTracking}</Tracking>
+      <Transforms>
+        <Transform FullName="VanArsdel.Integration.Maps.X12_00401_810_to_Invoice" AssemblyQualifiedName="VanArsdel.Integration.Maps.X12_00401_810_to_Invoice, VanArsdel.Integration.Maps, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cfedfd825850e71" />
+        <Transform FullName="VanArsdel.Integration.Maps.EFACT_D96A_INVOIC_to_Invoice" AssemblyQualifiedName="VanArsdel.Integration.Maps.EFACT_D96A_INVOIC_to_Invoice, VanArsdel.Integration.Maps, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cfedfd825850e71" />
+        <Transform FullName="VanArsdel.Integration.Maps.X12_00401_997_to_FunctionalAck" AssemblyQualifiedName="VanArsdel.Integration.Maps.X12_00401_997_to_FunctionalAck, VanArsdel.Integration.Maps, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cfedfd825850e71" />
+        <Transform FullName="VanArsdel.Integration.Maps.EFACT_D3_CONTRL_to_FunctionalAck" AssemblyQualifiedName="VanArsdel.Integration.Maps.EFACT_D3_CONTRL_to_FunctionalAck, VanArsdel.Integration.Maps, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cfedfd825850e71" />
+      </Transforms>
+      <RouteFailedMessage>true</RouteFailedMessage>
+      <ApplicationName>VanArsdel.Integration</ApplicationName>
+    </ReceivePort>
+    <ReceivePort Name="rp_Gateway_Orders" IsTwoWay="false" BindingOption="1">
+      <Description>Order batches forwarded by the partner order gateway.</Description>
+      <ReceiveLocations>
+        <ReceiveLocation Name="rl_Gateway_Orders_WCF">
+          <Description />
+          <Address>${GatewayReceivePath}</Address>
+          <PublicAddress />
+          <Primary>true</Primary>
+          <ReceiveLocationServiceWindowEnabled>false</ReceiveLocationServiceWindowEnabled>
+          <ReceiveLocationFromTime>2000-01-01T00:00:00</ReceiveLocationFromTime>
+          <ReceiveLocationToTime>2000-01-01T23:59:59</ReceiveLocationToTime>
+          <ReceiveLocationStartDateEnabled>false</ReceiveLocationStartDateEnabled>
+          <ReceiveLocationStartDate>2000-01-01T00:00:00</ReceiveLocationStartDate>
+          <ReceiveLocationEndDateEnabled>false</ReceiveLocationEndDateEnabled>
+          <ReceiveLocationEndDate>2000-01-01T23:59:59</ReceiveLocationEndDate>
+          <ReceiveLocationTransportType Name="WCF-BasicHttp" Capabilities="907" ConfigurationClsid="467c1a52-373f-4f09-9008-27af6b985f14" />
+          <ReceiveLocationTransportTypeData>&lt;CustomProps&gt;&lt;MaxReceivedMessageSize vt="3"&gt;4194304&lt;/MaxReceivedMessageSize&gt;&lt;MessageEncoding vt="8"&gt;Text&lt;/MessageEncoding&gt;&lt;TextEncoding vt="8"&gt;utf-8&lt;/TextEncoding&gt;&lt;SecurityMode vt="8"&gt;TransportCredentialOnly&lt;/SecurityMode&gt;&lt;TransportClientCredentialType vt="8"&gt;Windows&lt;/TransportClientCredentialType&gt;&lt;MessageClientCredentialType vt="8"&gt;UserName&lt;/MessageClientCredentialType&gt;&lt;AlgorithmSuite vt="8"&gt;Basic256&lt;/AlgorithmSuite&gt;&lt;OpenTimeout vt="8"&gt;00:01:00&lt;/OpenTimeout&gt;&lt;CloseTimeout vt="8"&gt;00:01:00&lt;/CloseTimeout&gt;&lt;ReceiveTimeout vt="8"&gt;00:10:00&lt;/ReceiveTimeout&gt;&lt;SendTimeout vt="8"&gt;00:01:00&lt;/SendTimeout&gt;&lt;MaxConcurrentCalls vt="3"&gt;200&lt;/MaxConcurrentCalls&gt;&lt;UseSSO vt="11"&gt;0&lt;/UseSSO&gt;&lt;InboundBodyLocation vt="8"&gt;UseBodyPath&lt;/InboundBodyLocation&gt;&lt;InboundBodyPathExpression vt="8"&gt;/*[local-name()='SubmitOrders']/*[local-name()='batch']&lt;/InboundBodyPathExpression&gt;&lt;InboundNodeEncoding vt="8"&gt;Xml&lt;/InboundNodeEncoding&gt;&lt;OutboundBodyLocation vt="8"&gt;UseBodyElement&lt;/OutboundBodyLocation&gt;&lt;SuspendMessageOnFailure vt="11"&gt;-1&lt;/SuspendMessageOnFailure&gt;&lt;IncludeExceptionDetailInFaults vt="11"&gt;0&lt;/IncludeExceptionDetailInFaults&gt;&lt;/CustomProps&gt;</ReceiveLocationTransportTypeData>
+          <ReceivePipeline Name="VanArsdel.Integration.Pipelines.PartnerXmlReceive" FullyQualifiedName="VanArsdel.Integration.Pipelines.PartnerXmlReceive, VanArsdel.Integration.Pipelines, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cfedfd825850e71" Type="1" TrackingOption="None" Description="" />
+          <ReceivePipelineData />
+          <SendPipeline xsi:nil="true" />
+          <SendPipelineData />
+          <Enable>true</Enable>
+          <ReceiveHandler Name="${GatewayIsolatedHost}" HostTrusted="false">
+            <TransportType Name="WCF-BasicHttp" Capabilities="907" ConfigurationClsid="467c1a52-373f-4f09-9008-27af6b985f14" />
+          </ReceiveHandler>
+          <ScheduleTimeZone>UTC</ScheduleTimeZone>
+          <ScheduleAutoAdjustToDaylightSaving>true</ScheduleAutoAdjustToDaylightSaving>
+          <ScheduleStartDateEnabled>false</ScheduleStartDateEnabled>
+          <ScheduleStopDateEnabled>false</ScheduleStopDateEnabled>
+          <ScheduleStartTimeEnabled>false</ScheduleStartTimeEnabled>
+          <ScheduleStopTimeEnabled>false</ScheduleStopTimeEnabled>
+        </ReceiveLocation>
+        <ReceiveLocation Name="rl_Gateway_Orders_Resubmit_FILE">
+          <Description />
+          <Address>\\${FileServer}\${FileShare}\resubmit\gateway\*.*</Address>
+          <PublicAddress />
+          <Primary>true</Primary>
+          <ReceiveLocationServiceWindowEnabled>false</ReceiveLocationServiceWindowEnabled>
+          <ReceiveLocationFromTime>2000-01-01T00:00:00</ReceiveLocationFromTime>
+          <ReceiveLocationToTime>2000-01-01T23:59:59</ReceiveLocationToTime>
+          <ReceiveLocationStartDateEnabled>false</ReceiveLocationStartDateEnabled>
+          <ReceiveLocationStartDate>2000-01-01T00:00:00</ReceiveLocationStartDate>
+          <ReceiveLocationEndDateEnabled>false</ReceiveLocationEndDateEnabled>
+          <ReceiveLocationEndDate>2000-01-01T23:59:59</ReceiveLocationEndDate>
+          <ReceiveLocationTransportType Name="FILE" Capabilities="11" ConfigurationClsid="5e49e3a6-b4fc-4077-b44c-22f34a242fdb" />
+          <ReceiveLocationTransportTypeData>&lt;CustomProps&gt;&lt;FileMask vt="8"&gt;*.xml&lt;/FileMask&gt;&lt;BatchSize vt="19"&gt;20&lt;/BatchSize&gt;&lt;BatchSizeInBytes vt="19"&gt;102400&lt;/BatchSizeInBytes&gt;&lt;PollingInterval vt="19"&gt;${PartnerPollingSeconds}000&lt;/PollingInterval&gt;&lt;FileNetFailRetryCount vt="19"&gt;5&lt;/FileNetFailRetryCount&gt;&lt;FileNetFailRetryInt vt="19"&gt;5&lt;/FileNetFailRetryInt&gt;&lt;RemoveReceivedFileDelay vt="19"&gt;10&lt;/RemoveReceivedFileDelay&gt;&lt;RemoveReceivedFileMaxInterval vt="19"&gt;300000&lt;/RemoveReceivedFileMaxInterval&gt;&lt;RemoveReceivedFileRetryCount vt="19"&gt;5&lt;/RemoveReceivedFileRetryCount&gt;&lt;RenameReceivedFiles vt="11"&gt;0&lt;/RenameReceivedFiles&gt;&lt;/CustomProps&gt;</ReceiveLocationTransportTypeData>
+          <ReceivePipeline Name="VanArsdel.Integration.Pipelines.PartnerXmlReceive" FullyQualifiedName="VanArsdel.Integration.Pipelines.PartnerXmlReceive, VanArsdel.Integration.Pipelines, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cfedfd825850e71" Type="1" TrackingOption="None" Description="" />
+          <ReceivePipelineData />
+          <SendPipeline xsi:nil="true" />
+          <SendPipelineData />
+          <Enable>true</Enable>
+          <ReceiveHandler Name="${ReceiveHost}" HostTrusted="false">
+            <TransportType Name="FILE" Capabilities="11" ConfigurationClsid="5e49e3a6-b4fc-4077-b44c-22f34a242fdb" />
+          </ReceiveHandler>
+          <ScheduleTimeZone>UTC</ScheduleTimeZone>
+          <ScheduleAutoAdjustToDaylightSaving>true</ScheduleAutoAdjustToDaylightSaving>
+          <ScheduleStartDateEnabled>false</ScheduleStartDateEnabled>
+          <ScheduleStopDateEnabled>false</ScheduleStopDateEnabled>
+          <ScheduleStartTimeEnabled>false</ScheduleStartTimeEnabled>
+          <ScheduleStopTimeEnabled>false</ScheduleStopTimeEnabled>
+        </ReceiveLocation>
+      </ReceiveLocations>
+      
+      <SendPipelineData />
+      <Authentication>0</Authentication>
+      <Tracking>${ReceivePortTracking}</Tracking>
+      <Transforms>
+        <Transform FullName="VanArsdel.Integration.Maps.PartnerOrder_to_Order" AssemblyQualifiedName="VanArsdel.Integration.Maps.PartnerOrder_to_Order, VanArsdel.Integration.Maps, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cfedfd825850e71" />
+      </Transforms>
+      <RouteFailedMessage>true</RouteFailedMessage>
+      <ApplicationName>VanArsdel.Integration</ApplicationName>
+    </ReceivePort>
+    <ReceivePort Name="rp_Erp_IDoc" IsTwoWay="false" BindingOption="1">
+      <Description>DESADV, INVOIC and ORDERS IDocs written by the ERP file port.</Description>
+      <ReceiveLocations>
+        <ReceiveLocation Name="rl_Erp_IDoc_FILE">
+          <Description />
+          <Address>\\${FileServer}\${FileShare}\erp\outbound\*.xml</Address>
+          <PublicAddress />
+          <Primary>true</Primary>
+          <ReceiveLocationServiceWindowEnabled>false</ReceiveLocationServiceWindowEnabled>
+          <ReceiveLocationFromTime>2000-01-01T00:00:00</ReceiveLocationFromTime>
+          <ReceiveLocationToTime>2000-01-01T23:59:59</ReceiveLocationToTime>
+          <ReceiveLocationStartDateEnabled>false</ReceiveLocationStartDateEnabled>
+          <ReceiveLocationStartDate>2000-01-01T00:00:00</ReceiveLocationStartDate>
+          <ReceiveLocationEndDateEnabled>false</ReceiveLocationEndDateEnabled>
+          <ReceiveLocationEndDate>2000-01-01T23:59:59</ReceiveLocationEndDate>
+          <ReceiveLocationTransportType Name="FILE" Capabilities="11" ConfigurationClsid="5e49e3a6-b4fc-4077-b44c-22f34a242fdb" />
+          <ReceiveLocationTransportTypeData>&lt;CustomProps&gt;&lt;FileMask vt="8"&gt;*.xml&lt;/FileMask&gt;&lt;BatchSize vt="19"&gt;20&lt;/BatchSize&gt;&lt;BatchSizeInBytes vt="19"&gt;102400&lt;/BatchSizeInBytes&gt;&lt;PollingInterval vt="19"&gt;${PartnerPollingSeconds}000&lt;/PollingInterval&gt;&lt;FileNetFailRetryCount vt="19"&gt;5&lt;/FileNetFailRetryCount&gt;&lt;FileNetFailRetryInt vt="19"&gt;5&lt;/FileNetFailRetryInt&gt;&lt;RemoveReceivedFileDelay vt="19"&gt;10&lt;/RemoveReceivedFileDelay&gt;&lt;RemoveReceivedFileMaxInterval vt="19"&gt;300000&lt;/RemoveReceivedFileMaxInterval&gt;&lt;RemoveReceivedFileRetryCount vt="19"&gt;5&lt;/RemoveReceivedFileRetryCount&gt;&lt;RenameReceivedFiles vt="11"&gt;0&lt;/RenameReceivedFiles&gt;&lt;/CustomProps&gt;</ReceiveLocationTransportTypeData>
+          <ReceivePipeline Name="VanArsdel.Integration.Pipelines.IDocReceive" FullyQualifiedName="VanArsdel.Integration.Pipelines.IDocReceive, VanArsdel.Integration.Pipelines, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cfedfd825850e71" Type="1" TrackingOption="None" Description="" />
+          <ReceivePipelineData />
+          <SendPipeline xsi:nil="true" />
+          <SendPipelineData />
+          <Enable>true</Enable>
+          <ReceiveHandler Name="${ReceiveHost}" HostTrusted="false">
+            <TransportType Name="FILE" Capabilities="11" ConfigurationClsid="5e49e3a6-b4fc-4077-b44c-22f34a242fdb" />
+          </ReceiveHandler>
+          <ScheduleTimeZone>UTC</ScheduleTimeZone>
+          <ScheduleAutoAdjustToDaylightSaving>true</ScheduleAutoAdjustToDaylightSaving>
+          <ScheduleStartDateEnabled>false</ScheduleStartDateEnabled>
+          <ScheduleStopDateEnabled>false</ScheduleStopDateEnabled>
+          <ScheduleStartTimeEnabled>false</ScheduleStartTimeEnabled>
+          <ScheduleStopTimeEnabled>false</ScheduleStopTimeEnabled>
+        </ReceiveLocation>
+        <ReceiveLocation Name="rl_Erp_IDoc_Resubmit_FILE">
+          <Description />
+          <Address>\\${FileServer}\${FileShare}\resubmit\idoc\*.*</Address>
+          <PublicAddress />
+          <Primary>true</Primary>
+          <ReceiveLocationServiceWindowEnabled>false</ReceiveLocationServiceWindowEnabled>
+          <ReceiveLocationFromTime>2000-01-01T00:00:00</ReceiveLocationFromTime>
+          <ReceiveLocationToTime>2000-01-01T23:59:59</ReceiveLocationToTime>
+          <ReceiveLocationStartDateEnabled>false</ReceiveLocationStartDateEnabled>
+          <ReceiveLocationStartDate>2000-01-01T00:00:00</ReceiveLocationStartDate>
+          <ReceiveLocationEndDateEnabled>false</ReceiveLocationEndDateEnabled>
+          <ReceiveLocationEndDate>2000-01-01T23:59:59</ReceiveLocationEndDate>
+          <ReceiveLocationTransportType Name="FILE" Capabilities="11" ConfigurationClsid="5e49e3a6-b4fc-4077-b44c-22f34a242fdb" />
+          <ReceiveLocationTransportTypeData>&lt;CustomProps&gt;&lt;FileMask vt="8"&gt;*.xml&lt;/FileMask&gt;&lt;BatchSize vt="19"&gt;20&lt;/BatchSize&gt;&lt;BatchSizeInBytes vt="19"&gt;102400&lt;/BatchSizeInBytes&gt;&lt;PollingInterval vt="19"&gt;${PartnerPollingSeconds}000&lt;/PollingInterval&gt;&lt;FileNetFailRetryCount vt="19"&gt;5&lt;/FileNetFailRetryCount&gt;&lt;FileNetFailRetryInt vt="19"&gt;5&lt;/FileNetFailRetryInt&gt;&lt;RemoveReceivedFileDelay vt="19"&gt;10&lt;/RemoveReceivedFileDelay&gt;&lt;RemoveReceivedFileMaxInterval vt="19"&gt;300000&lt;/RemoveReceivedFileMaxInterval&gt;&lt;RemoveReceivedFileRetryCount vt="19"&gt;5&lt;/RemoveReceivedFileRetryCount&gt;&lt;RenameReceivedFiles vt="11"&gt;0&lt;/RenameReceivedFiles&gt;&lt;/CustomProps&gt;</ReceiveLocationTransportTypeData>
+          <ReceivePipeline Name="VanArsdel.Integration.Pipelines.IDocReceive" FullyQualifiedName="VanArsdel.Integration.Pipelines.IDocReceive, VanArsdel.Integration.Pipelines, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cfedfd825850e71" Type="1" TrackingOption="None" Description="" />
+          <ReceivePipelineData />
+          <SendPipeline xsi:nil="true" />
+          <SendPipelineData />
+          <Enable>true</Enable>
+          <ReceiveHandler Name="${ReceiveHost}" HostTrusted="false">
+            <TransportType Name="FILE" Capabilities="11" ConfigurationClsid="5e49e3a6-b4fc-4077-b44c-22f34a242fdb" />
+          </ReceiveHandler>
+          <ScheduleTimeZone>UTC</ScheduleTimeZone>
+          <ScheduleAutoAdjustToDaylightSaving>true</ScheduleAutoAdjustToDaylightSaving>
+          <ScheduleStartDateEnabled>false</ScheduleStartDateEnabled>
+          <ScheduleStopDateEnabled>false</ScheduleStopDateEnabled>
+          <ScheduleStartTimeEnabled>false</ScheduleStartTimeEnabled>
+          <ScheduleStopTimeEnabled>false</ScheduleStopTimeEnabled>
+        </ReceiveLocation>
+      </ReceiveLocations>
+      
+      <SendPipelineData />
+      <Authentication>0</Authentication>
+      <Tracking>${ReceivePortTracking}</Tracking>
+      <Transforms>
+        <Transform FullName="VanArsdel.Integration.Maps.IDoc_DESADV01_to_Despatch" AssemblyQualifiedName="VanArsdel.Integration.Maps.IDoc_DESADV01_to_Despatch, VanArsdel.Integration.Maps, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cfedfd825850e71" />
+        <Transform FullName="VanArsdel.Integration.Maps.IDoc_INVOIC02_to_Invoice" AssemblyQualifiedName="VanArsdel.Integration.Maps.IDoc_INVOIC02_to_Invoice, VanArsdel.Integration.Maps, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cfedfd825850e71" />
+      </Transforms>
+      <RouteFailedMessage>true</RouteFailedMessage>
+      <ApplicationName>VanArsdel.Integration</ApplicationName>
+    </ReceivePort>
+    <ReceivePort Name="rp_Integration_AckOverdue" IsTwoWay="false" BindingOption="1">
+      <Description></Description>
+      <ReceiveLocations>
+        <ReceiveLocation Name="rl_Integration_AckOverdue_WCFSQL">
+          <Description />
+          <Address>mssql://${SqlServer}//${IntegrationDatabase}?InboundId=AckOverdue</Address>
+          <PublicAddress />
+          <Primary>true</Primary>
+          <ReceiveLocationServiceWindowEnabled>false</ReceiveLocationServiceWindowEnabled>
+          <ReceiveLocationFromTime>2000-01-01T00:00:00</ReceiveLocationFromTime>
+          <ReceiveLocationToTime>2000-01-01T23:59:59</ReceiveLocationToTime>
+          <ReceiveLocationStartDateEnabled>false</ReceiveLocationStartDateEnabled>
+          <ReceiveLocationStartDate>2000-01-01T00:00:00</ReceiveLocationStartDate>
+          <ReceiveLocationEndDateEnabled>false</ReceiveLocationEndDateEnabled>
+          <ReceiveLocationEndDate>2000-01-01T23:59:59</ReceiveLocationEndDate>
+          <ReceiveLocationTransportType Name="WCF-SQL" Capabilities="907" ConfigurationClsid="59b35d03-6a06-4734-a249-ef561254ecf7" />
+          <ReceiveLocationTransportTypeData>&lt;CustomProps&gt;&lt;BindingType vt="8"&gt;sqlBinding&lt;/BindingType&gt;&lt;BindingConfiguration vt="8"&gt;&amp;lt;binding name="sqlBinding" inboundOperationType="XmlPolling" polledDataAvailableStatement="SELECT COUNT(*) FROM dbo.Interchange WHERE AckStatusId = 1 AND AckDueUtc &amp;amp;lt; SYSUTCDATETIME()" pollingStatement="EXEC dbo.usp_PollOverdueAcks" pollingIntervalInSeconds="300" pollWhileDataFound="false" xmlStoredProcedureRootNodeName="OverdueAcks" xmlStoredProcedureRootNodeNamespace="http://schemas.vanarsdel.com/integration/ackoverdue/2017" useAmbientTransaction="true" receiveTimeout="00:10:00" /&amp;gt;&lt;/BindingConfiguration&gt;&lt;ServiceBehaviorConfiguration vt="8"&gt;&amp;lt;behavior name="ServiceBehavior"&amp;gt;&amp;lt;serviceDebug includeExceptionDetailInFaults="false" /&amp;gt;&amp;lt;/behavior&amp;gt;&lt;/ServiceBehaviorConfiguration&gt;&lt;CredentialType vt="8"&gt;None&lt;/CredentialType&gt;&lt;OrderedProcessing vt="11"&gt;-1&lt;/OrderedProcessing&gt;&lt;InboundBodyLocation vt="8"&gt;UseBodyElement&lt;/InboundBodyLocation&gt;&lt;InboundNodeEncoding vt="8"&gt;Xml&lt;/InboundNodeEncoding&gt;&lt;OutboundBodyLocation vt="8"&gt;UseBodyElement&lt;/OutboundBodyLocation&gt;&lt;DisableLocationOnFailure vt="11"&gt;0&lt;/DisableLocationOnFailure&gt;&lt;SuspendMessageOnFailure vt="11"&gt;-1&lt;/SuspendMessageOnFailure&gt;&lt;IncludeExceptionDetailInFaults vt="11"&gt;0&lt;/IncludeExceptionDetailInFaults&gt;&lt;/CustomProps&gt;</ReceiveLocationTransportTypeData>
+          <ReceivePipeline Name="Microsoft.BizTalk.DefaultPipelines.XMLReceive" FullyQualifiedName="Microsoft.BizTalk.DefaultPipelines.XMLReceive, Microsoft.BizTalk.DefaultPipelines, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Type="1" TrackingOption="None" Description="" />
+          <ReceivePipelineData />
+          <SendPipeline xsi:nil="true" />
+          <SendPipelineData />
+          <Enable>true</Enable>
+          <ReceiveHandler Name="${ReceiveHost}" HostTrusted="false">
+            <TransportType Name="WCF-SQL" Capabilities="907" ConfigurationClsid="59b35d03-6a06-4734-a249-ef561254ecf7" />
+          </ReceiveHandler>
+          <ScheduleTimeZone>UTC</ScheduleTimeZone>
+          <ScheduleAutoAdjustToDaylightSaving>true</ScheduleAutoAdjustToDaylightSaving>
+          <ScheduleStartDateEnabled>false</ScheduleStartDateEnabled>
+          <ScheduleStopDateEnabled>false</ScheduleStopDateEnabled>
+          <ScheduleStartTimeEnabled>false</ScheduleStartTimeEnabled>
+          <ScheduleStopTimeEnabled>false</ScheduleStopTimeEnabled>
+        </ReceiveLocation>
+      </ReceiveLocations>
+      
+      <SendPipelineData />
+      <Authentication>0</Authentication>
+      <Tracking>${ReceivePortTracking}</Tracking>
+      <Transforms />
+      <RouteFailedMessage>true</RouteFailedMessage>
+      <ApplicationName>VanArsdel.Integration</ApplicationName>
+    </ReceivePort>
+  </ReceivePortCollection>
+  <PartyCollection xsi:nil="true" />
+</BindingInfo>

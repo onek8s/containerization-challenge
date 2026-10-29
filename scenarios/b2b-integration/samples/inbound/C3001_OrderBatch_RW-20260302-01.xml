@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OrderBatch xmlns="http://schemas.vanarsdel.com/partners/orders/2016" BatchId="RW-20260302-01" PartnerId="C3001" Created="2026-03-02T07:55:12-05:00">
+  <Order>
+    <PoNumber>RW-0302-01</PoNumber>
+    <OrderDate>2026-03-02</OrderDate>
+    <DeliverBy>2026-03-04</DeliverBy>
+    <AccountNumber>104930</AccountNumber>
+    <DeliveryAddress>
+      <Name>Ridgeway Mechanical - Job 2291</Name>
+      <Line1>1450 Wilmington Pike</Line1>
+      <Town>Kettering</Town>
+      <Postcode>45420</Postcode>
+      <Country>us</Country>
+    </DeliveryAddress>
+    <Contact>Dan Mercer</Contact>
+    <Phone>937-555-0142</Phone>
+    <Instructions>Site delivery, crane not available</Instructions>
+    <Item><Sku>el-20410</Sku><Qty>40</Qty><Unit>ea</Unit><Price>3.25</Price></Item>
+    <Item><Sku>PK-90001</Sku><Qty>10</Qty><Unit>pak</Unit><Price>4.20</Price></Item>
+  </Order>
+  <Order>
+    <PoNumber>RW-0302-02</PoNumber>
+    <OrderDate>2026-03-02</OrderDate>
+    <DeliverBy>2026-03-09</DeliverBy>
+    <AccountNumber>104930</AccountNumber>
+    <Item><Sku>HV-71500</Sku><Qty>30</Qty><Unit>ea</Unit><Price>189.00</Price><Text>Pumps for the Dorothy Lane retrofit</Text></Item>
+  </Order>
+  <Order>
+    <PoNumber>RW-0302-03</PoNumber>
+    <OrderDate>2026-03-02</OrderDate>
+    <DeliverBy>2026-03-05</DeliverBy>
+    <AccountNumber>104930</AccountNumber>
+    <Item><Sku>PL-62016</Sku><Qty>3</Qty><Unit>coil</Unit><Price>96.00</Price></Item>
+    <Item><Sku>PL-60022</Sku><Qty>120</Qty><Unit>ea</Unit><Price>3.40</Price></Item>
+  </Order>
+</OrderBatch>

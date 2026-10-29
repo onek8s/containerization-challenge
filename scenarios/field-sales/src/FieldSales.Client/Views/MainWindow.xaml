@@ -1,0 +1,141 @@
+<Window x:Class="Wingtip.FieldSales.Client.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="{Binding Title}" Width="1100" Height="720" MinWidth="900" MinHeight="560" WindowStartupLocation="CenterScreen">
+    <DockPanel>
+        <Border DockPanel.Dock="Top" Background="{StaticResource Brand}" Padding="12,8">
+            <DockPanel>
+                <Button DockPanel.Dock="Right" Content="Synchronize" Command="{Binding SyncCommand}" Margin="0" />
+                <TextBlock Text="{Binding Title}" Foreground="White" FontSize="16" VerticalAlignment="Center" />
+            </DockPanel>
+        </Border>
+        <StatusBar DockPanel.Dock="Bottom">
+            <StatusBarItem><TextBlock Text="{Binding Status}" /></StatusBarItem>
+            <Separator />
+            <StatusBarItem><TextBlock Text="{Binding CatalogInfo}" /></StatusBarItem>
+            <StatusBarItem HorizontalAlignment="Right"><TextBlock Text="{Binding Version, StringFormat=Version {0}}" Foreground="Gray" /></StatusBarItem>
+        </StatusBar>
+
+        <TabControl SelectedIndex="{Binding SelectedTab}" Margin="8">
+            <TabItem Header="Customers">
+                <DockPanel Margin="8">
+                    <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,0,0,8">
+                        <TextBlock Text="Search" VerticalAlignment="Center" Margin="0,0,8,0" />
+                        <TextBox Width="260" Text="{Binding CustomerFilter, UpdateSourceTrigger=PropertyChanged}" />
+                        <Button Content="New order" Margin="12,0,0,0" Command="{Binding NewOrderCommand}" CommandParameter="{Binding SelectedItem, ElementName=CustomerGrid}" />
+                    </StackPanel>
+                    <DataGrid x:Name="CustomerGrid" ItemsSource="{Binding Customers}" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="No" Binding="{Binding CustomerNo}" Width="80" />
+                            <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*" />
+                            <DataGridTextColumn Header="Street" Binding="{Binding Street}" Width="200" />
+                            <DataGridTextColumn Header="City" Binding="{Binding City}" Width="140" />
+                            <DataGridTextColumn Header="Group" Binding="{Binding PriceGroup}" Width="60" />
+                            <DataGridCheckBoxColumn Header="Blocked" Binding="{Binding CreditBlocked}" Width="70" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </DockPanel>
+            </TabItem>
+
+            <TabItem Header="Order" DataContext="{Binding Order}">
+                <Grid Margin="8">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="320" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0" Margin="0,0,12,0">
+                        <TextBlock Text="Customer" />
+                        <ComboBox ItemsSource="{Binding Customers}" SelectedItem="{Binding Customer}" DisplayMemberPath="Name" IsTextSearchEnabled="True" Margin="0,2,0,4" />
+                        <TextBlock Text="{Binding RouteText}" Foreground="Gray" Margin="0,0,0,8" />
+                        <TextBlock Text="Delivery date" />
+                        <DatePicker SelectedDate="{Binding Delivery}" Margin="0,2,0,8" />
+                        <TextBlock Text="Comment for the warehouse" />
+                        <TextBox Text="{Binding Comment}" Height="60" TextWrapping="Wrap" AcceptsReturn="True" Margin="0,2,0,12" />
+                        <TextBlock Text="Add product (item number or name)" />
+                        <TextBox Text="{Binding Search, UpdateSourceTrigger=PropertyChanged, Delay=250}" Margin="0,2,0,4" />
+                        <ListBox ItemsSource="{Binding SearchResults}" SelectedItem="{Binding SelectedProduct}" Height="180">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock><Run Text="{Binding ItemNo}" FontWeight="SemiBold" /> <Run Text="{Binding Name}" /> <Run Text="{Binding Unit}" Foreground="Gray" /></TextBlock>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                        <TextBlock Text="{Binding StockText}" Foreground="Gray" Margin="0,4,0,0" />
+                        <Button Content="Add to order" Command="{Binding AddLineCommand}" HorizontalAlignment="Left" Margin="0,6,0,0" />
+                    </StackPanel>
+                    <DockPanel Grid.Column="1">
+                        <StackPanel DockPanel.Dock="Bottom">
+                            <TextBlock Text="{Binding ApprovalHint}" Foreground="DarkOrange" TextWrapping="Wrap" Margin="0,6" />
+                            <TextBlock Text="{Binding Message}" Foreground="DarkRed" TextWrapping="Wrap" Margin="0,0,0,6" />
+                            <DockPanel>
+                                <StackPanel DockPanel.Dock="Right" HorizontalAlignment="Right">
+                                    <TextBlock Text="{Binding NetTotal, StringFormat=Excl. VAT {0:N2}}" HorizontalAlignment="Right" />
+                                    <TextBlock Text="{Binding VatTotal, StringFormat=VAT {0:N2}}" HorizontalAlignment="Right" />
+                                    <TextBlock Text="{Binding GrossTotal, StringFormat=Total {0:N2} EUR}" FontWeight="Bold" HorizontalAlignment="Right" />
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom">
+                                    <Button Content="Save order" Command="{Binding SaveCommand}" FontWeight="SemiBold" />
+                                    <Button Content="Clear" Command="{Binding ClearCommand}" />
+                                </StackPanel>
+                            </DockPanel>
+                        </StackPanel>
+                        <DataGrid ItemsSource="{Binding Lines}" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Item" Binding="{Binding Product.ItemNo}" IsReadOnly="True" Width="70" />
+                                <DataGridTextColumn Header="Name" Binding="{Binding Product.Name}" IsReadOnly="True" Width="*" />
+                                <DataGridTextColumn Header="Unit" Binding="{Binding Product.Unit}" IsReadOnly="True" Width="45" />
+                                <DataGridTextColumn Header="Qty" Binding="{Binding Quantity, UpdateSourceTrigger=LostFocus}" Width="60" />
+                                <DataGridTextColumn Header="Price" Binding="{Binding UnitPrice, StringFormat=N2}" IsReadOnly="True" Width="80" />
+                                <DataGridTextColumn Header="Disc. %" Binding="{Binding LineDiscountPercent, UpdateSourceTrigger=LostFocus}" Width="60" />
+                                <DataGridTextColumn Header="Total" Binding="{Binding LineTotal, StringFormat=N2}" IsReadOnly="True" Width="90" />
+                                <DataGridTemplateColumn Width="70">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button Content="Remove" MinWidth="0" Padding="4,0" Margin="0"
+                                                    Command="{Binding DataContext.RemoveLineCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" CommandParameter="{Binding}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </DockPanel>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="{Binding WaitingCount}" HeaderStringFormat="Outbox ({0})">
+                <DockPanel Margin="8">
+                    <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,0,0,8">
+                        <Button Content="Open" Command="{Binding EditOutboxCommand}" />
+                        <Button Content="Send again" Command="{Binding ResendCommand}" />
+                        <Button Content="Delete" Command="{Binding DeleteOutboxCommand}" />
+                    </StackPanel>
+                    <DataGrid ItemsSource="{Binding Outbox}" SelectedItem="{Binding SelectedOutbox}" AutoGenerateColumns="False" IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Reference" Binding="{Binding Request.RepReference}" Width="120" />
+                            <DataGridTextColumn Header="Written" Binding="{Binding Request.CreatedAt, StringFormat=g}" Width="130" />
+                            <DataGridTextColumn Header="Customer" Binding="{Binding CustomerName}" Width="200" />
+                            <DataGridTextColumn Header="Delivery" Binding="{Binding Request.RequestedDelivery, StringFormat=d}" Width="90" />
+                            <DataGridTextColumn Header="Excl. VAT" Binding="{Binding NetTotal, StringFormat=N2}" Width="90" />
+                            <DataGridTextColumn Header="State" Binding="{Binding State}" Width="100" />
+                            <DataGridTextColumn Header="Message" Binding="{Binding Message}" Width="*" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </DockPanel>
+            </TabItem>
+
+            <TabItem Header="Sent orders">
+                <DataGrid ItemsSource="{Binding Sent}" AutoGenerateColumns="False" IsReadOnly="True" Margin="8">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Order" Binding="{Binding OrderNo}" Width="110" />
+                        <DataGridTextColumn Header="Reference" Binding="{Binding Request.RepReference}" Width="120" />
+                        <DataGridTextColumn Header="Customer" Binding="{Binding CustomerName}" Width="200" />
+                        <DataGridTextColumn Header="Delivery" Binding="{Binding Request.RequestedDelivery, StringFormat=d}" Width="90" />
+                        <DataGridTextColumn Header="Excl. VAT" Binding="{Binding NetTotal, StringFormat=N2}" Width="90" />
+                        <DataGridTextColumn Header="Status" Binding="{Binding ServerStatus}" Width="120" />
+                        <DataGridTextColumn Header="Note" Binding="{Binding Message}" Width="*" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+        </TabControl>
+    </DockPanel>
+</Window>

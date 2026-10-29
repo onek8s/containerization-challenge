@@ -1,0 +1,36 @@
+@page
+@model ContosoFoods.TradeRebates.Portal.Pages.Distributors.IndexModel
+@{
+    ViewData["Title"] = "Distributors";
+}
+<h1>Distributors</h1>
+<table>
+    <thead><tr><th>Code</th><th>Name</th><th>Vendor</th><th>Currency</th><th>Statement e-mail</th><th>Folder</th><th>Bank account</th><th></th></tr></thead>
+    <tbody>
+    @foreach (var d in Model.Distributors)
+    {
+        <tr>
+            <td>@d.Code</td>
+            <td>@d.Name @if (!d.IsActive) { <span class="muted">(inactive)</span> }</td>
+            <td>@d.ErpVendorNo</td>
+            <td>@d.Currency</td>
+            <td>@d.StatementEmail</td>
+            <td>@d.StatementFolder</td>
+            <td>
+                @if (Model.Revealed.TryGetValue(d.DistributorId, out var iban)) { <code>@iban</code> } else { @d.BankAccountMasked }
+                @if (d.BankAccountMasked is not null)
+                {
+                    <form method="post" asp-page-handler="Reveal" asp-route-id="@d.DistributorId" class="inline"><button type="submit">Show</button></form>
+                }
+            </td>
+            <td>
+                <form method="post" asp-page-handler="Bank" asp-route-id="@d.DistributorId" class="inline">
+                    <input type="text" name="iban" placeholder="New IBAN" />
+                    <button type="submit">Save</button>
+                </form>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+<p class="muted">Showing a bank account is recorded in the audit log.</p>

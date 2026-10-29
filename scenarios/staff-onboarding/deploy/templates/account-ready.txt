@@ -1,0 +1,16 @@
+Subject: Account ready for {DisplayName} starting {StartDate}
+Hello,
+
+The account for {DisplayName} ({Title}, {Office}) has been created and will be enabled on {StartDate}.
+
+User name: {SamAccountName}
+Sign-in name: {UserPrincipalName}
+E-mail: {Mail}
+Home folder: {HomeDirectory}
+
+The welcome pack is in {PackFolder}. Please print it for the first day.
+The service desk ({ServiceDesk}) sets the first password together with the new employee on the first morning.
+
+Request: {RequestUrl}
+
+Staff Onboarding

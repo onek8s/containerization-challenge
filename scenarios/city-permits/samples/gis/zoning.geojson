@@ -1,0 +1,159 @@
+{
+ "type": "FeatureCollection",
+ "crs": {
+  "type": "name",
+  "properties": {
+   "name": "urn:ogc:def:crs:EPSG::27700"
+  }
+ },
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       600790,
+       142190
+      ],
+      [
+       600970,
+       142190
+      ],
+      [
+       600970,
+       142580
+      ],
+      [
+       600790,
+       142580
+      ],
+      [
+       600790,
+       142190
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "ZONE_CODE": "R1",
+    "ZONE_NAME": "Residential (low density)",
+    "MAX_HEIGHT_M": 9.0,
+    "MAX_COVERAGE": 0.4,
+    "PERMITTED_USES": "C3;E(g)(i)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       600970,
+       142190
+      ],
+      [
+       601150,
+       142190
+      ],
+      [
+       601150,
+       142580
+      ],
+      [
+       600970,
+       142580
+      ],
+      [
+       600970,
+       142190
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "ZONE_CODE": "R2",
+    "ZONE_NAME": "Residential (medium density)",
+    "MAX_HEIGHT_M": 13.5,
+    "MAX_COVERAGE": 0.55,
+    "PERMITTED_USES": "C3;C4;E(g)(i)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601150,
+       142190
+      ],
+      [
+       601330,
+       142190
+      ],
+      [
+       601330,
+       142580
+      ],
+      [
+       601150,
+       142580
+      ],
+      [
+       601150,
+       142190
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "ZONE_CODE": "TC",
+    "ZONE_NAME": "Town centre",
+    "MAX_HEIGHT_M": 21.0,
+    "MAX_COVERAGE": 0.85,
+    "PERMITTED_USES": "E;F.1;Sui Generis;C3;E(b)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601330,
+       142190
+      ],
+      [
+       601510,
+       142190
+      ],
+      [
+       601510,
+       142580
+      ],
+      [
+       601330,
+       142580
+      ],
+      [
+       601330,
+       142190
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "ZONE_CODE": "MX",
+    "ZONE_NAME": "Mixed use",
+    "MAX_HEIGHT_M": 16.0,
+    "MAX_COVERAGE": 0.7,
+    "PERMITTED_USES": "E;C3;B8;E(g)(iii);E(b)"
+   }
+  }
+ ]
+}

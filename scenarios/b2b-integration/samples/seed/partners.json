@@ -1,0 +1,646 @@
+{
+  "Partners": [
+    {
+      "InterchangeQualifier": "ZZ",
+      "InterchangeId": "HARTWELL",
+      "Version": "00401",
+      "Gln": null,
+      "As2Identifier": "HARTWELL-AS2",
+      "DefaultShipVia": "UPSGND",
+      "AckRequired": true,
+      "AckTimeoutMinutes": 240,
+      "CreditCheckThreshold": 25000,
+      "Active": true,
+      "TestIndicator": false,
+      "PartnerId": "C1001",
+      "Name": "Hartwell Electrical Supply",
+      "Role": "Customer",
+      "Standard": "X12",
+      "Transport": "As2",
+      "ErpNumber": "104711",
+      "CurrencyCode": "USD",
+      "CountryCode": "US"
+    },
+    {
+      "InterchangeQualifier": "01",
+      "InterchangeId": "078123456",
+      "Version": "00401",
+      "Gln": null,
+      "As2Identifier": null,
+      "DefaultShipVia": "FDXG",
+      "AckRequired": true,
+      "AckTimeoutMinutes": 480,
+      "CreditCheckThreshold": 10000,
+      "Active": true,
+      "TestIndicator": false,
+      "PartnerId": "C1002",
+      "Name": "Brightline Facilities",
+      "Role": "Customer",
+      "Standard": "X12",
+      "Transport": "Sftp",
+      "ErpNumber": "104822",
+      "CurrencyCode": "USD",
+      "CountryCode": "US"
+    },
+    {
+      "InterchangeQualifier": "14",
+      "InterchangeId": "4012345000009",
+      "Version": "D96A",
+      "Gln": "4012345000009",
+      "As2Identifier": "BAUWERK-EDI",
+      "DefaultShipVia": "DHLFR",
+      "AckRequired": true,
+      "AckTimeoutMinutes": 240,
+      "CreditCheckThreshold": 20000,
+      "Active": true,
+      "TestIndicator": false,
+      "PartnerId": "C2001",
+      "Name": "Bauwerk Haustechnik GmbH",
+      "Role": "Customer",
+      "Standard": "Edifact",
+      "Transport": "As2",
+      "ErpNumber": "200310",
+      "CurrencyCode": "EUR",
+      "CountryCode": "DE"
+    },
+    {
+      "InterchangeQualifier": "14",
+      "InterchangeId": "7023456000007",
+      "Version": "D96A",
+      "Gln": "7023456000007",
+      "As2Identifier": null,
+      "DefaultShipVia": "DSV",
+      "AckRequired": false,
+      "AckTimeoutMinutes": 0,
+      "CreditCheckThreshold": 150000,
+      "Active": true,
+      "TestIndicator": false,
+      "PartnerId": "C2002",
+      "Name": "Nordvik Byggvarer AS",
+      "Role": "Customer",
+      "Standard": "Edifact",
+      "Transport": "Ftp",
+      "ErpNumber": "200455",
+      "CurrencyCode": "NOK",
+      "CountryCode": "NO"
+    },
+    {
+      "InterchangeQualifier": null,
+      "InterchangeId": null,
+      "Version": null,
+      "Gln": null,
+      "As2Identifier": null,
+      "DefaultShipVia": "BRANCH",
+      "AckRequired": false,
+      "AckTimeoutMinutes": 0,
+      "CreditCheckThreshold": 5000,
+      "Active": true,
+      "TestIndicator": false,
+      "PartnerId": "C3001",
+      "Name": "Ridgeway Mechanical",
+      "Role": "Customer",
+      "Standard": "Xml",
+      "Transport": "Gateway",
+      "ErpNumber": "104930",
+      "CurrencyCode": "USD",
+      "CountryCode": "US"
+    },
+    {
+      "InterchangeQualifier": null,
+      "InterchangeId": null,
+      "Version": null,
+      "Gln": null,
+      "As2Identifier": null,
+      "DefaultShipVia": "UPSGND",
+      "AckRequired": false,
+      "AckTimeoutMinutes": 0,
+      "CreditCheckThreshold": 5000,
+      "Active": true,
+      "TestIndicator": false,
+      "PartnerId": "C3002",
+      "Name": "Lakeshore Electric LLC",
+      "Role": "Customer",
+      "Standard": "Xml",
+      "Transport": "Gateway",
+      "ErpNumber": "104955",
+      "CurrencyCode": "USD",
+      "CountryCode": "US"
+    },
+    {
+      "InterchangeQualifier": "14",
+      "InterchangeId": "5034567000000",
+      "Version": "D96A",
+      "Gln": "5034567000000",
+      "As2Identifier": null,
+      "DefaultShipVia": null,
+      "AckRequired": true,
+      "AckTimeoutMinutes": 1440,
+      "CreditCheckThreshold": 0,
+      "Active": true,
+      "TestIndicator": false,
+      "PartnerId": "S5001",
+      "Name": "Kestrel Cable Co Ltd",
+      "Role": "Supplier",
+      "Standard": "Edifact",
+      "Transport": "Sftp",
+      "ErpNumber": "300120",
+      "CurrencyCode": "EUR",
+      "CountryCode": "GB"
+    },
+    {
+      "InterchangeQualifier": "ZZ",
+      "InterchangeId": "PELLHAMVLV",
+      "Version": "00401",
+      "Gln": null,
+      "As2Identifier": "PELLHAM",
+      "DefaultShipVia": null,
+      "AckRequired": true,
+      "AckTimeoutMinutes": 1440,
+      "CreditCheckThreshold": 0,
+      "Active": true,
+      "TestIndicator": false,
+      "PartnerId": "S5002",
+      "Name": "Pellham Valves Inc",
+      "Role": "Supplier",
+      "Standard": "X12",
+      "Transport": "As2",
+      "ErpNumber": "300245",
+      "CurrencyCode": "USD",
+      "CountryCode": "US"
+    }
+  ],
+  "CrossReferences": [
+    {
+      "PartnerId": "*",
+      "Kind": "Item",
+      "PartnerValue": "00614141100200",
+      "InternalValue": "EL-10020",
+      "ValidFrom": null,
+      "ValidTo": null
+    },
+    {
+      "PartnerId": "*",
+      "Kind": "Item",
+      "PartnerValue": "00614141100323",
+      "InternalValue": "EL-10032",
+      "ValidFrom": null,
+      "ValidTo": null
+    },
+    {
+      "PartnerId": "*",
+      "Kind": "Item",
+      "PartnerValue": "00614141112401",
+      "InternalValue": "EL-11240",
+      "ValidFrom": null,
+      "ValidTo": null
+    },
+    {
+      "PartnerId": "*",
+      "Kind": "Item",
+      "PartnerValue": "00614141204106",
+      "InternalValue": "EL-20410",
+      "ValidFrom": null,
+      "ValidTo": null
+    },
+    {
+      "PartnerId": "*",
+      "Kind": "Item",
+      "PartnerValue": "00614141301157",
+      "InternalValue": "EL-30115",
+      "ValidFrom": null,
+      "ValidTo": null
+    },
+    {
+      "PartnerId": "*",
+      "Kind": "Item",
+      "PartnerValue": "00614141302208",
+      "InternalValue": "EL-30220",
+      "ValidFrom": null,
+      "ValidTo": null
+    },
+    {
+      "PartnerId": "*",
+      "Kind": "Item",
+      "PartnerValue": "00614141501250",
+      "InternalValue": "CB-50125",
+      "ValidFrom": null,
+      "ValidTo": null
+    },
+    {
+      "PartnerId": "*",
+      "Kind": "Item",
+      "PartnerValue": "00614141503254",
+      "InternalValue": "CB-50325",
+      "ValidFrom": null,
+      "ValidTo": null
+    },
+    {
+      "PartnerId": "*",
+      "Kind": "Item",
+      "PartnerValue": "00614141516100",
+      "InternalValue": "CB-51610",
+      "ValidFrom": null,
+      "ValidTo": null
+    },
+    {
+      "PartnerId": "*",
+      "Kind": "Item",
+      "PartnerValue": "00614141600151",
+      "InternalValue": "PL-60015",
+      "ValidFrom": null,
+      "ValidTo": null
+    },
+    {
+      "PartnerId": "*",
+      "Kind": "Item",
+      "PartnerValue": "00614141600229",
+      "InternalValue": "PL-60022",
+      "ValidFrom": null,
+      "ValidTo": null
+    },
+    {
+      "PartnerId": "*",
+      "Kind": "Item",
+      "PartnerValue": "00614141610501",
+      "InternalValue": "PL-61050",
+      "ValidFrom": null,
+      "ValidTo": null
+    },
+    {
+      "PartnerId": "*",
+      "Kind": "Item",
+      "PartnerValue": "00614141620166",
+      "InternalValue": "PL-62016",
+      "ValidFrom": null,
+      "ValidTo": null
+    },
+    {
+      "PartnerId": "*",
+      "Kind": "Item",
+      "PartnerValue": "00614141701209",
+      "InternalValue": "HV-70120",
+      "ValidFrom": null,
+      "ValidTo": null
+    },
+    {
+      "PartnerId": "*",
+      "Kind": "Item",
+      "PartnerValue": "00614141715008",
+      "InternalValue": "HV-71500",
+      "ValidFrom": null,
+      "ValidTo": null
+    },
+    {
+      "PartnerId": "*",
+      "Kind": "Item",
+      "PartnerValue": "00614141720101",
+      "InternalValue": "HV-72010",
+      "ValidFrom": null,
+      "ValidTo": null
+    },
+    {
+      "PartnerId": "*",
+      "Kind": "Item",
+      "PartnerValue": "00614141800100",
+      "InternalValue": "HZ-80010",
+      "ValidFrom": null,
+      "ValidTo": null
+    },
+    {
+      "PartnerId": "*",
+      "Kind": "Item",
+      "PartnerValue": "00614141802203",
+      "InternalValue": "HZ-80220",
+      "ValidFrom": null,
+      "ValidTo": null
+    },
+    {
+      "PartnerId": "*",
+      "Kind": "Item",
+      "PartnerValue": "00614141900015",
+      "InternalValue": "PK-90001",
+      "ValidFrom": null,
+      "ValidTo": null
+    },
+    {
+      "PartnerId": "*",
+      "Kind": "Item",
+      "PartnerValue": "00614141900121",
+      "InternalValue": "PK-90012",
+      "ValidFrom": null,
+      "ValidTo": null
+    },
+    {
+      "PartnerId": "C1001",
+      "Kind": "Item",
+      "PartnerValue": "HW-88231",
+      "InternalValue": "EL-10020",
+      "ValidFrom": null,
+      "ValidTo": null
+    },
+    {
+      "PartnerId": "C1001",
+      "Kind": "Item",
+      "PartnerValue": "HW-88240",
+      "InternalValue": "EL-10032",
+      "ValidFrom": null,
+      "ValidTo": null
+    },
+    {
+      "PartnerId": "C1001",
+      "Kind": "Item",
+      "PartnerValue": "HW-90115",
+      "InternalValue": "EL-30115",
+      "ValidFrom": null,
+      "ValidTo": null
+    },
+    {
+      "PartnerId": "C1001",
+      "Kind": "Item",
+      "PartnerValue": "HW-77125",
+      "InternalValue": "CB-50125",
+      "ValidFrom": null,
+      "ValidTo": null
+    },
+    {
+      "PartnerId": "C1001",
+      "Kind": "Item",
+      "PartnerValue": "HW-77325",
+      "InternalValue": "CB-50325",
+      "ValidFrom": null,
+      "ValidTo": null
+    },
+    {
+      "PartnerId": "C1001",
+      "Kind": "Item",
+      "PartnerValue": "HW-66801",
+      "InternalValue": "HZ-80220",
+      "ValidFrom": null,
+      "ValidTo": null
+    },
+    {
+      "PartnerId": "C1001",
+      "Kind": "Item",
+      "PartnerValue": "HW-77999",
+      "InternalValue": "CB-51610",
+      "ValidFrom": "2015-01-01",
+      "ValidTo": "2017-12-31"
+    },
+    {
+      "PartnerId": "C1001",
+      "Kind": "ShipTo",
+      "PartnerValue": "0042",
+      "InternalValue": "604201",
+      "ValidFrom": null,
+      "ValidTo": null
+    },
+    {
+      "PartnerId": "C1001",
+      "Kind": "ShipTo",
+      "PartnerValue": "0057",
+      "InternalValue": "604202",
+      "ValidFrom": null,
+      "ValidTo": null
+    },
+    {
+      "PartnerId": "C1001",
+      "Kind": "ShipTo",
+      "PartnerValue": "0101",
+      "InternalValue": "604203",
+      "ValidFrom": null,
+      "ValidTo": null
+    },
+    {
+      "PartnerId": "C1001",
+      "Kind": "Carrier",
+      "PartnerValue": "UPSGND",
+      "InternalValue": "UPSN",
+      "ValidFrom": null,
+      "ValidTo": null
+    },
+    {
+      "PartnerId": "C1001",
+      "Kind": "Carrier",
+      "PartnerValue": "FDXG",
+      "InternalValue": "FDEG",
+      "ValidFrom": null,
+      "ValidTo": null
+    },
+    {
+      "PartnerId": "C1002",
+      "Kind": "Item",
+      "PartnerValue": "BL-1020",
+      "InternalValue": "EL-10020",
+      "ValidFrom": null,
+      "ValidTo": null
+    },
+    {
+      "PartnerId": "C1002",
+      "Kind": "Item",
+      "PartnerValue": "BL-3115",
+      "InternalValue": "EL-30115",
+      "ValidFrom": null,
+      "ValidTo": null
+    },
+    {
+      "PartnerId": "C1002",
+      "Kind": "Item",
+      "PartnerValue": "BL-6015",
+      "InternalValue": "PL-60015",
+      "ValidFrom": null,
+      "ValidTo": null
+    },
+    {
+      "PartnerId": "C1002",
+      "Kind": "Item",
+      "PartnerValue": "BL-7012",
+      "InternalValue": "HV-70120",
+      "ValidFrom": null,
+      "ValidTo": null
+    },
+    {
+      "PartnerId": "C1002",
+      "Kind": "ShipTo",
+      "PartnerValue": "DAYTON-01",
+      "InternalValue": "604301",
+      "ValidFrom": null,
+      "ValidTo": null
+    },
+    {
+      "PartnerId": "C1002",
+      "Kind": "ShipTo",
+      "PartnerValue": "AKRON-02",
+      "InternalValue": "604302",
+      "ValidFrom": null,
+      "ValidTo": null
+    },
+    {
+      "PartnerId": "C1002",
+      "Kind": "Carrier",
+      "PartnerValue": "FDXG",
+      "InternalValue": "FDEG",
+      "ValidFrom": null,
+      "ValidTo": null
+    },
+    {
+      "PartnerId": "C1002",
+      "Kind": "UnitOfMeasure",
+      "PartnerValue": "EA",
+      "InternalValue": "ST",
+      "ValidFrom": null,
+      "ValidTo": null
+    },
+    {
+      "PartnerId": "C2001",
+      "Kind": "Item",
+      "PartnerValue": "4711020",
+      "InternalValue": "EL-10020",
+      "ValidFrom": null,
+      "ValidTo": null
+    },
+    {
+      "PartnerId": "C2001",
+      "Kind": "Item",
+      "PartnerValue": "4711240",
+      "InternalValue": "EL-11240",
+      "ValidFrom": null,
+      "ValidTo": null
+    },
+    {
+      "PartnerId": "C2001",
+      "Kind": "Item",
+      "PartnerValue": "5500150",
+      "InternalValue": "PL-60015",
+      "ValidFrom": null,
+      "ValidTo": null
+    },
+    {
+      "PartnerId": "C2001",
+      "Kind": "Item",
+      "PartnerValue": "5500220",
+      "InternalValue": "PL-60022",
+      "ValidFrom": null,
+      "ValidTo": null
+    },
+    {
+      "PartnerId": "C2001",
+      "Kind": "Item",
+      "PartnerValue": "6100500",
+      "InternalValue": "HV-71500",
+      "ValidFrom": null,
+      "ValidTo": null
+    },
+    {
+      "PartnerId": "C2001",
+      "Kind": "ShipTo",
+      "PartnerValue": "4012345000108",
+      "InternalValue": "704101",
+      "ValidFrom": null,
+      "ValidTo": null
+    },
+    {
+      "PartnerId": "C2001",
+      "Kind": "ShipTo",
+      "PartnerValue": "4012345000115",
+      "InternalValue": "704102",
+      "ValidFrom": null,
+      "ValidTo": null
+    },
+    {
+      "PartnerId": "C2001",
+      "Kind": "Carrier",
+      "PartnerValue": "DHLFR",
+      "InternalValue": "DHL",
+      "ValidFrom": null,
+      "ValidTo": null
+    },
+    {
+      "PartnerId": "C2002",
+      "Kind": "Item",
+      "PartnerValue": "NB-220410",
+      "InternalValue": "EL-20410",
+      "ValidFrom": null,
+      "ValidTo": null
+    },
+    {
+      "PartnerId": "C2002",
+      "Kind": "Item",
+      "PartnerValue": "NB-350325",
+      "InternalValue": "CB-50325",
+      "ValidFrom": null,
+      "ValidTo": null
+    },
+    {
+      "PartnerId": "C2002",
+      "Kind": "Item",
+      "PartnerValue": "NB-610500",
+      "InternalValue": "PL-61050",
+      "ValidFrom": null,
+      "ValidTo": null
+    },
+    {
+      "PartnerId": "C2002",
+      "Kind": "ShipTo",
+      "PartnerValue": "7023456000014",
+      "InternalValue": "704201",
+      "ValidFrom": null,
+      "ValidTo": null
+    },
+    {
+      "PartnerId": "C2002",
+      "Kind": "Carrier",
+      "PartnerValue": "DSV",
+      "InternalValue": "DSV",
+      "ValidFrom": null,
+      "ValidTo": null
+    },
+    {
+      "PartnerId": "C3001",
+      "Kind": "UnitOfMeasure",
+      "PartnerValue": "coil",
+      "InternalValue": "ROL",
+      "ValidFrom": null,
+      "ValidTo": null
+    },
+    {
+      "PartnerId": "S5001",
+      "Kind": "Item",
+      "PartnerValue": "KC-NYM315",
+      "InternalValue": "CB-50125",
+      "ValidFrom": null,
+      "ValidTo": null
+    },
+    {
+      "PartnerId": "S5001",
+      "Kind": "Item",
+      "PartnerValue": "KC-NYM525",
+      "InternalValue": "CB-50325",
+      "ValidFrom": null,
+      "ValidTo": null
+    },
+    {
+      "PartnerId": "S5001",
+      "Kind": "Item",
+      "PartnerValue": "KC-NYY516",
+      "InternalValue": "CB-51610",
+      "ValidFrom": null,
+      "ValidTo": null
+    },
+    {
+      "PartnerId": "S5002",
+      "Kind": "Item",
+      "PartnerValue": "PV-2050-BR",
+      "InternalValue": "PL-61050",
+      "ValidFrom": null,
+      "ValidTo": null
+    },
+    {
+      "PartnerId": "S5002",
+      "Kind": "Item",
+      "PartnerValue": "PV-TRV15",
+      "InternalValue": "HV-70120",
+      "ValidFrom": null,
+      "ValidTo": null
+    }
+  ]
+}

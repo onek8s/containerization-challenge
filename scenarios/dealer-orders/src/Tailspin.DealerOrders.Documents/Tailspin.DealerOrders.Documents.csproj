@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>Tailspin.DealerOrders.Documents</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DocumentFormat.OpenXml" Version="2.8.1" />
+    <PackageReference Include="EPPlus" Version="4.5.3.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Tailspin.DealerOrders.Domain\Tailspin.DealerOrders.Domain.csproj" />
+    <ProjectReference Include="..\Tailspin.DealerOrders.Configurator\Tailspin.DealerOrders.Configurator.csproj" />
+  </ItemGroup>
+
+</Project>

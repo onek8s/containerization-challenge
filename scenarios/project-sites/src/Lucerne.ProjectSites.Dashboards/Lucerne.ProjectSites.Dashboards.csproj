@@ -1,0 +1,39 @@
+<Project Sdk="MSBuild.SDK.SystemWeb">
+
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+    <RootNamespace>Lucerne.ProjectSites.Dashboards</RootNamespace>
+    <AppConfig>Web.config</AppConfig>
+    <!-- Precompiling views needs the aspnet_compiler task of .NET Framework MSBuild. -->
+    <MvcBuildViews Condition="'$(MSBuildRuntimeType)' == 'Core'">false</MvcBuildViews>
+    <GeneratedBindingRedirectsAction>None</GeneratedBindingRedirectsAction>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.7" />
+    <PackageReference Include="Unity" Version="5.8.11" />
+    <PackageReference Include="log4net" Version="2.0.8" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Configuration" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Views\**\*.cshtml" />
+    <Content Include="Views\Web.config" />
+    <Content Include="Content\**\*" />
+    <Content Include="log4net.config" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Lucerne.ProjectSites.Core\Lucerne.ProjectSites.Core.csproj" />
+    <ProjectReference Include="..\Lucerne.ProjectSites.Data\Lucerne.ProjectSites.Data.csproj" />
+    <ProjectReference Include="..\Lucerne.ProjectSites.Documents\Lucerne.ProjectSites.Documents.csproj" />
+    <ProjectReference Include="..\Lucerne.ProjectSites.SharePoint.Csom\Lucerne.ProjectSites.SharePoint.Csom.csproj" />
+  </ItemGroup>
+
+</Project>

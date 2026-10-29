@@ -1,0 +1,44 @@
+@model PurchaseOrder
+@{
+    ViewBag.Title = "PO " + Model.PoNumber;
+    var r = Model.Request;
+}
+<div class="po">
+    <h1>Purchase order @Model.PoNumber</h1>
+    <table class="po-head">
+        <tr>
+            <td>
+                <strong>Supplier</strong><br />
+                @Model.Supplier.Name<br />
+                VAT @Model.Supplier.VatNumber<br />
+                @Model.Supplier.Email
+            </td>
+            <td>
+                <strong>Deliver to</strong><br />
+                <span class="pre">@Model.DeliveryAddress</span>
+            </td>
+            <td>
+                Order date @Model.OrderDate.ToString("d")<br />
+                Our reference @r.Number<br />
+                Cost center @r.CostCenterCode<br />
+                Buyer @Model.BuyerAccount
+            </td>
+        </tr>
+    </table>
+    <table class="grid">
+        <thead><tr><th>Pos</th><th>Description</th><th class="num">Qty</th><th>Unit</th><th class="num">Unit price</th><th class="num">Amount</th></tr></thead>
+        <tbody>
+            @foreach (var l in r.Lines)
+            {
+                <tr><td>@(l.LineNo * 10)</td><td>@l.Description</td><td class="num">@l.Quantity.ToString("0.###")</td><td>@l.Unit</td><td class="num">@l.UnitPrice.ToString("N2")</td><td class="num">@l.NetAmount.ToString("N2")</td></tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr><td colspan="5">Net total</td><td class="num">@r.NetTotal.ToString("N2") @r.Currency</td></tr>
+            <tr><td colspan="5">VAT</td><td class="num">@r.VatTotal.ToString("N2") @r.Currency</td></tr>
+            <tr><td colspan="5"><strong>Total</strong></td><td class="num"><strong>@r.GrossTotal.ToString("N2") @r.Currency</strong></td></tr>
+        </tfoot>
+    </table>
+    <p class="muted">Please quote the purchase order number on all invoices. Invoices without a valid PO number will be returned.</p>
+    <p class="noprint"><button onclick="window.print()">Print</button></p>
+</div>

@@ -1,0 +1,36 @@
+@page
+@model PolicyChanges.Portal.Pages.Partners.IndexModel
+@{
+    ViewData["Title"] = "Partners";
+}
+<h1>Partners</h1>
+
+@if (Model.NewKey is not null)
+{
+    <p>New API key, shown only now. Send it to the partner over the agreed secure channel:</p>
+    <p class="key">@Model.NewKey</p>
+}
+
+<table>
+    <tr><th>Code</th><th>Name</th><th>Since</th><th>Status</th><th></th></tr>
+    @foreach (var p in Model.Partners)
+    {
+        <tr>
+            <td>@p.Code</td>
+            <td>@p.Name</td>
+            <td>@p.CreatedUtc.ToLocalTime().ToString("d")</td>
+            <td>@(p.Active ? "Active" : "Disabled")</td>
+            <td>
+                <form method="post" asp-page-handler="IssueKey" asp-route-id="@p.Id" class="inline"><button type="submit">Issue new key</button></form>
+                <form method="post" asp-page-handler="Toggle" asp-route-id="@p.Id" class="inline"><button type="submit">@(p.Active ? "Disable" : "Enable")</button></form>
+            </td>
+        </tr>
+    }
+</table>
+
+<h2>Add partner</h2>
+<form method="post" asp-page-handler="Add">
+    <label>Code <input name="code" maxlength="20" required /></label>
+    <label>Name <input name="name" maxlength="100" required /></label>
+    <button type="submit">Add and issue key</button>
+</form>

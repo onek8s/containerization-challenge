@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Feature xmlns="http://schemas.microsoft.com/sharepoint/"
+         Id="{D6E4A9B5-3C7F-4EAD-A0B8-4B5C6D7E8F94}"
+         Title="Lucerne Project Sites - Timer Jobs"
+         Description="Status roll-up, retention, team sync and site provisioning jobs."
+         Scope="WebApplication"
+         Version="5.3.1.0"
+         Hidden="FALSE"
+         ReceiverAssembly="Lucerne.ProjectSites.Farm, Version=1.0.0.0, Culture=neutral, PublicKeyToken=$SharePoint.Project.AssemblyPublicKeyToken$"
+         ReceiverClass="Lucerne.ProjectSites.Farm.Features.TimerJobsFeatureReceiver">
+  <ElementManifests>
+  </ElementManifests>
+</Feature>

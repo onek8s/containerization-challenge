@@ -1,0 +1,57 @@
+@page
+@model Wingtip.Invoices.Admin.Pages.Files.IndexModel
+@{
+    ViewData["Title"] = "Files";
+}
+<h1>Received files</h1>
+
+<form method="get" class="filters">
+    <label>Status
+        <select name="status">
+            <option value="">All</option>
+            @foreach (var s in new[] { "Queued", "Processed", "Failed", "Poison" })
+            {
+                <option selected="@(Model.Status == s)">@s</option>
+            }
+        </select>
+    </label>
+    <label>Supplier
+        <select name="supplierId">
+            <option value="">All</option>
+            @foreach (var s in Model.Suppliers)
+            {
+                <option value="@s.SupplierId" selected="@(Model.SupplierId == s.SupplierId)">@s.Code</option>
+            }
+        </select>
+    </label>
+    <button type="submit">Show</button>
+</form>
+
+<table>
+    <thead>
+        <tr><th>File</th><th>Received</th><th>Supplier</th><th>Name</th><th class="num">Size</th><th>Status</th><th class="num">Invoices</th><th>Error</th><th></th></tr>
+    </thead>
+    <tbody>
+        @foreach (var f in Model.Files)
+        {
+            <tr class="@(f.Status is "Failed" or "Poison" ? "bad" : "")">
+                <td>@f.FileId</td>
+                <td>@f.ReceivedAt.ToString("d.M.yyyy HH:mm")</td>
+                <td>@f.SupplierCode <span class="muted">@f.ChannelType</span></td>
+                <td><a asp-page="/Files/Download" asp-route-id="@f.FileId">@f.FileName</a></td>
+                <td class="num">@((f.SizeBytes / 1024.0).ToString("N1")) kB</td>
+                <td>@f.Status @(f.Attempts > 0 ? "(" + f.Attempts + ")" : "")</td>
+                <td class="num"><a asp-page="/Invoices/Index" asp-route-text="">@f.Invoices</a></td>
+                <td class="summary">@f.LastError</td>
+                <td>
+                    @if (Model.IsAdmin && f.Status is "Failed" or "Poison" or "Processed")
+                    {
+                        <form method="post" asp-page-handler="Resubmit" asp-route-fileId="@f.FileId">
+                            <button type="submit">Process again</button>
+                        </form>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

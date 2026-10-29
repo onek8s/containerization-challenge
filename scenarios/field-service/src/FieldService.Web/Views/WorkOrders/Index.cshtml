@@ -1,0 +1,66 @@
+@model BoardViewModel
+@{
+    ViewData["Title"] = "Work orders";
+    var isTech = User.IsInRole(Roles.Technician);
+}
+<h2>Work orders</h2>
+<form method="get" asp-action="Index" class="row g-2 align-items-end mb-3">
+    <input type="hidden" name="apply" value="true" />
+    <div class="col-auto">
+        <label class="form-label" asp-for="Filter.Status">Status</label>
+        <select name="Status" class="form-select" asp-for="Filter.Status" asp-items="Html.GetEnumSelectList<WorkOrderStatus>()">
+            <option value="">(any)</option>
+        </select>
+    </div>
+    @if (!isTech)
+    {
+        <div class="col-auto">
+            <label class="form-label">Technician</label>
+            <select name="TechnicianId" class="form-select" asp-items="Model.Technicians">
+                <option value="">(all)</option>
+            </select>
+        </div>
+    }
+    <div class="col-auto">
+        <label class="form-label">Customer</label>
+        <input name="Customer" value="@Model.Filter.Customer" class="form-control" />
+    </div>
+    <div class="col-auto form-check">
+        <input type="checkbox" name="OpenOnly" value="true" class="form-check-input" id="openOnly" checked="@Model.Filter.OpenOnly" />
+        <input type="hidden" name="OpenOnly" value="false" />
+        <label class="form-check-label" for="openOnly">Open only</label>
+    </div>
+    <div class="col-auto form-check">
+        <input type="checkbox" name="OverdueOnly" value="true" class="form-check-input" id="overdueOnly" checked="@Model.Filter.OverdueOnly" />
+        <input type="hidden" name="OverdueOnly" value="false" />
+        <label class="form-check-label" for="overdueOnly">Overdue only</label>
+    </div>
+    <div class="col-auto">
+        <button class="btn btn-secondary" type="submit">Filter</button>
+    </div>
+</form>
+
+<table class="table table-hover">
+    <thead>
+        <tr><th>Number</th><th>Customer</th><th>Site</th><th>Summary</th><th>Priority</th><th>Technician</th><th>Due</th><th>Status</th></tr>
+    </thead>
+    <tbody>
+    @foreach (var o in Model.Orders)
+    {
+        <tr>
+            <td><a asp-action="Details" asp-route-id="@o.Number">@o.Number</a></td>
+            <td>@o.Customer?.Name</td>
+            <td>@o.SiteAddress</td>
+            <td>@o.Summary</td>
+            <td>@o.Priority</td>
+            <td>@(o.Technician?.Name ?? "-")</td>
+            <td>@o.DueUtc.ToLocalTime().ToString("g")</td>
+            <td><partial name="_StatusBadge" model="o" /></td>
+        </tr>
+    }
+    </tbody>
+</table>
+@if (Model.Orders.Count == 0)
+{
+    <p class="text-muted">No work orders match the filter.</p>
+}

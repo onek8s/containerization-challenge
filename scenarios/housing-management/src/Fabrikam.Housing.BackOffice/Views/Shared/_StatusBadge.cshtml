@@ -1,0 +1,12 @@
+@model ComplianceStatus
+@{
+    var css = Model switch
+    {
+        ComplianceStatus.Compliant => "badge-success",
+        ComplianceStatus.DueSoon => "badge-warning",
+        ComplianceStatus.Overdue => "badge-danger",
+        ComplianceStatus.NoCertificate => "badge-danger",
+        _ => "badge-secondary"
+    };
+}
+<span class="badge @css">@Model</span>

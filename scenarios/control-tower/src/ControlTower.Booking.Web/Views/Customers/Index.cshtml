@@ -1,0 +1,15 @@
+@model IEnumerable<Proseware.ControlTower.Domain.Parties.Customer>
+@{ ViewData["Title"] = "Customers"; }
+<div class="d-flex mb-2"><h1 class="h4 me-auto">Customers</h1><a class="btn btn-primary btn-sm" asp-action="Edit">New customer</a></div>
+<table class="table table-sm">
+    <thead><tr><th>Code</th><th>Name</th><th>Country</th><th>VAT</th><th>EORI</th><th>Currency</th><th>SLA days</th><th>Discount</th><th>Portal</th><th>Customs</th></tr></thead>
+    <tbody>
+    @foreach (var c in Model)
+    {
+        <tr>
+            <td><a asp-action="Edit" asp-route-id="@c.Id">@c.Code</a></td><td>@c.Name</td><td>@c.CountryCode</td><td>@c.VatNumber</td><td>@c.Eori</td>
+            <td>@c.InvoiceCurrency</td><td>@c.DomesticSlaDays</td><td>@c.DiscountPercent %</td><td>@(c.PortalEnabled ? "yes" : "")</td><td>@(c.CustomsBrokerageAgreed ? "yes" : "")</td>
+        </tr>
+    }
+    </tbody>
+</table>

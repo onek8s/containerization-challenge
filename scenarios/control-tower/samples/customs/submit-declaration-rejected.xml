@@ -1,0 +1,17 @@
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
+  <s:Body>
+    <SubmitDeclarationResponse xmlns="urn:customs.example:declaration:service:v2">
+      <SubmitDeclarationResult xmlns:a="urn:customs.example:declaration:data:v2">
+        <a:MessageId>1c22e0f3a7d84a51b3c56f1e8f2b0d44</a:MessageId>
+        <a:Accepted>false</a:Accepted>
+        <a:Errors>
+          <a:FunctionalError>
+            <a:Code>12</a:Code>
+            <a:Pointer>GoodsItems/GoodsItem[1]/CommodityCode</a:Pointer>
+            <a:Text>Commodity code 84879090 requires a 10-digit TARIC code for this procedure</a:Text>
+          </a:FunctionalError>
+        </a:Errors>
+      </SubmitDeclarationResult>
+    </SubmitDeclarationResponse>
+  </s:Body>
+</s:Envelope>

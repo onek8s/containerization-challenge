@@ -1,0 +1,11 @@
+@model int
+@{
+    var steps = new[] { "Where", "Problem", "Details", "Photos", "Appointment", "Check and send" };
+}
+<div class="wizard-steps">
+    @for (var i = 0; i < steps.Length; i++)
+    {
+        if (i == Model) { <strong>@(i + 1). @steps[i]</strong> } else { <span>@(i + 1). @steps[i]</span> }
+        if (i < steps.Length - 1) { <span> &rsaquo; </span> }
+    }
+</div>

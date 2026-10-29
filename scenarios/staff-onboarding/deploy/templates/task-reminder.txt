@@ -1,0 +1,8 @@
+Subject: Reminder {ReminderNumber}: {Subject} ({RequestNumber}) is waiting for you
+Hello,
+
+The request {RequestNumber} for {Subject} is still waiting for your decision.
+
+Open the task: {TaskUrl}
+
+Staff Onboarding

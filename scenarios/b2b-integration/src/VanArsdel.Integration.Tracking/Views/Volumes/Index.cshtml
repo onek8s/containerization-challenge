@@ -1,0 +1,18 @@
+@model System.Data.DataTable
+@{ ViewBag.Title = "Volumes"; }
+<h2>Document volumes per day</h2>
+<form method="get" class="search-form form-inline">
+    <input type="date" name="from" value="@ViewBag.From" class="form-control" />
+    <input type="date" name="to" value="@ViewBag.To" class="form-control" />
+    <button type="submit" class="btn btn-primary">Show</button>
+    <button type="submit" class="btn btn-default" formaction="@Url.Action("Export", "Volumes")">Export to Excel (with chart)</button>
+</form>
+<table class="table table-condensed table-striped">
+    <thead><tr>@foreach (System.Data.DataColumn c in Model.Columns) { <th>@c.ColumnName</th> }</tr></thead>
+    <tbody>
+        @foreach (System.Data.DataRow r in Model.Rows)
+        {
+            <tr>@foreach (System.Data.DataColumn c in Model.Columns) { <td>@(r[c] is DateTime ? ((DateTime)r[c]).ToString("yyyy-MM-dd") : r[c].ToString())</td> }</tr>
+        }
+    </tbody>
+</table>

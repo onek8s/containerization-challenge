@@ -1,0 +1,99 @@
+@model OrderViewModel
+@{
+    ViewBag.Title = "Order " + Model.OrderNumber;
+}
+<div class="page-header" data-order-id="@Model.Id">
+    <h2>Order @Model.OrderNumber <span class="label @StatusTexts.Css(Model.Status) order-status">@Model.StatusText</span></h2>
+    <p>
+        Your PO @Model.DealerPoNumber &middot; ordered @Model.CreatedUtc.ToLocalTime().ToString("g") by @Model.CreatedBy
+        @if (!string.IsNullOrEmpty(Model.AxSalesId)) { <text>&middot; Tailspin order @Model.AxSalesId</text> }
+        @if (Model.HasEdi) { <span class="label label-default">EDI</span> }
+    </p>
+    <p>
+        @if (Model.Status >= OrderStatus.Confirmed && Model.Status <= OrderStatus.Invoiced)
+        {
+            @Html.ActionLink("Order confirmation", "Confirmation", new { id = Model.Id }, new { @class = "btn btn-default" })
+        }
+        @if (Model.QuoteId.HasValue)
+        {
+            @Html.ActionLink("Quote", "Details", "Quotes", new { id = Model.QuoteId }, new { @class = "btn btn-default" })
+        }
+    </p>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <dl class="dl-horizontal">
+            <dt>Requested delivery</dt><dd>@(Model.RequestedDeliveryDate?.ToString("d") ?? "as soon as possible")</dd>
+            <dt>Confirmed delivery</dt><dd>@(Model.ConfirmedDeliveryDate?.ToString("d") ?? "not yet confirmed")</dd>
+            <dt>Deliver to</dt><dd>@Model.DeliveryAddressText</dd>
+            <dt>Terms</dt><dd>@Model.DeliveryTerms.ToString().ToUpperInvariant()</dd>
+            <dt>End customer</dt><dd>@Model.EndCustomerName</dd>
+        </dl>
+    </div>
+    <div class="col-md-6">
+        @if (Model.CanChange)
+        {
+            using (Html.BeginForm("ChangeDate", "Orders", new { id = Model.Id }, FormMethod.Post, new { @class = "form-inline" }))
+            {
+                @Html.AntiForgeryToken()
+                <label>New requested date <input type="date" name="requestedDate" class="form-control" required /></label>
+                <button type="submit" class="btn btn-default">Change</button>
+            }
+        }
+        @if (Model.CanCancel)
+        {
+            using (Html.BeginForm("Cancel", "Orders", new { id = Model.Id }, FormMethod.Post, new { @class = "form-inline", onsubmit = "return confirm('Cancel the order?');" }))
+            {
+                @Html.AntiForgeryToken()
+                <input name="reason" class="form-control" placeholder="Reason" />
+                <button type="submit" class="btn btn-danger">Cancel order</button>
+            }
+        }
+    </div>
+</div>
+<table class="table">
+    <thead><tr><th>#</th><th>Item</th><th>Description</th><th class="text-right">Qty</th><th class="text-right">Net</th><th class="text-right">Amount</th><th>Ship date</th><th class="text-right">Shipped</th><th>Serial</th></tr></thead>
+    <tbody>
+        @foreach (var l in Model.Lines)
+        {
+            <tr class="@(l.Cancelled ? "text-muted cancelled" : "")">
+                <td>@l.LineNumber</td>
+                <td>@l.ItemId<br /><small class="text-muted">@l.ConfigurationId @l.DealerLineReference</small></td>
+                <td>@l.Description</td>
+                <td class="text-right">@l.Quantity.ToString("0.##")</td>
+                <td class="text-right">@l.NetPrice.ToString("N2")</td>
+                <td class="text-right">@l.NetAmount.ToString("N2")</td>
+                <td>@l.ConfirmedShipDate?.ToString("d")</td>
+                <td class="text-right">@l.ShippedQuantity.ToString("0.##")</td>
+                <td>@l.SerialNumber</td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr><th colspan="5">Lines</th><th class="text-right">@Model.TotalNet.ToString("N2")</th><th colspan="3">@Model.Currency</th></tr>
+        @if (Model.FreightCharge > 0)
+        {
+            <tr><th colspan="5">Freight</th><th class="text-right">@Model.FreightCharge.ToString("N2")</th><th colspan="3"></th></tr>
+        }
+    </tfoot>
+</table>
+<div class="row">
+    <div class="col-md-6">
+        <h4>History</h4>
+        <ul class="list-unstyled history">
+            @foreach (var h in Model.History)
+            {
+                <li><strong>@h.Status</strong> @h.ChangedUtc.ToLocalTime().ToString("g") <span class="text-muted">@h.ChangedBy @h.Comment</span></li>
+            }
+        </ul>
+    </div>
+    <div class="col-md-6">
+        <h4>Documents</h4>
+        <ul class="list-unstyled">
+            @foreach (var d in Model.Documents)
+            {
+                <li>@Html.ActionLink(d.FileName, "Download", "Documents", new { id = d.Id }, null) <span class="text-muted">@d.CreatedUtc.ToLocalTime().ToString("g")</span></li>
+            }
+        </ul>
+    </div>
+</div>

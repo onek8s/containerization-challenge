@@ -1,0 +1,75 @@
+@page "/"
+@implements IDisposable
+@inject QuoteApiClient Api
+@inject LiveUpdates Live
+
+<PageTitle>Referrals</PageTitle>
+<h1>Referrals</h1>
+
+@if (error is not null) { <div class="error">@error</div> }
+@if (items is null)
+{
+    <p>Loading...</p>
+}
+else if (items.Count == 0)
+{
+    <p class="muted">No quotes are waiting for an underwriter.</p>
+}
+else
+{
+    <table class="list">
+        <thead><tr><th>Quote</th><th>Agency</th><th>Insured</th><th>Trade</th><th>Inception</th><th>Referred</th><th>Reasons</th><th>With</th><th class="num">Total</th></tr></thead>
+        <tbody>
+            @foreach (var r in items)
+            {
+                <tr class="@(r.InceptionDate <= DateOnly.FromDateTime(DateTime.Today.AddDays(3)) ? "urgent" : "")">
+                    <td><a href="quotes/@r.QuoteId">@r.Reference</a></td>
+                    <td>@r.AgencyCode</td>
+                    <td>@r.InsuredName</td>
+                    <td>@(TradeList.Find(r.TradeCode)?.Description ?? r.TradeCode)</td>
+                    <td>@r.InceptionDate.ToString("dd MMM yyyy")</td>
+                    <td>@r.ReferredUtc.ToLocalTime().ToString("dd MMM HH:mm")</td>
+                    <td>@r.ReferralCount</td>
+                    <td>@r.AssignedTo</td>
+                    <td class="num">@r.Total?.ToString("N2")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<ReferralQueueItem>? items;
+    private string? error;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Live.QuoteChanged += OnQuoteChanged;
+        await LoadAsync();
+        await Live.EnsureStartedAsync();
+    }
+
+    private async Task LoadAsync()
+    {
+        try
+        {
+            items = await Api.ReferralsAsync();
+            error = null;
+        }
+        catch (Exception ex) when (ex is ApiProblemException or HttpRequestException)
+        {
+            error = $"The quote API is not available: {ex.Message}";
+        }
+    }
+
+    private async Task OnQuoteChanged(QuoteNotice notice)
+    {
+        await InvokeAsync(async () =>
+        {
+            await LoadAsync();
+            StateHasChanged();
+        });
+    }
+
+    public void Dispose() => Live.QuoteChanged -= OnQuoteChanged;
+}

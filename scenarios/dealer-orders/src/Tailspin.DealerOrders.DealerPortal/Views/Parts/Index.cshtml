@@ -1,0 +1,42 @@
+@{
+    ViewBag.Title = "Parts order";
+    var addresses = (IList<DealerAddress>)ViewBag.Addresses;
+}
+<h2>Parts order</h2>
+<div id="parts-order" data-lookup-url="@Url.Action("Lookup")" data-place-url="@Url.Action("Place")">
+    <table class="table table-condensed parts">
+        <thead><tr><th style="width:12em">Item</th><th style="width:7em">Qty</th><th>Description</th><th class="text-right">Net price</th><th class="text-right">Amount</th><th>Stock</th><th>Your ref</th><th></th></tr></thead>
+        <tbody data-bind="foreach: lines">
+            <tr data-bind="css: { danger: notFound }">
+                <td><input class="form-control input-sm" data-bind="value: itemId, event: { change: $root.lookup }" /></td>
+                <td><input type="number" min="1" class="form-control input-sm" data-bind="value: quantity, event: { change: $root.lookup }" /></td>
+                <td data-bind="text: notFound() ? 'Unknown item' : description"></td>
+                <td class="text-right" data-bind="text: $root.money(netPrice())"></td>
+                <td class="text-right" data-bind="text: $root.money(netPrice() * quantity())"></td>
+                <td data-bind="text: stockText"></td>
+                <td><input class="form-control input-sm" data-bind="value: reference" /></td>
+                <td><button class="btn btn-link btn-xs" data-bind="click: $root.remove">Remove</button></td>
+            </tr>
+        </tbody>
+        <tfoot><tr><td colspan="4"><button class="btn btn-default btn-sm" data-bind="click: add">Add line</button></td><th class="text-right" data-bind="text: money(total())"></th><td colspan="3" data-bind="text: currency"></td></tr></tfoot>
+    </table>
+    <div class="row">
+        <div class="col-md-3"><label>Your PO number</label><input class="form-control" data-bind="value: dealerPoNumber" maxlength="30" /></div>
+        <div class="col-md-3"><label>Requested delivery</label><input type="date" class="form-control" data-bind="value: requestedDelivery" /></div>
+        <div class="col-md-4">
+            <label>Deliver to</label>
+            <select class="form-control" data-bind="value: deliveryAddressId">
+                @foreach (var a in addresses)
+                {
+                    <option value="@a.Id" selected="@a.IsDefaultDelivery">@a.ToString()</option>
+                }
+            </select>
+        </div>
+    </div>
+    <div class="form-group"><label>Notes</label><textarea class="form-control" rows="2" data-bind="value: notes"></textarea></div>
+    <button class="btn btn-primary" data-bind="click: place, enable: canPlace">Place order</button>
+    <span class="text-danger" data-bind="text: error"></span>
+</div>
+@section scripts {
+    @Scripts.Render("~/bundles/parts")
+}

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OrderBatch xmlns="http://schemas.vanarsdel.com/partners/orders/2016" BatchId="LE-20260302" PartnerId="C3002" Created="2026-03-02T08:31:40-05:00">
+  <Order>
+    <PoNumber>LE-7781</PoNumber>
+    <OrderDate>2026-03-02</OrderDate>
+    <DeliverBy>2026-03-06</DeliverBy>
+    <AccountNumber>104955</AccountNumber>
+    <Item><Sku>EL-30220</Sku><Qty>50</Qty><Unit>ea</Unit><Price>118.00</Price></Item>
+  </Order>
+  <Order>
+    <PoNumber>LE-7782</PoNumber>
+    <OrderDate>2026-03-02</OrderDate>
+    <DeliverBy>2026-03-04</DeliverBy>
+    <AccountNumber>104955</AccountNumber>
+    <Item><Sku>HZ-80010</Sku><Qty>20</Qty><Unit>ea</Unit><Price>5.90</Price></Item>
+    <Item><Sku>EL-99999</Sku><Qty>5</Qty><Unit>ea</Unit><Text>Same as last time</Text></Item>
+  </Order>
+</OrderBatch>

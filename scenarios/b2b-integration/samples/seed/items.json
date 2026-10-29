@@ -1,0 +1,182 @@
+[
+  {
+    "Item": "EL-10020",
+    "Description": "Circuit breaker 1P 20A type B",
+    "Uom": "ST",
+    "Price": 8.45,
+    "Gtin": "00614141100200",
+    "Hazardous": false,
+    "StockQty": 5000
+  },
+  {
+    "Item": "EL-10032",
+    "Description": "Circuit breaker 3P 32A type C",
+    "Uom": "ST",
+    "Price": 42.1,
+    "Gtin": "00614141100323",
+    "Hazardous": false,
+    "StockQty": 5000
+  },
+  {
+    "Item": "EL-11240",
+    "Description": "RCD 2P 40A 30mA",
+    "Uom": "ST",
+    "Price": 31.9,
+    "Gtin": "00614141112401",
+    "Hazardous": false,
+    "StockQty": 5000
+  },
+  {
+    "Item": "EL-20410",
+    "Description": "Junction box IP65 100x100",
+    "Uom": "ST",
+    "Price": 3.25,
+    "Gtin": "00614141204106",
+    "Hazardous": false,
+    "StockQty": 5000
+  },
+  {
+    "Item": "EL-30115",
+    "Description": "LED panel 600x600 36W 4000K",
+    "Uom": "ST",
+    "Price": 24.8,
+    "Gtin": "00614141301157",
+    "Hazardous": false,
+    "StockQty": 5000
+  },
+  {
+    "Item": "EL-30220",
+    "Description": "LED high bay 150W",
+    "Uom": "ST",
+    "Price": 118.0,
+    "Gtin": "00614141302208",
+    "Hazardous": false,
+    "StockQty": 5000
+  },
+  {
+    "Item": "CB-50125",
+    "Description": "Cable NYM-J 3x1.5 mm2",
+    "Uom": "M",
+    "Price": 0.62,
+    "Gtin": "00614141501250",
+    "Hazardous": false,
+    "StockQty": 20000
+  },
+  {
+    "Item": "CB-50325",
+    "Description": "Cable NYM-J 5x2.5 mm2",
+    "Uom": "M",
+    "Price": 1.48,
+    "Gtin": "00614141503254",
+    "Hazardous": false,
+    "StockQty": 20000
+  },
+  {
+    "Item": "CB-51610",
+    "Description": "Cable NYY-J 5x16 mm2",
+    "Uom": "M",
+    "Price": 9.75,
+    "Gtin": "00614141516100",
+    "Hazardous": false,
+    "StockQty": 20000
+  },
+  {
+    "Item": "PL-60015",
+    "Description": "Press fitting copper elbow 15 mm",
+    "Uom": "ST",
+    "Price": 1.95,
+    "Gtin": "00614141600151",
+    "Hazardous": false,
+    "StockQty": 5000
+  },
+  {
+    "Item": "PL-60022",
+    "Description": "Press fitting copper tee 22 mm",
+    "Uom": "ST",
+    "Price": 3.4,
+    "Gtin": "00614141600229",
+    "Hazardous": false,
+    "StockQty": 5000
+  },
+  {
+    "Item": "PL-61050",
+    "Description": "Ball valve DN50 PN40 brass",
+    "Uom": "ST",
+    "Price": 36.2,
+    "Gtin": "00614141610501",
+    "Hazardous": false,
+    "StockQty": 5000
+  },
+  {
+    "Item": "PL-62016",
+    "Description": "Multilayer pipe 16x2 coil 100 m",
+    "Uom": "ROL",
+    "Price": 96.0,
+    "Gtin": "00614141620166",
+    "Hazardous": false,
+    "StockQty": 5000
+  },
+  {
+    "Item": "HV-70120",
+    "Description": "Thermostatic radiator valve DN15",
+    "Uom": "ST",
+    "Price": 14.3,
+    "Gtin": "00614141701209",
+    "Hazardous": false,
+    "StockQty": 5000
+  },
+  {
+    "Item": "HV-71500",
+    "Description": "Circulation pump 25-60 180",
+    "Uom": "ST",
+    "Price": 189.0,
+    "Gtin": "00614141715008",
+    "Hazardous": false,
+    "StockQty": 5000
+  },
+  {
+    "Item": "HV-72010",
+    "Description": "Air vent automatic 3/8",
+    "Uom": "ST",
+    "Price": 6.1,
+    "Gtin": "00614141720101",
+    "Hazardous": false,
+    "StockQty": 5000
+  },
+  {
+    "Item": "HZ-80010",
+    "Description": "Propane cartridge 400 g",
+    "Uom": "ST",
+    "Price": 5.9,
+    "Gtin": "00614141800100",
+    "Hazardous": true,
+    "StockQty": 5000
+  },
+  {
+    "Item": "HZ-80220",
+    "Description": "Lithium battery pack 18V 5.0Ah",
+    "Uom": "ST",
+    "Price": 79.0,
+    "Gtin": "00614141802203",
+    "Hazardous": true,
+    "StockQty": 5000
+  },
+  {
+    "Item": "PK-90001",
+    "Description": "Cable ties 4.8x200 bag of 100",
+    "Uom": "PAK",
+    "Price": 4.2,
+    "Gtin": "00614141900015",
+    "Hazardous": false,
+    "StockQty": 5000
+  },
+  {
+    "Item": "PK-90012",
+    "Description": "Screw anchors 8 mm box of 100",
+    "Uom": "BOX",
+    "Price": 7.8,
+    "Gtin": "00614141900121",
+    "Hazardous": false,
+    "StockQty": 5000
+  }
+]

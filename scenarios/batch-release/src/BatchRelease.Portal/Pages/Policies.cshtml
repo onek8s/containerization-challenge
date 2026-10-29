@@ -1,0 +1,21 @@
+@page
+@model PoliciesModel
+@{
+    ViewData["Title"] = "Release policies";
+}
+<h1>Release policies</h1>
+@foreach (var f in Model.Families)
+{
+    <h2>@f.Name (@f.Code)</h2>
+    <p>Changed @f.PolicyChangedUtc.ToString("yyyy-MM-dd") by @f.PolicyChangedBy</p>
+    <table>
+        <thead><tr><th></th><th>Principal</th><th>Rights</th></tr></thead>
+        <tbody>
+            @foreach (var e in f.Entries)
+            {
+                <tr><td>@(e.Deny ? "Deny" : "Allow")</td><td>@e.Principal</td><td>@e.Rights</td></tr>
+            }
+        </tbody>
+    </table>
+    <details><summary>SDDL</summary><code>@f.Sddl</code></details>
+}

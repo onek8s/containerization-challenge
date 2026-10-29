@@ -1,0 +1,8 @@
+@{ ViewData["Title"] = "Admin"; }
+<h1 class="h3">Administration</h1>
+<div class="list-group col-lg-6 px-0">
+    <a class="list-group-item list-group-item-action" asp-action="BankHolidays">Bank holidays</a>
+    <a class="list-group-item list-group-item-action" asp-action="ScheduleOfRates">Schedule of Rates</a>
+    <a class="list-group-item list-group-item-action" asp-action="RentReview">Annual rent review</a>
+    <a class="list-group-item list-group-item-action" asp-controller="Contractors" asp-action="Index">Contractors and API clients</a>
+</div>

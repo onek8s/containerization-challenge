@@ -1,0 +1,9 @@
+Subject: New role for {Subject}: {Title}
+Hello,
+
+The access for the new role of {Subject} ({Title}) is now in place.
+
+Added: {Added}
+Previous role access removed after {HandoverDays} business days: {RemovedLater}
+
+Staff Onboarding

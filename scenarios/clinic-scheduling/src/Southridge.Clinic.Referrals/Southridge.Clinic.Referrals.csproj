@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net452</TargetFramework>
+    <RootNamespace>Southridge.Clinic.Referrals</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NHibernate" Version="3.3.3.4001" />
+    <PackageReference Include="Iesi.Collections" Version="3.2.0.4000" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Mappings\*.hbm.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Southridge.Clinic.Domain\Southridge.Clinic.Domain.csproj" />
+    <ProjectReference Include="..\Southridge.Clinic.Infrastructure\Southridge.Clinic.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,37 @@
+@model Tailspin.DealerOrders.SalesDesk.Models.DealerDetails
+@{
+    var d = Model.Dealer;
+    ViewBag.Title = d.AccountNumber;
+}
+<h2>@d.Name <small>@d.AccountNumber</small></h2>
+<div class="row">
+    <div class="col-md-6">
+        <dl class="dl-horizontal">
+            <dt>Status</dt><dd>@d.Status @(d.CreditHold ? "- credit hold" : "")</dd>
+            <dt>Tier / price group</dt><dd>@d.DiscountTier / @d.PriceGroup</dd>
+            <dt>Currency, language</dt><dd>@d.Currency, @d.LanguageCode</dd>
+            <dt>Credit</dt><dd>limit @d.CreditLimit.ToString("N0"), open AR @d.OpenBalance.ToString("N0"), open orders @Model.OpenOrderValue.ToString("N0"), available @d.AvailableCredit(Model.OpenOrderValue).ToString("N0")</dd>
+            <dt>Self-approved discount</dt><dd>@d.MaxSelfApprovedDiscount %</dd>
+            <dt>Terms</dt><dd>@d.PaymentTerms, @d.DeliveryTerms, warehouse @d.Warehouse</dd>
+            <dt>Sales</dt><dd>@d.SalesDistrict @d.SalesResponsible</dd>
+            <dt>Contact</dt><dd>@d.Email @d.Phone</dd>
+            <dt>EDI</dt><dd>@(Model.EdiPartner == null ? "none" : Model.EdiPartner.Name + " (" + Model.EdiPartner.Transport + ", " + Model.EdiPartner.InterchangeQualifier + "/" + Model.EdiPartner.InterchangeId + ")")</dd>
+        </dl>
+        @using (Html.BeginForm("Sync", "Dealers", new { id = d.Id }))
+        {
+            @Html.AntiForgeryToken()
+            <button class="btn btn-default">Send to AX</button>
+        }
+    </div>
+    <div class="col-md-6">
+        <h4>Addresses</h4>
+        <ul>@foreach (var a in d.Addresses) { <li>@a.ToString() @(a.IsDefaultDelivery ? "(default)" : "") <small class="text-muted">@a.AxLocationId @a.EdiLocationCode</small></li> }</ul>
+        <h4>Latest orders</h4>
+        <table class="table table-condensed">
+            @foreach (var o in Model.Orders)
+            {
+                <tr><td>@Html.ActionLink(o.OrderNumber, "Details", "Orders", new { id = o.Id }, null)</td><td>@o.Status</td><td class="text-right">@o.NetValue.ToString("N0") @o.Currency</td></tr>
+            }
+        </table>
+    </div>
+</div>

@@ -1,0 +1,39 @@
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
+  <s:Body>
+    <SubmitDeclaration xmlns="urn:customs.example:declaration:service:v2">
+      <request xmlns:a="urn:customs.example:declaration:data:v2" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+        <a:MessageId>8f0d5c2b4b9e4b0f9a1d2c3e4f506172</a:MessageId>
+        <a:DeclarationType>EX</a:DeclarationType>
+        <a:Lrn>PF2610240000104101</a:Lrn>
+        <a:DeclarantEori>FI01234567</a:DeclarantEori>
+        <a:RepresentativeEori>FI01234567</a:RepresentativeEori>
+        <a:ConsignorEori>FI08134560</a:ConsignorEori>
+        <a:ConsigneeEori i:nil="true" />
+        <a:OfficeOfDeclaration>FI004400</a:OfficeOfDeclaration>
+        <a:OfficeOfExit>SE600001</a:OfficeOfExit>
+        <a:TransportDocument>NRDL0000101</a:TransportDocument>
+        <a:MeansOfTransport>KTP-412</a:MeansOfTransport>
+        <a:ModeOfTransportAtBorder>3</a:ModeOfTransportAtBorder>
+        <a:Currency>EUR</a:Currency>
+        <a:TotalInvoiceAmount>23500</a:TotalInvoiceAmount>
+        <a:DeliveryTerms>DDP</a:DeliveryTerms>
+        <a:DispatchCountry>FI</a:DispatchCountry>
+        <a:DestinationCountry>GB</a:DestinationCountry>
+        <a:GoodsItems>
+          <a:GoodsItem>
+            <a:ItemNumber>1</a:ItemNumber>
+            <a:CommodityCode>84834023</a:CommodityCode>
+            <a:Description>Hydraulic units</a:Description>
+            <a:OriginCountry>FI</a:OriginCountry>
+            <a:NetMass>1734.6</a:NetMass>
+            <a:GrossMass>1885.4</a:GrossMass>
+            <a:StatisticalValue>23500</a:StatisticalValue>
+            <a:ProcedureCode>1000</a:ProcedureCode>
+            <a:NumberOfPackages>3</a:NumberOfPackages>
+            <a:KindOfPackages>PX</a:KindOfPackages>
+          </a:GoodsItem>
+        </a:GoodsItems>
+      </request>
+    </SubmitDeclaration>
+  </s:Body>
+</s:Envelope>

@@ -1,0 +1,25 @@
+@model QuoteViewModel[]
+@{
+    ViewBag.Title = "Quotes";
+}
+<h2>Quotes
+    @if (ViewBag.All) { @Html.ActionLink("Open only", "Index", null, new { @class = "btn btn-default btn-sm" }) }
+    else { @Html.ActionLink("Show all", "Index", new { all = true }, new { @class = "btn btn-default btn-sm" }) }
+</h2>
+<table class="table table-striped">
+    <thead><tr><th>Quote</th><th>Created</th><th>End customer</th><th>Reference</th><th>Status</th><th class="text-right">Net</th><th>Valid until</th></tr></thead>
+    <tbody>
+        @foreach (var q in Model)
+        {
+            <tr>
+                <td>@Html.ActionLink(q.QuoteNumber, "Details", new { id = q.Id })</td>
+                <td>@q.CreatedUtc.ToLocalTime().ToString("d") @q.CreatedBy</td>
+                <td>@q.EndCustomerName</td>
+                <td>@q.Reference</td>
+                <td>@q.StatusText</td>
+                <td class="text-right">@q.TotalNet.ToString("N2") @q.Currency</td>
+                <td>@q.ValidUntil.ToString("d")</td>
+            </tr>
+        }
+    </tbody>
+</table>

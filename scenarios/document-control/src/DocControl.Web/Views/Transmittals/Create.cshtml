@@ -1,0 +1,52 @@
+@model CreateTransmittalViewModel
+@{ ViewData["Title"] = "New transmittal"; }
+<h1>New transmittal</h1>
+
+<div asp-validation-summary="All" class="alert err"></div>
+
+<form method="post" class="form wide">
+    <div class="row">
+        <label>Project
+            <select asp-for="Project">
+                @foreach (var p in Model.Projects)
+                {
+                    <option value="@p.Code">@p.Code @p.Name</option>
+                }
+            </select>
+        </label>
+        <label>Purpose
+            <select asp-for="Purpose">
+                @foreach (var p in Enum.GetValues<TransmittalPurpose>())
+                {
+                    <option value="@p">@p.Code() - @p.Description()</option>
+                }
+            </select>
+        </label>
+        <button type="submit" name="refresh" value="1" class="secondary">Show documents</button>
+    </div>
+    <div class="row">
+        <label>Recipient company <input asp-for="RecipientCompany" /></label>
+        <label>Contact person <input asp-for="RecipientName" /></label>
+        <label>E-mail <input asp-for="RecipientEmail" type="email" /></label>
+    </div>
+    <label>Notes <textarea asp-for="Notes" rows="2"></textarea></label>
+
+    <table>
+        <tr><th></th><th>Document</th><th>Rev</th><th>Status</th><th>Title</th></tr>
+        @foreach (var r in Model.Issuable)
+        {
+            <tr>
+                <td><input type="checkbox" name="RevisionIds" value="@r.Id" checked="@Model.RevisionIds.Contains(r.Id)" /></td>
+                <td>@r.DocumentNumber</td>
+                <td>@r.Code</td>
+                <td><partial name="_StatusBadge" model="(RevisionStatus?)r.Status" /></td>
+                <td>@r.DocumentTitle</td>
+            </tr>
+        }
+    </table>
+    @if (Model.Issuable.Count == 0)
+    {
+        <p class="muted">No documents can be issued for this purpose.</p>
+    }
+    <button type="submit">Queue transmittal</button>
+</form>

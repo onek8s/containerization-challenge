@@ -1,0 +1,47 @@
+@model IList<ApiClient>
+@{
+    ViewBag.Title = "API clients";
+}
+<h1>Document API clients</h1>
+<p>Systems that request documents from <code>https://statements-api.corp.local/api</code> with the <code>X-Api-Key</code> header.</p>
+<table class="grid">
+    <thead><tr><th>Name</th><th>Key prefix</th><th>Allowed reports</th><th>Created</th><th>Last used</th><th>Enabled</th><th></th></tr></thead>
+    <tbody>
+        @foreach (var c in Model)
+        {
+            <tr class="@(c.Enabled ? "" : "disabled")">
+                <td>@c.Name</td>
+                <td><code>wgs_@(c.KeyPrefix)_...</code></td>
+                <td>@c.AllowedReports</td>
+                <td>@c.CreatedAt.ToString("dd.MM.yyyy") @c.CreatedBy</td>
+                <td>@(c.LastUsedAt.HasValue ? c.LastUsedAt.Value.ToString("dd.MM.yyyy HH:mm") : "never")</td>
+                <td>@(c.Enabled ? "yes" : "no")</td>
+                <td class="actions">
+                    @using (Html.BeginForm("SetEnabled", "Admin", new { id = c.ClientId, enabled = !c.Enabled }, FormMethod.Post, new { @class = "inline" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="link">@(c.Enabled ? "Disable" : "Enable")</button>
+                    }
+                    @using (Html.BeginForm("NewKey", "Admin", new { id = c.ClientId }, FormMethod.Post, new { @class = "inline", onsubmit = "return confirm('The current key stops working. Continue?');" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="link">New key</button>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h2>New client</h2>
+@using (Html.BeginForm("CreateClient", "Admin", FormMethod.Post, new { @class = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="field"><label for="Name">Name</label><input type="text" id="Name" name="Name" placeholder="ERP invoice reprint" /></div>
+    <div class="field"><label for="Prefix">Key prefix</label><input type="text" id="Prefix" name="Prefix" placeholder="erp" /></div>
+    <div class="field">
+        <label for="AllowedReports">Allowed reports</label><input type="text" id="AllowedReports" name="AllowedReports" placeholder="INVOICE,STATEMENT" />
+        <small>Comma separated: @ViewBag.ReportCodes, or * for all.</small>
+    </div>
+    <button type="submit" class="button">Create key</button>
+}

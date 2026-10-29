@@ -1,0 +1,106 @@
+{
+ "type": "FeatureCollection",
+ "crs": {
+  "type": "name",
+  "properties": {
+   "name": "urn:ogc:def:crs:EPSG::27700"
+  }
+ },
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      600790,
+      142190
+     ],
+     [
+      600790,
+      142580
+     ]
+    ]
+   },
+   "properties": {
+    "NAME": "Bank Street"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      600970,
+      142190
+     ],
+     [
+      600970,
+      142580
+     ]
+    ]
+   },
+   "properties": {
+    "NAME": "Castle Street"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      601150,
+      142190
+     ],
+     [
+      601150,
+      142580
+     ]
+    ]
+   },
+   "properties": {
+    "NAME": "Elwick Road"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      601330,
+      142190
+     ],
+     [
+      601330,
+      142580
+     ]
+    ]
+   },
+   "properties": {
+    "NAME": "Tufton Street"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      601510,
+      142190
+     ],
+     [
+      601510,
+      142580
+     ]
+    ]
+   },
+   "properties": {
+    "NAME": "Station Road"
+   }
+  }
+ ]
+}

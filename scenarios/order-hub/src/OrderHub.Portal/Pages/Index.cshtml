@@ -1,0 +1,37 @@
+@page
+@model IndexModel
+@{ ViewData["Title"] = "Overview"; }
+<h1>Last 24 hours</h1>
+<div class="tiles">
+    @foreach (var status in IndexModel.Statuses)
+    {
+        <a class="tile" asp-page="/Orders/Index" asp-route-status="@status">
+            <span class="count">@(Model.Counts.TryGetValue(status, out var n) ? n : 0)</span>
+            <partial name="_StatusBadge" model="status" />
+        </a>
+    }
+</div>
+
+<h2>Rejected orders</h2>
+@if (Model.Rejected.Count == 0)
+{
+    <p>No rejected orders.</p>
+}
+else
+{
+    <table>
+        <thead><tr><th>Received</th><th>Channel</th><th>Reference</th><th>Customer</th><th>Reason</th></tr></thead>
+        <tbody>
+            @foreach (var o in Model.Rejected)
+            {
+                <tr>
+                    <td>@o.ReceivedUtc.ToLocalTime().ToString("yyyy-MM-dd HH:mm")</td>
+                    <td>@o.Channel</td>
+                    <td><a asp-page="/Orders/Details" asp-route-id="@o.OrderId">@o.ExternalRef</a></td>
+                    <td>@o.Document.CustomerName</td>
+                    <td>@o.StatusReason</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

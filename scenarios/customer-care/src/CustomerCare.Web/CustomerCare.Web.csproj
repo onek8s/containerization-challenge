@@ -1,0 +1,48 @@
+<Project Sdk="MSBuild.SDK.SystemWeb">
+
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <LangVersion>7.3</LangVersion>
+    <RootNamespace>Tailspin.CustomerCare.Web</RootNamespace>
+    <AssemblyName>CustomerCare.Web</AssemblyName>
+    <AppConfig>Web.config</AppConfig>
+    <Version>5.4.0</Version>
+    <Company>Tailspin Energy</Company>
+    <Product>Customer Care</Product>
+    <GeneratedBindingRedirectsAction>None</GeneratedBindingRedirectsAction>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.3.0" />
+    <PackageReference Include="Microsoft.AspNet.SignalR.Core" Version="2.4.3" />
+    <PackageReference Include="Microsoft.AspNet.SignalR.SystemWeb" Version="2.4.3" />
+    <PackageReference Include="Microsoft.Owin.Host.SystemWeb" Version="4.2.2" />
+    <PackageReference Include="Hangfire.Core" Version="1.8.14" />
+    <PackageReference Include="Hangfire.SqlServer" Version="1.8.14" />
+    <PackageReference Include="EntityFramework" Version="6.5.1" />
+    <PackageReference Include="Microsoft.Owin.Security" Version="4.2.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.DirectoryServices.AccountManagement" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="**\*.aspx;**\*.ascx;**\*.ashx;**\*.Master" />
+    <Content Include="Views\**\*.cshtml;Views\Web.config;Content\**\*;Scripts\**\*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CustomerCare.Domain\CustomerCare.Domain.csproj" />
+    <ProjectReference Include="..\CustomerCare.Data\CustomerCare.Data.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,41 @@
+<Project Sdk="MSBuild.SDK.SystemWeb">
+
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+    <RootNamespace>VanArsdel.Integration.Tracking</RootNamespace>
+    <AssemblyName>VanArsdel.Integration.Tracking</AssemblyName>
+    <AppConfig>Web.config</AppConfig>
+    <GeneratedBindingRedirectsAction>None</GeneratedBindingRedirectsAction>
+    <SignAssembly>false</SignAssembly>
+    <!-- Release precompiles the pages and views with aspnet_compiler, which needs the .NET Framework MSBuild -->
+    <MvcBuildViews Condition="'$(MSBuildRuntimeType)' != 'Full'">false</MvcBuildViews>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MSBuild.Microsoft.VisualStudio.Web.targets" Version="14.0.0.3" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.3" />
+    <PackageReference Include="Unity" Version="4.0.1" />
+    <PackageReference Include="Unity.Mvc5" Version="1.2.3" />
+    <PackageReference Include="EPPlus" Version="4.5.3" />
+    <PackageReference Include="log4net" Version="2.0.8" />
+    <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Views\**\*.cshtml;Views\Web.config;Content\**\*;Global.asax" />
+    <None Include="Web.Lab.config;Web.Prod.config" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\VanArsdel.Integration.Data\VanArsdel.Integration.Data.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentAssertions" Version="6.7.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.3.2" />
+    <PackageReference Include="xunit" Version="2.4.2" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\VanArsdel.Allocation.Api\VanArsdel.Allocation.Api.csproj" />
+    <ProjectReference Include="..\..\src\VanArsdel.Customers.Api\VanArsdel.Customers.Api.csproj" />
+    <ProjectReference Include="..\..\src\VanArsdel.Integration\VanArsdel.Integration.csproj" />
+    <ProjectReference Include="..\..\src\VanArsdel.Notifications\VanArsdel.Notifications.csproj" />
+    <ProjectReference Include="..\..\src\VanArsdel.Orders.Api\VanArsdel.Orders.Api.csproj" />
+    <ProjectReference Include="..\..\src\VanArsdel.Pricing.Api\VanArsdel.Pricing.Api.csproj" />
+    <ProjectReference Include="..\..\src\VanArsdel.StoreOps.Api\VanArsdel.StoreOps.Api.csproj" />
+  </ItemGroup>
+
+</Project>

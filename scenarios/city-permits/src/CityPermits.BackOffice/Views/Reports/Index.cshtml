@@ -1,0 +1,9 @@
+@{ ViewData["Title"] = "Reports"; }
+<h1>Reports @ViewBag.Year</h1>
+<p><a href="/Reports/Excel?year=@ViewBag.Year">Download Excel workbook</a></p>
+<h2>Workload</h2>
+<table><tr><th>Officer</th><th>Kind</th><th>Open</th><th>Overdue</th><th>Due this week</th></tr>
+@foreach (var r in (IEnumerable<CityPermits.Data.Reporting.WorkloadRow>)ViewBag.Workload) { <tr><td>@r.Officer</td><td>@r.Kind</td><td>@r.Open</td><td>@r.Overdue</td><td>@r.DueThisWeek</td></tr> }</table>
+<h2>Performance</h2>
+<table><tr><th>Kind</th><th>Month</th><th>Decided</th><th>Within target</th><th>%</th><th>Avg days</th></tr>
+@foreach (var r in (IEnumerable<CityPermits.Data.Reporting.PerformanceRow>)ViewBag.Performance) { <tr><td>@r.Kind</td><td>@r.Period</td><td>@r.Decided</td><td>@r.WithinTarget</td><td>@r.PercentWithinTarget</td><td>@r.AverageDays</td></tr> }</table>

@@ -1,0 +1,19 @@
+@model ScheduleOfRatesItem
+@{ ViewData["Title"] = Model.Id == 0 ? "New SOR code" : Model.Code; }
+<h1 class="h3">@(Model.Id == 0 ? "New Schedule of Rates code" : Model.Code)</h1>
+<form asp-action="EditRate" asp-route-id="@(Model.Id == 0 ? (int?)null : Model.Id)" method="post" class="col-lg-6 px-0">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-row">
+        <div class="form-group col-md-4"><label asp-for="Code"></label><input asp-for="Code" class="form-control" /></div>
+        <div class="form-group col-md-4"><label asp-for="UnitPrice">Unit price</label><input asp-for="UnitPrice" class="form-control" /></div>
+        <div class="form-group col-md-4"><label asp-for="Unit"></label><input asp-for="Unit" class="form-control" /></div>
+    </div>
+    <div class="form-group"><label asp-for="Description"></label><input asp-for="Description" class="form-control" /></div>
+    <div class="form-row">
+        <div class="form-group col-md-6"><label asp-for="Trade"></label><select asp-for="Trade" class="form-control" asp-items="Html.GetEnumSelectList<Trade>()"></select></div>
+        <div class="form-group col-md-6"><label asp-for="DefaultPriority">Default priority</label><select asp-for="DefaultPriority" class="form-control" asp-items="Html.GetEnumSelectList<RepairPriority>()"></select></div>
+    </div>
+    <div class="form-check mb-3"><input asp-for="Active" class="form-check-input" /><label asp-for="Active" class="form-check-label"></label></div>
+    <button class="btn btn-primary">Save</button>
+    <a class="btn btn-link" asp-action="ScheduleOfRates">Back</a>
+</form>

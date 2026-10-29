@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <Field ID="{F03F444C-04FF-5AD4-B112-8294564D622E}" Name="LucProjectNumber" StaticName="LucProjectNumber" DisplayName="Project Number" Type="Text" Group="Lucerne" MaxLength="6" Required="TRUE" />
+  <Field ID="{D477E763-83A9-5100-A95B-DAC26288C109}" Name="LucProjectName" StaticName="LucProjectName" DisplayName="Project Name" Type="Text" Group="Lucerne" />
+  <Field ID="{830B6D91-A66E-5E57-806A-32EF4FAAF1CA}" Name="LucClientName" StaticName="LucClientName" DisplayName="Client" Type="Text" Group="Lucerne" />
+  <Field ID="{F6EFAD4F-5E20-51DE-BDC2-B631F76B4B8F}" Name="LucOffice" StaticName="LucOffice" DisplayName="Office" Type="Choice" Group="Lucerne">
+    <CHOICES><CHOICE>LUZ</CHOICE><CHOICE>ZRH</CHOICE><CHOICE>BSL</CHOICE><CHOICE>BRN</CHOICE><CHOICE>GVA</CHOICE><CHOICE>MUC</CHOICE><CHOICE>STR</CHOICE><CHOICE>VIE</CHOICE></CHOICES>
+  </Field>
+  <Field ID="{66606C63-5E94-5A78-8BB2-454C3F27E0FB}" Name="LucSector" StaticName="LucSector" DisplayName="Sector" Type="Choice" Group="Lucerne">
+    <CHOICES><CHOICE>Buildings</CHOICE><CHOICE>Bridges</CHOICE><CHOICE>Rail</CHOICE><CHOICE>Roads</CHOICE><CHOICE>Water</CHOICE><CHOICE>Energy</CHOICE><CHOICE>Industrial</CHOICE><CHOICE>Healthcare</CHOICE></CHOICES>
+  </Field>
+  <Field ID="{D49266D3-BF6B-51BE-9CBA-F8B6ACB021C2}" Name="LucProjectStage" StaticName="LucProjectStage" DisplayName="Stage" Type="Choice" Group="Lucerne">
+    <CHOICES><CHOICE>Bid</CHOICE><CHOICE>Active</CHOICE><CHOICE>OnHold</CHOICE><CHOICE>Closing</CHOICE><CHOICE>Closed</CHOICE><CHOICE>Lost</CHOICE></CHOICES>
+  </Field>
+  <Field ID="{799A257B-4131-5F64-9270-C31784DB2E27}" Name="LucProjectManager" StaticName="LucProjectManager" DisplayName="Project Manager" Type="User" Group="Lucerne" UserSelectionMode="PeopleOnly" UserSelectionScope="0" List="UserInfo" ShowField="ImnName" />
+  <Field ID="{AA71D7D2-5B7C-55D1-A08A-F361FEAB0D7B}" Name="LucProjectDirector" StaticName="LucProjectDirector" DisplayName="Project Director" Type="User" Group="Lucerne" UserSelectionMode="PeopleOnly" UserSelectionScope="0" List="UserInfo" ShowField="ImnName" />
+  <Field ID="{A2C0D251-3A47-5C59-A6D7-96FA8852040D}" Name="LucStartDate" StaticName="LucStartDate" DisplayName="Start Date" Type="DateTime" Group="Lucerne" Format="DateOnly" />
+  <Field ID="{C91EF748-E2E6-5920-BD0E-34846AE8DC82}" Name="LucPlannedEndDate" StaticName="LucPlannedEndDate" DisplayName="Planned End" Type="DateTime" Group="Lucerne" Format="DateOnly" />
+  <Field ID="{805D889D-4605-580C-BF0F-9B6A2E09A47B}" Name="LucClosedDate" StaticName="LucClosedDate" DisplayName="Closed Date" Type="DateTime" Group="Lucerne" Format="DateOnly" />
+  <Field ID="{08879B80-1A52-5E08-8772-05DB4F778E4F}" Name="LucBudgetHours" StaticName="LucBudgetHours" DisplayName="Budget Hours" Type="Number" Group="Lucerne" Decimals="1" />
+  <Field ID="{BFFDDB10-4B20-5C6F-9B1B-5AF20C375F33}" Name="LucFeeValue" StaticName="LucFeeValue" DisplayName="Fee" Type="Number" Group="Lucerne" Decimals="2" />
+  <Field ID="{9012788D-B514-549E-A290-024CF917A6E4}" Name="LucCurrency" StaticName="LucCurrency" DisplayName="Currency" Type="Choice" Group="Lucerne">
+    <CHOICES><CHOICE>CHF</CHOICE><CHOICE>EUR</CHOICE></CHOICES>
+  </Field>
+  <Field ID="{CEB645F9-35D5-5FEE-9AA2-4C65D8D9FAD6}" Name="LucPercentComplete" StaticName="LucPercentComplete" DisplayName="% Complete" Type="Number" Group="Lucerne" Decimals="0" Min="0" Max="100" />
+  <Field ID="{2745DB57-CA98-5C43-8135-46A02743039A}" Name="LucConfidential" StaticName="LucConfidential" DisplayName="Confidential" Type="Boolean" Group="Lucerne" />
+  <Field ID="{0C6B46FC-F8D8-58E7-A68A-82C948B2EE8C}" Name="LucDisciplines" StaticName="LucDisciplines" DisplayName="Disciplines" Type="MultiChoice" Group="Lucerne">
+    <CHOICES><CHOICE>STR</CHOICE><CHOICE>CIV</CHOICE><CHOICE>GEO</CHOICE><CHOICE>MEP</CHOICE><CHOICE>ELE</CHOICE><CHOICE>ENV</CHOICE><CHOICE>FIR</CHOICE><CHOICE>PMG</CHOICE></CHOICES>
+  </Field>
+  <Field ID="{C0F6F7EF-5F6A-53AE-BE14-9C59ECF396C1}" Name="LucSiteUrl" StaticName="LucSiteUrl" DisplayName="Project Site" Type="Text" Group="Lucerne" MaxLength="255" />
+  <Field ID="{C5960E31-7FC7-5937-A794-CBDB6268CDBD}" Name="LucErpModified" StaticName="LucErpModified" DisplayName="ERP Modified" Type="DateTime" Group="Lucerne" Format="DateOnly" Hidden="FALSE" />
+  <Field ID="{F95C4030-BD1E-5A9F-A1BB-7C289C2EC462}" Name="LucDocumentNumber" StaticName="LucDocumentNumber" DisplayName="Document Number" Type="Text" Group="Lucerne" MaxLength="30" Indexed="TRUE" />
+  <Field ID="{1C3F04E5-D7FA-5BA1-A93E-8309739ABD99}" Name="LucDiscipline" StaticName="LucDiscipline" DisplayName="Discipline" Type="Choice" Group="Lucerne">
+    <CHOICES><CHOICE>STR</CHOICE><CHOICE>CIV</CHOICE><CHOICE>GEO</CHOICE><CHOICE>MEP</CHOICE><CHOICE>ELE</CHOICE><CHOICE>ENV</CHOICE><CHOICE>FIR</CHOICE><CHOICE>PMG</CHOICE></CHOICES>
+  </Field>
+  <Field ID="{BDD09D40-B554-570E-8CDB-AB6BBCADA15C}" Name="LucDocumentType" StaticName="LucDocumentType" DisplayName="Document Type" Type="Choice" Group="Lucerne">
+    <CHOICES><CHOICE>DWG</CHOICE><CHOICE>CAL</CHOICE><CHOICE>RPT</CHOICE><CHOICE>SPC</CHOICE><CHOICE>MOD</CHOICE><CHOICE>SCH</CHOICE><CHOICE>COR</CHOICE><CHOICE>MIN</CHOICE><CHOICE>TRN</CHOICE></CHOICES>
+  </Field>
+  <Field ID="{35E89152-76CE-5823-992E-0D620D002079}" Name="LucRevision" StaticName="LucRevision" DisplayName="Revision" Type="Text" Group="Lucerne" MaxLength="3" />
+  <Field ID="{026A460D-80B2-5C51-916F-430980080AB4}" Name="LucDeliverableStatus" StaticName="LucDeliverableStatus" DisplayName="Document Status" Type="Choice" Group="Lucerne">
+    <CHOICES><CHOICE>Planned</CHOICE><CHOICE>WorkInProgress</CHOICE><CHOICE>ForReview</CHOICE><CHOICE>Approved</CHOICE><CHOICE>Issued</CHOICE><CHOICE>Superseded</CHOICE><CHOICE>Withdrawn</CHOICE></CHOICES>
+  </Field>
+  <Field ID="{366FD369-0270-590A-A6CE-321DB73DCC4A}" Name="LucPlannedDate" StaticName="LucPlannedDate" DisplayName="Planned Date" Type="DateTime" Group="Lucerne" Format="DateOnly" />
+  <Field ID="{0989A16B-1725-5850-9424-F5ED626B8FE6}" Name="LucForecastDate" StaticName="LucForecastDate" DisplayName="Forecast Date" Type="DateTime" Group="Lucerne" Format="DateOnly" />
+  <Field ID="{F6320F8B-C725-5F9F-8235-9DE4D8908DE9}" Name="LucIssuedDate" StaticName="LucIssuedDate" DisplayName="Issued Date" Type="DateTime" Group="Lucerne" Format="DateOnly" />
+  <Field ID="{627E489B-C8D3-5214-AD29-0ED7CEF3A268}" Name="LucApprovalStatus" StaticName="LucApprovalStatus" DisplayName="Approval" Type="Choice" Group="Lucerne">
+    <CHOICES><CHOICE>None</CHOICE><CHOICE>Pending</CHOICE><CHOICE>Approved</CHOICE><CHOICE>Rejected</CHOICE></CHOICES>
+  </Field>
+  <Field ID="{85A60918-DC08-5E64-BE38-8F2C586F7937}" Name="LucApprovedBy" StaticName="LucApprovedBy" DisplayName="Approved By" Type="User" Group="Lucerne" UserSelectionMode="PeopleOnly" UserSelectionScope="0" List="UserInfo" ShowField="ImnName" />
+  <Field ID="{139316B0-7946-51C9-B64F-4ABF2321EFA7}" Name="LucApprovedDate" StaticName="LucApprovedDate" DisplayName="Approved On" Type="DateTime" Group="Lucerne" Format="DateOnly" />
+  <Field ID="{E3B3E89C-0438-5D60-A31C-260B82BAD91C}" Name="LucDocControlId" StaticName="LucDocControlId" DisplayName="Document Control Id" Type="Text" Group="Lucerne" ShowInEditForm="FALSE" ShowInNewForm="FALSE" />
+  <Field ID="{F7DBB5E8-F313-5DD8-95A1-43E282FA60B0}" Name="LucDocControlStatus" StaticName="LucDocControlStatus" DisplayName="Document Control Status" Type="Text" Group="Lucerne" ShowInEditForm="FALSE" ShowInNewForm="FALSE" />
+  <Field ID="{9527E2D9-0B47-5F62-9C59-B3D54DAA63EE}" Name="LucRetentionCategory" StaticName="LucRetentionCategory" DisplayName="Retention Category" Type="Choice" Group="Lucerne">
+    <CHOICES><CHOICE>Contract</CHOICE><CHOICE>Design</CHOICE><CHOICE>Calculation</CHOICE><CHOICE>Correspondence</CHOICE><CHOICE>Minutes</CHOICE><CHOICE>WorkInProgress</CHOICE></CHOICES>
+  </Field>
+  <Field ID="{2F502BEB-508D-5E84-9981-E33A8E855C40}" Name="LucIsRecord" StaticName="LucIsRecord" DisplayName="Declared Record" Type="Boolean" Group="Lucerne" ShowInEditForm="FALSE" ShowInNewForm="FALSE" />
+  <Field ID="{596B9143-74DA-521F-8ED2-AF1A239BEB10}" Name="LucSeverity" StaticName="LucSeverity" DisplayName="Severity" Type="Choice" Group="Lucerne">
+    <CHOICES><CHOICE>Low</CHOICE><CHOICE>Medium</CHOICE><CHOICE>High</CHOICE><CHOICE>Critical</CHOICE></CHOICES>
+  </Field>
+  <Field ID="{88DCE629-9819-5275-8DFE-91E8AA89FACB}" Name="LucIsOpen" StaticName="LucIsOpen" DisplayName="Open" Type="Boolean" Group="Lucerne">
+    <Default>1</Default>
+  </Field>
+  <Field ID="{5FB4063B-6FF3-5D45-8FC2-ED8B29E4D86B}" Name="LucOwner" StaticName="LucOwner" DisplayName="Owner" Type="User" Group="Lucerne" UserSelectionMode="PeopleOnly" UserSelectionScope="0" List="UserInfo" ShowField="ImnName" />
+  <Field ID="{5D3FEA5F-EA63-5E99-91D7-F8C5AD20CC3E}" Name="LucRfiReference" StaticName="LucRfiReference" DisplayName="RFI Reference" Type="Text" Group="Lucerne" />
+  <Field ID="{5AABB0E1-922F-59B8-AF72-B70E13F52CC2}" Name="LucRaised" StaticName="LucRaised" DisplayName="Raised" Type="DateTime" Group="Lucerne" Format="DateOnly" />
+  <Field ID="{1D2FC4E2-DA95-5309-B40B-0548A8873747}" Name="LucResponseDue" StaticName="LucResponseDue" DisplayName="Response Due" Type="DateTime" Group="Lucerne" Format="DateOnly" />
+  <Field ID="{C7AC7CE2-7B6E-5880-AD85-0645D603A210}" Name="LucDueDate" StaticName="LucDueDate" DisplayName="Due" Type="DateTime" Group="Lucerne" Format="DateOnly" />
+  <Field ID="{A3F39E76-91D2-5D57-A39D-06B58B8470B6}" Name="LucCompleted" StaticName="LucCompleted" DisplayName="Completed" Type="Boolean" Group="Lucerne" />
+  <Field ID="{4480EC22-39FA-5726-B19F-9549E0010AA7}" Name="LucAssignedTo" StaticName="LucAssignedTo" DisplayName="Assigned To" Type="User" Group="Lucerne" UserSelectionMode="PeopleOnly" UserSelectionScope="0" List="UserInfo" ShowField="ImnName" />
+  <Field ID="{EE511A85-954C-5C1A-9B24-C9E8B45FD49F}" Name="LucEmployeeId" StaticName="LucEmployeeId" DisplayName="Employee Id" Type="Text" Group="Lucerne" Indexed="TRUE" />
+  <Field ID="{612FE376-4B39-5C98-8546-9530D5B3BE22}" Name="LucAccountName" StaticName="LucAccountName" DisplayName="Person" Type="User" Group="Lucerne" UserSelectionMode="PeopleOnly" UserSelectionScope="0" List="UserInfo" ShowField="ImnName" />
+  <Field ID="{BC92EE3F-80D3-5F04-B36D-F6548418716E}" Name="LucEmail" StaticName="LucEmail" DisplayName="E-mail" Type="Text" Group="Lucerne" />
+  <Field ID="{53018053-E2BF-5BB7-B7DF-2251BDC0FB4B}" Name="LucGrade" StaticName="LucGrade" DisplayName="Grade" Type="Text" Group="Lucerne" />
+  <Field ID="{6A9E2A6F-9B42-5183-BACD-5B67C7E143A4}" Name="LucJobTitle" StaticName="LucJobTitle" DisplayName="Job Title" Type="Text" Group="Lucerne" />
+  <Field ID="{318787BF-9EC1-5E25-A3C6-AF47AC88C0A4}" Name="LucActive" StaticName="LucActive" DisplayName="Active" Type="Boolean" Group="Lucerne">
+    <Default>1</Default>
+  </Field>
+  <Field ID="{9FC6D488-07FD-5880-9575-7A255FD8C587}" Name="LucTeamRole" StaticName="LucTeamRole" DisplayName="Team Role" Type="Choice" Group="Lucerne">
+    <CHOICES><CHOICE>Project Manager</CHOICE><CHOICE>Project Director</CHOICE><CHOICE>Booked hours</CHOICE><CHOICE>Discipline Lead</CHOICE><CHOICE>Reviewer</CHOICE><CHOICE>External</CHOICE></CHOICES>
+  </Field>
+  <Field ID="{C37C11C5-F097-597F-B9E5-7C0AF4D7AD11}" Name="LucLastBooked" StaticName="LucLastBooked" DisplayName="Last Booked Week" Type="Text" Group="Lucerne" />
+  <Field ID="{3DFE3BBC-33F0-5ECA-8ECC-B0F75D3428A2}" Name="LucWeek" StaticName="LucWeek" DisplayName="Week" Type="Text" Group="Lucerne" MaxLength="8" Indexed="TRUE" />
+  <Field ID="{70533607-1AE0-5C22-84A3-DB458672E5F5}" Name="LucHours" StaticName="LucHours" DisplayName="Hours" Type="Number" Group="Lucerne" Decimals="2" />
+  <Field ID="{DDDF75D9-21AC-5953-A7B2-9ED7CB9610C3}" Name="LucOverallStatus" StaticName="LucOverallStatus" DisplayName="Overall" Type="Choice" Group="Lucerne">
+    <CHOICES><CHOICE>NotAssessed</CHOICE><CHOICE>Green</CHOICE><CHOICE>Amber</CHOICE><CHOICE>Red</CHOICE></CHOICES>
+  </Field>
+  <Field ID="{28F8F2B6-6202-5BE2-A002-683C38936133}" Name="LucScheduleStatus" StaticName="LucScheduleStatus" DisplayName="Schedule" Type="Choice" Group="Lucerne">
+    <CHOICES><CHOICE>NotAssessed</CHOICE><CHOICE>Green</CHOICE><CHOICE>Amber</CHOICE><CHOICE>Red</CHOICE></CHOICES>
+  </Field>
+  <Field ID="{1104FDD1-21C1-5E37-A912-F0603816C45E}" Name="LucBudgetStatus" StaticName="LucBudgetStatus" DisplayName="Budget" Type="Choice" Group="Lucerne">
+    <CHOICES><CHOICE>NotAssessed</CHOICE><CHOICE>Green</CHOICE><CHOICE>Amber</CHOICE><CHOICE>Red</CHOICE></CHOICES>
+  </Field>
+  <Field ID="{1436B127-72EA-5F0A-B699-1BF902615B87}" Name="LucRiskStatus" StaticName="LucRiskStatus" DisplayName="Risk" Type="Choice" Group="Lucerne">
+    <CHOICES><CHOICE>NotAssessed</CHOICE><CHOICE>Green</CHOICE><CHOICE>Amber</CHOICE><CHOICE>Red</CHOICE></CHOICES>
+  </Field>
+  <Field ID="{A3BEAB8E-A800-502C-8095-64ECB398457A}" Name="LucStatusSummary" StaticName="LucStatusSummary" DisplayName="Status Summary" Type="Note" Group="Lucerne" NumLines="4" RichText="FALSE" />
+  <Field ID="{36FFB27C-F15F-5C44-839C-6A79B79E95C3}" Name="LucStatusMetrics" StaticName="LucStatusMetrics" DisplayName="Status Metrics" Type="Note" Group="Lucerne" NumLines="4" RichText="FALSE" Hidden="FALSE" />
+  <Field ID="{BB849801-92DF-51BC-9A96-18F1B16B906A}" Name="LucAssessedDate" StaticName="LucAssessedDate" DisplayName="Assessed" Type="DateTime" Group="Lucerne" Format="DateOnly" />
+  <Field ID="{1E87719D-2B64-58B9-A67E-671DD37E1DBE}" Name="LucRequestStatus" StaticName="LucRequestStatus" DisplayName="Request Status" Type="Choice" Group="Lucerne">
+    <CHOICES><CHOICE>New</CHOICE><CHOICE>Queued</CHOICE><CHOICE>Provisioning</CHOICE><CHOICE>Completed</CHOICE><CHOICE>Failed</CHOICE><CHOICE>Rejected</CHOICE></CHOICES>
+  </Field>
+  <Field ID="{2E07C31E-528A-51B9-9B37-CAA214A8ED89}" Name="LucRequestMessage" StaticName="LucRequestMessage" DisplayName="Message" Type="Note" Group="Lucerne" NumLines="4" RichText="FALSE" />
+  <Field ID="{A373D1F1-5AFA-5E5D-A544-D114D752F65B}" Name="LucRequester" StaticName="LucRequester" DisplayName="Requested By" Type="User" Group="Lucerne" UserSelectionMode="PeopleOnly" UserSelectionScope="0" List="UserInfo" ShowField="ImnName" />
+  <Field ID="{F57C7172-26D8-5DB0-A0EB-EF735A6F129C}" Name="LucRetentionAction" StaticName="LucRetentionAction" DisplayName="Retention Action" Type="Choice" Group="Lucerne">
+    <CHOICES><CHOICE>Keep</CHOICE><CHOICE>DeclareRecord</CHOICE><CHOICE>MoveToArchive</CHOICE><CHOICE>Delete</CHOICE></CHOICES>
+  </Field>
+  <Field ID="{A3C9EC70-3875-5DB7-91A3-8604F56B544D}" Name="LucItemUrl" StaticName="LucItemUrl" DisplayName="Item URL" Type="Text" Group="Lucerne" MaxLength="255" />
+  <Field ID="{D6FF5437-D5DA-59FA-AD04-B7677B253676}" Name="LucReason" StaticName="LucReason" DisplayName="Reason" Type="Note" Group="Lucerne" NumLines="4" RichText="FALSE" />
+  <Field ID="{FABAEF94-4FAC-5F83-9296-D8A31AC5BDEB}" Name="LucJob" StaticName="LucJob" DisplayName="Job" Type="Text" Group="Lucerne" />
+  <Field ID="{88E677DC-DE9D-5786-A4B7-B7DDFE605B21}" Name="LucOutcome" StaticName="LucOutcome" DisplayName="Outcome" Type="Note" Group="Lucerne" NumLines="4" RichText="FALSE" />
+</Elements>

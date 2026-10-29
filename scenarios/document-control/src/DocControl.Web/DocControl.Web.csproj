@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>Litware.DocControl.Web</RootNamespace>
+    <AssemblyName>Litware.DocControl.Web</AssemblyName>
+    <RuntimeIdentifier Condition="'$(Configuration)' == 'Release'">win-x64</RuntimeIdentifier>
+    <SelfContained>false</SelfContained>
+    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Negotiate" Version="8.0.33" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DocControl.Core\DocControl.Core.csproj" />
+    <ProjectReference Include="..\DocControl.Data\DocControl.Data.csproj" />
+    <ProjectReference Include="..\DocControl.Platform\DocControl.Platform.csproj" />
+  </ItemGroup>
+
+</Project>

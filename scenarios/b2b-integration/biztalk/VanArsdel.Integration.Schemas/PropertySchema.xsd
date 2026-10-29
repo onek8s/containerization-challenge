@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns="https://VanArsdel.Integration.Schemas.PropertySchema" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" targetNamespace="https://VanArsdel.Integration.Schemas.PropertySchema" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:annotation>
+    <xs:appinfo>
+      <b:schemaInfo schema_type="property" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" />
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="PartnerId" type="xs:string">
+    <xs:annotation><xs:appinfo><b:fieldInfo propertyGuid="5d1a7c0e-2b33-4b5a-9a0c-7d2f1f1e0a01" propSchFieldBase="MessageDataPropertyBase" /></xs:appinfo></xs:annotation>
+  </xs:element>
+  <xs:element name="MessageKind" type="xs:string">
+    <xs:annotation><xs:appinfo><b:fieldInfo propertyGuid="5d1a7c0e-2b33-4b5a-9a0c-7d2f1f1e0a02" propSchFieldBase="MessageDataPropertyBase" /></xs:appinfo></xs:annotation>
+  </xs:element>
+  <xs:element name="OrderNumber" type="xs:string">
+    <xs:annotation><xs:appinfo><b:fieldInfo propertyGuid="5d1a7c0e-2b33-4b5a-9a0c-7d2f1f1e0a03" propSchFieldBase="MessageDataPropertyBase" /></xs:appinfo></xs:annotation>
+  </xs:element>
+  <xs:element name="RoutingSlip" type="xs:string">
+    <xs:annotation><xs:appinfo><b:fieldInfo propertyGuid="5d1a7c0e-2b33-4b5a-9a0c-7d2f1f1e0a04" propSchFieldBase="MessageContextPropertyBase" /></xs:appinfo></xs:annotation>
+  </xs:element>
+  <xs:element name="InterchangeControlNumber" type="xs:string">
+    <xs:annotation><xs:appinfo><b:fieldInfo propertyGuid="5d1a7c0e-2b33-4b5a-9a0c-7d2f1f1e0a05" propSchFieldBase="MessageContextPropertyBase" /></xs:appinfo></xs:annotation>
+  </xs:element>
+  <xs:element name="AckControlNumber" type="xs:string">
+    <xs:annotation><xs:appinfo><b:fieldInfo propertyGuid="5d1a7c0e-2b33-4b5a-9a0c-7d2f1f1e0a06" propSchFieldBase="MessageDataPropertyBase" /></xs:appinfo></xs:annotation>
+  </xs:element>
+  <xs:element name="CorrelationToken" type="xs:string">
+    <xs:annotation><xs:appinfo><b:fieldInfo propertyGuid="5d1a7c0e-2b33-4b5a-9a0c-7d2f1f1e0a07" propSchFieldBase="MessageContextPropertyBase" /></xs:appinfo></xs:annotation>
+  </xs:element>
+  <xs:element name="ResubmitCount" type="xs:int">
+    <xs:annotation><xs:appinfo><b:fieldInfo propertyGuid="5d1a7c0e-2b33-4b5a-9a0c-7d2f1f1e0a08" propSchFieldBase="MessageContextPropertyBase" /></xs:appinfo></xs:annotation>
+  </xs:element>
+  <xs:element name="ResubmittedBy" type="xs:string">
+    <xs:annotation><xs:appinfo><b:fieldInfo propertyGuid="5d1a7c0e-2b33-4b5a-9a0c-7d2f1f1e0a09" propSchFieldBase="MessageContextPropertyBase" /></xs:appinfo></xs:annotation>
+  </xs:element>
+  <xs:element name="SourceSystem" type="xs:string">
+    <xs:annotation><xs:appinfo><b:fieldInfo propertyGuid="5d1a7c0e-2b33-4b5a-9a0c-7d2f1f1e0a0a" propSchFieldBase="MessageContextPropertyBase" /></xs:appinfo></xs:annotation>
+  </xs:element>
+  <xs:element name="ArchivePath" type="xs:string">
+    <xs:annotation><xs:appinfo><b:fieldInfo propertyGuid="5d1a7c0e-2b33-4b5a-9a0c-7d2f1f1e0a0b" propSchFieldBase="MessageContextPropertyBase" /></xs:appinfo></xs:annotation>
+  </xs:element>
+  <xs:element name="Endpoint" type="xs:string">
+    <xs:annotation><xs:appinfo><b:fieldInfo propertyGuid="5d1a7c0e-2b33-4b5a-9a0c-7d2f1f1e0a0d" propSchFieldBase="MessageContextPropertyBase" /></xs:appinfo></xs:annotation>
+  </xs:element>
+  <xs:element name="BodyHash" type="xs:string">
+    <xs:annotation><xs:appinfo><b:fieldInfo propertyGuid="5d1a7c0e-2b33-4b5a-9a0c-7d2f1f1e0a0c" propSchFieldBase="MessageContextPropertyBase" /></xs:appinfo></xs:annotation>
+  </xs:element>
+</xs:schema>

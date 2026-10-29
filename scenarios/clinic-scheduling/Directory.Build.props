@@ -1,0 +1,28 @@
+<Project>
+  <PropertyGroup>
+    <Company>Southridge Medical Group</Company>
+    <Product>Southridge Clinic Systems</Product>
+    <Copyright>Copyright © Southridge Medical Group 2008-2016</Copyright>
+    <Version>6.4.0</Version>
+    <FileVersion>6.4.0.1187</FileVersion>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <Deterministic>true</Deterministic>
+    <!-- Package metadata of Enterprise Library 5 / Unity 2 points at versions never published; audit advisories are tracked in the backlog. -->
+    <NoWarn>$(NoWarn);NU1603;NU1901;NU1902;NU1903;NU1904</NoWarn>
+  </PropertyGroup>
+
+  <!-- Language level follows the framework each project targets (the solution grew from VS2008 to VS2013). -->
+  <PropertyGroup Condition="'$(TargetFramework)' == 'net35'">
+    <LangVersion>3</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(TargetFramework)' == 'net40'">
+    <LangVersion>4</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(TargetFramework)' == 'net452'">
+    <LangVersion>5</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup Condition="$(TargetFramework.StartsWith('net3')) or $(TargetFramework.StartsWith('net4'))">
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="all" />
+  </ItemGroup>
+</Project>

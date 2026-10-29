@@ -1,0 +1,26 @@
+@model CustomerSearchModel
+@{ ViewData["Title"] = "Customers"; }
+<h2>Customer</h2>
+<form method="get"><input name="pic" value="@Model.Pic" placeholder="Personal identity code" /> <button>Search</button></form>
+@if (Model.Message != null) { <p>@Model.Message</p> }
+@if (Model.Customer is { } c)
+{
+    <div class="card">
+        <h3>@c.Name (@c.CustomerNumber)</h3>
+        <p>@c.Street, @c.PostalCode @c.City. Segment @c.Segment, customer since @c.CustomerSince.ToString("d.M.yyyy"), rating @c.InternalRating, KYC @c.KycStatus</p>
+        <table>
+            @foreach (var a in Model.Accounts) { <tr><td>@Iban.Format(a.Iban)</td><td>@a.Type</td><td class="num">@a.Balance.ToString("N2")</td></tr> }
+        </table>
+        @if (Model.Exposure is { } e)
+        {
+            <p>Loans @e.ActiveLoans, balance @e.TotalBalance.ToString("N2"), arrears @e.TotalArrears.ToString("N2"), max DPD @e.MaxDaysPastDue, monthly @e.MonthlyInstalments.ToString("N2")</p>
+        }
+    </div>
+}
+@if (Model.Applications.Count > 0)
+{
+    <h3>Applications</h3>
+    <table>
+        @foreach (var a in Model.Applications) { <tr><td><a asp-controller="Applications" asp-action="Details" asp-route-id="@a.Reference">@a.Reference</a></td><td>@a.ProductCode</td><td>@a.Amount.ToString("N2")</td><td>@a.StatusValue</td><td>@a.CreatedUtc.ToLocalTime().ToString("d.M.yyyy")</td></tr> }
+    </table>
+}

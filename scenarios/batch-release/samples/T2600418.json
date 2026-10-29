@@ -1,0 +1,29 @@
+{
+  "mesReference": "MES-778120",
+  "batchNumber": "T2600418",
+  "productCode": "PRX-0450",
+  "siteCode": "TKU",
+  "manufacturedOn": "2026-09-14",
+  "quantity": 412500,
+  "unit": "TAB",
+  "steps": [
+    { "sequence": 10, "operation": "Dispensing of raw materials", "status": "Complete", "performedBy": "mlahti", "verifiedBy": "jkoski", "completedUtc": "2026-09-14T06:42:00Z" },
+    { "sequence": 20, "operation": "Wet granulation", "status": "Complete", "performedBy": "mlahti", "verifiedBy": "tnieminen", "completedUtc": "2026-09-14T11:05:00Z" },
+    { "sequence": 30, "operation": "Fluid bed drying, LOD check", "status": "Complete", "performedBy": "tnieminen", "verifiedBy": "mlahti", "completedUtc": "2026-09-14T15:30:00Z" },
+    { "sequence": 40, "operation": "Blending and lubrication", "status": "Complete", "performedBy": "tnieminen", "verifiedBy": "jkoski", "completedUtc": "2026-09-15T08:10:00Z" },
+    { "sequence": 50, "operation": "Compression", "status": "Complete", "performedBy": "skorhonen", "verifiedBy": "tnieminen", "completedUtc": "2026-09-16T17:45:00Z" },
+    { "sequence": 60, "operation": "Film coating", "status": "Complete", "performedBy": "skorhonen", "verifiedBy": "mlahti", "completedUtc": "2026-09-17T13:20:00Z" },
+    { "sequence": 70, "operation": "Bulk packaging and labelling", "status": "Complete", "performedBy": "eheikkinen", "verifiedBy": "skorhonen", "completedUtc": "2026-09-18T09:00:00Z" }
+  ],
+  "results": [
+    { "testCode": "ID-IR", "testName": "Identification (IR)", "specification": "Conforms to reference", "textResult": "Conforms", "outcome": "Pass", "approvedBy": "lab.hvirta" },
+    { "testCode": "ASSAY", "testName": "Assay (HPLC)", "specification": "95.0 - 105.0 %", "lowerLimit": 95.0, "upperLimit": 105.0, "value": 99.42, "unit": "%", "approvedBy": "lab.hvirta" },
+    { "testCode": "DISS", "testName": "Dissolution, 30 min", "specification": "Q = 80 %", "lowerLimit": 80, "value": 93, "unit": "%", "approvedBy": "lab.hvirta" },
+    { "testCode": "UOD", "testName": "Uniformity of dosage units (AV)", "specification": "NMT 15.0", "upperLimit": 15.0, "value": 4.8, "approvedBy": "lab.hvirta" },
+    { "testCode": "IMP-TOT", "testName": "Total impurities", "specification": "NMT 1.0 %", "upperLimit": 1.0, "value": 0.31, "unit": "%", "approvedBy": "lab.hvirta" },
+    { "testCode": "MICRO", "testName": "Microbial limits (TAMC)", "specification": "NMT 1000 cfu/g", "upperLimit": 1000, "value": 20, "unit": "cfu/g", "approvedBy": "lab.pkoivisto" }
+  ],
+  "deviations": [
+    { "number": "DEV-26-0112", "title": "Granulation room differential pressure alarm for 4 minutes", "classification": "Minor", "status": "Closed", "impact": "None" }
+  ]
+}

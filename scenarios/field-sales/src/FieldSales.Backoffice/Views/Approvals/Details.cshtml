@@ -1,0 +1,22 @@
+@model SalesOrderEntity
+@{
+    ViewBag.Title = Model.OrderNo;
+}
+<h1>Approve order</h1>
+@Html.Partial("_OrderDetails", Model)
+@if (Model.Status == 2)
+{
+    <div class="panel">
+        @using (Html.BeginForm("Decide", "Approvals", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="SalesOrderId" value="@Model.SalesOrderId" />
+            <div class="form-row"><label for="Comment">Comment to the rep</label><textarea id="Comment" name="Comment" rows="3" cols="60"></textarea></div>
+            <div class="form-row"><label></label>
+                <button type="submit" name="Approve" value="true" class="btn btn-primary">Approve and confirm</button>&nbsp;
+                <button type="submit" name="Approve" value="false" class="btn btn-danger">Reject</button>
+            </div>
+        }
+    </div>
+}
+<a href="@Url.Action("Index")">&larr; Back to approvals</a>

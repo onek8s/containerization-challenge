@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Role based access for Staff Onboarding. Owned by IT Identity & Access.
+  Changes take effect for requests that are planned after the workflow host has been restarted.
+-->
+<accessMap>
+  <ous users="OU=Staff,OU=Users,OU=Litware,DC=corp,DC=local"
+       external="OU=External,OU=Users,OU=Litware,DC=corp,DC=local"
+       disabled="OU=Disabled,OU=Users,OU=Litware,DC=corp,DC=local" />
+  <homeFolders root="\\corp.local\dfs\home" drive="H:" />
+
+  <baseline>
+    <group name="GG-All Staff" />
+    <group name="GG-Intranet Readers" />
+    <group name="APP-Expenses-Users" />
+    <group name="LIC-M365-E3" />
+  </baseline>
+
+  <externalBaseline>
+    <group name="GG-External Staff" />
+    <group name="GG-Intranet Readers" />
+    <group name="LIC-M365-F3" />
+  </externalBaseline>
+
+  <department code="FIN" name="Finance" ou="OU=Finance,OU=Staff,OU=Users,OU=Litware,DC=corp,DC=local" share="\\corp.local\dfs\dept\Finance">
+    <group name="GG-FIN-Staff" />
+    <group name="FS-Finance-Read" />
+    <role code="FIN-AP" title="Accounts Payable Specialist">
+      <group name="APP-ERP-AP-Entry" />
+      <group name="FS-Finance-AP-Modify" />
+    </role>
+    <role code="FIN-AR" title="Accounts Receivable Specialist">
+      <group name="APP-ERP-AR-Entry" />
+      <group name="APP-CreditDesk-Users" />
+    </role>
+    <role code="FIN-CTRL" title="Financial Controller">
+      <group name="APP-ERP-GL-Post" privileged="true" />
+      <group name="APP-ERP-AP-Approve" privileged="true" />
+      <group name="FS-Finance-Modify" />
+    </role>
+    <role code="FIN-PAY" title="Payroll Specialist">
+      <group name="APP-Payroll-Operators" privileged="true" />
+      <group name="FS-Payroll-Modify" privileged="true" />
+    </role>
+  </department>
+
+  <department code="LOG" name="Logistics" ou="OU=Logistics,OU=Staff,OU=Users,OU=Litware,DC=corp,DC=local" share="\\corp.local\dfs\dept\Logistics">
+    <group name="GG-LOG-Staff" />
+    <group name="FS-Logistics-Modify" />
+    <role code="LOG-PLANNER" title="Transport Planner">
+      <group name="APP-TMS-Planners" />
+      <group name="APP-FreightRates-Quote" />
+    </role>
+    <role code="LOG-WH" title="Warehouse Operative">
+      <group name="APP-WMS-Handheld" />
+    </role>
+    <role code="LOG-WHLEAD" title="Warehouse Team Leader">
+      <group name="APP-WMS-Handheld" />
+      <group name="APP-WMS-Supervisors" />
+      <group name="APP-ShiftClock-Supervisors" />
+    </role>
+  </department>
+
+  <department code="SAL" name="Sales" ou="OU=Sales,OU=Staff,OU=Users,OU=Litware,DC=corp,DC=local" share="\\corp.local\dfs\dept\Sales">
+    <group name="GG-SAL-Staff" />
+    <group name="FS-Sales-Modify" />
+    <role code="SAL-KAM" title="Key Account Manager">
+      <group name="APP-CRM-Users" />
+      <group name="APP-CreditDesk-Requesters" />
+    </role>
+    <role code="SAL-INSIDE" title="Inside Sales Representative">
+      <group name="APP-CRM-Users" />
+    </role>
+  </department>
+
+  <department code="ITS" name="IT Services" ou="OU=IT,OU=Staff,OU=Users,OU=Litware,DC=corp,DC=local" share="\\corp.local\dfs\dept\IT">
+    <group name="GG-ITS-Staff" />
+    <group name="FS-IT-Modify" />
+    <role code="ITS-SD" title="Service Desk Analyst">
+      <group name="APP-ServiceDesk-Agents" />
+      <group name="ROLE-Helpdesk Password Reset" privileged="true" />
+    </role>
+    <role code="ITS-SYS" title="Systems Engineer">
+      <group name="APP-ServiceDesk-Agents" />
+      <group name="ROLE-Server Operators" privileged="true" />
+    </role>
+  </department>
+
+  <department code="HR" name="Human Resources" ou="OU=HR,OU=Staff,OU=Users,OU=Litware,DC=corp,DC=local" share="\\corp.local\dfs\dept\HR">
+    <group name="GG-HR-Staff" />
+    <group name="FS-HR-Modify" privileged="true" />
+    <role code="HR-BP" title="HR Business Partner">
+      <group name="APP-Onboarding-HR" />
+      <group name="APP-HRIS-Users" />
+    </role>
+    <role code="HR-ADMIN" title="HR Administrator">
+      <group name="APP-Onboarding-HR" />
+      <group name="APP-HRIS-Users" />
+      <group name="APP-Payroll-Readers" privileged="true" />
+    </role>
+  </department>
+
+  <requestable>
+    <group name="APP-PowerBI-Pro" />
+    <group name="APP-Visio-Users" />
+    <group name="APP-Project-Users" />
+    <group name="VPN-Remote-Staff" />
+    <group name="FS-Board-Read" privileged="true" />
+    <group name="APP-ERP-Reporting" />
+  </requestable>
+</accessMap>

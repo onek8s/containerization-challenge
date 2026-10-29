@@ -1,0 +1,17 @@
+@model RepairReportedViewModel
+@{ ViewData["Title"] = "Repair reported"; }
+<h1 class="h3">Thank you, we have your repair</h1>
+<p>Your reference is <strong>@Model.Reference</strong>.</p>
+@if (Model.AppointmentDate.HasValue)
+{
+    <p>You asked for @Model.AppointmentDate.Value.ToString("dddd d MMMM"), @SlotText.For(Model.Slot). The contractor will confirm the appointment.</p>
+}
+else
+{
+    <p>A contractor will attend within 24 hours.</p>
+}
+@if (Model.PhotosFailed > 0)
+{
+    <div class="alert alert-warning">We could not save @Model.PhotosFailed of your photos. Your repair has still been reported; the contractor may ask you for them.</div>
+}
+<a asp-controller="Repairs" asp-action="Details" asp-route-id="@Model.Reference">View your repair</a>

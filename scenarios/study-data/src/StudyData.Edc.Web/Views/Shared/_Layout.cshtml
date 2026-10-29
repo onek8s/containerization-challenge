@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewData["Title"] · Study Data</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+<header>
+    <a class="brand" href="/">Study Data <span>Site portal</span></a>
+    @if (User.Identity?.IsAuthenticated == true)
+    {
+        <nav>
+            <a href="/">My sites</a>
+            <a href="/queries">Queries</a>
+            <a href="/account/authenticator">Authenticator</a>
+        </nav>
+        <form method="post" action="/account/logout" class="who">
+            <span>@(User.FindFirst("name")?.Value ?? User.Identity!.Name)</span>
+            <button type="submit" class="link">Sign out</button>
+        </form>
+    }
+</header>
+<main>
+    @if (TempData["Message"] is string message)
+    {
+        <div class="notice ok">@message</div>
+    }
+    @if (TempData["Error"] is string error)
+    {
+        <div class="notice error">@error</div>
+    }
+    @RenderBody()
+</main>
+<footer>Fabrikam Clinical Research · Study Data 4.2 · For use by delegated site staff only</footer>
+</body>
+</html>

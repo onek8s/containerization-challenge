@@ -1,0 +1,39 @@
+@page
+@model FreightRates.Admin.Pages.Quotes.IndexModel
+@{
+    ViewData["Title"] = "Quotes";
+}
+<h1>Quotes</h1>
+<form method="get">
+    <label>Customer
+        <select asp-for="Customer">
+            <option value="">(all)</option>
+            @foreach (var code in Model.CustomerCodes)
+            {
+                <option value="@code">@code</option>
+            }
+        </select>
+    </label>
+    <label>Quote number <input asp-for="Number" /></label>
+    <label>Created from <input asp-for="From" type="date" /></label>
+    <button type="submit">Search</button>
+</form>
+<table>
+    <tr><th>Number</th><th>Customer</th><th>Reference</th><th>Lane</th><th>Ship date</th><th class="num">Weight</th><th class="num">Gross</th><th class="num">Total</th><th>Tariff</th><th>Created</th></tr>
+    @foreach (var q in Model.Quotes)
+    {
+        <tr>
+            <td>@q.Number</td>
+            <td>@q.Customer?.Code</td>
+            <td>@q.CustomerReference</td>
+            <td>@q.OriginZip &rarr; @q.DestinationZip</td>
+            <td>@q.ShipDate.ToString("yyyy-MM-dd")</td>
+            <td class="num">@q.TotalWeightLbs</td>
+            <td class="num">@q.GrossCharge.ToString("N2")</td>
+            <td class="num">@q.Total.ToString("N2")@(q.MinimumApplied ? " (min)" : "")</td>
+            <td>@q.TariffName</td>
+            <td>@q.CreatedUtc.ToLocalTime().ToString("g")</td>
+        </tr>
+    }
+</table>
+<p>Showing at most 200 quotes.</p>

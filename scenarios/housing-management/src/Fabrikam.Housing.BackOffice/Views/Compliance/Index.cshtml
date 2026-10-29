@@ -1,0 +1,74 @@
+@model ComplianceDashboardViewModel
+@{
+    ViewData["Title"] = "Compliance";
+    var communal = (List<ComplianceCertificate>)ViewBag.Communal;
+    var estates = (Dictionary<int, string>)ViewBag.Estates;
+    var statuses = new[] { ComplianceStatus.Compliant, ComplianceStatus.DueSoon, ComplianceStatus.Overdue, ComplianceStatus.NoCertificate, ComplianceStatus.NotApplicable };
+}
+<div class="d-flex justify-content-between">
+    <h1 class="h3">Compliance</h1>
+    <a class="btn btn-sm btn-outline-secondary align-self-center" asp-controller="Reports" asp-action="Compliance">Export</a>
+</div>
+<div class="row">
+    @foreach (var kv in Model.Counts)
+    {
+        var total = kv.Value.Where(x => x.Key != ComplianceStatus.NotApplicable).Sum(x => x.Value);
+        var ok = kv.Value.TryGetValue(ComplianceStatus.Compliant, out var c1) ? c1 : 0;
+        var due = kv.Value.TryGetValue(ComplianceStatus.DueSoon, out var c2) ? c2 : 0;
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                <div class="card-header"><a asp-route-type="@kv.Key">@kv.Key</a></div>
+                <div class="card-body">
+                    <div class="kpi-value @(ok + due == total ? "text-success" : "text-danger")">@(total == 0 ? "–" : Math.Round(100.0 * (ok + due) / total, 1) + "%")</div>
+                    <div class="small">
+                        @foreach (var s in statuses)
+                        {
+                            if (kv.Value.TryGetValue(s, out var n)) { <span class="mr-2"><partial name="_StatusBadge" model="s" /> @n</span> }
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<form method="get" class="form-inline mb-2">
+    <label class="mr-2">Type</label>
+    <select name="type" class="form-control form-control-sm mr-2" asp-items="Html.GetEnumSelectList<ComplianceType>()"><option value="">All</option></select>
+    <label class="mr-2">Expiring within</label>
+    <input name="daysAhead" value="@Model.DaysAhead" type="number" class="form-control form-control-sm mr-2" style="width:80px" /> days
+    <select name="patch" class="form-control form-control-sm mx-2">
+        <option value="">All patches</option>
+        @foreach (var p in new[] { "NORTH", "SOUTH", "EAST" }) { <option value="@p" selected="@(ViewBag.Patch == p)">@p</option> }
+    </select>
+    <button class="btn btn-sm btn-primary">Show</button>
+</form>
+<table class="table table-sm">
+    <thead><tr><th>Property</th><th>Address</th><th>Patch</th><th>Check</th><th>Expires</th><th>Status</th><th></th></tr></thead>
+    <tbody>
+        @foreach (var d in Model.Due)
+        {
+            <tr>
+                <td><a asp-controller="Properties" asp-action="Details" asp-route-id="@d.PropertyId">@d.PropertyReference</a></td>
+                <td>@d.Address</td>
+                <td>@d.PatchCode</td>
+                <td>@d.Type</td>
+                <td>@d.ExpiresOn?.ToString("dd/MM/yyyy")</td>
+                <td><partial name="_StatusBadge" model="d.Status" /></td>
+                <td><a asp-action="Upload" asp-route-propertyId="@d.PropertyId" asp-route-type="@d.Type">Record certificate</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h5 class="mt-4">Communal</h5>
+<table class="table table-sm">
+    <thead><tr><th>Estate</th><th>Check</th><th>Certificate</th><th>Inspected</th><th>Expires</th><th>Assessor</th></tr></thead>
+    @foreach (var c in communal)
+    {
+        <tr class="@(c.ExpiresOn < DateTime.Today ? "table-danger" : c.ExpiresOn < DateTime.Today.AddDays(ComplianceRules.DueSoonDays) ? "table-warning" : "")">
+            <td>@(estates.TryGetValue(c.EstateId.Value, out var name) ? name : c.EstateId.ToString())</td>
+            <td>@c.Type</td><td>@c.CertificateNumber</td><td>@c.InspectedOn.ToString("dd/MM/yyyy")</td><td>@c.ExpiresOn.ToString("dd/MM/yyyy")</td><td>@c.EngineerName</td>
+        </tr>
+    }
+</table>

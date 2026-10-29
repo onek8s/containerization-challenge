@@ -1,0 +1,10 @@
+@model Tuple<int, int, Func<int, string>>
+@if (Model.Item2 > 1)
+{
+    <ul class="pagination">
+        @for (var p = 1; p <= Model.Item2; p++)
+        {
+            <li class="@(p == Model.Item1 ? "active" : "")"><a href="@Model.Item3(p)">@p</a></li>
+        }
+    </ul>
+}

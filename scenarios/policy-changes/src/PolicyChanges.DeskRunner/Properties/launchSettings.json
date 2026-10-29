@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "PolicyChanges.DeskRunner": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

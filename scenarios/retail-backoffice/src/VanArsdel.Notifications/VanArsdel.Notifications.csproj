@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- "name.fi.html" would otherwise be taken as a culture and go to a satellite assembly. -->
+    <EmbeddedResource Include="Templates\*.html" WithCulture="false" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MailKit" Version="2.15.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\VanArsdel.BuildingBlocks\VanArsdel.BuildingBlocks.csproj" />
+    <ProjectReference Include="..\VanArsdel.Contracts\VanArsdel.Contracts.csproj" />
+    <ProjectReference Include="..\VanArsdel.Integration\VanArsdel.Integration.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,1013 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:s1="http://schemas.southridgemedical.org/clinic/ws/2008/11" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:tns="http://schemas.southridgemedical.org/clinic/ws/booking/2008/11" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" targetNamespace="http://schemas.southridgemedical.org/clinic/ws/booking/2008/11" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Southridge patient booking service</wsdl:documentation>
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://schemas.southridgemedical.org/clinic/ws/booking/2008/11">
+      <s:element name="GetSites">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetSitesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSitesResult" type="tns:ArrayOfSiteItem" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfSiteItem">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="SiteItem" nillable="true" type="tns:SiteItem" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SiteItem">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="SiteId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Code" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Address" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Phone" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetAppointmentTypes">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetAppointmentTypesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAppointmentTypesResult" type="tns:ArrayOfAppointmentTypeItem" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfAppointmentTypeItem">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="AppointmentTypeItem" nillable="true" type="tns:AppointmentTypeItem" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="AppointmentTypeItem">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="AppointmentTypeId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DurationMinutes" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="NewPatient" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="FindSlots">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="appointmentTypeId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="fromDate" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="days" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="siteId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="providerId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FindSlotsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FindSlotsResult" type="tns:ArrayOfSlotItem" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfSlotItem">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="SlotItem" nillable="true" type="tns:SlotItem" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SlotItem">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Start" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="End" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="ProviderId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ProviderName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="SiteId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="SiteName" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="RegisterPatient">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="registration" type="tns:PatientRegistration" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="PatientRegistration">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="FirstName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LastName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DateOfBirth" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="Sex" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Address1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="City" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="State" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Zip" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MobilePhone" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Email" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="PreferredSiteId" nillable="true" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="PortalUserName" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="RegisterPatientResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RegisterPatientResult" type="tns:RegistrationResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="RegistrationResponse">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Success" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="PatientId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Mrn" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Message" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="LinkAccount">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="mrn" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="lastName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="dateOfBirth" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="portalUserName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LinkAccountResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="LinkAccountResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPatient">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="portalUserName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPatientResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPatientResult" type="tns:PatientSummary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="PatientSummary">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="PatientId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Mrn" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FirstName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LastName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DateOfBirth" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="Email" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MobilePhone" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Balance" type="s:decimal" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="Book">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="patientId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="appointmentTypeId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="providerId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="siteId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="start" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="reason" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="portalUserName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BookResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="BookResult" type="tns:BookingResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="BookingResponse">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Success" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="AppointmentId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ConfirmationCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Message" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetAppointments">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="patientId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="fromDate" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="toDate" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAppointmentsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAppointmentsResult" type="tns:ArrayOfAppointmentItem" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfAppointmentItem">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="AppointmentItem" nillable="true" type="tns:AppointmentItem" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="AppointmentItem">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="AppointmentId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ConfirmationCode" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Start" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="Status" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AppointmentType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ProviderName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SiteName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SiteAddress" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SitePhone" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CanCancel" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="Cancel">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="patientId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="appointmentId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="reason" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="portalUserName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CancelResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CancelResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SubmitIntakeForm">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="form" type="tns:IntakeFormSubmission" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="IntakeFormSubmission">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="PatientId" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="AppointmentId" nillable="true" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Medications" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Allergies" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Conditions" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ReasonForVisit" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PharmacyName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PharmacyPhone" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SubmitIntakeFormResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SubmitIntakeFormResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ArrayOfSiteItem" nillable="true" type="tns:ArrayOfSiteItem" />
+      <s:element name="ArrayOfAppointmentTypeItem" nillable="true" type="tns:ArrayOfAppointmentTypeItem" />
+      <s:element name="ArrayOfSlotItem" nillable="true" type="tns:ArrayOfSlotItem" />
+      <s:element name="int" type="s:int" />
+      <s:element name="PatientSummary" nillable="true" type="tns:PatientSummary" />
+      <s:element name="BookingResponse" nillable="true" type="tns:BookingResponse" />
+      <s:element name="ArrayOfAppointmentItem" nillable="true" type="tns:ArrayOfAppointmentItem" />
+      <s:element name="boolean" type="s:boolean" />
+    </s:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://schemas.southridgemedical.org/clinic/ws/2008/11">
+      <s:element name="ApiKeyHeader" type="s1:ApiKeyHeader" />
+      <s:complexType name="ApiKeyHeader">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ApiKey" type="s:string" />
+        </s:sequence>
+        <s:anyAttribute />
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetSitesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSites" />
+  </wsdl:message>
+  <wsdl:message name="GetSitesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSitesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSitesApiKeyHeader">
+    <wsdl:part name="ApiKeyHeader" element="s1:ApiKeyHeader" />
+  </wsdl:message>
+  <wsdl:message name="GetAppointmentTypesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAppointmentTypes" />
+  </wsdl:message>
+  <wsdl:message name="GetAppointmentTypesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAppointmentTypesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAppointmentTypesApiKeyHeader">
+    <wsdl:part name="ApiKeyHeader" element="s1:ApiKeyHeader" />
+  </wsdl:message>
+  <wsdl:message name="FindSlotsSoapIn">
+    <wsdl:part name="parameters" element="tns:FindSlots" />
+  </wsdl:message>
+  <wsdl:message name="FindSlotsSoapOut">
+    <wsdl:part name="parameters" element="tns:FindSlotsResponse" />
+  </wsdl:message>
+  <wsdl:message name="FindSlotsApiKeyHeader">
+    <wsdl:part name="ApiKeyHeader" element="s1:ApiKeyHeader" />
+  </wsdl:message>
+  <wsdl:message name="RegisterPatientSoapIn">
+    <wsdl:part name="parameters" element="tns:RegisterPatient" />
+  </wsdl:message>
+  <wsdl:message name="RegisterPatientSoapOut">
+    <wsdl:part name="parameters" element="tns:RegisterPatientResponse" />
+  </wsdl:message>
+  <wsdl:message name="RegisterPatientApiKeyHeader">
+    <wsdl:part name="ApiKeyHeader" element="s1:ApiKeyHeader" />
+  </wsdl:message>
+  <wsdl:message name="LinkAccountSoapIn">
+    <wsdl:part name="parameters" element="tns:LinkAccount" />
+  </wsdl:message>
+  <wsdl:message name="LinkAccountSoapOut">
+    <wsdl:part name="parameters" element="tns:LinkAccountResponse" />
+  </wsdl:message>
+  <wsdl:message name="LinkAccountApiKeyHeader">
+    <wsdl:part name="ApiKeyHeader" element="s1:ApiKeyHeader" />
+  </wsdl:message>
+  <wsdl:message name="GetPatientSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPatient" />
+  </wsdl:message>
+  <wsdl:message name="GetPatientSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPatientResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPatientApiKeyHeader">
+    <wsdl:part name="ApiKeyHeader" element="s1:ApiKeyHeader" />
+  </wsdl:message>
+  <wsdl:message name="BookSoapIn">
+    <wsdl:part name="parameters" element="tns:Book" />
+  </wsdl:message>
+  <wsdl:message name="BookSoapOut">
+    <wsdl:part name="parameters" element="tns:BookResponse" />
+  </wsdl:message>
+  <wsdl:message name="BookApiKeyHeader">
+    <wsdl:part name="ApiKeyHeader" element="s1:ApiKeyHeader" />
+  </wsdl:message>
+  <wsdl:message name="GetAppointmentsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAppointments" />
+  </wsdl:message>
+  <wsdl:message name="GetAppointmentsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAppointmentsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAppointmentsApiKeyHeader">
+    <wsdl:part name="ApiKeyHeader" element="s1:ApiKeyHeader" />
+  </wsdl:message>
+  <wsdl:message name="CancelSoapIn">
+    <wsdl:part name="parameters" element="tns:Cancel" />
+  </wsdl:message>
+  <wsdl:message name="CancelSoapOut">
+    <wsdl:part name="parameters" element="tns:CancelResponse" />
+  </wsdl:message>
+  <wsdl:message name="CancelApiKeyHeader">
+    <wsdl:part name="ApiKeyHeader" element="s1:ApiKeyHeader" />
+  </wsdl:message>
+  <wsdl:message name="SubmitIntakeFormSoapIn">
+    <wsdl:part name="parameters" element="tns:SubmitIntakeForm" />
+  </wsdl:message>
+  <wsdl:message name="SubmitIntakeFormSoapOut">
+    <wsdl:part name="parameters" element="tns:SubmitIntakeFormResponse" />
+  </wsdl:message>
+  <wsdl:message name="SubmitIntakeFormApiKeyHeader">
+    <wsdl:part name="ApiKeyHeader" element="s1:ApiKeyHeader" />
+  </wsdl:message>
+  <wsdl:message name="GetSitesHttpGetIn" />
+  <wsdl:message name="GetSitesHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfSiteItem" />
+  </wsdl:message>
+  <wsdl:message name="GetAppointmentTypesHttpGetIn" />
+  <wsdl:message name="GetAppointmentTypesHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfAppointmentTypeItem" />
+  </wsdl:message>
+  <wsdl:message name="FindSlotsHttpGetIn">
+    <wsdl:part name="appointmentTypeId" type="s:string" />
+    <wsdl:part name="fromDate" type="s:string" />
+    <wsdl:part name="days" type="s:string" />
+    <wsdl:part name="siteId" type="s:string" />
+    <wsdl:part name="providerId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="FindSlotsHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfSlotItem" />
+  </wsdl:message>
+  <wsdl:message name="LinkAccountHttpGetIn">
+    <wsdl:part name="mrn" type="s:string" />
+    <wsdl:part name="lastName" type="s:string" />
+    <wsdl:part name="dateOfBirth" type="s:string" />
+    <wsdl:part name="portalUserName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="LinkAccountHttpGetOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="GetPatientHttpGetIn">
+    <wsdl:part name="portalUserName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetPatientHttpGetOut">
+    <wsdl:part name="Body" element="tns:PatientSummary" />
+  </wsdl:message>
+  <wsdl:message name="BookHttpGetIn">
+    <wsdl:part name="patientId" type="s:string" />
+    <wsdl:part name="appointmentTypeId" type="s:string" />
+    <wsdl:part name="providerId" type="s:string" />
+    <wsdl:part name="siteId" type="s:string" />
+    <wsdl:part name="start" type="s:string" />
+    <wsdl:part name="reason" type="s:string" />
+    <wsdl:part name="portalUserName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="BookHttpGetOut">
+    <wsdl:part name="Body" element="tns:BookingResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAppointmentsHttpGetIn">
+    <wsdl:part name="patientId" type="s:string" />
+    <wsdl:part name="fromDate" type="s:string" />
+    <wsdl:part name="toDate" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAppointmentsHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfAppointmentItem" />
+  </wsdl:message>
+  <wsdl:message name="CancelHttpGetIn">
+    <wsdl:part name="patientId" type="s:string" />
+    <wsdl:part name="appointmentId" type="s:string" />
+    <wsdl:part name="reason" type="s:string" />
+    <wsdl:part name="portalUserName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CancelHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="GetSitesHttpPostIn" />
+  <wsdl:message name="GetSitesHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfSiteItem" />
+  </wsdl:message>
+  <wsdl:message name="GetAppointmentTypesHttpPostIn" />
+  <wsdl:message name="GetAppointmentTypesHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfAppointmentTypeItem" />
+  </wsdl:message>
+  <wsdl:message name="FindSlotsHttpPostIn">
+    <wsdl:part name="appointmentTypeId" type="s:string" />
+    <wsdl:part name="fromDate" type="s:string" />
+    <wsdl:part name="days" type="s:string" />
+    <wsdl:part name="siteId" type="s:string" />
+    <wsdl:part name="providerId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="FindSlotsHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfSlotItem" />
+  </wsdl:message>
+  <wsdl:message name="LinkAccountHttpPostIn">
+    <wsdl:part name="mrn" type="s:string" />
+    <wsdl:part name="lastName" type="s:string" />
+    <wsdl:part name="dateOfBirth" type="s:string" />
+    <wsdl:part name="portalUserName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="LinkAccountHttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="GetPatientHttpPostIn">
+    <wsdl:part name="portalUserName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetPatientHttpPostOut">
+    <wsdl:part name="Body" element="tns:PatientSummary" />
+  </wsdl:message>
+  <wsdl:message name="BookHttpPostIn">
+    <wsdl:part name="patientId" type="s:string" />
+    <wsdl:part name="appointmentTypeId" type="s:string" />
+    <wsdl:part name="providerId" type="s:string" />
+    <wsdl:part name="siteId" type="s:string" />
+    <wsdl:part name="start" type="s:string" />
+    <wsdl:part name="reason" type="s:string" />
+    <wsdl:part name="portalUserName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="BookHttpPostOut">
+    <wsdl:part name="Body" element="tns:BookingResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAppointmentsHttpPostIn">
+    <wsdl:part name="patientId" type="s:string" />
+    <wsdl:part name="fromDate" type="s:string" />
+    <wsdl:part name="toDate" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAppointmentsHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfAppointmentItem" />
+  </wsdl:message>
+  <wsdl:message name="CancelHttpPostIn">
+    <wsdl:part name="patientId" type="s:string" />
+    <wsdl:part name="appointmentId" type="s:string" />
+    <wsdl:part name="reason" type="s:string" />
+    <wsdl:part name="portalUserName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CancelHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:portType name="BookingServiceSoap">
+    <wsdl:operation name="GetSites">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Sites that take online bookings.</wsdl:documentation>
+      <wsdl:input message="tns:GetSitesSoapIn" />
+      <wsdl:output message="tns:GetSitesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAppointmentTypes">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Appointment types patients can book themselves.</wsdl:documentation>
+      <wsdl:input message="tns:GetAppointmentTypesSoapIn" />
+      <wsdl:output message="tns:GetAppointmentTypesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FindSlots">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Open slots for an appointment type.</wsdl:documentation>
+      <wsdl:input message="tns:FindSlotsSoapIn" />
+      <wsdl:output message="tns:FindSlotsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RegisterPatient">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Registers a new patient from the online form.</wsdl:documentation>
+      <wsdl:input message="tns:RegisterPatientSoapIn" />
+      <wsdl:output message="tns:RegisterPatientSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LinkAccount">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Links an online account to an existing patient record. Returns 0 when nothing matches.</wsdl:documentation>
+      <wsdl:input message="tns:LinkAccountSoapIn" />
+      <wsdl:output message="tns:LinkAccountSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPatient">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Patient linked to an online account.</wsdl:documentation>
+      <wsdl:input message="tns:GetPatientSoapIn" />
+      <wsdl:output message="tns:GetPatientSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Book">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Books an online appointment.</wsdl:documentation>
+      <wsdl:input message="tns:BookSoapIn" />
+      <wsdl:output message="tns:BookSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAppointments">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Upcoming and recent appointments for a patient.</wsdl:documentation>
+      <wsdl:input message="tns:GetAppointmentsSoapIn" />
+      <wsdl:output message="tns:GetAppointmentsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Cancel">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Cancels an appointment on behalf of the patient.</wsdl:documentation>
+      <wsdl:input message="tns:CancelSoapIn" />
+      <wsdl:output message="tns:CancelSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SubmitIntakeForm">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Saves the pre-visit intake form.</wsdl:documentation>
+      <wsdl:input message="tns:SubmitIntakeFormSoapIn" />
+      <wsdl:output message="tns:SubmitIntakeFormSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="BookingServiceHttpGet">
+    <wsdl:operation name="GetSites">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Sites that take online bookings.</wsdl:documentation>
+      <wsdl:input message="tns:GetSitesHttpGetIn" />
+      <wsdl:output message="tns:GetSitesHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAppointmentTypes">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Appointment types patients can book themselves.</wsdl:documentation>
+      <wsdl:input message="tns:GetAppointmentTypesHttpGetIn" />
+      <wsdl:output message="tns:GetAppointmentTypesHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FindSlots">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Open slots for an appointment type.</wsdl:documentation>
+      <wsdl:input message="tns:FindSlotsHttpGetIn" />
+      <wsdl:output message="tns:FindSlotsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LinkAccount">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Links an online account to an existing patient record. Returns 0 when nothing matches.</wsdl:documentation>
+      <wsdl:input message="tns:LinkAccountHttpGetIn" />
+      <wsdl:output message="tns:LinkAccountHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPatient">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Patient linked to an online account.</wsdl:documentation>
+      <wsdl:input message="tns:GetPatientHttpGetIn" />
+      <wsdl:output message="tns:GetPatientHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Book">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Books an online appointment.</wsdl:documentation>
+      <wsdl:input message="tns:BookHttpGetIn" />
+      <wsdl:output message="tns:BookHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAppointments">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Upcoming and recent appointments for a patient.</wsdl:documentation>
+      <wsdl:input message="tns:GetAppointmentsHttpGetIn" />
+      <wsdl:output message="tns:GetAppointmentsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Cancel">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Cancels an appointment on behalf of the patient.</wsdl:documentation>
+      <wsdl:input message="tns:CancelHttpGetIn" />
+      <wsdl:output message="tns:CancelHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="BookingServiceHttpPost">
+    <wsdl:operation name="GetSites">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Sites that take online bookings.</wsdl:documentation>
+      <wsdl:input message="tns:GetSitesHttpPostIn" />
+      <wsdl:output message="tns:GetSitesHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAppointmentTypes">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Appointment types patients can book themselves.</wsdl:documentation>
+      <wsdl:input message="tns:GetAppointmentTypesHttpPostIn" />
+      <wsdl:output message="tns:GetAppointmentTypesHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FindSlots">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Open slots for an appointment type.</wsdl:documentation>
+      <wsdl:input message="tns:FindSlotsHttpPostIn" />
+      <wsdl:output message="tns:FindSlotsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LinkAccount">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Links an online account to an existing patient record. Returns 0 when nothing matches.</wsdl:documentation>
+      <wsdl:input message="tns:LinkAccountHttpPostIn" />
+      <wsdl:output message="tns:LinkAccountHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPatient">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Patient linked to an online account.</wsdl:documentation>
+      <wsdl:input message="tns:GetPatientHttpPostIn" />
+      <wsdl:output message="tns:GetPatientHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Book">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Books an online appointment.</wsdl:documentation>
+      <wsdl:input message="tns:BookHttpPostIn" />
+      <wsdl:output message="tns:BookHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAppointments">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Upcoming and recent appointments for a patient.</wsdl:documentation>
+      <wsdl:input message="tns:GetAppointmentsHttpPostIn" />
+      <wsdl:output message="tns:GetAppointmentsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Cancel">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Cancels an appointment on behalf of the patient.</wsdl:documentation>
+      <wsdl:input message="tns:CancelHttpPostIn" />
+      <wsdl:output message="tns:CancelHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BookingServiceSoap" type="tns:BookingServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetSites">
+      <soap:operation soapAction="http://schemas.southridgemedical.org/clinic/ws/booking/2008/11/GetSites" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetSitesApiKeyHeader" part="ApiKeyHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAppointmentTypes">
+      <soap:operation soapAction="http://schemas.southridgemedical.org/clinic/ws/booking/2008/11/GetAppointmentTypes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetAppointmentTypesApiKeyHeader" part="ApiKeyHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindSlots">
+      <soap:operation soapAction="http://schemas.southridgemedical.org/clinic/ws/booking/2008/11/FindSlots" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:FindSlotsApiKeyHeader" part="ApiKeyHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegisterPatient">
+      <soap:operation soapAction="http://schemas.southridgemedical.org/clinic/ws/booking/2008/11/RegisterPatient" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:RegisterPatientApiKeyHeader" part="ApiKeyHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LinkAccount">
+      <soap:operation soapAction="http://schemas.southridgemedical.org/clinic/ws/booking/2008/11/LinkAccount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:LinkAccountApiKeyHeader" part="ApiKeyHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPatient">
+      <soap:operation soapAction="http://schemas.southridgemedical.org/clinic/ws/booking/2008/11/GetPatient" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetPatientApiKeyHeader" part="ApiKeyHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Book">
+      <soap:operation soapAction="http://schemas.southridgemedical.org/clinic/ws/booking/2008/11/Book" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:BookApiKeyHeader" part="ApiKeyHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAppointments">
+      <soap:operation soapAction="http://schemas.southridgemedical.org/clinic/ws/booking/2008/11/GetAppointments" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetAppointmentsApiKeyHeader" part="ApiKeyHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Cancel">
+      <soap:operation soapAction="http://schemas.southridgemedical.org/clinic/ws/booking/2008/11/Cancel" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:CancelApiKeyHeader" part="ApiKeyHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SubmitIntakeForm">
+      <soap:operation soapAction="http://schemas.southridgemedical.org/clinic/ws/booking/2008/11/SubmitIntakeForm" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:SubmitIntakeFormApiKeyHeader" part="ApiKeyHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BookingServiceSoap12" type="tns:BookingServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetSites">
+      <soap12:operation soapAction="http://schemas.southridgemedical.org/clinic/ws/booking/2008/11/GetSites" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetSitesApiKeyHeader" part="ApiKeyHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAppointmentTypes">
+      <soap12:operation soapAction="http://schemas.southridgemedical.org/clinic/ws/booking/2008/11/GetAppointmentTypes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetAppointmentTypesApiKeyHeader" part="ApiKeyHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindSlots">
+      <soap12:operation soapAction="http://schemas.southridgemedical.org/clinic/ws/booking/2008/11/FindSlots" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:FindSlotsApiKeyHeader" part="ApiKeyHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegisterPatient">
+      <soap12:operation soapAction="http://schemas.southridgemedical.org/clinic/ws/booking/2008/11/RegisterPatient" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:RegisterPatientApiKeyHeader" part="ApiKeyHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LinkAccount">
+      <soap12:operation soapAction="http://schemas.southridgemedical.org/clinic/ws/booking/2008/11/LinkAccount" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:LinkAccountApiKeyHeader" part="ApiKeyHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPatient">
+      <soap12:operation soapAction="http://schemas.southridgemedical.org/clinic/ws/booking/2008/11/GetPatient" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetPatientApiKeyHeader" part="ApiKeyHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Book">
+      <soap12:operation soapAction="http://schemas.southridgemedical.org/clinic/ws/booking/2008/11/Book" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:BookApiKeyHeader" part="ApiKeyHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAppointments">
+      <soap12:operation soapAction="http://schemas.southridgemedical.org/clinic/ws/booking/2008/11/GetAppointments" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetAppointmentsApiKeyHeader" part="ApiKeyHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Cancel">
+      <soap12:operation soapAction="http://schemas.southridgemedical.org/clinic/ws/booking/2008/11/Cancel" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:CancelApiKeyHeader" part="ApiKeyHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SubmitIntakeForm">
+      <soap12:operation soapAction="http://schemas.southridgemedical.org/clinic/ws/booking/2008/11/SubmitIntakeForm" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:SubmitIntakeFormApiKeyHeader" part="ApiKeyHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BookingServiceHttpGet" type="tns:BookingServiceHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="GetSites">
+      <http:operation location="/GetSites" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAppointmentTypes">
+      <http:operation location="/GetAppointmentTypes" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindSlots">
+      <http:operation location="/FindSlots" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LinkAccount">
+      <http:operation location="/LinkAccount" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPatient">
+      <http:operation location="/GetPatient" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Book">
+      <http:operation location="/Book" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAppointments">
+      <http:operation location="/GetAppointments" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Cancel">
+      <http:operation location="/Cancel" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BookingServiceHttpPost" type="tns:BookingServiceHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="GetSites">
+      <http:operation location="/GetSites" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAppointmentTypes">
+      <http:operation location="/GetAppointmentTypes" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindSlots">
+      <http:operation location="/FindSlots" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LinkAccount">
+      <http:operation location="/LinkAccount" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPatient">
+      <http:operation location="/GetPatient" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Book">
+      <http:operation location="/Book" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAppointments">
+      <http:operation location="/GetAppointments" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Cancel">
+      <http:operation location="/Cancel" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="BookingService">
+    <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Southridge patient booking service</wsdl:documentation>
+    <wsdl:port name="BookingServiceSoap" binding="tns:BookingServiceSoap">
+      <soap:address location="http://clinic-ws.corp.local/BookingService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="BookingServiceSoap12" binding="tns:BookingServiceSoap12">
+      <soap12:address location="http://clinic-ws.corp.local/BookingService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="BookingServiceHttpGet" binding="tns:BookingServiceHttpGet">
+      <http:address location="http://clinic-ws.corp.local/BookingService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="BookingServiceHttpPost" binding="tns:BookingServiceHttpPost">
+      <http:address location="http://clinic-ws.corp.local/BookingService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

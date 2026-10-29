@@ -1,0 +1,70 @@
+@page "/stores"
+@implements IDisposable
+@inject RetailApi Api
+@inject StoreLiveFeed Feed
+
+<h1>Stores</h1>
+<ErrorBanner Message="@error" />
+<p class="muted">Live feed: @Feed.State</p>
+
+@if (stores != null)
+{
+    <table>
+        <thead><tr><th>Code</th><th>Name</th><th>Type</th><th>Country</th><th>City</th><th>Ship</th><th>C&amp;C</th><th>Last event</th></tr></thead>
+        <tbody>
+            @foreach (var s in stores)
+            {
+                <tr>
+                    <td>@s.Code</td><td>@s.Name</td><td>@s.Type</td><td>@s.Country</td><td>@s.City</td>
+                    <td>@(s.ShipFromStore ? "yes" : "")</td><td>@(s.ClickAndCollect ? "yes" : "")</td>
+                    <td class="muted">@(lastEvent.TryGetValue(s.Code, out var ev) ? ev : "")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<StoreRow> stores;
+    private readonly Dictionary<string, string> lastEvent = new();
+    private string error;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            stores = await Api.StoresAsync();
+        }
+        catch (ApiException ex)
+        {
+            error = ex.Message;
+        }
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (!firstRender) return;
+        Feed.Received += OnFeed;
+        try
+        {
+            await Feed.StartAsync();
+        }
+        catch (Exception ex)
+        {
+            error = "Live feed unavailable: " + ex.Message;
+        }
+        StateHasChanged();
+    }
+
+    private void OnFeed(string name, string payload)
+    {
+        using var doc = System.Text.Json.JsonDocument.Parse(payload);
+        var root = doc.RootElement;
+        var code = root.TryGetProperty("storeCode", out var c) ? c.GetString() : null;
+        if (code == null) return;
+        lastEvent[code] = $"{DateTime.Now:HH:mm:ss} {name}";
+        InvokeAsync(StateHasChanged);
+    }
+
+    public void Dispose() => Feed.Received -= OnFeed;
+}

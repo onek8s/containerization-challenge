@@ -1,0 +1,44 @@
+@model RunDetailsModel
+@{
+    ViewBag.Title = "Run " + Model.Run.RunId;
+    var r = Model.Run;
+}
+<p>@Html.ActionLink("← Subscriptions", "Index")</p>
+<h1>@r.SubscriptionName, run @r.RunId</h1>
+<p>
+    Started @r.StartedAt.ToString("dd.MM.yyyy HH:mm:ss") on @r.Host by @r.RunBy,
+    @(r.FinishedAt.HasValue ? "finished " + r.FinishedAt.Value.ToString("HH:mm:ss") : "still running").
+    <span class="status-@r.Status.ToLowerInvariant()">@r.Status</span>, @r.Documents documents, @r.Failures failures.
+</p>
+@if (!string.IsNullOrEmpty(r.Message))
+{
+    <pre class="message">@r.Message</pre>
+}
+<table class="grid">
+    <thead><tr><th>Customer</th><th>Document</th><th>Method</th><th>Target</th><th>Status</th><th class="num">Attempts</th><th>Next attempt</th><th>Error</th><th></th></tr></thead>
+    <tbody>
+        @foreach (var d in Model.Deliveries)
+        {
+            <tr>
+                <td>@if (d.CustomerNo != null) { @Html.ActionLink(d.CustomerNo, "Details", "Customers", new { id = d.CustomerNo }, null) }</td>
+                <td>@d.DocumentName</td>
+                <td>@d.Method</td>
+                <td class="path">@d.Target</td>
+                <td class="status-@d.Status.ToLowerInvariant()">@d.Status</td>
+                <td class="num">@d.Attempts</td>
+                <td>@(d.NextAttemptAt.HasValue ? d.NextAttemptAt.Value.ToString("dd.MM.yyyy HH:mm") : "")</td>
+                <td>@d.LastError</td>
+                <td>
+                    @if (User.IsCreditControl() && d.Method != DeliveryMethods.Print && (d.Status == "Failed" || d.Status == "Sent"))
+                    {
+                        using (Html.BeginForm("Resend", "Subscriptions", new { id = d.DeliveryId, runId = r.RunId }, FormMethod.Post, new { @class = "inline" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <button type="submit" class="link">Resend</button>
+                        }
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

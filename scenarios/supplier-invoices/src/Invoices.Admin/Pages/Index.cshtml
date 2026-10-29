@@ -1,0 +1,85 @@
+@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Overview";
+}
+<h1>Overview</h1>
+
+<section class="tiles">
+    @foreach (var status in new[] { InvoiceStatus.Exception, InvoiceStatus.Released, InvoiceStatus.Posting, InvoiceStatus.PostingFailed, InvoiceStatus.Posted })
+    {
+        var c = Model.Counts.FirstOrDefault(x => x.Status == (byte)status);
+        <a class="tile @StatusText.Css(status)" asp-page="/Invoices/Index" asp-route-status="@((byte)status)">
+            <span class="label">@StatusText.For(status)</span>
+            <span class="value">@(c?.Count ?? 0)</span>
+            <span class="sub">@((c?.Gross ?? 0m).ToString("N2")) EUR</span>
+        </a>
+    }
+</section>
+
+<div class="columns">
+    <section>
+        <h2>Open exceptions</h2>
+        @if (Model.Issues.Count == 0)
+        {
+            <p class="muted">No invoices waiting.</p>
+        }
+        else
+        {
+            <table>
+                <thead><tr><th>Reason</th><th class="num">Invoices</th><th>Oldest</th></tr></thead>
+                <tbody>
+                    @foreach (var i in Model.Issues)
+                    {
+                        <tr>
+                            <td><a asp-page="/Invoices/Exceptions" asp-route-code="@i.Code">@i.Code</a></td>
+                            <td class="num">@i.Count</td>
+                            <td>@i.Oldest.ToString("d.M.yyyy")</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </section>
+
+    <section>
+        <h2>Queues</h2>
+        @if (Model.QueueError != null)
+        {
+            <p class="notice error">@Model.QueueError</p>
+        }
+        else
+        {
+            <table>
+                <thead><tr><th>Queue</th><th class="num">Messages</th><th>Oldest</th></tr></thead>
+                <tbody>
+                    @foreach (var q in Model.Queues)
+                    {
+                        <tr title="@q.Path">
+                            <td>@q.Name</td>
+                            <td class="num">@(q.Messages < 0 ? "n/a" : q.Messages.ToString())</td>
+                            <td>@q.OldestMessage?.ToString("d.M. HH:mm")</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+
+        <h2>Delivery channels</h2>
+        <table>
+            <thead><tr><th>Supplier</th><th>Channel</th><th>Last poll</th><th>Last error</th></tr></thead>
+            <tbody>
+                @foreach (var ch in Model.Channels.Where(c => c.Active))
+                {
+                    var failing = ch.LastError != null && ch.LastErrorAt >= ch.LastPolledAt;
+                    <tr class="@(failing ? "bad" : "")">
+                        <td>@ch.SupplierCode</td>
+                        <td>@ch.ChannelType @ch.Location</td>
+                        <td>@ch.LastPolledAt?.ToString("d.M. HH:mm")</td>
+                        <td>@(failing ? ch.LastError : "")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </section>
+</div>

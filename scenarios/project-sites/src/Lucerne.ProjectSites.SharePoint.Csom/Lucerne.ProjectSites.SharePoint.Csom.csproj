@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+    <RootNamespace>Lucerne.ProjectSites.SharePoint.Csom</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SharePoint2016.CSOM" Version="16.0.4690.1000" />
+    <PackageReference Include="Polly" Version="6.1.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Lucerne.ProjectSites.SharePoint\Lucerne.ProjectSites.SharePoint.csproj" />
+  </ItemGroup>
+
+</Project>

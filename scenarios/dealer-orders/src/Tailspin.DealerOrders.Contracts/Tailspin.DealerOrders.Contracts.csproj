@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>Tailspin.DealerOrders.Contracts</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Tailspin.DealerOrders.Domain\Tailspin.DealerOrders.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

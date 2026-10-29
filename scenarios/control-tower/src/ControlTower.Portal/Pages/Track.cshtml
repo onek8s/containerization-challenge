@@ -1,0 +1,20 @@
+@page "/track"
+@model TrackModel
+@{ ViewData["Title"] = "Track a shipment"; }
+<h1 class="h4">Track a shipment</h1>
+<form method="get" class="row g-2 mb-4" style="max-width:600px">
+    <div class="col-md-5"><input name="number" value="@Model.Number" class="form-control" placeholder="Shipment number, e.g. PF24-0012345" /></div>
+    <div class="col-md-4"><input name="postcode" value="@Model.Postcode" class="form-control" placeholder="Delivery postcode" /></div>
+    <div class="col-md-3"><button class="btn btn-primary w-100">Track</button></div>
+</form>
+@if (Model.Searched && Model.Shipment is null)
+{
+    <div class="alert alert-warning">No shipment found with that number and postcode.</div>
+}
+@if (Model.Shipment is { } s)
+{
+    <h2 class="h5">@s.Number <span class="badge bg-primary">@s.Status</span></h2>
+    <p>@s.Origin?.City, @s.Origin?.CountryCode &rarr; @s.Destination?.City, @s.Destination?.CountryCode &middot; @s.PackageCount packages
+        @if (s.Eta is { } eta && s.ActualDelivery is null) { <span>&middot; estimated arrival @eta.ToString("dd.MM.yyyy")</span> }</p>
+    <partial name="_Timeline" model="s" />
+}

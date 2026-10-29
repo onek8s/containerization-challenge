@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\SharePoint.References.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net462</TargetFramework>
+    <RootNamespace>Lucerne.ProjectSites.ServerObjectModel</RootNamespace>
+    <PlatformTarget>x64</PlatformTarget>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Lucerne.ProjectSites.Core\Lucerne.ProjectSites.Core.csproj" />
+  </ItemGroup>
+
+</Project>

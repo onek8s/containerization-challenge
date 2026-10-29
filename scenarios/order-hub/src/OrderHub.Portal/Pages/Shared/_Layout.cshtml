@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Order Hub</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <a class="brand" asp-page="/Index">Litware Order Hub</a>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <nav>
+                <a asp-page="/Orders/Index">Orders</a>
+                <a asp-page="/Orders/Index" asp-route-status="Rejected">Rejected</a>
+                <a asp-page="/Reports/Index">Reports</a>
+                @if (User.IsInRole("Admin"))
+                {
+                    <a asp-page="/Products/Index">Products</a>
+                    <a asp-page="/Users/Index">Users</a>
+                }
+            </nav>
+            <form class="signout" method="post" asp-page="/Account/Logout">
+                <span>@User.Identity.Name</span>
+                <button type="submit">Sign out</button>
+            </form>
+        }
+    </header>
+    <main>
+        @if (TempData["Message"] != null)
+        {
+            <p class="message">@TempData["Message"]</p>
+        }
+        @RenderBody()
+    </main>
+    <footer>Order Hub @(typeof(Startup).Assembly.GetName().Version)</footer>
+</body>
+</html>

@@ -1,0 +1,118 @@
+@page "{id:int}"
+@model DetailsModel
+@using BatchRelease.Core.Rules
+@{
+    var b = Model.Batch!;
+    ViewData["Title"] = b.BatchNumber;
+}
+<h1>Batch @b.BatchNumber <span class="status status-@b.Status">@b.Status</span></h1>
+<p>
+    @b.Product?.Name (@b.ProductCode, @b.Product?.Strength @b.Product?.DosageForm) &middot; site @b.SiteCode &middot;
+    @b.Quantity.ToString("0.###") @b.Unit &middot; manufactured @b.ManufacturedOn.ToString("yyyy-MM-dd") &middot; expiry @b.ExpiresOn.ToString("yyyy-MM-dd")
+    &middot; MES @b.MesReference
+</p>
+
+@if (Model.AccessError is not null)
+{
+    <p class="error">@Model.AccessError</p>
+}
+
+<div class="actions">
+    @foreach (var kind in Model.AvailableDecisions)
+    {
+        <a asp-page="/Batches/Sign" asp-route-id="@b.Id" asp-route-kind="@kind">@kind</a>
+    }
+    @if (b.CertificateNumber is not null)
+    {
+        <span>Certificate @b.CertificateNumber</span>
+    }
+</div>
+
+@if (Model.Assessment is { } a && a.Findings.Count > 0)
+{
+    <h2>Release check</h2>
+    <ul>
+        @foreach (var f in a.Findings)
+        {
+            <li class="finding-@f.Severity">@f.Code @f.Message</li>
+        }
+    </ul>
+}
+
+<h2>Executed batch record</h2>
+<table>
+    <thead><tr><th>#</th><th>Operation</th><th>Status</th><th>Performed</th><th>Verified</th><th>Completed</th><th>Comment</th></tr></thead>
+    <tbody>
+        @foreach (var s in b.Steps.OrderBy(s => s.Sequence))
+        {
+            <tr><td>@s.Sequence</td><td>@s.Operation</td><td>@s.Status</td><td>@s.PerformedBy</td><td>@s.VerifiedBy</td><td>@s.CompletedUtc?.ToLocalTime().ToString("yyyy-MM-dd HH:mm")</td><td>@s.Comment</td></tr>
+        }
+    </tbody>
+</table>
+
+<h2>Laboratory results</h2>
+<table>
+    <thead><tr><th>Test</th><th>Specification</th><th>Result</th><th>Outcome</th><th>Investigation</th><th>Approved</th></tr></thead>
+    <tbody>
+        @foreach (var r in b.Results.OrderBy(r => r.TestCode))
+        {
+            <tr>
+                <td>@r.TestCode @r.TestName</td>
+                <td>@r.Specification</td>
+                <td>@(r.Value?.ToString() ?? r.TextResult) @r.Unit</td>
+                <td>@SpecificationEvaluator.Evaluate(r)</td>
+                <td>@r.InvestigationNumber @(r.InvestigationNumber is null ? "" : r.InvestigationClosed ? "(closed)" : "(open)")</td>
+                <td>@r.ApprovedBy</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h2>Deviations</h2>
+<table>
+    <thead><tr><th>Number</th><th>Title</th><th>Class</th><th>Status</th><th>Impact</th><th>CAPA</th></tr></thead>
+    <tbody>
+        @foreach (var d in b.Deviations.OrderBy(d => d.Number))
+        {
+            <tr><td>@d.Number</td><td>@d.Title</td><td>@d.Classification</td><td>@d.Status</td><td>@d.Impact</td><td>@d.CapaNumber</td></tr>
+        }
+    </tbody>
+</table>
+
+<h2>Documents</h2>
+<table>
+    <thead><tr><th>Kind</th><th>File</th><th>Size</th><th>SHA-256</th><th>Stored</th><th>By</th></tr></thead>
+    <tbody>
+        @foreach (var d in b.Documents.OrderBy(d => d.StoredUtc))
+        {
+            <tr>
+                <td>@d.Kind</td>
+                <td>
+                    @if (Model.CanRead)
+                    {
+                        <a asp-page="/Batches/Document" asp-route-batchId="@b.Id" asp-route-documentId="@d.Id">@d.FileName</a>
+                    }
+                    else
+                    {
+                        @d.FileName
+                    }
+                </td>
+                <td>@(d.Length / 1024) KB</td>
+                <td><code>@d.Sha256[..16]…</code></td>
+                <td>@d.StoredUtc.ToLocalTime().ToString("yyyy-MM-dd HH:mm")</td>
+                <td>@d.StoredBy</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h2>Signatures</h2>
+<table>
+    <thead><tr><th>Decision</th><th>Signed by</th><th>Account</th><th>Signed</th><th>Meaning</th><th>Comment</th><th>Certificate</th></tr></thead>
+    <tbody>
+        @foreach (var d in b.Decisions.OrderBy(d => d.SignedUtc))
+        {
+            <tr><td>@d.Kind</td><td>@d.SignerName</td><td>@d.SignerAccount</td><td>@d.SignedUtc.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss")</td><td>@d.Meaning</td><td>@d.Comment</td><td>@d.CertificateNumber</td></tr>
+        }
+    </tbody>
+</table>

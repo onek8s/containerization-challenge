@@ -1,0 +1,21 @@
+@model IEnumerable<Proseware.ControlTower.Domain.Pricing.RateCard>
+@{ ViewData["Title"] = "Rate cards"; var carriers = (Dictionary<int, string>)ViewBag.Carriers; }
+<div class="d-flex mb-2"><h1 class="h4 me-auto">Rate cards</h1><a class="btn btn-primary btn-sm" asp-action="Edit">New rate card</a></div>
+<table class="table table-sm">
+    <thead><tr><th>Mode</th><th>Lane</th><th>Carrier</th><th>Minimum</th><th>Fuel %</th><th>Transit</th><th>Breaks (kg: per 100 kg)</th><th>Valid</th></tr></thead>
+    <tbody>
+    @foreach (var r in Model)
+    {
+        <tr class="@(r.ValidTo < DateTime.Today ? "text-muted" : "")">
+            <td>@r.Mode</td>
+            <td><a asp-action="Edit" asp-route-id="@r.Id">@r.OriginCountry@(r.OriginPostalPrefix is null ? "" : "-" + r.OriginPostalPrefix) &rarr; @r.DestinationCountry</a></td>
+            <td>@(r.CarrierId is { } c && carriers.TryGetValue(c, out var n) ? n : "")</td>
+            <td>@r.MinimumCharge.ToString("N2") @r.Currency</td>
+            <td>@r.FuelSurchargePercent</td>
+            <td>@r.TransitDays d</td>
+            <td class="small">@string.Join(" | ", r.Breaks.OrderBy(b => b.FromKg).Select(b => $"{b.FromKg:0}: {b.PricePer100Kg:0.00}"))</td>
+            <td class="small">@r.ValidFrom.ToString("yyyy-MM-dd") - @r.ValidTo.ToString("yyyy-MM-dd")</td>
+        </tr>
+    }
+    </tbody>
+</table>

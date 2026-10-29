@@ -1,0 +1,429 @@
+{
+  "modelCode": "TF14",
+  "itemId": "TF14",
+  "name": "Tailspin TF14 forwarder",
+  "family": "Forwarder",
+  "modelYear": 2019,
+  "validFrom": "2018-09-01",
+  "validTo": null,
+  "leadTimeWeeks": 14,
+  "imageUrl": "/Content/img/tf14.jpg",
+  "exportControlClass": null,
+  "markets": [
+    "FI",
+    "SE",
+    "NO",
+    "DK",
+    "DE",
+    "AT",
+    "EE",
+    "US",
+    "CA",
+    "GB",
+    "FR",
+    "PL"
+  ],
+  "optionGroups": [
+    {
+      "code": "ENGINE",
+      "name": "Engine",
+      "kind": "SingleRequired",
+      "sortOrder": 10,
+      "options": [
+        {
+          "code": "ENG-205",
+          "name": "Engine 205 kW Stage V",
+          "itemId": "OPT-ENG205",
+          "isDefault": true,
+          "markets": [],
+          "extraLeadTimeWeeks": 0,
+          "discountGroup": null
+        },
+        {
+          "code": "ENG-240",
+          "name": "Engine 240 kW Stage V",
+          "itemId": "OPT-ENG240",
+          "isDefault": false,
+          "markets": [],
+          "extraLeadTimeWeeks": 0,
+          "discountGroup": null
+        },
+        {
+          "code": "ENG-T4F",
+          "name": "Engine 205 kW Tier 4 Final",
+          "itemId": "OPT-ENGT4F",
+          "isDefault": false,
+          "markets": [
+            "US",
+            "CA"
+          ],
+          "extraLeadTimeWeeks": 0,
+          "discountGroup": null
+        }
+      ]
+    },
+    {
+      "code": "CRANE",
+      "name": "Crane",
+      "kind": "SingleRequired",
+      "sortOrder": 20,
+      "options": [
+        {
+          "code": "CRANE-10M",
+          "name": "Crane TC100, 10.0 m reach",
+          "itemId": "OPT-CRANE10",
+          "isDefault": true,
+          "markets": [],
+          "extraLeadTimeWeeks": 0,
+          "discountGroup": null
+        },
+        {
+          "code": "CRANE-11M",
+          "name": "Crane TC110, 11.0 m reach",
+          "itemId": "OPT-CRANE11",
+          "isDefault": false,
+          "markets": [],
+          "extraLeadTimeWeeks": 2,
+          "discountGroup": null
+        }
+      ]
+    },
+    {
+      "code": "GRAPPLE",
+      "name": "Grapple",
+      "kind": "SingleRequired",
+      "sortOrder": 30,
+      "options": [
+        {
+          "code": "GRAPPLE-028",
+          "name": "Grapple G28, 0.28 m²",
+          "itemId": "OPT-GRP028",
+          "isDefault": true,
+          "markets": [],
+          "extraLeadTimeWeeks": 0,
+          "discountGroup": null
+        },
+        {
+          "code": "GRAPPLE-036",
+          "name": "Grapple G36, 0.36 m²",
+          "itemId": "OPT-GRP036",
+          "isDefault": false,
+          "markets": [],
+          "extraLeadTimeWeeks": 0,
+          "discountGroup": null
+        }
+      ]
+    },
+    {
+      "code": "LOADSPACE",
+      "name": "Load space",
+      "kind": "SingleRequired",
+      "sortOrder": 40,
+      "options": [
+        {
+          "code": "LOAD-STD",
+          "name": "Load space 5.0 m²",
+          "itemId": "",
+          "isDefault": true,
+          "markets": [],
+          "extraLeadTimeWeeks": 0,
+          "discountGroup": null
+        },
+        {
+          "code": "LOAD-XL",
+          "name": "Extended load space 5.8 m²",
+          "itemId": "OPT-LOADXL",
+          "isDefault": false,
+          "markets": [],
+          "extraLeadTimeWeeks": 0,
+          "discountGroup": null
+        },
+        {
+          "code": "LOAD-VAR",
+          "name": "Variable load space with sliding bunks",
+          "itemId": "OPT-LOADVAR",
+          "isDefault": false,
+          "markets": [],
+          "extraLeadTimeWeeks": 3,
+          "discountGroup": null
+        }
+      ]
+    },
+    {
+      "code": "BOGIE",
+      "name": "Bogie",
+      "kind": "SingleRequired",
+      "sortOrder": 50,
+      "options": [
+        {
+          "code": "BOGIE-STD",
+          "name": "Bogie axle standard",
+          "itemId": "",
+          "isDefault": true,
+          "markets": [],
+          "extraLeadTimeWeeks": 0,
+          "discountGroup": null
+        },
+        {
+          "code": "BOGIE-HD",
+          "name": "Heavy duty bogie axle",
+          "itemId": "OPT-BOGIEHD",
+          "isDefault": false,
+          "markets": [],
+          "extraLeadTimeWeeks": 0,
+          "discountGroup": null
+        }
+      ]
+    },
+    {
+      "code": "TYRES",
+      "name": "Tyres",
+      "kind": "SingleRequired",
+      "sortOrder": 60,
+      "options": [
+        {
+          "code": "TYRE-710",
+          "name": "Tyres 710/45-26.5",
+          "itemId": "OPT-TYRE710",
+          "isDefault": true,
+          "markets": [],
+          "extraLeadTimeWeeks": 0,
+          "discountGroup": null
+        },
+        {
+          "code": "TYRE-780",
+          "name": "Tyres 780/50-28.5",
+          "itemId": "OPT-TYRE780",
+          "isDefault": false,
+          "markets": [],
+          "extraLeadTimeWeeks": 0,
+          "discountGroup": null
+        }
+      ]
+    },
+    {
+      "code": "CAB",
+      "name": "Cab",
+      "kind": "SingleRequired",
+      "sortOrder": 70,
+      "options": [
+        {
+          "code": "CAB-COMFORT",
+          "name": "Comfort cab",
+          "itemId": "",
+          "isDefault": true,
+          "markets": [],
+          "extraLeadTimeWeeks": 0,
+          "discountGroup": null
+        },
+        {
+          "code": "CAB-LEVEL",
+          "name": "Levelling and rotating cab",
+          "itemId": "OPT-CABLEV",
+          "isDefault": false,
+          "markets": [],
+          "extraLeadTimeWeeks": 1,
+          "discountGroup": null
+        }
+      ]
+    },
+    {
+      "code": "EQUIP",
+      "name": "Equipment",
+      "kind": "Multiple",
+      "sortOrder": 80,
+      "options": [
+        {
+          "code": "TRACKS-ECO",
+          "name": "Bogie tracks Eco",
+          "itemId": "OPT-TRKECO",
+          "isDefault": false,
+          "markets": [],
+          "extraLeadTimeWeeks": 0,
+          "discountGroup": "ATTACHMENT"
+        },
+        {
+          "code": "COLD-PACK",
+          "name": "Nordic cold pack (-40 °C)",
+          "itemId": "OPT-COLD",
+          "isDefault": false,
+          "markets": [
+            "FI",
+            "SE",
+            "NO",
+            "CA"
+          ],
+          "extraLeadTimeWeeks": 0,
+          "discountGroup": null
+        },
+        {
+          "code": "TROPIC-PACK",
+          "name": "High ambient cooling pack",
+          "itemId": "OPT-TROPIC",
+          "isDefault": false,
+          "markets": [],
+          "extraLeadTimeWeeks": 0,
+          "discountGroup": null
+        },
+        {
+          "code": "LED-PACK",
+          "name": "LED working light pack",
+          "itemId": "OPT-LED",
+          "isDefault": false,
+          "markets": [],
+          "extraLeadTimeWeeks": 0,
+          "discountGroup": null
+        },
+        {
+          "code": "FIRE-SUPP",
+          "name": "Fire suppression system",
+          "itemId": "OPT-FIRE",
+          "isDefault": false,
+          "markets": [],
+          "extraLeadTimeWeeks": 0,
+          "discountGroup": null
+        },
+        {
+          "code": "SCALE",
+          "name": "Crane scale with load reporting",
+          "itemId": "OPT-SCALE",
+          "isDefault": false,
+          "markets": [],
+          "extraLeadTimeWeeks": 0,
+          "discountGroup": null
+        },
+        {
+          "code": "WINCH",
+          "name": "Traction assist winch",
+          "itemId": "OPT-WINCH",
+          "isDefault": false,
+          "markets": [],
+          "extraLeadTimeWeeks": 2,
+          "discountGroup": null
+        },
+        {
+          "code": "TELEMATICS",
+          "name": "TailspinLink telematics, 3 years",
+          "itemId": "OPT-LINK3",
+          "isDefault": false,
+          "markets": [],
+          "extraLeadTimeWeeks": 0,
+          "discountGroup": "SERVICE"
+        },
+        {
+          "code": "WARRANTY-EXT",
+          "name": "Extended warranty 36 months / 6,000 h",
+          "itemId": "OPT-WEXT36",
+          "isDefault": false,
+          "markets": [],
+          "extraLeadTimeWeeks": 0,
+          "discountGroup": "SERVICE"
+        },
+        {
+          "code": "TRAINING",
+          "name": "Operator training, 2 days at dealer",
+          "itemId": "OPT-TRAIN2",
+          "isDefault": false,
+          "markets": [],
+          "extraLeadTimeWeeks": 0,
+          "discountGroup": "SERVICE"
+        }
+      ]
+    }
+  ],
+  "rules": [
+    {
+      "id": "TF14-R1",
+      "kind": "Requires",
+      "option": "CRANE-11M",
+      "targets": [
+        "BOGIE-HD"
+      ],
+      "expression": null,
+      "message": "The 11 m crane needs the heavy duty bogie axle."
+    },
+    {
+      "id": "TF14-R2",
+      "kind": "Requires",
+      "option": "LOAD-XL",
+      "targets": [
+        "CRANE-11M",
+        "CRANE-10M"
+      ],
+      "expression": null,
+      "message": null
+    },
+    {
+      "id": "TF14-R3",
+      "kind": "Excludes",
+      "option": "TRACKS-ECO",
+      "targets": [
+        "TYRE-780"
+      ],
+      "expression": null,
+      "message": "Bogie tracks Eco do not fit 780 mm tyres."
+    },
+    {
+      "id": "TF14-R4",
+      "kind": "Excludes",
+      "option": "COLD-PACK",
+      "targets": [
+        "TROPIC-PACK"
+      ],
+      "expression": null,
+      "message": null
+    },
+    {
+      "id": "TF14-R5",
+      "kind": "Includes",
+      "option": "WINCH",
+      "targets": [
+        "BOGIE-HD"
+      ],
+      "expression": null,
+      "message": null
+    },
+    {
+      "id": "TF14-R6",
+      "kind": "Includes",
+      "option": "LOAD-VAR",
+      "targets": [
+        "SCALE"
+      ],
+      "expression": null,
+      "message": null
+    },
+    {
+      "id": "TF14-R7",
+      "kind": "Condition",
+      "option": null,
+      "targets": [],
+      "expression": "CRANE-11M and CAB-LEVEL => requires FIRE-SUPP",
+      "message": "Levelling cab with the 11 m crane requires the fire suppression system (insurance requirement)."
+    },
+    {
+      "id": "TF14-R8",
+      "kind": "Condition",
+      "option": null,
+      "targets": [],
+      "expression": "market(US, CA) and not ENG-T4F => invalid",
+      "message": "Machines for the USA and Canada need the Tier 4 Final engine."
+    },
+    {
+      "id": "TF14-R9",
+      "kind": "Condition",
+      "option": null,
+      "targets": [],
+      "expression": "ENG-T4F and not market(US, CA) => invalid",
+      "message": "The Tier 4 Final engine is only for the USA and Canada."
+    },
+    {
+      "id": "TF14-R10",
+      "kind": "Condition",
+      "option": null,
+      "targets": [],
+      "expression": "LOAD-VAR => requires any(CRANE-11M, ENG-240)",
+      "message": "Variable load space needs the 11 m crane or the 240 kW engine."
+    }
+  ]
+}

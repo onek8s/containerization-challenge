@@ -1,0 +1,80 @@
+@model DashboardViewModel
+@{ ViewData["Title"] = "My home"; }
+<h1 class="h3">Hello @Model.FirstName</h1>
+<p class="text-muted">@Model.Address &middot; Tenancy @Model.TenancyReference</p>
+<div class="row">
+    <div class="col-md-4 mb-3">
+        <div class="tile">
+            <h2>Rent account</h2>
+            @if (Model.Balance > 0)
+            {
+                <div class="figure balance-owed">@Money.Format(Model.Balance) owed</div>
+                <p>Please pay as soon as you can. If you are struggling, contact us: we can help.</p>
+            }
+            else
+            {
+                <div class="figure balance-credit">@Money.Format(-Model.Balance) in credit</div>
+            }
+            <p class="small mb-2">Weekly charge @Money.Format(Model.WeeklyCharge)</p>
+            @if (Model.LastPaymentDate.HasValue)
+            {
+                <p class="small">Last payment @Money.Format(Model.LastPaymentAmount ?? 0) on @Model.LastPaymentDate.Value.ToString("d MMM yyyy")</p>
+            }
+            <a class="btn btn-primary btn-sm" asp-controller="Rent" asp-action="Pay">Pay now</a>
+            <a class="btn btn-link btn-sm" asp-controller="Rent" asp-action="Statement">Statement</a>
+        </div>
+    </div>
+    <div class="col-md-4 mb-3">
+        <div class="tile">
+            <h2>Direct debit</h2>
+            @if (Model.DirectDebit != null)
+            {
+                <p>@Money.Format(Model.DirectDebit.Amount), @Model.DirectDebit.Schedule</p>
+                @if (Model.DirectDebit.NextCollectionDate.HasValue)
+                {
+                    <p>Next collection: <strong>@Model.DirectDebit.NextCollectionDate.Value.ToString("ddd d MMM yyyy")</strong></p>
+                }
+                <a asp-controller="DirectDebit" asp-action="Index">Change or cancel</a>
+            }
+            else
+            {
+                <p>Pay automatically and never miss a payment.</p>
+                <a class="btn btn-outline-secondary btn-sm" asp-controller="DirectDebit" asp-action="Index">Set up a direct debit</a>
+            }
+        </div>
+    </div>
+    <div class="col-md-4 mb-3">
+        <div class="tile">
+            <h2>Safety checks</h2>
+            @if (Model.GasCheckDue.HasValue)
+            {
+                if (Model.GasCheckDue.Value < DateTime.Today)
+                {
+                    <p class="balance-owed">Your annual gas safety check is overdue (it was due by @Model.GasCheckDue.Value.ToString("d MMMM yyyy")). Please call us on 0300 123 4567 to book it.</p>
+                }
+                else
+                {
+                    <p>Annual gas safety check due by <strong>@Model.GasCheckDue.Value.ToString("d MMMM yyyy")</strong>.</p>
+                }
+                <p class="small">Our gas engineer will write to you to book a time. You must let them in: it keeps you and your neighbours safe.</p>
+            }
+            else
+            {
+                <p>There are no safety checks due for your home.</p>
+            }
+            @if (Model.NewLetters > 0)
+            {
+                <p><a asp-controller="Documents" asp-action="Index">@Model.NewLetters new letter(s)</a> in the last 30 days.</p>
+            }
+            @if (Model.UnansweredMessages > 0)
+            {
+                <p class="small">@Model.UnansweredMessages message(s) waiting for our reply.</p>
+            }
+        </div>
+    </div>
+</div>
+<div class="d-flex justify-content-between align-items-center mt-2">
+    <h2 class="h5 mb-0">Open repairs</h2>
+    <a class="btn btn-primary" asp-controller="ReportRepair" asp-action="Index">Report a repair</a>
+</div>
+<partial name="_RepairTable" model="Model.OpenRepairs" />

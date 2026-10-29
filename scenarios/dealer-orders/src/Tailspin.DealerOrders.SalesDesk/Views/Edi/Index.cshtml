@@ -1,0 +1,20 @@
+@model IList<Tailspin.DealerOrders.SalesDesk.Infrastructure.EdiMessageRow>
+@{
+    ViewBag.Title = "EDI";
+}
+<h2>EDI messages</h2>
+<form class="form-inline" method="get">
+    @Html.DropDownList("state", EnumHelper.GetSelectList(typeof(EdiMessageState)), "Any state", new { @class = "form-control" })
+    <select name="partnerId" class="form-control"><option value="">All partners</option>@foreach (EdiPartner p in ViewBag.Partners) { <option value="@p.Id">@p.Name</option> }</select>
+    <button class="btn btn-default">Show</button>
+</form>
+<table class="table table-condensed table-striped">
+    <thead><tr><th>Id</th><th>Partner</th><th>Dir</th><th>Set</th><th>ISA</th><th>Reference</th><th>State</th><th>MDN</th><th>Created</th><th>Sent</th><th>Tries</th><th>Error</th></tr></thead>
+    @foreach (var m in Model)
+    {
+        <tr class="@(m.State == EdiMessageState.Failed || m.State == EdiMessageState.Rejected ? "danger" : "")">
+            <td>@Html.ActionLink(m.Id.ToString(), "Message", new { id = m.Id })</td><td>@m.PartnerName</td><td>@m.Direction</td><td>@m.TransactionSet</td><td>@m.InterchangeControl</td>
+            <td>@m.Reference</td><td>@m.State</td><td><small>@m.MdnStatus</small></td><td>@m.CreatedUtc.ToLocalTime().ToString("g")</td><td>@m.SentUtc?.ToLocalTime().ToString("g")</td><td>@m.Attempts</td><td><small>@m.Error</small></td>
+        </tr>
+    }
+</table>

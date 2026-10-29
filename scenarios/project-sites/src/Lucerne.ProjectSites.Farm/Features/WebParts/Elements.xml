@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <Module Name="LucerneWebParts" List="113" Url="_catalogs/wp">
+    <File Path="ProjectHealth.webpart" Url="LucerneProjectHealth.webpart" Type="GhostableInLibrary">
+      <Property Name="Group" Value="Lucerne" />
+    </File>
+    <File Path="MyProjects.webpart" Url="LucerneMyProjects.webpart" Type="GhostableInLibrary">
+      <Property Name="Group" Value="Lucerne" />
+    </File>
+    <File Path="UpcomingDeliverables.webpart" Url="LucerneUpcomingDeliverables.webpart" Type="GhostableInLibrary">
+      <Property Name="Group" Value="Lucerne" />
+    </File>
+  </Module>
+</Elements>

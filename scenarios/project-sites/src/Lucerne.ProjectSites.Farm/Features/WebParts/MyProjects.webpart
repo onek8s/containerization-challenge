@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<webParts>
+  <webPart xmlns="http://schemas.microsoft.com/WebPart/v3">
+    <metaData>
+      <type name="Lucerne.ProjectSites.Farm.WebParts.MyProjectsWebPart, Lucerne.ProjectSites.Farm, Version=1.0.0.0, Culture=neutral, PublicKeyToken=$SharePoint.Project.AssemblyPublicKeyToken$" />
+      <importErrorMessage>Cannot import this web part.</importErrorMessage>
+    </metaData>
+    <data>
+      <properties>
+        <property name="Title" type="string">My Projects</property>
+        <property name="Description" type="string">Projects you manage or direct</property>
+        <property name="ChromeType" type="chrometype">TitleOnly</property>
+      </properties>
+    </data>
+  </webPart>
+</webParts>

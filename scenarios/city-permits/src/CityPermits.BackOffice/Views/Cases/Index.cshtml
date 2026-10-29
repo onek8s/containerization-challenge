@@ -1,0 +1,17 @@
+@model List<PermitCase>
+@{ ViewData["Title"] = "Work queue"; }
+<h1>Work queue</h1>
+<form>
+    <select name="team"><option value="">All teams</option><option>Building Control</option><option>Licensing</option><option>Parking Services</option></select>
+    <select name="status" asp-items="Html.GetEnumSelectList<CaseStatus>()"><option value="">Open</option></select>
+    <input name="q" placeholder="Reference, title, address" /> <button>Filter</button>
+</form>
+<table>
+    <tr><th>Reference</th><th>Title</th><th>Applicant</th><th>Status</th><th>Officer</th><th>Target</th></tr>
+    @foreach (var c in Model)
+    {
+        var late = c.TargetDecisionDate < DateTime.Today;
+        <tr><td><a href="/Cases/Details/@c.Id">@c.Reference</a></td><td>@c.Title</td><td>@c.Applicant?.DisplayName</td><td>@c.Status</td>
+            <td>@c.AssignedOfficer</td><td style="@(late ? "color:#b71c1c" : "")">@c.TargetDecisionDate?.ToString("dd/MM/yyyy")</td></tr>
+    }
+</table>

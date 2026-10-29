@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Humongous.Workbench": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "applicationUrl": "http://localhost:5330",
+      "environmentVariables": { "ASPNETCORE_ENVIRONMENT": "Development" }
+    }
+  }
+}

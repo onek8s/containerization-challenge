@@ -1,0 +1,44 @@
+@model IList<InvoiceReviewItem>
+@{
+    ViewData["Title"] = "Contractor invoices";
+    var status = (InvoiceStatus)ViewBag.Status;
+}
+<h1 class="h3">Contractor invoices</h1>
+<ul class="nav nav-tabs mb-3">
+    @foreach (var s in new[] { InvoiceStatus.Received, InvoiceStatus.Queried, InvoiceStatus.Approved, InvoiceStatus.InPaymentRun, InvoiceStatus.Paid, InvoiceStatus.Rejected })
+    {
+        <li class="nav-item"><a class="nav-link @(s == status ? "active" : "")" asp-route-status="@s">@s</a></li>
+    }
+</ul>
+<table class="table table-sm">
+    <thead><tr><th>Contractor</th><th>Invoice</th><th>Date</th><th>Work order</th><th class="text-right">Priced work</th><th class="text-right">Net</th><th class="text-right">VAT</th><th class="text-right">Gross</th><th>Check</th><th></th></tr></thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            var i = item.Invoice;
+            <tr class="@(item.MatchProblem != null ? "table-warning" : "")">
+                <td>@i.Contractor.Code</td>
+                <td>@i.InvoiceNumber</td>
+                <td>@i.InvoiceDate.ToString("dd/MM/yyyy")</td>
+                <td><a asp-controller="Repairs" asp-action="Details" asp-route-id="@i.WorkOrderId">@i.WorkOrder?.Reference</a><br /><small class="text-muted">@i.WorkOrder?.Property?.AddressLine1</small></td>
+                <td class="text-right">@item.PricedWork.ToString("N2")</td>
+                <td class="text-right">@i.NetAmount.ToString("N2")</td>
+                <td class="text-right">@i.VatAmount.ToString("N2")</td>
+                <td class="text-right">@i.GrossAmount.ToString("N2")</td>
+                <td class="small">@(item.MatchProblem ?? "OK") @if (!string.IsNullOrEmpty(i.QueryReason)) { <br /><em>@i.QueryReason</em> }</td>
+                <td>
+                    @if (i.Status == InvoiceStatus.Received || i.Status == InvoiceStatus.Queried)
+                    {
+                        <form asp-action="ReviewInvoice" asp-route-id="@i.Id" method="post" class="form-inline">
+                            <input name="reason" class="form-control form-control-sm mr-1" placeholder="Reason" style="width:140px" />
+                            <button name="decision" value="approve" class="btn btn-sm btn-success mr-1">Approve</button>
+                            <button name="decision" value="query" class="btn btn-sm btn-warning mr-1">Query</button>
+                            <button name="decision" value="reject" class="btn btn-sm btn-outline-danger">Reject</button>
+                        </form>
+                    }
+                </td>
+            </tr>
+        }
+        @if (Model.Count == 0) { <tr><td colspan="10" class="text-muted">No invoices.</td></tr> }
+    </tbody>
+</table>

@@ -1,0 +1,42 @@
+@model BoardModel
+@{
+    ViewBag.Title = Model.Queue != null ? Model.Queue.Name : "All queues";
+    ViewBag.BodyClass = "board-page";
+}
+<h1>Queue board: @ViewBag.Title</h1>
+<p class="queues">
+    <a href="@Url.RouteUrl("board", new { queue = "" })" class="@(Model.Queue == null ? "current" : "")">All</a>
+    @foreach (var q in Model.Queues)
+    {
+        <a href="@Url.RouteUrl("board", new { queue = q.Code })" class="@(Model.Queue != null && Model.Queue.Id == q.Id ? "current" : "")">@q.Name</a>
+    }
+</p>
+<div class="board" id="board" data-queue="@(Model.Queue != null ? Model.Queue.Code : "")" data-url="@Url.Action("Data", "Board", new { queue = Model.Queue != null ? Model.Queue.Code : null })">
+    @foreach (var col in Model.Columns)
+    {
+        <section class="board-column" data-status="@col.Title">
+            <h2>@col.Title <span class="count">@col.Cases.Count</span></h2>
+            @foreach (var c in col.Cases)
+            {
+                <a class="card sla-@c.Sla.ToLowerInvariant() priority-@c.Priority.ToLowerInvariant()" href="@Url.Content("~/cases/" + c.Id)">
+                    <span class="card-number">@c.CaseNumber</span>
+                    <span class="card-subject">@c.Subject</span>
+                    <span class="card-meta">@c.Priority &middot; due @c.ResolveDue @if (c.AssignedTo != null) { <text>&middot; @Tailspin.CustomerCare.Web.Security.CareUser.ShortName(c.AssignedTo)</text> }</span>
+                </a>
+            }
+        </section>
+    }
+</div>
+@section scripts {
+    <script>
+        (function () {
+            var $board = $('#board');
+            var queue = $board.data('queue');
+            care.connect(function (hub) {
+                if (queue) { hub.server.watchQueue(queue); } else { hub.server.watchAll(); }
+            });
+            care.onCaseChanged(function () { care.reloadBoard($board); });
+            setInterval(function () { care.reloadBoard($board); }, 5 * 60 * 1000);
+        })();
+    </script>
+}

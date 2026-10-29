@@ -1,0 +1,231 @@
+@model TenancyDetailViewModel
+@{
+    var t = Model.Tenancy;
+    ViewData["Title"] = t.Reference;
+    var canIncome = User.HasAnyRole(HousingRoles.Income, HousingRoles.Officer, HousingRoles.Admin);
+    var activeArrangement = Model.Arrangements.FirstOrDefault(a => a.Status == ArrangementStatus.Active);
+}
+<div class="d-flex justify-content-between align-items-start">
+    <div>
+        <h1 class="h3 mb-0">@t.Reference &middot; @string.Join(" & ", t.Tenants.Select(n => n.FullName))</h1>
+        <p class="text-muted"><a asp-controller="Properties" asp-action="Details" asp-route-id="@t.PropertyId">@t.Property.SingleLineAddress</a> &middot; @t.Type tenancy from @t.StartDate.ToString("dd/MM/yyyy") &middot; @t.Status</p>
+    </div>
+    <div>
+        <a class="btn btn-sm btn-outline-primary" asp-action="Statement" asp-route-id="@t.Id">Statement</a>
+        <a class="btn btn-sm btn-outline-secondary" asp-controller="Documents" asp-action="Index" asp-route-tenancyId="@t.Id">Documents</a>
+        <a class="btn btn-sm btn-outline-secondary" asp-controller="Documents" asp-action="Upload" asp-route-tenancyId="@t.Id" asp-route-propertyId="@t.PropertyId">Upload</a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-4">
+        <div class="card mb-3">
+            <div class="card-header">Rent account</div>
+            <div class="card-body">
+                <div class="display-balance @(Model.Balance > 0 ? "text-danger" : "text-success")">@Money.Format(Model.Balance)</div>
+                <div class="text-muted">@(Model.Balance > 0 ? "in arrears" : "in credit or clear") &middot; weekly charge @Money.Format(t.WeeklyCharge) &middot; @Model.Decision.WeeksInArrears weeks</div>
+                <div class="mt-2">
+                    @if (t.HousingBenefitClaimed) { <span class="badge badge-info">Housing benefit @t.HousingBenefitClaimRef</span> }
+                    @if (t.UniversalCredit) { <span class="badge badge-info">Universal Credit</span> }
+                </div>
+            </div>
+            <table class="table table-sm mb-0 small">
+                @foreach (var l in Model.RecentLines)
+                {
+                    <tr><td>@l.PostedOn.ToString("dd/MM")</td><td>@l.Description</td><td class="text-right">@(l.Debit > 0 ? l.Debit.ToString("N2") : "")</td><td class="text-right">@(l.Credit > 0 ? l.Credit.ToString("N2") : "")</td></tr>
+                }
+            </table>
+        </div>
+
+        @if (canIncome)
+        {
+            <div class="card mb-3">
+                <div class="card-header">Post to account</div>
+                <form asp-action="PostAdjustment" asp-route-id="@t.Id" method="post" class="card-body">
+                    <div class="form-group">
+                        <select asp-for="Adjustment.Type" class="form-control form-control-sm">
+                            <option value="@TransactionType.Adjustment">Adjustment (+ debit / - credit)</option>
+                            <option value="@TransactionType.CashPayment">Payment taken at office</option>
+                            <option value="@TransactionType.WriteOff">Write-off</option>
+                            <option value="@TransactionType.Refund">Refund of credit</option>
+                            <option value="@TransactionType.RechargeRepair">Repair recharge</option>
+                        </select>
+                    </div>
+                    <div class="form-group"><input asp-for="Adjustment.Amount" class="form-control form-control-sm" placeholder="Amount" /></div>
+                    <div class="form-group"><input asp-for="Adjustment.Description" class="form-control form-control-sm" placeholder="Reason" /></div>
+                    <button class="btn btn-sm btn-primary">Post</button>
+                </form>
+            </div>
+        }
+
+        <div class="card mb-3">
+            <div class="card-header">Tenants</div>
+            <ul class="list-group list-group-flush">
+                @foreach (var n in t.Tenants)
+                {
+                    <li class="list-group-item">
+                        <strong>@n.FullName</strong> @if (n.IsLeadTenant) { <span class="badge badge-secondary">Lead</span> }
+                        @if (n.Vulnerable) { <span class="badge badge-warning" title="@n.VulnerabilityNotes">Vulnerable</span> }
+                        @if (n.NeedsLargePrint) { <span class="badge badge-light">Large print</span> }
+                        <div class="small text-muted">
+                            Born @n.DateOfBirth.ToString("dd/MM/yyyy") &middot; prefers @n.ContactPreference<br />
+                            @n.MobilePhone @(n.Email != null ? " · " + n.Email : "")
+                            @if (n.PortalSubjectId != null) { <br /><span>Registered for the tenant portal</span> }
+                        </div>
+                        @if (n.Vulnerable && !string.IsNullOrEmpty(n.VulnerabilityNotes)) { <div class="small text-warning">@n.VulnerabilityNotes</div> }
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+
+    <div class="col-lg-8">
+        <div class="card mb-3">
+            <div class="card-header d-flex justify-content-between">
+                <span>Arrears</span>
+                <span class="text-muted small">Policy IN-04 suggests: <strong>@Model.Decision.Action</strong> @(Model.Decision.Action != ArrearsAction.None ? "(" + Model.Decision.Stage + ")" : "") &ndash; @Model.Decision.Reason</span>
+            </div>
+            <div class="card-body">
+                @if (Model.ArrearsCase == null)
+                {
+                    <p class="text-muted">No open arrears case.</p>
+                }
+                else
+                {
+                    var c = Model.ArrearsCase;
+                    <p>
+                        Stage <strong>@c.Stage</strong> since @c.StageReachedOn.ToString("dd/MM/yyyy") at @Money.Format(c.BalanceAtStage)
+                        @if (c.NextReviewOn.HasValue) { <span>&middot; next review @c.NextReviewOn.Value.ToString("dd/MM/yyyy")</span> }
+                        @if (c.OnHold) { <span class="badge badge-warning">On hold: @c.HoldReason</span> }
+                    </p>
+                    <ul class="small">
+                        @foreach (var note in c.Notes.OrderByDescending(x => x.CreatedAt))
+                        {
+                            <li><span class="text-muted">@note.CreatedAt.ToString("dd/MM/yyyy HH:mm") @note.CreatedBy:</span> @note.Text</li>
+                        }
+                    </ul>
+                }
+                @if (canIncome)
+                {
+                    <form asp-action="AddNote" asp-route-id="@t.Id" method="post" class="form-inline mb-2">
+                        <input name="text" class="form-control form-control-sm mr-2 flex-grow-1" placeholder="Add a note (contact made, promise to pay...)" />
+                        <button class="btn btn-sm btn-outline-primary">Add note</button>
+                    </form>
+                    <div class="d-flex">
+                        @if (Model.ArrearsCase?.OnHold == true)
+                        {
+                            <form asp-action="Release" asp-route-id="@t.Id" method="post" class="mr-2"><button class="btn btn-sm btn-outline-secondary">Release hold</button></form>
+                        }
+                        else
+                        {
+                            <form asp-action="Hold" asp-route-id="@t.Id" method="post" class="form-inline mr-2">
+                                <input name="reason" class="form-control form-control-sm mr-1" placeholder="Hold reason" />
+                                <button class="btn btn-sm btn-outline-secondary">Put on hold</button>
+                            </form>
+                        }
+                        <form asp-action="ServeNotice" asp-route-id="@t.Id" method="post" onsubmit="return confirm('Generate and file a Notice of Seeking Possession for @t.Reference?');">
+                            <button class="btn btn-sm btn-danger">Serve NoSP</button>
+                        </form>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card mb-3">
+                    <div class="card-header">Direct debit</div>
+                    <ul class="list-group list-group-flush">
+                        @foreach (var m in Model.Mandates)
+                        {
+                            <li class="list-group-item small">
+                                <strong>@m.Status</strong> &middot; @m.Frequency @Money.Format(m.Amount) (day @m.CollectionDay)<br />
+                                @m.AccountHolderName, account ending @m.AccountNumberEnding &middot; @m.ProviderMandateId<br />
+                                @if (m.NextCollectionDate.HasValue) { <span>Next collection @m.NextCollectionDate.Value.ToString("dd/MM/yyyy")</span> }
+                                @if (m.Status == MandateStatus.Cancelled) { <span class="text-muted">Cancelled @m.CancelledAt?.ToString("dd/MM/yyyy"): @m.CancellationReason</span> }
+                                @if (canIncome && (m.Status == MandateStatus.Active || m.Status == MandateStatus.Submitted || m.Status == MandateStatus.PendingSubmission))
+                                {
+                                    <form asp-action="CancelMandate" asp-route-id="@t.Id" method="post" class="form-inline mt-1" onsubmit="return confirm('Cancel this direct debit at Paystream?');">
+                                        <input type="hidden" name="mandateId" value="@m.Id" />
+                                        <input name="reason" class="form-control form-control-sm mr-1" placeholder="Reason" />
+                                        <button class="btn btn-sm btn-outline-danger">Cancel</button>
+                                    </form>
+                                }
+                            </li>
+                        }
+                        @if (Model.Mandates.Count == 0) { <li class="list-group-item text-muted">No direct debit. Tenants set one up in the portal.</li> }
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card mb-3">
+                    <div class="card-header">Payment arrangement</div>
+                    <ul class="list-group list-group-flush">
+                        @foreach (var a in Model.Arrangements.Take(3))
+                        {
+                            <li class="list-group-item small">
+                                <strong>@a.Status</strong> &middot; @Money.Format(a.WeeklyAmountTowardsArrears)/week extra from @a.StartDate.ToString("dd/MM/yyyy") @(a.EndDate.HasValue ? "to " + a.EndDate.Value.ToString("dd/MM/yyyy") : "")
+                                @if (!string.IsNullOrEmpty(a.Notes)) { <br /><span class="text-muted">@a.Notes</span> }
+                                @if (canIncome && a.Status == ArrangementStatus.Active)
+                                {
+                                    <form asp-action="EndArrangement" asp-route-id="@t.Id" method="post" class="mt-1">
+                                        <input type="hidden" name="arrangementId" value="@a.Id" />
+                                        <button name="status" value="@ArrangementStatus.Broken" class="btn btn-sm btn-outline-danger">Broken</button>
+                                        <button name="status" value="@ArrangementStatus.Completed" class="btn btn-sm btn-outline-success">Completed</button>
+                                    </form>
+                                }
+                            </li>
+                        }
+                    </ul>
+                    @if (canIncome && activeArrangement == null)
+                    {
+                        <form asp-action="CreateArrangement" asp-route-id="@t.Id" method="post" class="card-body">
+                            <div class="form-row">
+                                <div class="col"><input asp-for="Arrangement.WeeklyAmount" class="form-control form-control-sm" /></div>
+                                <div class="col"><input asp-for="Arrangement.StartDate" type="date" class="form-control form-control-sm" /></div>
+                            </div>
+                            <input asp-for="Arrangement.Notes" class="form-control form-control-sm my-1" placeholder="Notes" />
+                            <button class="btn btn-sm btn-primary">Agree arrangement</button>
+                        </form>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-3">
+            <div class="card-header">Enquiries</div>
+            <ul class="list-group list-group-flush">
+                @foreach (var e in Model.Enquiries)
+                {
+                    <li class="list-group-item">
+                        <div class="d-flex justify-content-between"><strong>@e.Subject</strong><small class="text-muted">@e.Topic &middot; @e.CreatedAt.ToString("dd/MM/yyyy HH:mm")</small></div>
+                        <div>@e.Message</div>
+                        @if (e.RespondedAt.HasValue)
+                        {
+                            <div class="small text-success mt-1">@e.RespondedBy, @e.RespondedAt.Value.ToString("dd/MM/yyyy"): @e.Response</div>
+                        }
+                        else
+                        {
+                            <form asp-action="RespondEnquiry" asp-route-id="@t.Id" method="post" class="mt-2">
+                                <input type="hidden" name="enquiryId" value="@e.Id" />
+                                <textarea name="response" rows="2" class="form-control form-control-sm mb-1" placeholder="Reply to the tenant"></textarea>
+                                <button class="btn btn-sm btn-primary">Send reply</button>
+                            </form>
+                        }
+                    </li>
+                }
+                @if (Model.Enquiries.Count == 0) { <li class="list-group-item text-muted">No enquiries.</li> }
+            </ul>
+        </div>
+
+        <div class="card mb-3">
+            <div class="card-header">Communications</div>
+            <table class="table table-sm mb-0 small">
+                @foreach (var c in Model.Communications)
+                {
+                    <tr><td>@c.CreatedAt.ToString("dd/MM/yyyy HH:mm")</td><td>@c.Channel</td><td>@c.TemplateCode</td><td>@c.Subject</td><td>@c.Status</td></tr>
+                }
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>7.3</LangVersion>
+    <RootNamespace>CreditDesk.Core</RootNamespace>
+    <Version>3.2.0</Version>
+    <Company>Fabrikam Wholesale</Company>
+    <Product>Credit Desk</Product>
+  </PropertyGroup>
+
+</Project>

@@ -1,0 +1,9 @@
+Subject: Order {OrderNumber} invoiced
+
+Dear {DealerName},
+
+order {OrderNumber} (your reference {DealerPo}) has been invoiced ({InvoiceIds}).
+
+{Link}
+
+Tailspin Machinery dealer sales

@@ -1,0 +1,111 @@
+@model FormEditModel
+@{
+    ViewData["Title"] = Model.Definition.Name;
+    var locked = Model.Form.Status == FormStatus.Locked;
+}
+<div class="crumbs"><a href="/subjects/@Model.Subject.Id">Subject @Model.Subject.Number</a> / @Model.Visit.Definition!.Name</div>
+<h1>@Model.Definition.Name@(Model.Definition.Repeating ? $" #{Model.Form.Row}" : "") <span class="pill status-@Model.Form.Status.ToString().ToLowerInvariant()">@Model.Form.Status</span></h1>
+@if (Model.Form.LastSavedAt is not null)
+{
+    <p class="muted">Last saved @Model.Form.LastSavedAt?.ToString("dd-MMM-yyyy HH:mm") UTC by @Model.Form.LastSavedBy@(Model.Form.DerivedWith is null ? "" : $" · calculated with {Model.Form.DerivedWith}")</p>
+}
+
+@if (Model.Result is { Saved: true })
+{
+    <div class="notice ok">Saved. @(Model.Result.Queries.Count > 0 ? $"{Model.Result.Queries.Count} automatic quer{(Model.Result.Queries.Count == 1 ? "y was" : "ies were")} opened." : "")</div>
+}
+@if (Model.Result is { Saved: false })
+{
+    <div class="notice error">Not saved. @string.Join(" ", Model.Result.Errors.Where(e => e.FieldCode == "").Select(e => e.Message)) Correct the values marked below.</div>
+}
+@if (Model.Result?.Messages.Count > 0)
+{
+    <div class="notice">@string.Join(" ", Model.Result.Messages)</div>
+}
+<div asp-validation-summary="All" class="validation"></div>
+
+<form method="post" class="crf">
+    <input type="hidden" name="rowVersion" value="@Model.RowVersion" />
+    @foreach (var f in Model.Definition.Fields.OrderBy(f => f.Order))
+    {
+        Model.Values.TryGetValue(f.Code, out var value);
+        var issues = Model.IssuesFor(f.Code).ToList();
+        var fieldQueries = Model.Queries.Where(q => q.FieldCode == f.Code && q.State is QueryState.Open or QueryState.Answered).ToList();
+        <div class="field @(issues.Any(i => i.Severity == EditCheckSeverity.Hard) ? "bad" : issues.Any() ? "flag" : "")">
+            <label for="v_@f.Code">@f.Label@(f.Required ? " *" : "") <span class="code">@f.Code</span></label>
+            <div class="input">
+                @switch (f.Type)
+                {
+                    case FieldType.Derived:
+                        <output>@(value ?? "—") @f.Unit</output>
+                        <span class="muted small">calculated</span>
+                        break;
+                    case FieldType.Choice:
+                        <select id="v_@f.Code" name="v_@f.Code" disabled="@locked">
+                            <option value=""></option>
+                            @foreach (var c in f.ChoiceList())
+                            {
+                                <option value="@c.Key" selected="@(c.Key == value)">@c.Value</option>
+                            }
+                        </select>
+                        break;
+                    case FieldType.Boolean:
+                        <select id="v_@f.Code" name="v_@f.Code" disabled="@locked">
+                            <option value=""></option>
+                            <option value="1" selected="@(value == "1")">Yes</option>
+                            <option value="0" selected="@(value == "0")">No</option>
+                        </select>
+                        break;
+                    case FieldType.Date:
+                        <input id="v_@f.Code" name="v_@f.Code" type="date" value="@value" disabled="@locked" />
+                        break;
+                    case FieldType.Time:
+                        <input id="v_@f.Code" name="v_@f.Code" type="time" value="@value" disabled="@locked" />
+                        break;
+                    case FieldType.Text:
+                        <input id="v_@f.Code" name="v_@f.Code" value="@value" maxlength="@f.MaxLength" disabled="@locked" class="wide" />
+                        break;
+                    default:
+                        <input id="v_@f.Code" name="v_@f.Code" value="@value" inputmode="decimal" disabled="@locked" /> <span>@f.Unit</span>
+                        break;
+                }
+                @foreach (var i in issues)
+                {
+                    <div class="issue @i.Severity.ToString().ToLowerInvariant()">@i.Message</div>
+                }
+                @foreach (var q in fieldQueries)
+                {
+                    <div class="query">
+                        <b>Query #@q.Id (@q.State):</b> @q.Text
+                        @foreach (var m in q.Messages.Skip(1))
+                        {
+                            <div class="small muted">@m.At.ToString("dd-MMM HH:mm") @m.User: @m.Text</div>
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+    }
+    @if (!locked)
+    {
+        <label>Reason for change (required when changing saved data)
+            <select name="reason">
+                <option value="@Model.Reason">@Model.Reason</option>
+                <option>Transcription error</option>
+                <option>Data clarified with source</option>
+                <option>Answer to query</option>
+                <option>Late data from source</option>
+            </select>
+        </label>
+        <button type="submit">Save</button>
+    }
+</form>
+
+@foreach (var q in Model.Queries.Where(q => q.State == QueryState.Open))
+{
+    <form method="post" action="/queries/@q.Id/answer" class="answer">
+        <input type="hidden" name="returnUrl" value="/forms/@Model.Form.Id" />
+        <label>Answer query #@q.Id on @q.FieldCode <input name="text" class="wide" required /></label>
+        <button type="submit" class="small">Send answer</button>
+    </form>
+}

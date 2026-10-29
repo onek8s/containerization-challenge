@@ -1,0 +1,39 @@
+@model SearchModel
+@{
+    ViewBag.Title = "Search";
+}
+<h1>Search results for "@Model.Query"</h1>
+@if (!Model.Hits.Any() && !Model.Articles.Any())
+{
+    <p>Nothing found.</p>
+}
+@if (Model.Hits.Any(h => h.Kind == "case"))
+{
+    <h2>Cases</h2>
+    <ul>
+        @foreach (var h in Model.Hits.Where(h => h.Kind == "case"))
+        {
+            <li><a href="@Url.Content("~/cases/" + h.Id)">@h.Title</a> <span class="muted">@h.Detail</span></li>
+        }
+    </ul>
+}
+@if (Model.Hits.Any(h => h.Kind == "customer"))
+{
+    <h2>Customers</h2>
+    <ul>
+        @foreach (var h in Model.Hits.Where(h => h.Kind == "customer"))
+        {
+            <li><a href="@Url.Content("~/customers/" + h.Id)">@h.Title</a> <span class="muted">@h.Detail</span></li>
+        }
+    </ul>
+}
+@if (Model.Articles.Any())
+{
+    <h2>Knowledge base</h2>
+    <ul>
+        @foreach (var a in Model.Articles)
+        {
+            <li><a href="@Url.RouteUrl("kb-article", new { slug = a.Slug })">@a.Title</a></li>
+        }
+    </ul>
+}

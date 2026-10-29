@@ -1,0 +1,26 @@
+@model IEnumerable<SalesOrderEntity>
+@{
+    ViewBag.Title = "Approvals";
+}
+<h1>Orders waiting for approval</h1>
+<div class="panel">
+    @if (!Model.Any())
+    {
+        <p class="muted">Nothing to approve.</p>
+    }
+    else
+    {
+        <table class="table">
+            <tr><th>Order</th><th>Received</th><th>Rep</th><th>Customer</th><th>Delivery</th><th class="text-right">Manual discount %</th><th class="text-right">Excl. VAT</th></tr>
+            @foreach (var o in Model)
+            {
+                <tr>
+                    <td><a href="@Url.Action("Details", new { id = o.SalesOrderId })">@o.OrderNo</a></td>
+                    <td>@o.ReceivedAt.ToString("g")</td><td>@o.RepCode</td><td>@o.Customer.Name</td>
+                    <td>@o.RequestedDelivery.ToString("ddd d.M.")</td>
+                    <td class="text-right">@o.ManualDiscountPercent.ToString("0.##")</td><td class="text-right">@o.NetTotal.ToString("N2")</td>
+                </tr>
+            }
+        </table>
+    }
+</div>

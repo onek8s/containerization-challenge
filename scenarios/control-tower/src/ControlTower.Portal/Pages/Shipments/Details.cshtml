@@ -1,0 +1,52 @@
+@page "{id:int}"
+@model Proseware.ControlTower.Portal.Pages.Shipments.DetailsModel
+@{ var s = Model.Shipment; ViewData["Title"] = s.Number; }
+<div class="d-flex align-items-center mb-3" data-shipment="@s.Id">
+    <h1 class="h4 me-3 mb-0">@s.Number</h1>
+    <span class="badge bg-primary status">@s.Status</span>
+    <span class="ms-3 text-muted">@s.CustomerReference</span>
+</div>
+<div class="row">
+    <div class="col-md-7">
+        <div class="row mb-3">
+            <div class="col-6"><div class="small text-muted">From</div>@s.ShipperName<br />@s.Origin?.City, @s.Origin?.CountryCode</div>
+            <div class="col-6"><div class="small text-muted">To</div>@s.ConsigneeName<br />@s.Destination?.City, @s.Destination?.CountryCode</div>
+        </div>
+        <dl class="row small">
+            <dt class="col-4">Planned delivery</dt><dd class="col-8">@s.PlannedDelivery.ToString("dd.MM.yyyy")</dd>
+            <dt class="col-4">Estimated arrival</dt><dd class="col-8 eta">@s.Eta?.ToString("dd.MM.yyyy HH:mm")</dd>
+            @if (s.ActualDelivery is { } delivered)
+            {
+                <dt class="col-4">Delivered</dt><dd class="col-8">@delivered.ToString("dd.MM.yyyy HH:mm"), signed by @s.PodSignedBy</dd>
+            }
+            <dt class="col-4">Packages</dt><dd class="col-8">@s.PackageCount, @s.GrossWeightKg.ToString("0") kg</dd>
+            @foreach (var leg in s.Legs.OrderBy(l => l.Sequence).Where(l => l.Carrier?.TrackingUrl(l.CarrierReference) != null))
+            {
+                <dt class="col-4">@leg.Carrier!.Name</dt><dd class="col-8"><a href="@leg.Carrier.TrackingUrl(leg.CarrierReference)" target="_blank">@leg.CarrierReference</a></dd>
+            }
+        </dl>
+        <h2 class="h6">Tracking</h2>
+        <partial name="_Timeline" model="s" />
+    </div>
+    <div class="col-md-5">
+        @if (Model.VehiclePosition is { } pos)
+        {
+            <div id="map" style="height:300px" class="mb-2"
+                 data-lat="@pos.Lat.ToString(System.Globalization.CultureInfo.InvariantCulture)" data-lon="@pos.Lon.ToString(System.Globalization.CultureInfo.InvariantCulture)"
+                 data-dest-lat="@s.Destination!.Position.Y.ToString(System.Globalization.CultureInfo.InvariantCulture)" data-dest-lon="@s.Destination.Position.X.ToString(System.Globalization.CultureInfo.InvariantCulture)"></div>
+            <div class="small text-muted mb-3">Last position @pos.At.ToString("dd.MM. HH:mm") UTC</div>
+        }
+        <h2 class="h6">Documents</h2>
+        @if (Model.Documents.Count == 0) { <p class="small text-muted">No documents yet.</p> }
+        <ul class="list-unstyled small">
+            @foreach (var d in Model.Documents)
+            {
+                <li><a asp-page="/Shipments/Details" asp-page-handler="Document" asp-route-id="@s.Id" asp-route-documentId="@d.Id">@d.FileName</a></li>
+            }
+        </ul>
+    </div>
+</div>
+@section Scripts {
+    <script src="~/js/map.js" asp-append-version="true"></script>
+    <script src="~/js/live.js" asp-append-version="true"></script>
+}

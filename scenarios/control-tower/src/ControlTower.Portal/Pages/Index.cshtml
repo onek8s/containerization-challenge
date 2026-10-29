@@ -1,0 +1,33 @@
+@page
+@model IndexModel
+@{ ViewData["Title"] = "My shipments"; }
+<div class="d-flex align-items-center mb-2">
+    <h1 class="h4 me-auto">Shipments</h1>
+    <form method="get" class="d-flex">
+        <input name="q" value="@Model.Q" class="form-control form-control-sm me-2" placeholder="Number or your reference" />
+        <select name="view" class="form-select form-select-sm me-2">
+            <option value="open" selected="@(Model.View == "open")">In progress</option>
+            <option value="all" selected="@(Model.View == "all")">All</option>
+        </select>
+        <button class="btn btn-sm btn-primary">Search</button>
+    </form>
+</div>
+<table class="table table-sm table-hover" id="shipments">
+    <thead><tr><th>Shipment</th><th>Your reference</th><th>From</th><th>To</th><th>Status</th><th>Planned delivery</th><th>Estimated arrival</th></tr></thead>
+    <tbody>
+    @foreach (var s in Model.Result.Items)
+    {
+        <tr data-shipment="@s.Id">
+            <td><a asp-page="/Shipments/Details" asp-route-id="@s.Id">@s.Number</a></td>
+            <td>@s.CustomerReference</td>
+            <td>@s.Origin</td>
+            <td>@s.Destination</td>
+            <td class="status">@s.Status</td>
+            <td>@s.PlannedDelivery.ToString("dd.MM.yyyy")</td>
+            <td class="eta">@s.Eta?.ToString("dd.MM.yyyy HH:mm")</td>
+        </tr>
+    }
+    </tbody>
+</table>
+<p class="small text-muted">@Model.Result.Total shipments</p>
+@section Scripts { <script src="~/js/live.js" asp-append-version="true"></script> }

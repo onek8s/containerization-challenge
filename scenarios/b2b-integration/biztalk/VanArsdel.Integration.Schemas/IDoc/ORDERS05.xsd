@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.vanarsdel.com/erp/idoc/2013" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" xmlns:ns0="https://VanArsdel.Integration.Schemas.PropertySchema" elementFormDefault="unqualified" targetNamespace="http://schemas.vanarsdel.com/erp/idoc/2013" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:include schemaLocation="IDocTypes.xsd" />
+  <xs:annotation>
+    <xs:appinfo>
+      <b:schemaInfo root_reference="ORDERS05" standard="XML" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" />
+      <b:imports xmlns:b="http://schemas.microsoft.com/BizTalk/2003">
+        <b:namespace prefix="ns0" uri="https://VanArsdel.Integration.Schemas.PropertySchema" location="VanArsdel.Integration.Schemas.PropertySchema" />
+      </b:imports>
+    </xs:appinfo>
+    <xs:documentation>ORDERS05: inbound sales orders to the ERP (DIRECT 2, partner type KU) and outbound purchase orders from the ERP (DIRECT 1, partner type LI).</xs:documentation>
+  </xs:annotation>
+  <xs:element name="ORDERS05">
+    <xs:annotation>
+      <xs:appinfo>
+        <b:properties>
+          <b:property distinguished="false" name="ns0:OrderNumber" xpath="/*[local-name()='ORDERS05']/*[local-name()='IDOC']/*[local-name()='E1EDK01']/*[local-name()='BELNR']" />
+        </b:properties>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="IDOC" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="EDI_DC40" type="tns:EDI_DC40" />
+              <xs:element name="E1EDK01">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element minOccurs="0" name="ACTION" type="xs:string" />
+                    <xs:element name="CURCY" type="xs:string" />
+                    <xs:element minOccurs="0" name="BSART" type="xs:string" />
+                    <xs:element name="BELNR" type="xs:string" />
+                    <xs:element minOccurs="0" name="VSART" type="xs:string" />
+                    <xs:element minOccurs="0" name="RECIPNT_NO" type="xs:string" />
+                  </xs:sequence>
+                  <xs:attribute name="SEGMENT" type="xs:string" use="required" />
+                </xs:complexType>
+              </xs:element>
+              <xs:element minOccurs="0" maxOccurs="10" name="E1EDK14">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="QUALF" type="xs:string" />
+                    <xs:element name="ORGID" type="xs:string" />
+                  </xs:sequence>
+                  <xs:attribute name="SEGMENT" type="xs:string" use="required" />
+                </xs:complexType>
+              </xs:element>
+              <xs:element minOccurs="0" maxOccurs="10" name="E1EDK03" type="tns:E1EDK03" />
+              <xs:element maxOccurs="10" name="E1EDKA1" type="tns:E1EDKA1" />
+              <xs:element minOccurs="0" maxOccurs="10" name="E1EDK02" type="tns:E1EDK02" />
+              <xs:element minOccurs="0" maxOccurs="99" name="E1EDKT1">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="TDID" type="xs:string" />
+                    <xs:element name="E1EDKT2" maxOccurs="99">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="TDLINE" type="xs:string" />
+                        </xs:sequence>
+                        <xs:attribute name="SEGMENT" type="xs:string" use="required" />
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                  <xs:attribute name="SEGMENT" type="xs:string" use="required" />
+                </xs:complexType>
+              </xs:element>
+              <xs:element maxOccurs="unbounded" name="E1EDP01">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="POSEX" type="xs:string" />
+                    <xs:element name="MENGE" type="xs:string" />
+                    <xs:element name="MENEE" type="xs:string" />
+                    <xs:element minOccurs="0" name="VPREI" type="xs:string" />
+                    <xs:element minOccurs="0" name="PEINH" type="xs:string" />
+                    <xs:element minOccurs="0" name="NETWR" type="xs:string" />
+                    <xs:element minOccurs="0" maxOccurs="5" name="E1EDP20">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="WMENG" type="xs:string" />
+                          <xs:element minOccurs="0" name="EDATU" type="xs:string" />
+                        </xs:sequence>
+                        <xs:attribute name="SEGMENT" type="xs:string" use="required" />
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element maxOccurs="5" name="E1EDP19" type="tns:E1EDP19" />
+                  </xs:sequence>
+                  <xs:attribute name="SEGMENT" type="xs:string" use="required" />
+                </xs:complexType>
+              </xs:element>
+              <xs:element minOccurs="0" maxOccurs="5" name="E1EDS01" type="tns:E1EDS01" />
+            </xs:sequence>
+            <xs:attribute name="BEGIN" type="xs:string" use="required" />
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

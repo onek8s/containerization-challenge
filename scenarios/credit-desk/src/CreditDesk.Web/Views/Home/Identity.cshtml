@@ -1,0 +1,10 @@
+@model CreditDesk.Contracts.UserInfo
+@{ ViewBag.Title = "Sign-in details"; }
+<h1>Sign-in details</h1>
+<table class="kv">
+    <tr><th>Web user</th><td>@ViewBag.WebUser.Name (@ViewBag.WebUser.AuthenticationType)</td></tr>
+    <tr><th>Web thread identity</th><td>@ViewBag.WebIdentity.Name (@ViewBag.WebIdentity.ImpersonationLevel)</td></tr>
+    <tr><th>Credit server</th><td>@Model.ServerName</td></tr>
+    <tr><th>Identity at credit server</th><td>@Model.AccountName (@Model.AuthenticationType, @Model.ImpersonationLevel)</td></tr>
+    <tr><th>Credit Desk roles</th><td>@Model.Roles</td></tr>
+</table>

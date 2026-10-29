@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>VanArsdel.Integration.Messaging</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Text.Encoding.CodePages" Version="4.5.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\VanArsdel.Integration.Contracts\VanArsdel.Integration.Contracts.csproj" />
+    <ProjectReference Include="..\VanArsdel.Integration.Edi\VanArsdel.Integration.Edi.csproj" />
+  </ItemGroup>
+
+</Project>

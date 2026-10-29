@@ -1,0 +1,13 @@
+@inherits RazorLight.TemplatePage<Proseware.ControlTower.Documents.ShipmentDocumentModel>
+<div class="header">
+    <div class="issuer">
+        <h1>@Model.Title</h1>
+        <div><strong>@Model.DocumentNumber</strong> &middot; House @Model.Shipment.Number</div>
+        <div class="small">@Model.Issuer.Name, @Model.Issuer.Street, @Model.Issuer.PostalCode @Model.Issuer.City, @Model.Issuer.CountryCode &middot; VAT @Model.Issuer.VatNumber &middot; @Model.Issuer.Phone</div>
+        <div class="small">Issued @Model.IssuedAt.ToString("yyyy-MM-dd HH:mm") UTC</div>
+    </div>
+    <div class="qr">
+        <img src="@Model.QrCodeDataUri" width="90" height="90" alt="" /><br />
+        <span class="small">Track online</span>
+    </div>
+</div>

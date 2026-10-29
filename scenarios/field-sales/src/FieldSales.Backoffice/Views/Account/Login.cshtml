@@ -1,0 +1,18 @@
+@model LoginViewModel
+@{
+    ViewBag.Title = "Sign in";
+}
+<div class="panel login">
+    <h1>Sales Office</h1>
+    @using (Html.BeginForm("Login", "Account", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(m => m.ReturnUrl)
+        @Html.ValidationSummary(true)
+        <div class="form-row">@Html.LabelFor(m => m.UserName)@Html.TextBoxFor(m => m.UserName, new { autofocus = "autofocus" })</div>
+        <div class="form-row">@Html.LabelFor(m => m.Password)@Html.PasswordFor(m => m.Password)</div>
+        <div class="form-row"><label></label><span>@Html.CheckBoxFor(m => m.RememberMe) @Html.DisplayNameFor(m => m.RememberMe)</span></div>
+        <div class="form-row"><label></label><button type="submit" class="btn btn-primary">Sign in</button></div>
+    }
+    <p class="muted">Sales reps: use the Field Sales application on your laptop.</p>
+</div>

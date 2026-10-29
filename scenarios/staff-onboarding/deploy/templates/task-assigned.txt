@@ -1,0 +1,9 @@
+Subject: {TaskKind} needed: {Subject} ({RequestNumber})
+Hello,
+
+A staff onboarding request needs your decision: {TaskKind} for {Subject}.
+
+Open the task: {TaskUrl}
+Please decide by {DueDate}. You will receive reminders, and the task moves to your manager if it is not decided.
+
+Staff Onboarding

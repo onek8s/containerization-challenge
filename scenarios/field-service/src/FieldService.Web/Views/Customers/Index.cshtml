@@ -1,0 +1,22 @@
+@model List<CustomerRow>
+@{
+    ViewData["Title"] = "Customers";
+}
+<h2>Customers</h2>
+<table class="table table-striped">
+    <thead><tr><th>Account</th><th>Name</th><th>Contact</th><th class="text-end">Rate / h</th><th class="text-end">SLA h</th><th class="text-end">Open</th><th class="text-end">Total</th></tr></thead>
+    <tbody>
+    @foreach (var row in Model)
+    {
+        <tr>
+            <td>@row.Customer.AccountCode</td>
+            <td>@row.Customer.Name</td>
+            <td>@row.Customer.ContactEmail</td>
+            <td class="text-end">@row.Customer.HourlyRate.ToString("N2")</td>
+            <td class="text-end">@row.Customer.SlaHours</td>
+            <td class="text-end">@row.OpenOrders</td>
+            <td class="text-end">@row.TotalOrders</td>
+        </tr>
+    }
+    </tbody>
+</table>

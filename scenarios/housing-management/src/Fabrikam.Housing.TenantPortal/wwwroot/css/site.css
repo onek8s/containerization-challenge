@@ -1,0 +1,13 @@
+body { background: #f6f7f9; color: #1d2733; }
+.brand-bar { background: #00594f; }
+.btn-primary { background: #00594f; border-color: #00594f; }
+.btn-primary:hover { background: #00443c; border-color: #00443c; }
+.balance-owed { color: #b00020; font-weight: 600; }
+.balance-credit { color: #1e7b34; font-weight: 600; }
+.tile { background: #fff; border: 1px solid #dde2e7; border-radius: .4rem; padding: 1rem; height: 100%; }
+.tile h2 { font-size: 1rem; color: #4a5866; text-transform: uppercase; letter-spacing: .04em; }
+.tile .figure { font-size: 1.8rem; }
+.wizard-steps { color: #4a5866; font-size: .9rem; margin-bottom: 1rem; }
+.option-list label { display: block; padding: .6rem .8rem; border: 1px solid #dde2e7; border-radius: .3rem; background: #fff; margin-bottom: .4rem; cursor: pointer; }
+.field-validation-error, .validation-summary-errors { color: #b00020; }
+table.statement td.num, table.statement th.num { text-align: right; white-space: nowrap; }

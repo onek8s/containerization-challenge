@@ -1,0 +1,219 @@
+@using Proseware.ControlTower.Domain.Customs
+@using Proseware.ControlTower.Domain.Documents
+@model ShipmentDetailsViewModel
+@{
+    var s = Model.Shipment;
+    ViewData["Title"] = s.Number;
+    var canBook = User.IsInRole("booking") || User.IsInRole("admin");
+}
+<div class="d-flex align-items-center mb-2">
+    <h1 class="h3 me-3 mb-0">@s.Number</h1>
+    <partial name="_StatusBadge" model="s.Status" />
+    <span class="ms-3 text-muted">@s.Customer?.Name &middot; @s.CustomerReference &middot; @s.Mode &middot; @s.IncotermCode</span>
+    @if (canBook && s.Status == ShipmentStatus.Requested)
+    {
+        <form method="post" asp-action="Confirm" asp-route-id="@s.Id" class="ms-auto"><button class="btn btn-success btn-sm">Confirm booking request</button></form>
+    }
+</div>
+
+<div class="row">
+    <div class="col-lg-8">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card mb-3"><div class="card-body">
+                    <h2 class="h6">From</h2>
+                    <div>@s.ShipperName</div>
+                    <div class="small">@s.Origin?.DisplayAddress (@s.Origin?.Code)</div>
+                    <div class="small text-muted">Planned pickup @s.PlannedPickup.ToString("yyyy-MM-dd HH:mm") UTC@(s.ActualPickup is { } ap ? $", picked up {ap:yyyy-MM-dd HH:mm}" : "")</div>
+                </div></div>
+            </div>
+            <div class="col-md-6">
+                <div class="card mb-3"><div class="card-body">
+                    <h2 class="h6">To</h2>
+                    <div>@s.ConsigneeName <span class="small text-muted">@s.ConsigneeEmail @s.NotifyPhone</span></div>
+                    <div class="small">@s.Destination?.DisplayAddress (@s.Destination?.Code)</div>
+                    <div class="small text-muted">Planned delivery @s.PlannedDelivery.ToString("yyyy-MM-dd HH:mm") UTC, ETA @s.Eta?.ToString("yyyy-MM-dd HH:mm")@(s.ActualDelivery is { } ad ? $", delivered {ad:yyyy-MM-dd HH:mm} ({s.PodSignedBy})" : "")</div>
+                </div></div>
+            </div>
+        </div>
+
+        <h2 class="h5">Legs</h2>
+        <table class="table table-sm">
+            <thead><tr><th>#</th><th>Mode</th><th>From</th><th>To</th><th>Carrier</th><th>Reference</th><th>Planned</th><th>Actual / ETA</th><th>Status</th><th></th></tr></thead>
+            <tbody>
+            @foreach (var l in Model.Legs)
+            {
+                <tr>
+                    <td>@l.Sequence</td>
+                    <td>@l.Mode</td>
+                    <td>@l.From</td>
+                    <td>@l.To</td>
+                    <td>@l.CarrierName <span class="small text-muted">@l.VehiclePlate @l.VesselOrFlight</span></td>
+                    <td>@if (l.TrackingUrl is not null) { <a href="@l.TrackingUrl" target="_blank">@l.CarrierReference</a> } else { @l.CarrierReference }</td>
+                    <td class="small">@l.PlannedDeparture.ToString("dd.MM. HH:mm") &rarr; @l.PlannedArrival.ToString("dd.MM. HH:mm")</td>
+                    <td class="small">@l.ActualDeparture?.ToString("dd.MM. HH:mm") &rarr; @(l.ActualArrival?.ToString("dd.MM. HH:mm") ?? (l.Eta is { } e ? "ETA " + e.ToString("dd.MM. HH:mm") : ""))</td>
+                    <td>@l.Status</td>
+                    <td class="text-nowrap">
+                        @if (canBook && l.Status == LegStatus.Planned)
+                        {
+                            <form method="post" asp-action="BookLeg" asp-route-id="@s.Id" class="d-inline"><input type="hidden" name="legId" value="@l.Id" /><button class="btn btn-outline-primary btn-sm">Book</button></form>
+                            <button class="btn btn-link btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#leg-@l.Id">Edit</button>
+                        }
+                    </td>
+                </tr>
+                @if (canBook && l.Status == LegStatus.Planned)
+                {
+                    <tr class="collapse" id="leg-@l.Id"><td colspan="10">
+                        <form method="post" asp-action="LegCarrier" asp-route-id="@s.Id" class="row g-2">
+                            <input type="hidden" name="legId" value="@l.Id" />
+                            <div class="col-md-4"><select name="carrierId" class="form-select form-select-sm" asp-items="@(new Microsoft.AspNetCore.Mvc.Rendering.SelectList((IEnumerable<Microsoft.AspNetCore.Mvc.Rendering.SelectListItem>)ViewBag.Carriers, "Value", "Text", l.CarrierId))"><option value="">(no carrier)</option></select></div>
+                            <div class="col-md-4"><input name="reference" class="form-control form-control-sm" placeholder="Carrier reference (manual booking)" /></div>
+                            <div class="col-md-2"><button class="btn btn-sm btn-primary">Save</button></div>
+                        </form>
+                    </td></tr>
+                }
+            }
+            </tbody>
+        </table>
+
+        <h2 class="h5">Packages <span class="small text-muted">@s.PackageCount pcs, @s.GrossWeightKg.ToString("0.0") kg, @s.VolumeM3.ToString("0.00") m³, chargeable @Model.ChargeableKg.ToString("0.0") kg</span></h2>
+        <table class="table table-sm">
+            <thead><tr><th>SSCC</th><th>Kind</th><th>Qty</th><th>kg</th><th>Dimensions</th><th>Stackable</th><th>Dangerous goods</th><th>Container</th></tr></thead>
+            <tbody>
+            @foreach (var p in s.Packages)
+            {
+                <tr>
+                    <td class="font-monospace">@p.Sscc</td>
+                    <td>@p.Kind</td>
+                    <td>@p.Quantity</td>
+                    <td>@p.WeightKg.ToString("0.0")</td>
+                    <td>@p.LengthCm x @p.WidthCm x @p.HeightCm</td>
+                    <td>@(p.Stackable ? "yes" : "no")</td>
+                    <td>@if (p.DangerousGoods is { } dg) { <span class="badge bg-danger">UN @dg.UnNumber cl. @dg.HazardClass @(dg.LimitedQuantity ? "LQ" : "")</span> }</td>
+                    <td>@p.ContainerNumber @p.SealNumber</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+        @if (s.IsReefer) { <div class="alert alert-primary py-1">Temperature range @s.TemperatureMin … @s.TemperatureMax °C</div> }
+
+        <h2 class="h5">Customs</h2>
+        @if (s.CustomsDeclarations.Count == 0)
+        {
+            <p class="text-muted small">No declarations.</p>
+        }
+        @foreach (var d in s.CustomsDeclarations)
+        {
+            <div class="card mb-2"><div class="card-body py-2">
+                <div><strong>@d.Type</strong> @d.Lrn <span class="badge bg-secondary">@d.Status</span> @d.Mrn <span class="small text-muted">office @d.OfficeOfDeclaration @d.OfficeOfExit</span></div>
+                @if (d.RejectionReason is not null) { <div class="text-danger small">@d.RejectionReason</div> }
+                <table class="table table-sm mb-1">
+                    @foreach (var line in d.Lines.OrderBy(x => x.LineNumber))
+                    {
+                        <tr>
+                            @if (canBook && d.Status is DeclarationStatus.Draft or DeclarationStatus.Rejected)
+                            {
+                                <td colspan="5">
+                                    <form method="post" asp-action="DeclarationLine" asp-route-id="@s.Id" class="row g-1">
+                                        <input type="hidden" name="lineId" value="@line.Id" />
+                                        <div class="col-md-1">@line.LineNumber</div>
+                                        <div class="col-md-2"><input name="commodityCode" value="@line.CommodityCode" class="form-control form-control-sm" placeholder="CN code" /></div>
+                                        <div class="col-md-5"><input name="description" value="@line.Description" class="form-control form-control-sm" /></div>
+                                        <div class="col-md-2"><input name="statisticalValue" value="@line.StatisticalValue.ToString(System.Globalization.CultureInfo.InvariantCulture)" class="form-control form-control-sm" /></div>
+                                        <div class="col-md-2"><button class="btn btn-sm btn-outline-secondary">Save</button></div>
+                                    </form>
+                                </td>
+                            }
+                            else
+                            {
+                                <td>@line.LineNumber</td><td>@line.CommodityCode</td><td>@line.Description</td><td>@line.OriginCountry</td><td>@line.StatisticalValue @d.CurrencyCode</td>
+                            }
+                        </tr>
+                    }
+                </table>
+                @if (Model.DeclarationErrors.TryGetValue(d.Id, out var errs) && errs.Count > 0)
+                {
+                    <ul class="small text-danger mb-1">@foreach (var e in errs) { <li>@e</li> }</ul>
+                }
+                @if (canBook && d.Status is DeclarationStatus.Draft or DeclarationStatus.Rejected)
+                {
+                    <form method="post" asp-action="SubmitCustoms" asp-route-id="@s.Id"><input type="hidden" name="declarationId" value="@d.Id" /><button class="btn btn-sm btn-primary">Send to customs</button></form>
+                }
+            </div></div>
+        }
+
+        <h2 class="h5 mt-3">Charges</h2>
+        <table class="table table-sm w-auto">
+            @foreach (var c in s.Charges)
+            {
+                <tr><td>@c.Code</td><td>@c.Description</td><td class="text-end">@c.Amount.ToString("N2")</td><td>@c.Currency</td><td>@c.InvoiceNumber</td></tr>
+            }
+            <tr class="fw-bold"><td></td><td>Total</td><td class="text-end">@s.Charges.Sum(c => c.Amount).ToString("N2")</td><td>@s.Charges.FirstOrDefault()?.Currency</td><td></td></tr>
+        </table>
+    </div>
+
+    <div class="col-lg-4">
+        @if (Model.Alerts.Any(a => a.IsOpen))
+        {
+            <div class="card border-danger mb-3"><div class="card-body">
+                <h2 class="h6 text-danger">Open alerts</h2>
+                @foreach (var a in Model.Alerts.Where(a => a.IsOpen)) { <div class="small"><strong>@a.RuleCode</strong> @a.Message</div> }
+            </div></div>
+        }
+
+        <div class="card mb-3"><div class="card-body">
+            <h2 class="h6">Documents</h2>
+            <ul class="list-unstyled small">
+                @foreach (var d in Model.Documents)
+                {
+                    <li><a asp-action="Document" asp-route-id="@s.Id" asp-route-documentId="@d.Id">@d.FileName</a> <span class="text-muted">@d.CreatedAt.ToString("dd.MM. HH:mm") @d.CreatedBy</span></li>
+                }
+            </ul>
+            <form method="post" asp-action="CreateDocument" asp-route-id="@s.Id" class="d-flex">
+                <select name="kind" class="form-select form-select-sm me-2">
+                    <option value="@DocumentKind.Cmr">CMR</option>
+                    <option value="@DocumentKind.DeliveryNote">Delivery note</option>
+                    @if (s.Mode == TransportMode.Sea) { <option value="@DocumentKind.HouseBillOfLading">House B/L</option> }
+                    @if (s.Mode == TransportMode.Air) { <option value="@DocumentKind.HouseAirWaybill">House AWB</option> }
+                    @if (s.IsDangerousGoods) { <option value="@DocumentKind.DangerousGoodsNote">DG note</option> }
+                </select>
+                <button class="btn btn-sm btn-outline-primary text-nowrap">Create</button>
+            </form>
+        </div></div>
+
+        <div class="card mb-3"><div class="card-body">
+            <h2 class="h6">Labels</h2>
+            <form method="post" asp-action="PrintLabels" asp-route-id="@s.Id" class="d-flex">
+                <select name="printer" class="form-select form-select-sm me-2">
+                    @foreach (var p in Model.Printers) { <option>@p</option> }
+                </select>
+                <button class="btn btn-sm btn-outline-primary text-nowrap">Print all</button>
+            </form>
+        </div></div>
+
+        <div class="card mb-3"><div class="card-body">
+            <h2 class="h6">Timeline</h2>
+            <ul class="list-unstyled small timeline">
+                @foreach (var m in Model.Milestones)
+                {
+                    <li class="mb-1"><span class="text-muted">@m.OccurredAt.ToString("dd.MM. HH:mm")</span> <strong>@m.Description</strong> @m.Location <span class="text-muted">(@m.Source)</span>@if (m.Remarks is not null) { <div>@m.Remarks</div> }</li>
+                }
+            </ul>
+            <form method="post" asp-action="Milestone" asp-route-id="@s.Id" class="row g-1">
+                <div class="col-12"><select name="Code" class="form-select form-select-sm" asp-items="ManualMilestoneInput.Codes"></select></div>
+                <div class="col-6"><input name="OccurredAtLocal" type="datetime-local" class="form-control form-control-sm" value="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")" /></div>
+                <div class="col-6"><input name="LocationCode" class="form-control form-control-sm" placeholder="Location code" /></div>
+                <div class="col-12"><input name="Remarks" class="form-control form-control-sm" placeholder="Remarks" /></div>
+                <div class="col-12"><button class="btn btn-sm btn-outline-secondary">Add status</button></div>
+            </form>
+        </div></div>
+
+        @if (canBook && (s.Status == ShipmentStatus.Booked || s.Status == ShipmentStatus.Requested))
+        {
+            <form method="post" asp-action="Cancel" asp-route-id="@s.Id" class="d-flex">
+                <input name="reason" class="form-control form-control-sm me-2" placeholder="Reason" />
+                <button class="btn btn-sm btn-outline-danger" onclick="return confirm('Cancel @s.Number?')">Cancel shipment</button>
+            </form>
+        }
+    </div>
+</div>

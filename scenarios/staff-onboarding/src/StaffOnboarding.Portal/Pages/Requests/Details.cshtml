@@ -1,0 +1,118 @@
+@page "/requests/{number}"
+@model StaffOnboarding.Portal.Pages.Requests.DetailsModel
+@inject CurrentUser CurrentUser
+@{
+    var r = Model.Row!;
+    ViewData["Title"] = r.RequestNumber;
+    var open = r.Status is not (RequestStatus.Completed or RequestStatus.Cancelled or RequestStatus.Rejected or RequestStatus.Failed);
+}
+<h1>@r.RequestNumber · @r.Kind · @r.Subject</h1>
+<p>
+    <partial name="_StatusBadge" model="r.Status" />
+    @if (r.NextStep != null)
+    {
+        <span>Next: @r.NextStep at @(r.NextStepAtUtc?.ToLocalTime().ToString("dd.MM.yyyy HH:mm"))</span>
+    }
+</p>
+@if (Model.Error != null)
+{
+    <p class="error">@Model.Error</p>
+}
+
+<div class="grid">
+    <div>
+        <h2>Details</h2>
+        <table>
+            <tr><th>Requested by</th><td>@r.RequestedBy, @r.SubmittedAtUtc.ToLocalTime().ToString("dd.MM.yyyy HH:mm")</td></tr>
+            <tr><th>Date</th><td>@r.EffectiveDate.ToString("dd.MM.yyyy")</td></tr>
+            <tr><th>Department</th><td>@r.Department</td></tr>
+            <tr><th>Manager</th><td>@r.ManagerAccount</td></tr>
+            <tr><th>Account</th><td>@(Model.Account?.SamAccountName ?? r.SamAccountName)</td></tr>
+            @if (Model.Account != null)
+            {
+                <tr><th>Mail</th><td>@Model.Account.Mail</td></tr>
+                <tr><th>Directory</th><td>@Model.Account.DistinguishedName</td></tr>
+                <tr><th>Home folder</th><td>@Model.Account.HomeDirectory</td></tr>
+            }
+            @if (CurrentUser.IsIt)
+            {
+                <tr><th>Workflow</th><td>@r.Definition @r.WorkflowInstanceId</td></tr>
+            }
+        </table>
+
+        <h2>Tasks</h2>
+        <table>
+            <tr><th>Task</th><th>Assigned to</th><th>Status</th><th>Decision</th></tr>
+            @foreach (var t in Model.Tasks)
+            {
+                <tr>
+                    <td><a asp-page="/Tasks/Details" asp-route-id="@t.TaskId">@StaffOnboarding.Portal.Pages.IndexModel.Describe(t.Kind)</a></td>
+                    <td>@t.AssignedTo</td>
+                    <td>@t.Status</td>
+                    <td>@t.Outcome @t.DecidedBy @t.Comment</td>
+                </tr>
+            }
+        </table>
+
+        <h2>Documents</h2>
+        <ul>
+            @foreach (var f in Model.Documents)
+            {
+                <li><a href="/requests/@r.RequestNumber/documents/@Uri.EscapeDataString(f.Name)">@f.Name</a> (@(f.Length / 1024) KB)</li>
+            }
+        </ul>
+        @if (CurrentUser.IsHr)
+        {
+            <form method="post" asp-page-handler="Upload" enctype="multipart/form-data">
+                <input type="file" name="document" />
+                <button>Attach</button>
+            </form>
+        }
+    </div>
+    <div>
+        <h2>Timeline</h2>
+        <table>
+            @foreach (var e in Model.Timeline)
+            {
+                <tr>
+                    <td>@e.AtUtc.ToLocalTime().ToString("dd.MM. HH:mm")</td>
+                    <td>@e.Actor</td>
+                    <td><strong>@e.Event</strong><br />@e.Detail</td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+
+@if (CurrentUser.IsHr && open)
+{
+    <h2>Change request</h2>
+    <div class="actions">
+        @if (r.Kind == RequestKind.Joiner && r.Status is not RequestStatus.Provisioning)
+        {
+            <form method="post" asp-page-handler="StartDate">
+                <label>New start date</label>
+                <input type="date" name="date" required />
+                <button>Change start date</button>
+            </form>
+        }
+        @if (r.Kind == RequestKind.Leaver && r.Status is RequestStatus.Scheduled)
+        {
+            <form method="post" asp-page-handler="LastDay">
+                <label>New last working day</label>
+                <input type="date" name="date" required />
+                <button>Change last day</button>
+            </form>
+            <form method="post" asp-page-handler="DisableNow">
+                <label>Reason</label>
+                <input name="reason" required />
+                <button class="danger">Disable account now</button>
+            </form>
+        }
+        <form method="post" asp-page-handler="Cancel">
+            <label>Reason for cancelling</label>
+            <input name="reason" required />
+            <button class="secondary">Cancel request</button>
+        </form>
+    </div>
+}

@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Humongous.PolicyService": {
+      "commandName": "Project",
+      "environmentVariables": { "DOTNET_ENVIRONMENT": "Development" }
+    }
+  }
+}

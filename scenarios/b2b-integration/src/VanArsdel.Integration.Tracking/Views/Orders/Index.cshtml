@@ -1,0 +1,38 @@
+@model VanArsdel.Integration.Tracking.Models.OrderSearchModel
+@{ ViewBag.Title = "Orders"; }
+<h2>Orders</h2>
+@using (Html.BeginForm("Index", "Orders", FormMethod.Get, new { @class = "search-form form-inline" }))
+{
+    if (Model.Partners.Count > 1)
+    {
+        @Html.DropDownListFor(m => m.PartnerId, new SelectList(Model.Partners), "All partners", new { @class = "form-control" })
+    }
+    @Html.TextBoxFor(m => m.OrderNumber, new { @class = "form-control", placeholder = "PO number" })
+    @Html.TextBoxFor(m => m.ErpOrderNumber, new { @class = "form-control", placeholder = "ERP order" })
+    @Html.TextBoxFor(m => m.From, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })
+    @Html.TextBoxFor(m => m.To, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })
+    @Html.DropDownListFor(m => m.Status, new SelectList(VanArsdel.Integration.Tracking.Models.OrderSearchModel.Statuses), "Any status", new { @class = "form-control" })
+    <button type="submit" class="btn btn-primary">Search</button>
+    <button type="submit" class="btn btn-default" formaction="@Url.Action("Export", "Orders")">Export to Excel</button>
+}
+<p class="text-muted">@(Model.Searched ? Model.Results.Count + " order(s) found." : "Open orders (not yet invoiced or rejected).")</p>
+<table class="table table-condensed table-striped">
+    <thead>
+        <tr><th>Partner</th><th>PO number</th><th>ERP order</th><th>Status</th><th class="text-right">Lines</th><th class="text-right">Value</th><th>Received</th><th>Last step</th></tr>
+    </thead>
+    <tbody>
+        @foreach (var o in Model.Results)
+        {
+            <tr>
+                <td>@o.PartnerId</td>
+                <td>@Html.RouteLink(o.OrderNumber, "Order", new { partnerId = o.PartnerId, orderNumber = o.OrderNumber })</td>
+                <td>@o.ErpOrderNumber</td>
+                <td class="status-@o.Status">@o.Status</td>
+                <td class="text-right">@o.LineCount</td>
+                <td class="text-right">@o.OrderValue.ToString("N2")</td>
+                <td>@(o.ReceivedUtc.HasValue ? o.ReceivedUtc.Value.ToString("yyyy-MM-dd HH:mm") : "")</td>
+                <td>@(o.RejectReason ?? o.HoldReason)</td>
+            </tr>
+        }
+    </tbody>
+</table>

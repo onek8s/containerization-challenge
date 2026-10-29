@@ -1,0 +1,55 @@
+{
+  "id": 10482,
+  "parent_id": 0,
+  "number": "10482",
+  "order_key": "wc_order_7Kx2mQp9aZ1",
+  "created_via": "checkout",
+  "version": "4.9.2",
+  "status": "processing",
+  "currency": "EUR",
+  "date_created": "2026-10-29T14:12:09",
+  "date_created_gmt": "2026-10-29T12:12:09",
+  "discount_total": "0.00",
+  "shipping_total": "6.90",
+  "shipping_tax": "1.65",
+  "total": "389.70",
+  "total_tax": "75.43",
+  "prices_include_tax": true,
+  "customer_id": 2231,
+  "customer_note": "",
+  "billing": {
+    "first_name": "Aino",
+    "last_name": "Virtanen",
+    "company": "",
+    "address_1": "Mannerheimintie 12 B 7",
+    "address_2": "",
+    "city": "Helsinki",
+    "state": "",
+    "postcode": "00100",
+    "country": "FI",
+    "email": "aino.virtanen@example.com",
+    "phone": "+358401234567"
+  },
+  "shipping": {
+    "first_name": "Aino",
+    "last_name": "Virtanen",
+    "company": "",
+    "address_1": "Mannerheimintie 12 B 7",
+    "address_2": "",
+    "city": "Helsinki",
+    "state": "",
+    "postcode": "00100",
+    "country": "FI"
+  },
+  "payment_method": "paytrail",
+  "payment_method_title": "Paytrail",
+  "transaction_id": "a3f1e8d2-91c4-4a55-bb31-0c2f6a9e1d77",
+  "line_items": [
+    { "id": 8812, "name": "Fjell 2P tent, green", "product_id": 311, "variation_id": 0, "quantity": 1, "tax_class": "", "subtotal": "249.00", "total": "249.00", "sku": "LW-TNT-2P-GRN", "price": 249 },
+    { "id": 8813, "name": "Airmat regular", "product_id": 342, "variation_id": 0, "quantity": 2, "tax_class": "", "subtotal": "133.80", "total": "133.80", "sku": "LW-MAT-AIR-R", "price": 66.9 }
+  ],
+  "shipping_lines": [
+    { "id": 8814, "method_title": "Posti SmartPOST", "method_id": "flat_rate", "total": "6.90" }
+  ],
+  "meta_data": []
+}

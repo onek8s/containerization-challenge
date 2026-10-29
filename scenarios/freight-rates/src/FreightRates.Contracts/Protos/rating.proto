@@ -1,0 +1,58 @@
+syntax = "proto3";
+
+option csharp_namespace = "FreightRates.Contracts";
+
+package freightrates.rating.v1;
+
+import "google/protobuf/empty.proto";
+
+// Rating service hosted on the rating server. Rates are returned in cents.
+service Rating {
+  rpc Rate (RateRequest) returns (RateReply);
+  rpc GetTariffInfo (google.protobuf.Empty) returns (TariffInfoReply);
+  rpc ReloadTariffs (google.protobuf.Empty) returns (TariffInfoReply);
+}
+
+message RateRequest {
+  string origin_zip = 1;
+  string destination_zip = 2;
+  // yyyymmdd
+  int32 ship_date = 3;
+  repeated RateLine lines = 4;
+  // Optional tariff override; empty uses the default tariff.
+  string tariff_name = 5;
+}
+
+message RateLine {
+  // Freight class times ten, e.g. 775 for class 77.5.
+  int32 freight_class_x10 = 1;
+  int32 weight_lbs = 2;
+}
+
+message RateReply {
+  int64 gross_charge_cents = 1;
+  int64 minimum_charge_cents = 2;
+  int32 deficit_weight_lbs = 3;
+  int64 deficit_charge_cents = 4;
+  int32 transit_days = 5;
+  string tariff_name = 6;
+  string origin_terminal = 7;
+  string destination_terminal = 8;
+  repeated RateLineResult lines = 9;
+}
+
+message RateLineResult {
+  int32 freight_class_x10 = 1;
+  int32 weight_lbs = 2;
+  int32 rate_per_cwt_cents = 3;
+  int64 charge_cents = 4;
+}
+
+message TariffInfoReply {
+  string tariff_name = 1;
+  // yyyymmdd
+  int32 effective_date = 2;
+  string engine_version = 3;
+  string key_serial = 4;
+  int32 licence_days_left = 5;
+}

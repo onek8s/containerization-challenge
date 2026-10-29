@@ -1,0 +1,18 @@
+@page
+@model StaffOnboarding.Portal.Pages.Requests.NewLeaverModel
+@{
+    ViewData["Title"] = "Leaver";
+}
+<h1>Leaver</h1>
+<p>The account is disabled at 18:00 on the last working day and archived after 30 days, or when the handover is confirmed.</p>
+<form method="post">
+    <div asp-validation-summary="All"></div>
+    <fieldset>
+        <label asp-for="Form.SamAccountName">Employee (user name)</label><input asp-for="Form.SamAccountName" />
+        <label asp-for="Form.LastWorkingDay">Last working day</label><input asp-for="Form.LastWorkingDay" type="date" />
+        <label><input asp-for="Form.Immediate" /> Disable as soon as the manager confirms</label>
+        <label asp-for="Form.HandoverTo">Hand over home folder to (user name)</label><input asp-for="Form.HandoverTo" />
+        <label asp-for="Form.Notes">Notes</label><textarea asp-for="Form.Notes" rows="3"></textarea>
+    </fieldset>
+    <button>Submit</button>
+</form>

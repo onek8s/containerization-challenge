@@ -1,0 +1,293 @@
+{
+  "modelCode": "TH8",
+  "itemId": "TH8",
+  "name": "Tailspin TH8 eight-wheel harvester",
+  "family": "Harvester",
+  "modelYear": 2019,
+  "validFrom": "2018-09-01",
+  "validTo": null,
+  "leadTimeWeeks": 18,
+  "imageUrl": "/Content/img/th8.jpg",
+  "exportControlClass": "5A992",
+  "markets": [
+    "FI",
+    "SE",
+    "NO",
+    "DE",
+    "AT",
+    "EE",
+    "US",
+    "CA",
+    "PL",
+    "GB",
+    "FR",
+    "DK"
+  ],
+  "optionGroups": [
+    {
+      "code": "ENGINE",
+      "name": "Engine",
+      "kind": "SingleRequired",
+      "sortOrder": 10,
+      "options": [
+        {
+          "code": "ENG-240",
+          "name": "Engine 240 kW Stage V",
+          "itemId": "OPT-ENG240",
+          "isDefault": true,
+          "markets": [],
+          "extraLeadTimeWeeks": 0,
+          "discountGroup": null
+        },
+        {
+          "code": "ENG-T4F",
+          "name": "Engine 240 kW Tier 4 Final",
+          "itemId": "OPT-ENGT4F240",
+          "isDefault": false,
+          "markets": [
+            "US",
+            "CA"
+          ],
+          "extraLeadTimeWeeks": 0,
+          "discountGroup": null
+        }
+      ]
+    },
+    {
+      "code": "HEAD",
+      "name": "Harvester head",
+      "kind": "SingleRequired",
+      "sortOrder": 20,
+      "options": [
+        {
+          "code": "HEAD-H480",
+          "name": "Harvester head H480",
+          "itemId": "OPT-H480",
+          "isDefault": true,
+          "markets": [],
+          "extraLeadTimeWeeks": 0,
+          "discountGroup": null
+        },
+        {
+          "code": "HEAD-H560",
+          "name": "Harvester head H560 with multi-tree handling",
+          "itemId": "OPT-H560",
+          "isDefault": false,
+          "markets": [],
+          "extraLeadTimeWeeks": 3,
+          "discountGroup": null
+        }
+      ]
+    },
+    {
+      "code": "CRANE",
+      "name": "Crane",
+      "kind": "SingleRequired",
+      "sortOrder": 30,
+      "options": [
+        {
+          "code": "CRANE-10M",
+          "name": "Crane TH100 parallel, 10.0 m",
+          "itemId": "OPT-CRANEH10",
+          "isDefault": true,
+          "markets": [],
+          "extraLeadTimeWeeks": 0,
+          "discountGroup": null
+        },
+        {
+          "code": "CRANE-11M",
+          "name": "Crane TH110 parallel, 11.0 m",
+          "itemId": "OPT-CRANEH11",
+          "isDefault": false,
+          "markets": [],
+          "extraLeadTimeWeeks": 0,
+          "discountGroup": null
+        }
+      ]
+    },
+    {
+      "code": "MEASURE",
+      "name": "Measuring and control",
+      "kind": "SingleRequired",
+      "sortOrder": 40,
+      "options": [
+        {
+          "code": "CTRL-BASIC",
+          "name": "Tailspin TimberMate Basic",
+          "itemId": "",
+          "isDefault": true,
+          "markets": [],
+          "extraLeadTimeWeeks": 0,
+          "discountGroup": null
+        },
+        {
+          "code": "CTRL-PRO",
+          "name": "TimberMate Pro with StanForD 2010 and GNSS",
+          "itemId": "OPT-TMPRO",
+          "isDefault": false,
+          "markets": [],
+          "extraLeadTimeWeeks": 0,
+          "discountGroup": null
+        }
+      ]
+    },
+    {
+      "code": "CAB",
+      "name": "Cab",
+      "kind": "SingleRequired",
+      "sortOrder": 50,
+      "options": [
+        {
+          "code": "CAB-COMFORT",
+          "name": "Comfort cab",
+          "itemId": "",
+          "isDefault": true,
+          "markets": [],
+          "extraLeadTimeWeeks": 0,
+          "discountGroup": null
+        },
+        {
+          "code": "CAB-LEVEL",
+          "name": "Levelling and rotating cab",
+          "itemId": "OPT-CABLEVH",
+          "isDefault": false,
+          "markets": [],
+          "extraLeadTimeWeeks": 0,
+          "discountGroup": null
+        }
+      ]
+    },
+    {
+      "code": "EQUIP",
+      "name": "Equipment",
+      "kind": "Multiple",
+      "sortOrder": 60,
+      "options": [
+        {
+          "code": "COLD-PACK",
+          "name": "Nordic cold pack (-40 °C)",
+          "itemId": "OPT-COLD",
+          "isDefault": false,
+          "markets": [
+            "FI",
+            "SE",
+            "NO",
+            "CA"
+          ],
+          "extraLeadTimeWeeks": 0,
+          "discountGroup": null
+        },
+        {
+          "code": "FIRE-SUPP",
+          "name": "Fire suppression system",
+          "itemId": "OPT-FIRE",
+          "isDefault": false,
+          "markets": [],
+          "extraLeadTimeWeeks": 0,
+          "discountGroup": null
+        },
+        {
+          "code": "COLOUR-MARK",
+          "name": "Colour marking, 2 colours",
+          "itemId": "OPT-CMARK",
+          "isDefault": false,
+          "markets": [],
+          "extraLeadTimeWeeks": 0,
+          "discountGroup": null
+        },
+        {
+          "code": "STUMP-TREAT",
+          "name": "Stump treatment",
+          "itemId": "OPT-STUMP",
+          "isDefault": false,
+          "markets": [],
+          "extraLeadTimeWeeks": 0,
+          "discountGroup": null
+        },
+        {
+          "code": "LED-PACK",
+          "name": "LED working light pack",
+          "itemId": "OPT-LED",
+          "isDefault": false,
+          "markets": [],
+          "extraLeadTimeWeeks": 0,
+          "discountGroup": null
+        },
+        {
+          "code": "TELEMATICS",
+          "name": "TailspinLink telematics, 3 years",
+          "itemId": "OPT-LINK3",
+          "isDefault": false,
+          "markets": [],
+          "extraLeadTimeWeeks": 0,
+          "discountGroup": "SERVICE"
+        },
+        {
+          "code": "WARRANTY-EXT",
+          "name": "Extended warranty 36 months / 6,000 h",
+          "itemId": "OPT-WEXT36",
+          "isDefault": false,
+          "markets": [],
+          "extraLeadTimeWeeks": 0,
+          "discountGroup": "SERVICE"
+        }
+      ]
+    }
+  ],
+  "rules": [
+    {
+      "id": "TH8-R1",
+      "kind": "Requires",
+      "option": "HEAD-H560",
+      "targets": [
+        "CRANE-11M"
+      ],
+      "expression": null,
+      "message": "The H560 head needs the 11 m crane."
+    },
+    {
+      "id": "TH8-R2",
+      "kind": "Includes",
+      "option": "HEAD-H560",
+      "targets": [
+        "CTRL-PRO"
+      ],
+      "expression": null,
+      "message": null
+    },
+    {
+      "id": "TH8-R3",
+      "kind": "Requires",
+      "option": "STUMP-TREAT",
+      "targets": [
+        "CTRL-PRO"
+      ],
+      "expression": null,
+      "message": null
+    },
+    {
+      "id": "TH8-R4",
+      "kind": "Condition",
+      "option": null,
+      "targets": [],
+      "expression": "market(FI, SE, NO) and not FIRE-SUPP => invalid",
+      "message": "Fire suppression is required for harvesters sold in the Nordic countries."
+    },
+    {
+      "id": "TH8-R5",
+      "kind": "Condition",
+      "option": null,
+      "targets": [],
+      "expression": "market(US, CA) and not ENG-T4F => invalid",
+      "message": "Machines for the USA and Canada need the Tier 4 Final engine."
+    },
+    {
+      "id": "TH8-R6",
+      "kind": "Condition",
+      "option": null,
+      "targets": [],
+      "expression": "ENG-T4F and not market(US, CA) => invalid",
+      "message": "The Tier 4 Final engine is only for the USA and Canada."
+    }
+  ]
+}

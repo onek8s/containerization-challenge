@@ -1,0 +1,55 @@
+@model StatementsViewModel
+@{
+    ViewBag.Title = "Bills and payments";
+}
+<h1>Bills and payments</h1>
+<p class="balance">Your balance: <strong>@Model.Balance.ToString("C")</strong>
+    @if (Model.Balance > 0)
+    {
+        <text>&middot; @Html.ActionLink("View current statement (PDF)", "Current")</text>
+    }
+</p>
+<p>To pay, call the billing office or mail a check with the payment slip from your statement.</p>
+
+<h2>Statements</h2>
+@if (Model.Statements.Count == 0)
+{
+    <p>No statements yet.</p>
+}
+else
+{
+    <table class="list">
+        <tr><th>Date</th><th>Amount due</th><th>Due by</th></tr>
+        @foreach (var s in Model.Statements)
+        {
+            <tr class="@(s.DunningLevel > 1 ? "overdue" : null)">
+                <td>@s.StatementDate.ToString("MM/dd/yyyy")</td>
+                <td class="money">@s.AmountDue.ToString("C")</td>
+                <td>@s.DueDate.ToString("MM/dd/yyyy")</td>
+            </tr>
+        }
+    </table>
+}
+
+<h2>Insurance claims</h2>
+@if (Model.Claims.Count == 0)
+{
+    <p>No insurance claims in the last 18 months.</p>
+}
+else
+{
+    <table class="list">
+        <tr><th>Visit date</th><th>Insurance</th><th>Billed</th><th>Insurance paid</th><th>Your share</th><th>Status</th></tr>
+        @foreach (var c in Model.Claims)
+        {
+            <tr>
+                <td>@c.DateOfService.ToString("MM/dd/yyyy")</td>
+                <td>@c.PayerName</td>
+                <td class="money">@c.TotalCharge.ToString("C")</td>
+                <td class="money">@c.PaidAmount.ToString("C")</td>
+                <td class="money">@c.PatientResponsibility.ToString("C")</td>
+                <td>@c.StatusText</td>
+            </tr>
+        }
+    </table>
+}

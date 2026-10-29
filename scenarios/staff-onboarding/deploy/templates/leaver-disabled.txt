@@ -1,0 +1,9 @@
+Subject: Account of {Subject} has been disabled
+Hello,
+
+The account {Subject} was disabled as planned in request {RequestNumber}.
+
+Removed groups: {RemovedGroups}
+The home folder {HomeDirectory} will be archived in 30 days. If you were named to take it over, confirm the handover task when you have copied what you need.
+
+Staff Onboarding

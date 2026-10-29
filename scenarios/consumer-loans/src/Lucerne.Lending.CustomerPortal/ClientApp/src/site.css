@@ -1,0 +1,7 @@
+body { background: #f2f4f3; }
+.navbar-lucerne { background: #0d5c3f; }
+.btn-primary { background: #0d5c3f; border-color: #0d5c3f; }
+.btn-primary:hover, .btn-primary:focus { background: #0a4a33; border-color: #0a4a33; }
+.num { text-align: right; font-variant-numeric: tabular-nums; }
+.status-pill { font-size: .85rem; }
+.page { max-width: 980px; margin: 24px auto; padding: 0 12px; }

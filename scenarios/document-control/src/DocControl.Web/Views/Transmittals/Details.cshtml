@@ -1,0 +1,51 @@
+@model TransmittalDetailsViewModel
+@{
+    var t = Model.Transmittal;
+    ViewData["Title"] = t.Number;
+}
+<h1>@t.Number</h1>
+<dl class="grid">
+    <dt>Project</dt><dd>@t.ProjectCode</dd>
+    <dt>Purpose</dt><dd>@t.Purpose.Code() - @t.Purpose.Description()</dd>
+    <dt>Recipient</dt><dd>@t.RecipientName @t.RecipientCompany &lt;@t.RecipientEmail&gt;</dd>
+    <dt>Status</dt><dd>@t.Status @(t.Attempts > 1 ? $"(attempt {t.Attempts})" : "")</dd>
+    <dt>Created</dt><dd>@t.CreatedBy, @t.CreatedUtc.ToLocalTime().ToString("yyyy-MM-dd HH:mm")</dd>
+    @if (t.IssuedUtc is not null)
+    {
+        <dt>Issued</dt><dd>@t.IssuedUtc.Value.ToLocalTime().ToString("yyyy-MM-dd HH:mm")</dd>
+    }
+    @if (!string.IsNullOrEmpty(t.Notes))
+    {
+        <dt>Notes</dt><dd>@t.Notes</dd>
+    }
+    @if (!string.IsNullOrEmpty(t.Error))
+    {
+        <dt>Error</dt><dd class="err">@t.Error</dd>
+    }
+</dl>
+
+@if (Model.PackageAvailable)
+{
+    <p><a class="button" asp-action="Download" asp-route-id="@t.Id">Download package (@Litware.DocControl.Packaging.CoverSheet.FormatSize(t.PackageSize ?? 0))</a></p>
+}
+@if (CurrentUser.IsController && t.Status == TransmittalStatus.Failed)
+{
+    <form method="post" asp-action="Requeue" asp-route-id="@t.Id" class="inline"><button type="submit">Queue again</button></form>
+}
+@if (CurrentUser.IsController && (t.Status == TransmittalStatus.Queued || t.Status == TransmittalStatus.Failed))
+{
+    <form method="post" asp-action="Cancel" asp-route-id="@t.Id" class="inline"><button type="submit" class="danger">Cancel</button></form>
+}
+
+<table>
+    <tr><th>Document</th><th>Rev</th><th>Title</th><th>File</th></tr>
+    @foreach (var r in Model.Items)
+    {
+        <tr>
+            <td><a asp-controller="Register" asp-action="Document" asp-route-number="@r.DocumentNumber">@r.DocumentNumber</a></td>
+            <td>@r.Code</td>
+            <td>@r.DocumentTitle</td>
+            <td>@r.FileName</td>
+        </tr>
+    }
+</table>

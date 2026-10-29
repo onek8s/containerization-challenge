@@ -1,0 +1,32 @@
+@page
+@model SignersModel
+@{
+    ViewData["Title"] = "Signers";
+}
+<h1>Qualified Person signers</h1>
+@if (Model.Status is { } s)
+{
+    <p>Signing host @s.MachineName &middot; key provider <strong>@s.KeyProvider</strong> @(s.RequireHardwareKeys ? "(hardware keys required)" : "") &middot;
+       vault @s.VaultRoot @(s.VaultEncrypted ? "(encrypted)" : "(not encrypted)") &middot; security auditing @(s.SecurityAuditing ? "on" : "off")</p>
+}
+else
+{
+    <p class="error">The signing host is not available.</p>
+}
+<table>
+    <thead><tr><th>Name</th><th>Account</th><th>Key</th><th>Certificate</th><th>Valid</th><th>Enrolled</th><th></th></tr></thead>
+    <tbody>
+        @foreach (var x in Model.Signers)
+        {
+            <tr>
+                <td>@x.DisplayName</td>
+                <td>@x.AccountName</td>
+                <td>@x.KeyProvider @(x.HardwareKey ? "(hardware)" : "(software)")</td>
+                <td><code>@x.Thumbprint</code></td>
+                <td>@x.ValidFromUtc.ToString("yyyy-MM-dd") – @x.ValidToUtc.ToString("yyyy-MM-dd")</td>
+                <td>@x.EnrolledUtc.ToString("yyyy-MM-dd") by @x.EnrolledBy</td>
+                <td>@(x.Active ? "active" : "revoked")</td>
+            </tr>
+        }
+    </tbody>
+</table>

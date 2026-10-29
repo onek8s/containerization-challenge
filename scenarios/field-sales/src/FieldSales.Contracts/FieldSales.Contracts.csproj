@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>7.3</LangVersion>
+    <RootNamespace>Wingtip.FieldSales.Contracts</RootNamespace>
+    <AssemblyName>FieldSales.Contracts</AssemblyName>
+    <Version>3.2.0</Version>
+    <Company>Wingtip Foods</Company>
+    <Product>Field Sales</Product>
+  </PropertyGroup>
+
+</Project>

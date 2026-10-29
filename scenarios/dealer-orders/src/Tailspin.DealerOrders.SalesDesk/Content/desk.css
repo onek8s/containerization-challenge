@@ -1,0 +1,4 @@
+.tiles .tile { border: 1px solid #ddd; padding: 10px; margin-bottom: 12px; background: #fafafa; min-height: 60px; }
+.tiles .tile.bad { background: #f2dede; border-color: #ebccd1; }
+pre.x12 { max-height: 500px; overflow: auto; font-size: 12px; }
+form.form-inline { margin-bottom: 10px; }

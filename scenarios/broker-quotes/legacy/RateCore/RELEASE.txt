@@ -1,0 +1,17 @@
+RateCore release notes
+======================
+
+Build: VB6 SP6 on the pricing build PC (PRC-BUILD01). Binary compatibility with
+..\compat\RateCore.dll is required; never break it (the quote API binds to the vtable).
+Released DLLs and signed-off rate tables go to the pricing release share, see deploy\README in
+the platform repository for installing a release on the rating servers.
+
+4.12.318  2024-03-18  BC2024 tables. Work away loading on PL by trade group (WORKAWAY factor).
+4.11.301  2023-09-04  Claims experience by section (CLAIMS factors). R21/R22 table limits.
+4.10.287  2023-06-12  BC2023.2 tables. Subsidence zone 4 refers (R13).
+4.9.270   2022-04-01  IPT moved out of RateCore into the quoting platform.
+4.8.255   2021-02-15  Trace file setting (HKLM\SOFTWARE\Humongous\RateCore\TraceFile).
+4.7.240   2019-10-07  EL clerical / manual wageroll split.
+4.5.212   2016-05-23  Flood, subsidence and crime zones from ZONES.mdb (was hard-coded areas).
+4.0.150   2011-01-10  Rewrite of the Leeds rating DLL with a stable interface (Engine / Risk).
+3.x                   Leeds branch rating DLL used by the broker extranet (ASP).

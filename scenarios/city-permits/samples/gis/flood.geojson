@@ -1,0 +1,110 @@
+{
+ "type": "FeatureCollection",
+ "crs": {
+  "type": "name",
+  "properties": {
+   "name": "urn:ogc:def:crs:EPSG::27700"
+  }
+ },
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601340,
+       142180
+      ],
+      [
+       601540,
+       142180
+      ],
+      [
+       601540,
+       142360
+      ],
+      [
+       601340,
+       142360
+      ],
+      [
+       601340,
+       142180
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "FLOOD_ZONE": "3a"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601300,
+       142180
+      ],
+      [
+       601340,
+       142180
+      ],
+      [
+       601340,
+       142600
+      ],
+      [
+       601300,
+       142600
+      ],
+      [
+       601300,
+       142180
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "FLOOD_ZONE": "2"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601340,
+       142360
+      ],
+      [
+       601540,
+       142360
+      ],
+      [
+       601540,
+       142600
+      ],
+      [
+       601340,
+       142600
+      ],
+      [
+       601340,
+       142360
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "FLOOD_ZONE": "2"
+   }
+  }
+ ]
+}

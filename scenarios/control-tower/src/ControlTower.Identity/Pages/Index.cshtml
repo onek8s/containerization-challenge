@@ -1,0 +1,10 @@
+@page
+@model IndexModel
+@{ ViewData["Title"] = "Sign-in service"; }
+<h1 class="h3">Proseware sign-in service</h1>
+<p>This service signs you in to the Proseware Freight applications:</p>
+<ul>
+    <li><a href="@Model.Links.Booking">Booking</a></li>
+    <li><a href="@Model.Links.Tower">Control Tower</a></li>
+    <li><a href="@Model.Links.Portal">Customer portal</a></li>
+</ul>

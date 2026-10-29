@@ -1,0 +1,9 @@
+Subject: ACTION NEEDED: leaver {RequestNumber} cancelled after the account was disabled
+Service desk,
+
+Leaver request {RequestNumber} for {Subject} was cancelled after the account had already been disabled.
+Enable the account, move it back to its previous OU ({PreviousOu}) and restore these groups:
+
+{RemovedGroups}
+
+Staff Onboarding

@@ -1,0 +1,39 @@
+@model BookingStepViewModel
+@{ ViewData["Title"] = "New booking - packages"; var d = Model.Draft; }
+<partial name="_Steps" model="2" />
+<p class="text-muted">@Model.CustomerName &middot; @Model.OriginText &rarr; @Model.DestinationText &middot; @d.Mode</p>
+<form method="post" id="packages-form">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <table class="table table-sm align-middle">
+        <thead><tr><th>Kind</th><th>Qty</th><th>kg / pc</th><th>L cm</th><th>W cm</th><th>H cm</th><th>Stack</th><th>Marks</th><th>UN</th><th>DG name</th><th>Class</th><th>PG</th><th>Net qty</th><th>LQ</th><th></th></tr></thead>
+        <tbody>
+        @for (var i = 0; i < d.Packages.Count; i++)
+        {
+            var p = d.Packages[i];
+            <tr>
+                <td><select name="packages[@i].Kind" class="form-select form-select-sm" asp-items="@Html.GetEnumSelectList<PackageKind>().Select(x => { x.Selected = x.Value == ((int)p.Kind).ToString(); return x; })"></select></td>
+                <td><input name="packages[@i].Quantity" value="@p.Quantity" class="form-control form-control-sm" style="width:60px" /></td>
+                <td><input name="packages[@i].WeightKg" value="@p.WeightKg" class="form-control form-control-sm" style="width:80px" /></td>
+                <td><input name="packages[@i].LengthCm" value="@p.LengthCm" class="form-control form-control-sm" style="width:70px" /></td>
+                <td><input name="packages[@i].WidthCm" value="@p.WidthCm" class="form-control form-control-sm" style="width:70px" /></td>
+                <td><input name="packages[@i].HeightCm" value="@p.HeightCm" class="form-control form-control-sm" style="width:70px" /></td>
+                <td><input type="checkbox" name="packages[@i].Stackable" value="true" @(p.Stackable ? "checked" : "") /></td>
+                <td><input name="packages[@i].Marks" value="@p.Marks" class="form-control form-control-sm" /></td>
+                <td><input name="packages[@i].DgUnNumber" value="@p.DgUnNumber" class="form-control form-control-sm" style="width:70px" /></td>
+                <td><input name="packages[@i].DgShippingName" value="@p.DgShippingName" class="form-control form-control-sm" /></td>
+                <td><input name="packages[@i].DgClass" value="@p.DgClass" class="form-control form-control-sm" style="width:55px" /></td>
+                <td><input name="packages[@i].DgPackingGroup" value="@p.DgPackingGroup" class="form-control form-control-sm" style="width:55px" /></td>
+                <td><input name="packages[@i].DgNetQuantity" value="@p.DgNetQuantity" class="form-control form-control-sm" style="width:70px" /></td>
+                <td><input type="checkbox" name="packages[@i].DgLimitedQuantity" value="true" @(p.DgLimitedQuantity ? "checked" : "") /></td>
+                <td><button name="command" value="remove:@i" class="btn btn-link btn-sm text-danger">remove</button></td>
+            </tr>
+        }
+        </tbody>
+    </table>
+    <button name="command" value="add" class="btn btn-outline-secondary btn-sm">Add package line</button>
+    <div id="live-quote" class="mt-3 small text-muted"></div>
+    <div class="mt-3"><button name="command" value="next" class="btn btn-primary">Next: quote</button></div>
+</form>
+@section Scripts {
+    <script src="~/js/booking.js" asp-append-version="true"></script>
+}

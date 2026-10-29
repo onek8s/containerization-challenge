@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Batch Release</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <nav>
+            <a class="brand" asp-page="/Index">Proseware Batch Release</a>
+            <a asp-page="/Index">Queue</a>
+            <a asp-page="/Signers">Signers</a>
+            <a asp-page="/Policies">Release policies</a>
+            <span class="user">@User.Identity?.Name</span>
+        </nav>
+    </header>
+    <main>
+        @if (TempData["Message"] is string message)
+        {
+            <p class="message">@message</p>
+        }
+        @RenderBody()
+    </main>
+    <footer>Proseware Pharmaceuticals &middot; QA-0412 rev. 9</footer>
+</body>
+</html>

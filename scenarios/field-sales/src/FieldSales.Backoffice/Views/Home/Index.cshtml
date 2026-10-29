@@ -1,0 +1,26 @@
+@model DashboardViewModel
+@{
+    ViewBag.Title = "Overview";
+}
+<h1>Overview</h1>
+<div class="tiles">
+    <div class="tile"><div class="muted">Waiting for approval</div><div class="value"><a href="@Url.Action("Index", "Approvals")">@Model.PendingApprovals</a></div></div>
+    <div class="tile"><div class="muted">Orders received today</div><div class="value">@Model.OrdersToday</div></div>
+    <div class="tile"><div class="muted">Today, excl. VAT</div><div class="value">@Model.NetToday.ToString("N2") &euro;</div></div>
+    <div class="tile"><div class="muted">Price list version</div><div class="value">@Model.PriceListVersion</div>
+        <div class="muted">@(Model.LastPriceListImport.HasValue ? "Imported " + Model.LastPriceListImport.Value.ToString("g") : "Never imported")</div></div>
+</div>
+<div class="panel">
+    <h2>Sales reps, last 7 days</h2>
+    <table class="table">
+        <tr><th>Rep</th><th>User</th><th class="text-right">Orders</th><th class="text-right">Excl. VAT</th><th>Last sync</th></tr>
+        @foreach (var r in Model.Reps)
+        {
+            <tr><td>@r.RepCode</td><td>@r.SubmittedBy</td><td class="text-right">@r.Orders</td><td class="text-right">@r.NetTotal.ToString("N2")</td><td>@r.LastReceived.ToString("g")</td></tr>
+        }
+    </table>
+</div>
+@if (!string.IsNullOrEmpty(Model.ClientInstallUrl))
+{
+    <p class="muted">New laptop? Install Field Sales from <a href="@Model.ClientInstallUrl">@Model.ClientInstallUrl</a>.</p>
+}

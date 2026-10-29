@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{15698E7D-5994-56AC-9A37-578849229361}</ProjectGuid>
+    <ProjectTypeGuids>{EF7E3281-CD33-11D4-8326-00C04FA0CE8D};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>library</OutputType>
+    <GenericProcessing>true</GenericProcessing>
+    <RootNamespace>VanArsdel.Integration.Pipelines</RootNamespace>
+    <AssemblyName>VanArsdel.Integration.Pipelines</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <BpelCompliance>True</BpelCompliance>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\..\VanArsdel.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <EnableUnitTesting>True</EnableUnitTesting>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugSymbols>false</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <EnableUnitTesting>False</EnableUnitTesting>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System">
+      <Name>System</Name>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Name>System.Xml</Name>
+    </Reference>
+    <Reference Include="System.Configuration">
+      <Name>System.Configuration</Name>
+    </Reference>
+    <Reference Include="Microsoft.BizTalk.Pipeline">
+      <Name>Microsoft.BizTalk.Pipeline</Name>
+    </Reference>
+    <Reference Include="Microsoft.BizTalk.DefaultPipelines">
+      <Name>Microsoft.BizTalk.DefaultPipelines</Name>
+    </Reference>
+    <Reference Include="Microsoft.BizTalk.GlobalPropertySchemas">
+      <Name>Microsoft.BizTalk.GlobalPropertySchemas</Name>
+    </Reference>
+    <Reference Include="Microsoft.BizTalk.TestTools">
+      <Name>Microsoft.BizTalk.TestTools</Name>
+    </Reference>
+    <Reference Include="Microsoft.XLANGs.BaseTypes">
+      <Name>Microsoft.XLANGs.BaseTypes</Name>
+    </Reference>
+    <Reference Include="Microsoft.BizTalk.Edi.PipelineComponents">
+      <Name>Microsoft.BizTalk.Edi.PipelineComponents</Name>
+    </Reference>
+    <Reference Include="Microsoft.BizTalk.EdiInt.PipelineComponents">
+      <Name>Microsoft.BizTalk.EdiInt.PipelineComponents</Name>
+    </Reference>
+    <Reference Include="Microsoft.BizTalk.Pipeline.Components">
+      <Name>Microsoft.BizTalk.Pipeline.Components</Name>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\VanArsdel.Integration.Schemas\VanArsdel.Integration.Schemas.btproj">
+      <Project>{397BDBE9-B640-5F58-9478-6E3493B1D411}</Project>
+      <Name>..\VanArsdel.Integration.Schemas\VanArsdel.Integration.Schemas</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\VanArsdel.Integration.PipelineComponents\VanArsdel.Integration.PipelineComponents.csproj">
+      <Project>{F8C13C28-1730-516F-9F3A-71DA29EB1C17}</Project>
+      <Name>..\..\src\VanArsdel.Integration.PipelineComponents\VanArsdel.Integration.PipelineComponents</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Pipeline Include="As2EdiReceive.btp">
+      <TypeName>As2EdiReceive</TypeName>
+      <Namespace>VanArsdel.Integration.Pipelines</Namespace>
+      <SubType>Task</SubType>
+    </Pipeline>
+    <Pipeline Include="FileEdiReceive.btp">
+      <TypeName>FileEdiReceive</TypeName>
+      <Namespace>VanArsdel.Integration.Pipelines</Namespace>
+      <SubType>Task</SubType>
+    </Pipeline>
+    <Pipeline Include="PartnerXmlReceive.btp">
+      <TypeName>PartnerXmlReceive</TypeName>
+      <Namespace>VanArsdel.Integration.Pipelines</Namespace>
+      <SubType>Task</SubType>
+    </Pipeline>
+    <Pipeline Include="IDocReceive.btp">
+      <TypeName>IDocReceive</TypeName>
+      <Namespace>VanArsdel.Integration.Pipelines</Namespace>
+      <SubType>Task</SubType>
+    </Pipeline>
+    <Pipeline Include="As2EdiSend.btp">
+      <TypeName>As2EdiSend</TypeName>
+      <Namespace>VanArsdel.Integration.Pipelines</Namespace>
+      <SubType>Task</SubType>
+    </Pipeline>
+    <Pipeline Include="FileEdiSend.btp">
+      <TypeName>FileEdiSend</TypeName>
+      <Namespace>VanArsdel.Integration.Pipelines</Namespace>
+      <SubType>Task</SubType>
+    </Pipeline>
+    <Pipeline Include="IDocSend.btp">
+      <TypeName>IDocSend</TypeName>
+      <Namespace>VanArsdel.Integration.Pipelines</Namespace>
+      <SubType>Task</SubType>
+    </Pipeline>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\BizTalk\BizTalkC.targets" />
+</Project>

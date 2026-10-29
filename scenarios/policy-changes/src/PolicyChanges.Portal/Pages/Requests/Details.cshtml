@@ -1,0 +1,75 @@
+@page "{reference}"
+@model PolicyChanges.Portal.Pages.Requests.DetailsModel
+@{
+    var r = Model.Change;
+    ViewData["Title"] = r.Reference;
+}
+<h1>@r.Reference <partial name="_Status" model="r.Status" /></h1>
+
+<dl class="fields">
+    <dt>Policy</dt><dd>@r.PolicyNumber</dd>
+    <dt>Change</dt><dd>@r.ChangeType</dd>
+    <dt>Effective</dt><dd>@r.EffectiveDate.ToString("yyyy-MM-dd")</dd>
+    <dt>Submitted</dt><dd>@r.CreatedUtc.ToLocalTime().ToString("g") by @r.SubmittedBy (@r.Channel@(r.Partner is null ? "" : ", " + r.Partner.Name)@(r.PartnerReference is null ? "" : ", " + r.PartnerReference))</dd>
+    @foreach (var f in r.Fields)
+    {
+        <dt>@f.Key</dt>
+        <dd style="white-space: pre-line">@f.Value</dd>
+    }
+    <dt>Attempts</dt><dd>@r.Attempts</dd>
+    @if (r.Status == ChangeStatus.Queued && r.Attempts > 0)
+    {
+        <dt>Next attempt</dt><dd>@r.NextAttemptUtc.ToLocalTime().ToString("g")</dd>
+    }
+    @if (r.LockedBy is not null)
+    {
+        <dt>Desk station</dt><dd>@r.LockedBy</dd>
+    }
+    @if (r.Endorsement is not null)
+    {
+        <dt>Endorsement</dt><dd>@r.Endorsement</dd>
+    }
+    @if (r.ResultMessage is not null)
+    {
+        <dt>PolicyDesk</dt><dd>@r.ResultMessage</dd>
+    }
+</dl>
+
+@if (r.Status is ChangeStatus.Queued or ChangeStatus.NeedsReview)
+{
+    <form method="post" asp-page-handler="Withdraw" asp-route-reference="@r.Reference" class="inline">
+        <input name="reason" placeholder="Reason" />
+        <button type="submit">Withdraw</button>
+    </form>
+}
+@if (Model.IsLead && r.Status == ChangeStatus.NeedsReview)
+{
+    <form method="post" asp-page-handler="Requeue" asp-route-reference="@r.Reference" class="inline">
+        <button type="submit">Queue again</button>
+    </form>
+}
+
+<h2>History</h2>
+<table>
+    <tr><th>Time</th><th>Status</th><th>By</th><th>Message</th></tr>
+    @foreach (var e in r.Events)
+    {
+        <tr><td>@e.AtUtc.ToLocalTime().ToString("g")</td><td>@e.Status</td><td>@e.By</td><td>@e.Message</td></tr>
+    }
+</table>
+
+@if (r.Evidence.Count > 0)
+{
+    <h2>PolicyDesk screens</h2>
+    <div class="evidence">
+        @foreach (var e in r.Evidence)
+        {
+            <figure>
+                <a asp-page-handler="Evidence" asp-route-reference="@r.Reference" asp-route-id="@e.Id">
+                    <img src="@Url.Page("Details", "Evidence", new { reference = r.Reference, id = e.Id })" alt="@e.Name" />
+                </a>
+                <figcaption>Attempt @e.Attempt: @e.Name (@e.Station)</figcaption>
+            </figure>
+        }
+    </div>
+}

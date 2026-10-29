@@ -1,0 +1,7 @@
+@model SalesOrderEntity
+@{
+    ViewBag.Title = Model.OrderNo;
+}
+<h1>Order</h1>
+@Html.Partial("_OrderDetails", Model)
+<a href="@Url.Action("Index")">&larr; Back to orders</a>

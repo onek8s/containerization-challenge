@@ -1,0 +1,26 @@
+@page
+@model FurnaceRecords.Portal.Pages.Furnaces.IndexModel
+@{
+    ViewData["Title"] = "Furnaces";
+    var today = DateOnly.FromDateTime(DateTime.UtcNow);
+}
+<h1>Furnaces and sensors</h1>
+@foreach (var f in Model.Furnaces)
+{
+    <h2>@f.Code <small>@f.Name, class @f.FurnaceClass, type @f.Instrumentation</small></h2>
+    <p class="muted">Uniformity survey due @f.UniformitySurveyDue, system accuracy test due @f.AccuracyTestDue</p>
+    <table>
+        <tr><th>Ch</th><th>Name</th><th>Role</th><th>Type</th><th>Sensor</th><th>Calibrated</th><th>Due</th><th>Corrections</th><th>Enabled</th></tr>
+        @foreach (var c in f.Channels.OrderBy(c => c.Channel))
+        {
+            <tr class="@(c.CalibrationDue < today ? "bad" : "")">
+                <td>@c.Channel</td>
+                <td><a asp-page="Channel" asp-route-id="@c.Id">@c.Name</a></td>
+                <td>@c.Role</td><td>@c.Type</td><td>@c.SensorSerial</td><td>@c.CalibratedOn</td><td>@c.CalibrationDue</td>
+                <td>@string.Join(", ", c.Corrections.OrderBy(x => x.AtCelsius).Select(x => $"{x.AtCelsius:0} °C {x.CorrectionCelsius:+0.0;-0.0}"))</td>
+                <td>@(c.Enabled ? "yes" : "no")</td>
+            </tr>
+        }
+    </table>
+}
+<p class="muted">Channel changes take effect when the acquisition service restarts.</p>

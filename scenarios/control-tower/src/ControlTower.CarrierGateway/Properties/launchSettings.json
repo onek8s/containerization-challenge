@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "ControlTower.CarrierGateway": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development",
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "CONTROLTOWER_LOG_DIR": "../../.devdata/logs"
+      }
+    }
+  }
+}

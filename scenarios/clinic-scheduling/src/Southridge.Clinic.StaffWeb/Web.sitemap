@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0">
+  <siteMapNode url="~/Default.aspx" title="Home" roles="*">
+    <siteMapNode url="~/Default.aspx" title="Dashboard" roles="*" />
+    <siteMapNode url="~/Schedule/Day.aspx" title="Schedule" roles="FrontDesk,Clinical,Provider,PracticeManager,Administrator">
+      <siteMapNode url="~/Schedule/Day.aspx" title="Day view" />
+      <siteMapNode url="~/Schedule/Book.aspx" title="Book appointment" />
+      <siteMapNode url="~/Schedule/Waitlist.aspx" title="Waitlist" />
+    </siteMapNode>
+    <siteMapNode url="~/Patients/Search.aspx" title="Patients" roles="FrontDesk,Clinical,Provider,Billing,ReferralCoordinator,PracticeManager,Administrator">
+      <siteMapNode url="~/Patients/Search.aspx" title="Find patient" />
+      <siteMapNode url="~/Patients/Edit.aspx" title="Register patient" />
+    </siteMapNode>
+    <siteMapNode url="~/Referrals/Queue.aspx" title="Referrals" roles="ReferralCoordinator,Provider,PracticeManager,Administrator">
+      <siteMapNode url="~/Referrals/Queue.aspx" title="Referral queue" />
+      <siteMapNode url="~/Referrals/New.aspx" title="New referral" />
+    </siteMapNode>
+    <siteMapNode url="~/Billing/Claims.aspx" title="Billing" roles="Billing,PracticeManager,Administrator">
+      <siteMapNode url="~/Billing/Claims.aspx" title="Claims" />
+      <siteMapNode url="~/Billing/Payments.aspx" title="Payments" />
+      <siteMapNode url="~/Billing/Statements.aspx" title="Statements" />
+    </siteMapNode>
+    <siteMapNode url="~/Reports/Default.aspx" title="Reports" roles="Billing,PracticeManager,Administrator,Provider" />
+    <siteMapNode url="~/Admin/Users.aspx" title="Admin" roles="Administrator" />
+  </siteMapNode>
+</siteMap>

@@ -1,0 +1,14 @@
+@model AreaStepViewModel
+@{ ViewData["Title"] = "Report a repair"; }
+<h1 class="h3">Report a repair</h1>
+<partial name="_Wizard" model="0" />
+<div class="alert alert-warning">Smell gas? Leave the property and call 0800 111 999 now. Do not report gas leaks online.</div>
+<form asp-action="Area" method="post" class="option-list col-md-6 px-0">
+    <p>Where is the problem?</p>
+    @foreach (var area in Model.Areas)
+    {
+        <label><input type="radio" name="Area" value="@area" checked="@(Model.Area == area)" /> @area</label>
+    }
+    <span asp-validation-for="Area" class="field-validation-error"></span>
+    <div class="mt-3"><button type="submit" class="btn btn-primary">Next</button></div>
+</form>

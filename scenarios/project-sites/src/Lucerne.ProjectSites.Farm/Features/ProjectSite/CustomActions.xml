@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <!-- Site scripts (jQuery + Lucerne helpers) on every page of the project site -->
+  <CustomAction Id="Lucerne.ProjectSites.jQuery" Location="ScriptLink" ScriptSrc="~sitecollection/_layouts/15/Lucerne.ProjectSites/js/jquery-1.12.4.min.js" Sequence="100" />
+  <CustomAction Id="Lucerne.ProjectSites.Scripts" Location="ScriptLink" ScriptSrc="~sitecollection/_layouts/15/Lucerne.ProjectSites/js/lucerne.projectsites.js" Sequence="110" />
+  <CustomAction Id="Lucerne.ProjectSites.Css" Location="ScriptLink" ScriptBlock="document.write('&lt;link rel=&quot;stylesheet&quot; href=&quot;' + _spPageContextInfo.siteServerRelativeUrl.replace(/\/$/, '') + '/_layouts/15/Lucerne.ProjectSites/css/lucerne.css&quot; /&gt;');" Sequence="120" />
+
+  <!-- Ribbon on document libraries: submit for approval / approve -->
+  <CustomAction Id="Lucerne.ProjectSites.Ribbon.Approval" Location="CommandUI.Ribbon" RegistrationType="List" RegistrationId="101" Sequence="50">
+    <CommandUIExtension>
+      <CommandUIDefinitions>
+        <CommandUIDefinition Location="Ribbon.Documents.Manage.Controls._children">
+          <Button Id="Lucerne.ProjectSites.Ribbon.SubmitForApproval" Command="Lucerne.SubmitForApproval" Image32by32="/_layouts/15/images/placeholder32x32.png" LabelText="Submit for approval" TemplateAlias="o1" Sequence="90" />
+        </CommandUIDefinition>
+        <CommandUIDefinition Location="Ribbon.Documents.Manage.Controls._children">
+          <Button Id="Lucerne.ProjectSites.Ribbon.Approve" Command="Lucerne.Approve" Image32by32="/_layouts/15/images/placeholder32x32.png" LabelText="Approve" TemplateAlias="o1" Sequence="91" />
+        </CommandUIDefinition>
+      </CommandUIDefinitions>
+      <CommandUIHandlers>
+        <CommandUIHandler Command="Lucerne.SubmitForApproval" CommandAction="javascript:Lucerne.ProjectSites.setApproval('Pending');" EnabledScript="javascript:Lucerne.ProjectSites.hasSelection();" />
+        <CommandUIHandler Command="Lucerne.Approve" CommandAction="javascript:Lucerne.ProjectSites.setApproval('Approved');" EnabledScript="javascript:Lucerne.ProjectSites.hasSelection();" />
+      </CommandUIHandlers>
+    </CommandUIExtension>
+  </CustomAction>
+
+  <!-- Site actions menu -->
+  <CustomAction Id="Lucerne.ProjectSites.SiteActions.StatusReport" GroupId="SiteActions" Location="Microsoft.SharePoint.StandardMenu" Sequence="1000" Title="Project status report" Rights="EditListItems">
+    <UrlAction Url="~sitecollection/_layouts/15/Lucerne.ProjectSites/StatusReport.aspx" />
+  </CustomAction>
+  <CustomAction Id="Lucerne.ProjectSites.SiteActions.ManualStatus" GroupId="SiteActions" Location="Microsoft.SharePoint.StandardMenu" Sequence="1001" Title="Set project status" Rights="ManageWeb">
+    <UrlAction Url="~sitecollection/_layouts/15/Lucerne.ProjectSites/ManualStatus.aspx" />
+  </CustomAction>
+  <CustomAction Id="Lucerne.ProjectSites.Settings.Retention" GroupId="SiteCollectionAdmin" Location="Microsoft.SharePoint.SiteSettings" Sequence="200" Title="Retention preview" RequireSiteAdministrator="TRUE">
+    <UrlAction Url="~sitecollection/_layouts/15/Lucerne.ProjectSites/RetentionPreview.aspx" />
+  </CustomAction>
+</Elements>

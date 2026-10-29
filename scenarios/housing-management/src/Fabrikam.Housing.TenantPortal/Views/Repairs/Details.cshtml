@@ -1,0 +1,58 @@
+@model RepairDetailViewModel
+@{ ViewData["Title"] = "Repair " + Model.Reference; }
+<h1 class="h3">Repair @Model.Reference</h1>
+<dl class="row">
+    <dt class="col-sm-3">Problem</dt><dd class="col-sm-9">@Model.Description</dd>
+    <dt class="col-sm-3">Where</dt><dd class="col-sm-9">@Model.Location</dd>
+    <dt class="col-sm-3">Priority</dt><dd class="col-sm-9">@Model.Priority</dd>
+    <dt class="col-sm-3">Reported</dt><dd class="col-sm-9">@Model.ReportedAt.ToString("d MMMM yyyy HH:mm")</dd>
+    <dt class="col-sm-3">Status</dt><dd class="col-sm-9">@Model.StatusText</dd>
+    @if (Model.ContractorName != null) { <dt class="col-sm-3">Contractor</dt><dd class="col-sm-9">@Model.ContractorName</dd> }
+    @if (Model.CompletedAt.HasValue) { <dt class="col-sm-3">Completed</dt><dd class="col-sm-9">@Model.CompletedAt.Value.ToString("d MMMM yyyy")</dd> }
+    else { <dt class="col-sm-3">We aim to finish by</dt><dd class="col-sm-9">@Model.TargetDate.ToString("d MMMM yyyy")</dd> }
+</dl>
+@if (Model.Appointments.Count > 0)
+{
+    <h2 class="h5">Appointments</h2>
+    <ul>
+    @foreach (var a in Model.Appointments)
+    {
+        <li>@a.Date.ToString("dddd d MMMM") @SlotText.For(a.Slot) @(a.Cancelled ? "(cancelled)" : "") @a.Outcome</li>
+    }
+    </ul>
+}
+@if (Model.Photos.Count > 0)
+{
+    <h2 class="h5">Photos</h2>
+    <ul>
+    @foreach (var p in Model.Photos)
+    {
+        <li><a asp-controller="Documents" asp-action="Download" asp-route-id="@p.DocumentKey">@p.FileName</a></li>
+    }
+    </ul>
+}
+<h2 class="h5">History</h2>
+<ul class="small">
+@foreach (var e in Model.Events)
+{
+    <li>@e.At.ToString("dd/MM/yyyy HH:mm") @e.NewStatus</li>
+}
+</ul>
+@if (Model.CanRate)
+{
+    <form asp-action="Rate" asp-route-id="@Model.Reference" method="post" class="form-inline mb-3">
+        <label class="mr-2" for="score">How happy are you with this repair?</label>
+        <select name="score" id="score" class="form-control mr-2">
+            <option value="5">5 - very happy</option><option value="4">4</option><option value="3">3</option><option value="2">2</option><option value="1">1 - not happy</option>
+        </select>
+        <button class="btn btn-outline-secondary">Send</button>
+    </form>
+}
+@if (Model.SatisfactionScore.HasValue) { <p>You rated this repair @Model.SatisfactionScore out of 5.</p> }
+@if (Model.CanCancel)
+{
+    <form asp-action="Cancel" asp-route-id="@Model.Reference" method="post" class="form-inline" onsubmit="return confirm('Cancel this repair?');">
+        <input name="reason" class="form-control mr-2" placeholder="Reason (optional)" maxlength="200" />
+        <button class="btn btn-outline-danger">Cancel repair</button>
+    </form>
+}

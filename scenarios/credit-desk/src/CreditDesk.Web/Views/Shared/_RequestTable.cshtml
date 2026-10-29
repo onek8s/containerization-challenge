@@ -1,0 +1,27 @@
+@model IEnumerable<CreditDesk.Core.CreditRequest>
+@if (!Model.Any())
+{
+    <p class="muted">No requests.</p>
+}
+else
+{
+    <table>
+        <thead>
+            <tr><th>#</th><th>Customer</th><th class="num">Current</th><th class="num">Requested</th><th>Status</th><th>Requested</th><th>By</th></tr>
+        </thead>
+        <tbody>
+            @foreach (var r in Model)
+            {
+                <tr>
+                    <td>@Html.ActionLink(r.RequestId.ToString(), "Details", "Requests", new { id = r.RequestId }, null)</td>
+                    <td>@r.AccountNumber &ndash; @r.CustomerName</td>
+                    <td class="num">@r.CurrentLimit.ToString("N0")</td>
+                    <td class="num">@r.RequestedLimit.ToString("N0")</td>
+                    <td><span class="status status-@r.Status.ToString().ToLowerInvariant()">@r.Status</span></td>
+                    <td>@r.RequestedAt.ToString("g")</td>
+                    <td>@r.RequestedBy</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

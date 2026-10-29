@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewBag.Title - Property Inspections</title>
+    <link href="~/Content/site.css" rel="stylesheet" />
+</head>
+<body>
+    <header>
+        <a class="brand" href="@Url.Action("Index", "Inspections")">Northwind Insurance &middot; Property Inspections</a>
+        @if (Request.IsAuthenticated)
+        {
+            <nav>
+                <a href="@Url.Action("Index", "Inspections")">Inspections</a>
+                <a href="@Url.Action("Create", "Inspections")">New inspection</a>
+                <a href="@Url.Action("Password", "Account")">Password</a>
+                @using (Html.BeginForm("Logout", "Account", FormMethod.Post, new { @class = "inline" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="link">Sign out @User.Identity.Name</button>
+                }
+            </nav>
+        }
+    </header>
+    <main>
+        @RenderBody()
+    </main>
+    <footer>Northwind Insurance DAC &middot; Claims Operations &middot; @typeof(Northwind.Inspections.Web.MvcApplication).Assembly.GetName().Version</footer>
+</body>
+</html>

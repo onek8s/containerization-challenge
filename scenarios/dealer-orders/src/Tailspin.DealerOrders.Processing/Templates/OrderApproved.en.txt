@@ -1,0 +1,10 @@
+Subject: Order {OrderNumber} approved
+
+Dear {DealerName},
+
+order {OrderNumber} (your reference {DealerPo}) has been approved by the Tailspin sales desk and passed to production planning.
+You will receive the confirmation with the delivery date shortly.
+
+{Link}
+
+Tailspin Machinery dealer sales

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Exported with the Business Rules Engine Deployment Wizard. Import: deploy\scripts\Install-BusinessRules.ps1 -->
+<brl xmlns="http://schemas.microsoft.com/businessruleslanguage/2002">
+  <ruleset name="VanArsdel.Routing">
+    <version major="2" minor="4" description="Outbound routing slips (map and partner endpoint per standard and document kind)" modifiedby="CORP\svc-btsdeploy" date="2019-06-14T15:03:27.0000000+02:00" />
+    <configuration>
+      <factretriever />
+      <maxexecutionloopdepth>65536</maxexecutionloopdepth>
+      <translationduration>3600000</translationduration>
+    </configuration>
+    <bindings>
+      <class ref="RoutingFacts" type="VanArsdel.Integration.Rules.RoutingFacts" assembly="VanArsdel.Integration.Rules, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cfedfd825850e71" instance="0" instances="16" selectivity="1" isStatic="False" />
+    </bindings>
+    <rule name="DespatchX12" priority="50" active="true">
+      <if>
+        <and><compare operator="equal"><lhs><function><classmember classref="RoutingFacts" member="get_DocumentKind" sideeffects="false" /></function></lhs><rhs><constant><string>Despatch</string></constant></rhs></compare><compare operator="equal"><lhs><function><classmember classref="RoutingFacts" member="get_Standard" sideeffects="false" /></function></lhs><rhs><constant><string>X12</string></constant></rhs></compare></and>
+      </if>
+      <then>
+        <function><classmember classref="RoutingFacts" member="Route" sideeffects="true"><argument><constant><string>Despatch_to_X12_00401_856</string></constant></argument><argument><function><classmember classref="RoutingFacts" member="PartnerEndpoint" sideeffects="true" /></function></argument></classmember></function>
+      </then>
+    </rule>
+    <rule name="DespatchEdifact" priority="50" active="true">
+      <if>
+        <and><compare operator="equal"><lhs><function><classmember classref="RoutingFacts" member="get_DocumentKind" sideeffects="false" /></function></lhs><rhs><constant><string>Despatch</string></constant></rhs></compare><compare operator="equal"><lhs><function><classmember classref="RoutingFacts" member="get_Standard" sideeffects="false" /></function></lhs><rhs><constant><string>Edifact</string></constant></rhs></compare></and>
+      </if>
+      <then>
+        <function><classmember classref="RoutingFacts" member="Route" sideeffects="true"><argument><constant><string>Despatch_to_EFACT_D96A_DESADV</string></constant></argument><argument><function><classmember classref="RoutingFacts" member="PartnerEndpoint" sideeffects="true" /></function></argument></classmember></function>
+      </then>
+    </rule>
+    <rule name="InvoiceX12" priority="50" active="true">
+      <if>
+        <and><compare operator="equal"><lhs><function><classmember classref="RoutingFacts" member="get_DocumentKind" sideeffects="false" /></function></lhs><rhs><constant><string>Invoice</string></constant></rhs></compare><compare operator="equal"><lhs><function><classmember classref="RoutingFacts" member="get_Standard" sideeffects="false" /></function></lhs><rhs><constant><string>X12</string></constant></rhs></compare></and>
+      </if>
+      <then>
+        <function><classmember classref="RoutingFacts" member="Route" sideeffects="true"><argument><constant><string>Invoice_to_X12_00401_810</string></constant></argument><argument><function><classmember classref="RoutingFacts" member="PartnerEndpoint" sideeffects="true" /></function></argument></classmember></function>
+      </then>
+    </rule>
+    <rule name="InvoiceEdifact" priority="50" active="true">
+      <if>
+        <and><compare operator="equal"><lhs><function><classmember classref="RoutingFacts" member="get_DocumentKind" sideeffects="false" /></function></lhs><rhs><constant><string>Invoice</string></constant></rhs></compare><compare operator="equal"><lhs><function><classmember classref="RoutingFacts" member="get_Standard" sideeffects="false" /></function></lhs><rhs><constant><string>Edifact</string></constant></rhs></compare></and>
+      </if>
+      <then>
+        <function><classmember classref="RoutingFacts" member="Route" sideeffects="true"><argument><constant><string>Invoice_to_EFACT_D96A_INVOIC</string></constant></argument><argument><function><classmember classref="RoutingFacts" member="PartnerEndpoint" sideeffects="true" /></function></argument></classmember></function>
+      </then>
+    </rule>
+    <rule name="PurchaseOrderX12" priority="50" active="true">
+      <if>
+        <and><compare operator="equal"><lhs><function><classmember classref="RoutingFacts" member="get_DocumentKind" sideeffects="false" /></function></lhs><rhs><constant><string>PurchaseOrder</string></constant></rhs></compare><compare operator="equal"><lhs><function><classmember classref="RoutingFacts" member="get_Standard" sideeffects="false" /></function></lhs><rhs><constant><string>X12</string></constant></rhs></compare></and>
+      </if>
+      <then>
+        <function><classmember classref="RoutingFacts" member="Route" sideeffects="true"><argument><constant><string>Order_to_X12_00401_850</string></constant></argument><argument><function><classmember classref="RoutingFacts" member="PartnerEndpoint" sideeffects="true" /></function></argument></classmember></function>
+      </then>
+    </rule>
+    <rule name="PurchaseOrderEdifact" priority="50" active="true">
+      <if>
+        <and><compare operator="equal"><lhs><function><classmember classref="RoutingFacts" member="get_DocumentKind" sideeffects="false" /></function></lhs><rhs><constant><string>PurchaseOrder</string></constant></rhs></compare><compare operator="equal"><lhs><function><classmember classref="RoutingFacts" member="get_Standard" sideeffects="false" /></function></lhs><rhs><constant><string>Edifact</string></constant></rhs></compare></and>
+      </if>
+      <then>
+        <function><classmember classref="RoutingFacts" member="Route" sideeffects="true"><argument><constant><string>Order_to_EFACT_D96A_ORDERS</string></constant></argument><argument><function><classmember classref="RoutingFacts" member="PartnerEndpoint" sideeffects="true" /></function></argument></classmember></function>
+      </then>
+    </rule>
+    <rule name="NordvikNoAsn" priority="10" active="true">
+      <if>
+        <and><compare operator="equal"><lhs><function><classmember classref="RoutingFacts" member="get_PartnerId" sideeffects="false" /></function></lhs><rhs><constant><string>C2002</string></constant></rhs></compare><compare operator="equal"><lhs><function><classmember classref="RoutingFacts" member="get_DocumentKind" sideeffects="false" /></function></lhs><rhs><constant><string>Despatch</string></constant></rhs></compare></and>
+      </if>
+      <then>
+        <function><classmember classref="RoutingFacts" member="SetSlip" sideeffects="true"><argument><constant><string>0|ARCHIVE:outbound;TRACK:Despatch</string></constant></argument></classmember></function>
+      </then>
+    </rule>
+  </ruleset>
+</brl>

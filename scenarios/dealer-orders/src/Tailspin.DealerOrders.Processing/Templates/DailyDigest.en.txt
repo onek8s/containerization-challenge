@@ -1,0 +1,13 @@
+Subject: Your open orders at Tailspin Machinery, {Date}
+
+Dear {DealerName},
+
+open orders: {OpenCount}
+shipping in the next 14 days: {ShippingSoon}
+quotes expiring within 7 days: {ExpiringQuotes}
+
+{Lines}
+
+{Link}
+
+Tailspin Machinery dealer sales

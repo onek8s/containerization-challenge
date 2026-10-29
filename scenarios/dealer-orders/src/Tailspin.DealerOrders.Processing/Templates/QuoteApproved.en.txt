@@ -1,0 +1,12 @@
+Subject: Quote {QuoteNumber} approved
+
+Dear {DealerName},
+
+your quote {QuoteNumber} for {EndCustomer} has been approved with an extra discount of {Discount} %.
+Quote value: {Total}, valid until {ValidUntil}.
+
+{Comment}
+
+{Link}
+
+Tailspin Machinery dealer sales

@@ -1,0 +1,64 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{F050E96F-0438-4B1B-830A-6799D7FFB75C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeterBilling.Core", "src\MeterBilling.Core\MeterBilling.Core.csproj", "{52E49551-E8C9-48A8-980F-D0D07E940570}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeterBilling.Data", "src\MeterBilling.Data\MeterBilling.Data.csproj", "{7A1A08E9-3D8D-4CB0-B5FB-4C7445B0B1DF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeterBilling.Engine", "src\MeterBilling.Engine\MeterBilling.Engine.csproj", "{EBE4FD92-46B3-45C0-B9FF-F62B1466E1D4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeterBilling.Lookup", "src\MeterBilling.Lookup\MeterBilling.Lookup.csproj", "{71B7E0AC-8B76-4B6B-A71A-B9D113E3EFE6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeterBilling.Monitor", "src\MeterBilling.Monitor\MeterBilling.Monitor.csproj", "{42947BA5-F40A-48B5-992A-084E02727451}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{C668E676-9151-4798-B7EF-6D6B218B9E53}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeterBilling.Core.Tests", "tests\MeterBilling.Core.Tests\MeterBilling.Core.Tests.csproj", "{E12F76DD-1489-4795-8630-83BEF95DE1AE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{52E49551-E8C9-48A8-980F-D0D07E940570}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52E49551-E8C9-48A8-980F-D0D07E940570}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52E49551-E8C9-48A8-980F-D0D07E940570}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52E49551-E8C9-48A8-980F-D0D07E940570}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A1A08E9-3D8D-4CB0-B5FB-4C7445B0B1DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A1A08E9-3D8D-4CB0-B5FB-4C7445B0B1DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A1A08E9-3D8D-4CB0-B5FB-4C7445B0B1DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A1A08E9-3D8D-4CB0-B5FB-4C7445B0B1DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBE4FD92-46B3-45C0-B9FF-F62B1466E1D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBE4FD92-46B3-45C0-B9FF-F62B1466E1D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBE4FD92-46B3-45C0-B9FF-F62B1466E1D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBE4FD92-46B3-45C0-B9FF-F62B1466E1D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71B7E0AC-8B76-4B6B-A71A-B9D113E3EFE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71B7E0AC-8B76-4B6B-A71A-B9D113E3EFE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71B7E0AC-8B76-4B6B-A71A-B9D113E3EFE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71B7E0AC-8B76-4B6B-A71A-B9D113E3EFE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42947BA5-F40A-48B5-992A-084E02727451}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42947BA5-F40A-48B5-992A-084E02727451}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42947BA5-F40A-48B5-992A-084E02727451}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42947BA5-F40A-48B5-992A-084E02727451}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E12F76DD-1489-4795-8630-83BEF95DE1AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E12F76DD-1489-4795-8630-83BEF95DE1AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E12F76DD-1489-4795-8630-83BEF95DE1AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E12F76DD-1489-4795-8630-83BEF95DE1AE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{52E49551-E8C9-48A8-980F-D0D07E940570} = {F050E96F-0438-4B1B-830A-6799D7FFB75C}
+		{7A1A08E9-3D8D-4CB0-B5FB-4C7445B0B1DF} = {F050E96F-0438-4B1B-830A-6799D7FFB75C}
+		{EBE4FD92-46B3-45C0-B9FF-F62B1466E1D4} = {F050E96F-0438-4B1B-830A-6799D7FFB75C}
+		{71B7E0AC-8B76-4B6B-A71A-B9D113E3EFE6} = {F050E96F-0438-4B1B-830A-6799D7FFB75C}
+		{42947BA5-F40A-48B5-992A-084E02727451} = {F050E96F-0438-4B1B-830A-6799D7FFB75C}
+		{E12F76DD-1489-4795-8630-83BEF95DE1AE} = {C668E676-9151-4798-B7EF-6D6B218B9E53}
+	EndGlobalSection
+EndGlobal

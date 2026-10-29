@@ -1,0 +1,8 @@
+[
+  { "ErpNumber": "104711", "Name": "Hartwell Electrical Supply", "CreditLimit": 60000, "OpenExposure": 41250.00, "Blocked": false, "BlockReason": null, "Currency": "USD", "EdiOutput": true },
+  { "ErpNumber": "104822", "Name": "Brightline Facilities", "CreditLimit": 25000, "OpenExposure": 3120.40, "Blocked": false, "BlockReason": null, "Currency": "USD", "EdiOutput": true },
+  { "ErpNumber": "104930", "Name": "Ridgeway Mechanical", "CreditLimit": 15000, "OpenExposure": 14980.00, "Blocked": false, "BlockReason": null, "Currency": "USD", "EdiOutput": false },
+  { "ErpNumber": "104955", "Name": "Lakeshore Electric", "CreditLimit": 20000, "OpenExposure": 0, "Blocked": true, "BlockReason": "Overdue invoices older than 60 days", "Currency": "USD", "EdiOutput": false },
+  { "ErpNumber": "200310", "Name": "Bauwerk Haustechnik GmbH", "CreditLimit": 80000, "OpenExposure": 12600.00, "Blocked": false, "BlockReason": null, "Currency": "EUR", "EdiOutput": true },
+  { "ErpNumber": "200455", "Name": "Nordvik Elektro AS", "CreditLimit": 400000, "OpenExposure": 98000.00, "Blocked": false, "BlockReason": null, "Currency": "NOK", "EdiOutput": true }
+]

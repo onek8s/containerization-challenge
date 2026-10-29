@@ -1,0 +1,14 @@
+Subject: Tilaus {OrderNumber} vastaanotettu
+
+Hyvä {DealerName},
+
+olemme vastaanottaneet tilauksenne {OrderNumber} (viitteenne {DealerPo}).
+
+{Lines}
+
+Tilauksen arvo: {Total}
+Tila: {Status}
+
+Voitte seurata tilausta jälleenmyyjäportaalissa: {Link}
+
+Tailspin Machinery jälleenmyyntipalvelu

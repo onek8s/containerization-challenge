@@ -1,0 +1,11 @@
+Subject: ACTION NEEDED: provisioning failed for {RequestNumber}
+Service desk,
+
+The directory provisioning step for {RequestNumber} failed and will not be retried automatically.
+
+{Messages}
+
+Request: {RequestUrl}
+Fix the cause and resume the workflow instance (see the operations guide).
+
+Staff Onboarding

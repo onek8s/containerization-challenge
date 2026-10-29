@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <!-- Stand-ins for the external systems and a few lab tools. Not deployed to production. -->
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\VanArsdel.BuildingBlocks\VanArsdel.BuildingBlocks.csproj" />
+    <ProjectReference Include="..\VanArsdel.Contracts\VanArsdel.Contracts.csproj" />
+    <ProjectReference Include="..\VanArsdel.Integration\VanArsdel.Integration.csproj" />
+  </ItemGroup>
+
+</Project>

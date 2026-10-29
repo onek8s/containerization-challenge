@@ -1,0 +1,22 @@
+@model IReadOnlyList<TransmittalRecord>
+@{ ViewData["Title"] = "Transmittals"; }
+<h1>Transmittals</h1>
+@if (CurrentUser.IsController)
+{
+    <p><a class="button" asp-action="Create">New transmittal</a></p>
+}
+<table>
+    <tr><th>Number</th><th>Purpose</th><th>Recipient</th><th>Documents</th><th>Status</th><th>Created</th><th>Issued</th></tr>
+    @foreach (var t in Model)
+    {
+        <tr>
+            <td><a asp-action="Details" asp-route-id="@t.Id">@t.Number</a></td>
+            <td>@t.Purpose.Code()</td>
+            <td>@t.RecipientCompany</td>
+            <td>@t.ItemCount</td>
+            <td>@t.Status</td>
+            <td>@t.CreatedBy<br /><small>@t.CreatedUtc.ToLocalTime().ToString("yyyy-MM-dd HH:mm")</small></td>
+            <td>@t.IssuedUtc?.ToLocalTime().ToString("yyyy-MM-dd HH:mm")</td>
+        </tr>
+    }
+</table>

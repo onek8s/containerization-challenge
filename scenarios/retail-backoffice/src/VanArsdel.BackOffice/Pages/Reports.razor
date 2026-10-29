@@ -1,0 +1,86 @@
+@page "/reports"
+@inject RetailApi Api
+@inject IConfiguration Configuration
+
+<h1>Reports</h1>
+<ErrorBanner Message="@error" />
+
+@if (reports != null)
+{
+    <div class="filters">
+        <select @bind="selected">
+            @foreach (var r in reports)
+            {
+                <option value="@r.Name">@r.Title</option>
+            }
+        </select>
+        <input type="date" @bind="date" />
+        <button disabled="@running" @onclick="Run">Run now</button>
+        @if (!string.IsNullOrEmpty(lastFile))
+        {
+            <a href="@lastFile" target="_blank">Download</a>
+        }
+    </div>
+
+    <h2>Recent runs</h2>
+    <table>
+        <thead><tr><th>Report</th><th>Business date</th><th class="num">Rows</th><th>By</th><th>Created</th><th></th></tr></thead>
+        <tbody>
+            @foreach (var run in runs)
+            {
+                <tr>
+                    <td>@run.ReportName</td><td>@run.BusinessDate.ToString("d.M.yyyy")</td><td class="num">@run.Rows</td>
+                    <td>@(run.RequestedBy ?? "scheduler")</td><td>@run.CreatedUtc.ToLocalTime().ToString("d.M. HH:mm")</td>
+                    <td><a href="@Download(run.FileName)" target="_blank">@run.FileName</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<ReportInfo> reports;
+    private List<ReportRun> runs = new();
+    private string selected;
+    private DateTime date = DateTime.Today.AddDays(-1);
+    private bool running;
+    private string lastFile;
+    private string error;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            reports = await Api.ReportsAsync();
+            selected = reports.FirstOrDefault()?.Name;
+            runs = await Api.ReportRunsAsync();
+        }
+        catch (ApiException ex)
+        {
+            error = ex.Message;
+        }
+    }
+
+    private async Task Run()
+    {
+        running = true;
+        error = null;
+        try
+        {
+            var result = await Api.RunReportAsync(selected, date);
+            lastFile = result.DownloadUrl;
+            runs = await Api.ReportRunsAsync();
+        }
+        catch (ApiException ex)
+        {
+            error = ex.Message;
+        }
+        finally
+        {
+            running = false;
+        }
+    }
+
+    // The gateway route needs the bearer token, so downloads go through the reporting site link that users open from e-mail.
+    private string Download(string fileName) => Configuration["Gateway:BaseUrl"].TrimEnd('/') + "/reporting/reports/files/" + fileName;
+}

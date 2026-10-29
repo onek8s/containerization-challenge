@@ -1,0 +1,102 @@
+@model SubjectDetailsModel
+@{ ViewData["Title"] = Model.Subject.Number; }
+<div class="crumbs"><a href="/">My sites</a> / <a href="/subjects/site/@Model.Subject.SiteId">Site @Model.Subject.Site!.Number</a></div>
+<h1>Subject @Model.Subject.Number <span class="pill">@Model.Subject.Status</span></h1>
+<p class="muted">
+    Consent @Model.Subject.ConsentDate?.ToString("dd-MMM-yyyy") ·
+    @(Model.Subject.RandomisationNumber is null ? "not randomised" : $"randomisation number {Model.Subject.RandomisationNumber}") ·
+    @Model.OpenQueries open queries
+</p>
+
+<div class="actions">
+    @if (Model.Subject.Status == SubjectStatus.Screening)
+    {
+        <form method="post" action="/subjects/@Model.Subject.Id/randomise" class="inline">
+            <label>Stratum
+                <select name="stratum"><option value="BRCAMUT">BRCA mutated</option><option value="BRCAWT">BRCA wild type / unknown</option></select>
+            </label>
+            <button type="submit">Randomise</button>
+        </form>
+    }
+    @if (Model.CanSign)
+    {
+        <a class="button" href="/subjects/@Model.Subject.Id/sign">Sign casebook</a>
+    }
+</div>
+
+@foreach (var row in Model.Visits)
+{
+    var v = row.Visit;
+    <section class="visit @(v.OutOfWindow ? "oow" : "")">
+        <div class="visit-head">
+            <h2>@v.Definition!.Name</h2>
+            @if (!v.Definition.Unscheduled)
+            {
+                <form method="post" action="/subjects/@Model.Subject.Id/visits/@v.Id/date" class="inline">
+                    <input type="date" name="date" value="@v.Date?.ToString("yyyy-MM-dd")" />
+                    @if (v.Date is not null)
+                    {
+                        <input name="reason" placeholder="Reason for change" />
+                    }
+                    <button type="submit" class="small">Save date</button>
+                </form>
+                @if (row.Target is not null)
+                {
+                    <span class="muted">target @row.Target?.ToString("dd-MMM") (@row.Earliest?.ToString("dd-MMM") – @row.Latest?.ToString("dd-MMM"))</span>
+                }
+                @if (v.OutOfWindow)
+                {
+                    <span class="pill warn">out of window</span>
+                }
+            }
+        </div>
+        <ul class="forms">
+            @foreach (var (form, def, queries) in row.Forms)
+            {
+                <li>
+                    <a href="/forms/@form.Id">@def.Name@(def.Repeating ? $" #{form.Row}" : "")</a>
+                    <span class="pill status-@form.Status.ToString().ToLowerInvariant()">@form.Status</span>
+                    @if (queries > 0)
+                    {
+                        <span class="pill warn">@queries query</span>
+                    }
+                </li>
+            }
+        </ul>
+        @foreach (var code in v.Definition.FormCodeList.Where(c => Model.Study.Forms.First(f => f.Code == c).Repeating))
+        {
+            var def = Model.Study.Forms.First(f => f.Code == code);
+            <form method="post" action="/subjects/@Model.Subject.Id/visits/@v.Id/rows" class="inline">
+                <input type="hidden" name="form" value="@code" />
+                <button type="submit" class="small">Add @def.Name.ToLowerInvariant()</button>
+            </form>
+        }
+    </section>
+}
+
+<section>
+    <h2>Source documents</h2>
+    <ul>
+        @foreach (var d in Model.Documents)
+        {
+            <li><a href="/documents/@d.Id">@d.OriginalName</a> · @d.Category · @d.UploadedAt.ToString("dd-MMM-yyyy") · @d.UploadedBy</li>
+        }
+    </ul>
+    <form method="post" action="/documents/subject/@Model.Subject.Id" enctype="multipart/form-data" class="inline">
+        <select name="category"><option>Lab report</option><option>Imaging report</option><option>ECG</option><option>Discharge letter</option><option>Other</option></select>
+        <input type="file" name="file" accept=".pdf,.png,.jpg,.jpeg,.tif,.tiff" />
+        <label class="check"><input type="checkbox" name="redacted" value="true" /> Redacted</label>
+        <button type="submit" class="small">Upload</button>
+    </form>
+</section>
+
+@if (Model.Subject.Status is SubjectStatus.Screening or SubjectStatus.Randomised or SubjectStatus.OnTreatment)
+{
+    <details>
+        <summary>Withdraw or screen fail</summary>
+        <form method="post" action="/subjects/@Model.Subject.Id/withdraw" class="inline">
+            <input name="reason" placeholder="Reason" required />
+            <button type="submit" class="small danger">Confirm</button>
+        </form>
+    </details>
+}

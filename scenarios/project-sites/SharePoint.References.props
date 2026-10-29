@@ -1,0 +1,21 @@
+<Project>
+
+  <!--
+    Microsoft.SharePoint.dll (SharePoint Server 2016, 16.0.4327) for projects that run inside the farm.
+    On a farm server the same assembly is in the GAC and in
+    %CommonProgramFiles%\Microsoft Shared\Web Server Extensions\16\ISAPI.
+    The assembly is never copied to the output; the farm provides it at run time.
+  -->
+  <ItemGroup>
+    <PackageReference Include="SharePoint.dll.2016.SSOM" Version="16.0.4327.1000" GeneratePathProperty="true" ExcludeAssets="all" PrivateAssets="all" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Microsoft.SharePoint">
+      <HintPath Condition="'$(SharePointIsapiPath)' != ''">$(SharePointIsapiPath)\Microsoft.SharePoint.dll</HintPath>
+      <HintPath Condition="'$(SharePointIsapiPath)' == ''">$(PkgSharePoint_dll_2016_SSOM)\lib\Microsoft.SharePoint\Microsoft.SharePoint.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,29 @@
+@page
+@model Litware.OrderHub.Portal.Pages.Orders.IndexModel
+@{ ViewData["Title"] = "Orders"; }
+<h1>Orders</h1>
+<form method="get" class="filters">
+    <input name="q" value="@Model.Q" placeholder="Order, reference, invoice, tracking, customer" size="40" />
+    <select name="status" asp-items="Model.StatusOptions"><option value="">All statuses</option></select>
+    <select name="channel" asp-items="Model.ChannelOptions"><option value="">All channels</option></select>
+    <button type="submit">Search</button>
+</form>
+<table>
+    <thead><tr><th>Received</th><th>Order</th><th>Channel</th><th>Reference</th><th>Customer</th><th>Country</th><th>Status</th><th>Tracking</th></tr></thead>
+    <tbody>
+        @foreach (var o in Model.Orders)
+        {
+            <tr>
+                <td>@o.ReceivedUtc.ToLocalTime().ToString("yyyy-MM-dd HH:mm")</td>
+                <td><a asp-page="Details" asp-route-id="@o.OrderId">@(o.OrderNumber ?? "(none)")</a></td>
+                <td>@o.Channel</td>
+                <td>@o.ExternalRef</td>
+                <td>@o.Document.CustomerName</td>
+                <td>@o.Document.ShipTo?.CountryCode</td>
+                <td><partial name="_StatusBadge" model="o.Status" /></td>
+                <td>@o.Carrier @o.TrackingNumber</td>
+            </tr>
+        }
+    </tbody>
+</table>
+@if (Model.Orders.Count == 0) { <p>No orders found.</p> }

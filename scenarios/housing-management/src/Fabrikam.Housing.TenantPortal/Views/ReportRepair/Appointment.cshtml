@@ -1,0 +1,24 @@
+@model AppointmentStepViewModel
+@{ ViewData["Title"] = "Report a repair"; }
+<h1 class="h3">Choose an appointment</h1>
+<partial name="_Wizard" model="4" />
+<form asp-action="Appointment" method="post" class="col-md-8 px-0">
+    <div asp-validation-summary="All" class="validation-summary-errors"></div>
+    <div class="form-group">
+        <label for="Date">Day</label>
+        <select name="Date" id="Date" class="form-control">
+            @foreach (var d in Model.Days)
+            {
+                <option value="@d.ToString("yyyy-MM-dd")" selected="@(Model.Date == d)">@d.ToString("dddd d MMMM")</option>
+            }
+        </select>
+    </div>
+    <div class="form-group option-list">
+        <label><input type="radio" name="Slot" value="Morning" checked="@(Model.Slot == AppointmentSlot.Morning)" /> Morning, 8am to 12pm</label>
+        <label><input type="radio" name="Slot" value="Afternoon" checked="@(Model.Slot == AppointmentSlot.Afternoon)" /> Afternoon, 12pm to 5pm</label>
+        <label><input type="radio" name="Slot" value="SchoolRun" checked="@(Model.Slot == AppointmentSlot.SchoolRun)" /> School hours, 9:30am to 2:30pm</label>
+        <label><input type="radio" name="Slot" value="AllDay" checked="@(Model.Slot == AppointmentSlot.AllDay)" /> Any time, 8am to 5pm</label>
+    </div>
+    <a asp-action="Photos" class="btn btn-link">Back</a>
+    <button type="submit" class="btn btn-primary">Next</button>
+</form>

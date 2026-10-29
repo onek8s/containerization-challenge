@@ -1,0 +1,32 @@
+@page
+@model FreightRates.Admin.Pages.Tariffs.IndexModel
+@{
+    ViewData["Title"] = "Tariffs";
+}
+<h1>Tariffs</h1>
+@if (Model.Tariff is { } t)
+{
+    <table>
+        <tr><th>Active tariff</th><td>@t.TariffName</td></tr>
+        <tr><th>Effective</th><td>@t.EffectiveDate.ToString("yyyy-MM-dd")</td></tr>
+        <tr><th>Engine</th><td>@t.EngineVersion</td></tr>
+        <tr><th>Licence key</th><td>@t.KeySerial</td></tr>
+        <tr><th>Licence days left</th><td>@t.LicenceDaysLeft</td></tr>
+    </table>
+}
+else
+{
+    <p class="error">Rating host: @Model.TariffError</p>
+}
+
+<h2>Install tariff release</h2>
+<p>Select all files of the monthly release (.mrt, .mrx, .mrz) from the Meridian customer portal download.
+The rating host installs the files and reloads the tariffs within a few minutes.</p>
+<form method="post" enctype="multipart/form-data">
+    @if (Model.UploadError is not null)
+    {
+        <p class="error">@Model.UploadError</p>
+    }
+    <input type="file" name="files" multiple accept=".mrt,.mrx,.mrz" />
+    <button type="submit">Upload release</button>
+</form>

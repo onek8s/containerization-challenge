@@ -1,0 +1,459 @@
+<?xml version="1.0" encoding="utf-8"?><Database Name="SouthridgeClinic" Class="ClinicDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=sql01.corp.local;Initial Catalog=SouthridgeClinic;Persist Security Info=True;User ID=clinic_web" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="Clinic" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Site" Member="Sites">
+    <Type Name="Site">
+      <Column Name="SiteId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Code" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Address1" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="City" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="State" Type="System.String" DbType="Char(2) NOT NULL" CanBeNull="false" />
+      <Column Name="Zip" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="Phone" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="Fax" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="PlaceOfService" Type="System.String" DbType="Char(2) NOT NULL" CanBeNull="false" />
+      <Column Name="TaxId" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="GroupNpi" Type="System.String" DbType="Char(10)" CanBeNull="true" />
+      <Column Name="OpensAt" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
+      <Column Name="ClosesAt" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
+      <Column Name="OnlineBooking" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="Site_Provider" Member="Providers" ThisKey="SiteId" OtherKey="DefaultSiteId" Type="Provider" />
+      <Association Name="Site_ScheduleTemplate" Member="ScheduleTemplates" ThisKey="SiteId" OtherKey="SiteId" Type="ScheduleTemplate" />
+      <Association Name="Site_Patient" Member="Patients" ThisKey="SiteId" OtherKey="PreferredSiteId" Type="Patient" />
+      <Association Name="Site_Appointment" Member="Appointments" ThisKey="SiteId" OtherKey="SiteId" Type="Appointment" />
+      <Association Name="Site_Encounter" Member="Encounters" ThisKey="SiteId" OtherKey="SiteId" Type="Encounter" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Specialty" Member="Specialties">
+    <Type Name="Specialty">
+      <Column Name="SpecialtyCode" Type="System.String" DbType="VarChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(60) NOT NULL" CanBeNull="false" />
+      <Column Name="TaxonomyCode" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="RequiresReferral" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="Specialty_Provider" Member="Providers" ThisKey="SpecialtyCode" OtherKey="SpecialtyCode" Type="Provider" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Provider" Member="Providers">
+    <Type Name="Provider">
+      <Column Name="ProviderId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Npi" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+      <Column Name="FirstName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="LastName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Credentials" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="SpecialtyCode" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="DefaultSiteId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="UserName" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Column Name="AcceptsNewPatients" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="OnlineBooking" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="Specialty_Provider" Member="Specialty" ThisKey="SpecialtyCode" OtherKey="SpecialtyCode" Type="Specialty" IsForeignKey="true" />
+      <Association Name="Site_Provider" Member="DefaultSite" ThisKey="DefaultSiteId" OtherKey="SiteId" Type="Site" IsForeignKey="true" />
+      <Association Name="Provider_ScheduleTemplate" Member="ScheduleTemplates" ThisKey="ProviderId" OtherKey="ProviderId" Type="ScheduleTemplate" />
+      <Association Name="Provider_ScheduleBlock" Member="ScheduleBlocks" ThisKey="ProviderId" OtherKey="ProviderId" Type="ScheduleBlock" />
+      <Association Name="Provider_Patient" Member="Patients" ThisKey="ProviderId" OtherKey="PrimaryProviderId" Type="Patient" />
+      <Association Name="Provider_Appointment" Member="Appointments" ThisKey="ProviderId" OtherKey="ProviderId" Type="Appointment" />
+      <Association Name="Provider_Encounter" Member="Encounters" ThisKey="ProviderId" OtherKey="ProviderId" Type="Encounter" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AppointmentType" Member="AppointmentTypes">
+    <Type Name="AppointmentType">
+      <Column Name="AppointmentTypeId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Code" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(60) NOT NULL" CanBeNull="false" />
+      <Column Name="DurationMinutes" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Color" Type="System.String" DbType="Char(7) NOT NULL" CanBeNull="false" />
+      <Column Name="NewPatient" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="AllowOnline" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="DefaultCptCode" Type="System.String" DbType="VarChar(5)" CanBeNull="true" />
+      <Column Name="SendToHospital" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="AppointmentType_Appointment" Member="Appointments" ThisKey="AppointmentTypeId" OtherKey="AppointmentTypeId" Type="Appointment" />
+      <Association Name="AppointmentType_WaitlistEntry" Member="WaitlistEntries" ThisKey="AppointmentTypeId" OtherKey="AppointmentTypeId" Type="WaitlistEntry" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ScheduleTemplate" Member="ScheduleTemplates">
+    <Type Name="ScheduleTemplate">
+      <Column Name="TemplateId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ProviderId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="SiteId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DayOfWeek" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="StartTime" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
+      <Column Name="EndTime" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
+      <Column Name="SlotMinutes" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="AppointmentTypes" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="MaxOverbook" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="EffectiveFrom" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="EffectiveTo" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Association Name="Provider_ScheduleTemplate" Member="Provider" ThisKey="ProviderId" OtherKey="ProviderId" Type="Provider" IsForeignKey="true" />
+      <Association Name="Site_ScheduleTemplate" Member="Site" ThisKey="SiteId" OtherKey="SiteId" Type="Site" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ScheduleBlock" Member="ScheduleBlocks">
+    <Type Name="ScheduleBlock">
+      <Column Name="BlockId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ProviderId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SiteId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="StartsAt" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="EndsAt" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Reason" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="CreatedBy" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="CreatedOn" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="Provider_ScheduleBlock" Member="Provider" ThisKey="ProviderId" OtherKey="ProviderId" Type="Provider" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Payer" Member="Payers">
+    <Type Name="Payer">
+      <Column Name="PayerId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Code" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="PayerType" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="ClaimPayerId" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="FilingIndicator" Type="System.String" DbType="Char(2) NOT NULL" CanBeNull="false" />
+      <Column Name="TimelyFilingDays" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="Payer_PatientInsurance" Member="PatientInsurances" ThisKey="PayerId" OtherKey="PayerId" Type="PatientInsurance" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ProcedureCode" Member="ProcedureCodes">
+    <Type Name="ProcedureCode">
+      <Column Name="CptCode" Type="System.String" DbType="VarChar(5) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="StandardFee" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="Category" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="ProcedureCode_Charge" Member="Charges" ThisKey="CptCode" OtherKey="CptCode" Type="Charge" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DiagnosisCode" Member="DiagnosisCodes">
+    <Type Name="DiagnosisCode">
+      <Column Name="Code" Type="System.String" DbType="VarChar(8) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CodeSet" Type="System.Byte" DbType="TinyInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(250) NOT NULL" CanBeNull="false" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.FeeSchedule" Member="FeeSchedules">
+    <Type Name="FeeSchedule">
+      <Column Name="FeeScheduleId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="PayerId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CptCode" Type="System.String" DbType="VarChar(5) NOT NULL" CanBeNull="false" />
+      <Column Name="AllowedAmount" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="EffectiveFrom" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="EffectiveTo" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Patient" Member="Patients">
+    <Type Name="Patient">
+      <Column Name="PatientId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Mrn" Type="System.String" DbType="Char(9) NOT NULL" CanBeNull="false" />
+      <Column Name="FirstName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="MiddleName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="LastName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="DateOfBirth" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="Sex" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="Address1" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Address2" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="City" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="State" Type="System.String" DbType="Char(2)" CanBeNull="true" />
+      <Column Name="Zip" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="HomePhone" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="MobilePhone" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Column Name="PreferredContact" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="ReminderOptIn" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="PreferredSiteId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PrimaryProviderId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="HospitalId" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="PortalUserName" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Column Name="Balance" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="CreatedBy" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="CreatedOn" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="ModifiedBy" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Column Name="ModifiedOn" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="RowVersion" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" IsDbGenerated="true" IsVersion="true" CanBeNull="false" UpdateCheck="Never" />
+      <Association Name="Patient_PatientInsurance" Member="PatientInsurances" ThisKey="PatientId" OtherKey="PatientId" Type="PatientInsurance" />
+      <Association Name="Patient_PatientNote" Member="PatientNotes" ThisKey="PatientId" OtherKey="PatientId" Type="PatientNote" />
+      <Association Name="Patient_IntakeForm" Member="IntakeForms" ThisKey="PatientId" OtherKey="PatientId" Type="IntakeForm" />
+      <Association Name="Site_Patient" Member="PreferredSite" ThisKey="PreferredSiteId" OtherKey="SiteId" Type="Site" IsForeignKey="true" />
+      <Association Name="Provider_Patient" Member="PrimaryProvider" ThisKey="PrimaryProviderId" OtherKey="ProviderId" Type="Provider" IsForeignKey="true" />
+      <Association Name="Patient_Appointment" Member="Appointments" ThisKey="PatientId" OtherKey="PatientId" Type="Appointment" />
+      <Association Name="Patient_WaitlistEntry" Member="WaitlistEntries" ThisKey="PatientId" OtherKey="PatientId" Type="WaitlistEntry" />
+      <Association Name="Patient_Encounter" Member="Encounters" ThisKey="PatientId" OtherKey="PatientId" Type="Encounter" />
+      <Association Name="Patient_LabOrder" Member="LabOrders" ThisKey="PatientId" OtherKey="PatientId" Type="LabOrder" />
+      <Association Name="Patient_LabResult" Member="LabResults" ThisKey="PatientId" OtherKey="PatientId" Type="LabResult" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PatientInsurance" Member="PatientInsurances">
+    <Type Name="PatientInsurance">
+      <Column Name="PatientInsuranceId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="PatientId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Sequence" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="PayerId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="MemberId" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="GroupNumber" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="SubscriberFirstName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="SubscriberLastName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="SubscriberDateOfBirth" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Relationship" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="Copay" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="EffectiveFrom" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="EffectiveTo" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="VerifiedOn" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="Payer_PatientInsurance" Member="Payer" ThisKey="PayerId" OtherKey="PayerId" Type="Payer" IsForeignKey="true" />
+      <Association Name="Patient_PatientInsurance" Member="Patient" ThisKey="PatientId" OtherKey="PatientId" Type="Patient" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PatientNote" Member="PatientNotes">
+    <Type Name="PatientNote">
+      <Column Name="PatientNoteId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="PatientId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="NoteType" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Text" Type="System.String" DbType="NVarChar(2000) NOT NULL" CanBeNull="false" />
+      <Column Name="IsAlert" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="CreatedBy" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="CreatedOn" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="Patient_PatientNote" Member="Patient" ThisKey="PatientId" OtherKey="PatientId" Type="Patient" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.IntakeForm" Member="IntakeForms">
+    <Type Name="IntakeForm">
+      <Column Name="IntakeFormId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="PatientId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="AppointmentId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Medications" Type="System.String" DbType="NVarChar(2000)" CanBeNull="true" />
+      <Column Name="Allergies" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
+      <Column Name="Conditions" Type="System.String" DbType="NVarChar(2000)" CanBeNull="true" />
+      <Column Name="ReasonForVisit" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
+      <Column Name="PharmacyName" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="PharmacyPhone" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="SubmittedOn" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="ReviewedBy" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Column Name="ReviewedOn" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="Patient_IntakeForm" Member="Patient" ThisKey="PatientId" OtherKey="PatientId" Type="Patient" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Appointment" Member="Appointments">
+    <Type Name="Appointment">
+      <Column Name="AppointmentId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="PatientId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ProviderId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="SiteId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="AppointmentTypeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="StartsAt" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="EndsAt" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Status" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="Source" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="Reason" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="IsOverbook" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="ReferralId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="RescheduledFromId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ConfirmationCode" Type="System.String" DbType="Char(8) NOT NULL" CanBeNull="false" />
+      <Column Name="BookedBy" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="BookedOn" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="CheckedInOn" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="RoomedOn" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CompletedOn" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CancelledOn" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CancelledBy" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Column Name="CancelReason" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="LateCancel" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="ReminderSentOn" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ConfirmedOn" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CopayCollected" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="RowVersion" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" IsDbGenerated="true" IsVersion="true" CanBeNull="false" UpdateCheck="Never" />
+      <Association Name="Patient_Appointment" Member="Patient" ThisKey="PatientId" OtherKey="PatientId" Type="Patient" IsForeignKey="true" />
+      <Association Name="Provider_Appointment" Member="Provider" ThisKey="ProviderId" OtherKey="ProviderId" Type="Provider" IsForeignKey="true" />
+      <Association Name="Site_Appointment" Member="Site" ThisKey="SiteId" OtherKey="SiteId" Type="Site" IsForeignKey="true" />
+      <Association Name="AppointmentType_Appointment" Member="AppointmentType" ThisKey="AppointmentTypeId" OtherKey="AppointmentTypeId" Type="AppointmentType" IsForeignKey="true" />
+      <Association Name="Appointment_Encounter" Member="Encounters" ThisKey="AppointmentId" OtherKey="AppointmentId" Type="Encounter" />
+    </Type>
+  </Table>
+  <Table Name="dbo.WaitlistEntry" Member="WaitlistEntries">
+    <Type Name="WaitlistEntry">
+      <Column Name="WaitlistEntryId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="PatientId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ProviderId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SiteId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="AppointmentTypeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="EarliestDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="LatestDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Priority" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="Notes" Type="System.String" DbType="NVarChar(400)" CanBeNull="true" />
+      <Column Name="Source" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="CreatedOn" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="OfferedOn" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ResolvedOn" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="AppointmentId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Patient_WaitlistEntry" Member="Patient" ThisKey="PatientId" OtherKey="PatientId" Type="Patient" IsForeignKey="true" />
+      <Association Name="AppointmentType_WaitlistEntry" Member="AppointmentType" ThisKey="AppointmentTypeId" OtherKey="AppointmentTypeId" Type="AppointmentType" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Encounter" Member="Encounters">
+    <Type Name="Encounter">
+      <Column Name="EncounterId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="AppointmentId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PatientId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ProviderId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="SiteId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DateOfService" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="Status" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="ChiefComplaint" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="Notes" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="VitalsBp" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="VitalsPulse" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="VitalsWeightLb" Type="System.Decimal" DbType="Decimal(5,1)" CanBeNull="true" />
+      <Column Name="VitalsTempF" Type="System.Decimal" DbType="Decimal(4,1)" CanBeNull="true" />
+      <Column Name="SignedBy" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Column Name="SignedOn" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CreatedOn" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="RowVersion" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" IsDbGenerated="true" IsVersion="true" CanBeNull="false" UpdateCheck="Never" />
+      <Association Name="Appointment_Encounter" Member="Appointment" ThisKey="AppointmentId" OtherKey="AppointmentId" Type="Appointment" IsForeignKey="true" />
+      <Association Name="Patient_Encounter" Member="Patient" ThisKey="PatientId" OtherKey="PatientId" Type="Patient" IsForeignKey="true" />
+      <Association Name="Provider_Encounter" Member="Provider" ThisKey="ProviderId" OtherKey="ProviderId" Type="Provider" IsForeignKey="true" />
+      <Association Name="Site_Encounter" Member="Site" ThisKey="SiteId" OtherKey="SiteId" Type="Site" IsForeignKey="true" />
+      <Association Name="Encounter_EncounterDiagnosis" Member="EncounterDiagnosis" ThisKey="EncounterId" OtherKey="EncounterId" Type="EncounterDiagnosis" />
+      <Association Name="Encounter_Charge" Member="Charges" ThisKey="EncounterId" OtherKey="EncounterId" Type="Charge" />
+    </Type>
+  </Table>
+  <Table Name="dbo.EncounterDiagnosis" Member="EncounterDiagnosis">
+    <Type Name="EncounterDiagnosis">
+      <Column Name="EncounterId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Sequence" Type="System.Byte" DbType="TinyInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Code" Type="System.String" DbType="VarChar(8) NOT NULL" CanBeNull="false" />
+      <Column Name="CodeSet" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Association Name="Encounter_EncounterDiagnosis" Member="Encounter" ThisKey="EncounterId" OtherKey="EncounterId" Type="Encounter" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Charge" Member="Charges">
+    <Type Name="Charge">
+      <Column Name="ChargeId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="EncounterId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="LineNumber" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="CptCode" Type="System.String" DbType="VarChar(5) NOT NULL" CanBeNull="false" />
+      <Column Name="Modifier1" Type="System.String" DbType="Char(2)" CanBeNull="true" />
+      <Column Name="Modifier2" Type="System.String" DbType="Char(2)" CanBeNull="true" />
+      <Column Name="Units" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Amount" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="DiagnosisPointers" Type="System.String" DbType="VarChar(8) NOT NULL" CanBeNull="false" />
+      <Column Name="Status" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="ClaimId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PaidAmount" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="AdjustmentAmount" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="PatientAmount" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="EnteredBy" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="EnteredOn" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="Encounter_Charge" Member="Encounter" ThisKey="EncounterId" OtherKey="EncounterId" Type="Encounter" IsForeignKey="true" />
+      <Association Name="ProcedureCode_Charge" Member="ProcedureCode" ThisKey="CptCode" OtherKey="CptCode" Type="ProcedureCode" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.LabTest" Member="LabTests">
+    <Type Name="LabTest">
+      <Column Name="TestCode" Type="System.String" DbType="VarChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Specimen" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="CptCode" Type="System.String" DbType="VarChar(5)" CanBeNull="true" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="LabTest_LabOrder" Member="LabOrders" ThisKey="TestCode" OtherKey="TestCode" Type="LabOrder" />
+    </Type>
+  </Table>
+  <Table Name="dbo.LabOrder" Member="LabOrders">
+    <Type Name="LabOrder">
+      <Column Name="LabOrderId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="OrderNumber" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="EncounterId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PatientId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ProviderId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TestCode" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Priority" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="Status" Type="System.String" DbType="VarChar(12) NOT NULL" CanBeNull="false" />
+      <Column Name="ClinicalInfo" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="OrderedOn" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="SentOn" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ResultedOn" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="Patient_LabOrder" Member="Patient" ThisKey="PatientId" OtherKey="PatientId" Type="Patient" IsForeignKey="true" />
+      <Association Name="LabTest_LabOrder" Member="LabTest" ThisKey="TestCode" OtherKey="TestCode" Type="LabTest" IsForeignKey="true" />
+      <Association Name="LabOrder_LabResult" Member="LabResults" ThisKey="LabOrderId" OtherKey="LabOrderId" Type="LabResult" />
+    </Type>
+  </Table>
+  <Table Name="dbo.LabResult" Member="LabResults">
+    <Type Name="LabResult">
+      <Column Name="LabResultId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="PatientId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="LabOrderId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="OrderNumber" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="FillerOrderNumber" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="TestCode" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="ObservationCode" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="ObservationName" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Value" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="Units" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="ReferenceRange" Type="System.String" DbType="VarChar(40)" CanBeNull="true" />
+      <Column Name="AbnormalFlag" Type="System.String" DbType="VarChar(4)" CanBeNull="true" />
+      <Column Name="ResultStatus" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="ObservedOn" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ReceivedOn" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="ReviewedBy" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Column Name="ReviewedOn" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="MessageId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Patient_LabResult" Member="Patient" ThisKey="PatientId" OtherKey="PatientId" Type="Patient" IsForeignKey="true" />
+      <Association Name="LabOrder_LabResult" Member="LabOrder" ThisKey="LabOrderId" OtherKey="LabOrderId" Type="LabOrder" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AppSetting" Member="AppSettings">
+    <Type Name="AppSetting">
+      <Column Name="Name" Type="System.String" DbType="VarChar(100) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Value" Type="System.String" DbType="NVarChar(400) NOT NULL" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(400)" CanBeNull="true" />
+      <Column Name="ModifiedBy" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Column Name="ModifiedOn" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Function Name="dbo.usp_Appointment_Book" Method="BookAppointment">
+    <Parameter Name="PatientId" Parameter="patientId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ProviderId" Parameter="providerId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="SiteId" Parameter="siteId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="AppointmentTypeId" Parameter="appointmentTypeId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="StartsAt" Parameter="startsAt" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="DurationMinutes" Parameter="durationMinutes" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Source" Parameter="source" Type="System.Byte" DbType="TinyInt" />
+    <Parameter Name="Reason" Parameter="reason" Type="System.String" DbType="NVarChar(200)" />
+    <Parameter Name="AllowOverbook" Parameter="allowOverbook" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="ReferralId" Parameter="referralId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="RescheduledFromId" Parameter="rescheduledFromId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="BookedBy" Parameter="bookedBy" Type="System.String" DbType="NVarChar(256)" />
+    <Parameter Name="AppointmentId" Parameter="appointmentId" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Parameter Name="ConfirmationCode" Parameter="confirmationCode" Type="System.String" DbType="Char(8)" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.usp_Appointment_SetStatus" Method="SetAppointmentStatus">
+    <Parameter Name="AppointmentId" Parameter="appointmentId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Status" Parameter="status" Type="System.Byte" DbType="TinyInt" />
+    <Parameter Name="UserName" Parameter="userName" Type="System.String" DbType="NVarChar(256)" />
+    <Parameter Name="Reason" Parameter="reason" Type="System.String" DbType="NVarChar(200)" />
+    <Parameter Name="CopayCollected" Parameter="copayCollected" Type="System.Decimal" DbType="Money" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.usp_Audit_Write" Method="WriteAudit">
+    <Parameter Name="UserName" Parameter="userName" Type="System.String" DbType="NVarChar(256)" />
+    <Parameter Name="Action" Parameter="action" Type="System.String" DbType="VarChar(40)" />
+    <Parameter Name="EntityType" Parameter="entityType" Type="System.String" DbType="VarChar(40)" />
+    <Parameter Name="EntityId" Parameter="entityId" Type="System.String" DbType="VarChar(40)" />
+    <Parameter Name="PatientId" Parameter="patientId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Details" Parameter="details" Type="System.String" DbType="NVarChar(1000)" />
+    <Parameter Name="ClientAddress" Parameter="clientAddress" Type="System.String" DbType="VarChar(45)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.usp_LabOrder_Create" Method="CreateLabOrder">
+    <Parameter Name="EncounterId" Parameter="encounterId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="PatientId" Parameter="patientId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ProviderId" Parameter="providerId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="TestCode" Parameter="testCode" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="Priority" Parameter="priority" Type="System.Char" DbType="Char(1)" />
+    <Parameter Name="ClinicalInfo" Parameter="clinicalInfo" Type="System.String" DbType="NVarChar(200)" />
+    <Parameter Name="LabOrderId" Parameter="labOrderId" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Parameter Name="OrderNumber" Parameter="orderNumber" Type="System.String" DbType="VarChar(20)" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+</Database>

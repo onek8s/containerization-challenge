@@ -1,0 +1,31 @@
+@model EdiMessage
+@{
+    ViewBag.Title = "EDI " + Model.Id;
+    var partner = (EdiPartner)ViewBag.Partner;
+}
+<h2>@Model.Direction @Model.TransactionSet <small>@partner.Name, ISA @Model.InterchangeControl</small></h2>
+<p>
+    State @Model.State, created @Model.CreatedUtc.ToLocalTime().ToString("g"), AS2 @Model.As2MessageId @Model.MdnStatus
+    @if (Model.OrderId.HasValue) { @Html.ActionLink("order", "Details", "Orders", new { id = Model.OrderId }, null) }
+</p>
+@if (!string.IsNullOrEmpty(Model.Error)) { <div class="alert alert-danger">@Model.Error</div> }
+<p>
+    @Html.ActionLink("Download", "Raw", new { id = Model.Id }, new { @class = "btn btn-default btn-sm" })
+    @if (Model.Direction == EdiDirection.Inbound)
+    {
+        using (Html.BeginForm("Reprocess", "Edi", new { id = Model.Id }, FormMethod.Post, new { style = "display:inline" }))
+        {
+            @Html.AntiForgeryToken()
+            <button class="btn btn-warning btn-sm">Process again</button>
+        }
+    }
+    else
+    {
+        using (Html.BeginForm("Resend", "Edi", new { id = Model.Id }, FormMethod.Post, new { style = "display:inline" }))
+        {
+            @Html.AntiForgeryToken()
+            <button class="btn btn-warning btn-sm">Send again</button>
+        }
+    }
+</p>
+<pre class="x12">@Model.Content.Replace("~", "~\n")</pre>

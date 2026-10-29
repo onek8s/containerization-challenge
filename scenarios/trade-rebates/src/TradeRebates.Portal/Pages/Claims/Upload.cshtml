@@ -1,0 +1,31 @@
+@page
+@model ContosoFoods.TradeRebates.Portal.Pages.Claims.UploadModel
+@{
+    ViewData["Title"] = "Upload workbook";
+}
+<h1>Upload sell-out workbook</h1>
+<p>Excel workbook (.xlsx) with a sheet named <code>SellOut</code> and the columns
+DistributorCode, Period, InvoiceNo, InvoiceDate, CustomerNo, Gtin, Quantity, NetAmount. One claim is created per distributor and period.</p>
+<form method="post" enctype="multipart/form-data">
+    <input type="file" name="workbook" accept=".xlsx" />
+    <button type="submit">Import</button>
+</form>
+@if (Model.Results is not null)
+{
+    <h2>Result</h2>
+    <table>
+        <thead><tr><th>Claim</th><th>Distributor</th><th>Period</th><th class="n">Rows</th><th>Message</th></tr></thead>
+        <tbody>
+        @foreach (var r in Model.Results)
+        {
+            <tr>
+                <td>@if (r.ClaimId is int id) { <a asp-page="Details" asp-route-id="@id">@id</a> }</td>
+                <td>@r.DistributorCode</td>
+                <td>@(r.Period is int p ? Periods.Format(p) : "")</td>
+                <td class="n">@r.Lines</td>
+                <td>@r.Message</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}

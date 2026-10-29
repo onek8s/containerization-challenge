@@ -1,0 +1,4 @@
+     A*  LNMSTL2  Loan master by origination application reference
+     A          R LNMSTR                    PFILE(LNMSTP)
+     A          K LMAPRF
+     A          S LMAPRF                    COMP(NE ' ')

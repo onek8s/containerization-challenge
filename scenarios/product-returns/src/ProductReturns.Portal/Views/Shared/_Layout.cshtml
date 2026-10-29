@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Wide World Importers Returns</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <header class="top">
+        <a class="brand" asp-controller="Home" asp-action="Index">Wide World Importers <span>Returns</span></a>
+        <nav>
+            <a asp-controller="Home" asp-action="Index">Start a return</a>
+            <a asp-controller="Return" asp-action="Status">Return status</a>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <a asp-controller="Staff" asp-action="Index">Returns queue</a>
+                <form asp-controller="Staff" asp-action="Logout" method="post" class="inline">
+                    <button type="submit" class="link">Sign out @User.FindFirst("display_name")?.Value</button>
+                </form>
+            }
+        </nav>
+    </header>
+    <main class="page">
+        @RenderBody()
+    </main>
+    <footer class="bottom">
+        Wide World Importers B.V. &middot; Returns department, Waalhaven 18, Rotterdam &middot; returns@wideworldimporters.example
+    </footer>
+</body>
+</html>

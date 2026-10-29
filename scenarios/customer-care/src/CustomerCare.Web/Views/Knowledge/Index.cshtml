@@ -1,0 +1,23 @@
+@model KnowledgeIndexModel
+@{
+    ViewBag.Title = "Knowledge base";
+}
+<h1>Knowledge base @if (Model.CanEdit) { <a class="button" href="@Url.Action("Edit", "Knowledge")">New article</a> }</h1>
+<form method="get" action="@Url.RouteUrl("kb")" class="filters">
+    <input type="text" name="q" value="@Model.Query" placeholder="Search articles" maxlength="100" />
+    <button type="submit">Search</button>
+</form>
+@if (!Model.Articles.Any())
+{
+    <p>No articles found.</p>
+}
+<ul class="articles">
+    @foreach (var a in Model.Articles)
+    {
+        <li>
+            <a href="@Url.RouteUrl("kb-article", new { slug = a.Slug })">@a.Title</a>
+            @if (!a.IsPublished) { <span class="badge">Draft</span> }
+            <div class="muted">@Tailspin.CustomerCare.Domain.KnowledgeText.Excerpt(a.Body, 160)</div>
+        </li>
+    }
+</ul>

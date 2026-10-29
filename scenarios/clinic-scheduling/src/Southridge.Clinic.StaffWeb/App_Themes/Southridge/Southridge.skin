@@ -1,0 +1,10 @@
+<%-- Default control appearance for the staff site. Pages set CssClass only where they differ. --%>
+<asp:GridView runat="server" CssClass="grid" GridLines="None" CellPadding="0" PagerStyle-CssClass="pager" PagerSettings-Mode="NumericFirstLast"
+    PagerSettings-PageButtonCount="10" SortedAscendingHeaderStyle-CssClass="asc" SortedDescendingHeaderStyle-CssClass="desc" />
+<asp:DetailsView runat="server" CssClass="details" GridLines="None" FieldHeaderStyle-CssClass="label" />
+<asp:Button runat="server" CssClass="button" />
+<asp:Calendar runat="server" CssClass="calendar" DayNameFormat="FirstTwoLetters" NextPrevFormat="ShortMonth" />
+<asp:ValidationSummary runat="server" CssClass="validation" DisplayMode="BulletList" />
+<asp:ChangePassword runat="server" CssClass="form" ChangePasswordButtonStyle-CssClass="button" />
+<asp:Login runat="server" CssClass="form" LoginButtonStyle-CssClass="button" />
+<asp:Wizard runat="server" CssClass="wizard" SideBarStyle-CssClass="wizard-steps" NavigationButtonStyle-CssClass="button" />

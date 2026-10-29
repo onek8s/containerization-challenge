@@ -1,0 +1,18 @@
+@model IList<BankHoliday>
+@{ ViewData["Title"] = "Bank holidays"; }
+<h1 class="h3">Bank holidays (England and Wales)</h1>
+<p class="text-muted">Used for repair target dates and direct debit collection dates. Other applications pick up changes within 24 hours.</p>
+<form asp-action="AddBankHoliday" method="post" class="form-inline mb-3">
+    <input type="date" name="date" class="form-control form-control-sm mr-2" />
+    <input name="name" class="form-control form-control-sm mr-2" placeholder="Name" />
+    <button class="btn btn-sm btn-primary">Add</button>
+</form>
+<table class="table table-sm col-lg-6">
+    @foreach (var b in Model)
+    {
+        <tr>
+            <td>@b.Date.ToString("ddd dd/MM/yyyy")</td><td>@b.Name</td>
+            <td><form asp-action="DeleteBankHoliday" method="post"><input type="hidden" name="date" value="@b.Date.ToString("yyyy-MM-dd")" /><button class="btn btn-sm btn-link p-0 text-danger">Remove</button></form></td>
+        </tr>
+    }
+</table>

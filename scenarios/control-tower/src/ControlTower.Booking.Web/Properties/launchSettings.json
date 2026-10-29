@@ -1,0 +1,13 @@
+{
+  "profiles": {
+    "ControlTower.Booking.Web": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "applicationUrl": "http://localhost:5020",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "CONTROLTOWER_LOG_DIR": "../../.devdata/logs"
+      }
+    }
+  }
+}

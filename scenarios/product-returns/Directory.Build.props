@@ -1,0 +1,9 @@
+<Project>
+  <PropertyGroup>
+    <Company>Wide World Importers</Company>
+    <Product>Product Returns</Product>
+    <Version>2.4.0</Version>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+  </PropertyGroup>
+</Project>

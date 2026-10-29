@@ -1,0 +1,28 @@
+@page "/bordereaux"
+@inject QuoteApiClient Api
+
+<PageTitle>Bordereaux</PageTitle>
+<h1>Premium bordereaux</h1>
+<p class="muted">The policy service builds the bordereau for the previous month on the first of each month and sends it to Lucerne Capacity.</p>
+<table class="list">
+    <thead><tr><th>Period</th><th>Created</th><th class="num">Rows</th><th class="num">Gross premium</th><th>Status</th><th>File</th></tr></thead>
+    <tbody>
+        @foreach (var b in runs)
+        {
+            <tr>
+                <td>@b.Period</td>
+                <td>@b.CreatedUtc.ToLocalTime().ToString("dd MMM yyyy HH:mm")</td>
+                <td class="num">@b.Rows</td>
+                <td class="num">@b.GrossPremium.ToString("N2")</td>
+                <td>@b.Status @if (b.Error is not null) { <span class="error-text">@b.Error</span> }</td>
+                <td><a href="files/bordereaux/@b.Id">@b.FileName</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@code {
+    private List<BordereauRunInfo> runs = [];
+
+    protected override async Task OnInitializedAsync() => runs = await Api.BordereauxAsync();
+}

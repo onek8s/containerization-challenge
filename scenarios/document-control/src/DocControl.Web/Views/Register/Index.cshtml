@@ -1,0 +1,39 @@
+@model RegisterViewModel
+@{ ViewData["Title"] = "Register " + Model.Project; }
+<h1>Document register</h1>
+
+<form method="get" class="filters">
+    <select name="project" onchange="this.form.submit()">
+        @foreach (var p in Model.Projects)
+        {
+            <option value="@p.Code" selected="@(p.Code == Model.Project)">@p.Code @p.Name@(p.Active ? "" : " (closed)")</option>
+        }
+    </select>
+    <select name="discipline">
+        <option value="">All disciplines</option>
+        @foreach (var d in DocumentNumber.Disciplines)
+        {
+            <option value="@d.Key" selected="@(d.Key == Model.Discipline)">@d.Key @d.Value</option>
+        }
+    </select>
+    <input type="search" name="q" value="@Model.Search" placeholder="Number or title" />
+    <button type="submit">Search</button>
+    <a class="button" asp-action="Export" asp-route-project="@Model.Project">Export CSV</a>
+</form>
+
+<table>
+    <tr><th>Number</th><th>Title</th><th>Discipline</th><th>Type</th><th>Latest</th><th>Status</th><th>Approved</th></tr>
+    @foreach (var d in Model.Documents)
+    {
+        <tr>
+            <td><a asp-action="Document" asp-route-number="@d.Number">@d.Number</a></td>
+            <td>@d.Title</td>
+            <td>@d.Discipline</td>
+            <td>@d.DocumentType</td>
+            <td>@d.LatestRevision</td>
+            <td><partial name="_StatusBadge" model="d.LatestStatus" /></td>
+            <td>@d.ApprovedRevision</td>
+        </tr>
+    }
+</table>
+<p class="muted">@Model.Documents.Count documents</p>

@@ -1,0 +1,15 @@
+@page "/"
+@namespace VanArsdel.BackOffice.Pages
+@using Microsoft.AspNetCore.Authentication
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = "_Layout";
+    var expiresAt = await HttpContext.GetTokenAsync("expires_at");
+    var tokens = new VanArsdel.BackOffice.Services.InitialApplicationState
+    {
+        AccessToken = await HttpContext.GetTokenAsync("access_token"),
+        ExpiresAt = DateTimeOffset.TryParse(expiresAt, out var e) ? e : DateTimeOffset.UtcNow.AddMinutes(55),
+    };
+}
+
+<component type="typeof(App)" render-mode="ServerPrerendered" param-InitialState="tokens" />

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Feature xmlns="http://schemas.microsoft.com/sharepoint/"
+         Id="{E7F5BAC6-4D80-4FBE-B1C9-5C6D7E8F9AA5}"
+         Title="Lucerne Project Sites - Web Parts"
+         Description="Project health, my projects and upcoming deliverables web parts."
+         Scope="Site"
+         Version="5.3.1.0"
+         Hidden="FALSE">
+  <ElementManifests>
+    <ElementManifest Location="Elements.xml" />
+  </ElementManifests>
+</Feature>

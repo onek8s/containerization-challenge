@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "Lucerne.Lending.LabStubs": {
+      "commandName": "Project",
+      "applicationUrl": "http://localhost:5109",
+      "environmentVariables": { "ASPNETCORE_ENVIRONMENT": "Development" }
+    }
+  }
+}

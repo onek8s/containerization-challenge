@@ -1,0 +1,97 @@
+@model WorkOrderDetailsViewModel
+@{
+    var o = Model.Order;
+    ViewData["Title"] = o.Number;
+    var isTech = User.IsInRole(Roles.Technician);
+}
+<h2>@o.Number <small class="text-muted">@o.Summary</small></h2>
+<p><partial name="_StatusBadge" model="o" /> <span class="ms-2">Priority: @o.Priority</span> <span class="ms-2">Source: @o.Source</span></p>
+
+<div class="row">
+    <div class="col-md-7">
+        <dl class="row">
+            <dt class="col-sm-4">Customer</dt><dd class="col-sm-8">@o.Customer?.Name (@o.Customer?.AccountCode)</dd>
+            <dt class="col-sm-4">Customer reference</dt><dd class="col-sm-8">@(o.CustomerReference ?? "-")</dd>
+            <dt class="col-sm-4">Site</dt><dd class="col-sm-8">@o.SiteAddress</dd>
+            <dt class="col-sm-4">Created</dt><dd class="col-sm-8">@o.CreatedUtc.ToLocalTime().ToString("g")</dd>
+            <dt class="col-sm-4">Due</dt><dd class="col-sm-8">@o.DueUtc.ToLocalTime().ToString("g")</dd>
+            <dt class="col-sm-4">Technician</dt><dd class="col-sm-8">@(o.Technician?.Name ?? "Unassigned")</dd>
+            @if (o.CompletedUtc.HasValue)
+            {
+                <dt class="col-sm-4">Completed</dt><dd class="col-sm-8">@o.CompletedUtc.Value.ToLocalTime().ToString("g")</dd>
+                <dt class="col-sm-4">Labor hours</dt><dd class="col-sm-8">@o.LaborHours</dd>
+                <dt class="col-sm-4">Resolution</dt><dd class="col-sm-8">@o.ResolutionNotes</dd>
+            }
+            @if (o.InvoiceBatch != null)
+            {
+                <dt class="col-sm-4">Invoice batch</dt><dd class="col-sm-8">@o.InvoiceBatch</dd>
+            }
+        </dl>
+        @if (!string.IsNullOrEmpty(o.Description))
+        {
+            <h5>Description</h5>
+            <p style="white-space: pre-wrap">@o.Description</p>
+        }
+
+        @if (o.Parts.Count > 0)
+        {
+            <h5>Parts used</h5>
+            <table class="table table-sm">
+                <thead><tr><th>Part</th><th>Description</th><th class="text-end">Qty</th><th class="text-end">Unit price</th></tr></thead>
+                <tbody>
+                @foreach (var p in o.Parts)
+                {
+                    <tr><td>@p.PartNumber</td><td>@p.Description</td><td class="text-end">@p.Quantity</td><td class="text-end">@p.UnitPrice.ToString("N2")</td></tr>
+                }
+                </tbody>
+            </table>
+        }
+    </div>
+
+    <div class="col-md-5">
+        @if (o.IsOpen)
+        {
+            <div class="card mb-3"><div class="card-body">
+                <h5 class="card-title">Actions</h5>
+                @if (!isTech)
+                {
+                    <form asp-action="Assign" asp-route-id="@o.Number" method="post" class="d-flex mb-2">
+                        <select name="technicianId" class="form-select me-2" asp-items="Model.Technicians"></select>
+                        <button class="btn btn-outline-primary" type="submit">Assign</button>
+                    </form>
+                }
+                @if (o.Status == WorkOrderStatus.Assigned)
+                {
+                    <form asp-action="Start" asp-route-id="@o.Number" method="post" class="d-inline">
+                        <button class="btn btn-primary" type="submit">Start work</button>
+                    </form>
+                }
+                @if (o.Status is WorkOrderStatus.Assigned or WorkOrderStatus.InProgress)
+                {
+                    <a class="btn btn-success" asp-action="Complete" asp-route-id="@o.Number">Complete</a>
+                }
+                @if (!isTech)
+                {
+                    <form asp-action="Cancel" asp-route-id="@o.Number" method="post" class="d-inline">
+                        <button class="btn btn-outline-danger" type="submit" onclick="return confirm('Cancel this work order?')">Cancel order</button>
+                    </form>
+                }
+            </div></div>
+        }
+
+        <div class="card"><div class="card-body">
+            <h5 class="card-title">Photos and documents</h5>
+            <ul class="list-unstyled">
+                @foreach (var p in o.Photos.OrderBy(p => p.UploadedUtc))
+                {
+                    <li><a asp-action="Photo" asp-route-id="@o.Number" asp-route-photoId="@p.Id">@p.OriginalFileName</a>
+                        <small class="text-muted">@p.UploadedBy, @p.UploadedUtc.ToLocalTime().ToString("g")</small></li>
+                }
+            </ul>
+            <form asp-action="UploadPhoto" asp-route-id="@o.Number" method="post" enctype="multipart/form-data" class="d-flex">
+                <input type="file" name="photo" class="form-control me-2" accept=".jpg,.jpeg,.png,.heic,.pdf" />
+                <button class="btn btn-outline-secondary" type="submit">Upload</button>
+            </form>
+        </div></div>
+    </div>
+</div>

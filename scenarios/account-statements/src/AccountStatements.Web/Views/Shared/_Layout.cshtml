@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>@ViewBag.Title - Account Statements</title>
+    <link href="~/Content/site.css" rel="stylesheet" />
+</head>
+<body>
+    <header class="topbar">
+        <a class="brand" href="@Url.Action("Index", "Home")">Woodgrove Leasing &middot; Account Statements</a>
+        <nav>
+            @Html.ActionLink("Customers", "Index", "Customers")
+            @Html.ActionLink("Reports", "Index", "Reports")
+            @Html.ActionLink("Subscriptions", "Index", "Subscriptions")
+            @Html.ActionLink("Delivery problems", "Index", "Deliveries")
+            @if (User.IsAdmin())
+            {
+                @Html.ActionLink("API clients", "ApiClients", "Admin")
+            }
+        </nav>
+        <span class="user">@User.Identity.Name</span>
+    </header>
+    <main>
+        @if (TempData["Message"] != null)
+        {
+            <div class="notice">@TempData["Message"]</div>
+        }
+        @if (TempData["Error"] != null)
+        {
+            <div class="notice error">@TempData["Error"]</div>
+        }
+        @RenderBody()
+    </main>
+    <footer>Woodgrove Leasing Oy &middot; Accounts receivable &middot; receivables@@woodgrove-leasing.fi</footer>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

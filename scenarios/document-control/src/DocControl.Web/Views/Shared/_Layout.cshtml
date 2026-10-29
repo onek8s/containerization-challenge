@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Document Control</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <a class="brand" asp-controller="Home" asp-action="Index">Litware Document Control</a>
+        <nav>
+            <a asp-controller="Register" asp-action="Index">Register</a>
+            <a asp-controller="Revisions" asp-action="Upload">Submit revision</a>
+            @if (CurrentUser.IsController)
+            {
+                <a asp-controller="Revisions" asp-action="Review">Review</a>
+            }
+            <a asp-controller="Transmittals" asp-action="Index">Transmittals</a>
+            @if (CurrentUser.IsController)
+            {
+                <a asp-controller="Diagnostics" asp-action="Index">Diagnostics</a>
+            }
+        </nav>
+        <span class="user">@CurrentUser.Name</span>
+    </header>
+    <main>
+        @if (TempData["Message"] is string message)
+        {
+            <div class="alert ok">@message</div>
+        }
+        @if (TempData["Error"] is string error)
+        {
+            <div class="alert err">@error</div>
+        }
+        @RenderBody()
+    </main>
+    <footer>Litware Engineering &middot; EP-07 document numbering and revision control</footer>
+</body>
+</html>

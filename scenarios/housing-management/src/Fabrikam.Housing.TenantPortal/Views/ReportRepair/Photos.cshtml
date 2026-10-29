@@ -1,0 +1,27 @@
+@model PhotosStepViewModel
+@{ ViewData["Title"] = "Report a repair"; }
+<h1 class="h3">Add photos</h1>
+<partial name="_Wizard" model="3" />
+<p>@(Model.PhotoSuggested ? "A photo helps our contractor bring the right parts." : "You can add a photo if it helps to show the problem.") You can add up to @Model.MaxPhotos.</p>
+@if (Model.Photos.Count > 0)
+{
+    <form asp-action="Photos" method="post">
+        <ul>
+        @foreach (var p in Model.Photos)
+        {
+            <li>@p.FileName (@(p.Size / 1024) KB) <button type="submit" name="remove" value="@p.StoredName" class="btn btn-link btn-sm">Remove</button></li>
+        }
+        </ul>
+    </form>
+}
+<form asp-action="Photos" method="post" enctype="multipart/form-data" class="col-md-7 px-0">
+    @if (Model.Photos.Count < Model.MaxPhotos)
+    {
+        <div class="form-group">
+            <input type="file" name="photo" accept="image/*" class="form-control-file" />
+        </div>
+        <button type="submit" class="btn btn-outline-secondary">Add photo</button>
+    }
+    <a asp-action="Details" class="btn btn-link">Back</a>
+    <button type="submit" name="next" value="1" class="btn btn-primary">Next</button>
+</form>

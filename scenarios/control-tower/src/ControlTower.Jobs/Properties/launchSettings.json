@@ -1,0 +1,13 @@
+{
+  "profiles": {
+    "ControlTower.Jobs": {
+      "commandName": "Project",
+      "launchBrowser": false,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "DOTNET_ENVIRONMENT": "Development",
+        "CONTROLTOWER_LOG_DIR": "../../.devdata/logs"
+      }
+    }
+  }
+}

@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Loaded into SQL Server (drop folder, statement files, ERP posting, bank detail protection). PERMISSION_SET = UNSAFE. -->
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <RootNamespace>ContosoFoods.TradeRebates.SqlClr.Integration</RootNamespace>
+    <AssemblyName>TradeRebates.SqlClr.Integration</AssemblyName>
+    <Nullable>annotations</Nullable>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\TradeRebates.Rules\ClaimFile.cs" Link="Rules\ClaimFile.cs" />
+    <Compile Include="..\TradeRebates.Rules\Gtin.cs" Link="Rules\Gtin.cs" />
+  </ItemGroup>
+
+</Project>

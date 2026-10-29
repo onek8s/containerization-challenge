@@ -1,0 +1,51 @@
+@using VanArsdel.Integration.Tracking.Security
+@{
+    var principal = User as TrackingPrincipal;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewBag.Title - VanArsdel Order Tracking</title>
+    <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/tracking.css")" />
+</head>
+<body>
+    <nav class="navbar navbar-default navbar-static-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="@Url.Action("Index", "Orders")">VanArsdel Order Tracking</a>
+            @if (principal != null)
+            {
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Orders", "Index", "Orders")</li>
+                    <li>@Html.ActionLink("Interchanges", "Index", "Interchanges")</li>
+                    @if (principal.IsInRole(TrackingRoles.CustomerService) || principal.IsInRole(TrackingRoles.Admin))
+                    {
+                        <li>@Html.ActionLink("Partner KPIs", "Index", "Partners")</li>
+                        <li>@Html.ActionLink("Volumes", "Index", "Volumes")</li>
+                    }
+                    @if (principal.IsInRole(TrackingRoles.Admin))
+                    {
+                        <li>@Html.ActionLink("Users", "Index", "Users")</li>
+                    }
+                </ul>
+                using (Html.BeginForm("Logout", "Account", FormMethod.Post, new { @class = "navbar-form navbar-right" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <span class="navbar-text">@User.Identity.Name@(principal.IsInternal ? "" : " (" + principal.PartnerId + ")")</span>
+                    @Html.ActionLink("Password", "ChangePassword", "Account", null, new { @class = "btn btn-link" })
+                    <button type="submit" class="btn btn-default btn-sm">Sign out</button>
+                }
+            }
+        </div>
+    </nav>
+    <div class="container-fluid">
+        @if (TempData["Message"] != null) { <div class="alert alert-info">@TempData["Message"]</div> }
+        @RenderBody()
+        <footer class="text-muted"><small>Times are shown in UTC. Order data is updated as documents are processed; contact customer service at +44 20 7946 0321 for questions.</small></footer>
+    </div>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.4.min.js"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

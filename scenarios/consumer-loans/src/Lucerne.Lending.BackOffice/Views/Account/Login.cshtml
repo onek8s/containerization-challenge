@@ -1,0 +1,12 @@
+@{ ViewData["Title"] = "Sign in"; }
+<h2>Development sign-in</h2>
+<p>ADFS is not used in this environment (Auth:Mode = Development).</p>
+<form method="post" asp-action="Login">
+    <input type="hidden" name="returnUrl" value="@ViewData["ReturnUrl"]" />
+    <p><label>User</label><input name="user" value="uw.anna" /></p>
+    @foreach (var r in Roles.All)
+    {
+        <p><label></label><input type="checkbox" name="roles" value="@r" checked="@(r != Roles.ReadOnly)" /> @r</p>
+    }
+    <button>Sign in</button>
+</form>

@@ -1,0 +1,22 @@
+@model List<SiteSummary>
+@{ ViewData["Title"] = "My sites"; }
+<h1>My sites</h1>
+@if (Model.Count == 0)
+{
+    <p>You are not delegated to any site yet. Ask your study monitor to update the delegation log.</p>
+}
+<div class="cards">
+@foreach (var s in Model)
+{
+    <a class="card" href="/subjects/site/@s.SiteId">
+        <div class="muted">@s.StudyCode</div>
+        <h2>Site @s.SiteNumber</h2>
+        <div>@s.SiteName</div>
+        <div class="stats">
+            <span><b>@s.Subjects</b> subjects</span>
+            <span class="@(s.OpenQueries > 0 ? "warn" : "")"><b>@s.OpenQueries</b> open queries</span>
+            <span><b>@s.AnsweredQueries</b> awaiting monitor</span>
+        </div>
+    </a>
+}
+</div>

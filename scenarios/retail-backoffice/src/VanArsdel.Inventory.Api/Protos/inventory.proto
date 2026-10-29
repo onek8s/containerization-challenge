@@ -1,0 +1,85 @@
+syntax = "proto3";
+
+option csharp_namespace = "VanArsdel.Inventory.Grpc";
+
+package vanarsdel.inventory.v1;
+
+import "google/protobuf/timestamp.proto";
+
+// Stock availability and reservations. Used by the allocation service.
+service InventoryService {
+  rpc GetAvailability (AvailabilityRequest) returns (AvailabilityReply);
+  rpc Reserve (ReserveRequest) returns (ReserveReply);
+  rpc Release (ReleaseRequest) returns (ReleaseReply);
+  rpc Commit (CommitRequest) returns (CommitReply);
+}
+
+message AvailabilityRequest {
+  repeated string skus = 1;
+  // Empty: all active locations.
+  repeated string location_codes = 2;
+  // Only locations in this country (FI, SE, EE, LV, LT); empty: all.
+  string country = 3;
+  bool ship_from_store_only = 4;
+}
+
+message AvailabilityReply {
+  repeated LocationStock locations = 1;
+}
+
+message LocationStock {
+  string location_code = 1;
+  string location_type = 2;
+  string country = 3;
+  bool ship_from_store = 4;
+  bool click_and_collect = 5;
+  repeated SkuStock items = 6;
+}
+
+message SkuStock {
+  string sku = 1;
+  int32 on_hand = 2;
+  int32 reserved = 3;
+  int32 available = 4;
+  int32 safety_stock = 5;
+}
+
+message ReserveRequest {
+  string order_id = 1;
+  string shipment_id = 2;
+  string location_code = 3;
+  repeated ReserveLine lines = 4;
+  google.protobuf.Timestamp expires = 5;
+}
+
+message ReserveLine {
+  string sku = 1;
+  int32 quantity = 2;
+}
+
+message ReserveReply {
+  bool success = 1;
+  string reservation_id = 2;
+  repeated ReserveLine short_lines = 3;
+  string message = 4;
+}
+
+message ReleaseRequest {
+  string order_id = 1;
+  // Empty: all reservations of the order.
+  string shipment_id = 2;
+  string reason = 3;
+}
+
+message ReleaseReply {
+  int32 released = 1;
+}
+
+message CommitRequest {
+  string order_id = 1;
+  string shipment_id = 2;
+}
+
+message CommitReply {
+  int32 committed = 1;
+}

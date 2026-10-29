@@ -1,0 +1,199 @@
+{
+  "modelCode": "TF10",
+  "itemId": "TF10",
+  "name": "Tailspin TF10 forwarder",
+  "family": "Forwarder",
+  "modelYear": 2019,
+  "validFrom": "2018-09-01",
+  "validTo": null,
+  "leadTimeWeeks": 12,
+  "imageUrl": "/Content/img/tf10.jpg",
+  "exportControlClass": null,
+  "markets": [],
+  "optionGroups": [
+    {
+      "code": "ENGINE",
+      "name": "Engine",
+      "kind": "SingleRequired",
+      "sortOrder": 10,
+      "options": [
+        {
+          "code": "ENG-160",
+          "name": "Engine 160 kW Stage V",
+          "itemId": "OPT-ENG160",
+          "isDefault": true,
+          "markets": [],
+          "extraLeadTimeWeeks": 0,
+          "discountGroup": null
+        },
+        {
+          "code": "ENG-T4F",
+          "name": "Engine 160 kW Tier 4 Final",
+          "itemId": "OPT-ENGT4F160",
+          "isDefault": false,
+          "markets": [
+            "US",
+            "CA"
+          ],
+          "extraLeadTimeWeeks": 0,
+          "discountGroup": null
+        }
+      ]
+    },
+    {
+      "code": "CRANE",
+      "name": "Crane",
+      "kind": "SingleRequired",
+      "sortOrder": 20,
+      "options": [
+        {
+          "code": "CRANE-8M",
+          "name": "Crane TC80, 8.5 m reach",
+          "itemId": "OPT-CRANE8",
+          "isDefault": true,
+          "markets": [],
+          "extraLeadTimeWeeks": 0,
+          "discountGroup": null
+        },
+        {
+          "code": "CRANE-10M",
+          "name": "Crane TC100, 10.0 m reach",
+          "itemId": "OPT-CRANE10",
+          "isDefault": false,
+          "markets": [],
+          "extraLeadTimeWeeks": 0,
+          "discountGroup": null
+        }
+      ]
+    },
+    {
+      "code": "GRAPPLE",
+      "name": "Grapple",
+      "kind": "SingleRequired",
+      "sortOrder": 30,
+      "options": [
+        {
+          "code": "GRAPPLE-022",
+          "name": "Grapple G22, 0.22 m²",
+          "itemId": "OPT-GRP022",
+          "isDefault": true,
+          "markets": [],
+          "extraLeadTimeWeeks": 0,
+          "discountGroup": null
+        },
+        {
+          "code": "GRAPPLE-028",
+          "name": "Grapple G28, 0.28 m²",
+          "itemId": "OPT-GRP028",
+          "isDefault": false,
+          "markets": [],
+          "extraLeadTimeWeeks": 0,
+          "discountGroup": null
+        }
+      ]
+    },
+    {
+      "code": "TYRES",
+      "name": "Tyres",
+      "kind": "SingleRequired",
+      "sortOrder": 40,
+      "options": [
+        {
+          "code": "TYRE-600",
+          "name": "Tyres 600/55-26.5",
+          "itemId": "OPT-TYRE600",
+          "isDefault": true,
+          "markets": [],
+          "extraLeadTimeWeeks": 0,
+          "discountGroup": null
+        },
+        {
+          "code": "TYRE-710",
+          "name": "Tyres 710/45-26.5",
+          "itemId": "OPT-TYRE710",
+          "isDefault": false,
+          "markets": [],
+          "extraLeadTimeWeeks": 0,
+          "discountGroup": null
+        }
+      ]
+    },
+    {
+      "code": "EQUIP",
+      "name": "Equipment",
+      "kind": "Multiple",
+      "sortOrder": 50,
+      "options": [
+        {
+          "code": "COLD-PACK",
+          "name": "Nordic cold pack (-40 °C)",
+          "itemId": "OPT-COLD",
+          "isDefault": false,
+          "markets": [
+            "FI",
+            "SE",
+            "NO",
+            "CA"
+          ],
+          "extraLeadTimeWeeks": 0,
+          "discountGroup": null
+        },
+        {
+          "code": "LED-PACK",
+          "name": "LED working light pack",
+          "itemId": "OPT-LED",
+          "isDefault": false,
+          "markets": [],
+          "extraLeadTimeWeeks": 0,
+          "discountGroup": null
+        },
+        {
+          "code": "TRACKS-ECO",
+          "name": "Bogie tracks Eco",
+          "itemId": "OPT-TRKECO",
+          "isDefault": false,
+          "markets": [],
+          "extraLeadTimeWeeks": 0,
+          "discountGroup": "ATTACHMENT"
+        },
+        {
+          "code": "TELEMATICS",
+          "name": "TailspinLink telematics, 3 years",
+          "itemId": "OPT-LINK3",
+          "isDefault": false,
+          "markets": [],
+          "extraLeadTimeWeeks": 0,
+          "discountGroup": "SERVICE"
+        }
+      ]
+    }
+  ],
+  "rules": [
+    {
+      "id": "TF10-R1",
+      "kind": "Requires",
+      "option": "CRANE-10M",
+      "targets": [
+        "GRAPPLE-028"
+      ],
+      "expression": null,
+      "message": "The 10 m crane is delivered with the G28 grapple."
+    },
+    {
+      "id": "TF10-R2",
+      "kind": "Condition",
+      "option": null,
+      "targets": [],
+      "expression": "market(US, CA) and not ENG-T4F => invalid",
+      "message": "Machines for the USA and Canada need the Tier 4 Final engine."
+    },
+    {
+      "id": "TF10-R3",
+      "kind": "Condition",
+      "option": null,
+      "targets": [],
+      "expression": "ENG-T4F and not market(US, CA) => invalid",
+      "message": "The Tier 4 Final engine is only for the USA and Canada."
+    }
+  ]
+}

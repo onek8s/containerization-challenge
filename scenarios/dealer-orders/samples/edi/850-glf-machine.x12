@@ -1,0 +1,28 @@
+ISA*00*          *00*          *01*078912345      *ZZ*TAILSPINMACH   *191014*1532*U*00401*000004711*1*P*>~
+GS*PO*GLFEQUIP*TAILSPIN*20191014*1532*4711*X*004010~
+ST*850*0001~
+BEG*00*SA*GLF-PO-48213**20191014~
+CUR*BY*USD~
+REF*DP*FORESTRY~
+DTM*002*20191219~
+N1*BY*Great Lakes Forestry Equipment Inc.~
+N1*ST*Great Lakes Forestry Duluth yard*92*GLF-DUL~
+N3*4120 Airpark Blvd~
+N4*Duluth*MN*55811*US~
+N1*EN*Arrowhead Timber LLC~
+MSG*Customer demo machine, please deliver with full fuel tank~
+PO1*1*1*EA*249500**VP*TF14*BP*GLF-TF14~
+PID*F****Tailspin TF14 forwarder~
+SLN*1.1**I*1*EA****VP*OPT-ENGT4F~
+SLN*1.2**I*1*EA****VP*OPT-CRANE11~
+SLN*1.3**I*1*EA****VP*OPT-BOGIEHD~
+SLN*1.4**I*1*EA****VP*OPT-LED~
+SLN*1.5**I*1*EA****VP*OPT-TRKECO~
+PO1*2*2*EA*4750**VP*P-20310*BP*GLF-R14~
+PID*F****Grapple rotator R14~
+PO1*3*24*EA*41.25**VP*P-10045*BP*GLF-HF45~
+PID*F****Hydraulic filter element~
+CTT*3~
+SE*24*0001~
+GE*1*4711~
+IEA*1*000004711~

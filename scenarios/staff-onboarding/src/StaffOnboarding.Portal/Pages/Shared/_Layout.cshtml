@@ -1,0 +1,37 @@
+@inject CurrentUser CurrentUser
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Staff Onboarding</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <a class="brand" asp-page="/Index">Staff Onboarding</a>
+        <nav>
+            <a asp-page="/Index">My tasks</a>
+            @if (CurrentUser.IsHr || CurrentUser.IsIt)
+            {
+                <a asp-page="/Requests/Index">Requests</a>
+            }
+            @if (CurrentUser.IsHr)
+            {
+                <a asp-page="/Requests/NewJoiner">New joiner</a>
+                <a asp-page="/Requests/NewMover">Role change</a>
+                <a asp-page="/Requests/NewLeaver">Leaver</a>
+            }
+        </nav>
+        <span class="user">@CurrentUser.Name</span>
+    </header>
+    <main>
+        @if (TempData["Message"] is string message)
+        {
+            <p class="notice">@message</p>
+        }
+        @RenderBody()
+    </main>
+    <footer>Litware Inc. · IT Identity &amp; Access · Questions: servicedesk@litware.com</footer>
+</body>
+</html>

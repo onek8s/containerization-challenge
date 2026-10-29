@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net452</TargetFramework>
+    <RootNamespace>Southridge.Clinic.Reminders</RootNamespace>
+    <AssemblyName>SouthridgeReminders</AssemblyName>
+    <Configurations>Debug;Release;Lab</Configurations>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Data.Linq" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Southridge.Clinic.Domain\Southridge.Clinic.Domain.csproj" />
+    <ProjectReference Include="..\Southridge.Clinic.Infrastructure\Southridge.Clinic.Infrastructure.csproj" />
+    <ProjectReference Include="..\Southridge.Clinic.Data\Southridge.Clinic.Data.csproj" />
+    <ProjectReference Include="..\Southridge.Clinic.Scheduling\Southridge.Clinic.Scheduling.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,24 @@
+@page
+@model ContosoFoods.TradeRebates.Portal.Pages.Audit.IndexModel
+@{
+    ViewData["Title"] = "Audit";
+}
+<h1>Audit log</h1>
+<form method="get">
+    <label>Entity</label>
+    <select name="entity" asp-for="Entity">
+        <option value="">All</option>
+        <option>Claim</option><option>Agreement</option><option>Statement</option><option>Distributor</option><option>File</option><option>Workbook</option><option>ApiClient</option><option>Period</option>
+    </select>
+    <label>Id</label><input type="text" name="entityId" value="@Model.EntityId" />
+    <button type="submit">Show</button>
+</form>
+<table>
+    <thead><tr><th>At</th><th>Actor</th><th>Action</th><th>Entity</th><th>Id</th><th>Detail</th></tr></thead>
+    <tbody>
+    @foreach (var a in Model.Rows)
+    {
+        <tr><td>@a.At.ToString("yyyy-MM-dd HH:mm:ss")</td><td>@a.Actor</td><td>@a.Action</td><td>@a.Entity</td><td>@a.EntityId</td><td>@a.Detail</td></tr>
+    }
+    </tbody>
+</table>

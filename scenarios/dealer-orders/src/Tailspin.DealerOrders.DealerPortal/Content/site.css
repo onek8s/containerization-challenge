@@ -1,0 +1,17 @@
+body { padding-bottom: 20px; }
+.navbar-form { margin: 0; padding: 0; }
+.navbar-form .btn-link { color: #9d9d9d; padding-top: 15px; }
+.tile { border: 1px solid #ddd; border-radius: 4px; padding: 12px; margin-bottom: 15px; background: #f9f9f9; }
+.tile-value { font-size: 22px; font-weight: bold; }
+.tile-label { color: #777; }
+.filter { margin-bottom: 15px; }
+.filter .form-control { margin-right: 6px; }
+.model-card img { max-height: 140px; }
+.option { cursor: pointer; }
+.option input { margin-right: 8px; }
+.option-auto { font-style: italic; }
+.summary { position: sticky; top: 10px; }
+.live-status { position: fixed; right: 20px; top: 60px; width: 320px; z-index: 1000; }
+.order-status.updated { box-shadow: 0 0 0 2px #f0ad4e; }
+tr.cancelled td { text-decoration: line-through; }
+.history li { margin-bottom: 4px; }

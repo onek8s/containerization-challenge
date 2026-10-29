@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Provider-hosted add-in manifest. New-AppPackage.ps1 replaces the version; the app principal is the
+     high-trust client registered by deploy\Register-HighTrustAddIn.ps1. -->
+<App xmlns="http://schemas.microsoft.com/sharepoint/2012/app/manifest"
+     Name="LucerneProjectDashboards"
+     ProductID="{3e8b1c5d-7a2f-4b90-9d64-1f0e2c4a6b8d}"
+     Version="5.3.1.0"
+     SharePointMinVersion="16.0.0.0">
+  <Properties>
+    <Title>Project Dashboards</Title>
+    <StartPage>https://dashboards.corp.local/?{StandardTokens}</StartPage>
+    <SupportedLocales>
+      <SupportedLocale CultureName="en-US" />
+      <SupportedLocale CultureName="de-CH" />
+    </SupportedLocales>
+  </Properties>
+  <AppPrincipal>
+    <RemoteWebApplication ClientId="7c1f5e2a-3b4d-4e6f-8a9b-0c1d2e3f4a5b" />
+  </AppPrincipal>
+  <AppPermissionRequests AllowAppOnlyPolicy="true">
+    <AppPermissionRequest Scope="http://sharepoint/content/tenant" Right="Read" />
+    <AppPermissionRequest Scope="http://sharepoint/social/tenant" Right="Read" />
+  </AppPermissionRequests>
+</App>

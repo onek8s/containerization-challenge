@@ -1,0 +1,359 @@
+﻿#if __DESIGNER_DATA
+#error Do not define __DESIGNER_DATA.
+<?xml version="1.0" encoding="utf-8"?>
+<om:MetaModel MajorVersion="1" MinorVersion="3" Core="2b131234-7959-458d-834f-2dc0769ce683" ScheduleModel="66366196-361d-448d-976f-cab5e87496d2" xmlns:om="http://schemas.microsoft.com/BizTalk/2003/DesignerData">
+    <om:Property Name="DisplayName" Value="SendCustomerDocument" />
+    <om:Element Type="Module" OID="6975cf5f-4d3d-5196-a6a2-f7e518c73ecb">
+        <om:Property Name="ReportToAnalyst" Value="True" />
+        <om:Property Name="Name" Value="VanArsdel.Integration.Orchestrations" />
+        <om:Property Name="Signal" Value="False" />
+        <om:Element Type="PortType" OID="dacc93dc-6c71-5567-bf80-3383a5e37393" ParentLink="Module_PortType">
+            <om:Property Name="Synchronous" Value="False" />
+            <om:Property Name="TypeModifier" Value="Internal" />
+            <om:Property Name="ReportToAnalyst" Value="True" />
+            <om:Property Name="Name" Value="CanonicalDespatchInType" />
+            <om:Property Name="Signal" Value="False" />
+            <om:Element Type="OperationDeclaration" OID="7ab28fa8-cf8e-5a68-9c0c-c055c557f523" ParentLink="PortType_OperationDeclaration">
+                <om:Property Name="OperationType" Value="OneWay" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="Receive" />
+                <om:Property Name="Signal" Value="False" />
+                <om:Element Type="MessageRef" OID="191dacde-e0a3-5d12-ae78-41687e74b36b" ParentLink="OperationDeclaration_RequestMessageRef">
+                    <om:Property Name="Ref" Value="VanArsdel.Integration.Schemas.Canonical.CanonicalDespatch" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="Request" />
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+            </om:Element>
+        </om:Element>
+        <om:Element Type="PortType" OID="151549ba-c464-52ae-b81c-dbb59383d587" ParentLink="Module_PortType">
+            <om:Property Name="Synchronous" Value="False" />
+            <om:Property Name="TypeModifier" Value="Internal" />
+            <om:Property Name="ReportToAnalyst" Value="True" />
+            <om:Property Name="Name" Value="PartnerDocumentOutType" />
+            <om:Property Name="Signal" Value="False" />
+            <om:Element Type="OperationDeclaration" OID="a3751406-89ff-5bf0-b82b-846ea9e8926a" ParentLink="PortType_OperationDeclaration">
+                <om:Property Name="OperationType" Value="OneWay" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="Send" />
+                <om:Property Name="Signal" Value="False" />
+                <om:Element Type="MessageRef" OID="892b7296-2e1a-5ee0-9bf6-da7181479d79" ParentLink="OperationDeclaration_RequestMessageRef">
+                    <om:Property Name="Ref" Value="System.Xml.XmlDocument" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="Request" />
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+            </om:Element>
+        </om:Element>
+        <om:Element Type="ServiceDeclaration" OID="32124027-a6be-5629-a636-aff8371f9481" ParentLink="Module_ServiceDeclaration">
+            <om:Property Name="InitializedTransactionType" Value="False" />
+            <om:Property Name="IsInvokable" Value="False" />
+            <om:Property Name="TypeModifier" Value="Internal" />
+            <om:Property Name="ReportToAnalyst" Value="True" />
+            <om:Property Name="Name" Value="SendCustomerDocument" />
+            <om:Property Name="Signal" Value="False" />
+            <om:Element Type="MessageDeclaration" OID="c4d50d18-bf8a-5b38-805c-4c85c0634c20" ParentLink="ServiceDeclaration_MessageDeclaration">
+                <om:Property Name="Type" Value="VanArsdel.Integration.Schemas.Canonical.CanonicalDespatch" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="DespatchMsg" />
+                <om:Property Name="Signal" Value="True" />
+            </om:Element>
+            <om:Element Type="MessageDeclaration" OID="f466f4c7-6f95-50b8-a1c0-9eefd20a7934" ParentLink="ServiceDeclaration_MessageDeclaration">
+                <om:Property Name="Type" Value="System.Xml.XmlDocument" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="PartnerMsg" />
+                <om:Property Name="Signal" Value="True" />
+            </om:Element>
+            <om:Element Type="VariableDeclaration" OID="480f2ba5-b9a0-5a5c-a0d3-9163cc320484" ParentLink="ServiceDeclaration_VariableDeclaration">
+                <om:Property Name="UseDefaultConstructor" Value="False" />
+                <om:Property Name="Type" Value="System.String" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="partnerId" />
+                <om:Property Name="Signal" Value="True" />
+            </om:Element>
+            <om:Element Type="VariableDeclaration" OID="308bde69-9b9b-5498-a0c6-972eafadcba8" ParentLink="ServiceDeclaration_VariableDeclaration">
+                <om:Property Name="UseDefaultConstructor" Value="False" />
+                <om:Property Name="Type" Value="System.String" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="documentNumber" />
+                <om:Property Name="Signal" Value="True" />
+            </om:Element>
+            <om:Element Type="VariableDeclaration" OID="f5cf3cfe-4415-52f6-8cf9-a2aa31673389" ParentLink="ServiceDeclaration_VariableDeclaration">
+                <om:Property Name="UseDefaultConstructor" Value="False" />
+                <om:Property Name="Type" Value="System.String" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="erpOrderNumber" />
+                <om:Property Name="Signal" Value="True" />
+            </om:Element>
+            <om:Element Type="VariableDeclaration" OID="c1613811-e424-564b-b188-160a2fafbf3e" ParentLink="ServiceDeclaration_VariableDeclaration">
+                <om:Property Name="UseDefaultConstructor" Value="False" />
+                <om:Property Name="Type" Value="VanArsdel.Integration.Domain.Routing.RoutingSlip" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="slip" />
+                <om:Property Name="Signal" Value="True" />
+            </om:Element>
+            <om:Element Type="VariableDeclaration" OID="21a15716-a5ee-50d4-8f10-cfc0754d8c3e" ParentLink="ServiceDeclaration_VariableDeclaration">
+                <om:Property Name="UseDefaultConstructor" Value="False" />
+                <om:Property Name="Type" Value="System.Type" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="mapType" />
+                <om:Property Name="Signal" Value="True" />
+            </om:Element>
+            <om:Element Type="VariableDeclaration" OID="4d94b3c7-e1b2-56a9-93ec-cc56a7a49b41" ParentLink="ServiceDeclaration_VariableDeclaration">
+                <om:Property Name="UseDefaultConstructor" Value="False" />
+                <om:Property Name="Type" Value="System.String" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="endpoint" />
+                <om:Property Name="Signal" Value="True" />
+            </om:Element>
+            <om:Element Type="PortDeclaration" OID="39c804ea-6283-562e-a3fd-24ebc9bd1bd6" ParentLink="ServiceDeclaration_PortDeclaration">
+                <om:Property Name="PortModifier" Value="Implements" />
+                <om:Property Name="Orientation" Value="Receive" />
+                <om:Property Name="PortIndex" Value="0" />
+                <om:Property Name="IsWebPort" Value="False" />
+                <om:Property Name="OrderedDelivery" Value="False" />
+                <om:Property Name="Type" Value="VanArsdel.Integration.Orchestrations.CanonicalDespatchInType" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="DespatchIn" />
+                <om:Property Name="Signal" Value="False" />
+                <om:Element Type="DirectBindingAttribute" OID="b05fb2a5-cab1-5ff3-9380-9a06c2066681" ParentLink="PortDeclaration_CLRAttribute">
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+            </om:Element>
+            <om:Element Type="PortDeclaration" OID="060b64d2-459b-5f0f-8014-6f4074309711" ParentLink="ServiceDeclaration_PortDeclaration">
+                <om:Property Name="PortModifier" Value="Uses" />
+                <om:Property Name="Orientation" Value="Send" />
+                <om:Property Name="PortIndex" Value="1" />
+                <om:Property Name="IsWebPort" Value="False" />
+                <om:Property Name="OrderedDelivery" Value="False" />
+                <om:Property Name="Type" Value="VanArsdel.Integration.Orchestrations.PartnerDocumentOutType" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="PartnerOut" />
+                <om:Property Name="Signal" Value="False" />
+                <om:Element Type="DirectBindingAttribute" OID="4012d109-ee7a-578c-8351-c3b7ecb8fc29" ParentLink="PortDeclaration_CLRAttribute">
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+            </om:Element>
+            <om:Element Type="ServiceBody" OID="3251770b-cce0-5b53-a5c8-cfb72d052e07" ParentLink="ServiceDeclaration_ServiceBody">
+                <om:Property Name="Signal" Value="False" />
+                <om:Element Type="Receive" OID="dbee003b-6d89-5826-96ff-864511a62f3a" ParentLink="ServiceBody_Statement">
+                    <om:Property Name="Activate" Value="True" />
+                    <om:Property Name="PortName" Value="DespatchIn" />
+                    <om:Property Name="MessageName" Value="DespatchMsg" />
+                    <om:Property Name="OperationName" Value="Receive" />
+                    <om:Property Name="OperationMessageName" Value="Request" />
+                    <om:Property Name="Filter" Value='BTS.MessageType == "http://schemas.vanarsdel.com/integration/canonical/2014#Despatch"' />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="ReceiveDespatch" />
+                    <om:Property Name="Signal" Value="True" />
+                </om:Element>
+                <om:Element Type="VariableAssignment" OID="640bac90-a5b1-5ef3-8e81-6b6c1992eed6" ParentLink="ServiceBody_Statement">
+                    <om:Property Name="Expression" Value="partnerId = DespatchMsg(VanArsdel.Integration.Schemas.PartnerId);&#10;documentNumber = xpath(DespatchMsg, &quot;string(/*[local-name()='Despatch']/*[local-name()='Header']/*[local-name()='DespatchNumber'])&quot;);&#10;erpOrderNumber = xpath(DespatchMsg, &quot;string(/*[local-name()='Despatch']/*[local-name()='Header']/*[local-name()='ErpOrderNumber'])&quot;);&#10;VanArsdel.Integration.Runtime.Tracking.OrderLifecycleTracker.ConfirmedByErp(partnerId, xpath(DespatchMsg, &quot;string(/*[local-name()='Despatch']/*[local-name()='Header']/*[local-name()='OrderNumber'])&quot;), erpOrderNumber, System.DateTime.UtcNow);&#10;VanArsdel.Integration.Runtime.Tracking.OrderLifecycleTracker.DespatchReceived(erpOrderNumber, documentNumber, System.DateTime.UtcNow);&#10;slip = VanArsdel.Integration.Domain.Routing.RoutingSlip.Parse(VanArsdel.Integration.Runtime.Orchestration.OrderProcess.RoutingSlipFor(partnerId, &quot;Despatch&quot;));" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="ResolveRoutingSlip" />
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+                <om:Element Type="While" OID="52e46c1b-40c7-5c2b-b63b-e5cc135b779b" ParentLink="ServiceBody_Statement">
+                    <om:Property Name="Expression" Value="!slip.IsComplete" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="WalkRoutingSlip" />
+                    <om:Property Name="Signal" Value="False" />
+                    <om:Element Type="Decision" OID="e993671f-f543-55f8-87e2-f4526992f682" ParentLink="ComplexStatement_Statement">
+                        <om:Property Name="ReportToAnalyst" Value="True" />
+                        <om:Property Name="Name" Value="StepKind" />
+                        <om:Property Name="Signal" Value="False" />
+                        <om:Element Type="DecisionBranch" OID="9d5be442-3d3c-503b-bb5f-2f44444ffe6d" ParentLink="ReallyComplexStatement_Branch">
+                            <om:Property Name="Expression" Value="slip.Current.Kind == VanArsdel.Integration.Domain.Routing.RoutingStepKind.Transform" />
+                            <om:Property Name="IsGhostBranch" Value="False" />
+                            <om:Property Name="ReportToAnalyst" Value="True" />
+                            <om:Property Name="Name" Value="Map" />
+                            <om:Property Name="Signal" Value="False" />
+                            <om:Element Type="VariableAssignment" OID="6937b113-e7f3-597b-ba8d-0932f089ccf0" ParentLink="ComplexStatement_Statement">
+                                <om:Property Name="Expression" Value='mapType = System.Type.GetType("VanArsdel.Integration.Maps." + slip.Current.Target + ", VanArsdel.Integration.Maps, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cfedfd825850e71", true);' />
+                                <om:Property Name="ReportToAnalyst" Value="True" />
+                                <om:Property Name="Name" Value="ResolveMap" />
+                                <om:Property Name="Signal" Value="False" />
+                            </om:Element>
+                            <om:Element Type="Construct" OID="98dfc6f5-c70d-507f-bd6f-c53e452afdb7" ParentLink="ComplexStatement_Statement">
+                                <om:Property Name="ReportToAnalyst" Value="True" />
+                                <om:Property Name="Name" Value="DynamicTransform" />
+                                <om:Property Name="Signal" Value="False" />
+                                <om:Element Type="MessageAssignment" OID="96274905-c2c3-5656-a8e4-8bc5b1b11c94" ParentLink="ComplexStatement_Statement">
+                                    <om:Property Name="Expression" Value="transform (PartnerMsg) = mapType (DespatchMsg);&#10;PartnerMsg(VanArsdel.Integration.Schemas.PartnerId) = partnerId;&#10;PartnerMsg(VanArsdel.Integration.Schemas.RoutingSlip) = slip.ToString();" />
+                                    <om:Property Name="ReportToAnalyst" Value="False" />
+                                    <om:Property Name="Name" Value="Assign_DynamicTransform" />
+                                    <om:Property Name="Signal" Value="False" />
+                                </om:Element>
+                                <om:Element Type="MessageRef" OID="23359810-e5e9-50ac-b3e8-7342fcb9e332" ParentLink="Construct_MessageRef">
+                                    <om:Property Name="Ref" Value="PartnerMsg" />
+                                    <om:Property Name="ReportToAnalyst" Value="True" />
+                                    <om:Property Name="Signal" Value="False" />
+                                </om:Element>
+                            </om:Element>
+                        </om:Element>
+                        <om:Element Type="DecisionBranch" OID="6ffd8fde-8b4a-5889-8031-49763d774107" ParentLink="ReallyComplexStatement_Branch">
+                            <om:Property Name="Expression" Value="slip.Current.Kind == VanArsdel.Integration.Domain.Routing.RoutingStepKind.Send" />
+                            <om:Property Name="IsGhostBranch" Value="False" />
+                            <om:Property Name="ReportToAnalyst" Value="True" />
+                            <om:Property Name="Name" Value="Send" />
+                            <om:Property Name="Signal" Value="False" />
+                            <om:Element Type="VariableAssignment" OID="8b84ee0d-5fb9-504c-a2a7-1c69115c291f" ParentLink="ComplexStatement_Statement">
+                                <om:Property Name="Expression" Value="endpoint = slip.Current.Target;" />
+                                <om:Property Name="ReportToAnalyst" Value="True" />
+                                <om:Property Name="Name" Value="SetEndpoint" />
+                                <om:Property Name="Signal" Value="False" />
+                            </om:Element>
+                            <om:Element Type="Construct" OID="00ebba4d-016e-56fe-9827-23e16bdcdfa4" ParentLink="ComplexStatement_Statement">
+                                <om:Property Name="ReportToAnalyst" Value="True" />
+                                <om:Property Name="Name" Value="PromoteEndpoint" />
+                                <om:Property Name="Signal" Value="False" />
+                                <om:Element Type="MessageAssignment" OID="37155f59-d889-585f-9c37-262524286542" ParentLink="ComplexStatement_Statement">
+                                    <om:Property Name="Expression" Value="PartnerMsg = PartnerMsg;&#10;PartnerMsg(VanArsdel.Integration.Schemas.Endpoint) = endpoint;&#10;PartnerMsg(VanArsdel.Integration.Schemas.PartnerId) = partnerId;" />
+                                    <om:Property Name="ReportToAnalyst" Value="False" />
+                                    <om:Property Name="Name" Value="Assign_PromoteEndpoint" />
+                                    <om:Property Name="Signal" Value="False" />
+                                </om:Element>
+                                <om:Element Type="MessageRef" OID="0ca59d8e-9582-5904-80b0-9fb77a607ce4" ParentLink="Construct_MessageRef">
+                                    <om:Property Name="Ref" Value="PartnerMsg" />
+                                    <om:Property Name="ReportToAnalyst" Value="True" />
+                                    <om:Property Name="Signal" Value="False" />
+                                </om:Element>
+                            </om:Element>
+                            <om:Element Type="Send" OID="b6515c99-0c3d-518b-b507-cb647cd55800" ParentLink="ComplexStatement_Statement">
+                                <om:Property Name="PortName" Value="PartnerOut" />
+                                <om:Property Name="MessageName" Value="PartnerMsg" />
+                                <om:Property Name="OperationName" Value="Send" />
+                                <om:Property Name="OperationMessageName" Value="Request" />
+                                <om:Property Name="ReportToAnalyst" Value="True" />
+                                <om:Property Name="Name" Value="SendToPartner" />
+                                <om:Property Name="Signal" Value="True" />
+                            </om:Element>
+                            <om:Element Type="VariableAssignment" OID="7a2971e7-1deb-5275-88d4-b734853ccecd" ParentLink="ComplexStatement_Statement">
+                                <om:Property Name="Expression" Value="VanArsdel.Integration.Runtime.Tracking.OrderLifecycleTracker.DespatchSent(erpOrderNumber, documentNumber, System.DateTime.UtcNow);" />
+                                <om:Property Name="ReportToAnalyst" Value="True" />
+                                <om:Property Name="Name" Value="TrackAsnSent" />
+                                <om:Property Name="Signal" Value="False" />
+                            </om:Element>
+                        </om:Element>
+                        <om:Element Type="DecisionBranch" OID="d3936f01-b9ab-5644-a948-abe98522e143" ParentLink="ReallyComplexStatement_Branch">
+                            <om:Property Name="IsGhostBranch" Value="True" />
+                            <om:Property Name="ReportToAnalyst" Value="True" />
+                            <om:Property Name="Name" Value="Else" />
+                            <om:Property Name="Signal" Value="False" />
+                            <om:Element Type="VariableAssignment" OID="8b003477-f942-5c8f-8a49-181b57d6f71e" ParentLink="ComplexStatement_Statement">
+                                <om:Property Name="Expression" Value='System.Diagnostics.Trace.TraceInformation("Routing step " + slip.Current.ToString() + " handled by the send port");' />
+                                <om:Property Name="ReportToAnalyst" Value="True" />
+                                <om:Property Name="Name" Value="SkipStep" />
+                                <om:Property Name="Signal" Value="False" />
+                            </om:Element>
+                        </om:Element>
+                    </om:Element>
+                    <om:Element Type="VariableAssignment" OID="999f2a24-4d77-58bf-b80a-293800f57957" ParentLink="ComplexStatement_Statement">
+                        <om:Property Name="Expression" Value="slip = slip.Advance();" />
+                        <om:Property Name="ReportToAnalyst" Value="True" />
+                        <om:Property Name="Name" Value="AdvanceSlip" />
+                        <om:Property Name="Signal" Value="False" />
+                    </om:Element>
+                </om:Element>
+            </om:Element>
+        </om:Element>
+    </om:Element>
+</om:MetaModel>
+#endif // __DESIGNER_DATA
+module VanArsdel.Integration.Orchestrations
+{
+    internal porttype CanonicalDespatchInType
+    {
+        oneway Receive
+        {
+            VanArsdel.Integration.Schemas.Canonical.CanonicalDespatch
+        };
+    };
+    internal porttype PartnerDocumentOutType
+    {
+        oneway Send
+        {
+            System.Xml.XmlDocument
+        };
+    };
+    [Microsoft.XLANGs.BaseTypes.BPELExportable(false)]
+    internal service SendCustomerDocument
+    {
+        [Microsoft.XLANGs.BaseTypes.DirectBinding()]
+        port implements CanonicalDespatchInType DespatchIn;
+        [Microsoft.XLANGs.BaseTypes.DirectBinding()]
+        port uses PartnerDocumentOutType PartnerOut;
+        message VanArsdel.Integration.Schemas.Canonical.CanonicalDespatch DespatchMsg;
+        message System.Xml.XmlDocument PartnerMsg;
+        System.String partnerId;
+        System.String documentNumber;
+        System.String erpOrderNumber;
+        VanArsdel.Integration.Domain.Routing.RoutingSlip slip;
+        System.Type mapType;
+        System.String endpoint;
+        body ()
+        {
+            [Microsoft.XLANGs.BaseTypes.DesignerPosition("dbee003b-6d89-5826-96ff-864511a62f3a")]
+            activate (BTS.MessageType == "http://schemas.vanarsdel.com/integration/canonical/2014#Despatch") receive (DespatchIn.Receive, DespatchMsg);
+            [Microsoft.XLANGs.BaseTypes.DesignerPosition("640bac90-a5b1-5ef3-8e81-6b6c1992eed6")]
+            partnerId = DespatchMsg(VanArsdel.Integration.Schemas.PartnerId);
+            documentNumber = xpath(DespatchMsg, "string(/*[local-name()='Despatch']/*[local-name()='Header']/*[local-name()='DespatchNumber'])");
+            erpOrderNumber = xpath(DespatchMsg, "string(/*[local-name()='Despatch']/*[local-name()='Header']/*[local-name()='ErpOrderNumber'])");
+            VanArsdel.Integration.Runtime.Tracking.OrderLifecycleTracker.ConfirmedByErp(partnerId, xpath(DespatchMsg, "string(/*[local-name()='Despatch']/*[local-name()='Header']/*[local-name()='OrderNumber'])"), erpOrderNumber, System.DateTime.UtcNow);
+            VanArsdel.Integration.Runtime.Tracking.OrderLifecycleTracker.DespatchReceived(erpOrderNumber, documentNumber, System.DateTime.UtcNow);
+            slip = VanArsdel.Integration.Domain.Routing.RoutingSlip.Parse(VanArsdel.Integration.Runtime.Orchestration.OrderProcess.RoutingSlipFor(partnerId, "Despatch"));
+            [Microsoft.XLANGs.BaseTypes.DesignerPosition("52e46c1b-40c7-5c2b-b63b-e5cc135b779b")]
+            while (!slip.IsComplete)
+            {
+                [Microsoft.XLANGs.BaseTypes.DesignerPosition("e993671f-f543-55f8-87e2-f4526992f682")]
+                if (slip.Current.Kind == VanArsdel.Integration.Domain.Routing.RoutingStepKind.Transform)
+                {
+                    [Microsoft.XLANGs.BaseTypes.DesignerPosition("6937b113-e7f3-597b-ba8d-0932f089ccf0")]
+                    mapType = System.Type.GetType("VanArsdel.Integration.Maps." + slip.Current.Target + ", VanArsdel.Integration.Maps, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cfedfd825850e71", true);
+                    [Microsoft.XLANGs.BaseTypes.DesignerPosition("98dfc6f5-c70d-507f-bd6f-c53e452afdb7")]
+                    construct PartnerMsg
+                    {
+                        [Microsoft.XLANGs.BaseTypes.DesignerPosition("5ed20455-ec35-5275-bd02-deadde8762aa")]
+                        transform (PartnerMsg) = mapType (DespatchMsg);
+                        PartnerMsg(VanArsdel.Integration.Schemas.PartnerId) = partnerId;
+                        PartnerMsg(VanArsdel.Integration.Schemas.RoutingSlip) = slip.ToString();
+                    }
+                }
+                else if (slip.Current.Kind == VanArsdel.Integration.Domain.Routing.RoutingStepKind.Send)
+                {
+                    [Microsoft.XLANGs.BaseTypes.DesignerPosition("8b84ee0d-5fb9-504c-a2a7-1c69115c291f")]
+                    endpoint = slip.Current.Target;
+                    [Microsoft.XLANGs.BaseTypes.DesignerPosition("00ebba4d-016e-56fe-9827-23e16bdcdfa4")]
+                    construct PartnerMsg
+                    {
+                        [Microsoft.XLANGs.BaseTypes.DesignerPosition("0e8af084-5dfd-5131-9c6b-49a73a6b23a2")]
+                        PartnerMsg = PartnerMsg;
+                        PartnerMsg(VanArsdel.Integration.Schemas.Endpoint) = endpoint;
+                        PartnerMsg(VanArsdel.Integration.Schemas.PartnerId) = partnerId;
+                    }
+                    [Microsoft.XLANGs.BaseTypes.DesignerPosition("b6515c99-0c3d-518b-b507-cb647cd55800")]
+                    send (PartnerOut.Send, PartnerMsg);
+                    [Microsoft.XLANGs.BaseTypes.DesignerPosition("7a2971e7-1deb-5275-88d4-b734853ccecd")]
+                    VanArsdel.Integration.Runtime.Tracking.OrderLifecycleTracker.DespatchSent(erpOrderNumber, documentNumber, System.DateTime.UtcNow);
+                }
+                else
+                {
+                    [Microsoft.XLANGs.BaseTypes.DesignerPosition("8b003477-f942-5c8f-8a49-181b57d6f71e")]
+                    System.Diagnostics.Trace.TraceInformation("Routing step " + slip.Current.ToString() + " handled by the send port");
+                }
+                [Microsoft.XLANGs.BaseTypes.DesignerPosition("999f2a24-4d77-58bf-b80a-293800f57957")]
+                slip = slip.Advance();
+            }
+        }
+    }
+}

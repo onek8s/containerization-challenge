@@ -1,0 +1,11 @@
+@page
+@model LoginModel
+@{ ViewData["Title"] = "Sign in"; }
+<h1>Sign in</h1>
+<form method="post" class="form narrow">
+    <div asp-validation-summary="All" class="errors"></div>
+    <label>User name <input asp-for="UserName" autocomplete="username" autofocus /></label>
+    <label>Password <input asp-for="Password" type="password" autocomplete="current-password" /></label>
+    <input type="hidden" asp-for="ReturnUrl" />
+    <button type="submit">Sign in</button>
+</form>

@@ -1,0 +1,54 @@
+@model CustomerReturnModel
+@{
+    ViewData["Title"] = "Return " + Model.Return.RmaNumber;
+    var r = Model.Return;
+}
+<h1>Return @r.RmaNumber</h1>
+<p>Order @r.OrderNumber &middot; submitted @r.CreatedUtc.ToLocalTime().ToString("d MMMM yyyy")</p>
+<p class="status status-@r.Status.ToString().ToLowerInvariant()">@StatusText(r)</p>
+<table class="grid">
+    <thead><tr><th>Item</th><th>Quantity</th><th>Received</th></tr></thead>
+    <tbody>
+    @foreach (var l in r.Lines)
+    {
+        <tr><td>@l.Description</td><td>@l.Quantity</td><td>@l.ReceivedQuantity</td></tr>
+    }
+    </tbody>
+</table>
+@if (r.HasLabel && (r.Status == ReturnStatus.LabelIssued || r.Status == ReturnStatus.Approved))
+{
+    <p><a asp-action="Label" asp-route-id="@r.RmaNumber" class="button">Download return label</a> Tracking number @r.TrackingNumber</p>
+}
+@if (r.RefundAmount.HasValue)
+{
+    <p>Refund: <strong>@r.RefundAmount.Value.ToString("0.00") @r.Currency</strong>
+        @if (r.RestockingFee > 0) { <span>(restocking fee @r.RestockingFee.Value.ToString("0.00"))</span> }
+        @if (r.LabelFee > 0) { <span>(return label @r.LabelFee.Value.ToString("0.00"))</span> }
+    </p>
+}
+@if (r.Status == ReturnStatus.Submitted || r.Status == ReturnStatus.Approved || r.Status == ReturnStatus.LabelIssued)
+{
+    <form asp-action="Cancel" method="post" class="inline">
+        <input type="hidden" name="rma" value="@r.RmaNumber" />
+        <button type="submit" class="secondary" onclick="return confirm('Cancel this return?')">Cancel return</button>
+    </form>
+}
+
+@functions {
+    private static string StatusText(ReturnDetail r)
+    {
+        switch (r.Status)
+        {
+            case ReturnStatus.Submitted: return "We are reviewing your request.";
+            case ReturnStatus.Approved: return "Approved. Your return label is being prepared.";
+            case ReturnStatus.Rejected: return "We could not accept this return: " + r.RejectReason;
+            case ReturnStatus.LabelIssued: return "Please send the parcel with the return label.";
+            case ReturnStatus.Received: return "We have received your parcel and are checking the items.";
+            case ReturnStatus.Inspected: return "Checked. Your refund is being prepared.";
+            case ReturnStatus.RefundExported: return "Your refund has been sent and will arrive within 5 working days.";
+            case ReturnStatus.Closed: return "Closed.";
+            case ReturnStatus.Cancelled: return "Cancelled.";
+            default: return r.Status.ToString();
+        }
+    }
+}

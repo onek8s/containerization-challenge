@@ -1,0 +1,21 @@
+@model IList<VanArsdel.Integration.Tracking.Security.PortalUser>
+@{ ViewBag.Title = "Users"; }
+<h2>Portal users</h2>
+<p>@Html.ActionLink("Add a user", "Edit", null, new { @class = "btn btn-primary" })</p>
+<table class="table table-condensed table-striped">
+    <thead><tr><th>User</th><th>Name</th><th>Email</th><th>Partner</th><th>Roles</th><th>Last sign-in (UTC)</th><th>Status</th></tr></thead>
+    <tbody>
+        @foreach (var u in Model)
+        {
+            <tr>
+                <td>@Html.ActionLink(u.UserName, "Edit", new { id = u.UserName })</td>
+                <td>@u.DisplayName</td>
+                <td>@u.Email</td>
+                <td>@(u.PartnerId ?? "VanArsdel")</td>
+                <td>@u.Roles</td>
+                <td>@(u.LastLoginUtc.HasValue ? u.LastLoginUtc.Value.ToString("yyyy-MM-dd HH:mm") : "never")</td>
+                <td>@(u.IsLockedOut(DateTime.UtcNow) ? "Locked" : u.MustChangePassword ? "Must change password" : "Active")</td>
+            </tr>
+        }
+    </tbody>
+</table>

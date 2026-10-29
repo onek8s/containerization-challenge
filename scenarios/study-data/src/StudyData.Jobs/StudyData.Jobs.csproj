@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <RootNamespace>StudyData.Jobs</RootNamespace>
+    <UserSecretsId>studydata-jobs</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Hosting.WindowsServices" Version="8.0.1" />
+    <PackageReference Include="Quartz.Extensions.Hosting" Version="3.13.0" />
+    <PackageReference Include="Serilog.Extensions.Hosting" Version="8.0.0" />
+    <PackageReference Include="Serilog.Settings.Configuration" Version="8.0.4" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="6.0.0" />
+    <PackageReference Include="Serilog.Sinks.EventLog" Version="4.0.0" />
+    <PackageReference Include="Serilog.Sinks.File" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\StudyData.Calculation\StudyData.Calculation.csproj" />
+    <ProjectReference Include="..\StudyData.Coding\StudyData.Coding.csproj" />
+    <ProjectReference Include="..\StudyData.Documents\StudyData.Documents.csproj" />
+    <ProjectReference Include="..\StudyData.Integration\StudyData.Integration.csproj" />
+  </ItemGroup>
+
+</Project>

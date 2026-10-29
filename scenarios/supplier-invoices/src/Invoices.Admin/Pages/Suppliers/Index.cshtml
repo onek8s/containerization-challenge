@@ -1,0 +1,28 @@
+@page
+@model Wingtip.Invoices.Admin.Pages.Suppliers.IndexModel
+@{
+    ViewData["Title"] = "Suppliers";
+}
+<h1>Suppliers</h1>
+<p><a asp-page="/Suppliers/Edit">Add supplier</a></p>
+<table>
+    <thead>
+        <tr><th>Code</th><th>Name</th><th>VAT number</th><th>Vendor</th><th>Code page</th><th>Price tolerance</th><th>Match</th><th>Channels</th><th>Active</th></tr>
+    </thead>
+    <tbody>
+        @foreach (var s in Model.Suppliers)
+        {
+            <tr class="@(s.Active ? "" : "muted")">
+                <td><a asp-page="/Suppliers/Edit" asp-route-id="@s.SupplierId">@s.Code</a></td>
+                <td>@s.Name</td>
+                <td>@s.VatNumber</td>
+                <td>@s.VendorNumber</td>
+                <td>@s.CodePage</td>
+                <td>@(s.PriceTolerancePercent?.ToString("0.##") ?? "default") %</td>
+                <td>@(s.TwoWayMatch ? "Two-way" : "Three-way")</td>
+                <td>@string.Join(", ", Model.Channels.Where(c => c.SupplierId == s.SupplierId).Select(c => c.ChannelType + " " + c.Location))</td>
+                <td>@(s.Active ? "Yes" : "No")</td>
+            </tr>
+        }
+    </tbody>
+</table>

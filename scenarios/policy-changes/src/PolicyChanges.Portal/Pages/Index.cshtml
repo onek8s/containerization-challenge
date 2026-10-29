@@ -1,0 +1,45 @@
+@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Overview";
+}
+<h1>Overview</h1>
+
+<div class="cards">
+    @foreach (var status in Enum.GetValues<ChangeStatus>())
+    {
+        <a class="card" asp-page="/Requests/Index" asp-route-status="@status">
+            <div>@status</div>
+            <div class="value">@(Model.Counts.FirstOrDefault(c => c.Status == status)?.Count ?? 0)</div>
+        </a>
+    }
+</div>
+
+<h2>Desk stations</h2>
+@if (Model.Stations.Count == 0)
+{
+    <p>No desk station has reported yet.</p>
+}
+else
+{
+    <table>
+        <tr><th>Station</th><th>Signed in as</th><th>PolicyDesk</th><th>State</th><th>Working on</th><th>Last seen</th><th class="num">Applied</th><th class="num">Failed</th></tr>
+        @foreach (var s in Model.Stations)
+        {
+            var offline = Model.UtcNow - s.LastSeenUtc > Model.OfflineAfter;
+            <tr>
+                <td>@s.Name</td>
+                <td>@s.UserName</td>
+                <td>@s.ClientVersion</td>
+                <td class="@(offline ? "offline" : "")">@(offline ? "Offline" : s.State) <span class="hint">@s.Detail</span></td>
+                <td>@if (s.CurrentReference is not null) { <a asp-page="/Requests/Details" asp-route-reference="@s.CurrentReference">@s.CurrentReference</a> }</td>
+                <td>@s.LastSeenUtc.ToLocalTime().ToString("g")</td>
+                <td class="num">@s.AppliedCount</td>
+                <td class="num">@s.FailedCount</td>
+            </tr>
+        }
+    </table>
+}
+
+<h2>Latest changes</h2>
+<partial name="Requests/_List" model="Model.Recent" />

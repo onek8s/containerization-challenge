@@ -1,0 +1,11 @@
+Subject: New delivery date for order {OrderNumber}: {DeliveryDate}
+
+Dear {DealerName},
+
+the delivery date of order {OrderNumber} (your reference {DealerPo}) has changed from {PreviousDate} to {DeliveryDate}.
+
+Please contact your sales representative {SalesResponsible} if the new date does not suit your customer.
+
+{Link}
+
+Tailspin Machinery dealer sales

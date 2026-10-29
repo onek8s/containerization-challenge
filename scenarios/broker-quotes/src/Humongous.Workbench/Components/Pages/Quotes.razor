@@ -1,0 +1,53 @@
+@page "/quotes"
+@inject QuoteApiClient Api
+
+<PageTitle>Quotes</PageTitle>
+<h1>Quotes</h1>
+<div class="filters">
+    <input placeholder="Reference, insured or postcode" @bind="search" @bind:event="oninput" @bind:after="LoadAsync" />
+    <select @bind="status" @bind:after="LoadAsync">
+        <option value="">All statuses</option>
+        @foreach (var s in Enum.GetNames<QuoteStatus>())
+        {
+            <option value="@s">@s</option>
+        }
+    </select>
+</div>
+<table class="list">
+    <thead><tr><th>Reference</th><th>Agency</th><th>Insured</th><th>Inception</th><th>Status</th><th class="num">Total</th></tr></thead>
+    <tbody>
+        @foreach (var q in quotes)
+        {
+            <tr>
+                <td><a href="quotes/@q.Id">@q.Reference</a>@(q.IsRenewal ? " (renewal)" : "")</td>
+                <td>@q.AgencyCode</td>
+                <td>@q.InsuredName</td>
+                <td>@q.InceptionDate.ToString("dd MMM yyyy")</td>
+                <td>@q.Status</td>
+                <td class="num">@q.Total?.ToString("N2")</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div class="pager">
+    <button disabled="@(pageNumber == 1)" @onclick="() => MoveAsync(-1)">Previous</button>
+    <span>Page @pageNumber</span>
+    <button disabled="@(quotes.Count < 25)" @onclick="() => MoveAsync(1)">Next</button>
+</div>
+
+@code {
+    private List<QuoteSummary> quotes = [];
+    private string? search;
+    private string? status;
+    private int pageNumber = 1;
+
+    protected override Task OnInitializedAsync() => LoadAsync();
+
+    private async Task LoadAsync() => quotes = await Api.QuotesAsync(status, search, pageNumber);
+
+    private Task MoveAsync(int delta)
+    {
+        pageNumber += delta;
+        return LoadAsync();
+    }
+}

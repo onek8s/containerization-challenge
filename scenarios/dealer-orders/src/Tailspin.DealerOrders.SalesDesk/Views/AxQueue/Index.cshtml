@@ -1,0 +1,38 @@
+@model IList<AxCommand>
+@{
+    ViewBag.Title = "AX queue";
+    var counts = (Tailspin.DealerOrders.Data.Stores.QueueCounts)ViewBag.Counts;
+}
+<h2>AX command queue <small>pending @(counts.Pending ?? 0), running @(counts.Running ?? 0), retrying @(counts.Retrying ?? 0), failed @(counts.Failed ?? 0)</small></h2>
+<form class="form-inline" method="get">
+    @Html.DropDownList("state", EnumHelper.GetSelectList(typeof(AxCommandState)), "Any state", new { @class = "form-control" })
+    <button class="btn btn-default">Show</button>
+</form>
+<table class="table table-condensed table-striped">
+    <thead><tr><th>Id</th><th>Type</th><th>State</th><th>Order</th><th>Quote</th><th>Dealer</th><th>Run as</th><th>Created</th><th>Next try</th><th>Tries</th><th>Result / error</th><th></th></tr></thead>
+    @foreach (var c in Model)
+    {
+        <tr class="@(c.State == AxCommandState.Failed ? "danger" : c.State == AxCommandState.Retry ? "warning" : "")">
+            <td>@c.Id</td><td>@c.CommandType</td><td>@c.State</td>
+            <td>@if (c.OrderId.HasValue) { @Html.ActionLink(c.OrderId.ToString(), "Details", "Orders", new { id = c.OrderId }, null) }</td>
+            <td>@c.QuoteId</td><td>@c.DealerId</td><td>@c.RunAsAxUser</td>
+            <td>@c.CreatedUtc.ToLocalTime().ToString("g")</td><td>@c.NextAttemptUtc.ToLocalTime().ToString("g")</td><td>@c.Attempts</td>
+            <td><small>@(c.LastError ?? c.Result)</small></td>
+            <td>
+                @if (c.State == AxCommandState.Failed || c.State == AxCommandState.Retry)
+                {
+                    using (Html.BeginForm("Requeue", "AxQueue", new { id = c.Id }, FormMethod.Post, new { style = "display:inline" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <button class="btn btn-default btn-xs">Retry now</button>
+                    }
+                    using (Html.BeginForm("Cancel", "AxQueue", new { id = c.Id }, FormMethod.Post, new { style = "display:inline" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <button class="btn btn-link btn-xs">Cancel</button>
+                    }
+                }
+            </td>
+        </tr>
+    }
+</table>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewBag.Title - Sales Desk</title>
+    <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/desk.css")" />
+</head>
+<body>
+    <nav class="navbar navbar-default navbar-static-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="@Url.Action("Index", "Home")">Tailspin Sales Desk</a>
+            <ul class="nav navbar-nav">
+                <li>@Html.ActionLink("Approvals", "Index", "Approvals")</li>
+                <li>@Html.ActionLink("Orders", "Index", "Orders")</li>
+                <li>@Html.ActionLink("Dealers", "Index", "Dealers")</li>
+                <li>@Html.ActionLink("Catalog", "Index", "Catalog")</li>
+                <li>@Html.ActionLink("EDI", "Index", "Edi")</li>
+                <li>@Html.ActionLink("AX queue", "Index", "AxQueue")</li>
+            </ul>
+            <form class="navbar-form navbar-left" action="@Url.Action("Find", "Orders")" method="get">
+                <input name="number" class="form-control" placeholder="WO- or SO- number" />
+            </form>
+            <p class="navbar-text navbar-right">@User.Identity.Name</p>
+        </div>
+    </nav>
+    <div class="container-fluid">
+        @if (TempData["Message"] != null) { <div class="alert alert-success">@TempData["Message"]</div> }
+        @if (TempData["Error"] != null) { <div class="alert alert-danger">@TempData["Error"]</div> }
+        @RenderBody()
+    </div>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

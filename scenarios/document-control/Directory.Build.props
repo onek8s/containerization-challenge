@@ -1,0 +1,10 @@
+<Project>
+  <PropertyGroup>
+    <Company>Litware Engineering</Company>
+    <Product>Litware Document Control</Product>
+    <Copyright>Copyright © Litware Engineering 2019-2024</Copyright>
+    <Version>3.4.2</Version>
+    <LangVersion>latest</LangVersion>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+</Project>

@@ -1,0 +1,78 @@
+@using System.Security.Claims
+@{
+    var identity = User.Identity as ClaimsIdentity;
+    var displayName = identity == null ? null : (identity.FindFirst(PortalUser.DisplayNameClaim) == null ? User.Identity.Name : identity.FindFirst(PortalUser.DisplayNameClaim).Value);
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewBag.Title - Tailspin Dealer Portal</title>
+    <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css" />
+    @Styles.Render("~/Content/css")
+    @Html.AntiForgeryToken()
+</head>
+<body data-signed-in="@User.Identity.IsAuthenticated.ToString().ToLowerInvariant()">
+    <nav class="navbar navbar-inverse navbar-static-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-nav"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+                <a class="navbar-brand" href="@Url.Action("Index", "Home")">Tailspin Dealer Portal</a>
+            </div>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <div class="collapse navbar-collapse" id="main-nav">
+                    <ul class="nav navbar-nav">
+                        @if (User.IsInRole(PortalRoles.DealerSales) || User.IsInRole(PortalRoles.DealerAdmin))
+                        {
+                            <li>@Html.ActionLink("Configure", "Index", "Configurator")</li>
+                            <li>@Html.ActionLink("Quotes", "Index", "Quotes")</li>
+                        }
+                        <li>@Html.ActionLink("Orders", "Index", "Orders")</li>
+                        @if (User.IsInRole(PortalRoles.DealerParts) || User.IsInRole(PortalRoles.DealerAdmin))
+                        {
+                            <li>@Html.ActionLink("Parts order", "Index", "Parts")</li>
+                        }
+                        <li>@Html.ActionLink("Stock", "Index", "Stock")</li>
+                        <li>@Html.ActionLink("Documents", "Index", "Documents")</li>
+                        @if (User.IsInRole(PortalRoles.DealerAdmin))
+                        {
+                            <li>@Html.ActionLink("Users", "Index", "Users")</li>
+                        }
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>@Html.ActionLink(displayName ?? "", "ChangePassword", "Account")</li>
+                        <li>
+                            @using (Html.BeginForm("Logout", "Account", FormMethod.Post, new { @class = "navbar-form" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="btn btn-link navbar-btn">Sign out</button>
+                            }
+                        </li>
+                    </ul>
+                </div>
+            }
+        </div>
+    </nav>
+    <div class="container">
+        <div id="live-status" class="live-status"></div>
+        @Html.Partial("_Alerts")
+        @RenderBody()
+        <hr />
+        <footer class="text-muted small">&copy; @DateTime.Now.Year Tailspin Machinery Oy &middot; Dealer sales support +358 13 555 0100</footer>
+    </div>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.17.0/jquery.validate.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/mvc/5.2.3/jquery.validate.unobtrusive.min.js"></script>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <script src="https://ajax.aspnetcdn.com/ajax/signalr/jquery.signalr-2.4.1.min.js"></script>
+        <script src="@Url.Content("~/signalr/hubs")"></script>
+    }
+    @Scripts.Render("~/bundles/app")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

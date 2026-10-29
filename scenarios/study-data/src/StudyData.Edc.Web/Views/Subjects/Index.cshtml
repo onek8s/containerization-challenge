@@ -1,0 +1,25 @@
+@model List<Subject>
+@{
+    var site = (Site)ViewBag.Site;
+    var open = (Dictionary<int, int>)ViewBag.OpenQueries;
+    ViewData["Title"] = $"Site {site.Number}";
+}
+<div class="crumbs"><a href="/">My sites</a> / @site.Study!.Code</div>
+<h1>Site @site.Number · @site.Name</h1>
+<p><a class="button" href="/subjects/site/@site.Id/screen">Register a subject</a></p>
+<table>
+    <thead><tr><th>Subject</th><th>Initials</th><th>Status</th><th>Consent</th><th>Randomisation</th><th>Open queries</th></tr></thead>
+    <tbody>
+    @foreach (var s in Model)
+    {
+        <tr>
+            <td><a href="/subjects/@s.Id">@s.Number</a></td>
+            <td>@s.Initials</td>
+            <td><span class="pill">@s.Status</span></td>
+            <td>@s.ConsentDate?.ToString("dd-MMM-yyyy")</td>
+            <td>@s.RandomisationNumber</td>
+            <td class="@(open.GetValueOrDefault(s.Id) > 0 ? "warn" : "")">@open.GetValueOrDefault(s.Id)</td>
+        </tr>
+    }
+    </tbody>
+</table>

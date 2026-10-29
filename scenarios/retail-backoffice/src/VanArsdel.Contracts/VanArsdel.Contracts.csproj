@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>7.3</LangVersion>
+    <Description>Message contracts and shared constants of the VanArsdel back office services.</Description>
+  </PropertyGroup>
+
+</Project>

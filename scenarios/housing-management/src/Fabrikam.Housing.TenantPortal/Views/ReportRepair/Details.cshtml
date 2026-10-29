@@ -1,0 +1,26 @@
+@model DetailsStepViewModel
+@{ ViewData["Title"] = "Report a repair"; }
+<h1 class="h3">@Model.Option.Text</h1>
+<partial name="_Wizard" model="2" />
+@if (Model.Option.SafetyAdvice != null)
+{
+    <div class="alert alert-warning">@Model.Option.SafetyAdvice</div>
+}
+@if (Model.Priority == RepairPriority.Emergency)
+{
+    <div class="alert alert-info">This is an emergency repair. A contractor will attend within 24 hours to make it safe.</div>
+}
+<form asp-action="Details" method="post" class="col-md-7 px-0">
+    <div class="form-group">
+        <label asp-for="Location"></label>
+        <input asp-for="Location" class="form-control" />
+        <span asp-validation-for="Location" class="field-validation-error"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Description"></label>
+        <textarea asp-for="Description" class="form-control" rows="4"></textarea>
+        <span asp-validation-for="Description" class="field-validation-error"></span>
+    </div>
+    <a asp-action="Problem" class="btn btn-link">Back</a>
+    <button type="submit" class="btn btn-primary">Next</button>
+</form>

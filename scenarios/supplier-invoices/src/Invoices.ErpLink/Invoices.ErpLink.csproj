@@ -1,0 +1,34 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net48</TargetFramework>
+    <LangVersion>7.3</LangVersion>
+    <RootNamespace>Wingtip.Invoices.ErpLink</RootNamespace>
+    <AssemblyName>Invoices.ErpLink</AssemblyName>
+    <Version>2.4.0</Version>
+    <Company>Wingtip Supply</Company>
+    <Product>Supplier Invoices</Product>
+    <PlatformTarget>x64</PlatformTarget>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="all" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Messaging" />
+    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Runtime.Remoting" />
+    <Reference Include="System.ServiceProcess" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Invoices.Contracts\Invoices.Contracts.csproj" />
+    <ProjectReference Include="..\Invoices.Core\Invoices.Core.csproj" />
+    <ProjectReference Include="..\Invoices.Infrastructure\Invoices.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>

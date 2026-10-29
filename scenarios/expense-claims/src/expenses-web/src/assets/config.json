@@ -1,0 +1,10 @@
+{
+  "apiUrl": "http://localhost:5241",
+  "auth": {
+    "mode": "development",
+    "authority": "https://adfs.corp.local/adfs",
+    "clientId": "",
+    "resource": "https://expenses-api.corp.local",
+    "scope": "openid profile allatclaims"
+  }
+}

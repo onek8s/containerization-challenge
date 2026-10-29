@@ -1,0 +1,17 @@
+{
+  "profiles": {
+    "DocControl.Indexer": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    },
+    "Scan once": {
+      "commandName": "Project",
+      "commandLineArgs": "--scan-once",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

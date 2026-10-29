@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewData["Title"] - Humongous Insurance sign in</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <span class="brand">Humongous Insurance</span>
+        @if (User.Identity?.IsAuthenticated == true)
+        {
+            <nav>
+                <span>@User.Identity.Name</span>
+                @if (User.IsInRole(Roles.Administrator) || User.IsInRole(Roles.BrokerAdmin))
+                {
+                    <a asp-page="/Admin/Users/Index">Users</a>
+                }
+                <form method="post" asp-page="/Account/Logout"><button type="submit" class="link">Sign out</button></form>
+            </nav>
+        }
+    </header>
+    <main>@RenderBody()</main>
+    <footer>Humongous Insurance Ltd is authorised and regulated by the Financial Conduct Authority.</footer>
+</body>
+</html>

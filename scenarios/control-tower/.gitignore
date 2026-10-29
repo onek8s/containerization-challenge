@@ -1,0 +1,7 @@
+node_modules/
+src/ControlTower.Tower.Api/wwwroot/app/
+publish/
+*.routerdb
+.devdata/
+D:*/
+D:*

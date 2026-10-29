@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>ShiftClock.Shared</RootNamespace>
+    <Version>4.1.0</Version>
+    <Company>Northwind Manufacturing</Company>
+    <Product>Shift Clock</Product>
+  </PropertyGroup>
+
+</Project>

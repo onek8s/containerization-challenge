@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Deployment Framework for BizTalk (5.x) project of the BizTalk application VanArsdel.Integration. Builds the MSI
+  (Installer target) and deploys on a BizTalk server (Deploy / Undeploy targets, or the Start menu shortcuts the
+  MSI installs). Deploy-B2BIntegration.ps1 runs it with the environment's exported settings file and then deploys
+  what BTDF does not cover (database, IIS sites outside BizTalk, SLA monitor service, DNS).
+-->
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Installer" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition="'$(Configuration)' == ''">Release</Configuration>
+    <Platform Condition="'$(Platform)' == ''">x86</Platform>
+    <SchemaVersion>1.0</SchemaVersion>
+    <ProjectName>VanArsdel.Integration</ProjectName>
+    <ProjectVersion>4.6.2</ProjectVersion>
+    <ProductId>4b3f8a92-7c2e-4d15-9a61-0e8bd3c5f217</ProductId>
+    <ProductUpgradeCode>c1e5d7a0-2f84-4b39-8e16-5a9d0c3b7e42</ProductUpgradeCode>
+    <Manufacturer>VanArsdel Distribution</Manufacturer>
+    <PackageDescription>VanArsdel B2B integration (EDI, gateway orders, ERP IDocs)</PackageDescription>
+    <DefaultInstallDir>[ProgramFilesFolder]VanArsdel\$(ProjectName)\$(ProductVersion)</DefaultInstallDir>
+    <BizTalkHosts>B2BReceiveHost;B2BSendHost;B2BProcessingHost;B2BAS2Host;BizTalkIsolatedGateway</BizTalkHosts>
+
+    <IncludeSchemas>True</IncludeSchemas>
+    <IncludeOrchestrations>True</IncludeOrchestrations>
+    <IncludeTransforms>True</IncludeTransforms>
+    <IncludePipelines>True</IncludePipelines>
+    <IncludeComponents>True</IncludeComponents>
+    <IncludePipelineComponents>True</IncludePipelineComponents>
+    <IncludeCustomFunctoids>False</IncludeCustomFunctoids>
+    <IncludeVocabAndRules>True</IncludeVocabAndRules>
+    <IncludeVirtualDirectories>True</IncludeVirtualDirectories>
+    <IncludeMessagingBindings>True</IncludeMessagingBindings>
+    <IncludeDeploymentTest>False</IncludeDeploymentTest>
+    <IncludeBAM>True</IncludeBAM>
+    <IncludeSSO>True</IncludeSSO>
+    <Includelog4net>False</Includelog4net>
+    <IncludeEsbItineraries>False</IncludeEsbItineraries>
+    <IncludeSettingsSpreadsheetInMsi>True</IncludeSettingsSpreadsheetInMsi>
+    <SettingsSpreadsheetPath>EnvironmentSettings\SettingsFileGenerator.xml</SettingsSpreadsheetPath>
+
+    <UsingMasterBindings>True</UsingMasterBindings>
+    <PortBindingsMaster>$(MSBuildProjectDirectory)\PortBindingsMaster.xml</PortBindingsMaster>
+    <RequireXmlPreprocessDirectives>False</RequireXmlPreprocessDirectives>
+    <ApplyXmlEscape>True</ApplyXmlEscape>
+
+    <SsoAppName>VanArsdel.Integration</SsoAppName>
+    <SsoAppUserGroup>$(HostUsersGroup)</SsoAppUserGroup>
+    <SsoAppAdminGroup>$(AdminGroup)</SsoAppAdminGroup>
+
+    <StartApplicationOnDeploy>True</StartApplicationOnDeploy>
+    <EnableAllReceiveLocationsOnDeploy>True</EnableAllReceiveLocationsOnDeploy>
+    <StartReferencedApplicationsOnDeploy>True</StartReferencedApplicationsOnDeploy>
+    <AutoRestartHostInstances>True</AutoRestartHostInstances>
+    <SkipHostInstancesRestart>False</SkipHostInstancesRestart>
+    <SkipIISReset>False</SkipIISReset>
+    <UseIsolatedAppDomain>False</UseIsolatedAppDomain>
+    <EnableBizTalkExtendedLogging>False</EnableBizTalkExtendedLogging>
+    <EnableBizTalkAssemblyValidation>False</EnableBizTalkAssemblyValidation>
+    <EnableBizTalkCorrelationValidation>False</EnableBizTalkCorrelationValidation>
+    <EnableBizTalkSchemaValidation>False</EnableBizTalkSchemaValidation>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <DeploymentFrameworkTargetsPath>$(MSBuildExtensionsPath)\DeploymentFrameworkForBizTalk\5.0\</DeploymentFrameworkTargetsPath>
+    <SourceRoot>$(MSBuildProjectDirectory)\..</SourceRoot>
+    <BizTalkOutput>bin\$(Configuration)</BizTalkOutput>
+    <LibraryOutput>bin\$(Configuration)\net462</LibraryOutput>
+    <BizTalkInstallPath>$(Registry:HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\BizTalk Server\3.0@InstallPath)</BizTalkInstallPath>
+    <BAMInstallPath>$(BizTalkInstallPath)Tracking\</BAMInstallPath>
+  </PropertyGroup>
+
+  <!-- BizTalk assemblies (BizTalk resources of the application) -->
+  <ItemGroup>
+    <PropsFromEnvSettings Include="SsoAppUserGroup;SsoAppAdminGroup;HostUsersGroup;AdminGroup;SqlServer;IntegrationDatabase;BamDatabase;BamOnlineWindowMonths" />
+    <Schemas Include="VanArsdel.Integration.Schemas.dll">
+      <LocationPath>$(SourceRoot)\biztalk\VanArsdel.Integration.Schemas\$(BizTalkOutput)</LocationPath>
+    </Schemas>
+    <Transforms Include="VanArsdel.Integration.Maps.dll">
+      <LocationPath>$(SourceRoot)\biztalk\VanArsdel.Integration.Maps\$(BizTalkOutput)</LocationPath>
+    </Transforms>
+    <Pipelines Include="VanArsdel.Integration.Pipelines.dll">
+      <LocationPath>$(SourceRoot)\biztalk\VanArsdel.Integration.Pipelines\$(BizTalkOutput)</LocationPath>
+    </Pipelines>
+    <Orchestrations Include="VanArsdel.Integration.Orchestrations.dll">
+      <LocationPath>$(SourceRoot)\biztalk\VanArsdel.Integration.Orchestrations\$(BizTalkOutput)</LocationPath>
+    </Orchestrations>
+  </ItemGroup>
+
+  <!-- pipeline components go to Pipeline Components and the GAC -->
+  <ItemGroup>
+    <PipelineComponents Include="VanArsdel.Integration.PipelineComponents.dll">
+      <LocationPath>$(SourceRoot)\src\VanArsdel.Integration.PipelineComponents\$(LibraryOutput)</LocationPath>
+    </PipelineComponents>
+  </ItemGroup>
+
+  <!-- .NET libraries called from orchestrations, maps, pipeline components and BRE (GAC); the Runtime build output has them all -->
+  <ItemGroup>
+    <Components Include="VanArsdel.Integration.Runtime.dll;VanArsdel.Integration.Data.dll;VanArsdel.Integration.Domain.dll;VanArsdel.Integration.Contracts.dll;VanArsdel.Integration.Edi.dll;VanArsdel.Integration.Mapping.dll;VanArsdel.Integration.Rules.dll;VanArsdel.Integration.Messaging.dll;VanArsdel.Integration.Monitoring.dll">
+      <LocationPath>$(SourceRoot)\src\VanArsdel.Integration.Runtime\$(LibraryOutput)</LocationPath>
+    </Components>
+    <Components Include="VanArsdel.Integration.WcfExtensions.dll">
+      <LocationPath>$(SourceRoot)\src\VanArsdel.Integration.WcfExtensions\$(LibraryOutput)</LocationPath>
+    </Components>
+    <ExternalAssemblies Include="Microsoft.Practices.EnterpriseLibrary.Common.dll;Microsoft.Practices.EnterpriseLibrary.Data.dll">
+      <LocationPath>$(SourceRoot)\src\VanArsdel.Integration.Runtime\$(LibraryOutput)</LocationPath>
+    </ExternalAssemblies>
+  </ItemGroup>
+
+  <!-- Business Rules: vocabularies are inside the policy exports -->
+  <ItemGroup>
+    <RulePolicies Include="VanArsdel.OrderValidation.xml;VanArsdel.CreditRelease.xml;VanArsdel.Routing.xml">
+      <LocationPath>$(SourceRoot)\rules</LocationPath>
+    </RulePolicies>
+  </ItemGroup>
+
+  <!-- BAM activities and views -->
+  <ItemGroup>
+    <BamDefinitions Include="OrderLifecycle.xml;InterchangeTracking.xml">
+      <LocationPath>$(SourceRoot)\bam</LocationPath>
+    </BamDefinitions>
+    <BamViewAccounts Include="$(HostUsersGroup);$(GatewayAppPoolUser);$(MonitorServiceUser)" />
+  </ItemGroup>
+
+  <!--
+    Virtual directories inside the BizTalk isolated hosts: AS2 (BTSHTTPReceive.dll, B2BAS2Host app pool) and the
+    published WCF service the gateway forwards to (BizTalkIsolatedGateway app pool).
+  -->
+  <ItemGroup>
+    <VDirList Include="B2BAS2">
+      <Vdir>B2BAS2</Vdir>
+      <Physdir>$(BizTalkInstallPath)HttpReceive64</Physdir>
+      <AppPool>B2BAS2Host</AppPool>
+      <AppPoolNetVersion>v4.0</AppPoolNetVersion>
+    </VDirList>
+    <VDirList Include="B2BReceive">
+      <Vdir>B2BReceive</Vdir>
+      <Physdir>..\src\VanArsdel.Integration.Gateway\B2BReceive</Physdir>
+      <AppPool>BizTalkIsolatedGateway</AppPool>
+      <AppPoolNetVersion>v4.0</AppPoolNetVersion>
+    </VDirList>
+  </ItemGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="b2bdeploy.exe;b2bdeploy.exe.config;CommandLine.dll;VanArsdel.Integration.Deployment.dll">
+      <LocationPath>$(SourceRoot)\src\VanArsdel.Integration.BindingTool\bin\$(Configuration)\net472</LocationPath>
+    </AdditionalFiles>
+    <AdditionalFiles Include="partners.json">
+      <LocationPath>$(SourceRoot)\samples\seed</LocationPath>
+    </AdditionalFiles>
+  </ItemGroup>
+
+  <Import Project="$(DeploymentFrameworkTargetsPath)BizTalkDeploymentFramework.targets" />
+
+  <!-- parties and agreements come from the partner list; SSO values are written by b2bdeploy (one identifier) -->
+  <Target Name="CustomPostDeployTarget">
+    <Exec Command="&quot;$(MSBuildProjectDirectory)\b2bdeploy.exe&quot; parties --partners &quot;$(MSBuildProjectDirectory)\partners.json&quot; --server $(SqlServer) --database BizTalkMgmtDb" />
+  </Target>
+
+  <Target Name="CustomBAMPostDeploy">
+    <Exec Command="&quot;$(BAMInstallPath)bm.exe&quot; set-activitywindow -Activity:OrderLifecycle -TimeLength:$(BamOnlineWindowMonths) -TimeUnit:Month" />
+    <Exec Command="&quot;$(BAMInstallPath)bm.exe&quot; set-activitywindow -Activity:InterchangeTracking -TimeLength:$(BamOnlineWindowMonths) -TimeUnit:Month" />
+  </Target>
+</Project>

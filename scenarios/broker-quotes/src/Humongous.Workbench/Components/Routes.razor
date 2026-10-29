@@ -1,0 +1,15 @@
+@inject UserTokens UserTokens
+
+<Router AppAssembly="typeof(Program).Assembly">
+    <Found Context="routeData">
+        <AuthorizeRouteView RouteData="routeData" DefaultLayout="typeof(MainLayout)">
+            <NotAuthorized><p>Your account is not an underwriter account.</p></NotAuthorized>
+        </AuthorizeRouteView>
+    </Found>
+</Router>
+
+@code {
+    [Parameter] public InitialTokens Tokens { get; set; } = new();
+
+    protected override void OnInitialized() => UserTokens.Initialise(Tokens);
+}

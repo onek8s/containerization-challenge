@@ -1,0 +1,13 @@
+@page
+@model Lucerne.Lending.CustomerPortal.Pages.Account.LoginModel
+@{ ViewData["Title"] = "Sign in"; }
+<form method="post">
+    <div asp-validation-summary="All" class="validation"></div>
+    <input type="hidden" asp-for="ReturnUrl" />
+    <label asp-for="Input.Email">E-mail</label>
+    <input asp-for="Input.Email" type="email" autocomplete="username" />
+    <label asp-for="Input.Password">Password</label>
+    <input asp-for="Input.Password" type="password" autocomplete="current-password" />
+    <button type="submit">Sign in</button>
+</form>
+<p class="muted">New customer? <a asp-page="Register" asp-route-returnUrl="@Model.ReturnUrl">Create an account</a></p>

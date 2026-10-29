@@ -1,0 +1,24 @@
+@page "/rating"
+@using System.Text.Json
+@inject QuoteApiClient Api
+
+<PageTitle>Rating engine</PageTitle>
+<h1>Rating engine</h1>
+@if (state is { } s)
+{
+    <dl>
+        @foreach (var p in s.EnumerateObject())
+        {
+            <dt>@p.Name</dt><dd>@p.Value.ToString()</dd>
+        }
+    </dl>
+}
+<button @onclick="LoadAsync">Refresh</button>
+
+@code {
+    private JsonElement? state;
+
+    protected override Task OnInitializedAsync() => LoadAsync();
+
+    private async Task LoadAsync() => state = await Api.RatingStatusAsync();
+}

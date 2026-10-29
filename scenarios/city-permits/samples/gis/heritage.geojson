@@ -1,0 +1,79 @@
+{
+ "type": "FeatureCollection",
+ "crs": {
+  "type": "name",
+  "properties": {
+   "name": "urn:ogc:def:crs:EPSG::27700"
+  }
+ },
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601160,
+       142330
+      ],
+      [
+       601360,
+       142330
+      ],
+      [
+       601360,
+       142460
+      ],
+      [
+       601160,
+       142460
+      ],
+      [
+       601160,
+       142330
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "NAME": "Ashford Town Centre",
+    "DESIGNATED": "1969-07-14"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       600830,
+       142460
+      ],
+      [
+       600920,
+       142460
+      ],
+      [
+       600920,
+       142570
+      ],
+      [
+       600830,
+       142570
+      ],
+      [
+       600830,
+       142460
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "NAME": "Godinton Park",
+    "DESIGNATED": "1991-03-02"
+   }
+  }
+ ]
+}

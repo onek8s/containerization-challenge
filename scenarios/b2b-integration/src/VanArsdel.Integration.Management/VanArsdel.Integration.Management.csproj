@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\BizTalk.References.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+    <RootNamespace>VanArsdel.Integration.Management</RootNamespace>
+    <Description>Wrappers over the BizTalk management APIs (BizTalkOperations, ExplorerOM, WMI) shared by the operations portal, the SLA monitor and the binding tool.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <BizTalkReference Include="Microsoft.BizTalk.Operations" />
+    <BizTalkReference Include="Microsoft.BizTalk.ExplorerOM" />
+    <BizTalkReference Include="Microsoft.BizTalk.Pipeline" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="log4net" Version="2.0.8" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Transactions" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\VanArsdel.Integration.Data\VanArsdel.Integration.Data.csproj" />
+  </ItemGroup>
+
+</Project>

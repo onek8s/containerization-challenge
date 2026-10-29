@@ -1,0 +1,61 @@
+@inherits RazorLight.TemplatePage<Proseware.ControlTower.Documents.ShipmentDocumentModel>
+@{
+    var s = Model.Shipment;
+    var leg = Model.MainLeg;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@Model.Title @s.Number</title>
+    @{ await IncludeAsync("_Styles", Model); }
+</head>
+<body>
+    @{ await IncludeAsync("_Header", Model); }
+    <p class="small">This carriage is subject, notwithstanding any clause to the contrary, to the Convention on the Contract for the International Carriage of Goods by Road (CMR).</p>
+    <table class="grid">
+        <tr>
+            <td style="width:50%"><span class="box-label">1 Sender (name, address, country)</span>@s.ShipperName<br />@s.Origin?.Street<br />@s.Origin?.PostalCode @s.Origin?.City, @s.Origin?.CountryCode</td>
+            <td><span class="box-label">16 Carrier (name, address, country)</span>@(leg?.Carrier?.Name ?? Model.Issuer.Name)<br /><span class="small">Vehicle @(leg?.Vehicle?.Plate ?? "")</span></td>
+        </tr>
+        <tr>
+            <td><span class="box-label">2 Consignee (name, address, country)</span>@s.ConsigneeName<br />@s.Destination?.Street<br />@s.Destination?.PostalCode @s.Destination?.City, @s.Destination?.CountryCode</td>
+            <td><span class="box-label">17 Successive carriers</span>
+                @foreach (var l in s.Legs.OrderBy(x => x.Sequence).Skip(1))
+                {
+                    <div>@l.Sequence. @(l.Carrier?.Name ?? "-") (@l.From?.Code &rarr; @l.To?.Code)</div>
+                }
+            </td>
+        </tr>
+        <tr>
+            <td><span class="box-label">3 Place of delivery of the goods</span>@s.Destination?.City, @s.Destination?.CountryCode<br /><span class="small">Planned @Model.Local(s.PlannedDelivery, s.Destination?.TimeZoneId)</span></td>
+            <td><span class="box-label">18 Carrier's reservations and observations</span>&nbsp;</td>
+        </tr>
+        <tr>
+            <td><span class="box-label">4 Place and date of taking over the goods</span>@s.Origin?.City, @s.Origin?.CountryCode &middot; @Model.Local(s.ActualPickup ?? s.PlannedPickup, s.Origin?.TimeZoneId)</td>
+            <td><span class="box-label">13 Sender's instructions</span>Incoterms® 2020 @s.IncotermCode @s.Destination?.City<br />Reference @s.CustomerReference</td>
+        </tr>
+        <tr>
+            <td colspan="2"><span class="box-label">6-12 Marks, packages, nature of the goods, gross weight, volume</span>@s.GoodsDescription</td>
+        </tr>
+    </table>
+    @{ await IncludeAsync("_Packages", Model); }
+    @if (s.IsDangerousGoods)
+    {
+        <div class="dg"><strong>Dangerous goods (ADR):</strong>
+            @foreach (var p in s.Packages.Where(p => p.DangerousGoods != null))
+            {
+                var dg = p.DangerousGoods!;
+                <div>UN @dg.UnNumber @dg.ProperShippingName, @dg.HazardClass, @(dg.PackingGroup == null ? "" : "PG " + dg.PackingGroup)@(dg.TunnelCode == null ? "" : ", (" + dg.TunnelCode + ")") &middot; @dg.NetQuantity @dg.NetQuantityUnit@(dg.LimitedQuantity ? " LQ" : "")</div>
+            }
+        </div>
+    }
+    <table class="grid" style="margin-top:8px">
+        <tr>
+            <td style="width:33%"><span class="box-label">21 Established in</span>@Model.Issuer.City, @Model.IssuedAt.ToString("yyyy-MM-dd")</td>
+            <td style="width:33%"><span class="box-label">23 Signature and stamp of the carrier</span><div class="signature"></div></td>
+            <td><span class="box-label">24 Goods received (place, date, signature of consignee)</span><div class="signature">@s.PodSignedBy</div></td>
+        </tr>
+    </table>
+</body>
+</html>

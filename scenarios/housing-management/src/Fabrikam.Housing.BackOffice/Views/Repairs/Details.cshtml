@@ -1,0 +1,142 @@
+@model WorkOrderDetailViewModel
+@{
+    var o = Model.Order;
+    ViewData["Title"] = o.Reference;
+    var canEdit = User.HasAnyRole(HousingRoles.Repairs, HousingRoles.Officer, HousingRoles.Admin) && o.IsOpen;
+}
+<div class="d-flex justify-content-between align-items-start">
+    <div>
+        <h1 class="h3 mb-0">@o.Reference <span class="badge priority-@o.Priority.ToString().ToLower()">@o.Priority</span> <span class="badge badge-dark">@o.Status</span></h1>
+        <p class="text-muted"><a asp-controller="Properties" asp-action="Details" asp-route-id="@o.PropertyId">@o.Property.SingleLineAddress</a> &middot; @o.Property.PatchCode</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-7">
+        <div class="card mb-3">
+            <div class="card-body">
+                <p><strong>@o.Location</strong>: @o.Description</p>
+                <dl class="row mb-0 small">
+                    <dt class="col-4">Reported</dt><dd class="col-8">@o.ReportedAt.ToString("dd/MM/yyyy HH:mm") by @o.ReportedBy (@o.Channel)</dd>
+                    <dt class="col-4">Target</dt><dd class="col-8 @(Model.Overdue ? "text-danger font-weight-bold" : "")">@o.TargetDate.ToString("dd/MM/yyyy HH:mm") @(Model.Overdue ? "(past target)" : "")</dd>
+                    <dt class="col-4">Trade</dt><dd class="col-8">@o.Trade</dd>
+                    <dt class="col-4">Contractor</dt><dd class="col-8">@(o.Contractor?.Name ?? "Not assigned")</dd>
+                    @if (o.CompletedAt.HasValue)
+                    {
+                        <dt class="col-4">Completed</dt><dd class="col-8">@o.CompletedAt.Value.ToString("dd/MM/yyyy HH:mm") &middot; @o.LabourHours h &middot; @o.CompletionNotes</dd>
+                    }
+                    @if (o.Recharge) { <dt class="col-4">Recharge</dt><dd class="col-8 text-warning">@o.RechargeReason</dd> }
+                    @if (o.NoAccessCount > 0) { <dt class="col-4">No access</dt><dd class="col-8">@o.NoAccessCount time(s)</dd> }
+                    @if (o.SatisfactionScore.HasValue) { <dt class="col-4">Satisfaction</dt><dd class="col-8">@o.SatisfactionScore / 5</dd> }
+                    @if (Model.Tenancy != null)
+                    {
+                        <dt class="col-4">Tenancy</dt>
+                        <dd class="col-8">
+                            <a asp-controller="Tenancies" asp-action="Details" asp-route-id="@Model.Tenancy.Id">@Model.Tenancy.Reference</a>
+                            @foreach (var n in Model.Tenancy.Tenants) { <span>&middot; @n.FullName @n.MobilePhone</span> if (n.Vulnerable) { <span class="badge badge-warning">Vulnerable</span> } }
+                        </dd>
+                    }
+                </dl>
+            </div>
+        </div>
+        <div class="card mb-3">
+            <div class="card-header">Priced work</div>
+            <table class="table table-sm mb-0">
+                <thead><tr><th>SOR</th><th>Description</th><th class="text-right">Qty</th><th class="text-right">Price</th><th class="text-right">Total</th></tr></thead>
+                @foreach (var l in o.Lines)
+                {
+                    <tr><td>@l.SorCode</td><td>@l.Description @if (l.AddedByContractor) { <span class="badge badge-light">contractor</span> }</td><td class="text-right">@l.Quantity</td><td class="text-right">@l.UnitPrice.ToString("N2")</td><td class="text-right">@l.LineTotal.ToString("N2")</td></tr>
+                }
+                <tr class="font-weight-bold"><td colspan="4">Total</td><td class="text-right">@o.Lines.Sum(l => l.LineTotal).ToString("N2")</td></tr>
+            </table>
+            @if (canEdit)
+            {
+                <form asp-action="AddLine" asp-route-id="@o.Id" method="post" class="form-inline card-body py-2">
+                    <select name="sorCode" class="form-control form-control-sm mr-2">
+                        @foreach (var s in Model.Sor) { <option value="@s.Code">@s.Code &ndash; @s.Description</option> }
+                    </select>
+                    <input name="quantity" value="1" class="form-control form-control-sm mr-2" style="width:70px" />
+                    <button class="btn btn-sm btn-outline-primary">Add line</button>
+                </form>
+            }
+        </div>
+        <div class="card mb-3">
+            <div class="card-header">History</div>
+            <ul class="list-group list-group-flush small">
+                @foreach (var e in o.Events.OrderByDescending(e => e.At))
+                {
+                    <li class="list-group-item"><span class="text-muted">@e.At.ToString("dd/MM/yyyy HH:mm") @e.Actor</span> @(e.NewStatus.HasValue ? "→ " + e.NewStatus : "") @e.Text</li>
+                }
+            </ul>
+        </div>
+    </div>
+    <div class="col-lg-5">
+        @if (canEdit)
+        {
+            <div class="card mb-3">
+                <div class="card-header">Contractor</div>
+                <form asp-action="Assign" asp-route-id="@o.Id" method="post" class="card-body">
+                    @if (Model.Suggested != null) { <p class="small">Suggested: <strong>@Model.Suggested.Name</strong> (covers @o.Trade in @o.Property.PatchCode, lowest workload)</p> }
+                    <select name="contractorId" class="form-control form-control-sm mb-2">
+                        @foreach (var c in Model.Contractors)
+                        {
+                            <option value="@c.Id" selected="@(c.Id == (o.ContractorId ?? Model.Suggested?.Id))">@c.Code &ndash; @c.Name @(c.OutOfHours ? "(24h)" : "")</option>
+                        }
+                    </select>
+                    <button class="btn btn-sm btn-primary">Assign</button>
+                </form>
+            </div>
+            <div class="card mb-3">
+                <div class="card-header">Appointments</div>
+                <ul class="list-group list-group-flush small">
+                    @foreach (var a in o.Appointments.OrderByDescending(a => a.Date))
+                    {
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span class="@(a.Cancelled ? "text-muted" : "")">@a.Date.ToString("ddd dd/MM/yyyy") @a.Slot @(a.Cancelled ? "(cancelled)" : "") @a.Outcome</span>
+                            @if (!a.Cancelled && a.Outcome == null)
+                            {
+                                <form asp-action="CancelAppointment" asp-route-id="@o.Id" method="post"><input type="hidden" name="appointmentId" value="@a.Id" /><button class="btn btn-sm btn-link p-0">Cancel</button></form>
+                            }
+                        </li>
+                    }
+                </ul>
+                <form asp-action="Book" asp-route-id="@o.Id" method="post" class="form-inline card-body py-2">
+                    <select name="date" class="form-control form-control-sm mr-2">
+                        @foreach (var d in Model.AppointmentDays) { <option value="@d.ToString("yyyy-MM-dd")">@d.ToString("ddd dd/MM")</option> }
+                    </select>
+                    <select name="slot" class="form-control form-control-sm mr-2" asp-items="Html.GetEnumSelectList<AppointmentSlot>()"></select>
+                    <button class="btn btn-sm btn-outline-primary">Book</button>
+                </form>
+            </div>
+            <div class="card mb-3">
+                <div class="card-header">Actions</div>
+                <div class="card-body">
+                    <form asp-action="ChangePriority" asp-route-id="@o.Id" method="post" class="form-inline mb-2">
+                        <select name="priority" class="form-control form-control-sm mr-2">
+                            @foreach (RepairPriority p in Enum.GetValues(typeof(RepairPriority))) { <option value="@p" selected="@(p == o.Priority)">@p</option> }
+                        </select>
+                        <button class="btn btn-sm btn-outline-secondary">Change priority</button>
+                    </form>
+                    @if (Model.NextStatuses.Any())
+                    {
+                        <form asp-action="Move" asp-route-id="@o.Id" method="post" class="form-inline mb-2">
+                            <select name="status" class="form-control form-control-sm mr-2">
+                                @foreach (var s in Model.NextStatuses.Where(s => s != WorkOrderStatus.Cancelled)) { <option value="@s">@s</option> }
+                            </select>
+                            <input name="note" class="form-control form-control-sm mr-2" placeholder="Note" />
+                            <button class="btn btn-sm btn-outline-secondary">Set status</button>
+                        </form>
+                    }
+                    <form asp-action="Recharge" asp-route-id="@o.Id" method="post" class="form-inline mb-2">
+                        <input type="hidden" name="recharge" value="@((!o.Recharge).ToString().ToLower())" />
+                        @if (!o.Recharge) { <input name="reason" class="form-control form-control-sm mr-2" placeholder="Damage caused by..." /> }
+                        <button class="btn btn-sm btn-outline-warning">@(o.Recharge ? "Remove recharge" : "Recharge tenant")</button>
+                    </form>
+                    <form asp-action="Cancel" asp-route-id="@o.Id" method="post" class="form-inline" onsubmit="return confirm('Cancel @o.Reference?');">
+                        <input name="reason" class="form-control form-control-sm mr-2" placeholder="Reason" />
+                        <button class="btn btn-sm btn-outline-danger">Cancel job</button>
+                    </form>
+                </div>
+            </div>
+        }
+    </div>
+</div>

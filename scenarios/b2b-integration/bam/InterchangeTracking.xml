@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Files received from and sent to partners and the ERP, written by the InterchangeTracking pipeline component. Deploy: bm.exe update-all -DefinitionFile:InterchangeTracking.xml (deploy\Deploy-Bam.ps1) -->
+<BAMDefinition xmlns="http://schemas.microsoft.com/BizTalkServer/2004/10/BAM">
+  <Activity Name="InterchangeTracking" ID="IDA35F67E189CA5734A8854EEABCE3DC">
+    <Checkpoint Name="Direction" ID="IDC2A6B219911F5DB98E39B4D038C7E4" DataType="NVARCHAR" DataLength="10" />
+    <Checkpoint Name="PartnerId" ID="ID5E071DAEB0705781B81E3AEDE6DA5F" DataType="NVARCHAR" DataLength="20" />
+    <Checkpoint Name="MessageKind" ID="IDFD030F41D89C5FAFAD479EFDA330E3" DataType="NVARCHAR" DataLength="30" />
+    <Checkpoint Name="MessageType" ID="IDAB94D13611CA57B6A05C9AA3708462" DataType="NVARCHAR" DataLength="256" />
+    <Checkpoint Name="ControlNumber" ID="ID638007C8FEEA574D8A00CD5C01A0BC" DataType="NVARCHAR" DataLength="20" />
+    <Checkpoint Name="FileName" ID="IDE8DB3AB634AB5F2BB77B8DA88D8820" DataType="NVARCHAR" DataLength="260" />
+    <Checkpoint Name="ArchivePath" ID="ID7A01AC86EDF75CC7A8500F0CE7B2BC" DataType="NVARCHAR" DataLength="260" />
+    <Checkpoint Name="Port" ID="ID2406F2A5F34C50A18E33D983FC3D94" DataType="NVARCHAR" DataLength="128" />
+    <Checkpoint Name="SizeBytes" ID="ID0281EB9CCC0A5B8BB1FCA75E568578" DataType="INT" />
+    <Checkpoint Name="TrackedUtc" ID="IDDE21109CB70E5D5398758EAD319891" DataType="DATETIME" />
+  </Activity>
+  <View Name="InterchangeTrackingView" ID="ID10F5D28414185C83A55622720E20B3">
+    <ActivityView Name="ViewInterchangeTracking" ID="ID699C78350B8958E787A11DDF97A357" ActivityRef="IDA35F67E189CA5734A8854EEABCE3DC">
+      <Alias Name="Direction" ID="ID486D60B2BEB950D7964616FE5C3AF8">
+        <CheckpointRef>IDC2A6B219911F5DB98E39B4D038C7E4</CheckpointRef>
+      </Alias>
+      <Alias Name="PartnerId" ID="IDB10129FDD70A55E9AB009ADDC851CB">
+        <CheckpointRef>ID5E071DAEB0705781B81E3AEDE6DA5F</CheckpointRef>
+      </Alias>
+      <Alias Name="MessageKind" ID="ID0976D17079B55DC692F7C2D56F8375">
+        <CheckpointRef>IDFD030F41D89C5FAFAD479EFDA330E3</CheckpointRef>
+      </Alias>
+      <Alias Name="MessageType" ID="IDDCACD6EB3EE95CE38B3D739B0F41CC">
+        <CheckpointRef>IDAB94D13611CA57B6A05C9AA3708462</CheckpointRef>
+      </Alias>
+      <Alias Name="ControlNumber" ID="ID3A1EA4D2FF39523BA2AB8331DEA963">
+        <CheckpointRef>ID638007C8FEEA574D8A00CD5C01A0BC</CheckpointRef>
+      </Alias>
+      <Alias Name="FileName" ID="ID491AC253DDB851B7B01E47A3AFE8D8">
+        <CheckpointRef>IDE8DB3AB634AB5F2BB77B8DA88D8820</CheckpointRef>
+      </Alias>
+      <Alias Name="ArchivePath" ID="IDC893904B759B52A6B0F30D42406665">
+        <CheckpointRef>ID7A01AC86EDF75CC7A8500F0CE7B2BC</CheckpointRef>
+      </Alias>
+      <Alias Name="Port" ID="ID05A9B91DF2955D42896E949D9D21EA">
+        <CheckpointRef>ID2406F2A5F34C50A18E33D983FC3D94</CheckpointRef>
+      </Alias>
+      <Alias Name="SizeBytes" ID="IDF0B53181D63051BC8C90C160E5208E">
+        <CheckpointRef>ID0281EB9CCC0A5B8BB1FCA75E568578</CheckpointRef>
+      </Alias>
+      <Alias Name="TrackedUtc" ID="ID8C5F25A8F0F65347986246A7A9870C">
+        <CheckpointRef>IDDE21109CB70E5D5398758EAD319891</CheckpointRef>
+      </Alias>
+      <DataDimension Name="Partner" ID="IDC7FB4448470757FAAFEAF367545A8C">
+        <DataLevel Name="PartnerId" ID="IDF33A1F61A5435098ACE08EC4D163EF">IDB10129FDD70A55E9AB009ADDC851CB</DataLevel>
+      </DataDimension>
+      <DataDimension Name="Direction" ID="ID7800C9A06C4B58B0ACD637C78513B7">
+        <DataLevel Name="Direction" ID="ID6A99654953EC544D8347295DE99F6A">ID486D60B2BEB950D7964616FE5C3AF8</DataLevel>
+      </DataDimension>
+      <Measure Name="InterchangeCount" ID="IDF755D23CE1C951448DAC222B5EA15C" AggregationType="Count">
+        <AliasRef>ID486D60B2BEB950D7964616FE5C3AF8</AliasRef>
+      </Measure>
+      <Measure Name="BytesSum" ID="ID083C0A785B655D498480A80CEA83B6" AggregationType="Sum">
+        <AliasRef>IDF0B53181D63051BC8C90C160E5208E</AliasRef>
+      </Measure>
+    </ActivityView>
+  </View>
+</BAMDefinition>

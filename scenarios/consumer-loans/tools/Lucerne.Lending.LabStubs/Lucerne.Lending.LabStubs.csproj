@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <RootNamespace>Lucerne.Lending.LabStubs</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Lucerne.Lending.Integration\Lucerne.Lending.Integration.csproj" />
+    <ProjectReference Include="..\..\src\Lucerne.Lending.CoreBanking.Simulator\Lucerne.Lending.CoreBanking.Simulator.csproj" />
+  </ItemGroup>
+
+</Project>

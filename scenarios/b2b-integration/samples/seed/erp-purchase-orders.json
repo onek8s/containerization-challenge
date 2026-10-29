@@ -1,0 +1,24 @@
+[
+  {
+    "PoNumber": "4500012877",
+    "Vendor": "300120",
+    "Currency": "EUR",
+    "OrderDate": "2026-02-23",
+    "DeliveryDate": "2026-03-02",
+    "Lines": [
+      { "Line": 10, "Item": "CB-50125", "Quantity": 5000, "Uom": "M", "Price": 0.43 },
+      { "Line": 20, "Item": "CB-51610", "Quantity": 1000, "Uom": "M", "Price": 6.90 }
+    ]
+  },
+  {
+    "PoNumber": "4500012901",
+    "Vendor": "300245",
+    "Currency": "USD",
+    "OrderDate": "2026-02-24",
+    "DeliveryDate": "2026-02-27",
+    "Lines": [
+      { "Line": 10, "Item": "PL-61050", "Quantity": 40, "Uom": "ST", "Price": 31.75 },
+      { "Line": 20, "Item": "HV-70120", "Quantity": 150, "Uom": "ST", "Price": 11.20 }
+    ]
+  }
+]

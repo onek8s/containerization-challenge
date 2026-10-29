@@ -1,0 +1,75 @@
+@page "/returns"
+@inject RetailApi Api
+
+<h1>Returns</h1>
+<ErrorBanner Message="@error" />
+
+<div class="filters">
+    <select @bind="status">
+        <option value="">All</option>
+        <option>Registered</option>
+        <option>Received</option>
+        <option>Refunded</option>
+        <option>Rejected</option>
+    </select>
+    <button @onclick="Load">Show</button>
+</div>
+
+@if (returns != null)
+{
+    <table>
+        <thead><tr><th>RMA</th><th>Order</th><th>Channel</th><th>Store</th><th>Status</th><th>Customer</th><th class="num">Refund</th><th>Created</th><th></th></tr></thead>
+        <tbody>
+            @foreach (var r in returns)
+            {
+                <tr>
+                    <td>@r.RmaNo</td><td><a href="orders/@r.OrderNo">@r.OrderNo</a></td><td>@r.Channel</td><td>@r.StoreCode</td><td>@r.Status</td>
+                    <td>@r.CustomerEmail</td><td class="num">@r.RefundAmount.ToString("N2") @r.Currency</td><td>@r.CreatedUtc.ToLocalTime().ToString("d.M.yyyy")</td>
+                    <td>
+                        @if (r.Status == "Received")
+                        {
+                            <select @bind="grades[r.RmaNo]"><option>A</option><option>B</option><option>C</option></select>
+                            <button @onclick="() => Inspect(r)">Inspect and refund</button>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<ReturnRow> returns;
+    private readonly Dictionary<string, string> grades = new();
+    private string status = "Received";
+    private string error;
+
+    protected override Task OnInitializedAsync() => Load();
+
+    private async Task Load()
+    {
+        error = null;
+        try
+        {
+            returns = await Api.ReturnsAsync(status);
+            foreach (var r in returns) grades.TryAdd(r.RmaNo, "A");
+        }
+        catch (ApiException ex)
+        {
+            error = ex.Message;
+        }
+    }
+
+    private async Task Inspect(ReturnRow r)
+    {
+        try
+        {
+            await Api.InspectReturnAsync(r.RmaNo, grades[r.RmaNo]);
+            await Load();
+        }
+        catch (ApiException ex)
+        {
+            error = ex.Message;
+        }
+    }
+}

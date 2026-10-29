@@ -1,0 +1,5 @@
+[
+  { "customerNo": "C1001", "name": "Aalto Market", "street": "Kauppakatu 12", "postalCode": "00100", "city": "Helsinki", "priceGroup": "A", "creditBlocked": false },
+  { "customerNo": "C1040", "name": "Ranta Deli Oy", "street": "Satamakatu 3", "postalCode": "20100", "city": "Turku", "priceGroup": "B", "creditBlocked": false },
+  { "customerNo": "C1041", "name": "Kivi Service Station", "street": "Teollisuustie 44", "postalCode": "33500", "city": "Tampere", "priceGroup": "C", "creditBlocked": true }
+]

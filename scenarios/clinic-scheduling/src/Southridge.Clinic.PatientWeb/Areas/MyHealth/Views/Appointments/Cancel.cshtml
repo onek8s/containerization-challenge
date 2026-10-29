@@ -1,0 +1,21 @@
+@model CancelViewModel
+@{
+    ViewBag.Title = "Cancel appointment";
+}
+<h1>Cancel appointment</h1>
+<p>
+    @Model.Appointment.AppointmentType with @Model.Appointment.ProviderName<br />
+    @Model.Appointment.Start.ToString("dddd MMMM d 'at' h:mm tt") at @Model.Appointment.SiteName
+</p>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="field">
+        @Html.LabelFor(m => m.Reason)
+        @Html.TextBoxFor(m => m.Reason, new { size = 50, maxlength = 200 })
+    </div>
+    <p>
+        <input type="submit" value="Cancel this appointment" />
+        @Html.ActionLink("Keep it", "Index")
+    </p>
+}

@@ -1,0 +1,5 @@
+App_Data/
+publish/
+node_modules/
+src/StudyData.Monitor.Api/wwwroot/app/
+*.tsbuildinfo

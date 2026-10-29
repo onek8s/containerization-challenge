@@ -1,0 +1,40 @@
+@model CustomerListModel
+@{
+    ViewBag.Title = "Customers";
+}
+<h1>Customers</h1>
+<form method="get" class="filters">
+    <input type="search" name="q" value="@Model.Query" placeholder="Customer number or name" />
+    <select name="cc">
+        <option value="">All credit controllers</option>
+        @foreach (var c in Model.CreditControllers)
+        {
+            <option value="@c" selected="@(c == Model.CreditController)">@c</option>
+        }
+    </select>
+    <button type="submit" class="button">Search</button>
+</form>
+<table class="grid">
+    <thead>
+        <tr><th>Customer</th><th>Name</th><th>Credit controller</th><th>Statement</th><th class="num">Credit limit</th><th class="num">Open balance</th><th class="num">Overdue</th><th>Last payment</th></tr>
+    </thead>
+    <tbody>
+        @foreach (var c in Model.Customers)
+        {
+            <tr class="@(c.OnHold ? "on-hold" : "")">
+                <td>@Html.ActionLink(c.CustomerNo, "Details", new { id = c.CustomerNo })</td>
+                <td>@c.Name @if (c.OnHold) { <span class="tag">on hold</span> }</td>
+                <td>@c.CreditController</td>
+                <td>@((StatementDelivery)c.Delivery)</td>
+                <td class="num">@c.CreditLimit.ToString("#,0")</td>
+                <td class="num">@c.OpenBalance.ToString("#,0.00")</td>
+                <td class="num @(c.Overdue > 0 ? "bad" : "")">@c.Overdue.ToString("#,0.00")</td>
+                <td>@(c.LastPaymentDate.HasValue ? c.LastPaymentDate.Value.ToString("dd.MM.yyyy") : "")</td>
+            </tr>
+        }
+    </tbody>
+</table>
+@if (Model.Customers.Count == 0)
+{
+    <p>No customers found.</p>
+}

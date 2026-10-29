@@ -1,0 +1,66 @@
+@page "/bills/{billNumber}"
+@model BillDetailsModel
+@{
+    ViewData["Title"] = "Bill " + Model.Bill.BillNumber;
+    var b = Model.Bill;
+}
+<p class="no-print"><a asp-page="/Accounts/Details" asp-route-accountNumber="@b.AccountNumber">&larr; Account @b.AccountNumber</a></p>
+
+@if (Model.Message != null)
+{
+    <div class="message @(Model.Failed ? "error" : "")">@Model.Message</div>
+}
+
+<div class="panel">
+    <h1>Water bill @b.BillNumber @if (b.Estimated) { <span class="badge est">Estimated</span> }</h1>
+    <div class="grid">
+        <span class="muted">Account</span><span>@b.AccountNumber</span>
+        <span class="muted">Bill date</span><span>@b.BillDate.ToString("d")</span>
+        <span class="muted">Period</span><span>@b.PeriodFrom.ToString("d") &ndash; @b.PeriodTo.AddDays(-1).ToString("d")</span>
+        <span class="muted">Readings</span><span>@b.OpeningReading.ToString("0.0") &rarr; @b.ClosingReading.ToString("0.0") (@b.Consumption.ToString("0.0") m&sup3;)</span>
+        <span class="muted">Due date</span><span>@b.DueDate.ToString("d")</span>
+        <span class="muted">Payment reference</span><span>@b.PaymentReference</span>
+        <span class="muted">Status</span><span>@b.StatusText</span>
+    </div>
+
+    <h2>Charges</h2>
+    <table>
+        <tr><th>Description</th><th class="num">Quantity</th><th class="num">Price</th><th class="num">VAT %</th><th class="num">Amount EUR</th></tr>
+        @foreach (var line in Model.Lines)
+        {
+            <tr>
+                <td>@line.Description</td>
+                <td class="num">@line.Quantity.ToString("0.###") @line.Unit</td>
+                <td class="num">@line.UnitPrice.ToString("0.00###")</td>
+                <td class="num">@line.VatRate.ToString("0.0")</td>
+                <td class="num">@line.Amount.ToString("N2")</td>
+            </tr>
+        }
+        <tr><td colspan="4" class="num">Net</td><td class="num">@b.NetAmount.ToString("N2")</td></tr>
+        <tr><td colspan="4" class="num">VAT</td><td class="num">@b.VatAmount.ToString("N2")</td></tr>
+        <tr><th colspan="4" class="num">Total</th><th class="num">@b.TotalAmount.ToString("N2")</th></tr>
+    </table>
+</div>
+
+@if (b.Status == 1)
+{
+    <form method="post" class="panel">
+        <h2>Send a printed copy</h2>
+        <p class="muted">The copy is printed and mailed with the next print vendor pickup.</p>
+        <input type="text" name="Reason" maxlength="200" placeholder="Reason (e.g. customer did not receive the bill)" required />
+        <button type="submit">Request reprint</button>
+        <button type="button" onclick="window.print()">Print this page</button>
+    </form>
+}
+
+@if (Model.Reprints.Count > 0)
+{
+    <h2 class="no-print">Reprints</h2>
+    <table class="no-print">
+        <tr><th>Requested</th><th>By</th><th>Reason</th><th>Printed</th></tr>
+        @foreach (var r in Model.Reprints)
+        {
+            <tr><td>@r.RequestedAt.ToString("g")</td><td>@r.RequestedBy</td><td>@r.Reason</td><td>@(r.ProcessedAt?.ToString("g") ?? "pending")</td></tr>
+        }
+    </table>
+}

@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>Lucerne.ProjectSites.Sync</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Lucerne.ProjectSites.Core\Lucerne.ProjectSites.Core.csproj" />
+    <ProjectReference Include="..\Lucerne.ProjectSites.Integration\Lucerne.ProjectSites.Integration.csproj" />
+  </ItemGroup>
+
+</Project>

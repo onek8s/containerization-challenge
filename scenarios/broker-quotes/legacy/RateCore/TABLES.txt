@@ -1,0 +1,24 @@
+RateCore rate tables (Access 2000 format, Jet 4.0)
+==================================================
+
+Folder layout on a rating server (RateCore TablesPath, default D:\RateCore\Tables):
+
+  VERSIONS.mdb   tblVersion(Product TEXT(4), Version TEXT(10), DatabaseFile TEXT(50),
+                            EffectiveFrom DATETIME, EffectiveTo DATETIME NULL)
+  BC2023.mdb     product tables for Business Combined 2023.x
+  BC2024.mdb     product tables for Business Combined 2024.x
+  ZONES.mdb      tblDistrict(District TEXT(4), FloodZone INT, SubsZone INT, CrimeZone INT)
+
+Product databases:
+
+  tblTrade(TradeCode TEXT(5), TradeGroup TEXT(30), MDRate DOUBLE, StockRate DOUBLE, BIRate DOUBLE,
+           ELClericalRate DOUBLE, ELManualRate DOUBLE, PLRate DOUBLE, ReferFlag YESNO, DeclineFlag YESNO)
+  tblFactor(Factor TEXT(20), FactorKey TEXT(20), FactorValue DOUBLE)
+
+  Factors: CONSTRUCTION (STD/TF/NS), ROOF (STD/FLAT/THATCH/OTHER), FLOOD (1-4), SUBS (1-4),
+  CRIME (1-4), ALARM (0/1/2), EXCESS (100/250/500/1000), INDEMNITY (12/18/24/36),
+  PLLIMIT (1/2/5), AGE, LISTED, UNOCC, PRODUCTS, WORKAWAY (by trade group), COMPUTER, EL,
+  CLAIMS (PERCLAIM, MAX), LIMIT (MDTOTAL, CRIME4STOCK, ELMANUAL, PLTURNOVER).
+
+The tables are maintained by Pricing in Access and signed off by the Chief Actuary before each
+release. The databases are opened read-only; the rating servers need read access only.

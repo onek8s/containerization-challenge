@@ -1,0 +1,65 @@
+@model DashboardModel
+@{
+    ViewBag.Title = "Overview";
+}
+<h1>Overview</h1>
+<div class="cards">
+    <div class="card">
+        <h2>Ledger</h2>
+        @if (Model.LastLoad != null)
+        {
+            <p class="big">@Model.LastLoad.LedgerDate.ToString("dd.MM.yyyy")</p>
+            <p>Loaded @Model.LastLoad.LoadedAt.ToString("dd.MM.yyyy HH:mm") from @Model.LastLoad.Source, @Model.LastLoad.Entries.ToString("#,0") entries</p>
+        }
+        else
+        {
+            <p>No ledger loaded yet.</p>
+        }
+    </div>
+    <div class="card">
+        <h2>Delivery problems</h2>
+        <p class="big @(Model.Problems.Count > 0 ? "bad" : "")">@Model.Problems.Count</p>
+        <p>@Html.ActionLink("Show failed and retrying deliveries", "Index", "Deliveries")</p>
+    </div>
+    <div class="card">
+        <h2>Find a customer</h2>
+        <form method="get" action="@Url.Action("Index", "Customers")">
+            <input type="search" name="q" placeholder="Customer number or name" autofocus />
+            <button type="submit" class="button">Search</button>
+        </form>
+    </div>
+</div>
+
+<h2>Next scheduled</h2>
+<table class="grid">
+    <thead><tr><th>Subscription</th><th>Report</th><th>Next run</th><th>Delivery</th></tr></thead>
+    <tbody>
+        @foreach (var s in Model.Upcoming)
+        {
+            <tr>
+                <td>@s.Name</td>
+                <td>@s.ReportCode</td>
+                <td>@s.NextRunAt.Value.ToString("ddd dd.MM.yyyy HH:mm")</td>
+                <td>@s.DeliveryMethod</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h2>Recent runs</h2>
+<table class="grid">
+    <thead><tr><th>Started</th><th>Subscription</th><th>Status</th><th class="num">Documents</th><th class="num">Failures</th><th></th></tr></thead>
+    <tbody>
+        @foreach (var r in Model.RecentRuns)
+        {
+            <tr>
+                <td>@r.StartedAt.ToString("dd.MM.yyyy HH:mm")</td>
+                <td>@r.SubscriptionName</td>
+                <td class="status-@r.Status.ToLowerInvariant()">@r.Status</td>
+                <td class="num">@r.Documents</td>
+                <td class="num">@r.Failures</td>
+                <td>@Html.ActionLink("Details", "Run", "Subscriptions", new { id = r.RunId }, null)</td>
+            </tr>
+        }
+    </tbody>
+</table>

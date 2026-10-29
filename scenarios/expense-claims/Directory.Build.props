@@ -1,0 +1,10 @@
+<Project>
+  <PropertyGroup>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>10.0</LangVersion>
+    <Company>Lamna Healthcare</Company>
+    <Product>Expense Claims</Product>
+    <Version>3.4.0</Version>
+  </PropertyGroup>
+</Project>

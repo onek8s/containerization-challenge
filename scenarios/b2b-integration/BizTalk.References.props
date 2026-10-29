@@ -1,0 +1,36 @@
+<Project>
+
+  <!--
+    BizTalk Server runtime assemblies for the C# projects that run inside BizTalk hosts or call the BizTalk
+    management APIs. On a BizTalk server or developer workstation set BizTalkInstallPath (for example
+    "$(MSBuildProgramFiles32)\Microsoft BizTalk Server 2016") and the installed assemblies are used; the build
+    agent uses the reference packages (runtime: messaging, XLANG/s, BAM, BRE, Operations and the SSO interop;
+    utilities: ExplorerOM). The assemblies are never copied to the output: BizTalk provides them from the GAC at
+    run time.
+
+    Projects list the assemblies they need with BizTalkReference items, for example
+      <BizTalkReference Include="Microsoft.BizTalk.Pipeline" />
+  -->
+  <!-- Some assemblies of the reference package (SSO interop) are stamped .NET 4.8; the API is the same as on the servers -->
+  <PropertyGroup Condition="'$(BizTalkInstallPath)' == ''">
+    <ResolveAssemblyReferenceIgnoreTargetFrameworkAttributeVersionMismatch>true</ResolveAssemblyReferenceIgnoreTargetFrameworkAttributeVersionMismatch>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BizTalk.Server.2020.Runtime" Version="1.0.4" GeneratePathProperty="true" ExcludeAssets="all" PrivateAssets="all" />
+    <PackageReference Include="BizTalk.Server.2020.Utilities" Version="1.0.3" GeneratePathProperty="true" ExcludeAssets="all" PrivateAssets="all" />
+  </ItemGroup>
+
+  <Target Name="ResolveBizTalkReferences" BeforeTargets="ResolveAssemblyReferences" Condition="'@(BizTalkReference)' != ''">
+    <ItemGroup>
+      <_BizTalkCandidate Include="@(BizTalkReference->'$(BizTalkInstallPath)\%(Identity).dll')" Condition="'$(BizTalkInstallPath)' != ''" />
+      <_BizTalkCandidate Include="@(BizTalkReference->'$(BizTalkInstallPath)\Developer Tools\%(Identity).dll')" Condition="'$(BizTalkInstallPath)' != ''" />
+      <_BizTalkCandidate Include="@(BizTalkReference->'$(PkgBizTalk_Server_2020_Runtime)\lib\net40\%(Identity).dll')" Condition="'$(BizTalkInstallPath)' == ''" />
+      <_BizTalkCandidate Include="@(BizTalkReference->'$(PkgBizTalk_Server_2020_Utilities)\lib\net40\%(Identity).dll')" Condition="'$(BizTalkInstallPath)' == ''" />
+      <Reference Include="@(_BizTalkCandidate)" Condition="Exists('%(FullPath)')">
+        <Private>false</Private>
+      </Reference>
+    </ItemGroup>
+  </Target>
+
+</Project>

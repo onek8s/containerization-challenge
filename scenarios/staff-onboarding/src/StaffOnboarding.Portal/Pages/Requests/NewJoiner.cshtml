@@ -1,0 +1,42 @@
+@page
+@model StaffOnboarding.Portal.Pages.Requests.NewJoinerModel
+@{
+    ViewData["Title"] = "New joiner";
+}
+<h1>New joiner</h1>
+<p>The account is created @Model.LeadDays business days before the start date. The earliest possible start date today is @Model.EarliestStart.ToString("dd.MM.yyyy").</p>
+<form method="post" enctype="multipart/form-data">
+    <div asp-validation-summary="All"></div>
+    <div class="grid">
+        <fieldset>
+            <legend>Person</legend>
+            <label asp-for="Form.FirstName">First name(s)</label><input asp-for="Form.FirstName" />
+            <label asp-for="Form.PreferredName">Preferred first name</label><input asp-for="Form.PreferredName" />
+            <label asp-for="Form.LastName">Last name</label><input asp-for="Form.LastName" />
+            <label asp-for="Form.EmployeeId">Employee number (HRIS)</label><input asp-for="Form.EmployeeId" />
+            <label asp-for="Form.MobilePhone">Work mobile</label><input asp-for="Form.MobilePhone" />
+        </fieldset>
+        <fieldset>
+            <legend>Position</legend>
+            <label asp-for="Form.Department">Department</label>
+            <select asp-for="Form.Department" asp-items="Model.Departments"><option value="">Choose…</option></select>
+            <label asp-for="Form.JobRole">Job role</label>
+            <select asp-for="Form.JobRole" asp-items="Model.Roles"><option value="">Choose…</option></select>
+            <label asp-for="Form.Title">Job title</label><input asp-for="Form.Title" />
+            <label asp-for="Form.Office">Office</label><input asp-for="Form.Office" />
+            <label asp-for="Form.CostCenter">Cost center</label><input asp-for="Form.CostCenter" />
+            <label asp-for="Form.ManagerAccount">Manager (user name)</label><input asp-for="Form.ManagerAccount" placeholder="firstname.lastname" />
+            <label asp-for="Form.EmploymentType">Employment type</label>
+            <select asp-for="Form.EmploymentType" asp-items="Html.GetEnumSelectList<EmploymentType>()"></select>
+            <label asp-for="Form.ContractEndDate">Contract end date</label><input asp-for="Form.ContractEndDate" type="date" />
+            <label asp-for="Form.StartDate">Start date</label><input asp-for="Form.StartDate" type="date" />
+        </fieldset>
+    </div>
+    <fieldset>
+        <legend>Additional access</legend>
+        <select asp-for="Form.AdditionalGroups" asp-items="Model.Requestable" multiple size="6"></select>
+        <label asp-for="Form.Notes">Notes for IT</label><textarea asp-for="Form.Notes" rows="3"></textarea>
+        <label>Signed employment contract</label><input type="file" name="contract" />
+    </fieldset>
+    <button>Submit</button>
+</form>

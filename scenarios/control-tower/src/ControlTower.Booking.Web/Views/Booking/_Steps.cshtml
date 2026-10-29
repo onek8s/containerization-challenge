@@ -1,0 +1,6 @@
+@model int
+<ul class="nav nav-pills mb-3">
+    <li class="nav-item"><a class="nav-link @(Model == 1 ? "active" : "")" asp-action="Parties">1. Route and parties</a></li>
+    <li class="nav-item"><a class="nav-link @(Model == 2 ? "active" : "")" asp-action="Packages">2. Packages</a></li>
+    <li class="nav-item"><a class="nav-link @(Model == 3 ? "active" : "")" asp-action="Review">3. Quote and confirm</a></li>
+</ul>

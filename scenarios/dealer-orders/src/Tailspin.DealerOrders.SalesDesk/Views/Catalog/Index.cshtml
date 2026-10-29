@@ -1,0 +1,15 @@
+@model IList<ProductModel>
+@{
+    ViewBag.Title = "Catalog";
+}
+<h2>Machine catalog</h2>
+<table class="table table-condensed">
+    <thead><tr><th>Model</th><th>Item</th><th>Name</th><th>Family</th><th>Year</th><th>Valid</th><th>Lead time</th><th>Options</th><th>Rules</th><th>Export class</th></tr></thead>
+    @foreach (var m in Model)
+    {
+        <tr>
+            <td>@Html.ActionLink(m.ModelCode, "Model", new { id = m.ModelCode })</td><td>@m.ItemId</td><td>@m.Name</td><td>@m.Family</td><td>@m.ModelYear</td>
+            <td>@m.ValidFrom.ToString("d") - @m.ValidTo?.ToString("d")</td><td>@m.LeadTimeWeeks wk</td><td>@m.AllOptions.Count()</td><td>@m.Rules.Count</td><td>@m.ExportControlClass</td>
+        </tr>
+    }
+</table>

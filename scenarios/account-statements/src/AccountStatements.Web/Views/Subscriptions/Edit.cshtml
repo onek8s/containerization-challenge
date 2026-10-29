@@ -1,0 +1,95 @@
+@model SubscriptionEditModel
+@{
+    ViewBag.Title = Model.SubscriptionId == 0 ? "New subscription" : Model.Name;
+}
+<p>@Html.ActionLink("← Subscriptions", "Index")</p>
+<h1>@ViewBag.Title</h1>
+@using (Html.BeginForm("Save", "Subscriptions", FormMethod.Post, new { @class = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.SubscriptionId)
+    @Html.ValidationSummary(false, "", new { @class = "notice error" })
+
+    <div class="field">
+        @Html.LabelFor(m => m.Name)
+        @Html.TextBoxFor(m => m.Name)
+    </div>
+    <div class="field">
+        @Html.LabelFor(m => m.ReportCode)
+        @Html.DropDownListFor(m => m.ReportCode, new SelectList(Model.Reports, "Code", "Title", Model.ReportCode))
+        <small>Parameters: @string.Join("; ", Model.Reports.Select(r => r.Code + ": " + string.Join(", ", r.Parameters)))</small>
+    </div>
+    <div class="field">
+        @Html.LabelFor(m => m.Schedule)
+        @Html.TextBoxFor(m => m.Schedule, new { id = "schedule" })
+        <small>DAILY 05:30 &middot; WORKDAYS 06:00 &middot; WEEKLY MON,THU 07:30 &middot; MONTHLY 1 06:00 &middot; MONTHLY LAST 18:00 &middot; MONTHLY WD3 06:00 (third working day)</small>
+        <div id="schedule-preview" class="muted">
+            @if (Model.NextRuns.Count > 0)
+            {
+                @:Next runs: @string.Join(", ", Model.NextRuns.Select(d => d.ToString("ddd dd.MM.yyyy HH:mm")))
+            }
+        </div>
+    </div>
+    <div class="field">
+        @Html.LabelFor(m => m.Parameters)
+        @Html.TextBoxFor(m => m.Parameters)
+        <small>Name=Value;Name=Value. Dates: {Today}, {Yesterday}, {MonthStart}, {PrevMonthStart}, {PrevMonthEnd}, {WeekStart}, {PrevWeekStart}, {YearStart}, {QuarterStart}, {PrevQuarterEnd}, {Today-7}</small>
+    </div>
+    <div class="field">
+        @Html.LabelFor(m => m.OutputFormat)
+        @Html.DropDownListFor(m => m.OutputFormat, new SelectList(new[] { "PDF", "EXCEL", "WORD" }, Model.OutputFormat))
+    </div>
+    <div class="field">
+        @Html.LabelFor(m => m.DeliveryMethod)
+        @Html.DropDownListFor(m => m.DeliveryMethod, new SelectList(new[] { DeliveryMethods.Email, DeliveryMethods.Share, DeliveryMethods.Customer }, Model.DeliveryMethod))
+        <small>CUSTOMER: statement runs only, each customer by their own setting (e-mail, drop folder, print).</small>
+    </div>
+    <div class="field">
+        @Html.LabelFor(m => m.Recipients)
+        @Html.TextBoxFor(m => m.Recipients)
+        <small>E-mail addresses separated by ";". Statement runs send their summary here.</small>
+    </div>
+    <div class="field">
+        @Html.LabelFor(m => m.SharePath)
+        @Html.TextBoxFor(m => m.SharePath)
+    </div>
+    <div class="field">
+        @Html.LabelFor(m => m.FileNameTemplate)
+        @Html.TextBoxFor(m => m.FileNameTemplate)
+        <small>Fields: {RunDate:yyyyMMdd}, any parameter, statement runs also {CustomerNo} and {StatementDate:yyyyMMdd}</small>
+    </div>
+    <div class="field">
+        @Html.LabelFor(m => m.EmailSubject)
+        @Html.TextBoxFor(m => m.EmailSubject)
+    </div>
+    <div class="field">
+        <label>@Html.CheckBoxFor(m => m.Enabled) Enabled</label>
+    </div>
+    if (!string.IsNullOrEmpty(Model.Owner))
+    {
+        <p class="muted">Owner @Model.Owner</p>
+    }
+    <button type="submit" class="button">Save</button>
+}
+
+@section scripts {
+    <script>
+        (function () {
+            var input = document.getElementById('schedule');
+            var target = document.getElementById('schedule-preview');
+            var timer;
+            input.addEventListener('input', function () {
+                clearTimeout(timer);
+                timer = setTimeout(function () {
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('GET', '@Url.Action("Preview")?schedule=' + encodeURIComponent(input.value));
+                    xhr.onload = function () {
+                        var r = JSON.parse(xhr.responseText);
+                        target.textContent = r.error ? r.error : r.description + '. Next runs: ' + r.runs.join(', ');
+                    };
+                    xhr.send();
+                }, 400);
+            });
+        })();
+    </script>
+}

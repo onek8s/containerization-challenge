@@ -1,0 +1,27 @@
+@model List<StudyData.Data.Services.QueryRow>
+@{ ViewData["Title"] = "Queries"; var state = (QueryState?)ViewBag.State; }
+<h1>Queries</h1>
+<nav class="tabs">
+    @foreach (var s in new[] { QueryState.Open, QueryState.Answered, QueryState.Closed })
+    {
+        <a href="/queries?state=@s" class="@(state == s ? "active" : "")">@s</a>
+    }
+</nav>
+<table>
+    <thead><tr><th>#</th><th>Subject</th><th>Visit</th><th>Form</th><th>Field</th><th>Query</th><th>From</th><th>Age</th></tr></thead>
+    <tbody>
+    @foreach (var q in Model)
+    {
+        <tr class="@(q.AgeDays > 7 && q.State == QueryState.Open ? "late" : "")">
+            <td>@q.Id</td>
+            <td><a href="/subjects/@q.SubjectId">@q.Subject</a></td>
+            <td>@q.Visit</td>
+            <td><a href="/forms/@q.FormInstanceId">@q.Form@(q.Row > 1 ? $" #{q.Row}" : "")</a></td>
+            <td><code>@q.FieldCode</code></td>
+            <td>@q.Text</td>
+            <td>@q.Origin</td>
+            <td>@q.AgeDays d</td>
+        </tr>
+    }
+    </tbody>
+</table>

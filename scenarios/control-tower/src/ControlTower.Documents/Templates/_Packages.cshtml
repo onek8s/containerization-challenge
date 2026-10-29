@@ -1,0 +1,32 @@
+@inherits RazorLight.TemplatePage<Proseware.ControlTower.Documents.ShipmentDocumentModel>
+@{ var s = Model.Shipment; }
+<table class="grid" style="margin-top:6px">
+    <tr>
+        <th>#</th><th>Marks / SSCC</th><th>Kind</th><th>Qty</th><th>Dimensions (cm)</th><th class="num">Gross kg</th><th class="num">m³</th>
+    </tr>
+    @{ var i = 0; }
+    @foreach (var p in s.Packages)
+    {
+        i++;
+        <tr>
+            <td>@i</td>
+            <td>@(p.Marks ?? "")<br /><span class="small">@p.Sscc</span>@if (p.ContainerNumber != null) {<br /><span>@p.ContainerNumber / seal @p.SealNumber</span>}</td>
+            <td>@p.Kind</td>
+            <td>@p.Quantity</td>
+            <td>@p.LengthCm x @p.WidthCm x @p.HeightCm</td>
+            <td class="num">@p.WeightKg.ToString("0.0")</td>
+            <td class="num">@p.VolumeM3.ToString("0.000")</td>
+        </tr>
+    }
+    <tr>
+        <th colspan="3">Total</th>
+        <th>@s.PackageCount</th>
+        <th></th>
+        <th class="num">@s.GrossWeightKg.ToString("0.0")</th>
+        <th class="num">@s.VolumeM3.ToString("0.000")</th>
+    </tr>
+</table>
+@if (s.IsReefer)
+{
+    <div class="reefer"><strong>Temperature controlled:</strong> keep between @s.TemperatureMin °C and @s.TemperatureMax °C during the whole transport.</div>
+}

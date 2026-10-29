@@ -1,0 +1,4 @@
+﻿OrderRef;OrderDate;BuyerName;BuyerEmail;ShipName;ShipStreet;ShipPostalCode;ShipCity;ShipCountry;Sku;Title;Qty;UnitPrice;Currency;ShippingFee
+TM-7781204;2026-10-29T13:41:00+01:00;Jonas Becker;j.becker@example.de;Jonas Becker;Lindenstraße 23;10969;Berlin;DE;LW-SB-M5-REG;"Polar -5 Schlafsack, regular";1;149,00;EUR;4,90
+TM-7781204;2026-10-29T13:41:00+01:00;Jonas Becker;j.becker@example.de;Jonas Becker;Lindenstraße 23;10969;Berlin;DE;LW-HDL-300;Stirnlampe 300 lm;2;29,90;EUR;4,90
+TM-7781377;2026-10-29T13:55:12+01:00;Mette Hansen;mette.h@example.dk;"Hansen; Mette";Nørrebrogade 88, 2. th;2200;København N;DK;LW-STV-GAS;Gaskocher kompakt;1;39,95;EUR;6,90

@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <RootNamespace>Proseware.ControlTower.LabTools</RootNamespace>
+    <OutputType>Exe</OutputType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MQTTnet" Version="3.1.2" />
+    <PackageReference Include="SSH.NET" Version="2016.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\ControlTower.Domain\ControlTower.Domain.csproj" />
+    <ProjectReference Include="..\..\src\ControlTower.Data\ControlTower.Data.csproj" />
+    <ProjectReference Include="..\..\src\ControlTower.Integration\ControlTower.Integration.csproj" />
+    <ProjectReference Include="..\..\src\ControlTower.Routing\ControlTower.Routing.csproj" />
+  </ItemGroup>
+
+</Project>

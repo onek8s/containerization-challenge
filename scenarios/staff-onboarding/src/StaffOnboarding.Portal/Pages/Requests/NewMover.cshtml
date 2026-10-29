@@ -1,0 +1,29 @@
+@page
+@model StaffOnboarding.Portal.Pages.Requests.NewMoverModel
+@{
+    ViewData["Title"] = "Role change";
+}
+<h1>Role change</h1>
+<form method="post">
+    <div asp-validation-summary="All"></div>
+    <fieldset>
+        <label asp-for="Form.SamAccountName">Employee (user name)</label><input asp-for="Form.SamAccountName" />
+        <label asp-for="Form.Department">New department</label>
+        <select asp-for="Form.Department" asp-items="Model.Departments"><option value="">Choose…</option></select>
+        <label asp-for="Form.JobRole">New job role</label>
+        <select asp-for="Form.JobRole" asp-items="Model.Roles"><option value="">Choose…</option></select>
+        <label asp-for="Form.Title">New job title</label><input asp-for="Form.Title" />
+        <label asp-for="Form.Office">Office</label><input asp-for="Form.Office" />
+        <label asp-for="Form.CostCenter">Cost center</label><input asp-for="Form.CostCenter" />
+        <label asp-for="Form.ManagerAccount">New manager (user name)</label><input asp-for="Form.ManagerAccount" />
+        <label asp-for="Form.EmploymentType">Employment type</label>
+        <select asp-for="Form.EmploymentType" asp-items="Html.GetEnumSelectList<EmploymentType>()"></select>
+        <label asp-for="Form.ContractEndDate">Contract end date</label><input asp-for="Form.ContractEndDate" type="date" />
+        <label asp-for="Form.EffectiveDate">Effective date</label><input asp-for="Form.EffectiveDate" type="date" />
+        <label asp-for="Form.HandoverDays">Keep previous access for (business days)</label><input asp-for="Form.HandoverDays" />
+        <label asp-for="Form.AdditionalGroups">Additional access</label>
+        <select asp-for="Form.AdditionalGroups" asp-items="Model.Requestable" multiple size="6"></select>
+        <label asp-for="Form.Notes">Notes</label><textarea asp-for="Form.Notes" rows="3"></textarea>
+    </fieldset>
+    <button>Submit</button>
+</form>

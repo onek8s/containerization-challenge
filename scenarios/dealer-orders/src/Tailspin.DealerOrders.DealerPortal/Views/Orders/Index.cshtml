@@ -1,0 +1,31 @@
+@model OrderListViewModel
+@{
+    ViewBag.Title = "Orders";
+}
+<h2>Orders <small>@Model.Total found</small> @Html.ActionLink("Excel", "Export", null, new { @class = "btn btn-default btn-sm" })</h2>
+@using (Html.BeginForm("Index", "Orders", FormMethod.Get, new { @class = "form-inline filter" }))
+{
+    @Html.TextBoxFor(m => m.Text, new { @class = "form-control", placeholder = "Order, PO, Tailspin order or item" })
+    @Html.EnumDropDownListFor(m => m.Status, "Any status", new { @class = "form-control" })
+    <label class="checkbox-inline">@Html.CheckBoxFor(m => m.OpenOnly) Open only</label>
+    <button type="submit" class="btn btn-default">Search</button>
+}
+<table class="table table-striped">
+    <thead><tr><th>Order</th><th>Your PO</th><th>Item</th><th>Source</th><th>Status</th><th class="text-right">Value</th><th>Ordered</th><th>Delivery</th></tr></thead>
+    <tbody>
+        @foreach (var o in Model.Orders)
+        {
+            <tr data-order-id="@o.Id">
+                <td>@Html.ActionLink(o.OrderNumber, "Details", new { id = o.Id })</td>
+                <td>@o.DealerPoNumber</td>
+                <td>@o.FirstItem</td>
+                <td>@o.Source</td>
+                <td><span class="label @StatusTexts.Css(o.Status) order-status">@o.StatusText</span></td>
+                <td class="text-right">@o.NetValue.ToString("N2") @o.Currency</td>
+                <td>@o.CreatedUtc.ToLocalTime().ToString("d")</td>
+                <td>@((o.ConfirmedDeliveryDate ?? o.RequestedDeliveryDate)?.ToString("d"))</td>
+            </tr>
+        }
+    </tbody>
+</table>
+@Html.Partial("_Pager", Tuple.Create<int, int, Func<int, string>>(Model.Page, Model.Pages, p => Url.Action("Index", new { Model.Text, Model.Status, Model.OpenOnly, page = p })))

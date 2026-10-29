@@ -1,0 +1,23 @@
+@model UserEditViewModel
+@{
+    ViewBag.Title = string.IsNullOrEmpty(Model.Id) ? "New user" : Model.UserName;
+}
+<h1>@ViewBag.Title</h1>
+<div class="panel">
+    @using (Html.BeginForm("Save", "Users", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(m => m.Id)
+        @Html.ValidationSummary()
+        <div class="form-row">@Html.LabelFor(m => m.UserName)@if (string.IsNullOrEmpty(Model.Id)) { @Html.TextBoxFor(m => m.UserName) } else { @Html.HiddenFor(m => m.UserName) <span>@Model.UserName</span> }</div>
+        <div class="form-row">@Html.LabelFor(m => m.DisplayName)@Html.TextBoxFor(m => m.DisplayName)</div>
+        <div class="form-row">@Html.LabelFor(m => m.Email)@Html.TextBoxFor(m => m.Email, new { type = "email" })</div>
+        <div class="form-row">@Html.LabelFor(m => m.RepCode)@Html.TextBoxFor(m => m.RepCode, new { maxlength = 4 })</div>
+        <div class="form-row">@Html.LabelFor(m => m.DiscountLimitPercent)@Html.TextBoxFor(m => m.DiscountLimitPercent, new { type = "number", step = "0.5" })</div>
+        <div class="form-row"><label>Roles</label>
+            <span>@Html.CheckBoxFor(m => m.IsSalesRep) Sales rep &nbsp; @Html.CheckBoxFor(m => m.IsSalesManager) Sales manager &nbsp; @Html.CheckBoxFor(m => m.IsAdministrator) Administrator</span></div>
+        <div class="form-row">@Html.LabelFor(m => m.NewPassword)@Html.PasswordFor(m => m.NewPassword)</div>
+        <div class="form-row"><label></label><span class="muted">At least 8 characters with upper and lower case letters and a digit. Leave empty to keep the current password.</span></div>
+        <div class="form-row"><label></label><button type="submit" class="btn btn-primary">Save</button>&nbsp;<a class="btn" href="@Url.Action("Index")">Cancel</a></div>
+    }
+</div>

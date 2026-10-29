@@ -1,0 +1,36 @@
+@model UserViewModel[]
+@{
+    ViewBag.Title = "Users";
+}
+<h2>Portal users @Html.ActionLink("New user", "Create", null, new { @class = "btn btn-primary btn-sm" })</h2>
+<table class="table table-striped">
+    <thead><tr><th>User</th><th>Name</th><th>E-mail</th><th>Roles</th><th>Last sign-in</th><th></th></tr></thead>
+    <tbody>
+        @foreach (var u in Model)
+        {
+            <tr class="@(u.Disabled ? "text-muted" : "")">
+                <td>@Html.ActionLink(u.UserName, "Edit", new { id = u.Id })</td>
+                <td>@u.DisplayName</td>
+                <td>@u.Email</td>
+                <td>@string.Join(", ", u.Roles)</td>
+                <td>@u.LastLoginUtc?.ToLocalTime().ToString("g")</td>
+                <td>
+                    @if (u.Disabled) { <span class="label label-default">disabled</span> }
+                    @if (u.IsLockedOut)
+                    {
+                        using (Html.BeginForm("Unlock", "Users", new { id = u.Id }, FormMethod.Post, new { style = "display:inline" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <button class="btn btn-warning btn-xs" type="submit">Unlock</button>
+                        }
+                    }
+                    @using (Html.BeginForm("SendReset", "Users", new { id = u.Id }, FormMethod.Post, new { style = "display:inline" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <button class="btn btn-default btn-xs" type="submit">Send password link</button>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

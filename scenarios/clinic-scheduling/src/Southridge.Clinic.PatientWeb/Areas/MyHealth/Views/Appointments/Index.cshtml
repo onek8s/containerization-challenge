@@ -1,0 +1,49 @@
+@model AppointmentsViewModel
+@{
+    ViewBag.Title = "My appointments";
+}
+<h1>Hello @Model.PatientName</h1>
+<h2>Upcoming appointments</h2>
+@if (Model.Upcoming.Count == 0)
+{
+    <p>You have no upcoming appointments. <a href="@Url.Content("~/Book/Default.aspx")">Book a visit</a>.</p>
+}
+else
+{
+    <table class="list">
+        <tr><th>When</th><th>Visit</th><th>With</th><th>Where</th><th>Status</th><th></th></tr>
+        @foreach (var a in Model.Upcoming)
+        {
+            <tr>
+                <td>@a.Start.ToString("ddd MMM d, h:mm tt")</td>
+                <td>@a.AppointmentType</td>
+                <td>@a.ProviderName</td>
+                <td>@a.SiteName<br /><span class="small">@a.SiteAddress, @a.SitePhone</span></td>
+                <td>@a.Status<br /><span class="small">Code @a.ConfirmationCode</span></td>
+                <td>
+                    @Html.ActionLink("Pre-visit form", "Intake", "Forms", new { appointmentId = a.AppointmentId }, null)
+                    @if (a.CanCancel)
+                    {
+                        <br />@Html.ActionLink("Cancel", "Cancel", new { id = a.AppointmentId })
+                    }
+                </td>
+            </tr>
+        }
+    </table>
+}
+@if (Model.Past.Count > 0)
+{
+    <h2>Past visits</h2>
+    <table class="list">
+        <tr><th>When</th><th>Visit</th><th>With</th><th>Status</th></tr>
+        @foreach (var a in Model.Past)
+        {
+            <tr>
+                <td>@a.Start.ToString("MM/dd/yyyy")</td>
+                <td>@a.AppointmentType</td>
+                <td>@a.ProviderName</td>
+                <td>@a.Status</td>
+            </tr>
+        }
+    </table>
+}

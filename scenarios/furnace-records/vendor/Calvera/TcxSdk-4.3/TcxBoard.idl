@@ -1,0 +1,90 @@
+// Calvera Instruments TCX board SDK 4.3
+// Type library: TcxBoardLib 4.3 (TcxBoard.dll, installed by TCX_SDK_4.3.msi)
+//
+// TcxBoard.dll is an in-process COM server (ThreadingModel=Both). It talks to the
+// board through the TCX device driver installed with the SDK. One Board object
+// can have a board open at a time; a board can be open in one process only.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+    uuid(5C2E9A40-7B1D-4F6A-9C3E-1A8D2F04B731),
+    version(4.3),
+    helpstring("Calvera TCX Board 4.3 Type Library")
+]
+library TcxBoardLib
+{
+    importlib("stdole2.tlb");
+
+    typedef [v1_enum] enum TcxThermocouple
+    {
+        tcxTypeK = 1,
+        tcxTypeN = 2,
+        tcxTypeJ = 3,
+        tcxTypeS = 4,
+    } TcxThermocouple;
+
+    typedef [v1_enum] enum TcxState
+    {
+        tcxClosed = 0,
+        tcxOpen = 1,
+        tcxRunning = 2,
+        tcxFault = 3,
+    } TcxState;
+
+    [
+        object,
+        uuid(5C2E9A41-7B1D-4F6A-9C3E-1A8D2F04B731),
+        dual,
+        oleautomation,
+        helpstring("TCX thermocouple input board")
+    ]
+    interface ITcxBoard : IDispatch
+    {
+        [propget, id(1)] HRESULT Model([out, retval] BSTR* value);
+        [propget, id(2)] HRESULT SerialNumber([out, retval] long* value);
+        [propget, id(3)] HRESULT FirmwareVersion([out, retval] BSTR* value);
+        [propget, id(4)] HRESULT DriverVersion([out, retval] BSTR* value);
+        [propget, id(5)] HRESULT ChannelCount([out, retval] long* value);
+        [propget, id(6)] HRESULT MaxSampleRate([out, retval] long* value);
+        [propget, id(7)] HRESULT CalibrationDate([out, retval] DATE* value);
+        [propget, id(8)] HRESULT State([out, retval] TcxState* value);
+        [propget, id(9)] HRESULT LostScans([out, retval] long* value);
+
+        // boardIndex 0 is the first board in the system.
+        [id(20)] HRESULT Open([in] long boardIndex);
+        [id(21)] HRESULT Close();
+
+        // Raw EMF is returned; linearisation is done by the caller.
+        [id(22)] HRESULT ConfigureChannel([in] long channel, [in] TcxThermocouple type, [in] VARIANT_BOOL enabled);
+        [id(23)] HRESULT SetSampleRate([in] long scansPerSecond);
+        [id(24)] HRESULT Start();
+        [id(25)] HRESULT Stop();
+
+        // Waits up to timeoutMs for scans and returns up to maxScans of them, oldest first.
+        // times:      DATE (UTC) per scan
+        // coldJunction: terminal block temperature per scan, degrees Celsius
+        // openMask:   bit per channel set when open thermocouple detection tripped
+        // microvolts: [scan, channel], channels not enabled are 0
+        [id(26)] HRESULT ReadScans(
+            [in] long maxScans,
+            [in] long timeoutMs,
+            [out] SAFEARRAY(DATE)* times,
+            [out] SAFEARRAY(double)* coldJunction,
+            [out] SAFEARRAY(long)* openMask,
+            [out] SAFEARRAY(long)* microvolts,
+            [out, retval] long* count);
+    };
+
+    [
+        uuid(5C2E9A42-7B1D-4F6A-9C3E-1A8D2F04B731),
+        helpstring("TCX Board")
+    ]
+    coclass Board
+    {
+        [default] interface ITcxBoard;
+    };
+};
+
+// ProgID: Calvera.TcxBoard.4

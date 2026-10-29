@@ -1,0 +1,79 @@
+@page
+@model PolicyChanges.Portal.Pages.Requests.NewModel
+@{
+    ViewData["Title"] = "New change";
+}
+<h1>New change</h1>
+
+<form method="get">
+    <label>Change
+        <select asp-for="Type" asp-items="Html.GetEnumSelectList<ChangeType>()" onchange="this.form.submit()"></select>
+    </label>
+    <noscript><button type="submit">Choose</button></noscript>
+</form>
+
+@if (Model.Errors.Count > 0)
+{
+    <div class="error">
+        <ul>
+            @foreach (var e in Model.Errors) { <li>@e</li> }
+        </ul>
+    </div>
+}
+
+<form method="post" asp-route-type="@Model.Type">
+    <label>Policy number <input asp-for="PolicyNumber" placeholder="HL-0000000" required /></label>
+    <label>Effective date <input asp-for="EffectiveDate" type="date" required /></label>
+
+    @switch (Model.Type)
+    {
+        case ChangeType.AddressChange:
+            <label>Street <input name="Fields[Street]" value="@Model.Field(ChangeFields.Street)" maxlength="40" /></label>
+            <label>Postal code <input name="Fields[PostalCode]" value="@Model.Field(ChangeFields.PostalCode)" maxlength="10" /></label>
+            <label>City <input name="Fields[City]" value="@Model.Field(ChangeFields.City)" maxlength="30" /></label>
+            <label>Country
+                <select name="Fields[Country]">
+                    @foreach (var c in Countries.All)
+                    {
+                        <option selected="@(Model.Field(ChangeFields.Country) == c)">@c</option>
+                    }
+                </select>
+            </label>
+            break;
+
+        case ChangeType.PaymentMethodChange:
+            <label>Payment method
+                <select name="Fields[PaymentMethod]">
+                    @foreach (var m in PaymentMethods.All)
+                    {
+                        <option selected="@(Model.Field(ChangeFields.PaymentMethod) == m)">@m</option>
+                    }
+                </select>
+            </label>
+            <label>IBAN (direct debit) <input name="Fields[Iban]" value="@Model.Field(ChangeFields.Iban)" maxlength="42" /></label>
+            <label>Account holder (direct debit) <input name="Fields[AccountHolder]" value="@Model.Field(ChangeFields.AccountHolder)" maxlength="40" /></label>
+            <label>Billing day <input name="Fields[BillingDay]" value="@Model.Field(ChangeFields.BillingDay)" type="number" min="1" max="28" /></label>
+            break;
+
+        case ChangeType.BeneficiaryChange:
+            <label>Beneficiaries
+                <textarea name="Fields[Beneficiaries]" rows="5">@Model.Field(ChangeFields.Beneficiaries)</textarea>
+            </label>
+            <p class="hint">One per line: name|date of birth (yyyy-MM-dd)|share. Shares must total 100. The list replaces the current beneficiaries.</p>
+            break;
+
+        case ChangeType.Cancellation:
+            <label>Reason
+                <select name="Fields[Reason]">
+                    @foreach (var r in CancellationReasons.All)
+                    {
+                        <option selected="@(Model.Field(ChangeFields.Reason) == r)">@r</option>
+                    }
+                </select>
+            </label>
+            <label>Refund IBAN (optional) <input name="Fields[RefundIban]" value="@Model.Field(ChangeFields.RefundIban)" maxlength="42" /></label>
+            break;
+    }
+
+    <button type="submit">Queue change</button>
+</form>

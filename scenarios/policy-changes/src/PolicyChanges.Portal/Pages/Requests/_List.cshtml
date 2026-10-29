@@ -1,0 +1,24 @@
+@model List<ChangeRequest>
+@if (Model.Count == 0)
+{
+    <p>No changes.</p>
+}
+else
+{
+    <table>
+        <tr><th>Reference</th><th>Policy</th><th>Change</th><th>Effective</th><th>From</th><th>Status</th><th>Endorsement</th><th>Updated</th></tr>
+        @foreach (var r in Model)
+        {
+            <tr>
+                <td><a asp-page="/Requests/Details" asp-route-reference="@r.Reference">@r.Reference</a></td>
+                <td>@r.PolicyNumber</td>
+                <td>@r.ChangeType</td>
+                <td>@r.EffectiveDate.ToString("yyyy-MM-dd")</td>
+                <td>@(r.Partner?.Code ?? r.SubmittedBy)</td>
+                <td><partial name="_Status" model="r.Status" /></td>
+                <td>@r.Endorsement</td>
+                <td>@r.UpdatedUtc.ToLocalTime().ToString("g")</td>
+            </tr>
+        }
+    </table>
+}

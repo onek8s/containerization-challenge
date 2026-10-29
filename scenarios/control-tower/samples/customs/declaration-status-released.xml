@@ -1,0 +1,12 @@
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
+  <s:Body>
+    <GetDeclarationStatusResponse xmlns="urn:customs.example:declaration:service:v2">
+      <GetDeclarationStatusResult xmlns:a="urn:customs.example:declaration:data:v2">
+        <a:Mrn>26FI000000412E7H00</a:Mrn>
+        <a:Status>RELEASED</a:Status>
+        <a:StatusDate>2026-10-29T07:15:40.000Z</a:StatusDate>
+        <a:Errors />
+      </GetDeclarationStatusResult>
+    </GetDeclarationStatusResponse>
+  </s:Body>
+</s:Envelope>

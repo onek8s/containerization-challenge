@@ -1,0 +1,14 @@
+@model StaffLoginModel
+@{
+    ViewData["Title"] = "Staff sign-in";
+}
+<h1>Staff sign-in</h1>
+<form asp-action="Login" method="post" class="card narrow">
+    <div asp-validation-summary="ModelOnly" class="errors"></div>
+    <input type="hidden" asp-for="ReturnUrl" />
+    <label asp-for="UserName"></label>
+    <input asp-for="UserName" placeholder="CORP\username" autocomplete="username" />
+    <label asp-for="Password"></label>
+    <input asp-for="Password" autocomplete="current-password" />
+    <button type="submit">Sign in</button>
+</form>

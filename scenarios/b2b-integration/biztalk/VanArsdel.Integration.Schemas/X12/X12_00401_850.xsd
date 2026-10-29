@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns="http://schemas.microsoft.com/BizTalk/EDI/X12/2006" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://schemas.microsoft.com/BizTalk/EDI/X12/2006" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+  <xs:annotation>
+    <xs:appinfo>
+      <b:schemaInfo version="3.0" standard="X12" standards_version="00401" root_reference="X12_00401_850" displayroot_reference="X12_00401_850" X12ConditionDesignator_Check="Yes" count_positions_by_byte="false" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" />
+    </xs:appinfo>
+    <xs:documentation>Subset of the X12 00401 850 schema used by VanArsdel trading partners. Generated from the Microsoft EDI schema and trimmed to the segments in the partner implementation guides.</xs:documentation>
+  </xs:annotation>
+  <xs:element name="X12_00401_850">
+    <xs:annotation><xs:appinfo><b:recordInfo structure="delimited" child_delimiter_type="default" sequence_number="1" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="ST" type="X12_00401_850_ST" />
+        <xs:element name="BEG" type="X12_00401_850_BEG" />
+        <xs:element name="CUR" type="X12_00401_850_CUR" minOccurs="0" />
+        <xs:element name="REF" type="X12_00401_850_REF" minOccurs="0" maxOccurs="12" />
+        <xs:element name="PER" type="X12_00401_850_PER" minOccurs="0" maxOccurs="3" />
+        <xs:element name="FOB" type="X12_00401_850_FOB" minOccurs="0" />
+        <xs:element name="ITD" type="X12_00401_850_ITD" minOccurs="0" />
+        <xs:element name="DTM" type="X12_00401_850_DTM" minOccurs="0" maxOccurs="10" />
+        <xs:element name="TD5" type="X12_00401_850_TD5" minOccurs="0" maxOccurs="12" />
+        <xs:element name="N9Loop1" minOccurs="0" maxOccurs="1000">
+          <xs:annotation><xs:appinfo><b:recordInfo structure="delimited" child_delimiter_type="default" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation>
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="N9" type="X12_00401_850_N9" />
+              <xs:element name="MSG" type="X12_00401_850_MSG" minOccurs="0" maxOccurs="1000" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="N1Loop1" minOccurs="0" maxOccurs="200">
+          <xs:annotation><xs:appinfo><b:recordInfo structure="delimited" child_delimiter_type="default" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation>
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="N1" type="X12_00401_850_N1" />
+              <xs:element name="N2" type="X12_00401_850_N2" minOccurs="0" maxOccurs="2" />
+              <xs:element name="N3" type="X12_00401_850_N3" minOccurs="0" maxOccurs="2" />
+              <xs:element name="N4" type="X12_00401_850_N4" minOccurs="0" />
+              <xs:element name="REF" type="X12_00401_850_REF" minOccurs="0" maxOccurs="12" />
+              <xs:element name="PER" type="X12_00401_850_PER" minOccurs="0" maxOccurs="3" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="PO1Loop1" maxOccurs="unbounded">
+          <xs:annotation><xs:appinfo><b:recordInfo structure="delimited" child_delimiter_type="default" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation>
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="PO1" type="X12_00401_850_PO1" />
+              <xs:element name="CUR" type="X12_00401_850_CUR" minOccurs="0" />
+              <xs:element name="PIDLoop1" minOccurs="0" maxOccurs="1000">
+                <xs:annotation><xs:appinfo><b:recordInfo structure="delimited" child_delimiter_type="default" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation>
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="PID" type="X12_00401_850_PID" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="REF" type="X12_00401_850_REF" minOccurs="0" maxOccurs="12" />
+              <xs:element name="DTM" type="X12_00401_850_DTM" minOccurs="0" maxOccurs="10" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="CTTLoop1" minOccurs="0">
+          <xs:annotation><xs:appinfo><b:recordInfo structure="delimited" child_delimiter_type="default" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation>
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="CTT" type="X12_00401_850_CTT" />
+              <xs:element name="AMT" type="X12_00401_850_AMT" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="SE" type="X12_00401_850_SE" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="X12_00401_850_ST">
+    <xs:annotation><xs:appinfo><b:recordInfo structure="delimited" tag_name="ST" child_delimiter_type="default" child_order="prefix" notes="Transaction Set Header" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation>
+    <xs:sequence>
+      <xs:element name="ST01" form="unqualified"><xs:annotation><xs:appinfo><b:fieldInfo data_type="ID" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:minLength value="3" /><xs:maxLength value="3" /></xs:restriction></xs:simpleType></xs:element>
+      <xs:element name="ST02" form="unqualified"><xs:annotation><xs:appinfo><b:fieldInfo data_type="AN" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:minLength value="4" /><xs:maxLength value="9" /></xs:restriction></xs:simpleType></xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="X12_00401_850_BEG">
+    <xs:annotation><xs:appinfo><b:recordInfo structure="delimited" tag_name="BEG" child_delimiter_type="default" child_order="prefix" notes="Beginning Segment for Purchase Order" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation>
+    <xs:sequence>
+      <xs:element name="BEG01" form="unqualified"><xs:annotation><xs:appinfo><b:fieldInfo data_type="ID" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:minLength value="2" /><xs:maxLength value="2" /></xs:restriction></xs:simpleType></xs:element>
+      <xs:element name="BEG02" form="unqualified"><xs:annotation><xs:appinfo><b:fieldInfo data_type="ID" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:minLength value="2" /><xs:maxLength value="2" /></xs:restriction></xs:simpleType></xs:element>
+      <xs:element name="BEG03" form="unqualified"><xs:annotation><xs:appinfo><b:fieldInfo data_type="AN" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:minLength value="1" /><xs:maxLength value="22" /></xs:restriction></xs:simpleType></xs:element>
+      <xs:element name="BEG04" form="unqualified" minOccurs="0"><xs:annotation><xs:appinfo><b:fieldInfo data_type="AN" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:minLength value="1" /><xs:maxLength value="30" /></xs:restriction></xs:simpleType></xs:element>
+      <xs:element name="BEG05" form="unqualified"><xs:annotation><xs:appinfo><b:fieldInfo data_type="DT" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:pattern value="([0-9]{6}|[0-9]{8})" /></xs:restriction></xs:simpleType></xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="X12_00401_850_CUR">
+    <xs:annotation><xs:appinfo><b:recordInfo structure="delimited" tag_name="CUR" child_delimiter_type="default" child_order="prefix" notes="Currency" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation>
+    <xs:sequence>
+      <xs:element name="CUR01" form="unqualified"><xs:annotation><xs:appinfo><b:fieldInfo data_type="ID" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:minLength value="2" /><xs:maxLength value="3" /></xs:restriction></xs:simpleType></xs:element>
+      <xs:element name="CUR02" form="unqualified"><xs:annotation><xs:appinfo><b:fieldInfo data_type="ID" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:minLength value="3" /><xs:maxLength value="3" /></xs:restriction></xs:simpleType></xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="X12_00401_850_REF">
+    <xs:annotation><xs:appinfo><b:recordInfo structure="delimited" tag_name="REF" child_delimiter_type="default" child_order="prefix" notes="Reference Identification" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation>
+    <xs:sequence>
+      <xs:element name="REF01" form="unqualified"><xs:annotation><xs:appinfo><b:fieldInfo data_type="ID" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:minLength value="2" /><xs:maxLength value="3" /></xs:restriction></xs:simpleType></xs:element>
+      <xs:element name="REF02" form="unqualified" minOccurs="0"><xs:annotation><xs:appinfo><b:fieldInfo data_type="AN" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:minLength value="1" /><xs:maxLength value="30" /></xs:restriction></xs:simpleType></xs:element>
+      <xs:element name="REF03" form="unqualified" minOccurs="0"><xs:annotation><xs:appinfo><b:fieldInfo data_type="AN" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:minLength value="1" /><xs:maxLength value="80" /></xs:restriction></xs:simpleType></xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="X12_00401_850_PER">
+    <xs:annotation><xs:appinfo><b:recordInfo structure="delimited" tag_name="PER" child_delimiter_type="default" child_order="prefix" notes="Administrative Communications Contact" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation>
+    <xs:sequence>
+      <xs:element name="PER01" form="unqualified"><xs:annotation><xs:appinfo><b:fieldInfo data_type="ID" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:minLength value="2" /><xs:maxLength value="2" /></xs:restriction></xs:simpleType></xs:element>
+      <xs:element name="PER02" form="unqualified" minOccurs="0"><xs:annotation><xs:appinfo><b:fieldInfo data_type="AN" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:minLength value="1" /><xs:maxLength value="60" /></xs:restriction></xs:simpleType></xs:element>
+      <xs:element name="PER03" form="unqualified" minOccurs="0"><xs:annotation><xs:appinfo><b:fieldInfo data_type="ID" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:minLength value="2" /><xs:maxLength value="2" /></xs:restriction></xs:simpleType></xs:element>
+      <xs:element name="PER04" form="unqualified" minOccurs="0"><xs:annotation><xs:appinfo><b:fieldInfo data_type="AN" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:minLength value="1" /><xs:maxLength value="80" /></xs:restriction></xs:simpleType></xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="X12_00401_850_FOB">
+    <xs:annotation><xs:appinfo><b:recordInfo structure="delimited" tag_name="FOB" child_delimiter_type="default" child_order="prefix" notes="F.O.B. Related Instructions" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation>
+    <xs:sequence>
+      <xs:element name="FOB01" form="unqualified"><xs:annotation><xs:appinfo><b:fieldInfo data_type="ID" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:minLength value="2" /><xs:maxLength value="2" /></xs:restriction></xs:simpleType></xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="X12_00401_850_ITD">
+    <xs:annotation><xs:appinfo><b:recordInfo structure="delimited" tag_name="ITD" child_delimiter_type="default" child_order="prefix" notes="Terms of Sale" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation>
+    <xs:sequence>
+      <xs:element name="ITD01" form="unqualified" minOccurs="0"><xs:annotation><xs:appinfo><b:fieldInfo data_type="ID" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:minLength value="2" /><xs:maxLength value="2" /></xs:restriction></xs:simpleType></xs:element>
+      <xs:element name="ITD02" form="unqualified" minOccurs="0"><xs:annotation><xs:appinfo><b:fieldInfo data_type="ID" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:minLength value="1" /><xs:maxLength value="2" /></xs:restriction></xs:simpleType></xs:element>
+      <xs:element name="ITD03" form="unqualified" minOccurs="0"><xs:annotation><xs:appinfo><b:fieldInfo data_type="R" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:pattern value="-?[0-9]*\.?[0-9]*" /></xs:restriction></xs:simpleType></xs:element>
+      <xs:element name="ITD04" form="unqualified" minOccurs="0"><xs:annotation><xs:appinfo><b:fieldInfo data_type="DT" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:pattern value="([0-9]{6}|[0-9]{8})" /></xs:restriction></xs:simpleType></xs:element>
+      <xs:element name="ITD05" form="unqualified" minOccurs="0"><xs:annotation><xs:appinfo><b:fieldInfo data_type="N0" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:pattern value="-?[0-9]{1,3}" /></xs:restriction></xs:simpleType></xs:element>
+      <xs:element name="ITD06" form="unqualified" minOccurs="0"><xs:annotation><xs:appinfo><b:fieldInfo data_type="DT" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:pattern value="([0-9]{6}|[0-9]{8})" /></xs:restriction></xs:simpleType></xs:element>
+      <xs:element name="ITD07" form="unqualified" minOccurs="0"><xs:annotation><xs:appinfo><b:fieldInfo data_type="N0" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:pattern value="-?[0-9]{1,3}" /></xs:restriction></xs:simpleType></xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="X12_00401_850_DTM">
+    <xs:annotation><xs:appinfo><b:recordInfo structure="delimited" tag_name="DTM" child_delimiter_type="default" child_order="prefix" notes="Date/Time Reference" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation>
+    <xs:sequence>
+      <xs:element name="DTM01" form="unqualified"><xs:annotation><xs:appinfo><b:fieldInfo data_type="ID" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:minLength value="3" /><xs:maxLength value="3" /></xs:restriction></xs:simpleType></xs:element>
+      <xs:element name="DTM02" form="unqualified" minOccurs="0"><xs:annotation><xs:appinfo><b:fieldInfo data_type="DT" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:pattern value="([0-9]{6}|[0-9]{8})" /></xs:restriction></xs:simpleType></xs:element>
+      <xs:element name="DTM03" form="unqualified" minOccurs="0"><xs:annotation><xs:appinfo><b:fieldInfo data_type="TM" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:minLength value="4" /><xs:maxLength value="8" /></xs:restriction></xs:simpleType></xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="X12_00401_850_TD5">
+    <xs:annotation><xs:appinfo><b:recordInfo structure="delimited" tag_name="TD5" child_delimiter_type="default" child_order="prefix" notes="Carrier Details (Routing Sequence/Transit Time)" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation>
+    <xs:sequence>
+      <xs:element name="TD501" form="unqualified" minOccurs="0"><xs:annotation><xs:appinfo><b:fieldInfo data_type="ID" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:minLength value="1" /><xs:maxLength value="2" /></xs:restriction></xs:simpleType></xs:element>
+      <xs:element name="TD502" form="unqualified" minOccurs="0"><xs:annotation><xs:appinfo><b:fieldInfo data_type="ID" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:minLength value="1" /><xs:maxLength value="2" /></xs:restriction></xs:simpleType></xs:element>
+      <xs:element name="TD503" form="unqualified" minOccurs="0"><xs:annotation><xs:appinfo><b:fieldInfo data_type="AN" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:minLength value="2" /><xs:maxLength value="80" /></xs:restriction></xs:simpleType></xs:element>
+      <xs:element name="TD504" form="unqualified" minOccurs="0"><xs:annotation><xs:appinfo><b:fieldInfo data_type="ID" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:minLength value="1" /><xs:maxLength value="2" /></xs:restriction></xs:simpleType></xs:element>
+      <xs:element name="TD505" form="unqualified" minOccurs="0"><xs:annotation><xs:appinfo><b:fieldInfo data_type="AN" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:minLength value="1" /><xs:maxLength value="35" /></xs:restriction></xs:simpleType></xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="X12_00401_850_N9">
+    <xs:annotation><xs:appinfo><b:recordInfo structure="delimited" tag_name="N9" child_delimiter_type="default" child_order="prefix" notes="Reference Identification" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation>
+    <xs:sequence>
+      <xs:element name="N901" form="unqualified"><xs:annotation><xs:appinfo><b:fieldInfo data_type="ID" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:minLength value="2" /><xs:maxLength value="3" /></xs:restriction></xs:simpleType></xs:element>
+      <xs:element name="N902" form="unqualified" minOccurs="0"><xs:annotation><xs:appinfo><b:fieldInfo data_type="AN" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:minLength value="1" /><xs:maxLength value="30" /></xs:restriction></xs:simpleType></xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="X12_00401_850_MSG">
+    <xs:annotation><xs:appinfo><b:recordInfo structure="delimited" tag_name="MSG" child_delimiter_type="default" child_order="prefix" notes="Message Text" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation>
+    <xs:sequence>
+      <xs:element name="MSG01" form="unqualified"><xs:annotation><xs:appinfo><b:fieldInfo data_type="AN" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:minLength value="1" /><xs:maxLength value="264" /></xs:restriction></xs:simpleType></xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="X12_00401_850_N1">
+    <xs:annotation><xs:appinfo><b:recordInfo structure="delimited" tag_name="N1" child_delimiter_type="default" child_order="prefix" notes="Name" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation>
+    <xs:sequence>
+      <xs:element name="N101" form="unqualified"><xs:annotation><xs:appinfo><b:fieldInfo data_type="ID" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:minLength value="2" /><xs:maxLength value="3" /></xs:restriction></xs:simpleType></xs:element>
+      <xs:element name="N102" form="unqualified" minOccurs="0"><xs:annotation><xs:appinfo><b:fieldInfo data_type="AN" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:minLength value="1" /><xs:maxLength value="60" /></xs:restriction></xs:simpleType></xs:element>
+      <xs:element name="N103" form="unqualified" minOccurs="0"><xs:annotation><xs:appinfo><b:fieldInfo data_type="ID" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:minLength value="1" /><xs:maxLength value="2" /></xs:restriction></xs:simpleType></xs:element>
+      <xs:element name="N104" form="unqualified" minOccurs="0"><xs:annotation><xs:appinfo><b:fieldInfo data_type="AN" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:minLength value="2" /><xs:maxLength value="80" /></xs:restriction></xs:simpleType></xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="X12_00401_850_N2">
+    <xs:annotation><xs:appinfo><b:recordInfo structure="delimited" tag_name="N2" child_delimiter_type="default" child_order="prefix" notes="Additional Name Information" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation>
+    <xs:sequence>
+      <xs:element name="N201" form="unqualified"><xs:annotation><xs:appinfo><b:fieldInfo data_type="AN" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:minLength value="1" /><xs:maxLength value="60" /></xs:restriction></xs:simpleType></xs:element>
+      <xs:element name="N202" form="unqualified" minOccurs="0"><xs:annotation><xs:appinfo><b:fieldInfo data_type="AN" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:minLength value="1" /><xs:maxLength value="60" /></xs:restriction></xs:simpleType></xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="X12_00401_850_N3">
+    <xs:annotation><xs:appinfo><b:recordInfo structure="delimited" tag_name="N3" child_delimiter_type="default" child_order="prefix" notes="Address Information" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation>
+    <xs:sequence>
+      <xs:element name="N301" form="unqualified"><xs:annotation><xs:appinfo><b:fieldInfo data_type="AN" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:minLength value="1" /><xs:maxLength value="55" /></xs:restriction></xs:simpleType></xs:element>
+      <xs:element name="N302" form="unqualified" minOccurs="0"><xs:annotation><xs:appinfo><b:fieldInfo data_type="AN" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:minLength value="1" /><xs:maxLength value="55" /></xs:restriction></xs:simpleType></xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="X12_00401_850_N4">
+    <xs:annotation><xs:appinfo><b:recordInfo structure="delimited" tag_name="N4" child_delimiter_type="default" child_order="prefix" notes="Geographic Location" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation>
+    <xs:sequence>
+      <xs:element name="N401" form="unqualified" minOccurs="0"><xs:annotation><xs:appinfo><b:fieldInfo data_type="AN" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:minLength value="2" /><xs:maxLength value="30" /></xs:restriction></xs:simpleType></xs:element>
+      <xs:element name="N402" form="unqualified" minOccurs="0"><xs:annotation><xs:appinfo><b:fieldInfo data_type="ID" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:minLength value="2" /><xs:maxLength value="2" /></xs:restriction></xs:simpleType></xs:element>
+      <xs:element name="N403" form="unqualified" minOccurs="0"><xs:annotation><xs:appinfo><b:fieldInfo data_type="ID" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:minLength value="3" /><xs:maxLength value="15" /></xs:restriction></xs:simpleType></xs:element>
+      <xs:element name="N404" form="unqualified" minOccurs="0"><xs:annotation><xs:appinfo><b:fieldInfo data_type="ID" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:minLength value="2" /><xs:maxLength value="3" /></xs:restriction></xs:simpleType></xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="X12_00401_850_PO1">
+    <xs:annotation><xs:appinfo><b:recordInfo structure="delimited" tag_name="PO1" child_delimiter_type="default" child_order="prefix" notes="Baseline Item Data" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation>
+    <xs:sequence>
+      <xs:element name="PO101" form="unqualified" minOccurs="0"><xs:annotation><xs:appinfo><b:fieldInfo data_type="AN" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:minLength value="1" /><xs:maxLength value="20" /></xs:restriction></xs:simpleType></xs:element>
+      <xs:element name="PO102" form="unqualified"><xs:annotation><xs:appinfo><b:fieldInfo data_type="R" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:pattern value="-?[0-9]*\.?[0-9]*" /></xs:restriction></xs:simpleType></xs:element>
+      <xs:element name="PO103" form="unqualified"><xs:annotation><xs:appinfo><b:fieldInfo data_type="ID" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:minLength value="2" /><xs:maxLength value="2" /></xs:restriction></xs:simpleType></xs:element>
+      <xs:element name="PO104" form="unqualified" minOccurs="0"><xs:annotation><xs:appinfo><b:fieldInfo data_type="R" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:pattern value="-?[0-9]*\.?[0-9]*" /></xs:restriction></xs:simpleType></xs:element>
+      <xs:element name="PO105" form="unqualified" minOccurs="0"><xs:annotation><xs:appinfo><b:fieldInfo data_type="ID" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:minLength value="2" /><xs:maxLength value="2" /></xs:restriction></xs:simpleType></xs:element>
+      <xs:element name="PO106" form="unqualified" minOccurs="0"><xs:annotation><xs:appinfo><b:fieldInfo data_type="ID" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:minLength value="2" /><xs:maxLength value="2" /></xs:restriction></xs:simpleType></xs:element>
+      <xs:element name="PO107" form="unqualified" minOccurs="0"><xs:annotation><xs:appinfo><b:fieldInfo data_type="AN" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:minLength value="1" /><xs:maxLength value="48" /></xs:restriction></xs:simpleType></xs:element>
+      <xs:element name="PO108" form="unqualified" minOccurs="0"><xs:annotation><xs:appinfo><b:fieldInfo data_type="ID" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:minLength value="2" /><xs:maxLength value="2" /></xs:restriction></xs:simpleType></xs:element>
+      <xs:element name="PO109" form="unqualified" minOccurs="0"><xs:annotation><xs:appinfo><b:fieldInfo data_type="AN" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:minLength value="1" /><xs:maxLength value="48" /></xs:restriction></xs:simpleType></xs:element>
+      <xs:element name="PO110" form="unqualified" minOccurs="0"><xs:annotation><xs:appinfo><b:fieldInfo data_type="ID" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:minLength value="2" /><xs:maxLength value="2" /></xs:restriction></xs:simpleType></xs:element>
+      <xs:element name="PO111" form="unqualified" minOccurs="0"><xs:annotation><xs:appinfo><b:fieldInfo data_type="AN" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:minLength value="1" /><xs:maxLength value="48" /></xs:restriction></xs:simpleType></xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="X12_00401_850_PID">
+    <xs:annotation><xs:appinfo><b:recordInfo structure="delimited" tag_name="PID" child_delimiter_type="default" child_order="prefix" notes="Product/Item Description" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation>
+    <xs:sequence>
+      <xs:element name="PID01" form="unqualified"><xs:annotation><xs:appinfo><b:fieldInfo data_type="ID" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:minLength value="1" /><xs:maxLength value="1" /></xs:restriction></xs:simpleType></xs:element>
+      <xs:element name="PID02" form="unqualified" minOccurs="0"><xs:annotation><xs:appinfo><b:fieldInfo data_type="ID" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:minLength value="2" /><xs:maxLength value="3" /></xs:restriction></xs:simpleType></xs:element>
+      <xs:element name="PID03" form="unqualified" minOccurs="0"><xs:annotation><xs:appinfo><b:fieldInfo data_type="ID" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:minLength value="2" /><xs:maxLength value="2" /></xs:restriction></xs:simpleType></xs:element>
+      <xs:element name="PID04" form="unqualified" minOccurs="0"><xs:annotation><xs:appinfo><b:fieldInfo data_type="AN" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:minLength value="1" /><xs:maxLength value="12" /></xs:restriction></xs:simpleType></xs:element>
+      <xs:element name="PID05" form="unqualified" minOccurs="0"><xs:annotation><xs:appinfo><b:fieldInfo data_type="AN" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:minLength value="1" /><xs:maxLength value="80" /></xs:restriction></xs:simpleType></xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="X12_00401_850_CTT">
+    <xs:annotation><xs:appinfo><b:recordInfo structure="delimited" tag_name="CTT" child_delimiter_type="default" child_order="prefix" notes="Transaction Totals" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation>
+    <xs:sequence>
+      <xs:element name="CTT01" form="unqualified"><xs:annotation><xs:appinfo><b:fieldInfo data_type="N0" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:pattern value="-?[0-9]{1,6}" /></xs:restriction></xs:simpleType></xs:element>
+      <xs:element name="CTT02" form="unqualified" minOccurs="0"><xs:annotation><xs:appinfo><b:fieldInfo data_type="R" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:pattern value="-?[0-9]*\.?[0-9]*" /></xs:restriction></xs:simpleType></xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="X12_00401_850_AMT">
+    <xs:annotation><xs:appinfo><b:recordInfo structure="delimited" tag_name="AMT" child_delimiter_type="default" child_order="prefix" notes="Monetary Amount" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation>
+    <xs:sequence>
+      <xs:element name="AMT01" form="unqualified"><xs:annotation><xs:appinfo><b:fieldInfo data_type="ID" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:minLength value="1" /><xs:maxLength value="3" /></xs:restriction></xs:simpleType></xs:element>
+      <xs:element name="AMT02" form="unqualified"><xs:annotation><xs:appinfo><b:fieldInfo data_type="R" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:pattern value="-?[0-9]*\.?[0-9]*" /></xs:restriction></xs:simpleType></xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="X12_00401_850_SE">
+    <xs:annotation><xs:appinfo><b:recordInfo structure="delimited" tag_name="SE" child_delimiter_type="default" child_order="prefix" notes="Transaction Set Trailer" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation>
+    <xs:sequence>
+      <xs:element name="SE01" form="unqualified"><xs:annotation><xs:appinfo><b:fieldInfo data_type="N0" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:pattern value="-?[0-9]{1,10}" /></xs:restriction></xs:simpleType></xs:element>
+      <xs:element name="SE02" form="unqualified"><xs:annotation><xs:appinfo><b:fieldInfo data_type="AN" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:minLength value="4" /><xs:maxLength value="9" /></xs:restriction></xs:simpleType></xs:element>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

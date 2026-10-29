@@ -1,0 +1,42 @@
+@page "/tasks/{id:guid}"
+@model StaffOnboarding.Portal.Pages.Tasks.DetailsModel
+@{
+    ViewData["Title"] = "Task";
+    var t = Model.Task!;
+}
+<h1>@StaffOnboarding.Portal.Pages.IndexModel.Describe(t.Kind): @t.Subject</h1>
+<p>Request <strong>@t.RequestNumber</strong> · assigned to @t.AssignedTo · due @t.DueAtUtc.ToLocalTime().ToString("dd.MM.yyyy HH:mm") · status @t.Status</p>
+
+<pre class="payload">@Model.Summary</pre>
+
+@if (Model.Error != null)
+{
+    <p class="error">@Model.Error</p>
+}
+
+@if (t.Status == "Open" && Model.CanDecide)
+{
+    <form method="post">
+        <label for="Comment">Comment</label>
+        <textarea id="Comment" name="Comment" rows="3"></textarea>
+        <p>
+            @if (t.Kind == TaskKind.HomeFolderHandover)
+            {
+                <button name="outcome" value="Approved">I have copied what I need</button>
+            }
+            else
+            {
+                <button name="outcome" value="Approved">Approve</button>
+                <button name="outcome" value="Rejected" class="danger">Reject</button>
+            }
+        </p>
+    </form>
+}
+else if (t.Status == "Open")
+{
+    <p>This task is assigned to someone else.</p>
+}
+else
+{
+    <p>Decided by @t.DecidedBy on @(t.DecidedAtUtc?.ToLocalTime().ToString("dd.MM.yyyy HH:mm")): @t.Outcome @t.Comment</p>
+}

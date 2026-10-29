@@ -1,0 +1,174 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{1EE7BDB8-D40D-53D3-9B56-2929044134D6}</ProjectGuid>
+    <ProjectTypeGuids>{EF7E3281-CD33-11D4-8326-00C04FA0CE8D};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>library</OutputType>
+    <GenericProcessing>true</GenericProcessing>
+    <RootNamespace>VanArsdel.Integration.Schemas</RootNamespace>
+    <AssemblyName>VanArsdel.Integration.Schemas</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <BpelCompliance>True</BpelCompliance>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\..\VanArsdel.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <EnableUnitTesting>True</EnableUnitTesting>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugSymbols>false</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <EnableUnitTesting>False</EnableUnitTesting>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System">
+      <Name>System</Name>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Name>System.Xml</Name>
+    </Reference>
+    <Reference Include="System.Configuration">
+      <Name>System.Configuration</Name>
+    </Reference>
+    <Reference Include="Microsoft.BizTalk.Pipeline">
+      <Name>Microsoft.BizTalk.Pipeline</Name>
+    </Reference>
+    <Reference Include="Microsoft.BizTalk.DefaultPipelines">
+      <Name>Microsoft.BizTalk.DefaultPipelines</Name>
+    </Reference>
+    <Reference Include="Microsoft.BizTalk.GlobalPropertySchemas">
+      <Name>Microsoft.BizTalk.GlobalPropertySchemas</Name>
+    </Reference>
+    <Reference Include="Microsoft.BizTalk.TestTools">
+      <Name>Microsoft.BizTalk.TestTools</Name>
+    </Reference>
+    <Reference Include="Microsoft.XLANGs.BaseTypes">
+      <Name>Microsoft.XLANGs.BaseTypes</Name>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Schema Include="Canonical\CanonicalDespatch.xsd">
+      <TypeName>CanonicalDespatch</TypeName>
+      <Namespace>VanArsdel.Integration.Schemas.Canonical</Namespace>
+      <SubType>Task</SubType>
+    </Schema>
+    <Schema Include="Canonical\CanonicalFunctionalAck.xsd">
+      <TypeName>CanonicalFunctionalAck</TypeName>
+      <Namespace>VanArsdel.Integration.Schemas.Canonical</Namespace>
+      <SubType>Task</SubType>
+    </Schema>
+    <Schema Include="Canonical\CanonicalInvoice.xsd">
+      <TypeName>CanonicalInvoice</TypeName>
+      <Namespace>VanArsdel.Integration.Schemas.Canonical</Namespace>
+      <SubType>Task</SubType>
+    </Schema>
+    <Schema Include="Canonical\CanonicalOrder.xsd">
+      <TypeName>CanonicalOrder</TypeName>
+      <Namespace>VanArsdel.Integration.Schemas.Canonical</Namespace>
+      <SubType>Task</SubType>
+    </Schema>
+    <Schema Include="Canonical\CanonicalTypes.xsd">
+      <TypeName>CanonicalTypes</TypeName>
+      <Namespace>VanArsdel.Integration.Schemas.Canonical</Namespace>
+      <SubType>Task</SubType>
+    </Schema>
+    <Schema Include="Edifact\EFACT_D3_CONTRL.xsd">
+      <TypeName>EFACT_D3_CONTRL</TypeName>
+      <Namespace>VanArsdel.Integration.Schemas.Edifact</Namespace>
+      <SubType>Task</SubType>
+    </Schema>
+    <Schema Include="Edifact\EFACT_D96A_DESADV.xsd">
+      <TypeName>EFACT_D96A_DESADV</TypeName>
+      <Namespace>VanArsdel.Integration.Schemas.Edifact</Namespace>
+      <SubType>Task</SubType>
+    </Schema>
+    <Schema Include="Edifact\EFACT_D96A_INVOIC.xsd">
+      <TypeName>EFACT_D96A_INVOIC</TypeName>
+      <Namespace>VanArsdel.Integration.Schemas.Edifact</Namespace>
+      <SubType>Task</SubType>
+    </Schema>
+    <Schema Include="Edifact\EFACT_D96A_ORDERS.xsd">
+      <TypeName>EFACT_D96A_ORDERS</TypeName>
+      <Namespace>VanArsdel.Integration.Schemas.Edifact</Namespace>
+      <SubType>Task</SubType>
+    </Schema>
+    <Schema Include="Erp\OrderManagementService.xsd">
+      <TypeName>OrderManagementService</TypeName>
+      <Namespace>VanArsdel.Integration.Schemas.Erp</Namespace>
+      <SubType>Task</SubType>
+    </Schema>
+    <Schema Include="IDoc\DESADV01.xsd">
+      <TypeName>DESADV01</TypeName>
+      <Namespace>VanArsdel.Integration.Schemas.IDoc</Namespace>
+      <SubType>Task</SubType>
+    </Schema>
+    <Schema Include="IDoc\IDocTypes.xsd">
+      <TypeName>IDocTypes</TypeName>
+      <Namespace>VanArsdel.Integration.Schemas.IDoc</Namespace>
+      <SubType>Task</SubType>
+    </Schema>
+    <Schema Include="IDoc\INVOIC02.xsd">
+      <TypeName>INVOIC02</TypeName>
+      <Namespace>VanArsdel.Integration.Schemas.IDoc</Namespace>
+      <SubType>Task</SubType>
+    </Schema>
+    <Schema Include="IDoc\ORDERS05.xsd">
+      <TypeName>ORDERS05</TypeName>
+      <Namespace>VanArsdel.Integration.Schemas.IDoc</Namespace>
+      <SubType>Task</SubType>
+    </Schema>
+    <Schema Include="Partner\PartnerOrders.xsd">
+      <TypeName>PartnerOrders</TypeName>
+      <Namespace>VanArsdel.Integration.Schemas.Partner</Namespace>
+      <SubType>Task</SubType>
+    </Schema>
+    <Schema Include="PropertySchema.xsd">
+      <TypeName>PropertySchema</TypeName>
+      <Namespace>VanArsdel.Integration.Schemas</Namespace>
+      <SubType>Task</SubType>
+    </Schema>
+    <Schema Include="X12\X12_00401_810.xsd">
+      <TypeName>X12_00401_810</TypeName>
+      <Namespace>VanArsdel.Integration.Schemas.X12</Namespace>
+      <SubType>Task</SubType>
+    </Schema>
+    <Schema Include="X12\X12_00401_850.xsd">
+      <TypeName>X12_00401_850</TypeName>
+      <Namespace>VanArsdel.Integration.Schemas.X12</Namespace>
+      <SubType>Task</SubType>
+    </Schema>
+    <Schema Include="X12\X12_00401_856.xsd">
+      <TypeName>X12_00401_856</TypeName>
+      <Namespace>VanArsdel.Integration.Schemas.X12</Namespace>
+      <SubType>Task</SubType>
+    </Schema>
+    <Schema Include="X12\X12_00401_997.xsd">
+      <TypeName>X12_00401_997</TypeName>
+      <Namespace>VanArsdel.Integration.Schemas.X12</Namespace>
+      <SubType>Task</SubType>
+    </Schema>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\BizTalk\BizTalkC.targets" />
+</Project>

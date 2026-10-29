@@ -1,0 +1,26 @@
+body { font-family: "Segoe UI", Arial, sans-serif; margin: 0; color: #1f2933; background: #f5f7fa; }
+header { display: flex; align-items: center; gap: 24px; padding: 10px 24px; background: #12355b; color: #fff; }
+header a { color: #fff; text-decoration: none; }
+header .brand { font-weight: 600; font-size: 1.1em; }
+header nav { display: flex; gap: 16px; flex: 1; }
+header .user { opacity: .8; font-size: .9em; }
+main { max-width: 1100px; margin: 24px auto; padding: 0 24px; }
+footer { text-align: center; font-size: .8em; color: #7b8794; padding: 24px; }
+table { width: 100%; border-collapse: collapse; background: #fff; margin-bottom: 24px; }
+th, td { text-align: left; padding: 6px 10px; border-bottom: 1px solid #e4e7eb; vertical-align: top; }
+th { background: #e4e7eb; font-weight: 600; }
+fieldset { border: 1px solid #cbd2d9; background: #fff; margin-bottom: 16px; padding: 12px 16px; }
+label { display: block; margin: 8px 0 2px; font-weight: 600; font-size: .9em; }
+input, select, textarea { width: 100%; max-width: 420px; padding: 5px; box-sizing: border-box; }
+input[type=checkbox] { width: auto; }
+button { padding: 6px 16px; background: #12355b; color: #fff; border: 0; cursor: pointer; }
+button.secondary { background: #7b8794; }
+button.danger { background: #b42318; }
+.notice { background: #e3f8ff; border-left: 4px solid #12355b; padding: 8px 12px; }
+.error, .field-validation-error, .validation-summary-errors { color: #b42318; }
+.status { padding: 2px 8px; border-radius: 10px; font-size: .85em; background: #e4e7eb; }
+.status-completed { background: #d3f9d8; }
+.status-rejected, .status-failed, .status-cancelled { background: #ffe3e3; }
+.status-awaitingmanager, .status-awaitingit { background: #fff3bf; }
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.actions form { display: inline-block; margin-right: 12px; vertical-align: top; }

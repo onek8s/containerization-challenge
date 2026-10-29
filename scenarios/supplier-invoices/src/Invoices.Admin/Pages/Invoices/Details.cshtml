@@ -1,0 +1,103 @@
+@page "{id:long}"
+@model Wingtip.Invoices.Admin.Pages.Invoices.DetailsModel
+@inject UserDirectory Directory
+@{
+    var i = Model.Invoice;
+    ViewData["Title"] = "Invoice " + i.InvoiceNumber;
+}
+<h1>@(i.IsCredit ? "Credit note" : "Invoice") @i.InvoiceNumber <partial name="_StatusBadge" model="i.StatusValue" /></h1>
+
+<div class="columns">
+    <dl class="facts">
+        <dt>Supplier</dt><dd>@i.SupplierName (@i.SupplierCode, vendor @i.VendorNumber)</dd>
+        <dt>Invoice date</dt><dd>@i.InvoiceDate.ToString("d.M.yyyy")</dd>
+        <dt>Due date</dt><dd>@i.DueDate?.ToString("d.M.yyyy")</dd>
+        <dt>Purchase order</dt><dd>@i.PurchaseOrderNumber</dd>
+        <dt>Payment reference</dt><dd>@i.PaymentReference</dd>
+        <dt>Net</dt><dd>@i.NetAmount.ToString("N2") @i.Currency</dd>
+        <dt>VAT</dt><dd>@i.VatAmount.ToString("N2") @i.Currency</dd>
+        <dt>Gross</dt><dd><strong>@i.GrossAmount.ToString("N2") @i.Currency</strong></dd>
+    </dl>
+    <dl class="facts">
+        <dt>Received</dt><dd>@i.ReceivedAt.ToString("d.M.yyyy HH:mm") · <a asp-page="/Files/Index" asp-route-fileId="@i.FileId">file @i.FileId</a> · <a asp-page="/Files/Download" asp-route-id="@i.FileId">original</a></dd>
+        <dt>Match</dt><dd>@i.MatchSummary</dd>
+        <dt>Released</dt><dd>@Directory.DisplayName(i.ReleasedBy) @i.ReleasedAt?.ToString("d.M.yyyy HH:mm")</dd>
+        <dt>ERP batch</dt><dd>@i.BatchId</dd>
+        <dt>ERP voucher</dt><dd>@i.VoucherNumber @i.PostedAt?.ToString("d.M.yyyy HH:mm")</dd>
+        @if (i.ErpMessage != null)
+        {
+            <dt>ERP message</dt><dd class="bad">@i.ErpMessage</dd>
+        }
+    </dl>
+</div>
+
+@if (Model.Issues.Any(x => !x.Resolved))
+{
+    <h2>Exceptions</h2>
+    <ul class="issues">
+        @foreach (var x in Model.Issues.Where(x => !x.Resolved))
+        {
+            <li><code>@x.Code</code> @x.Message</li>
+        }
+    </ul>
+}
+
+@if (i.CanAct)
+{
+    <section class="actions">
+        <form method="post" asp-page-handler="Rematch">
+            <button type="submit" disabled="@(i.StatusValue == InvoiceStatus.PostingFailed)">Match again</button>
+        </form>
+        <form method="post" asp-page-handler="Release">
+            <input type="text" name="comment" placeholder="Comment (required for exceptions)" maxlength="1000" />
+            <button type="submit">Release for posting</button>
+        </form>
+        <form method="post" asp-page-handler="Reject">
+            <input type="text" name="reason" placeholder="Reason, sent to the supplier contact" maxlength="1000" required />
+            <button type="submit" class="danger">Reject</button>
+        </form>
+    </section>
+}
+
+<h2>Lines</h2>
+<table>
+    <thead>
+        <tr><th>#</th><th>Item</th><th>Description</th><th class="num">Qty</th><th class="num">Price</th><th class="num">Net</th><th class="num">VAT %</th><th>PO line</th><th>Account</th></tr>
+    </thead>
+    <tbody>
+        @foreach (var l in Model.Lines)
+        {
+            <tr>
+                <td>@l.LineNumber</td>
+                <td>@l.ItemNumber <span class="muted">@l.SupplierItemNumber</span></td>
+                <td>@l.Description</td>
+                <td class="num">@l.Quantity.ToString("0.###") @l.Unit</td>
+                <td class="num">@l.UnitPrice.ToString("0.00##")</td>
+                <td class="num">@l.NetAmount.ToString("N2")</td>
+                <td class="num">@l.VatRate.ToString("0.#")</td>
+                <td>@l.PurchaseOrderNumber @(l.PurchaseOrderLine.HasValue ? "/ " + l.PurchaseOrderLine : "")</td>
+                <td>@l.Account</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h2>History</h2>
+<table>
+    <thead><tr><th>Time</th><th>By</th><th>Action</th><th>Comment</th></tr></thead>
+    <tbody>
+        @foreach (var h in Model.History)
+        {
+            <tr>
+                <td>@h.At.ToString("d.M.yyyy HH:mm:ss")</td>
+                <td title="@h.UserName">@Directory.DisplayName(h.UserName)</td>
+                <td>@h.Action</td>
+                <td>@h.Comment</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<form method="post" asp-page-handler="Comment" class="inline">
+    <input type="text" name="comment" placeholder="Add a note" maxlength="1000" required />
+    <button type="submit">Add note</button>
+</form>

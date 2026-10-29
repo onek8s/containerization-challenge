@@ -1,0 +1,34 @@
+@model IList<Tailspin.DealerOrders.Data.Queries.StockRow>
+@{
+    ViewBag.Title = "Stock";
+}
+<h2>Stock <small>updated @(((DateTime?)ViewBag.LastSync)?.ToLocalTime().ToString("g") ?? "never")</small></h2>
+@using (Html.BeginForm("Index", "Stock", FormMethod.Get, new { @class = "form-inline filter" }))
+{
+    <input name="search" value="@ViewBag.Search" class="form-control" placeholder="Item number or name" />
+    <select name="warehouse" class="form-control">
+        <option value="">All warehouses</option>
+        @foreach (var w in new[] { "KON", "FRA", "MIL" })
+        {
+            <option value="@w" selected="@(w == (string)ViewBag.Warehouse)">@w</option>
+        }
+    </select>
+    <button type="submit" class="btn btn-default">Search</button>
+}
+<table class="table table-striped">
+    <thead><tr><th>Item</th><th>Name</th><th>Configuration</th><th>Warehouse</th><th class="text-right">Available</th><th class="text-right">On order</th><th>Next receipt</th></tr></thead>
+    <tbody>
+        @foreach (var s in Model)
+        {
+            <tr>
+                <td>@s.ItemId</td>
+                <td>@s.Name</td>
+                <td>@s.ConfigurationId</td>
+                <td>@s.Warehouse</td>
+                <td class="text-right">@s.Available.ToString("0.##")</td>
+                <td class="text-right">@s.OnOrder.ToString("0.##")</td>
+                <td>@s.NextReceiptDate?.ToString("d")</td>
+            </tr>
+        }
+    </tbody>
+</table>

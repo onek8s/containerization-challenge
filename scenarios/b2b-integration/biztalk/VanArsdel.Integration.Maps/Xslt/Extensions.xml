@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Scripting functoid classes used by the custom XSLT of all VanArsdel maps (assembly in the GAC on the BizTalk servers). -->
+<ExtensionObjects>
+  <ExtensionObject Namespace="http://schemas.microsoft.com/BizTalk/2003/ScriptNS0" AssemblyName="VanArsdel.Integration.Mapping, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cfedfd825850e71" ClassName="VanArsdel.Integration.Mapping.Functoids.DateFunctoids" />
+  <ExtensionObject Namespace="http://schemas.microsoft.com/BizTalk/2003/ScriptNS1" AssemblyName="VanArsdel.Integration.Mapping, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cfedfd825850e71" ClassName="VanArsdel.Integration.Mapping.Functoids.UnitFunctoids" />
+  <ExtensionObject Namespace="http://schemas.microsoft.com/BizTalk/2003/ScriptNS2" AssemblyName="VanArsdel.Integration.Mapping, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cfedfd825850e71" ClassName="VanArsdel.Integration.Mapping.Functoids.CrossReferenceFunctoids" />
+  <ExtensionObject Namespace="http://schemas.microsoft.com/BizTalk/2003/ScriptNS3" AssemblyName="VanArsdel.Integration.Mapping, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cfedfd825850e71" ClassName="VanArsdel.Integration.Mapping.Functoids.NumberFunctoids" />
+  <ExtensionObject Namespace="http://schemas.microsoft.com/BizTalk/2003/ScriptNS4" AssemblyName="VanArsdel.Integration.Mapping, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cfedfd825850e71" ClassName="VanArsdel.Integration.Mapping.Functoids.TextFunctoids" />
+  <ExtensionObject Namespace="http://schemas.microsoft.com/BizTalk/2003/ScriptNS5" AssemblyName="VanArsdel.Integration.Mapping, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cfedfd825850e71" ClassName="VanArsdel.Integration.Mapping.Functoids.CodeFunctoids" />
+</ExtensionObjects>

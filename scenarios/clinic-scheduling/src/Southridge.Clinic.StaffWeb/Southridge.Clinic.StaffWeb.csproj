@@ -1,0 +1,58 @@
+<Project Sdk="MSBuild.SDK.SystemWeb">
+
+  <PropertyGroup>
+    <TargetFramework>net452</TargetFramework>
+    <Configurations>Debug;Release;Lab</Configurations>
+    <RootNamespace>Southridge.Clinic.StaffWeb</RootNamespace>
+    <AppConfig>Web.config</AppConfig>
+    <GeneratedBindingRedirectsAction>None</GeneratedBindingRedirectsAction>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MSBuild.Microsoft.VisualStudio.Web.targets" Version="14.0.0.3" PrivateAssets="all" />
+    <PackageReference Include="AjaxControlToolkit" Version="4.1.60919" />
+    <PackageReference Include="elmah.corelibrary" Version="1.2.2" />
+    <PackageReference Include="AjaxMin" Version="5.14.5506.26202" PrivateAssets="all" GeneratePathProperty="true" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Services" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="**\*.aspx;**\*.ascx;**\*.ashx;**\*.asmx;**\*.master;**\*.Master;Global.asax" />
+    <Content Include="Content\**\*;Scripts\**\*;App_Themes\**\*;Web.sitemap" />
+    <None Include="Web.Debug.config;Web.Release.config;Web.Lab.config" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Southridge.Clinic.Domain\Southridge.Clinic.Domain.csproj" />
+    <ProjectReference Include="..\Southridge.Clinic.Hl7\Southridge.Clinic.Hl7.csproj" />
+    <ProjectReference Include="..\Southridge.Clinic.Contracts\Southridge.Clinic.Contracts.csproj" />
+    <ProjectReference Include="..\Southridge.Clinic.Infrastructure\Southridge.Clinic.Infrastructure.csproj" />
+    <ProjectReference Include="..\Southridge.Clinic.Data\Southridge.Clinic.Data.csproj" />
+    <ProjectReference Include="..\Southridge.Clinic.Referrals\Southridge.Clinic.Referrals.csproj" />
+    <ProjectReference Include="..\Southridge.Clinic.Scheduling\Southridge.Clinic.Scheduling.csproj" />
+    <ProjectReference Include="..\Southridge.Clinic.Billing\Southridge.Clinic.Billing.csproj" />
+    <ProjectReference Include="..\Southridge.Clinic.Documents\Southridge.Clinic.Documents.csproj" />
+  </ItemGroup>
+
+  <!-- Release builds minify the site scripts and styles (clinic.min.js / clinic.min.css). -->
+  <UsingTask TaskName="AjaxMin" AssemblyFile="$(PkgAjaxMin)\tools\net40\AjaxMinTask.dll" Condition="'$(PkgAjaxMin)' != ''" />
+  <Target Name="MinifyScripts" AfterTargets="Build" Condition="'$(Configuration)' == 'Release' and '$(MSBuildRuntimeType)' == 'Full'">
+    <ItemGroup>
+      <SiteScripts Include="Scripts\clinic.js" />
+      <SiteStyles Include="Content\clinic.css" />
+    </ItemGroup>
+    <AjaxMin JsSourceFiles="@(SiteScripts)" JsSourceExtensionPattern="\.js$" JsTargetExtension=".min.js" CssSourceFiles="@(SiteStyles)" CssSourceExtensionPattern="\.css$" CssTargetExtension=".min.css" />
+  </Target>
+
+</Project>

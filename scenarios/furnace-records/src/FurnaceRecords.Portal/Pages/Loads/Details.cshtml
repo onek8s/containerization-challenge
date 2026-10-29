@@ -1,0 +1,84 @@
+@page "{id}"
+@model FurnaceRecords.Portal.Pages.Loads.DetailsModel
+@{
+    var l = Model.Load;
+    var r = l.Recipe!;
+    ViewData["Title"] = l.LoadNumber;
+}
+<h1>@(l.Kind == LoadKind.Survey ? "Survey" : "Load") @l.LoadNumber <span class="badge @(l.Status is LoadStatus.Released ? "ok" : l.Status is LoadStatus.Rejected ? "bad" : "info")">@l.Status</span></h1>
+@if (Model.Message is not null) { <p class="success">@Model.Message</p> }
+@if (Model.Error is not null) { <p class="errors">@Model.Error</p> }
+
+<p>
+    Furnace <strong>@l.Furnace!.Code</strong> (class @l.Furnace.FurnaceClass), recipe <strong>@r.Code</strong> @r.Name
+    (@r.SetpointCelsius °C -@r.ToleranceMinusCelsius/+@r.TolerancePlusCelsius, soak @r.SoakMinutes min@(r.MaxQuenchDelaySeconds is { } q ? $", quench within {q} s" : "")).
+    Planned @Model.Local(l.PlannedAtUtc).ToString("yyyy-MM-dd HH:mm") by @l.PlannedBy.
+    @if (l.StartedAtUtc is { } s) { <text>Started @Model.Local(s).ToString("yyyy-MM-dd HH:mm").</text> }
+    @if (l.EndedAtUtc is { } e) { <text>Ended @Model.Local(e).ToString("yyyy-MM-dd HH:mm").</text> }
+</p>
+
+@Html.Raw(Model.Curve)
+
+@if (l.Passed is not null && l.Kind == LoadKind.Survey)
+{
+    <h2>Uniformity survey: @(l.Passed.Value ? "pass" : "findings")</h2>
+    <p>Class @l.Furnace.FurnaceClass tolerance ±@FurnaceClass.UniformityTolerance(l.Furnace.FurnaceClass) °C at @r.SetpointCelsius °C,
+        surveyed @l.SoakMinutes min after stabilisation, spread @(l.UniformityCelsius?.ToString("0.0") ?? "-") °C.</p>
+    <table>
+        <tr><th>Ch</th><th>Position</th><th class="num">Min °C</th><th class="num">Max °C</th><th class="num">Max deviation</th></tr>
+        @foreach (var sensor in Model.Survey)
+        {
+            <tr><td>@sensor.Channel</td><td>@Model.ChannelName(sensor.Channel)</td><td class="num">@sensor.Min.ToString("0.0")</td><td class="num">@sensor.Max.ToString("0.0")</td><td class="num">@sensor.MaxDeviation.ToString("0.0")</td></tr>
+        }
+    </table>
+}
+@if (l.Passed is not null && l.Kind == LoadKind.Production)
+{
+    <h2>Evaluation: @(l.Passed.Value ? "pass" : "findings")</h2>
+    <p>Soak @l.SoakMinutes min
+        @if (l.SoakStartUtc is { } ss && l.SoakEndUtc is { } se) { <text>(@Model.Local(ss).ToString("HH:mm:ss") - @Model.Local(se).ToString("HH:mm:ss"))</text> },
+        max heating rate @(l.MaxRampCelsiusPerMinute?.ToString("0.0") ?? "-") °C/min,
+        quench delay @(l.QuenchDelaySeconds?.ToString("0.0") ?? "-") s.</p>
+}
+@if (Model.Findings.Count > 0)
+{
+    <table>
+        <tr><th>Severity</th><th>Code</th><th>Finding</th><th>Time</th></tr>
+        @foreach (var f in Model.Findings)
+        {
+            <tr class="@(f.Severity == FindingSeverity.Fail ? "bad" : "")"><td>@f.Severity</td><td>@f.Code</td><td>@f.Message</td><td>@(f.AtUtc is { } at ? Model.Local(at).ToString("HH:mm:ss") : "")</td></tr>
+        }
+    </table>
+}
+
+@if (l.Status == LoadStatus.Completed && Model.CanDecide)
+{
+    <h2>Decision</h2>
+    <form method="post">
+        <input type="hidden" name="rowVersion" value="@Convert.ToBase64String(l.RowVersion)" />
+        <div class="row"><label for="comment">Comment</label><textarea id="comment" name="comment" rows="2" cols="60"></textarea></div>
+        <button type="submit" asp-page-handler="Release">Release</button>
+        <button type="submit" asp-page-handler="Reject">Reject</button>
+    </form>
+}
+@if (l.DecidedBy is not null)
+{
+    <p>@l.Status by @l.DecidedBy on @Model.Local(l.DecidedAtUtc!.Value).ToString("yyyy-MM-dd HH:mm"). @l.DecisionComment</p>
+}
+@if (l.Status == LoadStatus.Released)
+{
+    <p><a asp-page="Certificate" asp-route-id="@l.LoadNumber">@(l.Kind == LoadKind.Survey ? "Survey report" : "Certificate")</a>
+    @if (l.CertificatePath is not null) { <span class="muted">Archived as @l.CertificatePath</span> }</p>
+}
+
+<h2>Parts</h2>
+<table>
+    <tr><th>Work order</th><th>Part number</th><th>Lot</th><th class="num">Qty</th></tr>
+    @foreach (var p in l.Parts) { <tr><td>@p.WorkOrder</td><td>@p.PartNumber</td><td>@p.Lot</td><td class="num">@p.Quantity</td></tr> }
+</table>
+
+<h2>Events</h2>
+<table>
+    <tr><th>Time</th><th>Event</th><th>Detail</th></tr>
+    @foreach (var ev in Model.Events) { <tr><td>@Model.Local(ev.AtUtc).ToString("yyyy-MM-dd HH:mm:ss")</td><td>@ev.Kind</td><td>@ev.Detail</td></tr> }
+</table>

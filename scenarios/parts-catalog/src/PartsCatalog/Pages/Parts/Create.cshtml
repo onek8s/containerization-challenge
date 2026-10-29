@@ -1,0 +1,11 @@
+@page
+@model PartsCatalog.Pages.Parts.CreateModel
+@{
+    ViewData["Title"] = "Add part";
+}
+<h1>Add part</h1>
+<form method="post" class="edit">
+    <partial name="_PartFields" for="Part" />
+    <button type="submit">Save</button>
+    <a asp-page="Index">Cancel</a>
+</form>

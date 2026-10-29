@@ -1,0 +1,52 @@
+{
+    "items": [
+        {
+            "personnelNumber": "10100",
+            "firstName": "Daniel",
+            "lastName": "Gerber",
+            "windowsAccount": "CORP\\dgerber",
+            "email": "dgerber@lucerne-eng.example",
+            "location": "LUZ",
+            "costCentre": "1100",
+            "jobTitle": "Director",
+            "grade": "DIR",
+            "managerPersonnelNumber": null,
+            "employmentStatus": "Active",
+            "leavingDate": null,
+            "lastModified": "2019-06-14T17:00:00Z"
+        },
+        {
+            "personnelNumber": "10101",
+            "firstName": "Katrin",
+            "lastName": "Rochat",
+            "windowsAccount": "CORP\\krochat",
+            "email": "krochat@lucerne-eng.example",
+            "location": "ZRH",
+            "costCentre": "2300",
+            "jobTitle": "Director",
+            "grade": "DIR",
+            "managerPersonnelNumber": null,
+            "employmentStatus": "Active",
+            "leavingDate": null,
+            "lastModified": "2019-06-13T16:59:00Z"
+        },
+        {
+            "personnelNumber": "10102",
+            "firstName": "Stefan",
+            "lastName": "Wagner",
+            "windowsAccount": "CORP\\swagner",
+            "email": "swagner@lucerne-eng.example",
+            "location": "BSL",
+            "costCentre": "3700",
+            "jobTitle": "Director",
+            "grade": "DIR",
+            "managerPersonnelNumber": null,
+            "employmentStatus": "Active",
+            "leavingDate": null,
+            "lastModified": "2019-06-12T16:58:00Z"
+        }
+    ],
+    "page": 1,
+    "pageSize": 3,
+    "total": 84
+}

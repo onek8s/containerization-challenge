@@ -1,0 +1,29 @@
+@page
+@model FurnaceRecords.Portal.Pages.Loads.PlanModel
+@{
+    ViewData["Title"] = "Plan load";
+}
+<h1>Plan load</h1>
+<p class="muted">Loads are normally planned by MES. Use this page for loads planned at the furnace and for uniformity surveys (no parts).</p>
+@if (Model.Error is not null)
+{
+    <p class="errors">@Model.Error</p>
+}
+<form method="post">
+    <div class="row"><label asp-for="Kind">Type</label><select asp-for="Kind" asp-items="Html.GetEnumSelectList<LoadKind>()"></select></div>
+    <div class="row"><label asp-for="FurnaceCode">Furnace</label><select asp-for="FurnaceCode" asp-items="Model.Furnaces"></select></div>
+    <div class="row"><label asp-for="RecipeCode">Recipe</label><select asp-for="RecipeCode" asp-items="Model.Recipes"></select></div>
+    <table>
+        <tr><th>Work order</th><th>Part number</th><th>Lot</th><th>Quantity</th></tr>
+        @for (var i = 0; i < Model.Parts.Count; i++)
+        {
+            <tr>
+                <td><input asp-for="Parts[i].WorkOrder" /></td>
+                <td><input asp-for="Parts[i].PartNumber" /></td>
+                <td><input asp-for="Parts[i].Lot" /></td>
+                <td><input asp-for="Parts[i].Quantity" type="number" min="0" /></td>
+            </tr>
+        }
+    </table>
+    <button type="submit">Plan load</button>
+</form>

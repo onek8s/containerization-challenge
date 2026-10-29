@@ -1,0 +1,28 @@
+@model IEnumerable<RequestSummary>
+@if (!Model.Any())
+{
+    <p class="muted">Nothing here.</p>
+}
+else
+{
+    <table class="grid">
+        <thead>
+            <tr><th>Number</th><th>Title</th><th>Requester</th><th>Cost center</th><th>Supplier</th><th class="num">Net</th><th>Status</th><th>Waiting for</th></tr>
+        </thead>
+        <tbody>
+            @foreach (var r in Model)
+            {
+                <tr>
+                    <td><a href="@Url.Action("Details", "Requests", new { id = r.Id })">@r.Number</a></td>
+                    <td>@r.Title</td>
+                    <td>@r.RequesterName</td>
+                    <td>@r.CostCenterCode</td>
+                    <td>@r.SupplierName</td>
+                    <td class="num">@r.NetTotal.ToString("N2") @r.Currency</td>
+                    <td><span class="status status-@r.Status.ToString().ToLowerInvariant()">@r.Status</span></td>
+                    <td>@(r.NextStep.HasValue ? r.NextStep.ToString() : r.PoNumber)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

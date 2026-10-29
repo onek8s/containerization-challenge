@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>@ViewBag.Title - Credit Desk</title>
+    <link href="~/Content/site.css" rel="stylesheet" />
+</head>
+<body>
+    <header>
+        <a class="brand" href="@Url.Action("Index", "Home")">Fabrikam Credit Desk</a>
+        <nav>
+            @Html.ActionLink("My requests", "Index", "Home")
+            @Html.ActionLink("Customers", "Index", "Customers")
+            @Html.ActionLink("Approvals", "Index", "Approvals")
+        </nav>
+        <span class="user">@User.Identity.Name</span>
+    </header>
+    <main>
+        @if (TempData["Notice"] != null) { <p class="notice">@TempData["Notice"]</p> }
+        @if (TempData["Error"] != null) { <p class="error">@TempData["Error"]</p> }
+        @RenderBody()
+    </main>
+    <footer>Credit Desk @typeof(CreditDesk.Web.MvcApplication).Assembly.GetName().Version &middot; Credit Control, ext. 4410</footer>
+</body>
+</html>

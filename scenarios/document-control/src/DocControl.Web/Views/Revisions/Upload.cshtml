@@ -1,0 +1,14 @@
+@model UploadViewModel
+@{ ViewData["Title"] = "Submit revision"; }
+<h1>Submit revision</h1>
+<p class="muted">Files can also be dropped on the project folder of the drop share as <code>&lt;document number&gt;_&lt;revision&gt;.&lt;ext&gt;</code>.</p>
+
+<div asp-validation-summary="All" class="alert err"></div>
+
+<form method="post" enctype="multipart/form-data" class="form">
+    <label>Document number <input asp-for="DocumentNumber" placeholder="P1042-LIT-ME-DRG-0012" required /></label>
+    <label>Revision <input asp-for="Revision" placeholder="P01" maxlength="3" required /></label>
+    <label>Title <small>(required for a new document)</small> <input asp-for="Title" /></label>
+    <label>File <input asp-for="File" type="file" required /></label>
+    <button type="submit">Submit for review</button>
+</form>

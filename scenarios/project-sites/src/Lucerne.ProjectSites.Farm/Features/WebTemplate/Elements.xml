@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <WebTemplate AdjustHijriDays="0"
+               AlternateCSS=""
+               AlternateHeader=""
+               BaseConfigurationID="0"
+               BaseTemplateID="1"
+               BaseTemplateName="STS"
+               Description="Engineering project site: deliverables, risks, RFIs, discipline libraries."
+               DisplayCategory="Lucerne"
+               Locale="1033"
+               Name="LucerneProject"
+               Title="Lucerne Project Site" />
+</Elements>

@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net452</TargetFramework>
+    <RootNamespace>Southridge.Clinic.Data</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EnterpriseLibrary.Data" Version="5.0.505" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Web" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="ClinicData.dbml.layout" />
+    <None Include="ClinicData.dbml" />
+    <None Include="ReportsDataSet.xsd" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Southridge.Clinic.Domain\Southridge.Clinic.Domain.csproj" />
+    <ProjectReference Include="..\Southridge.Clinic.Hl7\Southridge.Clinic.Hl7.csproj" />
+    <ProjectReference Include="..\Southridge.Clinic.Infrastructure\Southridge.Clinic.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,34 @@
+body { margin: 0; font-family: "Segoe UI", Arial, sans-serif; color: #222; background: #f6f6f4; }
+.top { display: flex; justify-content: space-between; align-items: center; padding: 12px 24px; background: #1f3a5f; color: #fff; }
+.top a, .top button.link { color: #fff; text-decoration: none; margin-left: 16px; }
+.brand { font-weight: 600; margin-left: 0 !important; }
+.brand span { font-weight: 300; }
+.page { max-width: 1100px; margin: 24px auto; padding: 0 16px; }
+.bottom { text-align: center; color: #777; font-size: 12px; padding: 24px; }
+.card { background: #fff; border: 1px solid #ddd; padding: 16px; border-radius: 4px; }
+.narrow { max-width: 420px; }
+label { display: block; margin-top: 10px; font-weight: 600; }
+input[type=text], input[type=email], input[type=password], input:not([type]), select, textarea { padding: 6px; border: 1px solid #bbb; border-radius: 3px; min-width: 200px; }
+button, .button { background: #1f3a5f; color: #fff; border: 0; padding: 8px 14px; border-radius: 3px; cursor: pointer; text-decoration: none; display: inline-block; margin-top: 10px; }
+button.secondary, .button.secondary { background: #888; }
+button.link { background: none; padding: 0; margin: 0 0 0 16px; }
+form.inline { display: inline; }
+.grid { width: 100%; border-collapse: collapse; background: #fff; margin: 12px 0; }
+.grid th, .grid td { border-bottom: 1px solid #e3e3e3; padding: 6px 8px; text-align: left; vertical-align: top; }
+.grid tr.disabled td { color: #999; }
+.errors { color: #a00; }
+.errors ul { margin: 6px 0; }
+.field-error { color: #a00; font-size: 12px; display: block; }
+.muted { color: #777; }
+.tabs { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 4px; }
+.tabs li a { display: block; padding: 4px 8px; background: #e6e9ee; border-radius: 3px; text-decoration: none; color: #1f3a5f; font-size: 13px; }
+.tabs li.active a { background: #1f3a5f; color: #fff; }
+.facts dt { font-weight: 600; float: left; width: 120px; clear: left; }
+.facts dd { margin: 0 0 4px 130px; }
+.status { font-weight: 600; }
+.status-rejected, .status-cancelled { color: #a00; }
+.notes { list-style: none; padding: 0; }
+.notes li { background: #fff; border-left: 3px solid #1f3a5f; padding: 6px 10px; margin-bottom: 6px; }
+.pager a { margin-right: 6px; }
+.pager a.active { font-weight: 700; }
+.rma { font-size: 1.3em; letter-spacing: 1px; }

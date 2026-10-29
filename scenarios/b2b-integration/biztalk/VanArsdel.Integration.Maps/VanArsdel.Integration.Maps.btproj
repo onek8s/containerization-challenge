@@ -1,0 +1,178 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{BEE2933F-882D-561A-B358-7AFDE455B00F}</ProjectGuid>
+    <ProjectTypeGuids>{EF7E3281-CD33-11D4-8326-00C04FA0CE8D};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>library</OutputType>
+    <GenericProcessing>true</GenericProcessing>
+    <RootNamespace>VanArsdel.Integration.Maps</RootNamespace>
+    <AssemblyName>VanArsdel.Integration.Maps</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <BpelCompliance>True</BpelCompliance>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\..\VanArsdel.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <EnableUnitTesting>True</EnableUnitTesting>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugSymbols>false</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <EnableUnitTesting>False</EnableUnitTesting>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System">
+      <Name>System</Name>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Name>System.Xml</Name>
+    </Reference>
+    <Reference Include="System.Configuration">
+      <Name>System.Configuration</Name>
+    </Reference>
+    <Reference Include="Microsoft.BizTalk.Pipeline">
+      <Name>Microsoft.BizTalk.Pipeline</Name>
+    </Reference>
+    <Reference Include="Microsoft.BizTalk.DefaultPipelines">
+      <Name>Microsoft.BizTalk.DefaultPipelines</Name>
+    </Reference>
+    <Reference Include="Microsoft.BizTalk.GlobalPropertySchemas">
+      <Name>Microsoft.BizTalk.GlobalPropertySchemas</Name>
+    </Reference>
+    <Reference Include="Microsoft.BizTalk.TestTools">
+      <Name>Microsoft.BizTalk.TestTools</Name>
+    </Reference>
+    <Reference Include="Microsoft.XLANGs.BaseTypes">
+      <Name>Microsoft.XLANGs.BaseTypes</Name>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\VanArsdel.Integration.Schemas\VanArsdel.Integration.Schemas.btproj">
+      <Project>{397BDBE9-B640-5F58-9478-6E3493B1D411}</Project>
+      <Name>..\VanArsdel.Integration.Schemas\VanArsdel.Integration.Schemas</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\VanArsdel.Integration.Mapping\VanArsdel.Integration.Mapping.csproj">
+      <Project>{82CD431D-FCF0-57FF-B5B1-3D0C55F9F9D6}</Project>
+      <Name>..\..\src\VanArsdel.Integration.Mapping\VanArsdel.Integration.Mapping</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Map Include="X12_00401_850_to_Order.btm">
+      <TypeName>X12_00401_850_to_Order</TypeName>
+      <Namespace>VanArsdel.Integration.Maps</Namespace>
+      <SubType>Task</SubType>
+    </Map>
+    <Map Include="EFACT_D96A_ORDERS_to_Order.btm">
+      <TypeName>EFACT_D96A_ORDERS_to_Order</TypeName>
+      <Namespace>VanArsdel.Integration.Maps</Namespace>
+      <SubType>Task</SubType>
+    </Map>
+    <Map Include="PartnerOrder_to_Order.btm">
+      <TypeName>PartnerOrder_to_Order</TypeName>
+      <Namespace>VanArsdel.Integration.Maps</Namespace>
+      <SubType>Task</SubType>
+    </Map>
+    <Map Include="Order_to_IDoc_ORDERS05.btm">
+      <TypeName>Order_to_IDoc_ORDERS05</TypeName>
+      <Namespace>VanArsdel.Integration.Maps</Namespace>
+      <SubType>Task</SubType>
+    </Map>
+    <Map Include="IDoc_ORDERS05_to_Order.btm">
+      <TypeName>IDoc_ORDERS05_to_Order</TypeName>
+      <Namespace>VanArsdel.Integration.Maps</Namespace>
+      <SubType>Task</SubType>
+    </Map>
+    <Map Include="Order_to_EFACT_D96A_ORDERS.btm">
+      <TypeName>Order_to_EFACT_D96A_ORDERS</TypeName>
+      <Namespace>VanArsdel.Integration.Maps</Namespace>
+      <SubType>Task</SubType>
+    </Map>
+    <Map Include="Order_to_X12_00401_850.btm">
+      <TypeName>Order_to_X12_00401_850</TypeName>
+      <Namespace>VanArsdel.Integration.Maps</Namespace>
+      <SubType>Task</SubType>
+    </Map>
+    <Map Include="IDoc_DESADV01_to_Despatch.btm">
+      <TypeName>IDoc_DESADV01_to_Despatch</TypeName>
+      <Namespace>VanArsdel.Integration.Maps</Namespace>
+      <SubType>Task</SubType>
+    </Map>
+    <Map Include="Despatch_to_X12_00401_856.btm">
+      <TypeName>Despatch_to_X12_00401_856</TypeName>
+      <Namespace>VanArsdel.Integration.Maps</Namespace>
+      <SubType>Task</SubType>
+    </Map>
+    <Map Include="Despatch_to_EFACT_D96A_DESADV.btm">
+      <TypeName>Despatch_to_EFACT_D96A_DESADV</TypeName>
+      <Namespace>VanArsdel.Integration.Maps</Namespace>
+      <SubType>Task</SubType>
+    </Map>
+    <Map Include="IDoc_INVOIC02_to_Invoice.btm">
+      <TypeName>IDoc_INVOIC02_to_Invoice</TypeName>
+      <Namespace>VanArsdel.Integration.Maps</Namespace>
+      <SubType>Task</SubType>
+    </Map>
+    <Map Include="Invoice_to_X12_00401_810.btm">
+      <TypeName>Invoice_to_X12_00401_810</TypeName>
+      <Namespace>VanArsdel.Integration.Maps</Namespace>
+      <SubType>Task</SubType>
+    </Map>
+    <Map Include="Invoice_to_EFACT_D96A_INVOIC.btm">
+      <TypeName>Invoice_to_EFACT_D96A_INVOIC</TypeName>
+      <Namespace>VanArsdel.Integration.Maps</Namespace>
+      <SubType>Task</SubType>
+    </Map>
+    <Map Include="EFACT_D96A_INVOIC_to_Invoice.btm">
+      <TypeName>EFACT_D96A_INVOIC_to_Invoice</TypeName>
+      <Namespace>VanArsdel.Integration.Maps</Namespace>
+      <SubType>Task</SubType>
+    </Map>
+    <Map Include="X12_00401_810_to_Invoice.btm">
+      <TypeName>X12_00401_810_to_Invoice</TypeName>
+      <Namespace>VanArsdel.Integration.Maps</Namespace>
+      <SubType>Task</SubType>
+    </Map>
+    <Map Include="Invoice_to_IDoc_INVOIC02.btm">
+      <TypeName>Invoice_to_IDoc_INVOIC02</TypeName>
+      <Namespace>VanArsdel.Integration.Maps</Namespace>
+      <SubType>Task</SubType>
+    </Map>
+    <Map Include="X12_00401_997_to_FunctionalAck.btm">
+      <TypeName>X12_00401_997_to_FunctionalAck</TypeName>
+      <Namespace>VanArsdel.Integration.Maps</Namespace>
+      <SubType>Task</SubType>
+    </Map>
+    <Map Include="EFACT_D3_CONTRL_to_FunctionalAck.btm">
+      <TypeName>EFACT_D3_CONTRL_to_FunctionalAck</TypeName>
+      <Namespace>VanArsdel.Integration.Maps</Namespace>
+      <SubType>Task</SubType>
+    </Map>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Xslt\*.xslt" />
+    <None Include="Xslt\Extensions.xml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\BizTalk\BizTalkC.targets" />
+</Project>

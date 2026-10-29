@@ -1,0 +1,18 @@
+@page
+@model FurnaceRecords.Portal.Pages.Recipes.IndexModel
+@{
+    ViewData["Title"] = "Recipes";
+}
+<h1>Recipes</h1>
+<p><a asp-page="Edit">New recipe</a></p>
+<table>
+    <tr><th>Code</th><th>Name</th><th>Specification</th><th class="num">Setpoint °C</th><th class="num">Tolerance</th><th class="num">Soak min</th><th class="num">Quench s</th><th>Active</th></tr>
+    @foreach (var r in Model.Recipes)
+    {
+        <tr>
+            <td><a asp-page="Edit" asp-route-id="@r.Id">@r.Code</a></td><td>@r.Name</td><td>@r.Specification</td>
+            <td class="num">@r.SetpointCelsius</td><td class="num">-@r.ToleranceMinusCelsius/+@r.TolerancePlusCelsius</td>
+            <td class="num">@r.SoakMinutes@(r.MaxSoakMinutes is { } m ? $"-{m}" : "")</td><td class="num">@r.MaxQuenchDelaySeconds</td><td>@(r.Active ? "yes" : "no")</td>
+        </tr>
+    }
+</table>

@@ -1,0 +1,45 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.Master.cs" Inherits="Southridge.Clinic.PatientWeb.SiteMaster" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Southridge Medical Group</title>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/patients.css" rel="stylesheet" type="text/css" />
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server" />
+</head>
+<body>
+    <form id="MainForm" runat="server">
+    <asp:ScriptManager ID="ScriptManager" runat="server" EnablePartialRendering="true" />
+    <div id="page">
+        <div id="header">
+            <asp:HyperLink ID="BrandLink" runat="server" NavigateUrl="~/Default.aspx" CssClass="brand-link">Southridge Medical Group</asp:HyperLink>
+            <div id="account">
+                <asp:LoginView ID="AccountView" runat="server">
+                    <AnonymousTemplate>
+                        <asp:HyperLink ID="LoginLink" runat="server" NavigateUrl="~/Account/Login.aspx">Sign in</asp:HyperLink> |
+                        <asp:HyperLink ID="RegisterLink" runat="server" NavigateUrl="~/Account/Register.aspx">Create an account</asp:HyperLink>
+                    </AnonymousTemplate>
+                    <LoggedInTemplate>
+                        Signed in as <asp:LoginName ID="NameLabel" runat="server" />
+                        <asp:LoginStatus ID="Status" runat="server" LogoutAction="Redirect" LogoutPageUrl="~/Default.aspx" OnLoggingOut="Status_LoggingOut" />
+                    </LoggedInTemplate>
+                </asp:LoginView>
+            </div>
+        </div>
+        <ul id="nav">
+            <li><asp:HyperLink ID="BookLink" runat="server" NavigateUrl="~/Book/Default.aspx">Book a visit</asp:HyperLink></li>
+            <li><asp:HyperLink ID="AppointmentsLink" runat="server" NavigateUrl="~/MyHealth/Appointments">My appointments</asp:HyperLink></li>
+            <li><asp:HyperLink ID="BillsLink" runat="server" NavigateUrl="~/MyHealth/Statements">Bills and payments</asp:HyperLink></li>
+            <li><asp:HyperLink ID="LocationsLink" runat="server" NavigateUrl="~/Locations.aspx">Locations</asp:HyperLink></li>
+        </ul>
+        <div id="content">
+            <asp:Panel ID="MessagePanel" runat="server" Visible="false" CssClass="message" EnableViewState="false">
+                <asp:Literal ID="MessageText" runat="server" EnableViewState="false" Mode="Encode" />
+            </asp:Panel>
+            <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+        </div>
+        <div id="footer">Questions about your visit or bill? Call your clinic. In an emergency call 911.</div>
+    </div>
+    </form>
+</body>
+</html>

@@ -1,0 +1,33 @@
+@model IList<Tailspin.DealerOrders.SalesDesk.Infrastructure.ApprovalRow>
+@{
+    ViewBag.Title = "Approvals";
+}
+<h2>Approvals</h2>
+<p class="text-muted">Over 250 000 EUR, more than 10 % extra discount, credit and export reasons need a member of TSM-SalesManagers.</p>
+<table class="table">
+    <thead><tr><th>Dealer</th><th>Document</th><th>Reason</th><th>Details</th><th class="text-right">Amount</th><th>Discount</th><th>Requested</th><th style="width:30%">Decision</th></tr></thead>
+    <tbody>
+        @foreach (var a in Model)
+        {
+            <tr>
+                <td>@Html.ActionLink(a.DealerAccount, "Details", "Dealers", new { id = a.DealerId }, null)<br /><small>@a.DealerName</small></td>
+                <td>@if (a.OrderId.HasValue) { @Html.ActionLink(a.OrderNumber, "Details", "Orders", new { id = a.OrderId }, null) } else { @a.QuoteNumber }</td>
+                <td>@a.Reason</td>
+                <td>@a.Details</td>
+                <td class="text-right">@a.Amount.ToString("N2") @a.Currency</td>
+                <td>@a.RequestedDiscount.ToString("0.##") %</td>
+                <td>@a.RequestedUtc.ToLocalTime().ToString("g")<br /><small>@a.RequestedBy</small></td>
+                <td>
+                    @using (Html.BeginForm("Decide", "Approvals", new { id = a.Id }, FormMethod.Post, new { @class = "form-inline" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <input name="discount" type="number" step="0.5" min="0" max="30" value="@a.RequestedDiscount" class="form-control input-sm" style="width:5em" title="Approved discount %" />
+                        <input name="comment" class="form-control input-sm" placeholder="Comment" />
+                        <button name="approve" value="true" class="btn btn-success btn-sm">Approve</button>
+                        <button name="approve" value="false" class="btn btn-danger btn-sm">Reject</button>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

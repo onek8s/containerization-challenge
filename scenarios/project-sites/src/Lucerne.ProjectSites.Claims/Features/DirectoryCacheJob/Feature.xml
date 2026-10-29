@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Feature xmlns="http://schemas.microsoft.com/sharepoint/"
+         Id="{09B7DCE8-6FA2-41D0-93EB-7E8F9AABBCC7}"
+         Title="Lucerne Project Sites - Claims Directory Cache Job"
+         Description="Hourly copy of office and discipline from the hub Staff Directory."
+         Scope="WebApplication"
+         Version="5.3.1.0"
+         Hidden="FALSE"
+         ReceiverAssembly="Lucerne.ProjectSites.Claims, Version=1.0.0.0, Culture=neutral, PublicKeyToken=$SharePoint.Project.AssemblyPublicKeyToken$"
+         ReceiverClass="Lucerne.ProjectSites.Claims.DirectoryCacheJobFeatureReceiver">
+  <ElementManifests />
+</Feature>

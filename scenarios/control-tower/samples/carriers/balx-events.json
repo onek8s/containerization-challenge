@@ -1,0 +1,9 @@
+{
+  "events": [
+    { "shipmentId": "BX900001", "orderReference": "PF26-0000013-2", "code": "COLLECTED", "description": "Collected from terminal", "timestamp": "2026-10-29T05:40:00Z", "terminal": "FIVAN", "city": "Vantaa", "sscc": "364300123450001004" },
+    { "shipmentId": "BX900001", "orderReference": "PF26-0000013-2", "code": "ON_FERRY", "description": "Tallink Star 10:30", "timestamp": "2026-10-29T08:31:00Z", "city": "Helsinki" },
+    { "shipmentId": "BX900001", "orderReference": "PF26-0000013-2", "code": "FERRY_ARRIVED", "description": "Arrived Tallinn", "timestamp": "2026-10-29T10:42:00Z", "city": "Tallinn" },
+    { "shipmentId": "BX900001", "orderReference": "PF26-0000013-2", "code": "ETA", "description": "Revised arrival", "timestamp": "2026-10-29T11:05:00Z", "eta": "2026-10-31T09:00:00Z" }
+  ],
+  "nextCursor": null
+}

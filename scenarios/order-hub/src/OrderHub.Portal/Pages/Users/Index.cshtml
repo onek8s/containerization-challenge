@@ -1,0 +1,32 @@
+@page
+@model Litware.OrderHub.Portal.Pages.Users.IndexModel
+@{ ViewData["Title"] = "Users"; }
+<h1>Users</h1>
+<table>
+    <thead><tr><th>User</th><th>Roles</th><th>Locked until</th><th></th></tr></thead>
+    <tbody>
+        @foreach (var u in Model.Users)
+        {
+            <tr>
+                <td>@u.UserName</td>
+                <td>@string.Join(", ", u.Roles)</td>
+                <td>@(u.LockoutEnd?.ToLocalTime().ToString("yyyy-MM-dd HH:mm"))</td>
+                <td>
+                    @if (u.LockoutEnd != null)
+                    {
+                        <form method="post" asp-page-handler="Unlock" asp-route-id="@u.Id"><button type="submit">Unlock</button></form>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h2>Add user or reset password</h2>
+<form method="post" asp-page-handler="Save" class="form narrow">
+    <div asp-validation-summary="All" class="errors"></div>
+    <label>User name <input asp-for="Input.UserName" /></label>
+    <label>Password <input asp-for="Input.Password" type="password" autocomplete="new-password" /></label>
+    <label>Role <select asp-for="Input.Role"><option>Operator</option><option>Admin</option></select></label>
+    <button type="submit">Save</button>
+</form>

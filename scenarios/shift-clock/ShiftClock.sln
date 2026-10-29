@@ -1,0 +1,50 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{BFF792F3-E86C-4321-A8EE-5750689664C0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShiftClock.Shared", "src\ShiftClock.Shared\ShiftClock.Shared.csproj", "{602B08A9-2869-4D77-B86B-56EECEA6F649}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShiftClock.Service", "src\ShiftClock.Service\ShiftClock.Service.csproj", "{70D8EF7E-6344-4BC5-A5F2-1F430217F488}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShiftClock.Console", "src\ShiftClock.Console\ShiftClock.Console.csproj", "{79281650-A556-4974-9D9D-616A242D6DA2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{700F66F5-A6C7-4CC5-B8B1-00E651DFB1BB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShiftClock.Tests", "tests\ShiftClock.Tests\ShiftClock.Tests.csproj", "{A3D07170-DBBA-40A6-8B6C-0DC86EB91EA3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{602B08A9-2869-4D77-B86B-56EECEA6F649}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{602B08A9-2869-4D77-B86B-56EECEA6F649}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{602B08A9-2869-4D77-B86B-56EECEA6F649}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{602B08A9-2869-4D77-B86B-56EECEA6F649}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70D8EF7E-6344-4BC5-A5F2-1F430217F488}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70D8EF7E-6344-4BC5-A5F2-1F430217F488}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70D8EF7E-6344-4BC5-A5F2-1F430217F488}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70D8EF7E-6344-4BC5-A5F2-1F430217F488}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79281650-A556-4974-9D9D-616A242D6DA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79281650-A556-4974-9D9D-616A242D6DA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79281650-A556-4974-9D9D-616A242D6DA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79281650-A556-4974-9D9D-616A242D6DA2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3D07170-DBBA-40A6-8B6C-0DC86EB91EA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3D07170-DBBA-40A6-8B6C-0DC86EB91EA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3D07170-DBBA-40A6-8B6C-0DC86EB91EA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3D07170-DBBA-40A6-8B6C-0DC86EB91EA3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{602B08A9-2869-4D77-B86B-56EECEA6F649} = {BFF792F3-E86C-4321-A8EE-5750689664C0}
+		{70D8EF7E-6344-4BC5-A5F2-1F430217F488} = {BFF792F3-E86C-4321-A8EE-5750689664C0}
+		{79281650-A556-4974-9D9D-616A242D6DA2} = {BFF792F3-E86C-4321-A8EE-5750689664C0}
+		{A3D07170-DBBA-40A6-8B6C-0DC86EB91EA3} = {700F66F5-A6C7-4CC5-B8B1-00E651DFB1BB}
+	EndGlobalSection
+EndGlobal

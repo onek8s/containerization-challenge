@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>Proseware.ControlTower.Tests</RootNamespace>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
+    <PackageReference Include="xunit" Version="2.6.2" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.5.4" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="6.0.25" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\ControlTower.Domain\ControlTower.Domain.csproj" />
+    <ProjectReference Include="..\..\src\ControlTower.Data\ControlTower.Data.csproj" />
+    <ProjectReference Include="..\..\src\ControlTower.Integration\ControlTower.Integration.csproj" />
+    <ProjectReference Include="..\..\src\ControlTower.Rules\ControlTower.Rules.csproj" />
+    <ProjectReference Include="..\..\src\ControlTower.Routing\ControlTower.Routing.csproj" />
+    <ProjectReference Include="..\..\src\ControlTower.Documents\ControlTower.Documents.csproj" />
+    <ProjectReference Include="..\..\src\ControlTower.Tower.Api\ControlTower.Tower.Api.csproj" />
+    <ProjectReference Include="..\..\src\ControlTower.Scanning.Api\ControlTower.Scanning.Api.csproj" />
+  </ItemGroup>
+
+</Project>

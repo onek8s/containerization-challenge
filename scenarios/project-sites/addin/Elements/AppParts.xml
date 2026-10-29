@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- App parts (client web parts) shown on project sites and on the hub. -->
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <ClientWebPart Name="ProjectHealth" Title="Project health" Description="RAG status, burn and overdue deliverables of the current project" DefaultWidth="400" DefaultHeight="320">
+    <Content Type="html" Src="https://dashboards.corp.local/projects/{ProjectNumber}?{StandardTokens}&amp;part=1" />
+    <Properties>
+      <Property Name="ProjectNumber" Type="string" RequiresDesignerPermission="true" DefaultValue="" WebCategory="Project" WebDisplayName="Project number" />
+    </Properties>
+  </ClientWebPart>
+  <ClientWebPart Name="OfficePortfolio" Title="Office portfolio" Description="Status of all active projects of one office" DefaultWidth="600" DefaultHeight="480">
+    <Content Type="html" Src="https://dashboards.corp.local/?office=_office_&amp;{StandardTokens}&amp;part=1" />
+    <Properties>
+      <Property Name="office" Type="enum" RequiresDesignerPermission="true" DefaultValue="LUZ" WebCategory="Portfolio" WebDisplayName="Office">
+        <EnumItems>
+          <EnumItem Value="LUZ" WebDisplayName="Luzern" />
+          <EnumItem Value="ZRH" WebDisplayName="Zürich" />
+          <EnumItem Value="BSL" WebDisplayName="Basel" />
+          <EnumItem Value="BRN" WebDisplayName="Bern" />
+          <EnumItem Value="GVA" WebDisplayName="Genève" />
+          <EnumItem Value="MUC" WebDisplayName="München" />
+          <EnumItem Value="STR" WebDisplayName="Stuttgart" />
+          <EnumItem Value="VIE" WebDisplayName="Wien" />
+        </EnumItems>
+      </Property>
+    </Properties>
+  </ClientWebPart>
+  <CustomAction Id="LucerneDashboards.Ribbon.Export" RegistrationType="List" RegistrationId="100" Location="CommandUI.Ribbon"
+                Title="Export register" HostWebDialog="false">
+    <UrlAction Url="https://dashboards.corp.local/Export/Register/{ListId}?{StandardTokens}" />
+  </CustomAction>
+</Elements>

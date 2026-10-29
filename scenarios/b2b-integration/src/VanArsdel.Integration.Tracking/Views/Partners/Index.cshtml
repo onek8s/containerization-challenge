@@ -1,0 +1,29 @@
+@model VanArsdel.Integration.Tracking.Models.KpiModel
+@{ ViewBag.Title = "Partner KPIs"; }
+<h2>Partner KPIs</h2>
+@using (Html.BeginForm("Index", "Partners", FormMethod.Get, new { @class = "search-form form-inline" }))
+{
+    @Html.TextBoxFor(m => m.From, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date", Name = "from" })
+    @Html.TextBoxFor(m => m.To, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date", Name = "to" })
+    <button type="submit" class="btn btn-primary">Calculate</button>
+    <button type="submit" class="btn btn-default" formaction="@Url.Action("Export", "Partners")">Export to Excel</button>
+}
+<table class="table table-condensed table-striped">
+    <thead><tr><th>Partner</th><th class="text-right">Orders</th><th class="text-right">Rejected</th><th class="text-right">Reject rate</th><th class="text-right">Credit holds</th><th class="text-right">Median min to ERP</th><th class="text-right">Avg h to despatch</th><th class="text-right">Interchanges</th><th class="text-right">Ack on time</th></tr></thead>
+    <tbody>
+        @foreach (var k in Model.Kpis)
+        {
+            <tr>
+                <td>@k.PartnerId</td>
+                <td class="text-right">@k.Orders</td>
+                <td class="text-right">@k.Rejected</td>
+                <td class="text-right @(k.RejectRate > 0.02 ? "overdue" : "")">@k.RejectRate.ToString("P1")</td>
+                <td class="text-right">@k.CreditHolds</td>
+                <td class="text-right">@(k.MedianMinutesToErp.HasValue ? k.MedianMinutesToErp.Value.ToString("N1") : "-")</td>
+                <td class="text-right">@(k.AverageHoursToDespatch.HasValue ? k.AverageHoursToDespatch.Value.ToString("N1") : "-")</td>
+                <td class="text-right">@k.Interchanges</td>
+                <td class="text-right">@k.AckOnTimeRate.ToString("P1")</td>
+            </tr>
+        }
+    </tbody>
+</table>

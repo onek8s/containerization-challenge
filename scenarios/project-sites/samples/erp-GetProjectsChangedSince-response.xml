@@ -1,0 +1,57 @@
+<?xml version="1.0" ?>
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
+  <s:Body>
+    <GetProjectsChangedSinceResponse xmlns="http://schemas.lucerne-eng.example/erp/projects/2016/03">
+      <GetProjectsChangedSinceResult xmlns:a="http://schemas.lucerne-eng.example/erp/projects/2016/03/data" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+        <a:Projects>
+          <a:ErpProject>
+            <a:ProjectNo>P18140</a:ProjectNo>
+            <a:Description>Lake Geneva Pumping Station</a:Description>
+            <a:CustomerNo>C40119</a:CustomerNo>
+            <a:CustomerName>Lakeshore Water Utility</a:CustomerName>
+            <a:ProfitCentre>GVA-270</a:ProfitCentre>
+            <a:MarketSector>Water</a:MarketSector>
+            <a:StatusCode>20</a:StatusCode>
+            <a:ManagerEmployeeNo>10112</a:ManagerEmployeeNo>
+            <a:DirectorEmployeeNo>10104</a:DirectorEmployeeNo>
+            <a:StartDate>2018-01-24T00:00:00</a:StartDate>
+            <a:EndDate>2020-07-24T00:00:00</a:EndDate>
+            <a:ClosedDate i:nil="true"/>
+            <a:BudgetHours>5600</a:BudgetHours>
+            <a:ContractValue>1600000</a:ContractValue>
+            <a:CurrencyCode>CHF</a:CurrencyCode>
+            <a:PercentComplete>61</a:PercentComplete>
+            <a:Restricted>false</a:Restricted>
+            <a:DisciplineCodes>CIV,MEP,ELE,ENV</a:DisciplineCodes>
+            <a:LastChangedUtc>2019-06-13T05:00:00Z</a:LastChangedUtc>
+          </a:ErpProject>
+          <a:ErpProject>
+            <a:ProjectNo>P18115</a:ProjectNo>
+            <a:Description>Bern Wankdorf Data Centre</a:Description>
+            <a:CustomerNo>C40102</a:CustomerNo>
+            <a:CustomerName>Confidential client</a:CustomerName>
+            <a:ProfitCentre>BRN-260</a:ProfitCentre>
+            <a:MarketSector>Industrial</a:MarketSector>
+            <a:StatusCode>20</a:StatusCode>
+            <a:ManagerEmployeeNo>10111</a:ManagerEmployeeNo>
+            <a:DirectorEmployeeNo>10100</a:DirectorEmployeeNo>
+            <a:StartDate>2017-11-26T00:00:00</a:StartDate>
+            <a:EndDate>2020-05-26T00:00:00</a:EndDate>
+            <a:ClosedDate i:nil="true"/>
+            <a:BudgetHours>6400</a:BudgetHours>
+            <a:ContractValue>1800000</a:ContractValue>
+            <a:CurrencyCode>CHF</a:CurrencyCode>
+            <a:PercentComplete>55</a:PercentComplete>
+            <a:Restricted>true</a:Restricted>
+            <a:DisciplineCodes>STR,MEP,ELE</a:DisciplineCodes>
+            <a:LastChangedUtc>2019-06-13T10:00:00Z</a:LastChangedUtc>
+          </a:ErpProject>
+        </a:Projects>
+        <a:Page>1</a:Page>
+        <a:TotalCount>8</a:TotalCount>
+        <a:HasMore>true</a:HasMore>
+        <a:ServerTimeUtc>2019-06-14T17:00:00Z</a:ServerTimeUtc>
+      </GetProjectsChangedSinceResult>
+    </GetProjectsChangedSinceResponse>
+  </s:Body>
+</s:Envelope>

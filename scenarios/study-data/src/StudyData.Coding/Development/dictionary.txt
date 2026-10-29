@@ -1,0 +1,38 @@
+# Development dictionary (fictional codes, not MedDRA or WHODrug content)
+# dictionary	code	term	preferred code	preferred term	hierarchy	synonyms
+MEDDRA	90010001	Nausea	90010001	Nausea	Gastrointestinal disorders	feeling sick|queasy|nauseous
+MEDDRA	90010002	Vomiting	90010002	Vomiting	Gastrointestinal disorders	emesis|throwing up
+MEDDRA	90010003	Diarrhoea	90010003	Diarrhoea	Gastrointestinal disorders	diarrhea|loose stools
+MEDDRA	90010004	Constipation	90010004	Constipation	Gastrointestinal disorders	
+MEDDRA	90010005	Abdominal pain	90010005	Abdominal pain	Gastrointestinal disorders	stomach ache|tummy pain
+MEDDRA	90020001	Fatigue	90020001	Fatigue	General disorders and administration site conditions	tiredness|tired|exhaustion
+MEDDRA	90020002	Pyrexia	90020002	Pyrexia	General disorders and administration site conditions	fever|high temperature
+MEDDRA	90020003	Infusion site reaction	90020003	Infusion site reaction	General disorders and administration site conditions	
+MEDDRA	90030001	Neutrophil count decreased	90030001	Neutrophil count decreased	Investigations	low neutrophils|neutrophils low
+MEDDRA	90030002	Platelet count decreased	90030002	Platelet count decreased	Investigations	low platelets
+MEDDRA	90030003	Alanine aminotransferase increased	90030003	Alanine aminotransferase increased	Investigations	alt increased|raised alt
+MEDDRA	90030004	Blood creatinine increased	90030004	Blood creatinine increased	Investigations	creatinine raised
+MEDDRA	90040001	Neutropenia	90040001	Neutropenia	Blood and lymphatic system disorders	
+MEDDRA	90040002	Anaemia	90040002	Anaemia	Blood and lymphatic system disorders	anemia|low haemoglobin
+MEDDRA	90040003	Thrombocytopenia	90040003	Thrombocytopenia	Blood and lymphatic system disorders	
+MEDDRA	90040004	Febrile neutropenia	90040004	Febrile neutropenia	Blood and lymphatic system disorders	
+MEDDRA	90050001	Peripheral sensory neuropathy	90050001	Peripheral sensory neuropathy	Nervous system disorders	neuropathy|numbness in feet
+MEDDRA	90050002	Paraesthesia	90050002	Paraesthesia	Nervous system disorders	tingling|pins and needles|tingling in fingers|tingling in hands
+MEDDRA	90050003	Headache	90050003	Headache	Nervous system disorders	head ache
+MEDDRA	90050004	Dizziness	90050004	Dizziness	Nervous system disorders	
+MEDDRA	90060001	Decreased appetite	90060001	Decreased appetite	Metabolism and nutrition disorders	loss of appetite|anorexia
+MEDDRA	90060002	Hypomagnesaemia	90060002	Hypomagnesaemia	Metabolism and nutrition disorders	low magnesium
+MEDDRA	90070001	Urinary tract infection	90070001	Urinary tract infection	Infections and infestations	uti
+MEDDRA	90070002	Nasopharyngitis	90070002	Nasopharyngitis	Infections and infestations	common cold
+MEDDRA	90080001	Alopecia	90080001	Alopecia	Skin and subcutaneous tissue disorders	hair loss
+MEDDRA	90080002	Rash	90080002	Rash	Skin and subcutaneous tissue disorders	
+WHODRUG	000001010010	Ondansetron	000001010010	Ondansetron	A04AA01 Serotonin (5HT3) antagonists	zofran
+WHODRUG	000002020010	Paracetamol	000002020010	Paracetamol	N02BE01 Anilides	acetaminophen|panadol|tylenol|panodil
+WHODRUG	000003030010	Dexamethasone	000003030010	Dexamethasone	H02AB02 Glucocorticoids	
+WHODRUG	000004040010	Metoclopramide	000004040010	Metoclopramide	A03FA01 Propulsives	
+WHODRUG	000005050010	Filgrastim	000005050010	Filgrastim	L03AA02 Colony stimulating factors	g-csf|neupogen
+WHODRUG	000006060010	Pegfilgrastim	000006060010	Pegfilgrastim	L03AA13 Colony stimulating factors	neulasta
+WHODRUG	000007070010	Ibuprofen	000007070010	Ibuprofen	M01AE01 Propionic acid derivatives	burana|brufen
+WHODRUG	000008080010	Pantoprazole	000008080010	Pantoprazole	A02BC02 Proton pump inhibitors	somac
+WHODRUG	000009090010	Levothyroxine sodium	000009090010	Levothyroxine sodium	H03AA01 Thyroid hormones	thyroxin
+WHODRUG	000010100010	Macrogol	000010100010	Macrogol	A06AD15 Osmotically acting laxatives	movicol|laxido

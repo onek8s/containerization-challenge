@@ -1,0 +1,14 @@
+@model PayViewModel
+@{ ViewData["Title"] = "Pay rent"; }
+<h1 class="h3">Pay your rent by card</h1>
+<p>Your balance is @(Model.Balance > 0 ? Money.Format(Model.Balance) + " owed" : Money.Format(-Model.Balance) + " in credit"). Weekly charge @Money.Format(Model.WeeklyCharge).</p>
+<form asp-action="Pay" method="post" class="col-md-5 px-0">
+    <div asp-validation-summary="ModelOnly" class="validation-summary-errors"></div>
+    <div class="form-group">
+        <label asp-for="Amount">Amount to pay (£)</label>
+        <input asp-for="Amount" class="form-control" type="number" step="0.01" min="1" />
+        <span asp-validation-for="Amount" class="field-validation-error"></span>
+    </div>
+    <p class="small text-muted">You will go to our payment provider Paystream to enter your card details. We never see or store your card number.</p>
+    <button type="submit" class="btn btn-primary">Continue to payment</button>
+</form>

@@ -1,0 +1,8 @@
+Subject: Request {RequestNumber} was rejected
+Hello,
+
+Request {RequestNumber} was rejected by {DecidedBy}.
+
+Reason: {Comment}
+
+Staff Onboarding

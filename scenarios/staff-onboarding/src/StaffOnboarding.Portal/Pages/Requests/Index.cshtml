@@ -1,0 +1,27 @@
+@page
+@model StaffOnboarding.Portal.Pages.Requests.IndexModel
+@{
+    ViewData["Title"] = "Requests";
+}
+<h1>Requests</h1>
+<form method="get">
+    <select name="status" asp-items="Html.GetEnumSelectList<RequestStatus>()" asp-for="Status"><option value="">All statuses</option></select>
+    <select name="kind" asp-items="Html.GetEnumSelectList<RequestKind>()" asp-for="Kind"><option value="">All kinds</option></select>
+    <button>Filter</button>
+</form>
+<table>
+    <tr><th>Request</th><th>Kind</th><th>Employee</th><th>Account</th><th>Date</th><th>Status</th><th>Next step</th><th>Requested by</th></tr>
+    @foreach (var r in Model.Rows)
+    {
+        <tr>
+            <td><a asp-page="Details" asp-route-number="@r.RequestNumber">@r.RequestNumber</a></td>
+            <td>@r.Kind</td>
+            <td>@r.Subject</td>
+            <td>@r.SamAccountName</td>
+            <td>@r.EffectiveDate.ToString("dd.MM.yyyy")</td>
+            <td><partial name="_StatusBadge" model="r.Status" /></td>
+            <td>@r.NextStep @(r.NextStepAtUtc?.ToLocalTime().ToString("dd.MM.yyyy HH:mm"))</td>
+            <td>@r.RequestedBy</td>
+        </tr>
+    }
+</table>

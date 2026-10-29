@@ -1,0 +1,19 @@
+@model AuthenticatorModel
+@{ ViewData["Title"] = "Authenticator app"; }
+<div class="narrow">
+    <h1>Authenticator app</h1>
+    @if (Model.Enabled)
+    {
+        <p>An authenticator app is set up for your account.</p>
+    }
+    <ol>
+        <li>Install Microsoft Authenticator or another TOTP app on your phone.</li>
+        <li>Add an account with this key: <code>@Model.SharedKey</code> (or open <code class="small">@Model.Uri</code>).</li>
+        <li>Enter the six-digit code the app shows.</li>
+    </ol>
+    <form method="post">
+        <div asp-validation-summary="All" class="validation"></div>
+        <label>Code <input name="Code" autocomplete="one-time-code" inputmode="numeric" /></label>
+        <button type="submit">Confirm</button>
+    </form>
+</div>

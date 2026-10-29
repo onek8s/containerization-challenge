@@ -1,0 +1,42 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.Master.cs" Inherits="VanArsdel.Integration.OpsPortal.SiteMaster" %>
+<!DOCTYPE html>
+<html lang="en">
+<head runat="server" id="Head">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%: Page.Title %> - B2B Operations</title>
+    <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="<%: ResolveUrl("~/Content/ops.css") %>" />
+</head>
+<body>
+    <form id="MainForm" runat="server">
+        <nav class="navbar navbar-inverse navbar-static-top">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="<%: ResolveUrl("~/") %>">VanArsdel B2B Operations <span class="env"><asp:Literal ID="EnvironmentName" runat="server" /></span></a>
+                <ul class="nav navbar-nav">
+                    <li><a href="<%: ResolveUrl("~/Instances/") %>">Suspended</a></li>
+                    <li><a href="<%: ResolveUrl("~/Catalog/") %>">Ports</a></li>
+                    <li><a href="<%: ResolveUrl("~/Catalog/Hosts") %>">Hosts</a></li>
+                    <li><a href="<%: ResolveUrl("~/Partners/") %>">Partners</a></li>
+                    <li><a href="<%: ResolveUrl("~/History") %>">History</a></li>
+                    <li><asp:HyperLink ID="TrackingLink" runat="server">Order tracking</asp:HyperLink></li>
+                </ul>
+                <p class="navbar-text navbar-right"><asp:Literal ID="UserLabel" runat="server" Mode="Encode" /></p>
+            </div>
+        </nav>
+        <div class="container-fluid">
+            <asp:Panel ID="FlashPanel" runat="server" Visible="false" CssClass="alert alert-success">
+                <asp:Literal ID="FlashText" runat="server" Mode="Encode" />
+            </asp:Panel>
+            <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+        </div>
+    </form>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.4.min.js"></script>
+    <script>
+        $(function () {
+            $('#check-all').on('change', function () { $('.select-row input[type=checkbox]').prop('checked', this.checked); });
+            $('[data-confirm]').on('click', function () { return confirm($(this).data('confirm')); });
+        });
+    </script>
+</body>
+</html>

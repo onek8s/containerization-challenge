@@ -1,0 +1,90 @@
+@model Tailspin.DealerOrders.SalesDesk.Models.OrderDetails
+@{
+    var o = Model.Order;
+    ViewBag.Title = o.OrderNumber;
+}
+<h2>@o.OrderNumber <small>@o.Status @o.AxSalesId</small></h2>
+@if (!string.IsNullOrEmpty(o.ErrorMessage))
+{
+    <div class="alert alert-danger"><pre>@o.ErrorMessage</pre></div>
+}
+<div class="row">
+    <div class="col-md-6">
+        <dl class="dl-horizontal">
+            <dt>Dealer</dt><dd>@Html.ActionLink(Model.Dealer.AccountNumber + " " + Model.Dealer.Name, "Details", "Dealers", new { id = o.DealerId }, null)</dd>
+            <dt>Source</dt><dd>@o.Source @o.OrderType</dd>
+            <dt>Dealer PO</dt><dd>@o.DealerPoNumber</dd>
+            <dt>Created</dt><dd>@o.CreatedUtc.ToLocalTime().ToString("g") @o.CreatedBy</dd>
+            <dt>Requested / confirmed</dt><dd>@o.RequestedDeliveryDate?.ToString("d") / @o.ConfirmedDeliveryDate?.ToString("d")</dd>
+            <dt>Delivery</dt><dd>@o.DeliveryTerms @o.DeliveryAddress</dd>
+            <dt>Extra discount</dt><dd>@o.ExtraDiscount %</dd>
+            <dt>AX status</dt><dd>@o.AxStatusText @o.AxLastReadUtc?.ToLocalTime().ToString("g")</dd>
+        </dl>
+    </div>
+    <div class="col-md-6">
+        @if (o.Status == OrderStatus.Error)
+        {
+            using (Html.BeginForm("Resubmit", "Orders", new { id = o.Id }, FormMethod.Post, new { style = "display:inline" }))
+            {
+                @Html.AntiForgeryToken()
+                <button class="btn btn-warning">Send to AX again</button>
+            }
+        }
+        @if (o.CanCancel || o.Status == OrderStatus.Error)
+        {
+            using (Html.BeginForm("Cancel", "Orders", new { id = o.Id }, FormMethod.Post, new { @class = "form-inline", style = "margin-top:8px" }))
+            {
+                @Html.AntiForgeryToken()
+                <input name="reason" class="form-control" placeholder="Reason for the dealer" />
+                <button class="btn btn-danger">Cancel order</button>
+            }
+        }
+    </div>
+</div>
+<h4>Lines</h4>
+<table class="table table-condensed">
+    <thead><tr><th>#</th><th>Item</th><th>Config</th><th>Description</th><th class="text-right">Qty</th><th class="text-right">List</th><th class="text-right">Disc</th><th class="text-right">Net</th><th>Lot</th><th>Reservation</th><th>Ship</th><th>Serial</th></tr></thead>
+    @foreach (var l in o.Lines.OrderBy(x => x.LineNumber))
+    {
+        <tr class="@(l.Cancelled ? "text-muted" : "")">
+            <td>@l.LineNumber</td><td>@l.ItemId</td><td>@l.ConfigurationId</td><td>@l.Description</td>
+            <td class="text-right">@l.Quantity.ToString("0.##")</td><td class="text-right">@l.ListPrice.ToString("N2")</td>
+            <td class="text-right">@l.DiscountPercent.ToString("0.##")</td><td class="text-right">@l.NetPrice.ToString("N2")</td>
+            <td>@l.AxInventTransId</td><td>@l.Reservation @l.ReservedQuantity.ToString("0.##")</td><td>@l.ConfirmedShipDate?.ToString("d") @l.ShippedQuantity.ToString("0.##")</td><td>@l.SerialNumber</td>
+        </tr>
+    }
+</table>
+<div class="row">
+    <div class="col-md-6">
+        <h4>AX commands</h4>
+        <table class="table table-condensed">
+            @foreach (var c in Model.Commands)
+            {
+                <tr class="@(c.State == AxCommandState.Failed ? "danger" : "")"><td>@c.Id</td><td>@c.CommandType</td><td>@c.State</td><td>@c.Attempts</td><td>@c.RunAsAxUser</td><td>@c.CompletedUtc?.ToLocalTime().ToString("g")</td><td><small>@c.LastError</small></td></tr>
+            }
+        </table>
+        <h4>Approvals</h4>
+        <table class="table table-condensed">
+            @foreach (var a in Model.Approvals)
+            {
+                <tr><td>@a.Reason</td><td>@a.Decision</td><td>@a.DecidedBy</td><td>@a.DecisionComment</td></tr>
+            }
+        </table>
+    </div>
+    <div class="col-md-6">
+        <h4>History</h4>
+        <table class="table table-condensed">
+            @foreach (var h in o.History.OrderByDescending(x => x.ChangedUtc))
+            {
+                <tr><td>@h.ChangedUtc.ToLocalTime().ToString("g")</td><td>@h.FromStatus &rarr; @h.ToStatus</td><td>@h.ChangedBy</td><td>@h.Comment</td></tr>
+            }
+        </table>
+        <h4>EDI</h4>
+        <ul>
+            @foreach (var m in Model.EdiMessages)
+            {
+                <li>@Html.ActionLink(m.Direction + " " + m.TransactionSet + " " + m.InterchangeControl, "Message", "Edi", new { id = m.Id }, null) @m.State</li>
+            }
+        </ul>
+    </div>
+</div>

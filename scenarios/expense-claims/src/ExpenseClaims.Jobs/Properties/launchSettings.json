@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "ExpenseClaims.Jobs": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "applicationUrl": "http://localhost:5251",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

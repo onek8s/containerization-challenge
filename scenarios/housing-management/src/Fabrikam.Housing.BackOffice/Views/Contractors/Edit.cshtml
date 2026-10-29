@@ -1,0 +1,66 @@
+@model ContractorEditViewModel
+@{
+    var c = Model.Contractor;
+    ViewData["Title"] = c.Id == 0 ? "New contractor" : c.Code;
+}
+<h1 class="h3">@(c.Id == 0 ? "New contractor" : c.Name)</h1>
+@if (Model.NewSecret != null)
+{
+    <div class="alert alert-warning">
+        <strong>New API client secret for @c.ApiClientId:</strong> <code class="user-select-all">@Model.NewSecret</code><br />
+        Copy it now and send it to the contractor through the secure file share. It will not be shown again; the old secret stops working immediately.
+    </div>
+}
+<form asp-action="Edit" asp-route-id="@(c.Id == 0 ? (int?)null : c.Id)" method="post" class="col-lg-9 px-0">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-row">
+        <div class="form-group col-md-2"><label>Code</label><input name="Code" value="@c.Code" class="form-control" maxlength="10" /></div>
+        <div class="form-group col-md-6"><label>Name</label><input name="Name" value="@c.Name" class="form-control" /></div>
+        <div class="form-group col-md-2"><label>Weekly capacity</label><input name="WeeklyCapacity" value="@c.WeeklyCapacity" type="number" class="form-control" /></div>
+        <div class="form-group col-md-2"><label>Patches</label><input name="Patches" value="@c.Patches" class="form-control" placeholder="* or NORTH,EAST" /></div>
+    </div>
+    <div class="form-group">
+        <label>Trades</label><br />
+        @foreach (var t in Model.AllTrades)
+        {
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="selectedTrades" value="@t" id="trade-@t" checked="@Model.SelectedTrades.Contains(t)" />
+                <label class="form-check-label" for="trade-@t">@t</label>
+            </div>
+        }
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-4"><label>Jobs e-mail</label><input name="ContactEmail" value="@c.ContactEmail" class="form-control" /></div>
+        <div class="form-group col-md-4"><label>Phone</label><input name="ContactPhone" value="@c.ContactPhone" class="form-control" /></div>
+        <div class="form-group col-md-4"><label>Remittance e-mail</label><input name="RemittanceEmail" value="@c.RemittanceEmail" class="form-control" /></div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-3"><div class="form-check mt-4"><input type="checkbox" class="form-check-input" name="OutOfHours" value="true" checked="@c.OutOfHours" id="ooh" /><label class="form-check-label" for="ooh">Out of hours service</label></div></div>
+        <div class="form-group col-md-3"><div class="form-check mt-4"><input type="checkbox" class="form-check-input" name="GasSafeRegistered" value="true" checked="@c.GasSafeRegistered" id="gas" /><label class="form-check-label" for="gas">Gas Safe registered</label></div></div>
+        <div class="form-group col-md-3"><label>Gas Safe number</label><input name="GasSafeNumber" value="@c.GasSafeNumber" class="form-control" /></div>
+        <div class="form-group col-md-3"><div class="form-check mt-4"><input type="checkbox" class="form-check-input" name="Active" value="true" checked="@c.Active" id="active" /><label class="form-check-label" for="active">Active</label></div></div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-3"><div class="form-check mt-4"><input type="checkbox" class="form-check-input" name="VatRegistered" value="true" checked="@c.VatRegistered" id="vat" /><label class="form-check-label" for="vat">VAT registered</label></div></div>
+        <div class="form-group col-md-3"><label>VAT number</label><input name="VatNumber" value="@c.VatNumber" class="form-control" /></div>
+    </div>
+    <fieldset class="border p-2 mb-3">
+        <legend class="w-auto small px-1">Bank details for Bacs payments (changes are audited and checked by finance)</legend>
+        <div class="form-row">
+            <div class="form-group col-md-3"><label>Sort code</label><input name="BankSortCode" value="@c.BankSortCode" class="form-control" placeholder="00-00-00" /></div>
+            <div class="form-group col-md-3"><label>Account number</label><input name="BankAccountNumber" value="@c.BankAccountNumber" class="form-control" /></div>
+            <div class="form-group col-md-6"><label>Account name</label><input name="BankAccountName" value="@c.BankAccountName" class="form-control" /></div>
+        </div>
+    </fieldset>
+    <button class="btn btn-primary">Save</button>
+    <a class="btn btn-link" asp-action="Index">Back</a>
+</form>
+@if (c.Id != 0)
+{
+    <hr />
+    <h5>Contractor API access</h5>
+    <p>Client id <code>@c.ApiClientId</code>, secret issued @(c.ApiSecretIssuedAt?.ToString("dd/MM/yyyy") ?? "never"). Open jobs: @Model.OpenJobs.</p>
+    <form asp-action="NewSecret" asp-route-id="@c.Id" method="post" onsubmit="return confirm('Issue a new secret? The current one stops working immediately.');">
+        <button class="btn btn-outline-danger btn-sm">Issue new client secret</button>
+    </form>
+}

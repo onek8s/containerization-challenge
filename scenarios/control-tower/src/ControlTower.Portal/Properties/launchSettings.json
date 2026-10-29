@@ -1,0 +1,13 @@
+{
+  "profiles": {
+    "ControlTower.Portal": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "applicationUrl": "http://localhost:5030",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "CONTROLTOWER_LOG_DIR": "../../.devdata/logs"
+      }
+    }
+  }
+}

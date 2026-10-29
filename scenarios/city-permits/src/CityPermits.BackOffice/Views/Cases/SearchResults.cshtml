@@ -1,0 +1,3 @@
+@model IReadOnlyList<CityPermits.Archive.ArchiveSearchHit>
+<h1>Document search</h1>
+<table>@foreach (var h in Model) { <tr><td>@h.Name</td><td>@h.Path</td><td>@h.Rank</td></tr> }</table>

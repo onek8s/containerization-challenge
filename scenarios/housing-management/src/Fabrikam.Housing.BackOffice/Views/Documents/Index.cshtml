@@ -1,0 +1,25 @@
+@model DocumentSearchViewModel
+@{ ViewData["Title"] = "Documents"; }
+<h1 class="h3">Documents</h1>
+<form method="get" class="form-inline mb-3">
+    <input name="q" value="@Model.Q" class="form-control mr-2" style="min-width:360px" placeholder="Search letters, certificates, scanned post..." />
+    <input type="hidden" name="tenancyId" value="@Model.TenancyId" />
+    <input type="hidden" name="propertyId" value="@Model.PropertyId" />
+    <button class="btn btn-primary">Search</button>
+</form>
+@if (Model.TenancyId.HasValue) { <p class="text-muted">Limited to tenancy <a asp-controller="Tenancies" asp-action="Details" asp-route-id="@Model.TenancyId">@Model.TenancyId</a>.</p> }
+@if (Model.Error != null) { <div class="alert alert-warning">@Model.Error</div> }
+<div class="list-group">
+    @foreach (var h in Model.Hits)
+    {
+        <a class="list-group-item list-group-item-action d-flex" asp-action="Download" asp-route-id="@h.DocumentKey">
+            <img src="@Url.Action("Thumbnail", new { id = h.DocumentKey })" class="doc-thumb mr-3" alt="" onerror="this.style.visibility='hidden'" />
+            <div class="flex-grow-1">
+                <div class="d-flex justify-content-between"><strong>@h.Title</strong><small>@h.UploadedAt.ToString("dd/MM/yyyy")</small></div>
+                <span class="badge badge-light">@h.Category</span>
+                <div class="small text-muted">@Html.Raw(h.Snippet)</div>
+            </div>
+        </a>
+    }
+</div>
+@if (Model.Hits.Count == 0 && !string.IsNullOrEmpty(Model.Q) && Model.Error == null) { <p class="text-muted">No matches.</p> }

@@ -1,0 +1,14 @@
+{
+  "profiles": {
+    "ControlTower.Scanning.Api": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "launchUrl": "swagger",
+      "applicationUrl": "http://localhost:5040",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "CONTROLTOWER_LOG_DIR": "../../.devdata/logs"
+      }
+    }
+  }
+}

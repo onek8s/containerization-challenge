@@ -1,0 +1,71 @@
+@page "/orders"
+@inject RetailApi Api
+@inject NavigationManager Nav
+
+<h1>Orders</h1>
+<ErrorBanner Message="@error" />
+
+<div class="filters">
+    <input placeholder="Customer e-mail" @bind="email" />
+    <select @bind="status">
+        <option value="">All</option>
+        <option>AwaitingPayment</option>
+        <option>Allocating</option>
+        <option>Fulfilling</option>
+        <option>ReadyForCollection</option>
+        <option>Completed</option>
+        <option>Cancelled</option>
+    </select>
+    <button @onclick="() => Load(1)">Search</button>
+    <input placeholder="Go to order no" @bind="goTo" />
+    <button @onclick="@(() => Nav.NavigateTo("orders/" + goTo))">Open</button>
+</div>
+
+@if (result != null)
+{
+    <table>
+        <thead><tr><th>Order</th><th>Placed</th><th>Channel</th><th>Market</th><th>Status</th><th>Payment</th><th>Delivery</th><th>Customer</th><th class="num">Total</th></tr></thead>
+        <tbody>
+            @foreach (var o in result.Items)
+            {
+                <tr>
+                    <td><a href="orders/@o.OrderNo">@o.OrderNo</a></td>
+                    <td>@o.PlacedUtc.ToLocalTime().ToString("d.M. HH:mm")</td>
+                    <td>@o.Channel</td><td>@o.Market</td><td>@o.Status</td><td>@o.PaymentStatus</td>
+                    <td>@o.DeliveryMethod @o.CollectStoreCode</td><td>@o.CustomerEmail</td>
+                    <td class="num">@o.Total.ToString("N2") @o.Currency</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="pager">
+        <button disabled="@(pageNo <= 1)" @onclick="() => Load(pageNo - 1)">Previous</button>
+        <span>Page @pageNo of @Math.Max(1, (result.Total + 49) / 50)</span>
+        <button disabled="@(pageNo * 50 >= result.Total)" @onclick="() => Load(pageNo + 1)">Next</button>
+    </div>
+}
+
+@code {
+    private Paged<OrderRow> result;
+    private string email;
+    private string status = "";
+    private string goTo;
+    private int pageNo = 1;
+    private string error;
+
+    protected override Task OnInitializedAsync() => Load(1);
+
+    private async Task Load(int p)
+    {
+        pageNo = p;
+        error = null;
+        try
+        {
+            result = await Api.OrdersAsync(status, email, pageNo);
+        }
+        catch (ApiException ex)
+        {
+            error = ex.Message;
+        }
+    }
+}

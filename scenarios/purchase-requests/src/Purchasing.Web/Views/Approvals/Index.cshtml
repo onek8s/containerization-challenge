@@ -1,0 +1,6 @@
+@model IEnumerable<RequestSummary>
+@{
+    ViewBag.Title = "Approvals";
+}
+<h1>Waiting for your approval</h1>
+@Html.Partial("_RequestTable", Model)

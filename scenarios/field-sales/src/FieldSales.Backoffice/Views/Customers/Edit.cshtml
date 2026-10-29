@@ -1,0 +1,21 @@
+@model CustomerEditViewModel
+@{
+    ViewBag.Title = Model.Name;
+}
+<h1>@Model.Name <span class="muted">@Model.CustomerNo</span></h1>
+<div class="panel">
+    @using (Html.BeginForm("Edit", "Customers", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(m => m.CustomerId)
+        @Html.ValidationSummary()
+        <div class="form-row">@Html.LabelFor(m => m.Email)@Html.TextBoxFor(m => m.Email, new { type = "email" })</div>
+        <div class="form-row">@Html.LabelFor(m => m.PriceGroup)@Html.DropDownListFor(m => m.PriceGroup, new SelectList(new[] { "A", "B", "C", "D" }))</div>
+        <div class="form-row">@Html.LabelFor(m => m.RepCode)@Html.DropDownListFor(m => m.RepCode, new SelectList(Model.RepCodes), "(not assigned)")</div>
+        <div class="form-row"><label>Delivery days</label>
+            <span>@Html.CheckBoxFor(m => m.Monday) Mo &nbsp; @Html.CheckBoxFor(m => m.Tuesday) Tu &nbsp; @Html.CheckBoxFor(m => m.Wednesday) We &nbsp;
+                @Html.CheckBoxFor(m => m.Thursday) Th &nbsp; @Html.CheckBoxFor(m => m.Friday) Fr</span></div>
+        <div class="form-row">@Html.LabelFor(m => m.CreditBlocked)@Html.CheckBoxFor(m => m.CreditBlocked)</div>
+        <div class="form-row"><label></label><button type="submit" class="btn btn-primary">Save</button>&nbsp;<a class="btn" href="@Url.Action("Index")">Cancel</a></div>
+    }
+</div>

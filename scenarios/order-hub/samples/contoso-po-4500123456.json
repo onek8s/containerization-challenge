@@ -1,0 +1,18 @@
+{
+  "poNumber": "4500123456",
+  "storeId": "ST-0142",
+  "currency": "EUR",
+  "consumer": {
+    "name": "Liisa Mäkelä",
+    "email": "liisa.makela@example.fi",
+    "phone": "+358457654321",
+    "street": "Hämeenkatu 5 A 3",
+    "zip": "33100",
+    "city": "Tampere",
+    "country": "FI"
+  },
+  "lines": [
+    { "articleNo": "LW-PK-65-BLK", "description": "Trek 65 backpack black", "qty": 1, "netPrice": 119.20 },
+    { "articleNo": "LW-SB-M5-LNG", "description": "Polar -5 sleeping bag long", "qty": 1, "netPrice": 103.20 }
+  ]
+}

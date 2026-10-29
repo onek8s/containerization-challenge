@@ -1,0 +1,41 @@
+@page "{id:int}/{kind}"
+@model SignModel
+@using BatchRelease.Core.Rules
+@{
+    ViewData["Title"] = $"{Model.Kind} {Model.Batch?.BatchNumber}";
+}
+<h1>@Model.Kind batch @Model.Batch?.BatchNumber</h1>
+<p>@Model.Batch?.Product?.Name &middot; expiry @Model.Batch?.ExpiresOn.ToString("yyyy-MM-dd")</p>
+
+@if (Model.Error is not null)
+{
+    <div class="error">
+        <p>@Model.Error</p>
+        @if (Model.Findings.Count > 0)
+        {
+            <ul>
+                @foreach (var f in Model.Findings)
+                {
+                    <li class="finding-@f.Severity">@f.Code @f.Message</li>
+                }
+            </ul>
+        }
+    </div>
+}
+
+<form method="post" class="sign" autocomplete="off">
+    <p>Meaning of this signature:</p>
+    <p class="meaning">@SignatureMeanings.For(Model.Kind)</p>
+
+    <label><input type="checkbox" asp-for="Input.MeaningConfirmed" /> I confirm the meaning of my signature.</label>
+
+    <label>
+        @(SignatureMeanings.RequiresComment(Model.Kind) ? "Reason (required)" : "Comment")
+        <textarea asp-for="Input.Comment" rows="3"></textarea>
+    </label>
+
+    <label>Account <input type="text" value="@User.Identity?.Name" readonly /></label>
+    <label>Password <input type="password" asp-for="Input.Password" autocomplete="off" /></label>
+
+    <p><button type="submit">Sign</button> <a asp-page="/Batches/Details" asp-route-id="@Model.Batch?.Id">Cancel</a></p>
+</form>

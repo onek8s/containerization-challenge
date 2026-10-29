@@ -1,0 +1,10 @@
+<Project>
+  <PropertyGroup>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <Company>Fabrikam Clinical Research</Company>
+    <Product>Study Data</Product>
+    <Version>4.2.0</Version>
+  </PropertyGroup>
+</Project>

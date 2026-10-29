@@ -1,0 +1,192 @@
+@page "/quotes/{Id:guid}"
+@implements IDisposable
+@inject QuoteApiClient Api
+@inject LiveUpdates Live
+@inject AuthenticationStateProvider Auth
+
+<PageTitle>@quote?.Reference</PageTitle>
+
+@if (quote is null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <h1>@quote.Reference <span class="badge">@quote.Status</span></h1>
+    @if (message is not null) { <div class="info">@message</div> }
+    @if (error is not null) { <div class="error">@error</div> }
+
+    <div class="columns">
+        <section>
+            <h2>@quote.Risk.Insured.Name</h2>
+            <dl>
+                <dt>Broker</dt><dd>@quote.AgencyName (@quote.AgencyCode)</dd>
+                <dt>Address</dt><dd>@quote.Risk.Insured.AddressLine1, @quote.Risk.Insured.Town @quote.Risk.Insured.Postcode</dd>
+                <dt>Trade</dt><dd>@(TradeList.Find(quote.Risk.Insured.TradeCode)?.Description) (@quote.Risk.Insured.TradeCode)</dd>
+                <dt>Years trading</dt><dd>@quote.Risk.Insured.YearsTrading</dd>
+                <dt>Turnover</dt><dd>@quote.Risk.Insured.Turnover.ToString("N0")</dd>
+                <dt>Premises</dt><dd>@quote.Risk.Premises.Construction, roof @quote.Risk.Premises.Roof, built @quote.Risk.Premises.YearBuilt, alarm @quote.Risk.Premises.Alarm@(quote.Risk.Premises.Occupied ? "" : ", UNOCCUPIED")@(quote.Risk.Premises.ListedBuilding ? ", listed" : "")@(quote.Risk.Premises.FloodInLast10Years ? ", flooded in last 10 years" : "")</dd>
+                <dt>Inception</dt><dd>@quote.InceptionDate.ToString("dd MMM yyyy")</dd>
+                <dt>Product</dt><dd>BC @quote.ProductVersion, tables @quote.RatingTables</dd>
+                <dt>Commission</dt><dd>@quote.CommissionRate.ToString("P1")</dd>
+            </dl>
+
+            <h3>Sums insured and limits</h3>
+            <ul>
+                @if (quote.Risk.MaterialDamage is { } md)
+                {
+                    <li>Buildings @md.Buildings.ToString("N0"), contents @md.Contents.ToString("N0"), stock @md.Stock.ToString("N0"), computers @md.ComputerEquipment.ToString("N0"), excess @md.Excess.ToString("N0")</li>
+                }
+                @if (quote.Risk.BusinessInterruption is { } bi)
+                {
+                    <li>Gross profit @bi.GrossProfit.ToString("N0"), @bi.IndemnityPeriodMonths months</li>
+                }
+                @if (quote.Risk.EmployersLiability is { } el)
+                {
+                    <li>EL: @el.Employees employees, wageroll @el.Wageroll.ToString("N0") (manual @el.ManualWageroll.ToString("N0"))</li>
+                }
+                @if (quote.Risk.PublicLiability is { } pl)
+                {
+                    <li>PL limit @pl.LimitOfIndemnity.ToString("N0")@(pl.ProductsSupplied ? ", products" : "")@(pl.WorkAwayFromPremises ? ", work away" : "")</li>
+                }
+            </ul>
+
+            <h3>Claims</h3>
+            @if (quote.Risk.Claims.Count == 0) { <p class="muted">None declared.</p> }
+            <ul>
+                @foreach (var c in quote.Risk.Claims)
+                {
+                    <li>@c.Date.ToString("dd MMM yyyy") @c.Section.DisplayName() @c.Amount.ToString("N0") - @c.Description @(c.Open ? "(open)" : "")</li>
+                }
+            </ul>
+
+            <h3>Referral reasons</h3>
+            <ul>
+                @foreach (var r in quote.Referrals)
+                {
+                    <li><strong>@r.Code</strong> @r.Text <span class="muted">(@r.Source)</span></li>
+                }
+            </ul>
+        </section>
+
+        <section>
+            @if (quote.Premium is { } premium)
+            {
+                <h2>Premium</h2>
+                <table class="list">
+                    <thead><tr><th>Section</th><th class="num">Technical</th><th class="num">Net</th><th class="num">Gross</th>@if (canDecide){<th>Loading %</th>}</tr></thead>
+                    <tbody>
+                        @foreach (var s in premium.Sections)
+                        {
+                            <tr>
+                                <td>@s.Section.DisplayName()</td>
+                                <td class="num">@s.Technical.ToString("N2")</td>
+                                <td class="num">@s.Net.ToString("N2")</td>
+                                <td class="num">@s.Gross.ToString("N2")</td>
+                                @if (canDecide)
+                                {
+                                    <td><input type="number" step="5" class="small" value="@loadings.GetValueOrDefault(s.Section.ToCode())"
+                                               @onchange="e => loadings[s.Section.ToCode()] = decimal.TryParse(e.Value?.ToString(), out var v) ? v : 0" /></td>
+                                }
+                            </tr>
+                        }
+                        <tr class="total"><td>Gross premium</td><td></td><td class="num">@premium.NetPremium.ToString("N2")</td><td class="num">@premium.GrossPremium.ToString("N2")</td></tr>
+                        <tr><td>IPT</td><td></td><td></td><td class="num">@premium.Ipt.ToString("N2")</td></tr>
+                        <tr><td>Fee</td><td></td><td></td><td class="num">@premium.Fee.ToString("N2")</td></tr>
+                        <tr class="total"><td>Total</td><td></td><td></td><td class="num">@premium.Total.ToString("N2")</td></tr>
+                    </tbody>
+                </table>
+            }
+
+            @if (canDecide)
+            {
+                <div class="panel">
+                    <h3>Decision</h3>
+                    <label>Note to broker<textarea rows="3" @bind="note"></textarea></label>
+                    <button class="primary" disabled="@busy" @onclick="() => DecideAsync(ReferralDecision.Accept)">Accept with loadings</button>
+                    <button disabled="@busy" @onclick="() => DecideAsync(ReferralDecision.Decline)">Decline</button>
+                    <button disabled="@busy" @onclick="AssignAsync">Assign to me</button>
+                </div>
+            }
+            @if (quote.UnderwriterNote is not null)
+            {
+                <h3>Underwriter's note</h3>
+                <p>@quote.UnderwriterNote</p>
+            }
+
+            <h2>Documents</h2>
+            <ul>
+                @foreach (var d in quote.Documents)
+                {
+                    <li><a href="files/documents/@d.Id" target="_blank">@d.FileName</a></li>
+                }
+            </ul>
+
+            <h2>History</h2>
+            <ul class="history">
+                @foreach (var h in quote.History)
+                {
+                    <li>@h.AtUtc.ToLocalTime().ToString("dd MMM HH:mm") @h.Event @h.By <span class="muted">@h.Detail</span></li>
+                }
+            </ul>
+        </section>
+    </div>
+}
+
+@code {
+    [Parameter] public Guid Id { get; set; }
+
+    private QuoteDetail? quote;
+    private readonly Dictionary<string, decimal> loadings = [];
+    private string? note;
+    private string? message;
+    private string? error;
+    private bool busy;
+    private bool canDecide => quote?.Status == QuoteStatus.Referred;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        Live.QuoteChanged -= OnQuoteChanged;
+        Live.QuoteChanged += OnQuoteChanged;
+        quote = await Api.QuoteAsync(Id);
+        await Live.EnsureStartedAsync();
+    }
+
+    private async Task DecideAsync(ReferralDecision decision)
+    {
+        busy = true;
+        error = null;
+        try
+        {
+            quote = await Api.DecideAsync(Id, new ReferralDecisionRequest
+            {
+                Decision = decision,
+                Loadings = decision == ReferralDecision.Accept ? loadings.Where(l => l.Value != 0).ToDictionary() : [],
+                Note = note
+            });
+            message = decision == ReferralDecision.Accept ? "Accepted. The broker has been told." : "Declined. The broker has been told.";
+        }
+        catch (ApiProblemException ex)
+        {
+            error = ex.Message;
+        }
+        busy = false;
+    }
+
+    private async Task AssignAsync()
+    {
+        await Api.AssignAsync(Id);
+        var state = await Auth.GetAuthenticationStateAsync();
+        message = $"Assigned to {state.User.FindFirst("name")?.Value}.";
+        quote = await Api.QuoteAsync(Id);
+    }
+
+    private Task OnQuoteChanged(QuoteNotice notice) =>
+        notice.QuoteId != Id ? Task.CompletedTask : InvokeAsync(async () =>
+        {
+            quote = await Api.QuoteAsync(Id);
+            StateHasChanged();
+        });
+
+    public void Dispose() => Live.QuoteChanged -= OnQuoteChanged;
+}

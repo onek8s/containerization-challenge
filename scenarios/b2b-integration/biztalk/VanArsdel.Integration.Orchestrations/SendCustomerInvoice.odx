@@ -1,0 +1,374 @@
+﻿#if __DESIGNER_DATA
+#error Do not define __DESIGNER_DATA.
+<?xml version="1.0" encoding="utf-8"?>
+<om:MetaModel MajorVersion="1" MinorVersion="3" Core="2b131234-7959-458d-834f-2dc0769ce683" ScheduleModel="66366196-361d-448d-976f-cab5e87496d2" xmlns:om="http://schemas.microsoft.com/BizTalk/2003/DesignerData">
+    <om:Property Name="DisplayName" Value="SendCustomerInvoice" />
+    <om:Element Type="Module" OID="f7e4d40a-fdc9-54a7-88a9-74a81c019de4">
+        <om:Property Name="ReportToAnalyst" Value="True" />
+        <om:Property Name="Name" Value="VanArsdel.Integration.Orchestrations" />
+        <om:Property Name="Signal" Value="False" />
+        <om:Element Type="PortType" OID="c8cda5aa-4874-5a5f-b776-9f8f8157ac96" ParentLink="Module_PortType">
+            <om:Property Name="Synchronous" Value="False" />
+            <om:Property Name="TypeModifier" Value="Internal" />
+            <om:Property Name="ReportToAnalyst" Value="True" />
+            <om:Property Name="Name" Value="CanonicalInvoiceInType" />
+            <om:Property Name="Signal" Value="False" />
+            <om:Element Type="OperationDeclaration" OID="a41f2a0e-fc13-5f78-a198-baaa9f4d3621" ParentLink="PortType_OperationDeclaration">
+                <om:Property Name="OperationType" Value="OneWay" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="Receive" />
+                <om:Property Name="Signal" Value="False" />
+                <om:Element Type="MessageRef" OID="b7445f5e-c07b-56b5-b853-ca84e4e52b7b" ParentLink="OperationDeclaration_RequestMessageRef">
+                    <om:Property Name="Ref" Value="VanArsdel.Integration.Schemas.Canonical.CanonicalInvoice" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="Request" />
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+            </om:Element>
+        </om:Element>
+        <om:Element Type="PortType" OID="614134e0-b4a3-5e9b-8701-dc95a0bdfe55" ParentLink="Module_PortType">
+            <om:Property Name="Synchronous" Value="False" />
+            <om:Property Name="TypeModifier" Value="Internal" />
+            <om:Property Name="ReportToAnalyst" Value="True" />
+            <om:Property Name="Name" Value="PartnerInvoiceOutType" />
+            <om:Property Name="Signal" Value="False" />
+            <om:Element Type="OperationDeclaration" OID="e0014a02-0f31-5f24-b52b-f942fba861e5" ParentLink="PortType_OperationDeclaration">
+                <om:Property Name="OperationType" Value="OneWay" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="Send" />
+                <om:Property Name="Signal" Value="False" />
+                <om:Element Type="MessageRef" OID="ec66a20d-bc06-51fa-9f03-3fe0136c6a00" ParentLink="OperationDeclaration_RequestMessageRef">
+                    <om:Property Name="Ref" Value="System.Xml.XmlDocument" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="Request" />
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+            </om:Element>
+        </om:Element>
+        <om:Element Type="ServiceDeclaration" OID="4af30d5b-087f-5a96-9659-aea4ba25ebf1" ParentLink="Module_ServiceDeclaration">
+            <om:Property Name="InitializedTransactionType" Value="False" />
+            <om:Property Name="IsInvokable" Value="False" />
+            <om:Property Name="TypeModifier" Value="Internal" />
+            <om:Property Name="ReportToAnalyst" Value="True" />
+            <om:Property Name="Name" Value="SendCustomerInvoice" />
+            <om:Property Name="Signal" Value="False" />
+            <om:Element Type="MessageDeclaration" OID="b4e9a55a-257c-5324-a6d0-5e4463c1b5f5" ParentLink="ServiceDeclaration_MessageDeclaration">
+                <om:Property Name="Type" Value="VanArsdel.Integration.Schemas.Canonical.CanonicalInvoice" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="InvoiceMsg" />
+                <om:Property Name="Signal" Value="True" />
+            </om:Element>
+            <om:Element Type="MessageDeclaration" OID="3b701d05-2d54-5692-98ad-5f936563c5c1" ParentLink="ServiceDeclaration_MessageDeclaration">
+                <om:Property Name="Type" Value="VanArsdel.Integration.Schemas.X12.X12_00401_810" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="X12Msg" />
+                <om:Property Name="Signal" Value="True" />
+            </om:Element>
+            <om:Element Type="MessageDeclaration" OID="97c26ee9-7755-5737-83cd-f15ac767db70" ParentLink="ServiceDeclaration_MessageDeclaration">
+                <om:Property Name="Type" Value="VanArsdel.Integration.Schemas.Edifact.EFACT_D96A_INVOIC" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="EdifactMsg" />
+                <om:Property Name="Signal" Value="True" />
+            </om:Element>
+            <om:Element Type="VariableDeclaration" OID="c93b5a24-1aad-58d0-862b-ef27db48bd42" ParentLink="ServiceDeclaration_VariableDeclaration">
+                <om:Property Name="UseDefaultConstructor" Value="False" />
+                <om:Property Name="Type" Value="System.String" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="partnerId" />
+                <om:Property Name="Signal" Value="True" />
+            </om:Element>
+            <om:Element Type="VariableDeclaration" OID="e960b7bd-180a-50ff-bb55-468d8027465b" ParentLink="ServiceDeclaration_VariableDeclaration">
+                <om:Property Name="UseDefaultConstructor" Value="False" />
+                <om:Property Name="Type" Value="System.String" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="documentNumber" />
+                <om:Property Name="Signal" Value="True" />
+            </om:Element>
+            <om:Element Type="VariableDeclaration" OID="0c1d2022-24a5-5bd7-81e4-7c829c787afe" ParentLink="ServiceDeclaration_VariableDeclaration">
+                <om:Property Name="UseDefaultConstructor" Value="False" />
+                <om:Property Name="Type" Value="System.String" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="erpOrderNumber" />
+                <om:Property Name="Signal" Value="True" />
+            </om:Element>
+            <om:Element Type="VariableDeclaration" OID="31ba82e7-5be7-5683-b7be-46456af11237" ParentLink="ServiceDeclaration_VariableDeclaration">
+                <om:Property Name="UseDefaultConstructor" Value="False" />
+                <om:Property Name="Type" Value="System.String" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="standard" />
+                <om:Property Name="Signal" Value="True" />
+            </om:Element>
+            <om:Element Type="PortDeclaration" OID="b1d4bf52-1be8-5538-b67b-bf5b01590552" ParentLink="ServiceDeclaration_PortDeclaration">
+                <om:Property Name="PortModifier" Value="Implements" />
+                <om:Property Name="Orientation" Value="Receive" />
+                <om:Property Name="PortIndex" Value="0" />
+                <om:Property Name="IsWebPort" Value="False" />
+                <om:Property Name="OrderedDelivery" Value="False" />
+                <om:Property Name="Type" Value="VanArsdel.Integration.Orchestrations.CanonicalInvoiceInType" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="InvoiceIn" />
+                <om:Property Name="Signal" Value="False" />
+                <om:Element Type="DirectBindingAttribute" OID="566876b8-8f94-5f43-abda-45e880082389" ParentLink="PortDeclaration_CLRAttribute">
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+            </om:Element>
+            <om:Element Type="PortDeclaration" OID="a4c367ad-a712-5be8-9501-dbea2500c51e" ParentLink="ServiceDeclaration_PortDeclaration">
+                <om:Property Name="PortModifier" Value="Uses" />
+                <om:Property Name="Orientation" Value="Send" />
+                <om:Property Name="PortIndex" Value="1" />
+                <om:Property Name="IsWebPort" Value="False" />
+                <om:Property Name="OrderedDelivery" Value="False" />
+                <om:Property Name="Type" Value="VanArsdel.Integration.Orchestrations.PartnerInvoiceOutType" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="PartnerOut" />
+                <om:Property Name="Signal" Value="False" />
+                <om:Element Type="DirectBindingAttribute" OID="a44b6b42-47e8-5c5f-bb9a-0908acc5a25b" ParentLink="PortDeclaration_CLRAttribute">
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+            </om:Element>
+            <om:Element Type="ServiceBody" OID="56f092ee-78e8-5cfe-ac02-3f3022282d16" ParentLink="ServiceDeclaration_ServiceBody">
+                <om:Property Name="Signal" Value="False" />
+                <om:Element Type="Receive" OID="c1eca2c0-14e3-5208-b4d8-6969f01c379d" ParentLink="ServiceBody_Statement">
+                    <om:Property Name="Activate" Value="True" />
+                    <om:Property Name="PortName" Value="InvoiceIn" />
+                    <om:Property Name="MessageName" Value="InvoiceMsg" />
+                    <om:Property Name="OperationName" Value="Receive" />
+                    <om:Property Name="OperationMessageName" Value="Request" />
+                    <om:Property Name="Filter" Value='VanArsdel.Integration.Schemas.MessageKind == "CustomerInvoice"' />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="ReceiveInvoice" />
+                    <om:Property Name="Signal" Value="True" />
+                </om:Element>
+                <om:Element Type="VariableAssignment" OID="e766676d-56a2-519d-8312-fba6625f2879" ParentLink="ServiceBody_Statement">
+                    <om:Property Name="Expression" Value="partnerId = InvoiceMsg(VanArsdel.Integration.Schemas.PartnerId);&#10;documentNumber = xpath(InvoiceMsg, &quot;string(/*[local-name()='Invoice']/*[local-name()='Header']/*[local-name()='InvoiceNumber'])&quot;);&#10;erpOrderNumber = xpath(InvoiceMsg, &quot;string(/*[local-name()='Invoice']/*[local-name()='Header']/*[local-name()='ErpOrderNumber'])&quot;);&#10;standard = VanArsdel.Integration.Runtime.Orchestration.OrderProcess.StandardOf(partnerId);" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="ReadInvoiceKeys" />
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+                <om:Element Type="Decision" OID="84a02aec-0819-5616-85ef-ad8ee5c28a34" ParentLink="ServiceBody_Statement">
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="ByStandard" />
+                    <om:Property Name="Signal" Value="False" />
+                    <om:Element Type="DecisionBranch" OID="bbf44ccf-018d-5ed3-9c22-5df9cc249290" ParentLink="ReallyComplexStatement_Branch">
+                        <om:Property Name="Expression" Value='standard == "X12"' />
+                        <om:Property Name="IsGhostBranch" Value="False" />
+                        <om:Property Name="ReportToAnalyst" Value="True" />
+                        <om:Property Name="Name" Value="X12" />
+                        <om:Property Name="Signal" Value="False" />
+                        <om:Element Type="Construct" OID="05c43684-b74b-56ad-9d12-9aa1969d0b50" ParentLink="ComplexStatement_Statement">
+                            <om:Property Name="ReportToAnalyst" Value="True" />
+                            <om:Property Name="Name" Value="MapTo810" />
+                            <om:Property Name="Signal" Value="False" />
+                            <om:Element Type="Transform" OID="7860296d-8731-53b3-9e97-3d8c4c2e3167" ParentLink="ComplexStatement_Statement">
+                                <om:Property Name="ClassName" Value="VanArsdel.Integration.Maps.Invoice_to_X12_00401_810" />
+                                <om:Property Name="ReportToAnalyst" Value="True" />
+                                <om:Property Name="Name" Value="Transform_Invoice_to_X12_00401_810" />
+                                <om:Property Name="Signal" Value="True" />
+                                <om:Element Type="MessagePartRef" OID="17172983-1fad-5b8a-b8e7-f9342dd47d49" ParentLink="Transform_InputMessagePartRef">
+                                    <om:Property Name="MessageRef" Value="InvoiceMsg" />
+                                    <om:Property Name="ReportToAnalyst" Value="True" />
+                                    <om:Property Name="Name" Value="MessagePartReference_1" />
+                                    <om:Property Name="Signal" Value="False" />
+                                </om:Element>
+                                <om:Element Type="MessagePartRef" OID="498260a2-2da8-52d9-8acb-be30588958e4" ParentLink="Transform_OutputMessagePartRef">
+                                    <om:Property Name="MessageRef" Value="X12Msg" />
+                                    <om:Property Name="ReportToAnalyst" Value="True" />
+                                    <om:Property Name="Name" Value="MessagePartReference_2" />
+                                    <om:Property Name="Signal" Value="False" />
+                                </om:Element>
+                            </om:Element>
+                            <om:Element Type="MessageRef" OID="7486a867-c685-5182-84d3-00a1e24ca340" ParentLink="Construct_MessageRef">
+                                <om:Property Name="Ref" Value="X12Msg" />
+                                <om:Property Name="ReportToAnalyst" Value="True" />
+                                <om:Property Name="Signal" Value="False" />
+                            </om:Element>
+                        </om:Element>
+                        <om:Element Type="Construct" OID="ac474b68-81e9-53c9-a69e-8e427233617f" ParentLink="ComplexStatement_Statement">
+                            <om:Property Name="ReportToAnalyst" Value="True" />
+                            <om:Property Name="Name" Value="SetX12Endpoint" />
+                            <om:Property Name="Signal" Value="False" />
+                            <om:Element Type="MessageAssignment" OID="61d2a168-fc3c-5bb7-949f-7d8a5c30cb43" ParentLink="ComplexStatement_Statement">
+                                <om:Property Name="Expression" Value='X12Msg = X12Msg;&#10;X12Msg(VanArsdel.Integration.Schemas.PartnerId) = partnerId;&#10;X12Msg(VanArsdel.Integration.Schemas.Endpoint) = VanArsdel.Integration.Runtime.Orchestration.OrderProcess.EndpointFor(partnerId, "Invoice");' />
+                                <om:Property Name="ReportToAnalyst" Value="False" />
+                                <om:Property Name="Name" Value="Assign_SetX12Endpoint" />
+                                <om:Property Name="Signal" Value="False" />
+                            </om:Element>
+                            <om:Element Type="MessageRef" OID="47ff845e-48e0-56bd-afcb-a1a8424a99e4" ParentLink="Construct_MessageRef">
+                                <om:Property Name="Ref" Value="X12Msg" />
+                                <om:Property Name="ReportToAnalyst" Value="True" />
+                                <om:Property Name="Signal" Value="False" />
+                            </om:Element>
+                        </om:Element>
+                        <om:Element Type="Send" OID="babb16b3-62a8-5a3f-9154-8dc562ab7040" ParentLink="ComplexStatement_Statement">
+                            <om:Property Name="PortName" Value="PartnerOut" />
+                            <om:Property Name="MessageName" Value="X12Msg" />
+                            <om:Property Name="OperationName" Value="Send" />
+                            <om:Property Name="OperationMessageName" Value="Request" />
+                            <om:Property Name="ReportToAnalyst" Value="True" />
+                            <om:Property Name="Name" Value="Send810" />
+                            <om:Property Name="Signal" Value="True" />
+                        </om:Element>
+                    </om:Element>
+                    <om:Element Type="DecisionBranch" OID="d99225e1-b804-56ed-b089-223a1e2d9345" ParentLink="ReallyComplexStatement_Branch">
+                        <om:Property Name="IsGhostBranch" Value="True" />
+                        <om:Property Name="ReportToAnalyst" Value="True" />
+                        <om:Property Name="Name" Value="Else" />
+                        <om:Property Name="Signal" Value="False" />
+                        <om:Element Type="Construct" OID="75d5ff11-57de-55e5-8e51-d3d2e010d2a9" ParentLink="ComplexStatement_Statement">
+                            <om:Property Name="ReportToAnalyst" Value="True" />
+                            <om:Property Name="Name" Value="MapToINVOIC" />
+                            <om:Property Name="Signal" Value="False" />
+                            <om:Element Type="Transform" OID="b6b48bcc-4181-5741-89b4-10ce3584d649" ParentLink="ComplexStatement_Statement">
+                                <om:Property Name="ClassName" Value="VanArsdel.Integration.Maps.Invoice_to_EFACT_D96A_INVOIC" />
+                                <om:Property Name="ReportToAnalyst" Value="True" />
+                                <om:Property Name="Name" Value="Transform_Invoice_to_EFACT_D96A_INVOIC" />
+                                <om:Property Name="Signal" Value="True" />
+                                <om:Element Type="MessagePartRef" OID="65202391-e54b-5154-a7c8-110baaf5a821" ParentLink="Transform_InputMessagePartRef">
+                                    <om:Property Name="MessageRef" Value="InvoiceMsg" />
+                                    <om:Property Name="ReportToAnalyst" Value="True" />
+                                    <om:Property Name="Name" Value="MessagePartReference_1" />
+                                    <om:Property Name="Signal" Value="False" />
+                                </om:Element>
+                                <om:Element Type="MessagePartRef" OID="3ce2d1ff-138d-5ca1-a761-9002dfd5b5d3" ParentLink="Transform_OutputMessagePartRef">
+                                    <om:Property Name="MessageRef" Value="EdifactMsg" />
+                                    <om:Property Name="ReportToAnalyst" Value="True" />
+                                    <om:Property Name="Name" Value="MessagePartReference_2" />
+                                    <om:Property Name="Signal" Value="False" />
+                                </om:Element>
+                            </om:Element>
+                            <om:Element Type="MessageRef" OID="7df2dda6-35d6-521f-ad02-31c765286b1b" ParentLink="Construct_MessageRef">
+                                <om:Property Name="Ref" Value="EdifactMsg" />
+                                <om:Property Name="ReportToAnalyst" Value="True" />
+                                <om:Property Name="Signal" Value="False" />
+                            </om:Element>
+                        </om:Element>
+                        <om:Element Type="Construct" OID="c132257d-84bc-53ef-8987-bebc064cef23" ParentLink="ComplexStatement_Statement">
+                            <om:Property Name="ReportToAnalyst" Value="True" />
+                            <om:Property Name="Name" Value="SetEdifactEndpoint" />
+                            <om:Property Name="Signal" Value="False" />
+                            <om:Element Type="MessageAssignment" OID="0aae7434-8f93-5dfa-a4a5-b645f8f1c239" ParentLink="ComplexStatement_Statement">
+                                <om:Property Name="Expression" Value='EdifactMsg = EdifactMsg;&#10;EdifactMsg(VanArsdel.Integration.Schemas.PartnerId) = partnerId;&#10;EdifactMsg(VanArsdel.Integration.Schemas.Endpoint) = VanArsdel.Integration.Runtime.Orchestration.OrderProcess.EndpointFor(partnerId, "Invoice");' />
+                                <om:Property Name="ReportToAnalyst" Value="False" />
+                                <om:Property Name="Name" Value="Assign_SetEdifactEndpoint" />
+                                <om:Property Name="Signal" Value="False" />
+                            </om:Element>
+                            <om:Element Type="MessageRef" OID="496c1c86-d047-57a3-bcb7-9f5a3a793da0" ParentLink="Construct_MessageRef">
+                                <om:Property Name="Ref" Value="EdifactMsg" />
+                                <om:Property Name="ReportToAnalyst" Value="True" />
+                                <om:Property Name="Signal" Value="False" />
+                            </om:Element>
+                        </om:Element>
+                        <om:Element Type="Send" OID="f2b1da1c-7c3f-5c75-93a8-a8cdb6c69610" ParentLink="ComplexStatement_Statement">
+                            <om:Property Name="PortName" Value="PartnerOut" />
+                            <om:Property Name="MessageName" Value="EdifactMsg" />
+                            <om:Property Name="OperationName" Value="Send" />
+                            <om:Property Name="OperationMessageName" Value="Request" />
+                            <om:Property Name="ReportToAnalyst" Value="True" />
+                            <om:Property Name="Name" Value="SendINVOIC" />
+                            <om:Property Name="Signal" Value="True" />
+                        </om:Element>
+                    </om:Element>
+                </om:Element>
+                <om:Element Type="VariableAssignment" OID="ea11889e-eb0b-54c5-aafd-c9c36e087a5b" ParentLink="ServiceBody_Statement">
+                    <om:Property Name="Expression" Value="VanArsdel.Integration.Runtime.Tracking.OrderLifecycleTracker.InvoiceSent(erpOrderNumber, documentNumber, System.Convert.ToDecimal(xpath(InvoiceMsg, &quot;number(/*[local-name()='Invoice']/*[local-name()='Summary']/*[local-name()='GrandTotal'])&quot;)), System.DateTime.UtcNow);" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="TrackInvoiced" />
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+            </om:Element>
+        </om:Element>
+    </om:Element>
+</om:MetaModel>
+#endif // __DESIGNER_DATA
+module VanArsdel.Integration.Orchestrations
+{
+    internal porttype CanonicalInvoiceInType
+    {
+        oneway Receive
+        {
+            VanArsdel.Integration.Schemas.Canonical.CanonicalInvoice
+        };
+    };
+    internal porttype PartnerInvoiceOutType
+    {
+        oneway Send
+        {
+            System.Xml.XmlDocument
+        };
+    };
+    [Microsoft.XLANGs.BaseTypes.BPELExportable(false)]
+    internal service SendCustomerInvoice
+    {
+        [Microsoft.XLANGs.BaseTypes.DirectBinding()]
+        port implements CanonicalInvoiceInType InvoiceIn;
+        [Microsoft.XLANGs.BaseTypes.DirectBinding()]
+        port uses PartnerInvoiceOutType PartnerOut;
+        message VanArsdel.Integration.Schemas.Canonical.CanonicalInvoice InvoiceMsg;
+        message VanArsdel.Integration.Schemas.X12.X12_00401_810 X12Msg;
+        message VanArsdel.Integration.Schemas.Edifact.EFACT_D96A_INVOIC EdifactMsg;
+        System.String partnerId;
+        System.String documentNumber;
+        System.String erpOrderNumber;
+        System.String standard;
+        body ()
+        {
+            [Microsoft.XLANGs.BaseTypes.DesignerPosition("c1eca2c0-14e3-5208-b4d8-6969f01c379d")]
+            activate (VanArsdel.Integration.Schemas.MessageKind == "CustomerInvoice") receive (InvoiceIn.Receive, InvoiceMsg);
+            [Microsoft.XLANGs.BaseTypes.DesignerPosition("e766676d-56a2-519d-8312-fba6625f2879")]
+            partnerId = InvoiceMsg(VanArsdel.Integration.Schemas.PartnerId);
+            documentNumber = xpath(InvoiceMsg, "string(/*[local-name()='Invoice']/*[local-name()='Header']/*[local-name()='InvoiceNumber'])");
+            erpOrderNumber = xpath(InvoiceMsg, "string(/*[local-name()='Invoice']/*[local-name()='Header']/*[local-name()='ErpOrderNumber'])");
+            standard = VanArsdel.Integration.Runtime.Orchestration.OrderProcess.StandardOf(partnerId);
+            [Microsoft.XLANGs.BaseTypes.DesignerPosition("84a02aec-0819-5616-85ef-ad8ee5c28a34")]
+            if (standard == "X12")
+            {
+                [Microsoft.XLANGs.BaseTypes.DesignerPosition("05c43684-b74b-56ad-9d12-9aa1969d0b50")]
+                construct X12Msg
+                {
+                    [Microsoft.XLANGs.BaseTypes.DesignerPosition("e89abda2-16b7-5b27-9173-567b1bff0ae9")]
+                    transform (X12Msg) = VanArsdel.Integration.Maps.Invoice_to_X12_00401_810 (InvoiceMsg);
+                }
+                [Microsoft.XLANGs.BaseTypes.DesignerPosition("ac474b68-81e9-53c9-a69e-8e427233617f")]
+                construct X12Msg
+                {
+                    [Microsoft.XLANGs.BaseTypes.DesignerPosition("6fbff5ea-f7ef-5454-b8cd-3f6820a6facd")]
+                    X12Msg = X12Msg;
+                    X12Msg(VanArsdel.Integration.Schemas.PartnerId) = partnerId;
+                    X12Msg(VanArsdel.Integration.Schemas.Endpoint) = VanArsdel.Integration.Runtime.Orchestration.OrderProcess.EndpointFor(partnerId, "Invoice");
+                }
+                [Microsoft.XLANGs.BaseTypes.DesignerPosition("babb16b3-62a8-5a3f-9154-8dc562ab7040")]
+                send (PartnerOut.Send, X12Msg);
+            }
+            else
+            {
+                [Microsoft.XLANGs.BaseTypes.DesignerPosition("75d5ff11-57de-55e5-8e51-d3d2e010d2a9")]
+                construct EdifactMsg
+                {
+                    [Microsoft.XLANGs.BaseTypes.DesignerPosition("34f82479-bbf2-5b9a-8ca1-85579d73b4d3")]
+                    transform (EdifactMsg) = VanArsdel.Integration.Maps.Invoice_to_EFACT_D96A_INVOIC (InvoiceMsg);
+                }
+                [Microsoft.XLANGs.BaseTypes.DesignerPosition("c132257d-84bc-53ef-8987-bebc064cef23")]
+                construct EdifactMsg
+                {
+                    [Microsoft.XLANGs.BaseTypes.DesignerPosition("133cf09e-b583-5a21-9f32-da62eeec0325")]
+                    EdifactMsg = EdifactMsg;
+                    EdifactMsg(VanArsdel.Integration.Schemas.PartnerId) = partnerId;
+                    EdifactMsg(VanArsdel.Integration.Schemas.Endpoint) = VanArsdel.Integration.Runtime.Orchestration.OrderProcess.EndpointFor(partnerId, "Invoice");
+                }
+                [Microsoft.XLANGs.BaseTypes.DesignerPosition("f2b1da1c-7c3f-5c75-93a8-a8cdb6c69610")]
+                send (PartnerOut.Send, EdifactMsg);
+            }
+            [Microsoft.XLANGs.BaseTypes.DesignerPosition("ea11889e-eb0b-54c5-aafd-c9c36e087a5b")]
+            VanArsdel.Integration.Runtime.Tracking.OrderLifecycleTracker.InvoiceSent(erpOrderNumber, documentNumber, System.Convert.ToDecimal(xpath(InvoiceMsg, "number(/*[local-name()='Invoice']/*[local-name()='Summary']/*[local-name()='GrandTotal'])")), System.DateTime.UtcNow);
+        }
+    }
+}

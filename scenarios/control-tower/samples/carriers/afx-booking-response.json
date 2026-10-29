@@ -1,0 +1,10 @@
+{
+  "awb": "615-10000259",
+  "bookingStatus": "KK",
+  "latestAcceptance": "2026-10-30T14:00:00Z",
+  "flights": [
+    { "flightNumber": "AF3119", "date": "2026-10-30" },
+    { "flightNumber": "AF0871", "date": "2026-10-31" }
+  ],
+  "remarks": "COL handling confirmed"
+}

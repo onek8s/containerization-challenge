@@ -1,0 +1,14 @@
+Subject: Order {OrderNumber} received
+
+Dear {DealerName},
+
+we have received your order {OrderNumber} (your reference {DealerPo}).
+
+{Lines}
+
+Order value: {Total}
+Status: {Status}
+
+You can follow the order in the dealer portal: {Link}
+
+Tailspin Machinery dealer sales

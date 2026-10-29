@@ -1,0 +1,49 @@
+@model IList<Inspection>
+@{
+    ViewBag.Title = "Inspections";
+    var recent = (IList<RecentInspection>)ViewBag.Recent;
+}
+<h1>Inspections</h1>
+@foreach (var notice in (IEnumerable<string>)ViewBag.Notices)
+{
+    <p class="notice">@notice</p>
+}
+@if (recent.Count > 0)
+{
+    <p class="recent">Recently viewed:
+        @foreach (var r in recent)
+        {
+            <a href="@Url.RouteUrl("Inspection", new { id = r.Id })">@r.ClaimNumber</a>
+        }
+    </p>
+}
+<p>
+    <a class="button" href="@Url.Action("Create")">New inspection</a>
+    @if (ViewBag.ShowClosed)
+    {
+        <a href="@Url.Action("Index")">Hide closed</a>
+    }
+    else
+    {
+        <a href="@Url.Action("Index", new { closed = true })">Show closed</a>
+    }
+</p>
+<table class="grid">
+    <thead>
+        <tr><th>Claim</th><th>Property</th><th>Peril</th><th>Inspected</th><th>Adjuster</th><th>Photos</th><th>Status</th></tr>
+    </thead>
+    <tbody>
+        @foreach (var i in Model)
+        {
+            <tr>
+                <td><a href="@Url.RouteUrl("Inspection", new { id = i.Id })">@i.ClaimNumber</a></td>
+                <td>@i.PropertyAddress</td>
+                <td>@ReportBuilder.PerilName(i.PerilCode)</td>
+                <td>@i.InspectedOn.ToString("dd/MM/yyyy")</td>
+                <td>@i.AdjusterName</td>
+                <td class="num">@i.PhotoCount</td>
+                <td><span class="status s@((int)i.Status)">@i.Status</span></td>
+            </tr>
+        }
+    </tbody>
+</table>

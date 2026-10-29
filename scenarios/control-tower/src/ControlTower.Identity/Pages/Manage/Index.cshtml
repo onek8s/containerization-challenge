@@ -1,0 +1,11 @@
+@page
+@model Proseware.ControlTower.Identity.Pages.Manage.IndexModel
+@{ ViewData["Title"] = "My account"; }
+<h1 class="h4">@Model.DisplayName</h1>
+<dl class="row">
+    <dt class="col-sm-3">User name</dt><dd class="col-sm-9">@Model.UserName</dd>
+    <dt class="col-sm-3">Roles</dt><dd class="col-sm-9">@string.Join(", ", Model.UserRoles)</dd>
+    <dt class="col-sm-3">Authenticator app</dt><dd class="col-sm-9">@(Model.TwoFactorEnabled ? "In use" : "Not set up")</dd>
+</dl>
+<a class="btn btn-outline-primary" asp-page="./ChangePassword">Change password</a>
+<a class="btn btn-outline-primary" asp-page="./EnableAuthenticator">@(Model.TwoFactorEnabled ? "Replace authenticator" : "Set up authenticator")</a>

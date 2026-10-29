@@ -1,0 +1,50 @@
+<Project Sdk="MSBuild.SDK.SystemWeb">
+
+  <PropertyGroup>
+    <TargetFramework>net452</TargetFramework>
+    <Configurations>Debug;Release;Lab</Configurations>
+    <RootNamespace>Southridge.Clinic.PatientWeb</RootNamespace>
+    <AppConfig>Web.config</AppConfig>
+    <GeneratedBindingRedirectsAction>None</GeneratedBindingRedirectsAction>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MSBuild.Microsoft.VisualStudio.Web.targets" Version="14.0.0.3" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.AspNet.Mvc" Version="4.0.40804" />
+    <PackageReference Include="Microsoft.AspNet.Razor" Version="2.0.30506" />
+    <PackageReference Include="Microsoft.AspNet.WebPages" Version="2.0.30506" />
+    <PackageReference Include="Microsoft.Web.Infrastructure" Version="1.0.0" />
+    <PackageReference Include="Ninject" Version="3.0.1.10" />
+    <PackageReference Include="Ninject.MVC3" Version="3.0.0.6" />
+    <PackageReference Include="WebActivator" Version="1.5.3" />
+    <PackageReference Include="elmah.corelibrary" Version="1.2.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="**\*.aspx;**\*.ascx;**\*.ashx;**\*.master;**\*.Master;Global.asax" />
+    <Content Include="Areas\**\*.cshtml;Areas\**\Web.config;Content\**\*;App_Data\*.txt" />
+    <None Include="Web References\**\*.wsdl;Web References\**\*.map" />
+    <None Include="Web.Debug.config;Web.Release.config;Web.Lab.config" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Southridge.Clinic.Domain\Southridge.Clinic.Domain.csproj" />
+    <ProjectReference Include="..\Southridge.Clinic.Infrastructure\Southridge.Clinic.Infrastructure.csproj" />
+    <ProjectReference Include="..\Southridge.Clinic.Data\Southridge.Clinic.Data.csproj" />
+    <ProjectReference Include="..\Southridge.Clinic.Documents\Southridge.Clinic.Documents.csproj" />
+    <ProjectReference Include="..\Southridge.Clinic.Billing\Southridge.Clinic.Billing.csproj" />
+  </ItemGroup>
+
+</Project>

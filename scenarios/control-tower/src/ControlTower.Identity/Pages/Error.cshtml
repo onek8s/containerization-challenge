@@ -1,0 +1,17 @@
+@page
+@model ErrorModel
+@{ ViewData["Title"] = "Error"; }
+<h1 class="h3 text-danger">Sign-in error</h1>
+@if (Model.Message is not null)
+{
+    <p>@Model.Message</p>
+    @if (Model.Description is not null) { <p class="text-muted">@Model.Description</p> }
+}
+else
+{
+    <p>An error occurred while processing your request.</p>
+}
+@if (Model.RequestId is not null)
+{
+    <p class="small text-muted">Request id: <code>@Model.RequestId</code></p>
+}

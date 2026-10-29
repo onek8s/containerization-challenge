@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Exported with the Business Rules Engine Deployment Wizard. Import: deploy\scripts\Install-BusinessRules.ps1 -->
+<brl xmlns="http://schemas.microsoft.com/businessruleslanguage/2002">
+  <ruleset name="VanArsdel.CreditRelease">
+    <version major="1" minor="3" description="Decision after the ERP credit check" modifiedby="CORP\svc-btsdeploy" date="2018-02-06T09:12:45.0000000+01:00" />
+    <configuration>
+      <factretriever />
+      <maxexecutionloopdepth>65536</maxexecutionloopdepth>
+      <translationduration>3600000</translationduration>
+    </configuration>
+    <bindings>
+      <class ref="OrderFacts" type="VanArsdel.Integration.Rules.OrderFacts" assembly="VanArsdel.Integration.Rules, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cfedfd825850e71" instance="0" instances="16" selectivity="1" isStatic="False" />
+      <class ref="PartnerFacts" type="VanArsdel.Integration.Rules.PartnerFacts" assembly="VanArsdel.Integration.Rules, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cfedfd825850e71" instance="0" instances="16" selectivity="1" isStatic="False" />
+      <class ref="RuleOutcome" type="VanArsdel.Integration.Rules.RuleOutcome" assembly="VanArsdel.Integration.Rules, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cfedfd825850e71" instance="0" instances="16" selectivity="1" isStatic="False" />
+    </bindings>
+    <rule name="CreditBlocked" priority="100" active="true">
+      <if>
+        <and><compare operator="equal"><lhs><function><classmember classref="PartnerFacts" member="get_CreditChecked" sideeffects="false" /></function></lhs><rhs><constant><boolean>true</boolean></constant></rhs></compare><compare operator="equal"><lhs><function><classmember classref="PartnerFacts" member="get_CreditApproved" sideeffects="false" /></function></lhs><rhs><constant><boolean>false</boolean></constant></rhs></compare></and>
+      </if>
+      <then>
+        <function><classmember classref="RuleOutcome" member="PlaceOnCreditHold" sideeffects="true"><argument><function><classmember classref="PartnerFacts" member="get_BlockReason" sideeffects="false" /></function></argument></classmember></function>
+        <function><classmember classref="RuleOutcome" member="RuleFired" sideeffects="true"><argument><constant><string>CreditBlocked</string></constant></argument></classmember></function>
+      </then>
+    </rule>
+    <rule name="OverAvailableCredit" priority="90" active="true">
+      <if>
+        <and><compare operator="equal"><lhs><function><classmember classref="PartnerFacts" member="get_CreditApproved" sideeffects="false" /></function></lhs><rhs><constant><boolean>true</boolean></constant></rhs></compare><compare operator="greater than"><lhs><function><classmember classref="OrderFacts" member="GetOrderValue" sideeffects="true" /></function></lhs><rhs><function><classmember classref="PartnerFacts" member="AvailableCredit" sideeffects="true" /></function></rhs></compare></and>
+      </if>
+      <then>
+        <function><classmember classref="RuleOutcome" member="PlaceOnCreditHold" sideeffects="true"><argument><constant><string>Order value exceeds the available credit</string></constant></argument></classmember></function>
+        <function><classmember classref="RuleOutcome" member="RuleFired" sideeffects="true"><argument><constant><string>OverAvailableCredit</string></constant></argument></classmember></function>
+      </then>
+    </rule>
+    <rule name="CreditApproved" priority="10" active="true">
+      <if>
+        <and><compare operator="equal"><lhs><function><classmember classref="PartnerFacts" member="get_CreditApproved" sideeffects="false" /></function></lhs><rhs><constant><boolean>true</boolean></constant></rhs></compare><compare operator="less than or equal"><lhs><function><classmember classref="OrderFacts" member="GetOrderValue" sideeffects="true" /></function></lhs><rhs><function><classmember classref="PartnerFacts" member="AvailableCredit" sideeffects="true" /></function></rhs></compare></and>
+      </if>
+      <then>
+        <function><classmember classref="RuleOutcome" member="AddNote" sideeffects="true"><argument><constant><string>Credit approved</string></constant></argument></classmember></function>
+        <function><classmember classref="RuleOutcome" member="RuleFired" sideeffects="true"><argument><constant><string>CreditApproved</string></constant></argument></classmember></function>
+      </then>
+    </rule>
+  </ruleset>
+</brl>

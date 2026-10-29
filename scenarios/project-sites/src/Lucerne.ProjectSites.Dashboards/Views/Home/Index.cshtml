@@ -1,0 +1,60 @@
+@model PortfolioViewModel
+@{
+    ViewBag.Title = "Project portfolio";
+}
+<form method="get" class="form-inline luc-filter">
+    <select name="office" class="form-control">
+        <option value="">All offices</option>
+        @foreach (var o in Model.Offices)
+        {
+            <option value="@o" @(o == Model.Office ? "selected" : "")>@o</option>
+        }
+    </select>
+    <label class="checkbox-inline"><input type="checkbox" name="exceptions" value="true" @(Model.ExceptionsOnly ? "checked" : "") /> Amber and red only</label>
+    <button type="submit" class="btn btn-default">Show</button>
+    <a class="btn btn-link" href="@Url.Action("Portfolio", "Export", new { office = Model.Office })">Export to Excel</a>
+</form>
+
+<div class="row luc-tiles">
+    <div class="col-sm-3"><div class="luc-tile luc-rag-green">@Model.Count(RagStatus.Green) green</div></div>
+    <div class="col-sm-3"><div class="luc-tile luc-rag-amber">@Model.Count(RagStatus.Amber) amber</div></div>
+    <div class="col-sm-3"><div class="luc-tile luc-rag-red">@Model.Count(RagStatus.Red) red</div></div>
+    <div class="col-sm-3"><canvas id="ragChart" height="80"></canvas></div>
+</div>
+
+<table class="table table-condensed table-striped">
+    <thead>
+        <tr><th>Project</th><th>Client</th><th>Office</th><th>Stage</th><th>Overall</th><th>Schedule</th><th>Budget</th><th>Risk</th><th>% complete</th><th>Summary</th></tr>
+    </thead>
+    <tbody>
+        @foreach (var row in Model.Rows)
+        {
+            var s = row.Status;
+            <tr>
+                <td>@Html.RouteLink(row.Project.Number + " " + row.Project.Name, "Project", new { number = row.Project.Number })</td>
+                <td>@row.Project.ClientName</td>
+                <td>@row.Project.OfficeCode</td>
+                <td>@row.Project.Stage</td>
+                @foreach (var r in new[] { s == null ? RagStatus.NotAssessed : s.Overall, s == null ? RagStatus.NotAssessed : s.Schedule, s == null ? RagStatus.NotAssessed : s.Budget, s == null ? RagStatus.NotAssessed : s.Risk })
+                {
+                    <td class="luc-rag luc-rag-@r.ToString().ToLowerInvariant()">@(r == RagStatus.NotAssessed ? "-" : r.ToString())</td>
+                }
+                <td>@row.Project.PercentComplete.ToString("0")%</td>
+                <td>@(s == null ? "" : s.Summary)</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section scripts {
+    <script>
+        new Chart(document.getElementById('ragChart'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Green', 'Amber', 'Red'],
+                datasets: [{ data: [@Model.Count(RagStatus.Green), @Model.Count(RagStatus.Amber), @Model.Count(RagStatus.Red)], backgroundColor: ['#63be7b', '#ffd966', '#f8696b'] }]
+            },
+            options: { legend: { display: false } }
+        });
+    </script>
+}

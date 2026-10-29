@@ -1,0 +1,56 @@
+@model DashboardViewModel
+@{
+    ViewBag.Title = "Overview";
+}
+<div class="page-header">
+    <h1>@Model.Dealer.Name <small>@Model.Dealer.AccountNumber</small></h1>
+</div>
+@if (Model.Dealer.CreditHold)
+{
+    <div class="alert alert-warning">Your account is on credit hold. New orders wait for Tailspin credit control. Contact accounts receivable.</div>
+}
+<div class="row">
+    <div class="col-sm-2"><div class="tile"><div class="tile-value">@Model.Figures.OpenOrders</div><div class="tile-label">Open orders</div></div></div>
+    <div class="col-sm-2"><div class="tile"><div class="tile-value">@Model.Figures.ShippingThisWeek</div><div class="tile-label">Shipping this week</div></div></div>
+    <div class="col-sm-2"><div class="tile"><div class="tile-value">@Model.Figures.AwaitingApproval</div><div class="tile-label">Waiting for approval</div></div></div>
+    <div class="col-sm-2"><div class="tile"><div class="tile-value">@Model.Figures.OpenQuotes</div><div class="tile-label">Open quotes</div></div></div>
+    <div class="col-sm-4"><div class="tile"><div class="tile-value">@Model.AvailableCredit.ToString("N0") @Model.Dealer.Currency</div><div class="tile-label">Available credit</div></div></div>
+</div>
+<div class="row">
+    <div class="col-md-7">
+        <h3>Latest orders @Html.ActionLink("All orders", "Index", "Orders", null, new { @class = "btn btn-default btn-xs" })</h3>
+        <table class="table table-condensed">
+            <thead><tr><th>Order</th><th>Your PO</th><th>Item</th><th>Status</th><th class="text-right">Value</th><th>Delivery</th></tr></thead>
+            <tbody>
+                @foreach (var o in Model.RecentOrders)
+                {
+                    <tr data-order-id="@o.Id">
+                        <td>@Html.ActionLink(o.OrderNumber, "Details", "Orders", new { id = o.Id }, null)</td>
+                        <td>@o.DealerPoNumber</td>
+                        <td>@o.FirstItem</td>
+                        <td><span class="label @StatusTexts.Css(o.Status) order-status">@o.StatusText</span></td>
+                        <td class="text-right">@o.NetValue.ToString("N2") @o.Currency</td>
+                        <td>@((o.ConfirmedDeliveryDate ?? o.RequestedDeliveryDate)?.ToString("d"))</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-5">
+        <h3>Open quotes</h3>
+        <table class="table table-condensed">
+            <thead><tr><th>Quote</th><th>Customer</th><th>Status</th><th>Valid until</th></tr></thead>
+            <tbody>
+                @foreach (var q in Model.OpenQuotes)
+                {
+                    <tr>
+                        <td>@Html.ActionLink(q.QuoteNumber, "Details", "Quotes", new { id = q.Id }, null)</td>
+                        <td>@q.EndCustomerName</td>
+                        <td>@q.StatusText</td>
+                        <td>@q.ValidUntil.ToString("d")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

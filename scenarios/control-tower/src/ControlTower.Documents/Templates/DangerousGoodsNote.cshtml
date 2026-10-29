@@ -1,0 +1,44 @@
+@inherits RazorLight.TemplatePage<Proseware.ControlTower.Documents.ShipmentDocumentModel>
+@{ var s = Model.Shipment; }
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@Model.Title @s.Number</title>
+    @{ await IncludeAsync("_Styles", Model); }
+</head>
+<body>
+    @{ await IncludeAsync("_Header", Model); }
+    <table class="grid">
+        <tr>
+            <td style="width:50%"><span class="box-label">Consignor</span>@s.ShipperName<br />@s.Origin?.DisplayAddress</td>
+            <td><span class="box-label">Consignee</span>@s.ConsigneeName<br />@s.Destination?.DisplayAddress</td>
+        </tr>
+    </table>
+    <table class="grid" style="margin-top:6px">
+        <tr><th>UN No.</th><th>Proper shipping name</th><th>Class</th><th>PG</th><th>Tunnel</th><th>Packages</th><th class="num">Net quantity</th><th>LQ</th></tr>
+        @foreach (var p in s.Packages.Where(p => p.DangerousGoods != null))
+        {
+            var dg = p.DangerousGoods!;
+            <tr>
+                <td>UN @dg.UnNumber</td>
+                <td>@dg.ProperShippingName</td>
+                <td>@dg.HazardClass</td>
+                <td>@dg.PackingGroup</td>
+                <td>@dg.TunnelCode</td>
+                <td>@p.Quantity x @p.Kind<br /><span class="small">@p.Sscc</span></td>
+                <td class="num">@dg.NetQuantity @dg.NetQuantityUnit</td>
+                <td>@(dg.LimitedQuantity ? "Yes" : "No")</td>
+            </tr>
+        }
+    </table>
+    <p class="small">I hereby declare that the contents of this consignment are fully and accurately described above by the proper shipping name, and are classified, packaged, marked and labelled/placarded and are in all respects in proper condition for transport according to the applicable international and national governmental regulations (ADR / IMDG / IATA DGR).</p>
+    <table class="grid">
+        <tr>
+            <td style="width:50%"><span class="box-label">Name and status of declarant</span><div class="signature"></div></td>
+            <td><span class="box-label">Place, date and signature</span><div class="signature">@Model.Issuer.City, @Model.IssuedAt.ToString("yyyy-MM-dd")</div></td>
+        </tr>
+    </table>
+    <p class="small">Emergency contact: @Model.Issuer.Phone (24 h)</p>
+</body>
+</html>

@@ -1,0 +1,35 @@
+[
+  {
+    "WorkflowName": "KnockOut",
+    "Rules": [
+      { "RuleName": "KO01", "SuccessEvent": "Applicant under 18", "Expression": "input1.Age < 18" },
+      { "RuleName": "KO02", "SuccessEvent": "Applicant over 75 at maturity", "Expression": "input1.AgeAtMaturity > 75" },
+      { "RuleName": "KO03", "SuccessEvent": "Not resident in Finland", "Expression": "input1.Resident == false" },
+      { "RuleName": "KO04", "SuccessEvent": "Registered payment default", "Expression": "input1.PaymentDefault == true" },
+      { "RuleName": "KO05", "SuccessEvent": "Voluntary credit block registered", "Expression": "input1.CreditBlock == true" },
+      { "RuleName": "KO06", "SuccessEvent": "Debt restructuring in progress", "Expression": "input1.DebtRestructuring == true" },
+      { "RuleName": "KO07", "SuccessEvent": "Customer blocked in core", "Expression": "input1.CoreBlocked == true || input1.Deceased == true" },
+      { "RuleName": "KO08", "SuccessEvent": "Existing loan over 30 days past due", "Expression": "input1.ExistingMaxDpd > 30" },
+      { "RuleName": "KO09", "SuccessEvent": "Household budget negative after stress", "Expression": "input1.Surplus < 0" },
+      { "RuleName": "KO10", "SuccessEvent": "Insufficient income", "Expression": "input1.NetIncome < 900" },
+      { "RuleName": "KO11", "SuccessEvent": "Person not found in credit register", "Expression": "input1.BureauPersonFound == false" },
+      { "RuleName": "KO12", "SuccessEvent": "Customer due diligence refused", "Expression": "input1.KycStatus == \"X\"" }
+    ]
+  },
+  {
+    "WorkflowName": "Refer",
+    "Rules": [
+      { "RuleName": "RF01", "SuccessEvent": "Debt service to income over 45 %", "Expression": "input1.Dsti > 0.45" },
+      { "RuleName": "RF02", "SuccessEvent": "Amount over 30 000 EUR", "Expression": "input1.Amount > 30000" },
+      { "RuleName": "RF03", "SuccessEvent": "Applicant on probation", "Expression": "input1.OnProbation == true" },
+      { "RuleName": "RF04", "SuccessEvent": "Employment under 6 months", "Expression": "(input1.Employment == \"Permanent\" || input1.Employment == \"FixedTerm\") && input1.MonthsEmployed < 6" },
+      { "RuleName": "RF05", "SuccessEvent": "Self-employed income needs verification", "Expression": "input1.Employment == \"SelfEmployed\"" },
+      { "RuleName": "RF06", "SuccessEvent": "Politically exposed person", "Expression": "input1.PoliticallyExposed == true" },
+      { "RuleName": "RF07", "SuccessEvent": "Customer due diligence incomplete", "Expression": "input1.ExistingCustomer == true && input1.KycStatus != \"C\"" },
+      { "RuleName": "RF08", "SuccessEvent": "Arrears on existing loans", "Expression": "input1.ExistingArrears > 0" },
+      { "RuleName": "RF09", "SuccessEvent": "Six or more credit inquiries in 12 months", "Expression": "input1.CreditInquiries12M >= 6" },
+      { "RuleName": "RF10", "SuccessEvent": "Collateral missing or loan to value over 100 %", "Expression": "input1.RequiresCollateral == true && (input1.CollateralValue <= 0 || input1.LoanToValue > 1.0)" },
+      { "RuleName": "RF11", "SuccessEvent": "New customer over 15 000 EUR", "Expression": "input1.ExistingCustomer == false && input1.Amount > 15000" }
+    ]
+  }
+]

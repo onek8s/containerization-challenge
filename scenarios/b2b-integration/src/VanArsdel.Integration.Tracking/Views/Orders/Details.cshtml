@@ -1,0 +1,31 @@
+@model VanArsdel.Integration.Tracking.Models.OrderDetailsModel
+@{
+    ViewBag.Title = "Order " + Model.Order.OrderNumber;
+    var o = Model.Order;
+}
+<p>@Html.ActionLink("← Orders", "Index")</p>
+<h2>@o.PartnerId / @o.OrderNumber <small class="status-@o.Status">@o.Status</small></h2>
+<div class="row">
+    <div class="col-md-4">
+        <dl class="dl-horizontal">
+            <dt>ERP order</dt><dd>@(o.ErpOrderNumber ?? "-")</dd>
+            <dt>Lines</dt><dd>@o.LineCount</dd>
+            <dt>Value</dt><dd>@o.OrderValue.ToString("N2")</dd>
+            @if (!string.IsNullOrEmpty(o.HoldReason)) { <dt>Hold reason</dt><dd>@o.HoldReason</dd> }
+            @if (!string.IsNullOrEmpty(o.RejectReason)) { <dt>Reject reason</dt><dd class="text-danger">@o.RejectReason</dd> }
+        </dl>
+        <ul class="timeline">
+            @foreach (var s in Model.Steps)
+            {
+                <li class="@(s.Problem ? "problem" : s.AtUtc.HasValue ? "done" : "")">
+                    <strong>@s.Name</strong>
+                    @if (s.AtUtc.HasValue) { <span>@s.AtUtc.Value.ToString("yyyy-MM-dd HH:mm")</span><span class="since">@s.SinceReceived</span> }
+                </li>
+            }
+        </ul>
+    </div>
+    <div class="col-md-8">
+        <h4>Interchanges with @o.PartnerId in this period</h4>
+        @Html.Partial("_InterchangeTable", Model.Interchanges)
+    </div>
+</div>

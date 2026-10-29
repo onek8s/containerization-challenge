@@ -1,0 +1,39 @@
+@model IList<DeliveryRecord>
+@{
+    ViewBag.Title = "Delivery problems";
+}
+<h1>Delivery problems</h1>
+<p>Deliveries that are waiting for a retry or have failed. Retries resend the archived copy; e-mails to customers with a wrong address need the address corrected on the customer page first.</p>
+<table class="grid">
+    <thead><tr><th>Created</th><th>Subscription</th><th>Customer</th><th>Document</th><th>Method</th><th>Target</th><th>Status</th><th class="num">Attempts</th><th>Error</th><th></th></tr></thead>
+    <tbody>
+        @foreach (var d in Model)
+        {
+            <tr>
+                <td>@d.CreatedAt.ToString("dd.MM.yyyy HH:mm")</td>
+                <td>@Html.ActionLink(d.SubscriptionName, "Run", "Subscriptions", new { id = d.RunId }, null)</td>
+                <td>@if (d.CustomerNo != null) { @Html.ActionLink(d.CustomerNo + " " + d.CustomerName, "Details", "Customers", new { id = d.CustomerNo }, null) }</td>
+                <td>@d.DocumentName</td>
+                <td>@d.Method</td>
+                <td class="path">@d.Target</td>
+                <td class="status-@d.Status.ToLowerInvariant()">@d.Status</td>
+                <td class="num">@d.Attempts</td>
+                <td>@d.LastError</td>
+                <td>
+                    @if (User.IsCreditControl() && d.Status == "Failed")
+                    {
+                        using (Html.BeginForm("Resend", "Deliveries", new { id = d.DeliveryId }, FormMethod.Post, new { @class = "inline" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <button type="submit" class="link">Resend</button>
+                        }
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@if (Model.Count == 0)
+{
+    <p>No delivery problems.</p>
+}

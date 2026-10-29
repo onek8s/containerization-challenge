@@ -1,0 +1,18 @@
+     A*  LNTRNP  Loan transactions                          LNLIB
+     A*  Read by the lending applications through the IBMDA400 OLE DB
+     A*  provider (payment history). Reversed rows keep TRRVSD = 'Y'.
+     A          R LNTRNR                    TEXT('Loan transaction')
+     A            TRACCT        12A         TEXT('Loan account')
+     A            TRSEQN         9P 0       TEXT('Sequence')
+     A            TRBKDT         8S 0       TEXT('Booking date CCYYMMDD')
+     A            TRVLDT         8S 0       TEXT('Value date CCYYMMDD')
+     A            TRTYPE        12A         TEXT('Disbursement Payment Fee ..')
+     A            TRAMT         13P 2       TEXT('Amount')
+     A            TRPRIN        13P 2       TEXT('Principal part')
+     A            TRINT         11P 2       TEXT('Interest part')
+     A            TRFEES        11P 2       TEXT('Fee part')
+     A            TRBALA        13P 2       TEXT('Balance after')
+     A            TRTXID        20A         TEXT('Core transaction id')
+     A            TRRVSD         1A         TEXT('Reversed Y/N')
+     A          K TRACCT
+     A          K TRSEQN

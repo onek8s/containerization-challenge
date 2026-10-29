@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Proseware sign-in</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-ct mb-4">
+        <div class="container">
+            <a class="navbar-brand" href="/">Proseware Freight</a>
+            @if (User.Identity?.IsAuthenticated == true)
+            {
+                <span class="navbar-text text-white">
+                    <a class="text-white me-3" asp-page="/Manage/Index">@User.Identity.Name</a>
+                    @if (User.IsInRole(Roles.Admin))
+                    {
+                        <a class="text-white me-3" asp-page="/Admin/Users">Users</a>
+                    }
+                    <a class="text-white" asp-page="/Account/Logout">Sign out</a>
+                </span>
+            }
+        </div>
+    </nav>
+    <main class="container">
+        @RenderBody()
+    </main>
+    <footer class="container mt-5 text-muted small">Proseware Freight Oy &middot; Control Tower</footer>
+</body>
+</html>

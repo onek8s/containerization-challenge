@@ -1,0 +1,39 @@
+@page "{id:int}"
+@model CityPermits.Citizen.Pages.Cases.DetailsModel
+@{ var c = Model.Case!; ViewData["Title"] = c.Reference; }
+<h1>@c.Reference</h1>
+<p><strong>@c.Title</strong><br />@c.SiteAddress</p>
+<p>Status: <span class="status">@c.Status</span> @if (c.TargetDecisionDate is not null) { <text>· decision expected by @c.TargetDecisionDate.Value.ToString("d MMM yyyy")</text> }</p>
+@if (Model.Message is not null) { <p class="error">@Model.Message</p> }
+
+<h2>Fees</h2>
+<table>
+    @foreach (var f in c.Fees.Where(f => !f.Waived)) { <tr><td>@f.Description</td><td>£@f.Amount.ToString("N2")</td></tr> }
+    <tr><th>Total</th><th>£@c.TotalFees.ToString("N2")</th></tr>
+    <tr><td>Paid</td><td>£@c.TotalPaid.ToString("N2")</td></tr>
+</table>
+
+@if (c.Status == CaseStatus.Draft)
+{
+    <h2>Supporting documents</h2>
+    <form method="post" asp-page-handler="Upload" enctype="multipart/form-data">
+        <input type="file" name="file" /> <button class="btn">Upload</button>
+    </form>
+    <form method="post" asp-page-handler="Submit"><button class="btn">Submit application</button></form>
+}
+@if (c.Status == CaseStatus.AwaitingPayment && c.Balance > 0)
+{
+    <form method="post" asp-page-handler="Pay"><button class="btn">Pay £@c.Balance.ToString("N2") by card</button></form>
+}
+@if (c.Status == CaseStatus.InformationRequested)
+{
+    <form method="post" asp-page-handler="Upload" enctype="multipart/form-data">
+        <input type="file" name="file" /> <button class="btn">Send the requested information</button>
+    </form>
+}
+
+<h2>Documents</h2>
+<ul>@foreach (var d in c.Documents.Where(d => d.VisibleToApplicant)) { <li><a href="/documents/@d.Id">@d.FileName</a> (@d.Kind)</li> }</ul>
+
+<h2>History</h2>
+<table>@foreach (var e in c.Events.Where(e => e.VisibleToApplicant).OrderByDescending(e => e.AtUtc)) { <tr><td>@e.AtUtc.ToString("g")</td><td>@e.ToStatus</td><td>@e.Text</td></tr> }</table>

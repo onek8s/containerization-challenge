@@ -1,0 +1,42 @@
+@page
+@model PartsCatalog.Pages.Parts.IndexModel
+@{
+    ViewData["Title"] = "Parts";
+}
+<h1>Parts</h1>
+<form method="get" class="filter">
+    <input type="text" name="q" value="@Model.Q" placeholder="Part number or description" />
+    <select name="category">
+        <option value="">All categories</option>
+        @foreach (var c in Model.Categories)
+        {
+            <option value="@c" selected="@(c == Model.Category)">@c</option>
+        }
+    </select>
+    <label><input type="checkbox" name="reorder" value="true" checked="@Model.Reorder" /> Below reorder level</label>
+    <button type="submit">Search</button>
+</form>
+<table>
+    <thead>
+        <tr>
+            <th>Part number</th><th>Description</th><th>Category</th><th>Bin</th>
+            <th class="num">On hand</th><th class="num">Reorder</th><th class="num">Unit price</th><th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var p in Model.Parts)
+        {
+            <tr class="@(p.NeedsReorder ? "low" : "")">
+                <td>@p.PartNumber</td>
+                <td>@p.Description</td>
+                <td>@p.Category</td>
+                <td>@p.BinLocation</td>
+                <td class="num">@p.QuantityOnHand</td>
+                <td class="num">@p.ReorderLevel</td>
+                <td class="num">@p.UnitPrice.ToString("N2")</td>
+                <td><a asp-page="Edit" asp-route-id="@p.Id">Edit</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+<p>@Model.Parts.Count part(s)</p>

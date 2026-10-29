@@ -1,0 +1,31 @@
+@model IList<InvoiceRow>
+@if (Model.Count == 0)
+{
+    <p class="muted">No invoices.</p>
+}
+else
+{
+    <table>
+        <thead>
+            <tr>
+                <th>Received</th><th>Supplier</th><th>Invoice</th><th>Date</th><th>PO</th>
+                <th class="num">Gross</th><th>Status</th><th>Match</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var i in Model)
+            {
+                <tr>
+                    <td>@i.ReceivedAt.ToString("d.M.yyyy HH:mm")</td>
+                    <td title="@i.SupplierName">@i.SupplierCode</td>
+                    <td><a asp-page="/Invoices/Details" asp-route-id="@i.InvoiceId">@i.InvoiceNumber</a>@(i.IsCredit ? " (credit)" : "")</td>
+                    <td>@i.InvoiceDate.ToString("d.M.yyyy")</td>
+                    <td>@i.PurchaseOrderNumber</td>
+                    <td class="num">@i.GrossAmount.ToString("N2") @i.Currency</td>
+                    <td><partial name="_StatusBadge" model="i.StatusValue" /></td>
+                    <td class="summary">@i.MatchSummary</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net472</TargetFramework>
+    <RootNamespace>Lucerne.ProjectSites.AdminTool</RootNamespace>
+    <AssemblyName>psadmin</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Lucerne.ProjectSites.Core\Lucerne.ProjectSites.Core.csproj" />
+    <ProjectReference Include="..\Lucerne.ProjectSites.Documents\Lucerne.ProjectSites.Documents.csproj" />
+    <ProjectReference Include="..\Lucerne.ProjectSites.SharePoint.Csom\Lucerne.ProjectSites.SharePoint.Csom.csproj" />
+  </ItemGroup>
+
+</Project>

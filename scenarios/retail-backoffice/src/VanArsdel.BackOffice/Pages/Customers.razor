@@ -1,0 +1,61 @@
+@page "/customers"
+@inject RetailApi Api
+@inject IJSRuntime JS
+
+<h1>Customers</h1>
+<ErrorBanner Message="@error" />
+
+<div class="filters">
+    <input placeholder="E-mail, phone, card or name (3+ characters)" @bind="q" />
+    <button @onclick="Search">Search</button>
+</div>
+
+@if (customers != null)
+{
+    <table>
+        <thead><tr><th>Name</th><th>E-mail</th><th>Phone</th><th>Market</th><th>Card</th><th>Level</th><th class="num">Points</th><th class="num">12 m spend</th><th></th></tr></thead>
+        <tbody>
+            @foreach (var c in customers)
+            {
+                <tr>
+                    <td>@c.FirstName @c.LastName</td><td>@c.Email</td><td>@c.Phone</td><td>@c.Market</td><td>@c.CardNo</td><td>@c.Tier</td>
+                    <td class="num">@c.Points</td><td class="num">@c.RollingSpend.ToString("N2")</td>
+                    <td><button class="danger" @onclick="() => Erase(c)">Erase (GDPR)</button></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<CustomerRow> customers;
+    private string q;
+    private string error;
+
+    private async Task Search()
+    {
+        error = null;
+        try
+        {
+            customers = await Api.CustomersAsync(q);
+        }
+        catch (ApiException ex)
+        {
+            error = ex.Message;
+        }
+    }
+
+    private async Task Erase(CustomerRow customer)
+    {
+        if (!await JS.InvokeAsync<bool>("confirm", $"Erase {customer.Email}? This cannot be undone.")) return;
+        try
+        {
+            await Api.EraseCustomerAsync(customer.Id);
+            customers.Remove(customer);
+        }
+        catch (ApiException ex)
+        {
+            error = ex.Message;
+        }
+    }
+}

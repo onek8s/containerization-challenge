@@ -1,0 +1,44 @@
+@page
+@model ContosoFoods.TradeRebates.Portal.Pages.Claims.IndexModel
+@{
+    ViewData["Title"] = "Claims";
+}
+<h1>Sell-out claims</h1>
+<form method="get">
+    <label>Status</label>
+    <select name="status" asp-for="Status">
+        <option value="">All</option>
+        <option value="V">To review</option>
+        <option value="A">Approved</option>
+        <option value="X">Rejected</option>
+        <option value="R">Received</option>
+    </select>
+    <label>Distributor</label>
+    <select name="distributorId" asp-for="DistributorId" asp-items="Model.DistributorItems"><option value="">All</option></select>
+    <label>Period</label>
+    <input type="text" name="period" value="@Model.Period" placeholder="yyyyMM" />
+    <button type="submit">Filter</button>
+    <a asp-page="Upload">Upload workbook</a>
+</form>
+<table>
+    <thead><tr><th>Claim</th><th>Distributor</th><th>Period</th><th>Source</th><th>Status</th><th class="n">Lines</th><th class="n">Quantity</th><th class="n">Net value</th><th class="n">Warnings</th><th class="n">Rejected</th><th>Received</th><th>Decided</th></tr></thead>
+    <tbody>
+    @foreach (var c in Model.Claims)
+    {
+        <tr>
+            <td><a asp-page="Details" asp-route-id="@c.ClaimId">@c.ClaimId</a></td>
+            <td>@c.DistributorName</td>
+            <td>@Periods.Format(c.Period)</td>
+            <td>@c.Source <span class="muted">@c.SourceRef</span></td>
+            <td>@ClaimStatus.Name(c.Status)</td>
+            <td class="n">@c.LineCount</td>
+            <td class="n">@c.TotalQuantity.ToString("N0")</td>
+            <td class="n">@c.TotalAmount.ToString("N2")</td>
+            <td class="n">@c.WarningCount</td>
+            <td class="n">@c.RejectedCount</td>
+            <td>@c.ReceivedAt.ToString("yyyy-MM-dd HH:mm") <span class="muted">@c.ReceivedBy</span></td>
+            <td>@c.DecidedAt?.ToString("yyyy-MM-dd") <span class="muted">@c.DecidedBy</span></td>
+        </tr>
+    }
+    </tbody>
+</table>

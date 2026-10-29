@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <ContentType ID="0x010100B6A1F4D9C7E64C3B8F2E5A7D1C9B3E21" Name="Engineering Document" Group="Lucerne" Inherits="TRUE" Version="0">
+    <FieldRefs>
+      <FieldRef ID="{F95C4030-BD1E-5A9F-A1BB-7C289C2EC462}" Name="LucDocumentNumber" />
+      <FieldRef ID="{1C3F04E5-D7FA-5BA1-A93E-8309739ABD99}" Name="LucDiscipline" />
+      <FieldRef ID="{BDD09D40-B554-570E-8CDB-AB6BBCADA15C}" Name="LucDocumentType" />
+      <FieldRef ID="{35E89152-76CE-5823-992E-0D620D002079}" Name="LucRevision" />
+      <FieldRef ID="{026A460D-80B2-5C51-916F-430980080AB4}" Name="LucDeliverableStatus" />
+      <FieldRef ID="{627E489B-C8D3-5214-AD29-0ED7CEF3A268}" Name="LucApprovalStatus" />
+      <FieldRef ID="{85A60918-DC08-5E64-BE38-8F2C586F7937}" Name="LucApprovedBy" />
+      <FieldRef ID="{139316B0-7946-51C9-B64F-4ABF2321EFA7}" Name="LucApprovedDate" />
+      <FieldRef ID="{E3B3E89C-0438-5D60-A31C-260B82BAD91C}" Name="LucDocControlId" />
+      <FieldRef ID="{F7DBB5E8-F313-5DD8-95A1-43E282FA60B0}" Name="LucDocControlStatus" />
+      <FieldRef ID="{9527E2D9-0B47-5F62-9C59-B3D54DAA63EE}" Name="LucRetentionCategory" />
+      <FieldRef ID="{2F502BEB-508D-5E84-9981-E33A8E855C40}" Name="LucIsRecord" />
+    </FieldRefs>
+  </ContentType>
+  <ContentType ID="0x010100B6A1F4D9C7E64C3B8F2E5A7D1C9B3E2101" Name="Drawing" Group="Lucerne" Inherits="TRUE" Version="0">
+    <FieldRefs>
+    </FieldRefs>
+  </ContentType>
+  <ContentType ID="0x010100B6A1F4D9C7E64C3B8F2E5A7D1C9B3E2102" Name="Calculation" Group="Lucerne" Inherits="TRUE" Version="0">
+    <FieldRefs>
+    </FieldRefs>
+  </ContentType>
+  <ContentType ID="0x010100B6A1F4D9C7E64C3B8F2E5A7D1C9B3E2103" Name="Report" Group="Lucerne" Inherits="TRUE" Version="0">
+    <FieldRefs>
+    </FieldRefs>
+  </ContentType>
+  <ContentType ID="0x010100B6A1F4D9C7E64C3B8F2E5A7D1C9B3E2104" Name="Correspondence" Group="Lucerne" Inherits="TRUE" Version="0">
+    <FieldRefs>
+    </FieldRefs>
+  </ContentType>
+  <ContentType ID="0x0100E3C2B1A0F94E4D6B8C7A5F3E2D1C0B9A01" Name="Deliverable" Group="Lucerne" Inherits="TRUE" Version="0">
+    <FieldRefs>
+      <FieldRef ID="{F95C4030-BD1E-5A9F-A1BB-7C289C2EC462}" Name="LucDocumentNumber" />
+      <FieldRef ID="{1C3F04E5-D7FA-5BA1-A93E-8309739ABD99}" Name="LucDiscipline" />
+      <FieldRef ID="{BDD09D40-B554-570E-8CDB-AB6BBCADA15C}" Name="LucDocumentType" />
+      <FieldRef ID="{35E89152-76CE-5823-992E-0D620D002079}" Name="LucRevision" />
+      <FieldRef ID="{026A460D-80B2-5C51-916F-430980080AB4}" Name="LucDeliverableStatus" />
+      <FieldRef ID="{366FD369-0270-590A-A6CE-321DB73DCC4A}" Name="LucPlannedDate" />
+      <FieldRef ID="{0989A16B-1725-5850-9424-F5ED626B8FE6}" Name="LucForecastDate" />
+      <FieldRef ID="{F6320F8B-C725-5F9F-8235-9DE4D8908DE9}" Name="LucIssuedDate" />
+    </FieldRefs>
+  </ContentType>
+  <ContentType ID="0x0100E3C2B1A0F94E4D6B8C7A5F3E2D1C0B9A02" Name="Project Risk" Group="Lucerne" Inherits="TRUE" Version="0">
+    <FieldRefs>
+      <FieldRef ID="{596B9143-74DA-521F-8ED2-AF1A239BEB10}" Name="LucSeverity" />
+      <FieldRef ID="{88DCE629-9819-5275-8DFE-91E8AA89FACB}" Name="LucIsOpen" />
+      <FieldRef ID="{5FB4063B-6FF3-5D45-8FC2-ED8B29E4D86B}" Name="LucOwner" />
+    </FieldRefs>
+  </ContentType>
+  <ContentType ID="0x0100E3C2B1A0F94E4D6B8C7A5F3E2D1C0B9A03" Name="RFI" Group="Lucerne" Inherits="TRUE" Version="0">
+    <FieldRefs>
+      <FieldRef ID="{5D3FEA5F-EA63-5E99-91D7-F8C5AD20CC3E}" Name="LucRfiReference" />
+      <FieldRef ID="{5AABB0E1-922F-59B8-AF72-B70E13F52CC2}" Name="LucRaised" />
+      <FieldRef ID="{1D2FC4E2-DA95-5309-B40B-0548A8873747}" Name="LucResponseDue" />
+      <FieldRef ID="{88DCE629-9819-5275-8DFE-91E8AA89FACB}" Name="LucIsOpen" />
+    </FieldRefs>
+  </ContentType>
+  <ContentType ID="0x0100E3C2B1A0F94E4D6B8C7A5F3E2D1C0B9A04" Name="Project Action" Group="Lucerne" Inherits="TRUE" Version="0">
+    <FieldRefs>
+      <FieldRef ID="{C7AC7CE2-7B6E-5880-AD85-0645D603A210}" Name="LucDueDate" />
+      <FieldRef ID="{A3F39E76-91D2-5D57-A39D-06B58B8470B6}" Name="LucCompleted" />
+      <FieldRef ID="{4480EC22-39FA-5726-B19F-9549E0010AA7}" Name="LucAssignedTo" />
+    </FieldRefs>
+  </ContentType>
+  <ContentType ID="0x0100E3C2B1A0F94E4D6B8C7A5F3E2D1C0B9A05" Name="Team Member" Group="Lucerne" Inherits="TRUE" Version="0">
+    <FieldRefs>
+      <FieldRef ID="{612FE376-4B39-5C98-8546-9530D5B3BE22}" Name="LucAccountName" />
+      <FieldRef ID="{EE511A85-954C-5C1A-9B24-C9E8B45FD49F}" Name="LucEmployeeId" />
+      <FieldRef ID="{1C3F04E5-D7FA-5BA1-A93E-8309739ABD99}" Name="LucDiscipline" />
+      <FieldRef ID="{F6EFAD4F-5E20-51DE-BDC2-B631F76B4B8F}" Name="LucOffice" />
+      <FieldRef ID="{9FC6D488-07FD-5880-9575-7A255FD8C587}" Name="LucTeamRole" />
+      <FieldRef ID="{318787BF-9EC1-5E25-A3C6-AF47AC88C0A4}" Name="LucActive" />
+      <FieldRef ID="{C37C11C5-F097-597F-B9E5-7C0AF4D7AD11}" Name="LucLastBooked" />
+    </FieldRefs>
+  </ContentType>
+  <ContentType ID="0x0100E3C2B1A0F94E4D6B8C7A5F3E2D1C0B9A06" Name="Hours Entry" Group="Lucerne" Inherits="TRUE" Version="0">
+    <FieldRefs>
+      <FieldRef ID="{EE511A85-954C-5C1A-9B24-C9E8B45FD49F}" Name="LucEmployeeId" />
+      <FieldRef ID="{612FE376-4B39-5C98-8546-9530D5B3BE22}" Name="LucAccountName" />
+      <FieldRef ID="{1C3F04E5-D7FA-5BA1-A93E-8309739ABD99}" Name="LucDiscipline" />
+      <FieldRef ID="{F6EFAD4F-5E20-51DE-BDC2-B631F76B4B8F}" Name="LucOffice" />
+      <FieldRef ID="{3DFE3BBC-33F0-5ECA-8ECC-B0F75D3428A2}" Name="LucWeek" />
+      <FieldRef ID="{70533607-1AE0-5C22-84A3-DB458672E5F5}" Name="LucHours" />
+    </FieldRefs>
+  </ContentType>
+  <ContentType ID="0x0100E3C2B1A0F94E4D6B8C7A5F3E2D1C0B9A10" Name="Project Record" Group="Lucerne" Inherits="TRUE" Version="0">
+    <FieldRefs>
+      <FieldRef ID="{F03F444C-04FF-5AD4-B112-8294564D622E}" Name="LucProjectNumber" />
+      <FieldRef ID="{D477E763-83A9-5100-A95B-DAC26288C109}" Name="LucProjectName" />
+      <FieldRef ID="{830B6D91-A66E-5E57-806A-32EF4FAAF1CA}" Name="LucClientName" />
+      <FieldRef ID="{F6EFAD4F-5E20-51DE-BDC2-B631F76B4B8F}" Name="LucOffice" />
+      <FieldRef ID="{66606C63-5E94-5A78-8BB2-454C3F27E0FB}" Name="LucSector" />
+      <FieldRef ID="{D49266D3-BF6B-51BE-9CBA-F8B6ACB021C2}" Name="LucProjectStage" />
+      <FieldRef ID="{799A257B-4131-5F64-9270-C31784DB2E27}" Name="LucProjectManager" />
+      <FieldRef ID="{AA71D7D2-5B7C-55D1-A08A-F361FEAB0D7B}" Name="LucProjectDirector" />
+      <FieldRef ID="{A2C0D251-3A47-5C59-A6D7-96FA8852040D}" Name="LucStartDate" />
+      <FieldRef ID="{C91EF748-E2E6-5920-BD0E-34846AE8DC82}" Name="LucPlannedEndDate" />
+      <FieldRef ID="{805D889D-4605-580C-BF0F-9B6A2E09A47B}" Name="LucClosedDate" />
+      <FieldRef ID="{08879B80-1A52-5E08-8772-05DB4F778E4F}" Name="LucBudgetHours" />
+      <FieldRef ID="{BFFDDB10-4B20-5C6F-9B1B-5AF20C375F33}" Name="LucFeeValue" />
+      <FieldRef ID="{9012788D-B514-549E-A290-024CF917A6E4}" Name="LucCurrency" />
+      <FieldRef ID="{CEB645F9-35D5-5FEE-9AA2-4C65D8D9FAD6}" Name="LucPercentComplete" />
+      <FieldRef ID="{2745DB57-CA98-5C43-8135-46A02743039A}" Name="LucConfidential" />
+      <FieldRef ID="{0C6B46FC-F8D8-58E7-A68A-82C948B2EE8C}" Name="LucDisciplines" />
+      <FieldRef ID="{C0F6F7EF-5F6A-53AE-BE14-9C59ECF396C1}" Name="LucSiteUrl" />
+      <FieldRef ID="{C5960E31-7FC7-5937-A794-CBDB6268CDBD}" Name="LucErpModified" />
+    </FieldRefs>
+  </ContentType>
+  <ContentType ID="0x0100E3C2B1A0F94E4D6B8C7A5F3E2D1C0B9A11" Name="Site Request" Group="Lucerne" Inherits="TRUE" Version="0">
+    <FieldRefs>
+      <FieldRef ID="{F03F444C-04FF-5AD4-B112-8294564D622E}" Name="LucProjectNumber" />
+      <FieldRef ID="{1E87719D-2B64-58B9-A67E-671DD37E1DBE}" Name="LucRequestStatus" />
+      <FieldRef ID="{2E07C31E-528A-51B9-9B37-CAA214A8ED89}" Name="LucRequestMessage" />
+      <FieldRef ID="{A373D1F1-5AFA-5E5D-A544-D114D752F65B}" Name="LucRequester" />
+      <FieldRef ID="{C0F6F7EF-5F6A-53AE-BE14-9C59ECF396C1}" Name="LucSiteUrl" />
+    </FieldRefs>
+  </ContentType>
+  <ContentType ID="0x0100E3C2B1A0F94E4D6B8C7A5F3E2D1C0B9A12" Name="Status Record" Group="Lucerne" Inherits="TRUE" Version="0">
+    <FieldRefs>
+      <FieldRef ID="{F03F444C-04FF-5AD4-B112-8294564D622E}" Name="LucProjectNumber" />
+      <FieldRef ID="{F6EFAD4F-5E20-51DE-BDC2-B631F76B4B8F}" Name="LucOffice" />
+      <FieldRef ID="{DDDF75D9-21AC-5953-A7B2-9ED7CB9610C3}" Name="LucOverallStatus" />
+      <FieldRef ID="{28F8F2B6-6202-5BE2-A002-683C38936133}" Name="LucScheduleStatus" />
+      <FieldRef ID="{1104FDD1-21C1-5E37-A912-F0603816C45E}" Name="LucBudgetStatus" />
+      <FieldRef ID="{1436B127-72EA-5F0A-B699-1BF902615B87}" Name="LucRiskStatus" />
+      <FieldRef ID="{A3BEAB8E-A800-502C-8095-64ECB398457A}" Name="LucStatusSummary" />
+      <FieldRef ID="{36FFB27C-F15F-5C44-839C-6A79B79E95C3}" Name="LucStatusMetrics" />
+      <FieldRef ID="{BB849801-92DF-51BC-9A96-18F1B16B906A}" Name="LucAssessedDate" />
+    </FieldRefs>
+  </ContentType>
+  <ContentType ID="0x0100E3C2B1A0F94E4D6B8C7A5F3E2D1C0B9A13" Name="Staff Record" Group="Lucerne" Inherits="TRUE" Version="0">
+    <FieldRefs>
+      <FieldRef ID="{EE511A85-954C-5C1A-9B24-C9E8B45FD49F}" Name="LucEmployeeId" />
+      <FieldRef ID="{612FE376-4B39-5C98-8546-9530D5B3BE22}" Name="LucAccountName" />
+      <FieldRef ID="{BC92EE3F-80D3-5F04-B36D-F6548418716E}" Name="LucEmail" />
+      <FieldRef ID="{F6EFAD4F-5E20-51DE-BDC2-B631F76B4B8F}" Name="LucOffice" />
+      <FieldRef ID="{1C3F04E5-D7FA-5BA1-A93E-8309739ABD99}" Name="LucDiscipline" />
+      <FieldRef ID="{53018053-E2BF-5BB7-B7DF-2251BDC0FB4B}" Name="LucGrade" />
+      <FieldRef ID="{6A9E2A6F-9B42-5183-BACD-5B67C7E143A4}" Name="LucJobTitle" />
+      <FieldRef ID="{318787BF-9EC1-5E25-A3C6-AF47AC88C0A4}" Name="LucActive" />
+    </FieldRefs>
+  </ContentType>
+  <ContentType ID="0x0100E3C2B1A0F94E4D6B8C7A5F3E2D1C0B9A14" Name="Log Entry" Group="Lucerne" Inherits="TRUE" Version="0">
+    <FieldRefs>
+      <FieldRef ID="{F03F444C-04FF-5AD4-B112-8294564D622E}" Name="LucProjectNumber" />
+      <FieldRef ID="{FABAEF94-4FAC-5F83-9296-D8A31AC5BDEB}" Name="LucJob" />
+      <FieldRef ID="{88E677DC-DE9D-5786-A4B7-B7DDFE605B21}" Name="LucOutcome" />
+      <FieldRef ID="{F57C7172-26D8-5DB0-A0EB-EF735A6F129C}" Name="LucRetentionAction" />
+      <FieldRef ID="{A3C9EC70-3875-5DB7-91A3-8604F56B544D}" Name="LucItemUrl" />
+      <FieldRef ID="{9527E2D9-0B47-5F62-9C59-B3D54DAA63EE}" Name="LucRetentionCategory" />
+      <FieldRef ID="{D6FF5437-D5DA-59FA-AD04-B7677B253676}" Name="LucReason" />
+    </FieldRefs>
+  </ContentType>
+</Elements>

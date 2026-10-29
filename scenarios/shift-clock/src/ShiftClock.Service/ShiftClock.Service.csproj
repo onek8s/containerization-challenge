@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>ShiftClock.Service</RootNamespace>
+    <AssemblyName>ShiftClock.Service</AssemblyName>
+    <UserSecretsId>northwind-shiftclock-service</UserSecretsId>
+    <Version>4.1.0</Version>
+    <Company>Northwind Manufacturing</Company>
+    <Product>Shift Clock</Product>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.WindowsServices" Version="8.0.1" />
+    <PackageReference Include="System.Diagnostics.EventLog" Version="8.0.1" />
+    <PackageReference Include="System.IO.Ports" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ShiftClock.Shared\ShiftClock.Shared.csproj" />
+  </ItemGroup>
+
+</Project>

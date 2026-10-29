@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <ListInstance Title="Projects" Url="Lists/Projects" TemplateType="100" FeatureId="{00BFEA71-DE22-43B2-A848-C05709900100}" Description="Project register, maintained from the ERP" OnQuickLaunch="TRUE" />
+  <ContentTypeBinding ContentTypeId="0x0100E3C2B1A0F94E4D6B8C7A5F3E2D1C0B9A10" ListUrl="Lists/Projects" />
+  <ListInstance Title="Project Status" Url="Lists/ProjectStatus" TemplateType="100" FeatureId="{00BFEA71-DE22-43B2-A848-C05709900100}" Description="Nightly status roll-up" OnQuickLaunch="TRUE" />
+  <ContentTypeBinding ContentTypeId="0x0100E3C2B1A0F94E4D6B8C7A5F3E2D1C0B9A12" ListUrl="Lists/ProjectStatus" />
+  <ListInstance Title="Site Requests" Url="Lists/SiteRequests" TemplateType="100" FeatureId="{00BFEA71-DE22-43B2-A848-C05709900100}" Description="Requests for new project sites" OnQuickLaunch="TRUE" />
+  <ContentTypeBinding ContentTypeId="0x0100E3C2B1A0F94E4D6B8C7A5F3E2D1C0B9A11" ListUrl="Lists/SiteRequests" />
+  <ListInstance Title="Staff Directory" Url="Lists/StaffDirectory" TemplateType="100" FeatureId="{00BFEA71-DE22-43B2-A848-C05709900100}" Description="Staff from the HR system" OnQuickLaunch="TRUE" />
+  <ContentTypeBinding ContentTypeId="0x0100E3C2B1A0F94E4D6B8C7A5F3E2D1C0B9A13" ListUrl="Lists/StaffDirectory" />
+  <ListInstance Title="Retention Log" Url="Lists/RetentionLog" TemplateType="100" FeatureId="{00BFEA71-DE22-43B2-A848-C05709900100}" Description="Retention actions" OnQuickLaunch="TRUE" />
+  <ContentTypeBinding ContentTypeId="0x0100E3C2B1A0F94E4D6B8C7A5F3E2D1C0B9A14" ListUrl="Lists/RetentionLog" />
+  <ListInstance Title="Sync Log" Url="Lists/SyncLog" TemplateType="100" FeatureId="{00BFEA71-DE22-43B2-A848-C05709900100}" Description="Job and sync runs" OnQuickLaunch="TRUE" />
+  <ContentTypeBinding ContentTypeId="0x0100E3C2B1A0F94E4D6B8C7A5F3E2D1C0B9A14" ListUrl="Lists/SyncLog" />
+</Elements>

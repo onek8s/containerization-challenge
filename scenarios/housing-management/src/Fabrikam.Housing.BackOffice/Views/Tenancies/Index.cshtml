@@ -1,0 +1,25 @@
+@model IList<Tenancy>
+@{ ViewData["Title"] = "Tenancies"; }
+<h1 class="h3">Tenancies</h1>
+<form method="get" class="form-inline mb-3">
+    <input name="q" value="@ViewBag.Q" class="form-control mr-2" placeholder="Tenancy ref, surname or address" style="min-width:320px" />
+    <button class="btn btn-primary">Search</button>
+</form>
+<table class="table table-sm table-striped">
+    <thead><tr><th>Tenancy</th><th>Tenants</th><th>Address</th><th>Patch</th><th>Type</th><th>Start</th><th class="text-right">Weekly charge</th><th></th></tr></thead>
+    <tbody>
+        @foreach (var t in Model)
+        {
+            <tr>
+                <td><a asp-action="Details" asp-route-id="@t.Id">@t.Reference</a></td>
+                <td>@string.Join(", ", t.Tenants.Select(n => n.FullName))</td>
+                <td>@t.Property.AddressLine1, @t.Property.Postcode</td>
+                <td>@t.Property.PatchCode</td>
+                <td>@t.Type</td>
+                <td>@t.StartDate.ToString("dd/MM/yyyy")</td>
+                <td class="text-right">@Money.Format(t.WeeklyCharge)</td>
+                <td>@if (t.Tenants.Any(n => n.Vulnerable)) { <span class="badge badge-warning">Vulnerable</span> }</td>
+            </tr>
+        }
+    </tbody>
+</table>

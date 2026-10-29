@@ -1,0 +1,6 @@
+/* Theme-only additions; the main layout is in Content/clinic.css. */
+table.grid th.asc a:after { content: " \25B2"; font-size: 9px; }
+table.grid th.desc a:after { content: " \25BC"; font-size: 9px; }
+.calendar { border: 1px solid #b8c2cc; background: #fff; }
+.wizard-steps { width: 160px; background: #f6f9fc; padding: 8px; }
+.wizard-steps a { text-decoration: none; }

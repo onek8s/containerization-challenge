@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Customer order lifecycle, written by the orchestrations through OrchestrationEventStream (VanArsdel.Integration.Runtime). Deploy: bm.exe update-all -DefinitionFile:OrderLifecycle.xml (deploy\Deploy-Bam.ps1) -->
+<BAMDefinition xmlns="http://schemas.microsoft.com/BizTalkServer/2004/10/BAM">
+  <Activity Name="OrderLifecycle" ID="IDFADFDB6D526853C58707421EB0ACE2">
+    <Checkpoint Name="PartnerId" ID="ID8840DFF5875D5FD9A091EBAD9A9FBA" DataType="NVARCHAR" DataLength="20" />
+    <Checkpoint Name="OrderNumber" ID="IDE012BB34821157CEBB26F80B003303" DataType="NVARCHAR" DataLength="35" />
+    <Checkpoint Name="Standard" ID="IDECC11EBD680E561196B26D4296C94D" DataType="NVARCHAR" DataLength="10" />
+    <Checkpoint Name="InterchangeId" ID="ID5767C688F2305B5E8F4A1413054951" DataType="NVARCHAR" DataLength="50" />
+    <Checkpoint Name="LineCount" ID="ID6A85DAEA6DB155778E1F193ABB287F" DataType="INT" />
+    <Checkpoint Name="Status" ID="IDA95A01E1AF1F52949B52E215F5E21E" DataType="NVARCHAR" DataLength="20" />
+    <Checkpoint Name="ReceivedUtc" ID="IDFEB95AF09C7E5B7DA9E20A63108029" DataType="DATETIME" />
+    <Checkpoint Name="ValidatedUtc" ID="IDB968AC2DEBC35D99AB3FEAC8D31185" DataType="DATETIME" />
+    <Checkpoint Name="CreditHoldUtc" ID="ID7604CD0DADB15819A695FF5579D1E0" DataType="DATETIME" />
+    <Checkpoint Name="HoldReason" ID="ID0994AAECD0E75E4EA402602B49F81D" DataType="NVARCHAR" DataLength="256" />
+    <Checkpoint Name="ReleasedUtc" ID="IDD401B81535B65ED397687464027A94" DataType="DATETIME" />
+    <Checkpoint Name="SentToErpUtc" ID="ID9A367E189B2E58E5A0937441BB9CAF" DataType="DATETIME" />
+    <Checkpoint Name="OrderValue" ID="IDF1EFA013D21D5517846546AFCD4838" DataType="FLOAT" />
+    <Checkpoint Name="Currency" ID="ID9D0CFE628DC3593B867056D4A5E92F" DataType="NVARCHAR" DataLength="3" />
+    <Checkpoint Name="ErpOrderNumber" ID="ID95FAE2E73B245C618A106174412857" DataType="NVARCHAR" DataLength="20" />
+    <Checkpoint Name="ConfirmedUtc" ID="ID0E3F426F36845FA89364FD38F6A50E" DataType="DATETIME" />
+    <Checkpoint Name="DespatchNumber" ID="ID6A5C74463E205F45AC5AD79648EB42" DataType="NVARCHAR" DataLength="20" />
+    <Checkpoint Name="DespatchedUtc" ID="IDBE32C60E93C458539125347441EF45" DataType="DATETIME" />
+    <Checkpoint Name="AsnSentUtc" ID="ID049A98EB8760596B80264E3FC492AF" DataType="DATETIME" />
+    <Checkpoint Name="InvoiceNumber" ID="IDBF5A6AD8394F576FBE00EB3A98BAB9" DataType="NVARCHAR" DataLength="20" />
+    <Checkpoint Name="InvoiceAmount" ID="ID26EE13098EB35CABA513C66B15FA8F" DataType="FLOAT" />
+    <Checkpoint Name="InvoicedUtc" ID="ID56FB25B48836552A817DE267F8CE81" DataType="DATETIME" />
+    <Checkpoint Name="RejectedUtc" ID="ID4130FB7027C75EA9B3C022DD28DD70" DataType="DATETIME" />
+    <Checkpoint Name="RejectReason" ID="IDE6A4413F3B2C534885F7201FAA1DD2" DataType="NVARCHAR" DataLength="512" />
+  </Activity>
+  <View Name="OrderLifecycleView" ID="IDDB8A80553B29597793D53138A7B970">
+    <ActivityView Name="ViewOrderLifecycle" ID="ID328C595F5DF45BA583562204DD3159" ActivityRef="IDFADFDB6D526853C58707421EB0ACE2">
+      <Alias Name="PartnerId" ID="IDB17A2ADB9A2F553AA2AD75B8717D84">
+        <CheckpointRef>ID8840DFF5875D5FD9A091EBAD9A9FBA</CheckpointRef>
+      </Alias>
+      <Alias Name="OrderNumber" ID="ID71AB0A5EE2465DB89DF3C523997BEC">
+        <CheckpointRef>IDE012BB34821157CEBB26F80B003303</CheckpointRef>
+      </Alias>
+      <Alias Name="Standard" ID="ID8E6DBB6729B25E119E2ACA459C0DB9">
+        <CheckpointRef>IDECC11EBD680E561196B26D4296C94D</CheckpointRef>
+      </Alias>
+      <Alias Name="InterchangeId" ID="ID6A7B795C95D5510B9E8E0C9515E586">
+        <CheckpointRef>ID5767C688F2305B5E8F4A1413054951</CheckpointRef>
+      </Alias>
+      <Alias Name="LineCount" ID="ID05C423F2EB6F55DCBC4976C49FBEAE">
+        <CheckpointRef>ID6A85DAEA6DB155778E1F193ABB287F</CheckpointRef>
+      </Alias>
+      <Alias Name="Status" ID="ID095C689E850D56DF864BC1BAE098E0">
+        <CheckpointRef>IDA95A01E1AF1F52949B52E215F5E21E</CheckpointRef>
+      </Alias>
+      <Alias Name="ReceivedUtc" ID="ID136B256ED198519F91E343C81DA200">
+        <CheckpointRef>IDFEB95AF09C7E5B7DA9E20A63108029</CheckpointRef>
+      </Alias>
+      <Alias Name="ValidatedUtc" ID="ID325E6904373E59D39EAFD16EF2C5E6">
+        <CheckpointRef>IDB968AC2DEBC35D99AB3FEAC8D31185</CheckpointRef>
+      </Alias>
+      <Alias Name="CreditHoldUtc" ID="ID1D1AA4CC46535424A550CFB9DCE4C8">
+        <CheckpointRef>ID7604CD0DADB15819A695FF5579D1E0</CheckpointRef>
+      </Alias>
+      <Alias Name="HoldReason" ID="IDB0AC3A8CA35759D6B9EDF0B86D13A9">
+        <CheckpointRef>ID0994AAECD0E75E4EA402602B49F81D</CheckpointRef>
+      </Alias>
+      <Alias Name="ReleasedUtc" ID="ID76331D71D4B458998548F4134D685F">
+        <CheckpointRef>IDD401B81535B65ED397687464027A94</CheckpointRef>
+      </Alias>
+      <Alias Name="SentToErpUtc" ID="ID66DC6BC3D8285E159376A54EA2F707">
+        <CheckpointRef>ID9A367E189B2E58E5A0937441BB9CAF</CheckpointRef>
+      </Alias>
+      <Alias Name="OrderValue" ID="ID122D4DD4752859AA93FB38FDF68243">
+        <CheckpointRef>IDF1EFA013D21D5517846546AFCD4838</CheckpointRef>
+      </Alias>
+      <Alias Name="Currency" ID="IDEF525EFFB4735493818033061D3D59">
+        <CheckpointRef>ID9D0CFE628DC3593B867056D4A5E92F</CheckpointRef>
+      </Alias>
+      <Alias Name="ErpOrderNumber" ID="IDDB6E43DA09675241842D23EB565C8B">
+        <CheckpointRef>ID95FAE2E73B245C618A106174412857</CheckpointRef>
+      </Alias>
+      <Alias Name="ConfirmedUtc" ID="IDA975719576AE581F8369BAC4FC5831">
+        <CheckpointRef>ID0E3F426F36845FA89364FD38F6A50E</CheckpointRef>
+      </Alias>
+      <Alias Name="DespatchNumber" ID="ID8456C7AD5399586E827D66686ABA3E">
+        <CheckpointRef>ID6A5C74463E205F45AC5AD79648EB42</CheckpointRef>
+      </Alias>
+      <Alias Name="DespatchedUtc" ID="IDD30BACC5A307556BAF10F4231C0657">
+        <CheckpointRef>IDBE32C60E93C458539125347441EF45</CheckpointRef>
+      </Alias>
+      <Alias Name="AsnSentUtc" ID="ID3F5EC9F3D7975D05B261C8E4AF0F63">
+        <CheckpointRef>ID049A98EB8760596B80264E3FC492AF</CheckpointRef>
+      </Alias>
+      <Alias Name="InvoiceNumber" ID="IDFF618DC16EA153368F27F7834436ED">
+        <CheckpointRef>IDBF5A6AD8394F576FBE00EB3A98BAB9</CheckpointRef>
+      </Alias>
+      <Alias Name="InvoiceAmount" ID="IDEE9C2EF700EA5CD5AE1A933C37003A">
+        <CheckpointRef>ID26EE13098EB35CABA513C66B15FA8F</CheckpointRef>
+      </Alias>
+      <Alias Name="InvoicedUtc" ID="ID9E44969C2E4157E1AE7096BFE77E12">
+        <CheckpointRef>ID56FB25B48836552A817DE267F8CE81</CheckpointRef>
+      </Alias>
+      <Alias Name="RejectedUtc" ID="IDA104F34DAC205D129CB2EAA0A62E1F">
+        <CheckpointRef>ID4130FB7027C75EA9B3C022DD28DD70</CheckpointRef>
+      </Alias>
+      <Alias Name="RejectReason" ID="IDF81BA7E67758531FA4ED76815F5F28">
+        <CheckpointRef>IDE6A4413F3B2C534885F7201FAA1DD2</CheckpointRef>
+      </Alias>
+      <Duration Name="ReceivedToErp" ID="ID9225B07A5906501FA9B7E07F99A77C">
+        <Start>ID136B256ED198519F91E343C81DA200</Start>
+        <End>ID66DC6BC3D8285E159376A54EA2F707</End>
+        <TimeResolution>Minute</TimeResolution>
+      </Duration>
+      <Duration Name="ErpToAsn" ID="ID100B4C33FDC453DCA471722C7C5179">
+        <Start>ID66DC6BC3D8285E159376A54EA2F707</Start>
+        <End>ID3F5EC9F3D7975D05B261C8E4AF0F63</End>
+        <TimeResolution>Minute</TimeResolution>
+      </Duration>
+      <Duration Name="CreditHoldTime" ID="IDF7E85F41C6805956B3F920652F193E">
+        <Start>ID1D1AA4CC46535424A550CFB9DCE4C8</Start>
+        <End>ID76331D71D4B458998548F4134D685F</End>
+        <TimeResolution>Minute</TimeResolution>
+      </Duration>
+      <Duration Name="OrderToInvoice" ID="ID86FB5DD69EEF54828A8EB904AFCEFD">
+        <Start>ID136B256ED198519F91E343C81DA200</Start>
+        <End>ID9E44969C2E4157E1AE7096BFE77E12</End>
+        <TimeResolution>Minute</TimeResolution>
+      </Duration>
+      <DataDimension Name="Partner" ID="IDB6DE748692A659A4B0A718C0E2E6C1">
+        <DataLevel Name="PartnerId" ID="IDD0BF2F6FED445C5DA7112667DADA0D">IDB17A2ADB9A2F553AA2AD75B8717D84</DataLevel>
+      </DataDimension>
+      <DataDimension Name="OrderStatus" ID="ID9467C216E8F6516493793C71168926">
+        <DataLevel Name="Status" ID="IDBC31B4E9FD7E5813A77E03AA42EB17">ID095C689E850D56DF864BC1BAE098E0</DataLevel>
+      </DataDimension>
+      <Measure Name="OrderCount" ID="ID61244D9824605DFE9E588DB7A3E39B" AggregationType="Count">
+        <AliasRef>IDB17A2ADB9A2F553AA2AD75B8717D84</AliasRef>
+      </Measure>
+      <Measure Name="OrderValueSum" ID="ID690B3C4EE070581C85C24FAA8AF801" AggregationType="Sum">
+        <AliasRef>ID122D4DD4752859AA93FB38FDF68243</AliasRef>
+      </Measure>
+    </ActivityView>
+  </View>
+</BAMDefinition>

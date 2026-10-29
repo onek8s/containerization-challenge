@@ -1,0 +1,39 @@
+{
+ "type": "FeatureCollection",
+ "crs": {
+  "type": "name",
+  "properties": {
+   "name": "urn:ogc:def:crs:EPSG::27700"
+  }
+ },
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     600845,
+     142490
+    ]
+   },
+   "properties": {
+    "TPO_REF": "TPO/1987/04",
+    "SPECIES": "Oak"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     601210,
+     142350
+    ]
+   },
+   "properties": {
+    "TPO_REF": "TPO/2003/11",
+    "SPECIES": "London plane"
+   }
+  }
+ ]
+}

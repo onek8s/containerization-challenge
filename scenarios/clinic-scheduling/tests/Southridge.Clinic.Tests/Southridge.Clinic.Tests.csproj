@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net452</TargetFramework>
+    <IsPackable>false</IsPackable>
+    <RootNamespace>Southridge.Clinic.Tests</RootNamespace>
+    <Configurations>Debug;Release;Lab</Configurations>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.11.0" />
+    <PackageReference Include="MSTest.TestAdapter" Version="1.4.0" />
+    <PackageReference Include="MSTest.TestFramework" Version="1.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Southridge.Clinic.Domain\Southridge.Clinic.Domain.csproj" />
+    <ProjectReference Include="..\..\src\Southridge.Clinic.Scheduling\Southridge.Clinic.Scheduling.csproj" />
+    <ProjectReference Include="..\..\src\Southridge.Clinic.Billing\Southridge.Clinic.Billing.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,31 @@
+@inject Microsoft.Extensions.Configuration.IConfiguration Config
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"] - Permits back office</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <style>
+        body{font-family:Segoe UI,Arial,sans-serif;margin:0;font-size:14px} header{background:#263238;color:#fff;padding:8px 16px}
+        header a{color:#fff;margin-right:16px} main{padding:16px} table{border-collapse:collapse;width:100%} td,th{border-bottom:1px solid #ddd;padding:4px 6px;text-align:left}
+        .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px} .card{border:1px solid #ccc;padding:10px;margin-bottom:12px}
+        .Blocking{color:#b71c1c;font-weight:bold}.Consult{color:#e65100}.Condition{color:#1565c0}.msg{background:#e8f5e9;padding:6px}.err{background:#ffebee;padding:6px}
+        #map{height:320px}
+    </style>
+    <script>window.mapTiles = '@(Config["MapService:TileUrl"])';</script>
+</head>
+<body>
+<header>
+    <a href="/Cases">Work queue</a><a href="/Cases?mine=true">My cases</a><a href="/Reports">Reports</a>
+    <form action="/Cases/Search" style="display:inline"><input name="q" placeholder="Search documents" /></form>
+    <span style="float:right">@User.Identity?.Name</span>
+</header>
+<main>
+    @if (TempData["Message"] is string m) { <p class="msg">@m</p> }
+    @if (TempData["Error"] is string e) { <p class="err">@e</p> }
+    @RenderBody()
+</main>
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

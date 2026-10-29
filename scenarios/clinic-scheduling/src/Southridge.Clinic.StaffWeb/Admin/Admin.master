@@ -1,0 +1,17 @@
+<%@ Master Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Admin.master.cs" Inherits="Southridge.Clinic.StaffWeb.Admin.AdminMaster" %>
+<asp:Content ID="Head" ContentPlaceHolderID="HeadContent" runat="server">
+    <asp:ContentPlaceHolder ID="AdminHead" runat="server" />
+</asp:Content>
+<asp:Content ID="Main" ContentPlaceHolderID="MainContent" runat="server">
+    <div class="admin">
+        <ul class="tabs">
+            <li><asp:HyperLink ID="UsersLink" runat="server" NavigateUrl="~/Admin/Users.aspx">Users</asp:HyperLink></li>
+            <li><asp:HyperLink ID="TemplatesLink" runat="server" NavigateUrl="~/Admin/Templates.aspx">Schedule templates</asp:HyperLink></li>
+            <li><asp:HyperLink ID="SettingsLink" runat="server" NavigateUrl="~/Admin/Settings.aspx">Settings</asp:HyperLink></li>
+            <li><asp:HyperLink ID="InterfacesLink" runat="server" NavigateUrl="~/Admin/Interfaces.aspx">Interfaces</asp:HyperLink></li>
+            <li><asp:HyperLink ID="ApiClientsLink" runat="server" NavigateUrl="~/Admin/ApiClients.aspx">Kiosks and partners</asp:HyperLink></li>
+            <li><asp:HyperLink ID="ErrorsLink" runat="server" NavigateUrl="~/Admin/elmah.axd">Error log</asp:HyperLink></li>
+        </ul>
+        <asp:ContentPlaceHolder ID="AdminContent" runat="server" />
+    </div>
+</asp:Content>

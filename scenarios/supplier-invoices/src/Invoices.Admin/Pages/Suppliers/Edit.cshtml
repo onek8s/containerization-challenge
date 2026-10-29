@@ -1,0 +1,72 @@
+@page "{id:int?}"
+@model Wingtip.Invoices.Admin.Pages.Suppliers.EditModel
+@{
+    ViewData["Title"] = Model.Supplier.SupplierId == 0 ? "New supplier" : "Supplier " + Model.Supplier.Code;
+}
+<h1>@ViewData["Title"]</h1>
+
+<form method="post" class="form">
+    <div asp-validation-summary="All" class="notice error"></div>
+    <input type="hidden" asp-for="Supplier.SupplierId" />
+    <label>Code <input asp-for="Supplier.Code" readonly="@(Model.Supplier.SupplierId != 0)" maxlength="10" required /></label>
+    <label>Name <input asp-for="Supplier.Name" maxlength="100" required /></label>
+    <label>VAT number <input asp-for="Supplier.VatNumber" maxlength="20" required /></label>
+    <label>ERP vendor number <input asp-for="Supplier.VendorNumber" maxlength="10" /></label>
+    <label>Code page of CSV files
+        <select asp-for="Supplier.CodePage">
+            <option value="1252">1252 Windows Western</option>
+            <option value="28591">28591 ISO 8859-1</option>
+            <option value="28605">28605 ISO 8859-15</option>
+            <option value="65001">65001 UTF-8</option>
+            <option value="850">850 OEM Multilingual</option>
+        </select>
+    </label>
+    <label>Price tolerance % (empty = default) <input asp-for="Supplier.PriceTolerancePercent" type="number" step="0.1" min="0" max="20" /></label>
+    <label class="check"><input asp-for="Supplier.TwoWayMatch" /> Two-way match (no goods receipt needed)</label>
+    <label>Cost center <input asp-for="Supplier.CostCenter" maxlength="6" /></label>
+    <label>Contact e-mail <input asp-for="Supplier.ContactEmail" type="email" maxlength="200" /></label>
+    <label class="check"><input asp-for="Supplier.Active" /> Active</label>
+    <button type="submit">Save</button>
+</form>
+
+@if (Model.Supplier.SupplierId != 0)
+{
+    <h2>Delivery channels</h2>
+    <table>
+        <thead><tr><th>Type</th><th>Location</th><th>File pattern</th><th>Active</th><th>Last poll</th><th>Last error</th><th></th></tr></thead>
+        <tbody>
+            @foreach (var c in Model.Channels)
+            {
+                <tr>
+                    <form method="post" asp-page-handler="Channel">
+                        <input type="hidden" name="channel.ChannelId" value="@c.ChannelId" />
+                        <td>
+                            <select name="channel.ChannelType">
+                                <option selected="@(c.ChannelType == "FTP")">FTP</option>
+                                <option selected="@(c.ChannelType == "SHARE")">SHARE</option>
+                            </select>
+                        </td>
+                        <td><input name="channel.Location" value="@c.Location" required /></td>
+                        <td><input name="channel.FilePattern" value="@c.FilePattern" required /></td>
+                        <td><input type="checkbox" name="channel.Active" value="true" checked="@c.Active" /></td>
+                        <td>@c.LastPolledAt?.ToString("d.M. HH:mm")</td>
+                        <td class="summary">@c.LastError</td>
+                        <td><button type="submit">Save</button></td>
+                    </form>
+                </tr>
+            }
+            <tr>
+                <form method="post" asp-page-handler="Channel">
+                    <input type="hidden" name="channel.ChannelId" value="0" />
+                    <td><select name="channel.ChannelType"><option>FTP</option><option>SHARE</option></select></td>
+                    <td><input name="channel.Location" placeholder="suppliers/CODE/out or folder on the drop share" required /></td>
+                    <td><input name="channel.FilePattern" value="*.*" required /></td>
+                    <td><input type="checkbox" name="channel.Active" value="true" checked /></td>
+                    <td colspan="2"></td>
+                    <td><button type="submit">Add</button></td>
+                </form>
+            </tr>
+        </tbody>
+    </table>
+    <p class="muted">FTP locations are folders on @Model.FtpHost. Share locations are folders under @Model.DropRoot, or a full UNC path.</p>
+}

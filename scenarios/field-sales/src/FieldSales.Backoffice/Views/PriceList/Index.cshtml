@@ -1,0 +1,64 @@
+@model PriceListViewModel
+@{
+    ViewBag.Title = "Price list";
+}
+<h1>Price list <span class="muted">version @Model.PriceListVersion, @Model.ActiveProducts active products</span></h1>
+@if (Model.ImportErrors != null && Model.ImportErrors.Any())
+{
+    <div class="alert alert-danger">
+        <strong>The file was not imported.</strong>
+        <ul>@foreach (var e in Model.ImportErrors.Take(50)) { <li>@e</li> }</ul>
+        @if (Model.ImportErrors.Count > 50) { <p>... and @(Model.ImportErrors.Count - 50) more.</p> }
+    </div>
+}
+@Html.ValidationSummary()
+<div class="panel">
+    <h2>Import from purchasing</h2>
+    <p class="muted">CSV saved from the purchasing price list workbook: ItemNo;Name;Category;Unit;CaseSize;ListPrice;VatRate;MinOrderQty;Active.
+        Products missing from the file are left as they are; set Active to 0 to stop selling an item.</p>
+    @using (Html.BeginForm("Upload", "PriceList", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        <input type="file" name="file" accept=".csv,.txt" />
+        <button type="submit" class="btn btn-primary">Import</button>
+    }
+    <table class="table" style="margin-top:12px">
+        <tr><th>Imported</th><th>File</th><th>By</th><th class="text-right">New</th><th class="text-right">Changed</th><th class="text-right">Version</th></tr>
+        @foreach (var i in Model.Imports)
+        {
+            <tr><td>@i.ImportedAt.ToString("g")</td><td>@i.FileName</td><td>@i.ImportedBy</td><td class="text-right">@i.Inserted</td><td class="text-right">@i.Updated</td><td class="text-right">@i.PriceListVersion</td></tr>
+        }
+    </table>
+</div>
+<div class="panel">
+    <h2>Promotions</h2>
+    <table class="table">
+        <tr><th>Item</th><th class="text-right">Price</th><th>From</th><th>To</th><th>By</th><th></th></tr>
+        @foreach (var p in Model.Promotions)
+        {
+            <tr><td>@p.ItemNo</td><td class="text-right">@p.PromoPrice.ToString("N2")</td><td>@p.ValidFrom.ToString("d.M.yyyy")</td><td>@p.ValidTo.ToString("d.M.yyyy")</td><td>@p.CreatedBy</td>
+                <td>@using (Html.BeginForm("DeletePromotion", "PriceList", new { id = p.PromotionId }, FormMethod.Post, new { @class = "inline" }))
+                    { @Html.AntiForgeryToken() <button type="submit" class="btn">Remove</button> }</td></tr>
+        }
+    </table>
+    @using (Html.BeginForm("AddPromotion", "PriceList", FormMethod.Post, new { @class = "filters", style = "margin-top:12px" }))
+    {
+        @Html.AntiForgeryToken()
+        <label>Item <input type="text" name="ItemNo" value="@Model.NewPromotion.ItemNo" size="8" /></label>
+        <label>Price <input type="number" step="0.01" name="PromoPrice" value="@(Model.NewPromotion.PromoPrice > 0 ? Model.NewPromotion.PromoPrice.ToString(System.Globalization.CultureInfo.InvariantCulture) : "")" /></label>
+        <label>From <input type="date" name="ValidFrom" value="@Model.NewPromotion.ValidFrom.ToString("yyyy-MM-dd")" /></label>
+        <label>To <input type="date" name="ValidTo" value="@Model.NewPromotion.ValidTo.ToString("yyyy-MM-dd")" /></label>
+        <button type="submit" class="btn btn-primary">Add promotion</button>
+    }
+</div>
+<div class="panel">
+    <h2>Price group discounts</h2>
+    <table class="table">
+        <tr><th>Group</th><th>Category</th><th class="text-right">Discount %</th></tr>
+        @foreach (var r in Model.Rules)
+        {
+            <tr><td>@r.PriceGroup</td><td>@(string.IsNullOrEmpty(r.Category) ? "(all other)" : r.Category)</td><td class="text-right">@r.DiscountPercent.ToString("0.##")</td></tr>
+        }
+    </table>
+    <p class="muted">Group discounts are maintained by finance in the ERP and loaded with the yearly price agreement.</p>
+</div>

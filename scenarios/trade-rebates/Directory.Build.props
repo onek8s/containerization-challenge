@@ -1,0 +1,9 @@
+<Project>
+  <PropertyGroup>
+    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+    <Company>Contoso Foods</Company>
+    <Product>Trade Rebates</Product>
+    <Version>3.4.0</Version>
+  </PropertyGroup>
+</Project>

@@ -1,0 +1,100 @@
+@page "/orders/{OrderNo}"
+@inject RetailApi Api
+
+<h1>Order @OrderNo</h1>
+<ErrorBanner Message="@error" />
+
+@if (order != null)
+{
+    <div class="columns">
+        <dl>
+            <dt>Status</dt><dd>@order.Status (saga: @(order.Saga?.CurrentState ?? "-"))</dd>
+            <dt>Channel</dt><dd>@order.Channel / @order.Market</dd>
+            <dt>Customer</dt><dd>@order.CustomerFirstName @order.CustomerLastName, @order.CustomerEmail, @order.CustomerPhone</dd>
+            <dt>Club card</dt><dd>@order.LoyaltyCardNo</dd>
+            <dt>Delivery</dt><dd>@order.DeliveryMethod @order.CollectStoreCode</dd>
+        </dl>
+        <dl>
+            <dt>Total</dt><dd>@order.Total.ToString("N2") @order.Currency (shipping @order.ShippingFee.ToString("N2"))</dd>
+            <dt>Payment</dt><dd>@order.PaymentMethod @order.PaymentStatus @order.PaymentReference</dd>
+            <dt>Captured</dt><dd>@order.CapturedAmount.ToString("N2")</dd>
+            <dt>Promotion</dt><dd>@order.PromotionCode</dd>
+            @if (!string.IsNullOrEmpty(order.CancelReason))
+            {
+                <dt>Cancelled</dt><dd>@order.CancelReason</dd>
+            }
+        </dl>
+    </div>
+
+    <h2>Lines</h2>
+    <table>
+        <thead><tr><th>#</th><th>SKU</th><th class="num">Qty</th><th class="num">Price</th><th class="num">Discount</th></tr></thead>
+        <tbody>
+            @foreach (var l in order.Lines)
+            {
+                <tr><td>@l.LineNo</td><td>@l.Sku</td><td class="num">@l.Quantity</td><td class="num">@l.UnitPrice.ToString("N2")</td><td class="num">@l.Discount.ToString("N2")</td></tr>
+            }
+        </tbody>
+    </table>
+
+    <h2>Shipments</h2>
+    <table>
+        <thead><tr><th>From</th><th>Status</th><th>Carrier</th><th>Tracking</th><th class="num">Parcels</th></tr></thead>
+        <tbody>
+            @foreach (var s in order.Shipments)
+            {
+                <tr><td>@s.FromLocation</td><td>@s.Status</td><td>@s.Carrier</td><td><a href="@s.TrackingUrl" target="_blank">@s.TrackingNo</a></td><td class="num">@s.Parcels</td></tr>
+            }
+        </tbody>
+    </table>
+
+    <h2>Timeline</h2>
+    <ul class="timeline">
+        @foreach (var e in order.Timeline)
+        {
+            <li><time>@e.CreatedUtc.ToLocalTime().ToString("d.M. HH:mm:ss")</time> <b>@e.Type</b> @e.Text <i>@e.By</i></li>
+        }
+    </ul>
+
+    @if (order.Status != "Cancelled" && order.Status != "Completed")
+    {
+        <h2>Cancel</h2>
+        <div class="filters">
+            <input placeholder="Reason" @bind="reason" />
+            <button class="danger" @onclick="Cancel">Cancel order</button>
+        </div>
+    }
+}
+
+@code {
+    [Parameter] public string OrderNo { get; set; }
+
+    private OrderView order;
+    private string reason;
+    private string error;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        try
+        {
+            order = await Api.OrderAsync(OrderNo);
+        }
+        catch (ApiException ex)
+        {
+            error = ex.Message;
+        }
+    }
+
+    private async Task Cancel()
+    {
+        try
+        {
+            await Api.CancelOrderAsync(OrderNo, string.IsNullOrWhiteSpace(reason) ? "Cancelled by customer service" : reason);
+            order = await Api.OrderAsync(OrderNo);
+        }
+        catch (ApiException ex)
+        {
+            error = ex.Message;
+        }
+    }
+}

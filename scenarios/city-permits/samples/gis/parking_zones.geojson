@@ -1,0 +1,113 @@
+{
+ "type": "FeatureCollection",
+ "crs": {
+  "type": "name",
+  "properties": {
+   "name": "urn:ogc:def:crs:EPSG::27700"
+  }
+ },
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601150,
+       142185
+      ],
+      [
+       601370,
+       142185
+      ],
+      [
+       601370,
+       142585
+      ],
+      [
+       601150,
+       142585
+      ],
+      [
+       601150,
+       142185
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "ZONE_CODE": "A",
+    "NAME": "Town Centre"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       600970,
+       142185
+      ],
+      [
+       601150,
+       142185
+      ],
+      [
+       601150,
+       142455
+      ],
+      [
+       600970,
+       142455
+      ],
+      [
+       600970,
+       142185
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "ZONE_CODE": "B",
+    "NAME": "Beaver"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601370,
+       142320
+      ],
+      [
+       601540,
+       142320
+      ],
+      [
+       601540,
+       142600
+      ],
+      [
+       601370,
+       142600
+      ],
+      [
+       601370,
+       142320
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "ZONE_CODE": "C",
+    "NAME": "Station"
+   }
+  }
+ ]
+}

@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Humongous.BrokerPortal": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "applicationUrl": "http://localhost:5320",
+      "environmentVariables": { "ASPNETCORE_ENVIRONMENT": "Development" }
+    }
+  }
+}

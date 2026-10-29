@@ -1,0 +1,45 @@
+@page
+@model Wingtip.Invoices.Admin.Pages.Invoices.IndexModel
+@{
+    ViewData["Title"] = "Invoices";
+}
+<h1>Invoices</h1>
+
+<form method="get" class="filters">
+    <label>Status
+        <select name="status">
+            <option value="">All</option>
+            @foreach (InvoiceStatus s in Enum.GetValues(typeof(InvoiceStatus)))
+            {
+                <option value="@((byte)s)" selected="@(Model.Search.Status == (byte)s)">@StatusText.For(s)</option>
+            }
+        </select>
+    </label>
+    <label>Supplier
+        <select name="supplierId">
+            <option value="">All</option>
+            @foreach (var s in Model.Suppliers)
+            {
+                <option value="@s.SupplierId" selected="@(Model.Search.SupplierId == s.SupplierId)">@s.Code @s.Name</option>
+            }
+        </select>
+    </label>
+    <label>Invoice date from <input type="date" name="from" value="@Model.Search.From?.ToString("yyyy-MM-dd")" /></label>
+    <label>to <input type="date" name="to" value="@Model.Search.To?.ToString("yyyy-MM-dd")" /></label>
+    <label>Search <input type="search" name="text" value="@Model.Search.Text" placeholder="Invoice, PO, voucher, reference" /></label>
+    <button type="submit">Search</button>
+</form>
+
+<partial name="_InvoiceTable" model="Model.Rows" />
+
+<p class="pager">
+    @Model.Total invoices
+    @if (Model.Search.Page > 1)
+    {
+        <a asp-all-route-data="Model.RouteFor(Model.Search.Page - 1)">Previous</a>
+    }
+    @if (Model.Search.Page * Model.Search.PageSize < Model.Total)
+    {
+        <a asp-all-route-data="Model.RouteFor(Model.Search.Page + 1)">Next</a>
+    }
+</p>

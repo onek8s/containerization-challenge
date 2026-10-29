@@ -1,0 +1,11 @@
+body { font-size: 13px; }
+.timeline { list-style: none; padding: 0; }
+.timeline li { padding: 6px 10px; border-left: 3px solid #ccc; margin-bottom: 2px; }
+.timeline li.done { border-left-color: #5cb85c; }
+.timeline li.problem { border-left-color: #d9534f; background: #fdf3f3; }
+.timeline .since { color: #777; margin-left: 8px; }
+.status-Rejected, .status-CreditHold { color: #a94442; font-weight: bold; }
+.status-Invoiced { color: #3c763d; }
+.overdue { color: #a94442; font-weight: bold; }
+.search-form .form-control { display: inline-block; width: auto; margin-right: 6px; }
+footer { margin-top: 30px; }

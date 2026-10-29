@@ -1,0 +1,7 @@
+@model Shipment
+<ul class="list-unstyled timeline" id="timeline">
+    @foreach (var m in Model.Milestones.Where(m => m.VisibleToCustomer).OrderByDescending(m => m.OccurredAt))
+    {
+        <li><span class="text-muted">@m.OccurredAt.ToString("dd.MM.yyyy HH:mm") UTC</span> <strong>@MilestoneCodes.Describe(m.Code)</strong> @m.LocationText</li>
+    }
+</ul>

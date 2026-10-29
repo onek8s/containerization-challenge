@@ -1,0 +1,13 @@
+@model ShipmentStatus
+@{
+    var css = Model switch
+    {
+        ShipmentStatus.Requested => "bg-warning text-dark",
+        ShipmentStatus.Booked => "bg-secondary",
+        ShipmentStatus.Delivered => "bg-success",
+        ShipmentStatus.Cancelled => "bg-dark",
+        ShipmentStatus.CustomsHold => "bg-danger",
+        _ => "bg-primary"
+    };
+}
+<span class="badge @css">@Model</span>

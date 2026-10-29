@@ -1,0 +1,28 @@
+@model IList<Tailspin.DealerOrders.Contracts.Portal.ModelSummaryDto>
+@{
+    ViewBag.Title = "Configure a machine";
+}
+<h2>Configure a machine</h2>
+@foreach (var family in Model.GroupBy(m => m.Family))
+{
+    <h3>@family.Key</h3>
+    <div class="row">
+        @foreach (var m in family)
+        {
+            <div class="col-sm-6 col-md-3">
+                <div class="thumbnail model-card">
+                    @if (!string.IsNullOrEmpty(m.ImageUrl))
+                    {
+                        <img src="@Url.Content(m.ImageUrl)" alt="@m.Name" />
+                    }
+                    <div class="caption">
+                        <h4>@m.Name</h4>
+                        <p>Model year @m.ModelYear &middot; @m.LeadTimeWeeks weeks</p>
+                        <p>From <strong>@m.BasePrice.ToString("N0") @m.Currency</strong></p>
+                        <p>@Html.ActionLink("Configure", "Configure", new { id = m.ModelCode }, new { @class = "btn btn-primary" })</p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}

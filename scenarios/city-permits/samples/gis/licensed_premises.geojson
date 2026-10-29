@@ -1,0 +1,39 @@
+{
+ "type": "FeatureCollection",
+ "crs": {
+  "type": "name",
+  "properties": {
+   "name": "urn:ogc:def:crs:EPSG::27700"
+  }
+ },
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     601230,
+     142380
+    ]
+   },
+   "properties": {
+    "PREMISES": "The Kings Head",
+    "LICENCE": "BL/2019/00211H"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     601270,
+     142400
+    ]
+   },
+   "properties": {
+    "PREMISES": "County Wines",
+    "LICENCE": "BL/2021/00087C"
+   }
+  }
+ ]
+}

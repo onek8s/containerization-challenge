@@ -1,0 +1,43 @@
+<Project Sdk="MSBuild.SDK.SystemWeb">
+
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <LangVersion>7.3</LangVersion>
+    <RootNamespace>Woodgrove.Statements.Web</RootNamespace>
+    <AssemblyName>AccountStatements.Web</AssemblyName>
+    <AppConfig>Web.config</AppConfig>
+    <Version>2.4.0</Version>
+    <Company>Woodgrove Leasing</Company>
+    <Product>Account Statements</Product>
+    <GeneratedBindingRedirectsAction>None</GeneratedBindingRedirectsAction>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.3.0" />
+    <PackageReference Include="Microsoft.ReportingServices.ReportViewerControl.WebForms" Version="150.1652.0" />
+    <PackageReference Include="Microsoft.SqlServer.Types" Version="14.0.1016.290" />
+    <PackageReference Include="System.Memory" Version="4.5.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Extensions" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Views\**\*.cshtml" />
+    <Content Include="Views\Web.config" />
+    <Content Include="Content\**\*" />
+    <Content Include="Reports\*.aspx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AccountStatements.Core\AccountStatements.Core.csproj" />
+    <ProjectReference Include="..\AccountStatements.Data\AccountStatements.Data.csproj" />
+    <ProjectReference Include="..\AccountStatements.Reporting\AccountStatements.Reporting.csproj" />
+  </ItemGroup>
+
+</Project>

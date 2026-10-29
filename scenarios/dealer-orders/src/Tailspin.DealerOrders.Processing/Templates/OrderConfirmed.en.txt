@@ -1,0 +1,12 @@
+Subject: Order {OrderNumber} confirmed, delivery {DeliveryDate}
+
+Dear {DealerName},
+
+your order {OrderNumber} (your reference {DealerPo}) has been confirmed as Tailspin order {AxSalesId}.
+Confirmed delivery date: {DeliveryDate}.
+
+{Lines}
+
+The order confirmation is available in the dealer portal: {Link}
+
+Tailspin Machinery dealer sales

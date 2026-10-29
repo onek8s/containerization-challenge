@@ -1,0 +1,48 @@
+{
+  "name": "Change payment method",
+  "changeType": "PaymentMethodChange",
+  "clientVersion": "6.4",
+  "defaultTimeoutSeconds": 15,
+  "steps": [
+    { "action": "window", "title": "PolicyDesk 6.* - *" },
+    { "action": "set", "field": "Policy number", "value": "{Policy}" },
+    { "action": "click", "button": "Open" },
+    { "action": "dialog", "optional": true, "timeoutSeconds": 3, "reject": [ "was not found", "is locked by" ] },
+    { "action": "window", "title": "PolicyDesk - Policy {Policy}" },
+    { "action": "capture", "name": "policy-before" },
+    { "action": "click", "button": "Change payment..." },
+    { "action": "dialog", "optional": true, "timeoutSeconds": 2, "reject": [ "not in force" ] },
+    { "action": "window", "title": "PolicyDesk - Change payment - {Policy}" },
+    { "action": "set", "field": "Effective date", "value": "{Effective}" },
+    {
+      "action": "select",
+      "field": "Payment method",
+      "value": "{Field:PaymentMethod}",
+      "map": { "DirectDebit": "Direct debit", "Invoice": "Invoice" }
+    },
+    {
+      "action": "when",
+      "items": "{Field:PaymentMethod}",
+      "is": "DirectDebit",
+      "steps": [
+        { "action": "set", "field": "IBAN", "value": "{Field:Iban|iban}" },
+        { "action": "set", "field": "Account holder", "value": "{Field:AccountHolder}" }
+      ]
+    },
+    { "action": "set", "field": "Billing day", "value": "{Field:BillingDay}" },
+    { "action": "capture", "name": "payment-entered" },
+    { "action": "click", "button": "Save" },
+    {
+      "action": "dialog",
+      "name": "endorsement",
+      "accept": [ "^Endorsement (?<Endorsement>\\d{7}) created" ],
+      "reject": [ "not in force", "before the policy start", "IBAN is not valid", "not allowed", "Billing day" ]
+    },
+    { "action": "window", "title": "PolicyDesk - Policy {Policy}" },
+    { "action": "capture", "name": "policy-after" },
+    { "action": "click", "button": "Close" }
+  ],
+  "cleanup": [
+    { "action": "dialog", "optional": true, "timeoutSeconds": 1, "accept": [ ".*" ] }
+  ]
+}

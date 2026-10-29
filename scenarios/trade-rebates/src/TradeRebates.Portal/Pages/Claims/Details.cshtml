@@ -1,0 +1,62 @@
+@page "{id:int}"
+@model ContosoFoods.TradeRebates.Portal.Pages.Claims.DetailsModel
+@{
+    var h = Model.Claim!.Header;
+    ViewData["Title"] = $"Claim {h.ClaimId}";
+}
+<h1>Claim @h.ClaimId · @h.DistributorName · @Periods.Format(h.Period)</h1>
+<p>
+    Status <b>@ClaimStatus.Name(h.Status)</b> · Source @h.Source @h.SourceRef · received @h.ReceivedAt.ToString("yyyy-MM-dd HH:mm") by @h.ReceivedBy
+    @if (h.ValidatedAt is not null) { <span>· validated @h.ValidatedAt?.ToString("yyyy-MM-dd HH:mm")</span> }
+    @if (h.DecidedBy is not null) { <span>· decided by @h.DecidedBy @h.DecidedAt?.ToString("yyyy-MM-dd HH:mm") @h.DecisionNote</span> }
+</p>
+<p>@h.LineCount lines · quantity @h.TotalQuantity.ToString("N0") · net value @h.TotalAmount.ToString("N2") · @h.WarningCount warnings · @h.RejectedCount rejected</p>
+
+@if (h.Status is "R" or "V")
+{
+    <form method="post" asp-page-handler="Validate" class="inline"><button type="submit">Validate again</button></form>
+}
+@if (h.Status == "V" && Model.CanDecide)
+{
+    <form method="post" asp-page-handler="Decide" class="inline">
+        <input type="hidden" name="rowVer" value="@Convert.ToBase64String(h.RowVer)" />
+        <input type="text" name="note" placeholder="Note" />
+        <button type="submit" name="approve" value="true">Approve</button>
+        <button type="submit" name="approve" value="false">Reject</button>
+    </form>
+}
+
+@if (Model.Claim.Issues.Count > 0)
+{
+    <h2>File and workbook issues</h2>
+    <ul>
+    @foreach (var i in Model.Claim.Issues)
+    {
+        <li>@(i.LineNumber > 0 ? $"Line {i.LineNumber}: " : "")@i.Message</li>
+    }
+    </ul>
+}
+
+<h2>Lines</h2>
+<table>
+    <thead><tr><th>#</th><th>Invoice</th><th>Date</th><th>Customer</th><th>GTIN</th><th>Product</th><th class="n">Quantity</th><th class="n">Net value</th><th class="n">Unit price</th><th class="n">Price book</th><th>Status</th><th>Issue</th></tr></thead>
+    <tbody>
+    @foreach (var l in Model.Claim.Lines)
+    {
+        <tr class="status-@l.LineStatus">
+            <td>@l.LineNumber</td>
+            <td>@l.InvoiceNo</td>
+            <td>@l.InvoiceDate.ToString("yyyy-MM-dd")</td>
+            <td>@l.CustomerNo</td>
+            <td>@l.Gtin</td>
+            <td>@l.ProductDescription</td>
+            <td class="n">@l.Quantity.ToString("N0")</td>
+            <td class="n">@l.NetAmount.ToString("N2")</td>
+            <td class="n">@(l.Quantity != 0 ? (l.NetAmount / l.Quantity).ToString("N2") : "")</td>
+            <td class="n">@l.ListNetPrice?.ToString("N2")</td>
+            <td>@LineStatus.Name(l.LineStatus)</td>
+            <td>@l.Issue</td>
+        </tr>
+    }
+    </tbody>
+</table>

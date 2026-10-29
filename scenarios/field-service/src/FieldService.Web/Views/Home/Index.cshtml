@@ -1,0 +1,49 @@
+@model DashboardViewModel
+@{
+    ViewData["Title"] = "Dashboard";
+}
+<h2>Dashboard</h2>
+<div class="row g-3 mb-4">
+    @foreach (var status in new[] { WorkOrderStatus.New, WorkOrderStatus.Assigned, WorkOrderStatus.InProgress, WorkOrderStatus.Completed })
+    {
+        <div class="col-md-2">
+            <div class="card text-center"><div class="card-body">
+                <div class="fs-3">@Model.Count(status)</div>
+                <div class="text-muted">@status</div>
+            </div></div>
+        </div>
+    }
+    <div class="col-md-2">
+        <div class="card text-center border-danger"><div class="card-body">
+            <div class="fs-3 text-danger">@Model.OverdueCount</div>
+            <div class="text-muted">Overdue</div>
+        </div></div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <h4>Recent imports</h4>
+        <table class="table table-sm">
+            <thead><tr><th>File</th><th>Processed</th><th>Created</th><th>Rejected</th></tr></thead>
+            <tbody>
+            @foreach (var f in Model.RecentImports)
+            {
+                <tr><td>@f.FileName</td><td>@f.ProcessedUtc.ToLocalTime().ToString("g")</td><td>@f.OrdersCreated</td><td>@f.RowsRejected</td></tr>
+            }
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-6">
+        <h4>Invoice batches</h4>
+        <table class="table table-sm">
+            <thead><tr><th>Batch</th><th>Created</th><th>Orders</th><th class="text-end">Total</th></tr></thead>
+            <tbody>
+            @foreach (var b in Model.RecentBatches)
+            {
+                <tr><td>@b.BatchNumber</td><td>@b.CreatedUtc.ToLocalTime().ToString("g")</td><td>@b.OrderCount</td><td class="text-end">@b.TotalAmount.ToString("N2")</td></tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net472</TargetFramework>
+    <RootNamespace>Lucerne.ProjectSites.SyncService</RootNamespace>
+    <AssemblyName>LucerneProjectSync</AssemblyName>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Unity" Version="5.8.11" />
+    <PackageReference Include="log4net" Version="2.0.8" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.ServiceProcess" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="log4net.config" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Lucerne.ProjectSites.Sync\Lucerne.ProjectSites.Sync.csproj" />
+    <ProjectReference Include="..\Lucerne.ProjectSites.Data\Lucerne.ProjectSites.Data.csproj" />
+    <ProjectReference Include="..\Lucerne.ProjectSites.SharePoint.Csom\Lucerne.ProjectSites.SharePoint.Csom.csproj" />
+  </ItemGroup>
+
+</Project>

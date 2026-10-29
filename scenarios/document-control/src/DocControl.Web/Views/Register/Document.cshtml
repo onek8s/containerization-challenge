@@ -1,0 +1,27 @@
+@model DocumentViewModel
+@{ ViewData["Title"] = Model.Document.Number; }
+<h1>@Model.Document.Number</h1>
+<p class="lead">@Model.Document.Title</p>
+<p class="muted">
+    @(DocumentNumber.Disciplines.GetValueOrDefault(Model.Document.Discipline)) &middot;
+    @(DocumentNumber.DocumentTypes.GetValueOrDefault(Model.Document.DocumentType)) &middot;
+    created by @Model.Document.CreatedBy on @Model.Document.CreatedUtc.ToString("yyyy-MM-dd")
+</p>
+
+<p><a class="button" asp-controller="Revisions" asp-action="Upload" asp-route-number="@Model.Document.Number" asp-route-revision="@Model.SuggestedRevision">Submit @Model.SuggestedRevision</a></p>
+
+<table>
+    <tr><th>Rev</th><th>Status</th><th>File</th><th>Size</th><th>Submitted</th><th>Reviewed</th><th>Comment</th></tr>
+    @foreach (var r in Model.Revisions)
+    {
+        <tr>
+            <td>@r.Code</td>
+            <td><partial name="_StatusBadge" model="(RevisionStatus?)r.Status" /></td>
+            <td><a asp-action="File" asp-route-id="@r.Id">@r.FileName</a></td>
+            <td>@Litware.DocControl.Packaging.CoverSheet.FormatSize(r.Size)</td>
+            <td>@r.SubmittedBy<br /><small>@r.SubmittedUtc.ToLocalTime().ToString("yyyy-MM-dd HH:mm") &middot; @r.Source</small></td>
+            <td>@r.ReviewedBy<br /><small>@r.ReviewedUtc?.ToLocalTime().ToString("yyyy-MM-dd HH:mm")</small></td>
+            <td>@r.ReviewComment</td>
+        </tr>
+    }
+</table>

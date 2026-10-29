@@ -1,0 +1,14 @@
+@model VanArsdel.Integration.Tracking.Models.InterchangeListModel
+@{ ViewBag.Title = "Interchanges"; }
+<h2>Interchanges</h2>
+@using (Html.BeginForm("Index", "Interchanges", FormMethod.Get, new { @class = "search-form form-inline" }))
+{
+    if ((User as VanArsdel.Integration.Tracking.Security.TrackingPrincipal).IsInternal)
+    {
+        @Html.TextBoxFor(m => m.PartnerId, new { @class = "form-control", placeholder = "Partner id" })
+    }
+    @Html.DropDownListFor(m => m.Days, new SelectList(new[] { 1, 7, 30, 90 }), new { @class = "form-control" }) <span>days</span>
+    <label class="checkbox-inline">@Html.CheckBoxFor(m => m.OverdueOnly) Only acknowledgements overdue</label>
+    <button type="submit" class="btn btn-primary">Show</button>
+}
+@Html.Partial("_InterchangeTable", Model.Interchanges)

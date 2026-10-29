@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>7.3</LangVersion>
+    <RootNamespace>Woodgrove.Statements.Core</RootNamespace>
+    <Version>2.4.0</Version>
+    <Company>Woodgrove Leasing</Company>
+    <Product>Account Statements</Product>
+  </PropertyGroup>
+
+</Project>

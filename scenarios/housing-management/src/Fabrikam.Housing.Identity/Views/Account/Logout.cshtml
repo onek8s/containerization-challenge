@@ -1,0 +1,10 @@
+@{ ViewData["Title"] = "Sign out"; }
+<div class="card card-narrow"><div class="card-body">
+    <h1 class="h4">Sign out</h1>
+    <p>Do you want to sign out of Fabrikam Homes?</p>
+    <form asp-action="Logout" method="post">
+        <input type="hidden" name="logoutId" value="@ViewBag.LogoutId" />
+        <input type="hidden" name="confirm" value="true" />
+        <button type="submit" class="btn btn-primary">Yes, sign out</button>
+    </form>
+</div></div>

@@ -1,0 +1,13 @@
+@page
+@model CityPermits.Citizen.Pages.Cases.IndexModel
+@{ ViewData["Title"] = "My applications"; }
+<h1>My applications</h1>
+<p>@Model.Applicant?.DisplayName</p>
+<table>
+    <tr><th>Reference</th><th>Application</th><th>Status</th><th>Valid to</th></tr>
+    @foreach (var c in Model.Items)
+    {
+        <tr><td><a asp-page="Details" asp-route-id="@c.Id">@c.Reference</a></td><td>@c.Title</td><td><span class="status">@c.Status</span></td><td>@c.ValidTo</td></tr>
+    }
+</table>
+<p><a class="btn" href="/Apply">Start a new application</a></p>

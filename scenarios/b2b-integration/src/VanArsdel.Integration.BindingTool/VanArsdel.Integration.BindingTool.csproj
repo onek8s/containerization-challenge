@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\BizTalk.References.props" />
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net472</TargetFramework>
+    <RootNamespace>VanArsdel.Integration.BindingTool</RootNamespace>
+    <AssemblyName>b2bdeploy</AssemblyName>
+    <SignAssembly>false</SignAssembly>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Description>Deployment helper: environment settings export, bindings expansion and checks, SSO config store, BizTalk parties.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <BizTalkReference Include="Microsoft.EnterpriseSingleSignOn.Interop" />
+    <BizTalkReference Include="Microsoft.BizTalk.ExplorerOM" />
+    <BizTalkReference Include="Microsoft.BizTalk.Operations" />
+    <BizTalkReference Include="Microsoft.BizTalk.Pipeline" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommandLineParser" Version="2.2.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
+    <PackageReference Include="log4net" Version="2.0.8" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\VanArsdel.Integration.Deployment\VanArsdel.Integration.Deployment.csproj" />
+    <ProjectReference Include="..\VanArsdel.Integration.Management\VanArsdel.Integration.Management.csproj" />
+    <ProjectReference Include="..\VanArsdel.Integration.Runtime\VanArsdel.Integration.Runtime.csproj" />
+  </ItemGroup>
+
+</Project>

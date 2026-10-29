@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\BizTalk.References.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net462</TargetFramework>
+    <RootNamespace>VanArsdel.Integration.Runtime</RootNamespace>
+    <Description>Helpers called from orchestrations and pipeline components: SSO settings, partner directory, BAM, BRE policies.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <BizTalkReference Include="Microsoft.XLANGs.BaseTypes" />
+    <BizTalkReference Include="Microsoft.BizTalk.Bam.EventObservation" />
+    <BizTalkReference Include="Microsoft.BizTalk.Bam.XLANGs" />
+    <BizTalkReference Include="Microsoft.EnterpriseSingleSignOn.Interop" />
+    <BizTalkReference Include="Microsoft.RuleEngine" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\VanArsdel.Integration.Data\VanArsdel.Integration.Data.csproj" />
+    <ProjectReference Include="..\VanArsdel.Integration.Edi\VanArsdel.Integration.Edi.csproj" />
+    <ProjectReference Include="..\VanArsdel.Integration.Rules\VanArsdel.Integration.Rules.csproj" />
+  </ItemGroup>
+
+</Project>

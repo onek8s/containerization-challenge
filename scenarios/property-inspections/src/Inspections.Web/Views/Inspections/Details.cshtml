@@ -1,0 +1,106 @@
+@model InspectionDetailsModel
+@{
+    var i = Model.Inspection;
+    ViewBag.Title = i.ClaimNumber;
+}
+<h1>@i.ClaimNumber <span class="status s@((int)i.Status)">@i.Status</span></h1>
+@foreach (var notice in Model.Notices)
+{
+    <p class="notice">@notice</p>
+}
+<dl class="facts">
+    <dt>Policy holder</dt><dd>@i.PolicyHolder</dd>
+    <dt>Property</dt><dd>@i.PropertyAddress</dd>
+    <dt>Peril</dt><dd>@ReportBuilder.PerilName(i.PerilCode)</dd>
+    <dt>Inspected on</dt><dd>@i.InspectedOn.ToString("dd/MM/yyyy")</dd>
+    <dt>Adjuster</dt><dd>@i.AdjusterName</dd>
+    <dt>Claim handler</dt><dd>@i.HandlerEmail</dd>
+    <dt>Estimated loss</dt><dd>@(i.EstimatedLoss.HasValue ? i.EstimatedLoss.Value.ToString("C0") : "-")</dd>
+    @if (i.ReportSentUtc.HasValue)
+    {
+        <dt>Report sent</dt><dd>@i.ReportSentUtc.Value.ToLocalTime().ToString("dd/MM/yyyy HH:mm")</dd>
+    }
+</dl>
+@if (!string.IsNullOrWhiteSpace(i.Notes))
+{
+    <p class="notes">@i.Notes</p>
+}
+
+<div class="buttons">
+    @if (i.Status == InspectionStatus.Draft)
+    {
+        using (Html.BeginForm("Submit", "Inspections", new { id = i.Id }, FormMethod.Post, new { @class = "inline" }))
+        {
+            @Html.AntiForgeryToken()
+            <button type="submit">Submit inspection</button>
+        }
+    }
+    @if (Model.ReportBlockedReason == null)
+    {
+        using (Html.BeginForm("RequestReport", "Inspections", new { id = i.Id }, FormMethod.Post, new { @class = "inline" }))
+        {
+            @Html.AntiForgeryToken()
+            <button type="submit">Send report to claim handler</button>
+        }
+    }
+    else
+    {
+        <span class="hint">@Model.ReportBlockedReason</span>
+    }
+</div>
+
+<h2>Photos (@Model.Photos.Count)</h2>
+@if (Model.CanEdit)
+{
+    using (Html.BeginForm("Upload", "Inspections", new { id = i.Id }, FormMethod.Post, new { enctype = "multipart/form-data", @class = "form upload" }))
+    {
+        @Html.AntiForgeryToken()
+        <input type="file" name="files" multiple accept="image/*" />
+        <input type="text" name="caption" placeholder="Caption (single photo)" maxlength="400" />
+        <button type="submit">Upload</button>
+    }
+}
+<ul class="photos">
+    @foreach (var p in Model.Photos)
+    {
+        <li>
+            @if (p.Purged)
+            {
+                <div class="purged">Removed after retention period</div>
+            }
+            else
+            {
+                <a href="/media/@p.Id.ToString("N")" target="_blank"><img src="/media/@p.Id.ToString("N")/thumb" alt="@p.FileName" loading="lazy" /></a>
+            }
+            <div class="meta">@p.Sequence. @p.FileName &middot; @p.Width x @p.Height @(p.TakenUtc.HasValue ? "· taken " + p.TakenUtc.Value.ToLocalTime().ToString("dd/MM/yyyy HH:mm") : "")</div>
+            @if (Model.CanEdit)
+            {
+                using (Html.BeginForm("Caption", "Inspections", new { id = i.Id }, FormMethod.Post, new { @class = "inline" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="photoId" value="@p.Id" />
+                    <input type="text" name="caption" value="@p.Caption" maxlength="400" />
+                    <button type="submit" class="secondary">Save</button>
+                }
+                using (Html.BeginForm("DeletePhoto", "Inspections", new { id = i.Id }, FormMethod.Post, new { @class = "inline" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="photoId" value="@p.Id" />
+                    <button type="submit" class="danger" onclick="return confirm('Delete this photo?')">Delete</button>
+                }
+            }
+            else
+            {
+                <div class="caption">@p.Caption</div>
+            }
+        </li>
+    }
+</ul>
+
+<h2>History</h2>
+<ul class="history">
+    @foreach (var h in Model.History)
+    {
+        <li>@h.Key.ToLocalTime().ToString("dd/MM/yyyy HH:mm") &middot; @h.Value</li>
+    }
+</ul>

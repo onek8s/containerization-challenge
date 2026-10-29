@@ -1,0 +1,829 @@
+﻿#if __DESIGNER_DATA
+#error Do not define __DESIGNER_DATA.
+<?xml version="1.0" encoding="utf-8"?>
+<om:MetaModel MajorVersion="1" MinorVersion="3" Core="2b131234-7959-458d-834f-2dc0769ce683" ScheduleModel="66366196-361d-448d-976f-cab5e87496d2" xmlns:om="http://schemas.microsoft.com/BizTalk/2003/DesignerData">
+    <om:Property Name="DisplayName" Value="ProcessCustomerOrder" />
+    <om:Element Type="Module" OID="86a9f188-0c97-57ee-80c1-d92a59f7f771">
+        <om:Property Name="ReportToAnalyst" Value="True" />
+        <om:Property Name="Name" Value="VanArsdel.Integration.Orchestrations" />
+        <om:Property Name="Signal" Value="False" />
+        <om:Element Type="PortType" OID="f971a91b-46e3-5b15-bcba-4d5a68534985" ParentLink="Module_PortType">
+            <om:Property Name="Synchronous" Value="False" />
+            <om:Property Name="TypeModifier" Value="Internal" />
+            <om:Property Name="ReportToAnalyst" Value="True" />
+            <om:Property Name="Name" Value="CanonicalOrderInType" />
+            <om:Property Name="Signal" Value="False" />
+            <om:Element Type="OperationDeclaration" OID="3fbbe8cf-8230-5461-9b38-a5dd86f81ae6" ParentLink="PortType_OperationDeclaration">
+                <om:Property Name="OperationType" Value="OneWay" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="Receive" />
+                <om:Property Name="Signal" Value="False" />
+                <om:Element Type="MessageRef" OID="bb94530a-5db4-54fb-b1aa-444d535b2f82" ParentLink="OperationDeclaration_RequestMessageRef">
+                    <om:Property Name="Ref" Value="VanArsdel.Integration.Schemas.Canonical.CanonicalOrder" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="Request" />
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+            </om:Element>
+        </om:Element>
+        <om:Element Type="PortType" OID="3f89421f-3ee1-52c6-909a-1eccafce3a91" ParentLink="Module_PortType">
+            <om:Property Name="Synchronous" Value="True" />
+            <om:Property Name="TypeModifier" Value="Internal" />
+            <om:Property Name="ReportToAnalyst" Value="True" />
+            <om:Property Name="Name" Value="ErpOrderServiceType" />
+            <om:Property Name="Signal" Value="False" />
+            <om:Element Type="OperationDeclaration" OID="7cea57df-81bb-5748-add9-459061b066b6" ParentLink="PortType_OperationDeclaration">
+                <om:Property Name="OperationType" Value="RequestResponse" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="CheckCredit" />
+                <om:Property Name="Signal" Value="False" />
+                <om:Element Type="MessageRef" OID="949317ea-20a2-5b32-97ff-056ea7668abb" ParentLink="OperationDeclaration_RequestMessageRef">
+                    <om:Property Name="Ref" Value="VanArsdel.Integration.Schemas.Erp.OrderManagementService.CheckCredit" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="Request" />
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+                <om:Element Type="MessageRef" OID="fab54f41-1d2e-5a80-8fc5-7e6c90733d30" ParentLink="OperationDeclaration_ResponseMessageRef">
+                    <om:Property Name="Ref" Value="VanArsdel.Integration.Schemas.Erp.OrderManagementService.CheckCreditResponse" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="Response" />
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+            </om:Element>
+        </om:Element>
+        <om:Element Type="PortType" OID="ce4f3f28-1df3-5993-995c-c9464a9839c1" ParentLink="Module_PortType">
+            <om:Property Name="Synchronous" Value="False" />
+            <om:Property Name="TypeModifier" Value="Internal" />
+            <om:Property Name="ReportToAnalyst" Value="True" />
+            <om:Property Name="Name" Value="ErpIDocOutType" />
+            <om:Property Name="Signal" Value="False" />
+            <om:Element Type="OperationDeclaration" OID="1f96e66a-ee10-5535-8b4a-ef27b87d93e8" ParentLink="PortType_OperationDeclaration">
+                <om:Property Name="OperationType" Value="OneWay" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="Send" />
+                <om:Property Name="Signal" Value="False" />
+                <om:Element Type="MessageRef" OID="1ae180d7-490c-5b49-80e9-9a1bf866e02a" ParentLink="OperationDeclaration_RequestMessageRef">
+                    <om:Property Name="Ref" Value="VanArsdel.Integration.Schemas.IDoc.ORDERS05" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="Request" />
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+            </om:Element>
+        </om:Element>
+        <om:Element Type="PortType" OID="1b54f2fc-0565-529a-8fa5-29b74ec668ee" ParentLink="Module_PortType">
+            <om:Property Name="Synchronous" Value="False" />
+            <om:Property Name="TypeModifier" Value="Internal" />
+            <om:Property Name="ReportToAnalyst" Value="True" />
+            <om:Property Name="Name" Value="CreditHoldOutType" />
+            <om:Property Name="Signal" Value="False" />
+            <om:Element Type="OperationDeclaration" OID="646b32a2-5817-57ec-8b49-c12e87040178" ParentLink="PortType_OperationDeclaration">
+                <om:Property Name="OperationType" Value="OneWay" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="Send" />
+                <om:Property Name="Signal" Value="False" />
+                <om:Element Type="MessageRef" OID="2ba3deac-a05b-54c9-9796-b9c43260fcd8" ParentLink="OperationDeclaration_RequestMessageRef">
+                    <om:Property Name="Ref" Value="VanArsdel.Integration.Schemas.Canonical.CanonicalOrder" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="Request" />
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+            </om:Element>
+        </om:Element>
+        <om:Element Type="PortType" OID="3fb06410-b1a2-568a-a4c5-7872f9b8321b" ParentLink="Module_PortType">
+            <om:Property Name="Synchronous" Value="False" />
+            <om:Property Name="TypeModifier" Value="Internal" />
+            <om:Property Name="ReportToAnalyst" Value="True" />
+            <om:Property Name="Name" Value="NotifyType" />
+            <om:Property Name="Signal" Value="False" />
+            <om:Element Type="OperationDeclaration" OID="909aad92-e996-53e7-811f-3166e6b07041" ParentLink="PortType_OperationDeclaration">
+                <om:Property Name="OperationType" Value="OneWay" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="Send" />
+                <om:Property Name="Signal" Value="False" />
+                <om:Element Type="MessageRef" OID="3316811a-73e0-5a1f-b2a6-db493270d8ed" ParentLink="OperationDeclaration_RequestMessageRef">
+                    <om:Property Name="Ref" Value="System.Xml.XmlDocument" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="Request" />
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+            </om:Element>
+        </om:Element>
+        <om:Element Type="ServiceDeclaration" OID="5adb5674-f023-5fa1-b212-652d16fce39e" ParentLink="Module_ServiceDeclaration">
+            <om:Property Name="InitializedTransactionType" Value="False" />
+            <om:Property Name="IsInvokable" Value="False" />
+            <om:Property Name="TypeModifier" Value="Internal" />
+            <om:Property Name="ReportToAnalyst" Value="True" />
+            <om:Property Name="Name" Value="ProcessCustomerOrder" />
+            <om:Property Name="Signal" Value="False" />
+            <om:Element Type="MessageDeclaration" OID="453b73fb-cd90-5d56-a196-c712bb25ee76" ParentLink="ServiceDeclaration_MessageDeclaration">
+                <om:Property Name="Type" Value="System.Xml.XmlDocument" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="NotifyMsg" />
+                <om:Property Name="Signal" Value="True" />
+            </om:Element>
+            <om:Element Type="MessageDeclaration" OID="aeabe2fb-ce90-5047-99b8-f54f44fd3d1c" ParentLink="ServiceDeclaration_MessageDeclaration">
+                <om:Property Name="Type" Value="VanArsdel.Integration.Schemas.Canonical.CanonicalOrder" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="OrderMsg" />
+                <om:Property Name="Signal" Value="True" />
+            </om:Element>
+            <om:Element Type="MessageDeclaration" OID="f8fac7c1-3b6e-5485-8980-12aee75ff63e" ParentLink="ServiceDeclaration_MessageDeclaration">
+                <om:Property Name="Type" Value="VanArsdel.Integration.Schemas.Canonical.CanonicalOrder" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="ErpOrderMsg" />
+                <om:Property Name="Signal" Value="True" />
+            </om:Element>
+            <om:Element Type="MessageDeclaration" OID="b6c2db6b-450b-5935-ae2b-df72815978d6" ParentLink="ServiceDeclaration_MessageDeclaration">
+                <om:Property Name="Type" Value="VanArsdel.Integration.Schemas.IDoc.ORDERS05" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="IDocMsg" />
+                <om:Property Name="Signal" Value="True" />
+            </om:Element>
+            <om:Element Type="MessageDeclaration" OID="b57108f0-aad3-5e49-96ed-1fc5cfa6465b" ParentLink="ServiceDeclaration_MessageDeclaration">
+                <om:Property Name="Type" Value="VanArsdel.Integration.Schemas.Erp.OrderManagementService.CheckCredit" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="CreditRequest" />
+                <om:Property Name="Signal" Value="True" />
+            </om:Element>
+            <om:Element Type="MessageDeclaration" OID="c7af8dd7-aeaf-5722-b41a-fcc05be718f4" ParentLink="ServiceDeclaration_MessageDeclaration">
+                <om:Property Name="Type" Value="VanArsdel.Integration.Schemas.Erp.OrderManagementService.CheckCreditResponse" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="CreditResponse" />
+                <om:Property Name="Signal" Value="True" />
+            </om:Element>
+            <om:Element Type="VariableDeclaration" OID="3ea777eb-06df-5565-8ff5-0a610a562543" ParentLink="ServiceDeclaration_VariableDeclaration">
+                <om:Property Name="UseDefaultConstructor" Value="False" />
+                <om:Property Name="Type" Value="System.String" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="partnerId" />
+                <om:Property Name="Signal" Value="True" />
+            </om:Element>
+            <om:Element Type="VariableDeclaration" OID="2e2c179e-96c1-5b10-93a9-cf23ef9d5a33" ParentLink="ServiceDeclaration_VariableDeclaration">
+                <om:Property Name="UseDefaultConstructor" Value="False" />
+                <om:Property Name="Type" Value="System.String" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="documentNumber" />
+                <om:Property Name="Signal" Value="True" />
+            </om:Element>
+            <om:Element Type="VariableDeclaration" OID="e3dbefe3-33f7-56ee-8739-7c0ec843f658" ParentLink="ServiceDeclaration_VariableDeclaration">
+                <om:Property Name="UseDefaultConstructor" Value="False" />
+                <om:Property Name="Type" Value="VanArsdel.Integration.Rules.RuleOutcome" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="outcome" />
+                <om:Property Name="Signal" Value="True" />
+            </om:Element>
+            <om:Element Type="VariableDeclaration" OID="48823958-57e6-58e7-96fc-914ecf6cc36e" ParentLink="ServiceDeclaration_VariableDeclaration">
+                <om:Property Name="UseDefaultConstructor" Value="False" />
+                <om:Property Name="Type" Value="VanArsdel.Integration.Rules.PartnerFacts" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="partnerFacts" />
+                <om:Property Name="Signal" Value="True" />
+            </om:Element>
+            <om:Element Type="VariableDeclaration" OID="27aad398-cefe-5cea-a063-d87e3aead488" ParentLink="ServiceDeclaration_VariableDeclaration">
+                <om:Property Name="UseDefaultConstructor" Value="False" />
+                <om:Property Name="Type" Value="System.Boolean" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="released" />
+                <om:Property Name="Signal" Value="True" />
+            </om:Element>
+            <om:Element Type="VariableDeclaration" OID="dd4bb3db-30d4-5427-b4d9-15f512f75dd7" ParentLink="ServiceDeclaration_VariableDeclaration">
+                <om:Property Name="UseDefaultConstructor" Value="False" />
+                <om:Property Name="Type" Value="System.Exception" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="lastError" />
+                <om:Property Name="Signal" Value="True" />
+            </om:Element>
+            <om:Element Type="PortDeclaration" OID="078cabaf-05c5-5fe1-9755-cdde2b8b2dc4" ParentLink="ServiceDeclaration_PortDeclaration">
+                <om:Property Name="PortModifier" Value="Implements" />
+                <om:Property Name="Orientation" Value="Receive" />
+                <om:Property Name="PortIndex" Value="0" />
+                <om:Property Name="IsWebPort" Value="False" />
+                <om:Property Name="OrderedDelivery" Value="False" />
+                <om:Property Name="Type" Value="VanArsdel.Integration.Orchestrations.CanonicalOrderInType" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="OrderIn" />
+                <om:Property Name="Signal" Value="False" />
+                <om:Element Type="DirectBindingAttribute" OID="0a398543-f258-509f-b0f0-8f89de38b324" ParentLink="PortDeclaration_CLRAttribute">
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+            </om:Element>
+            <om:Element Type="PortDeclaration" OID="c21c266f-076e-5411-b08c-c07dcd99ce29" ParentLink="ServiceDeclaration_PortDeclaration">
+                <om:Property Name="PortModifier" Value="Uses" />
+                <om:Property Name="Orientation" Value="SendReceive" />
+                <om:Property Name="PortIndex" Value="1" />
+                <om:Property Name="IsWebPort" Value="False" />
+                <om:Property Name="OrderedDelivery" Value="False" />
+                <om:Property Name="Type" Value="VanArsdel.Integration.Orchestrations.ErpOrderServiceType" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="ErpOrderService" />
+                <om:Property Name="Signal" Value="False" />
+                <om:Element Type="LogicalBindingAttribute" OID="7e07947c-5d2a-5d14-8563-af42bf7a68cb" ParentLink="PortDeclaration_CLRAttribute">
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+            </om:Element>
+            <om:Element Type="PortDeclaration" OID="ff786354-4007-5fe6-a12e-e71f52153ef3" ParentLink="ServiceDeclaration_PortDeclaration">
+                <om:Property Name="PortModifier" Value="Uses" />
+                <om:Property Name="Orientation" Value="Send" />
+                <om:Property Name="PortIndex" Value="2" />
+                <om:Property Name="IsWebPort" Value="False" />
+                <om:Property Name="OrderedDelivery" Value="False" />
+                <om:Property Name="Type" Value="VanArsdel.Integration.Orchestrations.ErpIDocOutType" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="ErpIDocOut" />
+                <om:Property Name="Signal" Value="False" />
+                <om:Element Type="LogicalBindingAttribute" OID="91578b10-500d-52e6-ba4b-fd8c1543f909" ParentLink="PortDeclaration_CLRAttribute">
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+            </om:Element>
+            <om:Element Type="PortDeclaration" OID="b589b0d7-ee5e-591a-8e5c-a096c84a9a50" ParentLink="ServiceDeclaration_PortDeclaration">
+                <om:Property Name="PortModifier" Value="Uses" />
+                <om:Property Name="Orientation" Value="Send" />
+                <om:Property Name="PortIndex" Value="3" />
+                <om:Property Name="IsWebPort" Value="False" />
+                <om:Property Name="OrderedDelivery" Value="False" />
+                <om:Property Name="Type" Value="VanArsdel.Integration.Orchestrations.CreditHoldOutType" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="CreditHoldOut" />
+                <om:Property Name="Signal" Value="False" />
+                <om:Element Type="LogicalBindingAttribute" OID="ed12259b-3176-5d75-9a7a-3c3e7d31104e" ParentLink="PortDeclaration_CLRAttribute">
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+            </om:Element>
+            <om:Element Type="PortDeclaration" OID="e9a68f98-9f53-5078-832a-b558dd46e458" ParentLink="ServiceDeclaration_PortDeclaration">
+                <om:Property Name="PortModifier" Value="Uses" />
+                <om:Property Name="Orientation" Value="Send" />
+                <om:Property Name="PortIndex" Value="4" />
+                <om:Property Name="IsWebPort" Value="False" />
+                <om:Property Name="OrderedDelivery" Value="False" />
+                <om:Property Name="Type" Value="VanArsdel.Integration.Orchestrations.NotifyType" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="Notify" />
+                <om:Property Name="Signal" Value="False" />
+                <om:Element Type="PhysicalBindingAttribute" OID="3cc9841a-7da8-5fd2-baca-c1804532f39c" ParentLink="PortDeclaration_CLRAttribute">
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+            </om:Element>
+            <om:Element Type="ServiceBody" OID="0a644b66-7fbd-5cfc-9d2a-988b8c41394a" ParentLink="ServiceDeclaration_ServiceBody">
+                <om:Property Name="Signal" Value="False" />
+                <om:Element Type="Receive" OID="01478673-4b3c-59d3-9b0b-cba2bb383976" ParentLink="ServiceBody_Statement">
+                    <om:Property Name="Activate" Value="True" />
+                    <om:Property Name="PortName" Value="OrderIn" />
+                    <om:Property Name="MessageName" Value="OrderMsg" />
+                    <om:Property Name="OperationName" Value="Receive" />
+                    <om:Property Name="OperationMessageName" Value="Request" />
+                    <om:Property Name="Filter" Value='VanArsdel.Integration.Schemas.MessageKind == "CustomerOrder"' />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="ReceiveOrder" />
+                    <om:Property Name="Signal" Value="True" />
+                </om:Element>
+                <om:Element Type="VariableAssignment" OID="99ff21af-f978-53ca-a9ae-f53c29e3c4f6" ParentLink="ServiceBody_Statement">
+                    <om:Property Name="Expression" Value="partnerId = OrderMsg(VanArsdel.Integration.Schemas.PartnerId);&#10;documentNumber = OrderMsg(VanArsdel.Integration.Schemas.OrderNumber);&#10;released = false;&#10;VanArsdel.Integration.Runtime.Tracking.OrderLifecycleTracker.Received(partnerId, documentNumber, VanArsdel.Integration.Runtime.Orchestration.OrderProcess.StandardOf(partnerId), OrderMsg(BTS.InterchangeID), System.DateTime.UtcNow, System.Convert.ToInt32(xpath(OrderMsg, &quot;count(/*[local-name()='Order']/*[local-name()='Lines']/*)&quot;)));" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="ReadOrderKeys" />
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+                <om:Element Type="Scope" OID="5ba23322-c50e-5164-bff1-bc245da1e3fb" ParentLink="ServiceBody_Statement">
+                    <om:Property Name="InitializedTransactionType" Value="True" />
+                    <om:Property Name="IsSynchronized" Value="False" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="ProcessOrder" />
+                    <om:Property Name="Signal" Value="False" />
+                    <om:Element Type="VariableAssignment" OID="cc122812-86c7-565d-a1ff-431bc2bc0406" ParentLink="ComplexStatement_Statement">
+                        <om:Property Name="Expression" Value="outcome = VanArsdel.Integration.Runtime.Orchestration.OrderProcess.Validate(OrderMsg);" />
+                        <om:Property Name="ReportToAnalyst" Value="True" />
+                        <om:Property Name="Name" Value="ValidateOrder" />
+                        <om:Property Name="Signal" Value="False" />
+                    </om:Element>
+                    <om:Element Type="Decision" OID="8b80b367-2a24-58a3-bdef-63331e2d2369" ParentLink="ComplexStatement_Statement">
+                        <om:Property Name="ReportToAnalyst" Value="True" />
+                        <om:Property Name="Name" Value="IsRejected" />
+                        <om:Property Name="Signal" Value="False" />
+                        <om:Element Type="DecisionBranch" OID="c917457b-0025-5b1f-9d5d-793789ad4587" ParentLink="ReallyComplexStatement_Branch">
+                            <om:Property Name="Expression" Value="outcome.Rejected || outcome.ManualReview" />
+                            <om:Property Name="IsGhostBranch" Value="False" />
+                            <om:Property Name="ReportToAnalyst" Value="True" />
+                            <om:Property Name="Name" Value="Rejected" />
+                            <om:Property Name="Signal" Value="False" />
+                            <om:Element Type="VariableAssignment" OID="67ae7502-6661-51c0-bfb3-2f6b794e9cc5" ParentLink="ComplexStatement_Statement">
+                                <om:Property Name="Expression" Value="VanArsdel.Integration.Runtime.Tracking.OrderLifecycleTracker.Rejected(partnerId, documentNumber, outcome.Summary(), System.DateTime.UtcNow);" />
+                                <om:Property Name="ReportToAnalyst" Value="True" />
+                                <om:Property Name="Name" Value="TrackRejected" />
+                                <om:Property Name="Signal" Value="False" />
+                            </om:Element>
+                            <om:Element Type="Construct" OID="19805652-c36b-56fe-86a5-b9cc39120e74" ParentLink="ComplexStatement_Statement">
+                                <om:Property Name="ReportToAnalyst" Value="True" />
+                                <om:Property Name="Name" Value="BuildNotice" />
+                                <om:Property Name="Signal" Value="False" />
+                                <om:Element Type="MessageAssignment" OID="65da3b5f-e4e6-5f4d-8051-c76a82ff3a2d" ParentLink="ComplexStatement_Statement">
+                                    <om:Property Name="Expression" Value='NotifyMsg = new System.Xml.XmlDocument();&#10;NotifyMsg.LoadXml("&lt;Notice/&gt;");&#10;NotifyMsg.DocumentElement.InnerText = VanArsdel.Integration.Runtime.Orchestration.OrderProcess.RejectionNotice(partnerId, documentNumber, outcome);&#10;NotifyMsg(SMTP.Subject) = VanArsdel.Integration.Runtime.Orchestration.OrderProcess.Subject("Rejected order", partnerId, documentNumber);' />
+                                    <om:Property Name="ReportToAnalyst" Value="False" />
+                                    <om:Property Name="Name" Value="Assign_BuildNotice" />
+                                    <om:Property Name="Signal" Value="False" />
+                                </om:Element>
+                                <om:Element Type="MessageRef" OID="e5dea354-0a67-524e-871b-916dbfd66912" ParentLink="Construct_MessageRef">
+                                    <om:Property Name="Ref" Value="NotifyMsg" />
+                                    <om:Property Name="ReportToAnalyst" Value="True" />
+                                    <om:Property Name="Signal" Value="False" />
+                                </om:Element>
+                            </om:Element>
+                            <om:Element Type="VariableAssignment" OID="cb460ee8-a561-50be-a0ad-235c824ae12c" ParentLink="ComplexStatement_Statement">
+                                <om:Property Name="Expression" Value='Notify(Microsoft.XLANGs.BaseTypes.Address) = VanArsdel.Integration.Runtime.Orchestration.OrderProcess.MailTo("CustomerService");' />
+                                <om:Property Name="ReportToAnalyst" Value="True" />
+                                <om:Property Name="Name" Value="SetMailTo" />
+                                <om:Property Name="Signal" Value="False" />
+                            </om:Element>
+                            <om:Element Type="Send" OID="e8968fa9-70e7-53a1-bb1a-5309fff67e96" ParentLink="ComplexStatement_Statement">
+                                <om:Property Name="PortName" Value="Notify" />
+                                <om:Property Name="MessageName" Value="NotifyMsg" />
+                                <om:Property Name="OperationName" Value="Send" />
+                                <om:Property Name="OperationMessageName" Value="Request" />
+                                <om:Property Name="ReportToAnalyst" Value="True" />
+                                <om:Property Name="Name" Value="SendNotice" />
+                                <om:Property Name="Signal" Value="True" />
+                            </om:Element>
+                            <om:Element Type="Terminate" OID="b374bab1-2e98-582b-8cc4-fdbbc86e2674" ParentLink="ComplexStatement_Statement">
+                                <om:Property Name="ErrorMessage" Value='"Order rejected by VanArsdel.OrderValidation: " + outcome.Summary()' />
+                                <om:Property Name="ReportToAnalyst" Value="True" />
+                                <om:Property Name="Name" Value="TerminateRejected" />
+                                <om:Property Name="Signal" Value="False" />
+                            </om:Element>
+                        </om:Element>
+                        <om:Element Type="DecisionBranch" OID="c04deaea-b07b-5c30-8c40-066d75ea1b9f" ParentLink="ReallyComplexStatement_Branch">
+                            <om:Property Name="IsGhostBranch" Value="True" />
+                            <om:Property Name="ReportToAnalyst" Value="True" />
+                            <om:Property Name="Name" Value="Else" />
+                            <om:Property Name="Signal" Value="False" />
+                        </om:Element>
+                    </om:Element>
+                    <om:Element Type="VariableAssignment" OID="93850bcd-b040-5507-a994-91297f9e90d2" ParentLink="ComplexStatement_Statement">
+                        <om:Property Name="Expression" Value="VanArsdel.Integration.Runtime.Tracking.OrderLifecycleTracker.Milestone(partnerId, documentNumber, VanArsdel.Integration.Domain.Orders.OrderMilestone.Validated, System.DateTime.UtcNow);&#10;released = !outcome.CreditCheckRequired;" />
+                        <om:Property Name="ReportToAnalyst" Value="True" />
+                        <om:Property Name="Name" Value="TrackValidated" />
+                        <om:Property Name="Signal" Value="False" />
+                    </om:Element>
+                    <om:Element Type="Decision" OID="d75db67b-40d8-5b57-b0d1-e5cc9943da03" ParentLink="ComplexStatement_Statement">
+                        <om:Property Name="ReportToAnalyst" Value="True" />
+                        <om:Property Name="Name" Value="NeedsCreditCheck" />
+                        <om:Property Name="Signal" Value="False" />
+                        <om:Element Type="DecisionBranch" OID="762d63a1-bfe0-53af-8196-b8e1d7a25e1d" ParentLink="ReallyComplexStatement_Branch">
+                            <om:Property Name="Expression" Value="outcome.CreditCheckRequired" />
+                            <om:Property Name="IsGhostBranch" Value="False" />
+                            <om:Property Name="ReportToAnalyst" Value="True" />
+                            <om:Property Name="Name" Value="CreditCheck" />
+                            <om:Property Name="Signal" Value="False" />
+                            <om:Element Type="Construct" OID="7aed9fba-413d-51c5-b44d-79ab776c5844" ParentLink="ComplexStatement_Statement">
+                                <om:Property Name="ReportToAnalyst" Value="True" />
+                                <om:Property Name="Name" Value="BuildCreditRequest" />
+                                <om:Property Name="Signal" Value="False" />
+                                <om:Element Type="MessageAssignment" OID="0300c0fc-4dc5-53cf-996b-63fa5ff8d2f5" ParentLink="ComplexStatement_Statement">
+                                    <om:Property Name="Expression" Value="CreditRequest = VanArsdel.Integration.Runtime.Messages.ErpMessages.CreateCheckCredit(OrderMsg);" />
+                                    <om:Property Name="ReportToAnalyst" Value="False" />
+                                    <om:Property Name="Name" Value="Assign_BuildCreditRequest" />
+                                    <om:Property Name="Signal" Value="False" />
+                                </om:Element>
+                                <om:Element Type="MessageRef" OID="04570121-7064-5a6d-b3d5-e05826126bd6" ParentLink="Construct_MessageRef">
+                                    <om:Property Name="Ref" Value="CreditRequest" />
+                                    <om:Property Name="ReportToAnalyst" Value="True" />
+                                    <om:Property Name="Signal" Value="False" />
+                                </om:Element>
+                            </om:Element>
+                            <om:Element Type="Send" OID="3af8c011-1461-5c4f-9139-46ca2975e667" ParentLink="ComplexStatement_Statement">
+                                <om:Property Name="PortName" Value="ErpOrderService" />
+                                <om:Property Name="MessageName" Value="CreditRequest" />
+                                <om:Property Name="OperationName" Value="CheckCredit" />
+                                <om:Property Name="OperationMessageName" Value="Request" />
+                                <om:Property Name="ReportToAnalyst" Value="True" />
+                                <om:Property Name="Name" Value="SendCreditCheck" />
+                                <om:Property Name="Signal" Value="True" />
+                            </om:Element>
+                            <om:Element Type="Receive" OID="458b42f2-d954-5e9c-96c3-2dc639bedba9" ParentLink="ComplexStatement_Statement">
+                                <om:Property Name="Activate" Value="False" />
+                                <om:Property Name="PortName" Value="ErpOrderService" />
+                                <om:Property Name="MessageName" Value="CreditResponse" />
+                                <om:Property Name="OperationName" Value="CheckCredit" />
+                                <om:Property Name="OperationMessageName" Value="Request" />
+                                <om:Property Name="ReportToAnalyst" Value="True" />
+                                <om:Property Name="Name" Value="ReceiveCreditResult" />
+                                <om:Property Name="Signal" Value="True" />
+                            </om:Element>
+                            <om:Element Type="VariableAssignment" OID="8e0a7762-3cc1-53a2-b100-4897058cd136" ParentLink="ComplexStatement_Statement">
+                                <om:Property Name="Expression" Value="partnerFacts = VanArsdel.Integration.Runtime.Messages.ErpMessages.ApplyCreditResponse(CreditResponse, VanArsdel.Integration.Runtime.Orchestration.OrderProcess.PartnerFactsFor(partnerId));&#10;outcome = VanArsdel.Integration.Runtime.Orchestration.OrderProcess.ReleaseCredit(OrderMsg, partnerFacts, outcome);&#10;released = !outcome.CreditHold;" />
+                                <om:Property Name="ReportToAnalyst" Value="True" />
+                                <om:Property Name="Name" Value="ReleaseCredit" />
+                                <om:Property Name="Signal" Value="False" />
+                            </om:Element>
+                            <om:Element Type="Decision" OID="5a22a18c-6e0c-5e9a-8797-285f7c31fab2" ParentLink="ComplexStatement_Statement">
+                                <om:Property Name="ReportToAnalyst" Value="True" />
+                                <om:Property Name="Name" Value="IsOnHold" />
+                                <om:Property Name="Signal" Value="False" />
+                                <om:Element Type="DecisionBranch" OID="a752fdad-8aa8-5ed1-a4e4-fc56a79b01fb" ParentLink="ReallyComplexStatement_Branch">
+                                    <om:Property Name="Expression" Value="outcome.CreditHold" />
+                                    <om:Property Name="IsGhostBranch" Value="False" />
+                                    <om:Property Name="ReportToAnalyst" Value="True" />
+                                    <om:Property Name="Name" Value="CreditHold" />
+                                    <om:Property Name="Signal" Value="False" />
+                                    <om:Element Type="VariableAssignment" OID="0d2f5889-bd12-5613-aea6-74fb128a4b6e" ParentLink="ComplexStatement_Statement">
+                                        <om:Property Name="Expression" Value="VanArsdel.Integration.Runtime.Tracking.OrderLifecycleTracker.CreditHold(partnerId, documentNumber, outcome.HoldReason, System.DateTime.UtcNow);" />
+                                        <om:Property Name="ReportToAnalyst" Value="True" />
+                                        <om:Property Name="Name" Value="TrackCreditHold" />
+                                        <om:Property Name="Signal" Value="False" />
+                                    </om:Element>
+                                    <om:Element Type="Send" OID="c01d2220-9a97-5f8d-856f-767d1d478f6e" ParentLink="ComplexStatement_Statement">
+                                        <om:Property Name="PortName" Value="CreditHoldOut" />
+                                        <om:Property Name="MessageName" Value="OrderMsg" />
+                                        <om:Property Name="OperationName" Value="Send" />
+                                        <om:Property Name="OperationMessageName" Value="Request" />
+                                        <om:Property Name="ReportToAnalyst" Value="True" />
+                                        <om:Property Name="Name" Value="SendToCreditHoldQueue" />
+                                        <om:Property Name="Signal" Value="True" />
+                                    </om:Element>
+                                    <om:Element Type="Construct" OID="2159aebc-8b2c-556c-a38b-17ff9822b780" ParentLink="ComplexStatement_Statement">
+                                        <om:Property Name="ReportToAnalyst" Value="True" />
+                                        <om:Property Name="Name" Value="BuildNotice" />
+                                        <om:Property Name="Signal" Value="False" />
+                                        <om:Element Type="MessageAssignment" OID="4f94d0ce-63d0-562a-9629-1afdd20373fc" ParentLink="ComplexStatement_Statement">
+                                            <om:Property Name="Expression" Value='NotifyMsg = new System.Xml.XmlDocument();&#10;NotifyMsg.LoadXml("&lt;Notice/&gt;");&#10;NotifyMsg.DocumentElement.InnerText = "Order " + documentNumber + " is on credit hold: " + outcome.HoldReason;&#10;NotifyMsg(SMTP.Subject) = VanArsdel.Integration.Runtime.Orchestration.OrderProcess.Subject("Credit hold", partnerId, documentNumber);' />
+                                            <om:Property Name="ReportToAnalyst" Value="False" />
+                                            <om:Property Name="Name" Value="Assign_BuildNotice" />
+                                            <om:Property Name="Signal" Value="False" />
+                                        </om:Element>
+                                        <om:Element Type="MessageRef" OID="76db314a-4d41-5dbf-acf3-b8d9b577ca38" ParentLink="Construct_MessageRef">
+                                            <om:Property Name="Ref" Value="NotifyMsg" />
+                                            <om:Property Name="ReportToAnalyst" Value="True" />
+                                            <om:Property Name="Signal" Value="False" />
+                                        </om:Element>
+                                    </om:Element>
+                                    <om:Element Type="VariableAssignment" OID="6df0e167-f8b3-5b89-9673-bbb84f950ad9" ParentLink="ComplexStatement_Statement">
+                                        <om:Property Name="Expression" Value='Notify(Microsoft.XLANGs.BaseTypes.Address) = VanArsdel.Integration.Runtime.Orchestration.OrderProcess.MailTo("Credit");' />
+                                        <om:Property Name="ReportToAnalyst" Value="True" />
+                                        <om:Property Name="Name" Value="SetMailTo" />
+                                        <om:Property Name="Signal" Value="False" />
+                                    </om:Element>
+                                    <om:Element Type="Send" OID="c5c414c4-d3f0-577b-8876-373bfd27e8d8" ParentLink="ComplexStatement_Statement">
+                                        <om:Property Name="PortName" Value="Notify" />
+                                        <om:Property Name="MessageName" Value="NotifyMsg" />
+                                        <om:Property Name="OperationName" Value="Send" />
+                                        <om:Property Name="OperationMessageName" Value="Request" />
+                                        <om:Property Name="ReportToAnalyst" Value="True" />
+                                        <om:Property Name="Name" Value="SendNotice" />
+                                        <om:Property Name="Signal" Value="True" />
+                                    </om:Element>
+                                </om:Element>
+                                <om:Element Type="DecisionBranch" OID="c4409d65-53b7-502f-a4c8-284128e36fc2" ParentLink="ReallyComplexStatement_Branch">
+                                    <om:Property Name="IsGhostBranch" Value="True" />
+                                    <om:Property Name="ReportToAnalyst" Value="True" />
+                                    <om:Property Name="Name" Value="Else" />
+                                    <om:Property Name="Signal" Value="False" />
+                                </om:Element>
+                            </om:Element>
+                        </om:Element>
+                        <om:Element Type="DecisionBranch" OID="d79f994a-b676-5574-9cbe-c52be5254c3b" ParentLink="ReallyComplexStatement_Branch">
+                            <om:Property Name="IsGhostBranch" Value="True" />
+                            <om:Property Name="ReportToAnalyst" Value="True" />
+                            <om:Property Name="Name" Value="Else" />
+                            <om:Property Name="Signal" Value="False" />
+                        </om:Element>
+                    </om:Element>
+                    <om:Element Type="Decision" OID="e7d3c660-ef21-5d8b-bf1d-1e2a95c69000" ParentLink="ComplexStatement_Statement">
+                        <om:Property Name="ReportToAnalyst" Value="True" />
+                        <om:Property Name="Name" Value="IsReleased" />
+                        <om:Property Name="Signal" Value="False" />
+                        <om:Element Type="DecisionBranch" OID="4205cd6f-3aca-5c1e-ad68-86f17e6c386e" ParentLink="ReallyComplexStatement_Branch">
+                            <om:Property Name="Expression" Value="released" />
+                            <om:Property Name="IsGhostBranch" Value="False" />
+                            <om:Property Name="ReportToAnalyst" Value="True" />
+                            <om:Property Name="Name" Value="Released" />
+                            <om:Property Name="Signal" Value="False" />
+                            <om:Element Type="Construct" OID="01d1c7bb-4c75-5247-8771-9bc49029387d" ParentLink="ComplexStatement_Statement">
+                                <om:Property Name="ReportToAnalyst" Value="True" />
+                                <om:Property Name="Name" Value="ApplyRuleOutcome" />
+                                <om:Property Name="Signal" Value="False" />
+                                <om:Element Type="MessageAssignment" OID="a405fd53-d25f-5222-ad41-82cef4869852" ParentLink="ComplexStatement_Statement">
+                                    <om:Property Name="Expression" Value="ErpOrderMsg = VanArsdel.Integration.Runtime.Orchestration.OrderProcess.ApplyOutcome(OrderMsg, outcome);" />
+                                    <om:Property Name="ReportToAnalyst" Value="False" />
+                                    <om:Property Name="Name" Value="Assign_ApplyRuleOutcome" />
+                                    <om:Property Name="Signal" Value="False" />
+                                </om:Element>
+                                <om:Element Type="MessageRef" OID="3fdaf2fd-9683-59c2-bd0b-e356f989d359" ParentLink="Construct_MessageRef">
+                                    <om:Property Name="Ref" Value="ErpOrderMsg" />
+                                    <om:Property Name="ReportToAnalyst" Value="True" />
+                                    <om:Property Name="Signal" Value="False" />
+                                </om:Element>
+                            </om:Element>
+                            <om:Element Type="Construct" OID="bb08fa03-96ef-5ae1-b14a-cbb055871eeb" ParentLink="ComplexStatement_Statement">
+                                <om:Property Name="ReportToAnalyst" Value="True" />
+                                <om:Property Name="Name" Value="MapToIDoc" />
+                                <om:Property Name="Signal" Value="False" />
+                                <om:Element Type="Transform" OID="e93320bb-df47-5077-86e4-d20436a89628" ParentLink="ComplexStatement_Statement">
+                                    <om:Property Name="ClassName" Value="VanArsdel.Integration.Maps.Order_to_IDoc_ORDERS05" />
+                                    <om:Property Name="ReportToAnalyst" Value="True" />
+                                    <om:Property Name="Name" Value="Transform_Order_to_IDoc_ORDERS05" />
+                                    <om:Property Name="Signal" Value="True" />
+                                    <om:Element Type="MessagePartRef" OID="c69a25a0-b14f-54b4-b7a7-f6b2468d2654" ParentLink="Transform_InputMessagePartRef">
+                                        <om:Property Name="MessageRef" Value="ErpOrderMsg" />
+                                        <om:Property Name="ReportToAnalyst" Value="True" />
+                                        <om:Property Name="Name" Value="MessagePartReference_1" />
+                                        <om:Property Name="Signal" Value="False" />
+                                    </om:Element>
+                                    <om:Element Type="MessagePartRef" OID="1e9f72b4-e3c2-563d-9aa8-abef49a2430e" ParentLink="Transform_OutputMessagePartRef">
+                                        <om:Property Name="MessageRef" Value="IDocMsg" />
+                                        <om:Property Name="ReportToAnalyst" Value="True" />
+                                        <om:Property Name="Name" Value="MessagePartReference_2" />
+                                        <om:Property Name="Signal" Value="False" />
+                                    </om:Element>
+                                </om:Element>
+                                <om:Element Type="MessageRef" OID="ac006cdf-b1ff-5be1-98ba-7f00a2831ce0" ParentLink="Construct_MessageRef">
+                                    <om:Property Name="Ref" Value="IDocMsg" />
+                                    <om:Property Name="ReportToAnalyst" Value="True" />
+                                    <om:Property Name="Signal" Value="False" />
+                                </om:Element>
+                            </om:Element>
+                            <om:Element Type="Send" OID="0555e999-4e52-5f1c-bdc3-c25adc683d07" ParentLink="ComplexStatement_Statement">
+                                <om:Property Name="PortName" Value="ErpIDocOut" />
+                                <om:Property Name="MessageName" Value="IDocMsg" />
+                                <om:Property Name="OperationName" Value="Send" />
+                                <om:Property Name="OperationMessageName" Value="Request" />
+                                <om:Property Name="ReportToAnalyst" Value="True" />
+                                <om:Property Name="Name" Value="SendToErp" />
+                                <om:Property Name="Signal" Value="True" />
+                            </om:Element>
+                            <om:Element Type="VariableAssignment" OID="f5b1170a-5ea4-5cda-90e2-0527921d1cfe" ParentLink="ComplexStatement_Statement">
+                                <om:Property Name="Expression" Value="VanArsdel.Integration.Runtime.Tracking.OrderLifecycleTracker.Milestone(partnerId, documentNumber, VanArsdel.Integration.Domain.Orders.OrderMilestone.Released, System.DateTime.UtcNow);&#10;VanArsdel.Integration.Runtime.Tracking.OrderLifecycleTracker.SentToErp(partnerId, documentNumber, VanArsdel.Integration.Runtime.Orchestration.OrderProcess.OrderValue(OrderMsg), OrderMsg.Header.Currency, System.DateTime.UtcNow);" />
+                                <om:Property Name="ReportToAnalyst" Value="True" />
+                                <om:Property Name="Name" Value="TrackSentToErp" />
+                                <om:Property Name="Signal" Value="False" />
+                            </om:Element>
+                        </om:Element>
+                        <om:Element Type="DecisionBranch" OID="53914931-a9b4-5550-817b-fa2085354ac3" ParentLink="ReallyComplexStatement_Branch">
+                            <om:Property Name="IsGhostBranch" Value="True" />
+                            <om:Property Name="ReportToAnalyst" Value="True" />
+                            <om:Property Name="Name" Value="Else" />
+                            <om:Property Name="Signal" Value="False" />
+                        </om:Element>
+                    </om:Element>
+                    <om:Element Type="Catch" OID="8addc22b-aa42-5677-915e-47da3e7de555" ParentLink="Scope_Catch">
+                        <om:Property Name="ExceptionName" Value="ex" />
+                        <om:Property Name="ExceptionType" Value="System.Exception" />
+                        <om:Property Name="IsFaultMessage" Value="False" />
+                        <om:Property Name="ReportToAnalyst" Value="True" />
+                        <om:Property Name="Name" Value="Catch_Exception" />
+                        <om:Property Name="Signal" Value="True" />
+                        <om:Element Type="VariableAssignment" OID="8b03237c-f3e3-5a37-96fd-d1d69f1adb54" ParentLink="Catch_Statement">
+                            <om:Property Name="Expression" Value='lastError = ex;&#10;System.Diagnostics.Trace.TraceError("ProcessCustomerOrder " + partnerId + " " + documentNumber + ": " + ex.ToString());' />
+                            <om:Property Name="ReportToAnalyst" Value="True" />
+                            <om:Property Name="Name" Value="KeepError" />
+                            <om:Property Name="Signal" Value="False" />
+                        </om:Element>
+                        <om:Element Type="Construct" OID="104c79eb-392d-59d2-af2d-667d09f5a089" ParentLink="Catch_Statement">
+                            <om:Property Name="ReportToAnalyst" Value="True" />
+                            <om:Property Name="Name" Value="BuildNotice" />
+                            <om:Property Name="Signal" Value="False" />
+                            <om:Element Type="MessageAssignment" OID="7b30746f-8700-51bc-9e21-db114e6e2778" ParentLink="ComplexStatement_Statement">
+                                <om:Property Name="Expression" Value='NotifyMsg = new System.Xml.XmlDocument();&#10;NotifyMsg.LoadXml("&lt;Notice/&gt;");&#10;NotifyMsg.DocumentElement.InnerText = "Order " + documentNumber + " failed: " + lastError.Message;&#10;NotifyMsg(SMTP.Subject) = VanArsdel.Integration.Runtime.Orchestration.OrderProcess.Subject("Order failed", partnerId, documentNumber);' />
+                                <om:Property Name="ReportToAnalyst" Value="False" />
+                                <om:Property Name="Name" Value="Assign_BuildNotice" />
+                                <om:Property Name="Signal" Value="False" />
+                            </om:Element>
+                            <om:Element Type="MessageRef" OID="4d89ab74-af59-5e9d-b4d5-42aeace0f3cf" ParentLink="Construct_MessageRef">
+                                <om:Property Name="Ref" Value="NotifyMsg" />
+                                <om:Property Name="ReportToAnalyst" Value="True" />
+                                <om:Property Name="Signal" Value="False" />
+                            </om:Element>
+                        </om:Element>
+                        <om:Element Type="VariableAssignment" OID="57542007-22df-5b9c-bbc2-7bce96658508" ParentLink="Catch_Statement">
+                            <om:Property Name="Expression" Value='Notify(Microsoft.XLANGs.BaseTypes.Address) = VanArsdel.Integration.Runtime.Orchestration.OrderProcess.MailTo("Integration");' />
+                            <om:Property Name="ReportToAnalyst" Value="True" />
+                            <om:Property Name="Name" Value="SetMailTo" />
+                            <om:Property Name="Signal" Value="False" />
+                        </om:Element>
+                        <om:Element Type="Send" OID="de4e15a2-41bd-5a5f-a664-9e19aca817e2" ParentLink="Catch_Statement">
+                            <om:Property Name="PortName" Value="Notify" />
+                            <om:Property Name="MessageName" Value="NotifyMsg" />
+                            <om:Property Name="OperationName" Value="Send" />
+                            <om:Property Name="OperationMessageName" Value="Request" />
+                            <om:Property Name="ReportToAnalyst" Value="True" />
+                            <om:Property Name="Name" Value="SendNotice" />
+                            <om:Property Name="Signal" Value="True" />
+                        </om:Element>
+                        <om:Element Type="Terminate" OID="8fee30f1-8d4c-5ef8-b3e3-34a6816f25ce" ParentLink="Catch_Statement">
+                            <om:Property Name="ErrorMessage" Value="lastError.Message" />
+                            <om:Property Name="ReportToAnalyst" Value="True" />
+                            <om:Property Name="Name" Value="TerminateFailed" />
+                            <om:Property Name="Signal" Value="False" />
+                        </om:Element>
+                    </om:Element>
+                </om:Element>
+            </om:Element>
+        </om:Element>
+    </om:Element>
+</om:MetaModel>
+#endif // __DESIGNER_DATA
+module VanArsdel.Integration.Orchestrations
+{
+    internal porttype CanonicalOrderInType
+    {
+        oneway Receive
+        {
+            VanArsdel.Integration.Schemas.Canonical.CanonicalOrder
+        };
+    };
+    internal porttype ErpOrderServiceType
+    {
+        requestresponse CheckCredit
+        {
+            VanArsdel.Integration.Schemas.Erp.OrderManagementService.CheckCredit, VanArsdel.Integration.Schemas.Erp.OrderManagementService.CheckCreditResponse
+        };
+    };
+    internal porttype ErpIDocOutType
+    {
+        oneway Send
+        {
+            VanArsdel.Integration.Schemas.IDoc.ORDERS05
+        };
+    };
+    internal porttype CreditHoldOutType
+    {
+        oneway Send
+        {
+            VanArsdel.Integration.Schemas.Canonical.CanonicalOrder
+        };
+    };
+    internal porttype NotifyType
+    {
+        oneway Send
+        {
+            System.Xml.XmlDocument
+        };
+    };
+    [Microsoft.XLANGs.BaseTypes.BPELExportable(false)]
+    internal service ProcessCustomerOrder
+    {
+        [Microsoft.XLANGs.BaseTypes.DirectBinding()]
+        port implements CanonicalOrderInType OrderIn;
+        [Microsoft.XLANGs.BaseTypes.LogicalBinding()]
+        port uses ErpOrderServiceType ErpOrderService;
+        [Microsoft.XLANGs.BaseTypes.LogicalBinding()]
+        port uses ErpIDocOutType ErpIDocOut;
+        [Microsoft.XLANGs.BaseTypes.LogicalBinding()]
+        port uses CreditHoldOutType CreditHoldOut;
+        [Microsoft.XLANGs.BaseTypes.PhysicalBinding(typeof(Microsoft.BizTalk.DefaultPipelines.PassThruTransmit))]
+        port uses dynamic NotifyType Notify;
+        message System.Xml.XmlDocument NotifyMsg;
+        message VanArsdel.Integration.Schemas.Canonical.CanonicalOrder OrderMsg;
+        message VanArsdel.Integration.Schemas.Canonical.CanonicalOrder ErpOrderMsg;
+        message VanArsdel.Integration.Schemas.IDoc.ORDERS05 IDocMsg;
+        message VanArsdel.Integration.Schemas.Erp.OrderManagementService.CheckCredit CreditRequest;
+        message VanArsdel.Integration.Schemas.Erp.OrderManagementService.CheckCreditResponse CreditResponse;
+        System.String partnerId;
+        System.String documentNumber;
+        VanArsdel.Integration.Rules.RuleOutcome outcome;
+        VanArsdel.Integration.Rules.PartnerFacts partnerFacts;
+        System.Boolean released;
+        System.Exception lastError;
+        body ()
+        {
+            [Microsoft.XLANGs.BaseTypes.DesignerPosition("01478673-4b3c-59d3-9b0b-cba2bb383976")]
+            activate (VanArsdel.Integration.Schemas.MessageKind == "CustomerOrder") receive (OrderIn.Receive, OrderMsg);
+            [Microsoft.XLANGs.BaseTypes.DesignerPosition("99ff21af-f978-53ca-a9ae-f53c29e3c4f6")]
+            partnerId = OrderMsg(VanArsdel.Integration.Schemas.PartnerId);
+            documentNumber = OrderMsg(VanArsdel.Integration.Schemas.OrderNumber);
+            released = false;
+            VanArsdel.Integration.Runtime.Tracking.OrderLifecycleTracker.Received(partnerId, documentNumber, VanArsdel.Integration.Runtime.Orchestration.OrderProcess.StandardOf(partnerId), OrderMsg(BTS.InterchangeID), System.DateTime.UtcNow, System.Convert.ToInt32(xpath(OrderMsg, "count(/*[local-name()='Order']/*[local-name()='Lines']/*)")));
+            [Microsoft.XLANGs.BaseTypes.DesignerPosition("5ba23322-c50e-5164-bff1-bc245da1e3fb")]
+            scope
+            {
+                body
+                {
+                    [Microsoft.XLANGs.BaseTypes.DesignerPosition("cc122812-86c7-565d-a1ff-431bc2bc0406")]
+                    outcome = VanArsdel.Integration.Runtime.Orchestration.OrderProcess.Validate(OrderMsg);
+                    [Microsoft.XLANGs.BaseTypes.DesignerPosition("8b80b367-2a24-58a3-bdef-63331e2d2369")]
+                    if (outcome.Rejected || outcome.ManualReview)
+                    {
+                        [Microsoft.XLANGs.BaseTypes.DesignerPosition("67ae7502-6661-51c0-bfb3-2f6b794e9cc5")]
+                        VanArsdel.Integration.Runtime.Tracking.OrderLifecycleTracker.Rejected(partnerId, documentNumber, outcome.Summary(), System.DateTime.UtcNow);
+                        [Microsoft.XLANGs.BaseTypes.DesignerPosition("19805652-c36b-56fe-86a5-b9cc39120e74")]
+                        construct NotifyMsg
+                        {
+                            [Microsoft.XLANGs.BaseTypes.DesignerPosition("b2f8cde7-401e-5501-a428-13b9455a339c")]
+                            NotifyMsg = new System.Xml.XmlDocument();
+                            NotifyMsg.LoadXml("<Notice/>");
+                            NotifyMsg.DocumentElement.InnerText = VanArsdel.Integration.Runtime.Orchestration.OrderProcess.RejectionNotice(partnerId, documentNumber, outcome);
+                            NotifyMsg(SMTP.Subject) = VanArsdel.Integration.Runtime.Orchestration.OrderProcess.Subject("Rejected order", partnerId, documentNumber);
+                        }
+                        [Microsoft.XLANGs.BaseTypes.DesignerPosition("cb460ee8-a561-50be-a0ad-235c824ae12c")]
+                        Notify(Microsoft.XLANGs.BaseTypes.Address) = VanArsdel.Integration.Runtime.Orchestration.OrderProcess.MailTo("CustomerService");
+                        [Microsoft.XLANGs.BaseTypes.DesignerPosition("e8968fa9-70e7-53a1-bb1a-5309fff67e96")]
+                        send (Notify.Send, NotifyMsg);
+                        [Microsoft.XLANGs.BaseTypes.DesignerPosition("b374bab1-2e98-582b-8cc4-fdbbc86e2674")]
+                        terminate "Order rejected by VanArsdel.OrderValidation: " + outcome.Summary();
+                    }
+                    [Microsoft.XLANGs.BaseTypes.DesignerPosition("93850bcd-b040-5507-a994-91297f9e90d2")]
+                    VanArsdel.Integration.Runtime.Tracking.OrderLifecycleTracker.Milestone(partnerId, documentNumber, VanArsdel.Integration.Domain.Orders.OrderMilestone.Validated, System.DateTime.UtcNow);
+                    released = !outcome.CreditCheckRequired;
+                    [Microsoft.XLANGs.BaseTypes.DesignerPosition("d75db67b-40d8-5b57-b0d1-e5cc9943da03")]
+                    if (outcome.CreditCheckRequired)
+                    {
+                        [Microsoft.XLANGs.BaseTypes.DesignerPosition("7aed9fba-413d-51c5-b44d-79ab776c5844")]
+                        construct CreditRequest
+                        {
+                            [Microsoft.XLANGs.BaseTypes.DesignerPosition("e6051e50-91bc-5163-8632-e8e4a680d256")]
+                            CreditRequest = VanArsdel.Integration.Runtime.Messages.ErpMessages.CreateCheckCredit(OrderMsg);
+                        }
+                        [Microsoft.XLANGs.BaseTypes.DesignerPosition("3af8c011-1461-5c4f-9139-46ca2975e667")]
+                        send (ErpOrderService.CheckCredit, CreditRequest);
+                        [Microsoft.XLANGs.BaseTypes.DesignerPosition("458b42f2-d954-5e9c-96c3-2dc639bedba9")]
+                        receive (ErpOrderService.CheckCredit, CreditResponse);
+                        [Microsoft.XLANGs.BaseTypes.DesignerPosition("8e0a7762-3cc1-53a2-b100-4897058cd136")]
+                        partnerFacts = VanArsdel.Integration.Runtime.Messages.ErpMessages.ApplyCreditResponse(CreditResponse, VanArsdel.Integration.Runtime.Orchestration.OrderProcess.PartnerFactsFor(partnerId));
+                        outcome = VanArsdel.Integration.Runtime.Orchestration.OrderProcess.ReleaseCredit(OrderMsg, partnerFacts, outcome);
+                        released = !outcome.CreditHold;
+                        [Microsoft.XLANGs.BaseTypes.DesignerPosition("5a22a18c-6e0c-5e9a-8797-285f7c31fab2")]
+                        if (outcome.CreditHold)
+                        {
+                            [Microsoft.XLANGs.BaseTypes.DesignerPosition("0d2f5889-bd12-5613-aea6-74fb128a4b6e")]
+                            VanArsdel.Integration.Runtime.Tracking.OrderLifecycleTracker.CreditHold(partnerId, documentNumber, outcome.HoldReason, System.DateTime.UtcNow);
+                            [Microsoft.XLANGs.BaseTypes.DesignerPosition("c01d2220-9a97-5f8d-856f-767d1d478f6e")]
+                            send (CreditHoldOut.Send, OrderMsg);
+                            [Microsoft.XLANGs.BaseTypes.DesignerPosition("2159aebc-8b2c-556c-a38b-17ff9822b780")]
+                            construct NotifyMsg
+                            {
+                                [Microsoft.XLANGs.BaseTypes.DesignerPosition("e27d8d56-3d23-5e7a-911a-268af43496d5")]
+                                NotifyMsg = new System.Xml.XmlDocument();
+                                NotifyMsg.LoadXml("<Notice/>");
+                                NotifyMsg.DocumentElement.InnerText = "Order " + documentNumber + " is on credit hold: " + outcome.HoldReason;
+                                NotifyMsg(SMTP.Subject) = VanArsdel.Integration.Runtime.Orchestration.OrderProcess.Subject("Credit hold", partnerId, documentNumber);
+                            }
+                            [Microsoft.XLANGs.BaseTypes.DesignerPosition("6df0e167-f8b3-5b89-9673-bbb84f950ad9")]
+                            Notify(Microsoft.XLANGs.BaseTypes.Address) = VanArsdel.Integration.Runtime.Orchestration.OrderProcess.MailTo("Credit");
+                            [Microsoft.XLANGs.BaseTypes.DesignerPosition("c5c414c4-d3f0-577b-8876-373bfd27e8d8")]
+                            send (Notify.Send, NotifyMsg);
+                        }
+                    }
+                    [Microsoft.XLANGs.BaseTypes.DesignerPosition("e7d3c660-ef21-5d8b-bf1d-1e2a95c69000")]
+                    if (released)
+                    {
+                        [Microsoft.XLANGs.BaseTypes.DesignerPosition("01d1c7bb-4c75-5247-8771-9bc49029387d")]
+                        construct ErpOrderMsg
+                        {
+                            [Microsoft.XLANGs.BaseTypes.DesignerPosition("16bbb4aa-b31b-5c96-85a7-adb9159480df")]
+                            ErpOrderMsg = VanArsdel.Integration.Runtime.Orchestration.OrderProcess.ApplyOutcome(OrderMsg, outcome);
+                        }
+                        [Microsoft.XLANGs.BaseTypes.DesignerPosition("bb08fa03-96ef-5ae1-b14a-cbb055871eeb")]
+                        construct IDocMsg
+                        {
+                            [Microsoft.XLANGs.BaseTypes.DesignerPosition("ab2f858f-5e11-5451-af4b-28b566f73d29")]
+                            transform (IDocMsg) = VanArsdel.Integration.Maps.Order_to_IDoc_ORDERS05 (ErpOrderMsg);
+                        }
+                        [Microsoft.XLANGs.BaseTypes.DesignerPosition("0555e999-4e52-5f1c-bdc3-c25adc683d07")]
+                        send (ErpIDocOut.Send, IDocMsg);
+                        [Microsoft.XLANGs.BaseTypes.DesignerPosition("f5b1170a-5ea4-5cda-90e2-0527921d1cfe")]
+                        VanArsdel.Integration.Runtime.Tracking.OrderLifecycleTracker.Milestone(partnerId, documentNumber, VanArsdel.Integration.Domain.Orders.OrderMilestone.Released, System.DateTime.UtcNow);
+                        VanArsdel.Integration.Runtime.Tracking.OrderLifecycleTracker.SentToErp(partnerId, documentNumber, VanArsdel.Integration.Runtime.Orchestration.OrderProcess.OrderValue(OrderMsg), OrderMsg.Header.Currency, System.DateTime.UtcNow);
+                    }
+                }
+                exceptions
+                {
+                    [Microsoft.XLANGs.BaseTypes.DesignerPosition("8d0e2886-f884-5142-ba68-23645aa68344")]
+                    catch (System.Exception ex)
+                    {
+                        [Microsoft.XLANGs.BaseTypes.DesignerPosition("8b03237c-f3e3-5a37-96fd-d1d69f1adb54")]
+                        lastError = ex;
+                        System.Diagnostics.Trace.TraceError("ProcessCustomerOrder " + partnerId + " " + documentNumber + ": " + ex.ToString());
+                        [Microsoft.XLANGs.BaseTypes.DesignerPosition("104c79eb-392d-59d2-af2d-667d09f5a089")]
+                        construct NotifyMsg
+                        {
+                            [Microsoft.XLANGs.BaseTypes.DesignerPosition("2e23888a-c41e-5b5b-b17e-dd1aba83c10d")]
+                            NotifyMsg = new System.Xml.XmlDocument();
+                            NotifyMsg.LoadXml("<Notice/>");
+                            NotifyMsg.DocumentElement.InnerText = "Order " + documentNumber + " failed: " + lastError.Message;
+                            NotifyMsg(SMTP.Subject) = VanArsdel.Integration.Runtime.Orchestration.OrderProcess.Subject("Order failed", partnerId, documentNumber);
+                        }
+                        [Microsoft.XLANGs.BaseTypes.DesignerPosition("57542007-22df-5b9c-bbc2-7bce96658508")]
+                        Notify(Microsoft.XLANGs.BaseTypes.Address) = VanArsdel.Integration.Runtime.Orchestration.OrderProcess.MailTo("Integration");
+                        [Microsoft.XLANGs.BaseTypes.DesignerPosition("de4e15a2-41bd-5a5f-a664-9e19aca817e2")]
+                        send (Notify.Send, NotifyMsg);
+                        [Microsoft.XLANGs.BaseTypes.DesignerPosition("8fee30f1-8d4c-5ef8-b3e3-34a6816f25ce")]
+                        terminate lastError.Message;
+                    }
+                }
+            }
+        }
+    }
+}

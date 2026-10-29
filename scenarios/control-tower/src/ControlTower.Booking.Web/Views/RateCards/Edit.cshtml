@@ -1,0 +1,20 @@
+@model RateCardEditModel
+@{ ViewData["Title"] = "Rate card"; }
+<h1 class="h4">Rate card</h1>
+<form method="post" class="row g-2" style="max-width:900px">
+    <input type="hidden" asp-for="Id" />
+    <div asp-validation-summary="All" class="text-danger col-12"></div>
+    <div class="col-md-3"><label asp-for="Mode" class="form-label"></label><select asp-for="Mode" asp-items="Html.GetEnumSelectList<TransportMode>()" class="form-select"></select></div>
+    <div class="col-md-5"><label asp-for="CarrierId" class="form-label">Carrier</label><select asp-for="CarrierId" asp-items="Model.Carriers" class="form-select"><option value="">(Proseware network)</option></select></div>
+    <div class="col-md-2"><label asp-for="OriginCountry" class="form-label">From</label><input asp-for="OriginCountry" class="form-control" /></div>
+    <div class="col-md-2"><label asp-for="DestinationCountry" class="form-label">To</label><input asp-for="DestinationCountry" class="form-control" /></div>
+    <div class="col-md-2"><label asp-for="OriginPostalPrefix" class="form-label">Postcode prefix</label><input asp-for="OriginPostalPrefix" class="form-control" /></div>
+    <div class="col-md-2"><label asp-for="Currency" class="form-label"></label><input asp-for="Currency" class="form-control" /></div>
+    <div class="col-md-2"><label asp-for="MinimumCharge" class="form-label">Minimum</label><input asp-for="MinimumCharge" class="form-control" /></div>
+    <div class="col-md-2"><label asp-for="FuelSurchargePercent" class="form-label">Fuel %</label><input asp-for="FuelSurchargePercent" class="form-control" /></div>
+    <div class="col-md-2"><label asp-for="TransitDays" class="form-label">Transit days</label><input asp-for="TransitDays" class="form-control" /></div>
+    <div class="col-md-3"><label asp-for="ValidFrom" class="form-label">Valid from</label><input asp-for="ValidFrom" type="date" class="form-control" /></div>
+    <div class="col-md-3"><label asp-for="ValidTo" class="form-label">Valid to</label><input asp-for="ValidTo" type="date" class="form-control" /></div>
+    <div class="col-md-6"><label asp-for="Breaks" class="form-label">Weight breaks (from kg; price per 100 kg)</label><textarea asp-for="Breaks" rows="6" class="form-control font-monospace"></textarea></div>
+    <div class="col-12"><button class="btn btn-primary">Save</button> <a asp-action="Index" class="btn btn-link">Back</a></div>
+</form>

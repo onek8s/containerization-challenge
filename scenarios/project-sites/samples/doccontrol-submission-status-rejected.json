@@ -1,0 +1,8 @@
+{
+    "submissionId": "DC-1001",
+    "status": "Rejected",
+    "registeredNumber": null,
+    "comment": "Document number does not follow LE-QP-07 or checksum mismatch",
+    "updatedAt": "2019-06-14T17:00:00Z",
+    "IsFinal": true
+}

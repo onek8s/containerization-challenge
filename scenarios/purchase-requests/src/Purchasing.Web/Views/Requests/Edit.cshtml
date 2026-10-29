@@ -1,0 +1,53 @@
+@model RequestEditModel
+@{
+    var form = Model.Form;
+    ViewBag.Title = form.Id == null ? "New request" : "Edit " + form.Number;
+}
+<h1>@ViewBag.Title</h1>
+
+@using (Html.BeginForm("Save", "Requests", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(false, "", new { @class = "errors" })
+    @Html.HiddenFor(m => m.Form.Id)
+    @Html.HiddenFor(m => m.Form.Number)
+
+    <div class="fields">
+        <label>Title @Html.TextBoxFor(m => m.Form.Title, new { maxlength = 200, @class = "wide" })</label>
+        <label>Cost center
+            @Html.DropDownListFor(m => m.Form.CostCenterCode, new SelectList(Model.CostCenters.Select(c => new { c.Code, Name = c.Code + " " + c.Name }), "Code", "Name", form.CostCenterCode), "-- choose --")
+        </label>
+        <label>Supplier
+            @Html.DropDownListFor(m => m.Form.SupplierId, new SelectList(Model.Suppliers, "Id", "Name", form.SupplierId), "-- choose --")
+        </label>
+        <label>Category
+            @Html.DropDownListFor(m => m.Form.Category, new SelectList(Model.Categories, "Code", "Name", form.Category))
+        </label>
+        <label>Needed by @Html.TextBoxFor(m => m.Form.NeededBy, "{0:yyyy-MM-dd}", new { type = "date" })</label>
+        <label class="full">Justification @Html.TextAreaFor(m => m.Form.Justification, 3, 80, new { })</label>
+    </div>
+
+    <h2>Lines</h2>
+    <table class="grid lines">
+        <thead><tr><th>Description</th><th>Qty</th><th>Unit</th><th>Unit price</th><th>VAT %</th><th></th></tr></thead>
+        <tbody>
+            @for (var i = 0; i < form.Lines.Count; i++)
+            {
+                <tr>
+                    <td>@Html.TextBoxFor(m => m.Form.Lines[i].Description, new { @class = "wide" })</td>
+                    <td>@Html.TextBoxFor(m => m.Form.Lines[i].Quantity, new { size = 6 })</td>
+                    <td>@Html.TextBoxFor(m => m.Form.Lines[i].Unit, new { size = 4 })</td>
+                    <td>@Html.TextBoxFor(m => m.Form.Lines[i].UnitPrice, new { size = 10 })</td>
+                    <td>@Html.TextBoxFor(m => m.Form.Lines[i].VatRate, new { size = 4 })</td>
+                    <td><button type="submit" name="removeLine" value="@i" class="link">remove</button></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <p><button type="submit" name="command" value="add-line" class="link">+ add line</button></p>
+
+    <p class="actions">
+        <button type="submit" name="command" value="save">Save draft</button>
+        <button type="submit" name="command" value="submit" class="primary">Save and send for approval</button>
+    </p>
+}

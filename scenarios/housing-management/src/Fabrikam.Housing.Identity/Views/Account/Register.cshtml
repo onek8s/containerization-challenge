@@ -1,0 +1,44 @@
+@model RegisterViewModel
+@{ ViewData["Title"] = "Register"; }
+<div class="card card-narrow">
+    <div class="card-body">
+        <h1 class="h4 mb-3">Register for the tenant portal</h1>
+        <p>You need your tenancy reference. It is on your tenancy agreement and every rent statement.</p>
+        <form asp-action="Register" method="post">
+            <input type="hidden" asp-for="ReturnUrl" />
+            <div asp-validation-summary="ModelOnly" class="validation-summary-errors"></div>
+            <div class="form-group">
+                <label asp-for="TenancyReference"></label>
+                <input asp-for="TenancyReference" class="form-control" placeholder="T020145" />
+                <span asp-validation-for="TenancyReference" class="field-validation-error"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DateOfBirth"></label>
+                <input asp-for="DateOfBirth" class="form-control" />
+                <span asp-validation-for="DateOfBirth" class="field-validation-error"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Postcode"></label>
+                <input asp-for="Postcode" class="form-control" autocomplete="postal-code" />
+                <span asp-validation-for="Postcode" class="field-validation-error"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email"></label>
+                <input asp-for="Email" class="form-control" autocomplete="email" />
+                <span asp-validation-for="Email" class="field-validation-error"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password"></label>
+                <input asp-for="Password" class="form-control" autocomplete="new-password" />
+                <small class="form-text text-muted">At least 10 characters, with upper and lower case letters and a number.</small>
+                <span asp-validation-for="Password" class="field-validation-error"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ConfirmPassword"></label>
+                <input asp-for="ConfirmPassword" class="form-control" autocomplete="new-password" />
+                <span asp-validation-for="ConfirmPassword" class="field-validation-error"></span>
+            </div>
+            <button type="submit" class="btn btn-primary">Create account</button>
+        </form>
+    </div>
+</div>

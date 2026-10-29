@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <ListInstance Title="Deliverables" Url="Lists/Deliverables" TemplateType="100" FeatureId="{00BFEA71-DE22-43B2-A848-C05709900100}" Description="Deliverables register" OnQuickLaunch="TRUE" />
+  <ContentTypeBinding ContentTypeId="0x0100E3C2B1A0F94E4D6B8C7A5F3E2D1C0B9A01" ListUrl="Lists/Deliverables" />
+  <ListInstance Title="Risks" Url="Lists/Risks" TemplateType="100" FeatureId="{00BFEA71-DE22-43B2-A848-C05709900100}" Description="Risk register" OnQuickLaunch="TRUE" />
+  <ContentTypeBinding ContentTypeId="0x0100E3C2B1A0F94E4D6B8C7A5F3E2D1C0B9A02" ListUrl="Lists/Risks" />
+  <ListInstance Title="RFIs" Url="Lists/RFIs" TemplateType="100" FeatureId="{00BFEA71-DE22-43B2-A848-C05709900100}" Description="Requests for information" OnQuickLaunch="TRUE" />
+  <ContentTypeBinding ContentTypeId="0x0100E3C2B1A0F94E4D6B8C7A5F3E2D1C0B9A03" ListUrl="Lists/RFIs" />
+  <ListInstance Title="Actions" Url="Lists/Actions" TemplateType="100" FeatureId="{00BFEA71-DE22-43B2-A848-C05709900100}" Description="Actions from meetings and reviews" OnQuickLaunch="TRUE" />
+  <ContentTypeBinding ContentTypeId="0x0100E3C2B1A0F94E4D6B8C7A5F3E2D1C0B9A04" ListUrl="Lists/Actions" />
+  <ListInstance Title="Project Team" Url="Lists/Team" TemplateType="100" FeatureId="{00BFEA71-DE22-43B2-A848-C05709900100}" Description="Team, maintained from timesheets" OnQuickLaunch="TRUE" />
+  <ContentTypeBinding ContentTypeId="0x0100E3C2B1A0F94E4D6B8C7A5F3E2D1C0B9A05" ListUrl="Lists/Team" />
+  <ListInstance Title="Project Hours" Url="Lists/Hours" TemplateType="100" FeatureId="{00BFEA71-DE22-43B2-A848-C05709900100}" Description="Approved hours by week from the ERP" OnQuickLaunch="TRUE" />
+  <ContentTypeBinding ContentTypeId="0x0100E3C2B1A0F94E4D6B8C7A5F3E2D1C0B9A06" ListUrl="Lists/Hours" />
+  <ListInstance Title="Meeting Minutes" Url="Minutes" TemplateType="101" FeatureId="{00BFEA71-E717-4E80-AA17-D0C71B360101}" Description="Meeting minutes" OnQuickLaunch="TRUE" />
+  <ContentTypeBinding ContentTypeId="0x010100B6A1F4D9C7E64C3B8F2E5A7D1C9B3E2104" ListUrl="Minutes" />
+  <ListInstance Title="Transmittals" Url="Transmittals" TemplateType="101" FeatureId="{00BFEA71-E717-4E80-AA17-D0C71B360101}" Description="Transmittals to client and contractors" OnQuickLaunch="TRUE" />
+  <ContentTypeBinding ContentTypeId="0x010100B6A1F4D9C7E64C3B8F2E5A7D1C9B3E2104" ListUrl="Transmittals" />
+  <ListInstance Title="Archive" Url="Archive" TemplateType="101" FeatureId="{00BFEA71-E717-4E80-AA17-D0C71B360101}" Description="Archived records" OnQuickLaunch="TRUE" />
+  <ContentTypeBinding ContentTypeId="0x010100B6A1F4D9C7E64C3B8F2E5A7D1C9B3E21" ListUrl="Archive" />
+</Elements>

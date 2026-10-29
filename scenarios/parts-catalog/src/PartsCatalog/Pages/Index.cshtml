@@ -1,0 +1,13 @@
+@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home";
+}
+<h1>Parts Catalog</h1>
+<p>Spare parts register for the maintenance stores.</p>
+<ul class="stats">
+    <li><strong>@Model.TotalParts</strong> part numbers</li>
+    <li><strong>@Model.TotalUnits</strong> units on hand</li>
+    <li><strong>@Model.StockValue.ToString("N2")</strong> stock value</li>
+    <li><a asp-page="/Parts/Index" asp-route-reorder="true"><strong>@Model.ReorderCount</strong> below reorder level</a></li>
+</ul>

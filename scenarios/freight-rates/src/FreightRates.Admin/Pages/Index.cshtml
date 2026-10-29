@@ -1,0 +1,34 @@
+@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Overview";
+}
+<h1>Overview</h1>
+<div class="cards">
+    <div class="card">
+        <div>Tariff</div>
+        @if (Model.Tariff is { } t)
+        {
+            <div class="value">@t.TariffName</div>
+            <div>effective @t.EffectiveDate.ToString("yyyy-MM-dd")</div>
+            <div>engine @t.EngineVersion, key @t.KeySerial</div>
+            <div>licence days left: @t.LicenceDaysLeft</div>
+        }
+        else
+        {
+            <div class="error">Rating host: @Model.TariffError</div>
+        }
+    </div>
+    <div class="card">
+        <div>Quotes today</div>
+        <div class="value">@Model.QuotesToday</div>
+    </div>
+    <div class="card">
+        <div>Quoted today (USD)</div>
+        <div class="value">@Model.QuotedToday.ToString("N2")</div>
+    </div>
+    <div class="card">
+        <div>Active customers</div>
+        <div class="value">@Model.ActiveCustomers</div>
+    </div>
+</div>

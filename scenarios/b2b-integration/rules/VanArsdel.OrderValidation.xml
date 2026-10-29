@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Exported with the Business Rules Engine Deployment Wizard. Import: deploy\scripts\Install-BusinessRules.ps1 -->
+<brl xmlns="http://schemas.microsoft.com/businessruleslanguage/2002">
+  <ruleset name="VanArsdel.OrderValidation">
+    <version major="1" minor="9" description="Customer order checks before the order goes to the ERP (v1.9: hazardous goods export check)" modifiedby="CORP\svc-btsdeploy" date="2019-04-23T10:41:12.0000000+02:00" />
+    <configuration>
+      <factretriever />
+      <maxexecutionloopdepth>65536</maxexecutionloopdepth>
+      <translationduration>3600000</translationduration>
+    </configuration>
+    <bindings>
+      <class ref="OrderFacts" type="VanArsdel.Integration.Rules.OrderFacts" assembly="VanArsdel.Integration.Rules, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cfedfd825850e71" instance="0" instances="16" selectivity="1" isStatic="False" />
+      <class ref="PartnerFacts" type="VanArsdel.Integration.Rules.PartnerFacts" assembly="VanArsdel.Integration.Rules, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cfedfd825850e71" instance="0" instances="16" selectivity="1" isStatic="False" />
+      <class ref="CalendarFacts" type="VanArsdel.Integration.Rules.CalendarFacts" assembly="VanArsdel.Integration.Rules, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cfedfd825850e71" instance="0" instances="16" selectivity="1" isStatic="False" />
+      <class ref="RuleOutcome" type="VanArsdel.Integration.Rules.RuleOutcome" assembly="VanArsdel.Integration.Rules, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cfedfd825850e71" instance="0" instances="16" selectivity="1" isStatic="False" />
+    </bindings>
+    <rule name="PartnerInactive" priority="100" active="true">
+      <if>
+        <compare operator="equal"><lhs><function><classmember classref="PartnerFacts" member="get_Active" sideeffects="false" /></function></lhs><rhs><constant><boolean>false</boolean></constant></rhs></compare>
+      </if>
+      <then>
+        <function><classmember classref="RuleOutcome" member="Reject" sideeffects="true"><argument><constant><string>PARTNER_INACTIVE</string></constant></argument><argument><constant><string>The trading partner is not active.</string></constant></argument></classmember></function>
+        <function><classmember classref="RuleOutcome" member="RuleFired" sideeffects="true"><argument><constant><string>PartnerInactive</string></constant></argument></classmember></function>
+      </then>
+    </rule>
+    <rule name="ZeroQuantity" priority="90" active="true">
+      <if>
+        <compare operator="equal"><lhs><function><classmember classref="OrderFacts" member="HasZeroQuantityLine" sideeffects="true" /></function></lhs><rhs><constant><boolean>true</boolean></constant></rhs></compare>
+      </if>
+      <then>
+        <function><classmember classref="RuleOutcome" member="RejectLine" sideeffects="true"><argument><constant><string>QTY_ZERO</string></constant></argument><argument><constant><string>Line quantity is zero.</string></constant></argument><argument><function><classmember classref="OrderFacts" member="FirstZeroQuantityLine" sideeffects="true" /></function></argument></classmember></function>
+        <function><classmember classref="RuleOutcome" member="RuleFired" sideeffects="true"><argument><constant><string>ZeroQuantity</string></constant></argument></classmember></function>
+      </then>
+    </rule>
+    <rule name="DuplicateLineNumbers" priority="90" active="true">
+      <if>
+        <compare operator="equal"><lhs><function><classmember classref="OrderFacts" member="HasDuplicateLineNumbers" sideeffects="true" /></function></lhs><rhs><constant><boolean>true</boolean></constant></rhs></compare>
+      </if>
+      <then>
+        <function><classmember classref="RuleOutcome" member="Reject" sideeffects="true"><argument><constant><string>LINE_DUPLICATE</string></constant></argument><argument><constant><string>Line numbers are not unique.</string></constant></argument></classmember></function>
+        <function><classmember classref="RuleOutcome" member="RuleFired" sideeffects="true"><argument><constant><string>DuplicateLineNumbers</string></constant></argument></classmember></function>
+      </then>
+    </rule>
+    <rule name="UnknownShipTo" priority="80" active="true">
+      <if>
+        <compare operator="equal"><lhs><function><classmember classref="OrderFacts" member="HasUnresolvedShipTo" sideeffects="true" /></function></lhs><rhs><constant><boolean>true</boolean></constant></rhs></compare>
+      </if>
+      <then>
+        <function><classmember classref="RuleOutcome" member="Reject" sideeffects="true"><argument><constant><string>SHIPTO_UNKNOWN</string></constant></argument><argument><constant><string>The delivery point has no ship-to cross-reference.</string></constant></argument></classmember></function>
+        <function><classmember classref="RuleOutcome" member="RuleFired" sideeffects="true"><argument><constant><string>UnknownShipTo</string></constant></argument></classmember></function>
+      </then>
+    </rule>
+    <rule name="UnknownItem" priority="80" active="true">
+      <if>
+        <compare operator="equal"><lhs><function><classmember classref="OrderFacts" member="HasUnresolvedItem" sideeffects="true" /></function></lhs><rhs><constant><boolean>true</boolean></constant></rhs></compare>
+      </if>
+      <then>
+        <function><classmember classref="RuleOutcome" member="RequireManualReview" sideeffects="true"><argument><function><classmember classref="OrderFacts" member="UnresolvedItems" sideeffects="true" /></function></argument></classmember></function>
+        <function><classmember classref="RuleOutcome" member="RuleFired" sideeffects="true"><argument><constant><string>UnknownItem</string></constant></argument></classmember></function>
+      </then>
+    </rule>
+    <rule name="DefaultShipVia" priority="50" active="true">
+      <if>
+        <compare operator="not equal"><lhs><function><classmember classref="PartnerFacts" member="get_DefaultShipVia" sideeffects="false" /></function></lhs><rhs><constant><string></string></constant></rhs></compare>
+      </if>
+      <then>
+        <function><classmember classref="RuleOutcome" member="SetShipVia" sideeffects="true"><argument><function><classmember classref="PartnerFacts" member="get_DefaultShipVia" sideeffects="false" /></function></argument></classmember></function>
+        <function><classmember classref="RuleOutcome" member="RuleFired" sideeffects="true"><argument><constant><string>DefaultShipVia</string></constant></argument></classmember></function>
+      </then>
+    </rule>
+    <rule name="CreditCheckAboveThreshold" priority="40" active="true">
+      <if>
+        <and><compare operator="greater than"><lhs><function><classmember classref="PartnerFacts" member="get_CreditCheckThreshold" sideeffects="false" /></function></lhs><rhs><constant><decimal>0</decimal></constant></rhs></compare><compare operator="greater than"><lhs><function><classmember classref="OrderFacts" member="GetOrderValue" sideeffects="true" /></function></lhs><rhs><function><classmember classref="PartnerFacts" member="get_CreditCheckThreshold" sideeffects="false" /></function></rhs></compare></and>
+      </if>
+      <then>
+        <function><classmember classref="RuleOutcome" member="RequireCreditCheck" sideeffects="true" /></function>
+        <function><classmember classref="RuleOutcome" member="RuleFired" sideeffects="true"><argument><constant><string>CreditCheckAboveThreshold</string></constant></argument></classmember></function>
+      </then>
+    </rule>
+    <rule name="CableDrum" priority="30" active="true">
+      <if>
+        <compare operator="equal"><lhs><function><classmember classref="OrderFacts" member="ContainsCableDrum" sideeffects="true" /></function></lhs><rhs><constant><boolean>true</boolean></constant></rhs></compare>
+      </if>
+      <then>
+        <function><classmember classref="RuleOutcome" member="AddNote" sideeffects="true"><argument><constant><string>Cable over 500 m: cut and drum at the cable centre</string></constant></argument></classmember></function>
+        <function><classmember classref="RuleOutcome" member="SetPriority" sideeffects="true"><argument><constant><int>2</int></constant></argument></classmember></function>
+        <function><classmember classref="RuleOutcome" member="RuleFired" sideeffects="true"><argument><constant><string>CableDrum</string></constant></argument></classmember></function>
+      </then>
+    </rule>
+    <rule name="HazardousGoodsGround" priority="20" active="true">
+      <if>
+        <compare operator="equal"><lhs><function><classmember classref="OrderFacts" member="ContainsHazardousGoods" sideeffects="true" /></function></lhs><rhs><constant><boolean>true</boolean></constant></rhs></compare>
+      </if>
+      <then>
+        <function><classmember classref="RuleOutcome" member="SetShipVia" sideeffects="true"><argument><constant><string>HAZGND</string></constant></argument></classmember></function>
+        <function><classmember classref="RuleOutcome" member="AddNote" sideeffects="true"><argument><constant><string>Hazardous goods: ground transport only</string></constant></argument></classmember></function>
+        <function><classmember classref="RuleOutcome" member="RuleFired" sideeffects="true"><argument><constant><string>HazardousGoodsGround</string></constant></argument></classmember></function>
+      </then>
+    </rule>
+    <rule name="HazardousGoodsExport" priority="20" active="true">
+      <if>
+        <and><compare operator="equal"><lhs><function><classmember classref="OrderFacts" member="ContainsHazardousGoods" sideeffects="true" /></function></lhs><rhs><constant><boolean>true</boolean></constant></rhs></compare><compare operator="equal"><lhs><function><classmember classref="PartnerFacts" member="IsInternational" sideeffects="true" /></function></lhs><rhs><constant><boolean>true</boolean></constant></rhs></compare></and>
+      </if>
+      <then>
+        <function><classmember classref="RuleOutcome" member="RequireManualReview" sideeffects="true"><argument><constant><string>Hazardous goods for an international customer need dangerous goods paperwork</string></constant></argument></classmember></function>
+        <function><classmember classref="RuleOutcome" member="RuleFired" sideeffects="true"><argument><constant><string>HazardousGoodsExport</string></constant></argument></classmember></function>
+      </then>
+    </rule>
+    <rule name="AfterCutOff" priority="10" active="true">
+      <if>
+        <compare operator="equal"><lhs><function><classmember classref="CalendarFacts" member="IsAfterCutOff" sideeffects="true" /></function></lhs><rhs><constant><boolean>true</boolean></constant></rhs></compare>
+      </if>
+      <then>
+        <function><classmember classref="RuleOutcome" member="AddNote" sideeffects="true"><argument><constant><string>Received after cut-off, ships next business day</string></constant></argument></classmember></function>
+        <function><classmember classref="RuleOutcome" member="RuleFired" sideeffects="true"><argument><constant><string>AfterCutOff</string></constant></argument></classmember></function>
+      </then>
+    </rule>
+    <rule name="RushOrderType" priority="10" active="true">
+      <if>
+        <compare operator="equal"><lhs><function><classmember classref="OrderFacts" member="get_OrderType" sideeffects="false" /></function></lhs><rhs><constant><string>ZRSH</string></constant></rhs></compare>
+      </if>
+      <then>
+        <function><classmember classref="RuleOutcome" member="SetPriority" sideeffects="true"><argument><constant><int>1</int></constant></argument></classmember></function>
+        <function><classmember classref="RuleOutcome" member="RuleFired" sideeffects="true"><argument><constant><string>RushOrderType</string></constant></argument></classmember></function>
+      </then>
+    </rule>
+  </ruleset>
+</brl>

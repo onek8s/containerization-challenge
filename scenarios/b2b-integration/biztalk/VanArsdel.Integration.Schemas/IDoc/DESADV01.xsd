@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.vanarsdel.com/erp/idoc/2013" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" elementFormDefault="unqualified" targetNamespace="http://schemas.vanarsdel.com/erp/idoc/2013" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:include schemaLocation="IDocTypes.xsd" />
+  <xs:annotation>
+    <xs:appinfo>
+      <b:schemaInfo root_reference="DESADV01" standard="XML" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" />
+    </xs:appinfo>
+    <xs:documentation>DESADV01: outbound delivery (goods issue posted) from the ERP/WMS with handling units (SSCC).</xs:documentation>
+  </xs:annotation>
+  <xs:element name="DESADV01">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="IDOC" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="EDI_DC40" type="tns:EDI_DC40" />
+              <xs:element name="E1EDL20">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="VBELN" type="xs:string" />
+                    <xs:element minOccurs="0" name="BTGEW" type="xs:string" />
+                    <xs:element minOccurs="0" name="GEWEI" type="xs:string" />
+                    <xs:element minOccurs="0" name="ANZPK" type="xs:string" />
+                    <xs:element minOccurs="0" name="TRAID" type="xs:string" />
+                    <xs:element minOccurs="0" name="ROUTE" type="xs:string" />
+                    <xs:element minOccurs="0" maxOccurs="10" name="E1ADRM1">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="PARTNER_Q" type="xs:string" />
+                          <xs:element name="PARTNER_ID" type="xs:string" />
+                          <xs:element minOccurs="0" name="NAME1" type="xs:string" />
+                          <xs:element minOccurs="0" name="STREET1" type="xs:string" />
+                          <xs:element minOccurs="0" name="CITY1" type="xs:string" />
+                          <xs:element minOccurs="0" name="POSTL_COD1" type="xs:string" />
+                          <xs:element minOccurs="0" name="REGION" type="xs:string" />
+                          <xs:element minOccurs="0" name="COUNTRY1" type="xs:string" />
+                        </xs:sequence>
+                        <xs:attribute name="SEGMENT" type="xs:string" use="required" />
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element minOccurs="0" maxOccurs="20" name="E1EDT13">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="QUALF" type="xs:string" />
+                          <xs:element name="NTANF" type="xs:string" />
+                        </xs:sequence>
+                        <xs:attribute name="SEGMENT" type="xs:string" use="required" />
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element maxOccurs="unbounded" name="E1EDL24">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="POSNR" type="xs:string" />
+                          <xs:element name="MATNR" type="xs:string" />
+                          <xs:element minOccurs="0" name="ARKTX" type="xs:string" />
+                          <xs:element minOccurs="0" name="KDMAT" type="xs:string" />
+                          <xs:element minOccurs="0" name="EAN11" type="xs:string" />
+                          <xs:element name="LFIMG" type="xs:string" />
+                          <xs:element name="VRKME" type="xs:string" />
+                          <xs:element minOccurs="0" name="VGBEL" type="xs:string" />
+                          <xs:element minOccurs="0" name="E1EDL41">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="QUALI" type="xs:string" />
+                                <xs:element name="BSTNR" type="xs:string" />
+                                <xs:element minOccurs="0" name="POSEX" type="xs:string" />
+                              </xs:sequence>
+                              <xs:attribute name="SEGMENT" type="xs:string" use="required" />
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                        <xs:attribute name="SEGMENT" type="xs:string" use="required" />
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" name="E1EDL37">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="EXIDV" type="xs:string" />
+                          <xs:element minOccurs="0" name="VHART" type="xs:string" />
+                          <xs:element maxOccurs="unbounded" name="E1EDL44">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="POSNR" type="xs:string" />
+                                <xs:element name="VEMNG" type="xs:string" />
+                              </xs:sequence>
+                              <xs:attribute name="SEGMENT" type="xs:string" use="required" />
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                        <xs:attribute name="SEGMENT" type="xs:string" use="required" />
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                  <xs:attribute name="SEGMENT" type="xs:string" use="required" />
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute name="BEGIN" type="xs:string" use="required" />
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

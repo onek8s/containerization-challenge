@@ -1,0 +1,8 @@
+@model ApiKeyCreatedModel
+@{
+    ViewBag.Title = "API key";
+}
+<h1>API key for @Model.Name</h1>
+<p>Copy the key now and give it to the system owner. It is not shown again; only a hash is stored.</p>
+<pre class="key">@Model.Key</pre>
+<p>@Html.ActionLink("Back to API clients", "ApiClients")</p>

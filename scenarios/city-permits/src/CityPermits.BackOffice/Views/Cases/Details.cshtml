@@ -1,0 +1,62 @@
+@model PermitCase
+@{
+    ViewData["Title"] = Model.Reference;
+    var site = ViewBag.Site as CityPermits.Domain.SiteConstraints;
+    var findings = (IEnumerable<RuleFinding>)ViewBag.Findings;
+    var actions = (List<Transition>)ViewBag.Actions;
+}
+<h1>@Model.Reference · @Model.Title</h1>
+<p>@Model.Kind · <strong>@Model.Status</strong> · @Model.SiteAddress · Ward @Model.Ward · Applicant @Model.Applicant?.DisplayName (@Model.Applicant?.Email)</p>
+<div class="grid">
+<div>
+    <div class="card"><h3>Actions</h3>
+        @foreach (var t in actions)
+        {
+            <form method="post" action="/Cases/Act/@Model.Id" style="margin-bottom:6px">@Html.AntiForgeryToken()
+                <input type="hidden" name="action" value="@t.Action" />
+                @if (t.RequiresNote) { <input name="note" placeholder="Note" style="width:60%" /> }
+                <button>@t.Action</button></form>
+        }
+        <form method="post" action="/Cases/SiteChecks/@Model.Id">@Html.AntiForgeryToken()<button>Run site checks</button></form>
+        <form method="post" action="/Cases/Assign/@Model.Id">@Html.AntiForgeryToken()
+            <select name="officer">@foreach (var o in (List<string>)ViewBag.Officers) { <option selected="@(o == Model.AssignedOfficer)">@o</option> }</select><button>Assign</button></form>
+    </div>
+    <div class="card"><h3>Site checks</h3>
+        @if (site is null) { <p>Not run.</p> }
+        else
+        {
+            <p>Zoning @site.ZoningCode @site.ZoningName · max height @site.MaxHeightM m · coverage @site.MaxSiteCoverage · flood zone @(site.FloodZone ?? "1") · parking zone @site.ParkingZone · @site.Source @site.CheckedUtc.ToString("g")</p>
+            <ul>@foreach (var f in findings) { <li class="@f.Severity">@f.Code: @f.Message @(f.Consultee is null ? "" : $"(consult {f.Consultee})")</li> }</ul>
+        }
+    </div>
+    <div class="card"><h3>Fees</h3><table>
+        @foreach (var f in Model.Fees)
+        {
+            <tr><td>@f.Code</td><td>@f.Description</td><td>£@f.Amount.ToString("N2")</td><td>@(f.Waived ? $"waived by {f.WaivedBy}" : "")</td>
+                <td>@if (!f.Waived) {<form method="post" action="/Cases/Waive/@Model.Id">@Html.AntiForgeryToken()<input type="hidden" name="feeId" value="@f.Id" /><input name="reason" placeholder="reason" size="8" /><button>Waive</button></form>}</td></tr>
+        }
+        <tr><th colspan="2">Balance</th><th>£@Model.Balance.ToString("N2")</th></tr></table></div>
+    <div class="card"><h3>Conditions</h3><ol>@foreach (var c in Model.Conditions.OrderBy(x => x.Order)) { <li>@c.Text</li> }</ol>
+        <form method="post" action="/Cases/AddCondition/@Model.Id">@Html.AntiForgeryToken()
+            <select name="code">@foreach (var s in (List<CityPermits.Data.StandardCondition>)ViewBag.StandardConditions) { <option value="@s.Code">@s.Code @s.Text[..Math.Min(60, s.Text.Length)]</option> }</select><button>Add</button></form></div>
+</div>
+<div>
+    <div class="card"><h3>Map</h3><div id="map"></div><a href="/map/export/@Model.Id" target="_blank">Site location plan</a></div>
+    <div class="card"><h3>Consultations</h3><table>
+        @foreach (var x in Model.Consultations)
+        {
+            <tr><td>@x.Consultee</td><td>@x.Reason</td><td>due @x.DueDate</td><td>@(x.Response ?? "")</td>
+                <td>@if (x.RespondedUtc is null) {<form method="post" action="/Cases/RecordConsultation/@Model.Id">@Html.AntiForgeryToken()<input type="hidden" name="consultationId" value="@x.Id" /><input name="response" size="10" /><label><input type="checkbox" name="objection" value="true" />objection</label><button>Record</button></form>}</td></tr>
+        }</table></div>
+    <div class="card"><h3>Documents</h3><ul>@foreach (var d in Model.Documents) { <li><a href="/Cases/Document/@d.Id">@d.FileName</a> @d.Kind @(d.RecordsSystemId is null ? "" : $"· records {d.RecordsSystemId}")</li> }</ul></div>
+    <div class="card"><h3>Inspections</h3><table>@foreach (var i in Model.Inspections) { <tr><td>@i.Stage</td><td>@i.Status</td><td>@i.ScheduledDate</td><td>@i.Inspector</td></tr> }</table></div>
+    <div class="card"><h3>History</h3><table>@foreach (var e in Model.Events.OrderByDescending(e => e.AtUtc)) { <tr><td>@e.AtUtc.ToString("g")</td><td>@e.Actor</td><td>@e.Type</td><td>@e.Text</td></tr> }</table></div>
+</div>
+</div>
+@section Scripts {
+<script>
+var lat = @(Model.Northing is null ? "51.146" : "null"), lon = null;
+var map = L.map('map').setView([51.1465, 0.8755], 17);
+if (window.mapTiles) L.tileLayer(window.mapTiles, { maxZoom: 20, minZoom: 12 }).addTo(map);
+</script>
+}

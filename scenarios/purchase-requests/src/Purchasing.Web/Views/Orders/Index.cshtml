@@ -1,0 +1,31 @@
+@model IEnumerable<PurchaseOrder>
+@{
+    ViewBag.Title = "Purchase orders";
+    var ready = ViewBag.ReadyToOrder as IEnumerable<RequestSummary>;
+}
+<h1>Purchase orders</h1>
+
+@if (ready != null)
+{
+    <h2>Approved requests</h2>
+    @Html.Partial("_RequestTable", ready)
+}
+
+<h2>Orders, last 60 days</h2>
+<table class="grid">
+    <thead><tr><th>PO</th><th>Request</th><th>Supplier</th><th>Date</th><th>Buyer</th><th class="num">Net</th><th>Sent to ERP</th></tr></thead>
+    <tbody>
+        @foreach (var o in Model)
+        {
+            <tr>
+                <td><a href="@Url.Action("Print", new { id = o.Id })">@o.PoNumber</a></td>
+                <td><a href="@Url.Action("Details", "Requests", new { id = o.RequestId })">@o.RequestNumber</a></td>
+                <td>@o.Supplier.Name</td>
+                <td>@o.OrderDate.ToString("d")</td>
+                <td>@o.BuyerAccount</td>
+                <td class="num">@(o.Request != null ? o.Request.NetTotal.ToString("N2") : "")</td>
+                <td>@(o.ExportedAt.HasValue ? o.ExportedAt.Value.ToString("g") : "pending")</td>
+            </tr>
+        }
+    </tbody>
+</table>

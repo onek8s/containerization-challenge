@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewData["Title"] - Fabrikam Homes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <header class="brand-bar">
+        <div class="container"><span class="brand">Fabrikam Homes</span> <span class="brand-sub">sign in</span></div>
+    </header>
+    <main class="container py-4">
+        @if (TempData["Message"] != null)
+        {
+            <div class="alert alert-success">@TempData["Message"]</div>
+        }
+        @RenderBody()
+    </main>
+    <footer class="container small text-muted py-3 border-top">
+        Fabrikam Homes is a registered provider of social housing (RP 4X21). Need help? Call 0300 123 4567, Monday to Friday 8am to 6pm.
+    </footer>
+</body>
+</html>

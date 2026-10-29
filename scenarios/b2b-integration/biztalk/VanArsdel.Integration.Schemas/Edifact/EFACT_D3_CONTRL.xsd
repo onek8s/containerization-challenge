@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns="http://schemas.microsoft.com/BizTalk/EDI/EDIFACT/2006" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://schemas.microsoft.com/BizTalk/EDI/EDIFACT/2006" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+  <xs:annotation>
+    <xs:appinfo>
+      <b:schemaInfo version="3.0" standard="EDIFACT" EDIFACTMessageType="CONTRL" EDIFACTMessageVersion="3" EDIFACTMessageRelease="D" root_reference="EFACT_D3_CONTRL" displayroot_reference="EFACT_D3_CONTRL" count_positions_by_byte="false" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" />
+    </xs:appinfo>
+    <xs:documentation>Subset of the UN/EDIFACT D3 CONTRL schema used by VanArsdel trading partners. Generated from the Microsoft EDI schema and trimmed to the segments in the partner implementation guides.</xs:documentation>
+  </xs:annotation>
+  <xs:element name="EFACT_D3_CONTRL">
+    <xs:annotation><xs:appinfo><b:recordInfo structure="delimited" child_delimiter_type="default" sequence_number="1" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="UNH" type="EFACT_D3_CONTRL_UNH" />
+        <xs:element name="UCI" type="EFACT_D3_CONTRL_UCI" />
+        <xs:element name="UCMLoop1" minOccurs="0" maxOccurs="unbounded">
+          <xs:annotation><xs:appinfo><b:recordInfo structure="delimited" child_delimiter_type="default" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation>
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="UCM" type="EFACT_D3_CONTRL_UCM" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="UNT" type="EFACT_D3_CONTRL_UNT" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="EFACT_D3_CONTRL_UNH">
+    <xs:annotation><xs:appinfo><b:recordInfo structure="delimited" tag_name="UNH" child_delimiter_type="default" child_order="prefix" notes="Message header" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation>
+    <xs:sequence>
+      <xs:element name="UNH1" form="unqualified"><xs:annotation><xs:appinfo><b:fieldInfo data_type="AN" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:minLength value="1" /><xs:maxLength value="14" /></xs:restriction></xs:simpleType></xs:element>
+      <xs:element name="UNH2" form="unqualified">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="UNH2.1" form="unqualified"><xs:annotation><xs:appinfo><b:fieldInfo data_type="ID" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:minLength value="1" /><xs:maxLength value="6" /></xs:restriction></xs:simpleType></xs:element>
+            <xs:element name="UNH2.2" form="unqualified"><xs:annotation><xs:appinfo><b:fieldInfo data_type="ID" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:minLength value="1" /><xs:maxLength value="3" /></xs:restriction></xs:simpleType></xs:element>
+            <xs:element name="UNH2.3" form="unqualified"><xs:annotation><xs:appinfo><b:fieldInfo data_type="ID" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:minLength value="1" /><xs:maxLength value="3" /></xs:restriction></xs:simpleType></xs:element>
+            <xs:element name="UNH2.4" form="unqualified"><xs:annotation><xs:appinfo><b:fieldInfo data_type="ID" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:minLength value="1" /><xs:maxLength value="2" /></xs:restriction></xs:simpleType></xs:element>
+            <xs:element name="UNH2.5" form="unqualified" minOccurs="0"><xs:annotation><xs:appinfo><b:fieldInfo data_type="AN" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:minLength value="1" /><xs:maxLength value="6" /></xs:restriction></xs:simpleType></xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="EFACT_D3_CONTRL_UCI">
+    <xs:annotation><xs:appinfo><b:recordInfo structure="delimited" tag_name="UCI" child_delimiter_type="default" child_order="prefix" notes="Interchange response" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation>
+    <xs:sequence>
+      <xs:element name="UCI01" form="unqualified"><xs:annotation><xs:appinfo><b:fieldInfo data_type="AN" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:minLength value="1" /><xs:maxLength value="14" /></xs:restriction></xs:simpleType></xs:element>
+      <xs:element name="S002" form="unqualified">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="S00201" form="unqualified"><xs:annotation><xs:appinfo><b:fieldInfo data_type="AN" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:minLength value="1" /><xs:maxLength value="35" /></xs:restriction></xs:simpleType></xs:element>
+            <xs:element name="S00202" form="unqualified" minOccurs="0"><xs:annotation><xs:appinfo><b:fieldInfo data_type="AN" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:minLength value="1" /><xs:maxLength value="4" /></xs:restriction></xs:simpleType></xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="S003" form="unqualified">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="S00301" form="unqualified"><xs:annotation><xs:appinfo><b:fieldInfo data_type="AN" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:minLength value="1" /><xs:maxLength value="35" /></xs:restriction></xs:simpleType></xs:element>
+            <xs:element name="S00302" form="unqualified" minOccurs="0"><xs:annotation><xs:appinfo><b:fieldInfo data_type="AN" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:minLength value="1" /><xs:maxLength value="4" /></xs:restriction></xs:simpleType></xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="UCI04" form="unqualified"><xs:annotation><xs:appinfo><b:fieldInfo data_type="ID" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:minLength value="1" /><xs:maxLength value="3" /></xs:restriction></xs:simpleType></xs:element>
+      <xs:element name="UCI05" form="unqualified" minOccurs="0"><xs:annotation><xs:appinfo><b:fieldInfo data_type="ID" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:minLength value="1" /><xs:maxLength value="3" /></xs:restriction></xs:simpleType></xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="EFACT_D3_CONTRL_UCM">
+    <xs:annotation><xs:appinfo><b:recordInfo structure="delimited" tag_name="UCM" child_delimiter_type="default" child_order="prefix" notes="Message response" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation>
+    <xs:sequence>
+      <xs:element name="UCM01" form="unqualified"><xs:annotation><xs:appinfo><b:fieldInfo data_type="AN" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:minLength value="1" /><xs:maxLength value="14" /></xs:restriction></xs:simpleType></xs:element>
+      <xs:element name="S009" form="unqualified">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="S00901" form="unqualified"><xs:annotation><xs:appinfo><b:fieldInfo data_type="AN" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:minLength value="1" /><xs:maxLength value="6" /></xs:restriction></xs:simpleType></xs:element>
+            <xs:element name="S00902" form="unqualified"><xs:annotation><xs:appinfo><b:fieldInfo data_type="AN" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:minLength value="1" /><xs:maxLength value="3" /></xs:restriction></xs:simpleType></xs:element>
+            <xs:element name="S00903" form="unqualified"><xs:annotation><xs:appinfo><b:fieldInfo data_type="AN" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:minLength value="1" /><xs:maxLength value="3" /></xs:restriction></xs:simpleType></xs:element>
+            <xs:element name="S00904" form="unqualified"><xs:annotation><xs:appinfo><b:fieldInfo data_type="AN" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:minLength value="1" /><xs:maxLength value="2" /></xs:restriction></xs:simpleType></xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="UCM03" form="unqualified"><xs:annotation><xs:appinfo><b:fieldInfo data_type="ID" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:minLength value="1" /><xs:maxLength value="3" /></xs:restriction></xs:simpleType></xs:element>
+      <xs:element name="UCM04" form="unqualified" minOccurs="0"><xs:annotation><xs:appinfo><b:fieldInfo data_type="ID" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:minLength value="1" /><xs:maxLength value="3" /></xs:restriction></xs:simpleType></xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="EFACT_D3_CONTRL_UNT">
+    <xs:annotation><xs:appinfo><b:recordInfo structure="delimited" tag_name="UNT" child_delimiter_type="default" child_order="prefix" notes="Message trailer" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation>
+    <xs:sequence>
+      <xs:element name="UNT1" form="unqualified"><xs:annotation><xs:appinfo><b:fieldInfo data_type="N0" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:pattern value="-?[0-9]{1,6}" /></xs:restriction></xs:simpleType></xs:element>
+      <xs:element name="UNT2" form="unqualified"><xs:annotation><xs:appinfo><b:fieldInfo data_type="AN" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" /></xs:appinfo></xs:annotation><xs:simpleType><xs:restriction base="xs:string"><xs:minLength value="1" /><xs:maxLength value="14" /></xs:restriction></xs:simpleType></xs:element>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

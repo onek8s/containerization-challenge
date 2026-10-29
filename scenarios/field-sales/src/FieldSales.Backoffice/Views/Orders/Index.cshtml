@@ -1,0 +1,37 @@
+@model OrderSearchViewModel
+@{
+    ViewBag.Title = "Orders";
+}
+<h1>Orders</h1>
+@using (Html.BeginForm("Index", "Orders", FormMethod.Get, new { @class = "filters" }))
+{
+    <label>From <input type="date" name="From" value="@Model.From.Value.ToString("yyyy-MM-dd")" /></label>
+    <label>To <input type="date" name="To" value="@Model.To.Value.ToString("yyyy-MM-dd")" /></label>
+    <label>Rep <input type="text" name="RepCode" value="@Model.RepCode" size="5" /></label>
+    <label>Customer <input type="text" name="Customer" value="@Model.Customer" /></label>
+    <label>Status
+        <select name="Status">
+            <option value="">All</option>
+            @foreach (Wingtip.FieldSales.Core.OrderStatus s in Enum.GetValues(typeof(Wingtip.FieldSales.Core.OrderStatus)))
+            {
+                <option value="@((int)s)" @(Model.Status == (int)s ? "selected" : "")>@s</option>
+            }
+        </select>
+    </label>
+    <button type="submit" class="btn">Search</button>
+}
+<div class="panel">
+    <table class="table">
+        <tr><th>Order</th><th>Rep reference</th><th>Received</th><th>Customer</th><th>Delivery</th><th>Status</th><th class="text-right">Excl. VAT</th></tr>
+        @foreach (var o in Model.Orders)
+        {
+            <tr>
+                <td><a href="@Url.Action("Details", new { id = o.SalesOrderId })">@o.OrderNo</a></td>
+                <td>@o.RepReference</td><td>@o.ReceivedAt.ToString("g")</td><td>@o.Customer.Name</td>
+                <td>@o.RequestedDelivery.ToString("d.M.yyyy")</td><td>@Html.Partial("_OrderStatus", o.Status)</td>
+                <td class="text-right">@o.NetTotal.ToString("N2")</td>
+            </tr>
+        }
+    </table>
+    <p class="muted">@Model.Orders.Count orders, @Model.Orders.Sum(o => o.NetTotal).ToString("N2") &euro; excl. VAT</p>
+</div>

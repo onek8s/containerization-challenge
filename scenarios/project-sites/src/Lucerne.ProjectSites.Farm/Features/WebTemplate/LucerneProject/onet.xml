@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Title="Lucerne Project Site" Revision="7" ListDir="Lists" xmlns:ows="Microsoft SharePoint" xmlns="http://schemas.microsoft.com/sharepoint/" UIVersion="15">
+  <NavBars>
+    <NavBar Name="SharePoint Top Navbar" Separator="&amp;nbsp;&amp;nbsp;&amp;nbsp;" Body="&lt;a ID='onettopnavbar#LABEL_ID#' href='#URL#' accesskey='J'&gt;#LABEL#&lt;/a&gt;" ID="1002" />
+  </NavBars>
+  <ListTemplates />
+  <DocumentTemplates />
+  <Configurations>
+    <Configuration ID="0" Name="LucerneProject">
+      <Lists />
+      <SiteFeatures>
+        <!-- Standard site collection features -->
+        <Feature ID="B21B090C-C796-4B0F-AC0F-7EF1659C20AE" />
+        <Feature ID="A392DA98-270B-4E85-9769-04C0FDE267AA" />
+        <!-- Lucerne columns and content types, web parts -->
+        <Feature ID="A3B1D6E2-0F4C-4B7A-9D85-1E2F3A4B5C61" />
+        <Feature ID="E7F5BAC6-4D80-4FBE-B1C9-5C6D7E8F9AA5" />
+      </SiteFeatures>
+      <WebFeatures>
+        <!-- Team collaboration lists, wiki page home, following content -->
+        <Feature ID="00BFEA71-4EA5-48D4-A4AD-7EA5C011ABE5" />
+        <Feature ID="99FE402E-89A0-45AA-9163-85342E865DC8" />
+        <Feature ID="00BFEA71-E717-4E80-AA17-D0C71B360101" />
+        <Feature ID="00BFEA71-DE22-43B2-A848-C05709900100" />
+        <Feature ID="A7A2793E-67CD-4DC1-9FD0-43F61581207A" />
+        <!-- Lucerne project site -->
+        <Feature ID="C5D3F8A4-2B6E-4D9C-9FA7-3A4B5C6D7E83" />
+      </WebFeatures>
+      <Modules />
+    </Configuration>
+  </Configurations>
+  <Modules />
+</Project>

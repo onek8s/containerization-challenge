@@ -1,0 +1,9 @@
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
+  <s:Body>
+    <GetApprovedTimesheetLines xmlns="http://schemas.lucerne-eng.example/erp/projects/2016/03">
+      <fromDate>2019-06-03T00:00:00</fromDate>
+      <toDate>2019-06-09T00:00:00</toDate>
+      <projectNumber>P18007</projectNumber>
+    </GetApprovedTimesheetLines>
+  </s:Body>
+</s:Envelope>

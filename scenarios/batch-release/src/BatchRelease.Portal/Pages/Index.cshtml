@@ -1,0 +1,43 @@
+@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Release queue";
+}
+<h1>Release queue</h1>
+
+<form method="get">
+    <select name="view" asp-for="View">
+        <option value="open">Open</option>
+        <option value="final">Released / rejected</option>
+        <option value="all">All</option>
+    </select>
+    <input type="text" name="q" value="@Model.Q" placeholder="Batch, product code or name" />
+    <button type="submit">Show</button>
+</form>
+
+<table>
+    <thead>
+        <tr><th>Batch</th><th>Product</th><th>Site</th><th>Manufactured</th><th>Expiry</th><th>Received</th><th>Open deviations</th><th>OOS</th><th>Status</th><th>Certificate</th></tr>
+    </thead>
+    <tbody>
+        @foreach (var b in Model.Batches)
+        {
+            <tr>
+                <td><a asp-page="/Batches/Details" asp-route-id="@b.Id">@b.BatchNumber</a></td>
+                <td>@b.ProductCode @b.ProductName</td>
+                <td>@b.SiteCode</td>
+                <td>@b.ManufacturedOn.ToString("yyyy-MM-dd")</td>
+                <td>@b.ExpiresOn.ToString("yyyy-MM")</td>
+                <td>@b.ReceivedUtc.ToLocalTime().ToString("yyyy-MM-dd HH:mm")</td>
+                <td>@b.OpenDeviations</td>
+                <td>@b.FailedResults</td>
+                <td><span class="status status-@b.Status">@b.Status</span></td>
+                <td>@b.CertificateNumber</td>
+            </tr>
+        }
+    </tbody>
+</table>
+@if (Model.Batches.Count == 0)
+{
+    <p>No batches.</p>
+}

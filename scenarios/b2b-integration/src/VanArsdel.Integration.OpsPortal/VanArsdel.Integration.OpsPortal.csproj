@@ -1,0 +1,49 @@
+<Project Sdk="MSBuild.SDK.SystemWeb">
+
+  <Import Project="..\..\BizTalk.References.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+    <RootNamespace>VanArsdel.Integration.OpsPortal</RootNamespace>
+    <AssemblyName>VanArsdel.Integration.OpsPortal</AssemblyName>
+    <AppConfig>Web.config</AppConfig>
+    <GeneratedBindingRedirectsAction>None</GeneratedBindingRedirectsAction>
+    <!-- the portal is not loaded by BizTalk, so it is not strong named -->
+    <SignAssembly>false</SignAssembly>
+    <!-- Release precompiles the pages and views with aspnet_compiler, which needs the .NET Framework MSBuild -->
+    <MvcBuildViews Condition="'$(MSBuildRuntimeType)' != 'Full'">false</MvcBuildViews>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MSBuild.Microsoft.VisualStudio.Web.targets" Version="14.0.0.3" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.AspNet.FriendlyUrls.Core" Version="1.0.2" />
+    <PackageReference Include="Unity" Version="4.0.1" />
+    <PackageReference Include="AutoMapper" Version="6.2.2" />
+    <PackageReference Include="log4net" Version="2.0.8" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BizTalkReference Include="Microsoft.BizTalk.Operations" />
+    <BizTalkReference Include="Microsoft.BizTalk.ExplorerOM" />
+    <BizTalkReference Include="Microsoft.BizTalk.Pipeline" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Web.Extensions" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="**\*.aspx;**\*.Master;*.html;Global.asax;Content\**\*" />
+    <None Include="Web.Lab.config;Web.Prod.config" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\VanArsdel.Integration.Data\VanArsdel.Integration.Data.csproj" />
+    <ProjectReference Include="..\VanArsdel.Integration.Management\VanArsdel.Integration.Management.csproj" />
+  </ItemGroup>
+
+</Project>

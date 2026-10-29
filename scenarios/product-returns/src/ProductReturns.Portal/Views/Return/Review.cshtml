@@ -1,0 +1,34 @@
+@model ReviewModel
+@{
+    ViewData["Title"] = "Review your return";
+}
+<h1>Review your return</h1>
+<table class="grid">
+    <thead><tr><th>Item</th><th>Quantity</th><th>Reason</th><th>Amount</th></tr></thead>
+    <tbody>
+    @foreach (var l in Model.Draft.Lines)
+    {
+        var line = Model.Order.Lines.First(o => o.LineNumber == l.LineNumber);
+        <tr>
+            <td>@line.Description</td>
+            <td>@l.Quantity</td>
+            <td>@(ReturnReasons.Find(l.ReasonCode)?.Text)</td>
+            <td>@((l.Quantity * line.UnitPrice).ToString("0.00")) @Model.Order.Currency</td>
+        </tr>
+    }
+    </tbody>
+</table>
+<p>Value of returned items: <strong>@Model.ItemsValue.ToString("0.00") @Model.Order.Currency</strong></p>
+@if (Model.LabelFee > 0)
+{
+    <p>The return label costs @Model.LabelFee.ToString("0.00") @Model.Order.Currency and is deducted from your refund. Opened or used items may have a restocking fee.</p>
+}
+else
+{
+    <p>The return label is free of charge.</p>
+}
+<p>We review your request within one working day and e-mail you a return label.</p>
+<form asp-action="Submit" method="post" class="inline">
+    <button type="submit">Submit return</button>
+</form>
+<a asp-action="Select" class="button secondary">Change</a>

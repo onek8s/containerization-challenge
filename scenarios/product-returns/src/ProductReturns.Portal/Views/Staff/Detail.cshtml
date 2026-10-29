@@ -1,0 +1,87 @@
+@model StaffDetailModel
+@{
+    var r = Model.Return;
+    ViewData["Title"] = r.RmaNumber;
+}
+<p><a asp-action="Index">&larr; Back to queue</a></p>
+<h1>@r.RmaNumber <small class="status status-@r.Status.ToString().ToLowerInvariant()">@r.Status</small></h1>
+@if (Model.Error != null)
+{
+    <div class="errors">@Model.Error</div>
+}
+<dl class="facts">
+    <dt>Order</dt><dd>@r.OrderNumber</dd>
+    <dt>Customer</dt><dd>@r.CustomerName, @r.CustomerEmail</dd>
+    <dt>Created</dt><dd>@r.CreatedUtc.ToLocalTime().ToString("dd.MM.yyyy HH:mm") by @r.CreatedBy</dd>
+    @if (r.DecidedUtc.HasValue)
+    {
+        <dt>Decided</dt><dd>@r.DecidedUtc.Value.ToLocalTime().ToString("dd.MM.yyyy HH:mm") by @r.DecidedBy</dd>
+    }
+    @if (r.TrackingNumber != null)
+    {
+        <dt>Label</dt><dd>@r.TrackingNumber @if (r.HasLabel) { <a asp-action="Label" asp-route-id="@r.RmaNumber">PDF</a> }</dd>
+    }
+    @if (r.LabelError != null)
+    {
+        <dt>Label error</dt><dd class="errors">@r.LabelError</dd>
+    }
+    @if (r.ReceivedUtc.HasValue)
+    {
+        <dt>Received</dt><dd>@r.ReceivedUtc.Value.ToLocalTime().ToString("dd.MM.yyyy HH:mm")</dd>
+    }
+    @if (r.RefundAmount.HasValue)
+    {
+        <dt>Refund</dt><dd>@r.RefundAmount.Value.ToString("0.00") @r.Currency (restocking @((r.RestockingFee ?? 0).ToString("0.00")), label @((r.LabelFee ?? 0).ToString("0.00")))</dd>
+    }
+    @if (r.RefundBatch != null)
+    {
+        <dt>Refund batch</dt><dd>@r.RefundBatch</dd>
+    }
+</dl>
+<table class="grid">
+    <thead><tr><th>Line</th><th>Item</th><th>Category</th><th>Qty</th><th>Price</th><th>Reason</th><th>Received</th><th>Condition</th><th>Refund</th></tr></thead>
+    <tbody>
+    @foreach (var l in r.Lines)
+    {
+        <tr>
+            <td>@l.OrderLineNumber</td>
+            <td>@l.Description<br /><small>@l.Sku</small>@if (l.CustomerComment != null) { <br /><em>"@l.CustomerComment"</em> }</td>
+            <td>@l.Category</td>
+            <td>@l.Quantity</td>
+            <td>@l.UnitPrice.ToString("0.00")</td>
+            <td>@l.ReasonCode</td>
+            <td>@l.ReceivedQuantity</td>
+            <td>@l.Condition</td>
+            <td>@(l.RefundAmount?.ToString("0.00"))</td>
+        </tr>
+    }
+    </tbody>
+</table>
+<div class="actions">
+    @if (r.Status == ReturnStatus.Submitted)
+    {
+        <form asp-action="Approve" asp-route-id="@r.RmaNumber" method="post" class="inline"><button type="submit">Approve</button></form>
+    }
+    @if (r.Status == ReturnStatus.Submitted || r.Status == ReturnStatus.Approved)
+    {
+        <form asp-action="Reject" asp-route-id="@r.RmaNumber" method="post" class="inline">
+            <input type="text" name="reason" placeholder="Reason for the customer" required />
+            <button type="submit" class="secondary">Reject</button>
+        </form>
+    }
+    @if (r.Status == ReturnStatus.Received && Model.IsSupervisor)
+    {
+        <form asp-action="CompleteInspection" asp-route-id="@r.RmaNumber" method="post" class="inline"><button type="submit">Complete inspection and calculate refund</button></form>
+    }
+</div>
+<h2>Notes</h2>
+<ul class="notes">
+    @foreach (var n in r.Notes)
+    {
+        <li><small>@n.CreatedUtc.ToLocalTime().ToString("dd.MM.yyyy HH:mm") @n.Author</small><br />@n.Text</li>
+    }
+</ul>
+<form asp-action="AddNote" asp-route-id="@r.RmaNumber" method="post">
+    <textarea name="text" rows="2" required></textarea>
+    <button type="submit">Add note</button>
+</form>

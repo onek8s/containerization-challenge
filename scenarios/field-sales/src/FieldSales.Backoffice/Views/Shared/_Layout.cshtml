@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>@ViewBag.Title - Field Sales Office</title>
+    <link href="~/Content/site.css" rel="stylesheet" />
+</head>
+<body>
+    @if (Request.IsAuthenticated)
+    {
+        <div class="navbar">
+            <a class="brand" href="@Url.Action("Index", "Home")">Wingtip Foods &middot; Sales Office</a>
+            @if (User.IsInRole("SalesManager"))
+            {
+                <a href="@Url.Action("Index", "Approvals")">Approvals</a>
+            }
+            <a href="@Url.Action("Index", "Orders")">Orders</a>
+            <a href="@Url.Action("Index", "Customers")">Customers</a>
+            @if (User.IsInRole("SalesManager"))
+            {
+                <a href="@Url.Action("Index", "PriceList")">Price list</a>
+            }
+            @if (User.IsInRole("Administrator"))
+            {
+                <a href="@Url.Action("Index", "Users")">Users</a>
+            }
+            <div class="right">
+                <span>@User.Identity.Name</span>
+                @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { @class = "inline" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <button type="submit">Sign out</button>
+                }
+            </div>
+        </div>
+    }
+    <div class="page">
+        @if (TempData["Message"] != null)
+        {
+            <div class="alert alert-success">@TempData["Message"]</div>
+        }
+        @if (TempData["Error"] != null)
+        {
+            <div class="alert alert-danger">@TempData["Error"]</div>
+        }
+        @RenderBody()
+    </div>
+    <footer>Field Sales @typeof(Wingtip.FieldSales.Backoffice.MvcApplication).Assembly.GetName().Version &middot; @Environment.MachineName</footer>
+</body>
+</html>

@@ -1,0 +1,54 @@
+@page
+@model CityPermits.Citizen.Pages.ApplyModel
+@{ ViewData["Title"] = "New application"; }
+<h1>New application: @Model.KindName</h1>
+<div asp-validation-summary="All" class="error"></div>
+<form method="post">
+    <input type="hidden" asp-for="Kind" />
+    <label>Address</label>
+    <input id="addr" placeholder="Start typing the address or postcode" autocomplete="off" />
+    <select asp-for="Uprn" id="uprn"><option value="">Select an address</option></select>
+    @if (Model.Kind == PermitKind.BuildingPermit)
+    {
+        <label>Type of work</label>
+        <select asp-for="Building.WorkType" asp-items="Html.GetEnumSelectList<WorkType>()"></select>
+        <label>Description of the work</label><textarea asp-for="Description" rows="4"></textarea>
+        <label>Estimated cost (£)</label><input asp-for="Building.EstimatedCost" />
+        <label>Gross floor area (m²)</label><input asp-for="Building.GrossFloorAreaM2" />
+        <label>Footprint (m²)</label><input asp-for="Building.FootprintM2" />
+        <label>Height (m)</label><input asp-for="Building.HeightM" />
+        <label>Storeys</label><input asp-for="Building.Storeys" />
+        <label>Use class after the work</label><input asp-for="Building.UseClass" placeholder="C3" />
+        <label><input type="checkbox" asp-for="Building.ListedBuilding" style="width:auto" /> Listed building</label>
+    }
+    else if (Model.Kind == PermitKind.BusinessLicence)
+    {
+        <label>Licence type</label>
+        <select asp-for="Business.Category" asp-items="Html.GetEnumSelectList<BusinessCategory>()"></select>
+        <label>Trading name</label><input asp-for="Business.TradingName" />
+        <label>Opening hours</label><input asp-for="Business.OpeningHours" />
+        <label>Capacity (persons)</label><input asp-for="Business.Capacity" />
+        <label>Designated premises supervisor</label><input asp-for="Business.ResponsiblePerson" />
+        <label><input type="checkbox" asp-for="Business.Seasonal" style="width:auto" /> Seasonal (6 months)</label>
+    }
+    else
+    {
+        <label>Permit type</label>
+        <select asp-for="Parking.PermitType" asp-items="Html.GetEnumSelectList<ParkingPermitType>()"></select>
+        <label>Vehicle registration</label><input asp-for="Parking.Registration" />
+        <label>Vehicle emissions band</label>
+        <select asp-for="Parking.EmissionBand" asp-items="Html.GetEnumSelectList<VehicleEmissionBand>()"></select>
+        <label>Duration (months)</label>
+        <select asp-for="Parking.DurationMonths"><option>12</option><option>6</option><option>3</option></select>
+    }
+    <button class="btn">Save and continue</button>
+</form>
+@section Scripts {
+<script>
+const box = document.getElementById('addr'), sel = document.getElementById('uprn');
+let t; box.addEventListener('input', () => { clearTimeout(t); t = setTimeout(async () => {
+  const r = await fetch('/address-search?q=' + encodeURIComponent(box.value)); const list = await r.json();
+  sel.innerHTML = '<option value="">Select an address</option>' + list.map(a => `<option value="${a.uprn}">${a.address}, ${a.postcode}</option>`).join('');
+}, 250); });
+</script>
+}

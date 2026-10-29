@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewData["Title"] - Permits and licences - City of Ashford</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+<header class="masthead">
+    <a href="/" class="brand">City of Ashford · Permits and licences</a>
+    <nav>
+        @if (User.Identity?.IsAuthenticated == true)
+        {
+            <a href="/Cases">My applications</a>
+            <a href="/Apply">New application</a>
+            <form method="post" action="/signout" class="inline"><button>Sign out</button></form>
+        }
+        else
+        {
+            <a href="/SignIn">Sign in</a>
+        }
+    </nav>
+</header>
+<main>@RenderBody()</main>
+<footer>City of Ashford Council · Civic Centre, Tannery Lane, Ashford TN23 1PL</footer>
+@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

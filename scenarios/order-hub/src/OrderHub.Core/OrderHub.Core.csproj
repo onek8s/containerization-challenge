@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>7.3</LangVersion>
+    <RootNamespace>Litware.OrderHub.Core</RootNamespace>
+    <Version>3.2.0</Version>
+    <Company>Litware Outdoor</Company>
+    <Product>Order Hub</Product>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OrderHub.Contracts\OrderHub.Contracts.csproj" />
+  </ItemGroup>
+
+</Project>

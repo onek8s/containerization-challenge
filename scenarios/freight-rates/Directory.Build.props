@@ -1,0 +1,10 @@
+<Project>
+  <PropertyGroup>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <Company>Contoso Freight Brokerage</Company>
+    <Product>Freight Rates</Product>
+    <Version>3.4.0</Version>
+  </PropertyGroup>
+</Project>

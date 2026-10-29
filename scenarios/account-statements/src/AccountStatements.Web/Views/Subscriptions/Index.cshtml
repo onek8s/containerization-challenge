@@ -1,0 +1,61 @@
+@model IList<Subscription>
+@{
+    ViewBag.Title = "Subscriptions";
+    var runs = (IList<SubscriptionRun>)ViewBag.Runs;
+}
+<h1>Subscriptions</h1>
+<p>@Html.ActionLink("New subscription", "Create", null, new { @class = "button" })</p>
+<table class="grid">
+    <thead><tr><th>Name</th><th>Report</th><th>Schedule</th><th>Format</th><th>Delivery</th><th>Owner</th><th>Next run</th><th>Last run</th><th></th></tr></thead>
+    <tbody>
+        @foreach (var s in Model)
+        {
+            <tr class="@(s.Enabled ? "" : "disabled")">
+                <td>@Html.ActionLink(s.Name, "Edit", new { id = s.SubscriptionId })</td>
+                <td>@s.ReportCode</td>
+                <td><code>@s.Schedule</code></td>
+                <td>@s.OutputFormat</td>
+                <td>@s.DeliveryMethod</td>
+                <td>@s.Owner</td>
+                <td>@(s.NextRunAt.HasValue ? s.NextRunAt.Value.ToString("dd.MM.yyyy HH:mm") : "-")</td>
+                <td class="status-@((s.LastStatus ?? "none").ToLowerInvariant())">@(s.LastRunAt.HasValue ? s.LastRunAt.Value.ToString("dd.MM.yyyy HH:mm") + " " + s.LastStatus : "")</td>
+                <td class="actions">
+                    @if (s.Enabled)
+                    {
+                        using (Html.BeginForm("RunNow", "Subscriptions", new { id = s.SubscriptionId }, FormMethod.Post, new { @class = "inline" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <button type="submit" class="link">Run now</button>
+                        }
+                        using (Html.BeginForm("Disable", "Subscriptions", new { id = s.SubscriptionId }, FormMethod.Post, new { @class = "inline", onsubmit = "return confirm('Disable this subscription?');" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <button type="submit" class="link">Disable</button>
+                        }
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h2>Recent runs</h2>
+<table class="grid">
+    <thead><tr><th>Started</th><th>Finished</th><th>Subscription</th><th>Run by</th><th>Host</th><th>Status</th><th class="num">Documents</th><th class="num">Failures</th><th></th></tr></thead>
+    <tbody>
+        @foreach (var r in runs)
+        {
+            <tr>
+                <td>@r.StartedAt.ToString("dd.MM.yyyy HH:mm")</td>
+                <td>@(r.FinishedAt.HasValue ? r.FinishedAt.Value.ToString("HH:mm:ss") : "running")</td>
+                <td>@r.SubscriptionName</td>
+                <td>@r.RunBy</td>
+                <td>@r.Host</td>
+                <td class="status-@r.Status.ToLowerInvariant()">@r.Status</td>
+                <td class="num">@r.Documents</td>
+                <td class="num">@r.Failures</td>
+                <td>@Html.ActionLink("Details", "Run", new { id = r.RunId })</td>
+            </tr>
+        }
+    </tbody>
+</table>

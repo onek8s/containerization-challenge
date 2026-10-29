@@ -1,0 +1,4 @@
+.bg-ct { background-color: #1f3a5f; }
+.timeline li { border-left: 3px solid #1f3a5f; padding: 2px 0 6px 10px; }
+.flash { animation: flash 2s ease-out; }
+@keyframes flash { from { background-color: #fff3a0; } to { background-color: transparent; } }

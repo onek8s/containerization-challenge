@@ -1,0 +1,17 @@
+@model ScreenModel
+@{ ViewData["Title"] = "Register subject"; }
+<div class="narrow">
+    <h1>Register a subject</h1>
+    <p class="muted">@Model.SiteName</p>
+    <form method="post">
+        <div asp-validation-summary="All" class="validation"></div>
+        <input type="hidden" asp-for="SiteName" />
+        <label>Initials (optional, as allowed by the site's ethics approval) <input asp-for="Initials" maxlength="3" /></label>
+        <label>Year of birth <input asp-for="BirthYear" type="number" /></label>
+        <label>Sex
+            <select asp-for="Sex"><option value="F">Female</option><option value="M">Male</option></select>
+        </label>
+        <label>Date of informed consent <input asp-for="ConsentDate" type="date" /></label>
+        <button type="submit">Register</button>
+    </form>
+</div>

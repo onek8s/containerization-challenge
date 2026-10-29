@@ -1,0 +1,10 @@
+Subject: Approval needed: {Reason} for {DealerName} ({Number})
+
+{DealerName} ({Account}) needs an approval.
+
+Reason: {Reason}
+Document: {Number}
+Amount: {Total}
+Details: {Details}
+
+Open the approval queue: {Link}

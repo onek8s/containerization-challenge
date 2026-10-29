@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <RootNamespace>Lucerne.Lending.Documents</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="iTextSharp.LGPLv2.Core" Version="1.7.4" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.WindowsServices" Version="6.0.2" />
+    <PackageReference Include="NLog.Extensions.Hosting" Version="5.3.8" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Lucerne.Lending.Data\Lucerne.Lending.Data.csproj" />
+    <ProjectReference Include="..\Lucerne.Lending.Integration\Lucerne.Lending.Integration.csproj" />
+    <ProjectReference Include="..\Lucerne.Lending.Contracts\Lucerne.Lending.Contracts.csproj" />
+  </ItemGroup>
+
+</Project>

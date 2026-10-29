@@ -1,0 +1,34 @@
+@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Search";
+}
+<h1>Find a customer</h1>
+<form method="get" class="panel">
+    <input type="text" name="q" value="@Model.Query" placeholder="Account number, name, address, meter or bill number" autofocus />
+    <button type="submit">Search</button>
+</form>
+
+@if (Model.Hits != null)
+{
+    if (Model.Hits.Count == 0)
+    {
+        <p class="muted">No customers found for "@Model.Query".</p>
+    }
+    else
+    {
+        <table>
+            <tr><th>Account</th><th>Customer</th><th>Address</th><th>Meter</th><th></th></tr>
+            @foreach (var hit in Model.Hits)
+            {
+                <tr>
+                    <td><a asp-page="/Accounts/Details" asp-route-accountNumber="@hit.AccountNumber">@hit.AccountNumber</a></td>
+                    <td>@hit.CustomerName</td>
+                    <td>@hit.AddressLine1, @hit.City</td>
+                    <td>@hit.MeterSerial</td>
+                    <td>@(hit.Active ? "" : "Closed")</td>
+                </tr>
+            }
+        </table>
+    }
+}

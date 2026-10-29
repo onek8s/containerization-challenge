@@ -1,0 +1,30 @@
+     A*  LNMSTP  Consumer loan master                       LNLIB
+     A*  Keyed by account number. Maintained by LNBOOK, LNDISB, LNFEE,
+     A*  LNPPLN, LNTERM and the end-of-day job LNEOD.
+     A                                      UNIQUE
+     A          R LNMSTR                    TEXT('Loan master')
+     A            LMACCT        12A         TEXT('Loan account')
+     A            LMCIF         10A         TEXT('Borrower CIF')
+     A            LMCOCF        10A         TEXT('Co-borrower CIF')
+     A            LMAPRF        20A         TEXT('Origination application ref')
+     A            LMPROD         4A         TEXT('Product CL01-CL09')
+     A            LMORIG        13P 2       TEXT('Original amount')
+     A            LMBALA        13P 2       TEXT('Principal balance')
+     A            LMREFR         3A         TEXT('Reference rate E3M/E12/FIX')
+     A            LMMARG         7P 4       TEXT('Margin %')
+     A            LMRATE         7P 4       TEXT('Nominal rate %')
+     A            LMAFEE         9P 2       TEXT('Arrangement fee')
+     A            LMMFEE         7P 2       TEXT('Monthly fee')
+     A            LMTERM         3P 0       TEXT('Term months')
+     A            LMDUED         3P 0       TEXT('Due day')
+     A            LMNXDT         8S 0       TEXT('Next due CCYYMMDD')
+     A            LMNXAM        11P 2       TEXT('Next instalment')
+     A            LMARRS        13P 2       TEXT('Arrears incl. fees')
+     A            LMOLDU         8S 0       TEXT('Oldest unpaid due date')
+     A            LMDPD          4S 0       TEXT('Days past due')
+     A            LMSTAT         4A         TEXT('BOOK ACTV COLL TERM CLSD')
+     A            LMOPDT         8S 0       TEXT('Opened CCYYMMDD')
+     A            LMBRCH         4A         TEXT('Branch')
+     A            LMOFCR        10A         TEXT('Officer')
+     A            LMCHGT          Z         TEXT('Last change')
+     A          K LMACCT

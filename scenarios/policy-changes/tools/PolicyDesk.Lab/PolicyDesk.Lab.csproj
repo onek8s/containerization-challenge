@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <AssemblyName>HPDESK</AssemblyName>
+    <RootNamespace>PolicyDesk.Lab</RootNamespace>
+    <Product>PolicyDesk lab client</Product>
+    <Version>6.4.0</Version>
+    <FileVersion>6.4.0.112</FileVersion>
+    <ApplicationHighDpiMode>SystemAware</ApplicationHighDpiMode>
+  </PropertyGroup>
+
+</Project>

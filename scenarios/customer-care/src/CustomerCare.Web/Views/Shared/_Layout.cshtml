@@ -1,0 +1,54 @@
+@using Tailspin.CustomerCare.Web.Security
+@{
+    var user = CareUser.Get(Context);
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>@ViewBag.Title - Customer Care</title>
+    <link href="@Url.Content("~/Content/site.css")" rel="stylesheet" type="text/css" />
+</head>
+<body class="@ViewBag.BodyClass">
+    <header class="top">
+        <a class="brand" href="@Url.Content("~/")">Tailspin Energy <span>Customer Care</span></a>
+        <nav>
+            <a href="@Url.Content("~/")">Dashboard</a>
+            <a href="@Url.Content("~/cases")">Cases</a>
+            <a href="@Url.Content("~/cases/new")">New case</a>
+            <a href="@Url.Content("~/customers")">Customers</a>
+            <a href="@Url.Content("~/board")">Queue board</a>
+            <a href="@Url.Content("~/kb")">Knowledge base</a>
+            @if (user.IsSupervisor)
+            {
+                <a href="@Url.Content("~/Reports/Sla.aspx")">SLA report</a>
+                <a href="@Url.Content("~/admin/jobs")">Jobs</a>
+            }
+            @if (user.IsAdministrator)
+            {
+                <a href="@Url.Content("~/Admin/Queues.aspx")">Queues</a>
+                <a href="@Url.Content("~/Admin/Settings.aspx")">Settings</a>
+            }
+        </nav>
+        <form class="search" method="get" action="@Url.Content("~/search")">
+            <input type="text" name="q" placeholder="Case number, customer, account..." maxlength="100" value="@Request.QueryString["q"]" />
+            <button type="submit">Search</button>
+        </form>
+        <div class="user">@user.DisplayName</div>
+    </header>
+    @if (TempData["Message"] != null)
+    {
+        <div class="message">@TempData["Message"]</div>
+    }
+    <main>
+        @RenderBody()
+    </main>
+    <footer>Customer Care @(typeof(Tailspin.CustomerCare.Web.SiteMaster).Assembly.GetName().Version) &middot; @Environment.MachineName</footer>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.7.1.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/signalr/jquery.signalr-2.4.3.min.js"></script>
+    <script src="@Url.Content("~/signalr/hubs")"></script>
+    <script src="@Url.Content("~/Scripts/care.js")"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

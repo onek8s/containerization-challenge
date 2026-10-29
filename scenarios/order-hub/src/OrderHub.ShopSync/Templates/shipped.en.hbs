@@ -1,0 +1,10 @@
+Your Litware order {{orderNumber}} is on its way
+<html><body style="font-family: Arial, sans-serif; color: #222">
+<p>Hi {{name}},</p>
+<p>Your order <b>{{orderNumber}}</b> has left our warehouse and is on its way with {{carrier}}.</p>
+{{#if trackingUrl}}<p><a href="{{trackingUrl}}">Track your parcel</a> ({{trackingNumber}})</p>{{else}}<p>{{trackingNumber}}</p>{{/if}}
+<table cellpadding="4" style="border-collapse: collapse">
+{{#each lines}}<tr><td>{{Quantity}} x</td><td>{{Description}}</td><td style="color:#888">{{Sku}}</td></tr>
+{{/each}}</table>
+<p>Thank you for shopping with Litware Outdoor!</p>
+</body></html>

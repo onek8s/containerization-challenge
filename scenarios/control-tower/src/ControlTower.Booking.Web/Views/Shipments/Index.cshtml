@@ -1,0 +1,25 @@
+@model ShipmentSearchViewModel
+@{ ViewData["Title"] = "Shipments"; }
+<form method="get" class="row g-2 mb-3">
+    <div class="col-md-3"><input asp-for="Q" class="form-control" placeholder="Number, reference, consignee, SSCC, carrier ref" /></div>
+    <div class="col-md-2"><select asp-for="CustomerId" asp-items="Model.Customers" class="form-select"><option value="">All customers</option></select></div>
+    <div class="col-md-2"><select asp-for="Status" asp-items="Html.GetEnumSelectList<ShipmentStatus>()" class="form-select"><option value="">Any status</option></select></div>
+    <div class="col-md-2"><select asp-for="Mode" asp-items="Html.GetEnumSelectList<TransportMode>()" class="form-select"><option value="">Any mode</option></select></div>
+    <div class="col-md-1 form-check pt-2"><input asp-for="OpenOnly" class="form-check-input" /><label asp-for="OpenOnly" class="form-check-label">Open</label></div>
+    <div class="col-md-1"><button class="btn btn-primary">Search</button></div>
+</form>
+@if (Model.Result is { } r)
+{
+    <p class="small text-muted">@r.Total shipments</p>
+    <partial name="_ShipmentTable" model="r.Items" />
+    <nav>
+        <ul class="pagination pagination-sm">
+            @for (var p = 1; p <= Math.Min(r.Pages, 20); p++)
+            {
+                <li class="page-item @(p == r.Page ? "active" : "")">
+                    <a class="page-link" asp-action="Index" asp-route-q="@Model.Q" asp-route-customerId="@Model.CustomerId" asp-route-status="@Model.Status" asp-route-mode="@Model.Mode" asp-route-openOnly="@Model.OpenOnly" asp-route-page="@p">@p</a>
+                </li>
+            }
+        </ul>
+    </nav>
+}

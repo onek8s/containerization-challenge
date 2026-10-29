@@ -1,0 +1,24 @@
+body { font-family: "Segoe UI", Arial, sans-serif; margin: 0; color: #1d2733; background: #f5f7f9; font-size: 14px; }
+header { background: #0b4f71; color: #fff; padding: 10px 24px; display: flex; justify-content: space-between; align-items: center; }
+header a { color: #fff; text-decoration: none; font-weight: 600; }
+main { padding: 20px 24px; max-width: 1100px; }
+h1 { font-size: 22px; margin: 0 0 14px; }
+h2 { font-size: 17px; margin: 22px 0 8px; }
+table { border-collapse: collapse; width: 100%; background: #fff; }
+th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid #e1e5ea; }
+th { background: #eef2f5; font-weight: 600; }
+td.num, th.num { text-align: right; }
+.panel { background: #fff; border: 1px solid #dfe4ea; padding: 14px 16px; margin-bottom: 14px; }
+.grid { display: grid; grid-template-columns: 180px 1fr; gap: 4px 12px; }
+.muted { color: #6b7785; }
+.badge { padding: 1px 7px; border-radius: 9px; background: #e6edf3; font-size: 12px; }
+.badge.est { background: #fff1d6; }
+.message { padding: 8px 12px; background: #e8f5e9; border: 1px solid #b7dfb9; margin-bottom: 12px; }
+.message.error { background: #fdecea; border-color: #f5c2bd; }
+input[type=text] { padding: 6px 8px; width: 320px; }
+button { padding: 6px 14px; }
+@media print {
+  header, form, .no-print { display: none; }
+  body { background: #fff; }
+  .panel { border: none; }
+}

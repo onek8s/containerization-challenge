@@ -1,0 +1,36 @@
+@model CreditDesk.Web.Models.CustomerDetailsModel
+@{
+    var c = Model.Customer;
+    ViewBag.Title = c.Name;
+}
+<h1>@c.AccountNumber &ndash; @c.Name</h1>
+@if (c.OnStop) { <p class="error">This account is on stop.</p> }
+<table class="kv">
+    <tr><th>Address</th><td>@c.AddressLine1 @c.AddressLine2, @c.PostalCode @c.City, @c.CountryCode</td></tr>
+    <tr><th>Contact</th><td>@c.ContactName</td></tr>
+    <tr><th>Customer since</th><td>@(c.CustomerSince.HasValue ? c.CustomerSince.Value.ToString("d") : "")</td></tr>
+    <tr><th>Sales rep</th><td>@c.SalesRep</td></tr>
+    <tr><th>Credit limit</th><td>@c.CreditLimit.ToString("N2")</td></tr>
+    <tr><th>Open balance</th><td>@c.OpenBalance.ToString("N2") (available @c.AvailableCredit.ToString("N2"))</td></tr>
+    <tr><th>Overdue</th><td>@c.OverdueBalance.ToString("N2") @(c.OldestOverdueDays > 0 ? "(oldest " + c.OldestOverdueDays + " days)" : "")</td></tr>
+</table>
+
+<h2>Request a new credit limit</h2>
+@using (Html.BeginForm("Create", "Requests", FormMethod.Post, new { @class = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(false)
+    @Html.HiddenFor(m => m.NewRequest.AccountNumber)
+    <label>
+        @Html.DisplayNameFor(m => m.NewRequest.RequestedLimit)
+        @Html.TextBoxFor(m => m.NewRequest.RequestedLimit, new { type = "number", step = "100", min = "0" })
+    </label>
+    <label>
+        Reason
+        @Html.TextAreaFor(m => m.NewRequest.Reason, 4, 60, null)
+    </label>
+    <button type="submit">Submit request</button>
+}
+
+<h2>History</h2>
+@Html.Partial("_RequestTable", Model.History)

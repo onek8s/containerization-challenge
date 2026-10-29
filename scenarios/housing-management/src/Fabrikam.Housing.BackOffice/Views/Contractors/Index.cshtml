@@ -1,0 +1,29 @@
+@model IList<Contractor>
+@{
+    ViewData["Title"] = "Contractors";
+    var open = (Dictionary<int, int>)ViewBag.OpenJobs;
+}
+<div class="d-flex justify-content-between">
+    <h1 class="h3">Contractors</h1>
+    @if (User.IsInRole(HousingRoles.Admin)) { <a class="btn btn-sm btn-primary align-self-center" asp-action="Edit">New contractor</a> }
+</div>
+<table class="table table-sm table-striped">
+    <thead><tr><th>Code</th><th>Name</th><th>Trades</th><th>Patches</th><th>24h</th><th>Gas Safe</th><th class="text-right">Open jobs / weekly capacity</th><th>API client</th><th>Active</th></tr></thead>
+    <tbody>
+        @foreach (var c in Model)
+        {
+            var jobs = open.TryGetValue(c.Id, out var n) ? n : 0;
+            <tr>
+                <td>@if (User.IsInRole(HousingRoles.Admin)) { <a asp-action="Edit" asp-route-id="@c.Id">@c.Code</a> } else { @c.Code }</td>
+                <td>@c.Name</td>
+                <td>@c.Trades</td>
+                <td>@c.Patches</td>
+                <td>@(c.OutOfHours ? "Yes" : "")</td>
+                <td>@c.GasSafeNumber</td>
+                <td class="text-right @(jobs > c.WeeklyCapacity ? "text-danger" : "")">@jobs / @c.WeeklyCapacity</td>
+                <td><code>@c.ApiClientId</code> @if (c.ApiSecretIssuedAt.HasValue) { <small class="text-muted">secret @c.ApiSecretIssuedAt.Value.ToString("dd/MM/yyyy")</small> }</td>
+                <td>@(c.Active ? "Yes" : "No")</td>
+            </tr>
+        }
+    </tbody>
+</table>

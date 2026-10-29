@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="8.0.11" />
+    <PackageReference Include="Microsoft.Extensions.TimeProvider.Testing" Version="8.10.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />
+    <PackageReference Include="xunit" Version="2.9.2" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.8.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\FurnaceRecords.Core\FurnaceRecords.Core.csproj" />
+    <ProjectReference Include="..\..\src\FurnaceRecords.Data\FurnaceRecords.Data.csproj" />
+    <ProjectReference Include="..\..\src\FurnaceRecords.Acquisition\FurnaceRecords.Acquisition.csproj" />
+    <ProjectReference Include="..\..\src\FurnaceRecords.Api\FurnaceRecords.Api.csproj" />
+    <ProjectReference Include="..\..\src\FurnaceRecords.Worker\FurnaceRecords.Worker.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\vendor\Calvera\TcxSdk-4.3\TcxBoard.idl" Link="vendor\TcxBoard.idl" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="Xunit" />
+  </ItemGroup>
+
+</Project>

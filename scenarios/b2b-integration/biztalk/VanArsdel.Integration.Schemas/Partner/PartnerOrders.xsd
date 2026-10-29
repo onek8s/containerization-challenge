@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.vanarsdel.com/partners/orders/2016" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" xmlns:ns0="https://VanArsdel.Integration.Schemas.PropertySchema" elementFormDefault="qualified" targetNamespace="http://schemas.vanarsdel.com/partners/orders/2016" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:annotation>
+    <xs:appinfo>
+      <b:schemaInfo is_envelope="yes" root_reference="OrderBatch" standard="XML" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" />
+      <b:imports xmlns:b="http://schemas.microsoft.com/BizTalk/2003">
+        <b:namespace prefix="ns0" uri="https://VanArsdel.Integration.Schemas.PropertySchema" location="VanArsdel.Integration.Schemas.PropertySchema" />
+      </b:imports>
+    </xs:appinfo>
+    <xs:documentation>Partner gateway order batch (2016). The XML Debatcher splits OrderBatch into Order documents; BatchId and PartnerId are copied to each order's context.</xs:documentation>
+  </xs:annotation>
+  <xs:element name="OrderBatch">
+    <xs:annotation>
+      <xs:appinfo>
+        <b:recordInfo body_xpath="/*[local-name()='OrderBatch' and namespace-uri()='http://schemas.vanarsdel.com/partners/orders/2016']" />
+        <b:properties>
+          <b:property distinguished="false" name="ns0:PartnerId" xpath="/*[local-name()='OrderBatch']/@*[local-name()='PartnerId']" />
+        </b:properties>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="500" name="Order" type="tns:Order" />
+      </xs:sequence>
+      <xs:attribute name="BatchId" type="xs:string" use="required" />
+      <xs:attribute name="PartnerId" type="xs:string" use="required" />
+      <xs:attribute name="Created" type="xs:dateTime" use="required" />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Order" type="tns:Order">
+    <xs:annotation>
+      <xs:appinfo>
+        <b:properties>
+          <b:property distinguished="false" name="ns0:OrderNumber" xpath="/*[local-name()='Order']/*[local-name()='PoNumber']" />
+        </b:properties>
+      </xs:appinfo>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name="Order">
+    <xs:sequence>
+      <xs:element name="PoNumber">
+        <xs:simpleType><xs:restriction base="xs:string"><xs:minLength value="1" /><xs:maxLength value="22" /></xs:restriction></xs:simpleType>
+      </xs:element>
+      <xs:element name="OrderDate" type="xs:date" />
+      <xs:element minOccurs="0" name="DeliverBy" type="xs:date" />
+      <xs:element name="AccountNumber">
+        <xs:simpleType><xs:restriction base="xs:string"><xs:pattern value="[0-9]{4,10}" /></xs:restriction></xs:simpleType>
+      </xs:element>
+      <xs:element minOccurs="0" name="DeliveryAddress">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="Name" type="xs:string" />
+            <xs:element name="Line1" type="xs:string" />
+            <xs:element minOccurs="0" name="Line2" type="xs:string" />
+            <xs:element name="Town" type="xs:string" />
+            <xs:element minOccurs="0" name="Postcode" type="xs:string" />
+            <xs:element name="Country">
+              <xs:simpleType><xs:restriction base="xs:string"><xs:length value="2" /></xs:restriction></xs:simpleType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="Contact" type="xs:string" />
+      <xs:element minOccurs="0" name="Phone" type="xs:string" />
+      <xs:element minOccurs="0" name="Instructions">
+        <xs:simpleType><xs:restriction base="xs:string"><xs:maxLength value="250" /></xs:restriction></xs:simpleType>
+      </xs:element>
+      <xs:element maxOccurs="999" name="Item">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="Sku" type="xs:string" />
+            <xs:element name="Qty">
+              <xs:simpleType><xs:restriction base="xs:decimal"><xs:minExclusive value="0" /></xs:restriction></xs:simpleType>
+            </xs:element>
+            <xs:element minOccurs="0" name="Unit" type="xs:string" />
+            <xs:element minOccurs="0" name="Price" type="xs:decimal" />
+            <xs:element minOccurs="0" name="Text" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

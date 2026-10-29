@@ -1,0 +1,47 @@
+@page
+@model ContosoFoods.TradeRebates.Portal.Pages.Statements.IndexModel
+@{
+    ViewData["Title"] = "Statements";
+}
+<h1>Quarterly statements</h1>
+@if (Model.CanRun)
+{
+    <fieldset>
+        <form method="post" asp-page-handler="Accruals" class="inline">
+            <label>Recalculate accruals</label>
+            <input type="text" name="period" placeholder="yyyyMM" value="@Model.DefaultPeriod" />
+            <button type="submit">Calculate</button>
+        </form>
+        <br />
+        <form method="post" asp-page-handler="Request" class="inline">
+            <label>Request statements</label>
+            <input type="text" name="quarter" placeholder="yyyyQn" value="@Model.DefaultQuarter" />
+            <button type="submit">Request</button>
+            <span class="muted">Statements are rendered in the background and posted as credit notes.</span>
+        </form>
+    </fieldset>
+}
+<form method="get">
+    <label>Quarter</label><input type="text" name="quarter" value="@Model.Quarter" placeholder="all" />
+    <button type="submit">Show</button>
+</form>
+<table>
+    <thead><tr><th>#</th><th>Quarter</th><th>Distributor</th><th class="n">Amount</th><th>Status</th><th>Requested</th><th>Completed</th><th>Credit note</th><th>File</th><th>Error</th></tr></thead>
+    <tbody>
+    @foreach (var s in Model.Statements)
+    {
+        <tr>
+            <td>@s.StatementId</td>
+            <td>@s.Quarter</td>
+            <td>@s.DistributorName</td>
+            <td class="n">@s.Amount.ToString("N2")</td>
+            <td>@StatementStatus.Name(s.Status)</td>
+            <td>@s.RequestedAt.ToString("yyyy-MM-dd HH:mm") <span class="muted">@s.RequestedBy</span></td>
+            <td>@s.CompletedAt?.ToString("yyyy-MM-dd HH:mm")</td>
+            <td>@s.ErpDocumentNo</td>
+            <td>@if (s.FilePath is not null) { <a asp-page-handler="File" asp-route-id="@s.StatementId">open</a> }</td>
+            <td class="error">@s.ErrorMessage</td>
+        </tr>
+    }
+    </tbody>
+</table>

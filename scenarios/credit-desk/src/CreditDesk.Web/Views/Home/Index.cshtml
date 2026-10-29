@@ -1,0 +1,10 @@
+@model CreditDesk.Web.Models.HomeModel
+@{ ViewBag.Title = "My requests"; }
+<h1>Welcome, @Model.User.DisplayName</h1>
+@if (Model.PendingApprovals > 0)
+{
+    <p class="notice">@Html.ActionLink(Model.PendingApprovals + " request(s) waiting for your approval", "Index", "Approvals")</p>
+}
+<h2>My recent requests</h2>
+@Html.Partial("_RequestTable", Model.MyRequests)
+<p>@Html.ActionLink("Find a customer to request a new limit", "Index", "Customers")</p>

@@ -1,0 +1,31 @@
+@model StatementViewModel
+@{ ViewData["Title"] = "Rent statement"; }
+<h1 class="h3">Rent statement</h1>
+<p>Tenancy @Model.TenancyReference. Current balance:
+    @if (Model.Balance > 0) { <span class="balance-owed">@Money.Format(Model.Balance) owed</span> } else { <span class="balance-credit">@Money.Format(-Model.Balance) in credit</span> }
+</p>
+<form method="get" class="form-inline mb-3">
+    <label class="mr-2" for="from">From</label>
+    <input type="date" id="from" name="from" value="@Model.From.ToString("yyyy-MM-dd")" class="form-control mr-3" />
+    <label class="mr-2" for="to">To</label>
+    <input type="date" id="to" name="to" value="@Model.To.ToString("yyyy-MM-dd")" class="form-control mr-3" />
+    <button class="btn btn-outline-secondary mr-2">Show</button>
+    <a class="btn btn-outline-secondary" asp-action="StatementPdf" asp-route-from="@Model.From.ToString("yyyy-MM-dd")" asp-route-to="@Model.To.ToString("yyyy-MM-dd")">Download PDF</a>
+</form>
+<table class="table table-sm bg-white statement">
+    <thead><tr><th>Date</th><th>Description</th><th>Reference</th><th class="num">Charges</th><th class="num">Payments</th><th class="num">Balance</th></tr></thead>
+    <tbody>
+    @foreach (var l in Model.Lines)
+    {
+        <tr>
+            <td>@l.PostedOn.ToString("dd/MM/yyyy")</td>
+            <td>@l.Description</td>
+            <td>@l.Reference</td>
+            <td class="num">@(l.Debit != 0 ? l.Debit.ToString("N2") : "")</td>
+            <td class="num">@(l.Credit != 0 ? l.Credit.ToString("N2") : "")</td>
+            <td class="num">@l.Balance.ToString("N2")</td>
+        </tr>
+    }
+    </tbody>
+</table>
+<p class="small text-muted">Rent is charged every Monday for 48 weeks of the year. There are no charges in the two weeks over Christmas and New Year and the last two weeks of March.</p>

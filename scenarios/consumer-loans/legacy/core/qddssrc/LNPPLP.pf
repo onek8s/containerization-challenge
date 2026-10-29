@@ -1,0 +1,12 @@
+     A*  LNPPLP  Payment plan instalments                   LNLIB
+     A                                      UNIQUE
+     A          R LNPPLR                    TEXT('Plan instalment')
+     A            PPACCT        12A         TEXT('Loan account')
+     A            PPNUMB         3P 0       TEXT('Instalment number')
+     A            PPDUDT         8S 0       TEXT('Due date CCYYMMDD')
+     A            PPAMNT        11P 2       TEXT('Amount')
+     A            PPPAID        11P 2       TEXT('Paid so far')
+     A            PPSTAT         1A         TEXT('O=open P=paid B=broken')
+     A            PPOFCR        10A         TEXT('Officer')
+     A          K PPACCT
+     A          K PPNUMB

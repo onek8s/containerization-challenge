@@ -1,0 +1,21 @@
+@page
+@model Litware.OrderHub.Portal.Pages.Products.IndexModel
+@{ ViewData["Title"] = "Products"; }
+<h1>Products</h1>
+<p>The product list is refreshed from the ERP every night. Orders with inactive SKUs are rejected.</p>
+<table>
+    <thead><tr><th>SKU</th><th>Description</th><th>EAN</th><th>Active</th><th></th></tr></thead>
+    <tbody>
+        @foreach (var p in Model.Products)
+        {
+            <tr>
+                <td>@p.Sku</td><td>@p.Description</td><td>@p.Ean</td><td>@(p.Active ? "Yes" : "No")</td>
+                <td>
+                    <form method="post" asp-page-handler="Toggle" asp-route-sku="@p.Sku">
+                        <button type="submit">@(p.Active ? "Deactivate" : "Activate")</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

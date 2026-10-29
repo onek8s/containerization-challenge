@@ -1,0 +1,27 @@
+@page
+@model ContosoFoods.TradeRebates.Portal.Pages.Agreements.IndexModel
+@{
+    ViewData["Title"] = "Agreements";
+}
+<h1>Rebate agreements</h1>
+<p><a asp-page="Edit">New agreement</a></p>
+<table>
+    <thead><tr><th>Agreement</th><th>Distributor</th><th>Description</th><th>Basis</th><th>Category</th><th>Tiers</th><th>Valid</th><th class="n">Cap</th><th>Status</th><th class="n">Accrued</th></tr></thead>
+    <tbody>
+    @foreach (var a in Model.Agreements)
+    {
+        <tr>
+            <td><a asp-page="Details" asp-route-id="@a.AgreementId">@a.AgreementNo</a></td>
+            <td>@a.DistributorName</td>
+            <td>@a.Description</td>
+            <td>@AgreementStatus.BasisName(a.Basis)</td>
+            <td>@(a.Category ?? "All")</td>
+            <td><code>@a.TiersText</code> <span class="muted">@a.TierMode, @a.TierCount tiers</span></td>
+            <td>@a.ValidFrom.ToString("yyyy-MM-dd") – @a.ValidTo.ToString("yyyy-MM-dd")</td>
+            <td class="n">@a.CapAmount?.ToString("N2")</td>
+            <td>@AgreementStatus.Name(a.Status)</td>
+            <td class="n">@a.Accrued?.ToString("N2")</td>
+        </tr>
+    }
+    </tbody>
+</table>

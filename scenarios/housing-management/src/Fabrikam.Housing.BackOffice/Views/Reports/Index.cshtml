@@ -1,0 +1,42 @@
+@{ ViewData["Title"] = "Reports"; }
+<h1 class="h3">Reports</h1>
+<div class="row">
+    <div class="col-md-6 col-xl-3 mb-3">
+        <div class="card h-100"><div class="card-body">
+            <h5>Arrears</h5>
+            <p class="small text-muted">Current tenancies with a balance owing, by patch, with stage and benefit flags.</p>
+            <form asp-action="Arrears" method="get">
+                <div class="form-row">
+                    <div class="col"><input name="minimum" value="10" class="form-control form-control-sm" title="Minimum balance" /></div>
+                    <div class="col"><select name="patch" class="form-control form-control-sm"><option value="">All</option><option>NORTH</option><option>SOUTH</option><option>EAST</option></select></div>
+                </div>
+                <button class="btn btn-sm btn-primary mt-2">Excel</button>
+            </form>
+        </div></div>
+    </div>
+    <div class="col-md-6 col-xl-3 mb-3">
+        <div class="card h-100"><div class="card-body">
+            <h5>Repairs performance</h5>
+            <p class="small text-muted">Completed in target by priority and contractor, overdue open jobs (KPI return).</p>
+            <form asp-action="RepairsPerformance" method="get">
+                <input type="date" name="from" value="@DateTime.Today.AddDays(-90).ToString("yyyy-MM-dd")" class="form-control form-control-sm mb-1" />
+                <input type="date" name="to" value="@DateTime.Today.ToString("yyyy-MM-dd")" class="form-control form-control-sm" />
+                <button class="btn btn-sm btn-primary mt-2">Excel</button>
+            </form>
+        </div></div>
+    </div>
+    <div class="col-md-6 col-xl-3 mb-3">
+        <div class="card h-100"><div class="card-body">
+            <h5>Compliance</h5>
+            <p class="small text-muted">All current certificates with expiry dates, for the board's compliance return.</p>
+            <a class="btn btn-sm btn-primary" asp-action="Compliance">Excel</a>
+        </div></div>
+    </div>
+    <div class="col-md-6 col-xl-3 mb-3">
+        <div class="card h-100"><div class="card-body">
+            <h5>Rent roll</h5>
+            <p class="small text-muted">Rent, service and water charges per home in the finance month end layout (.xls).</p>
+            <a class="btn btn-sm btn-primary" asp-action="RentRoll">Excel 97-2003</a>
+        </div></div>
+    </div>
+</div>

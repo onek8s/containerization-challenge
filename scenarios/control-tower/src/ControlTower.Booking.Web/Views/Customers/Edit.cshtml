@@ -1,0 +1,20 @@
+@model CustomerEditModel
+@{ ViewData["Title"] = Model.Id == 0 ? "New customer" : Model.Name; }
+<h1 class="h4">@ViewData["Title"]</h1>
+<form method="post" class="row g-2" style="max-width:900px">
+    <input type="hidden" asp-for="Id" />
+    <div asp-validation-summary="All" class="text-danger col-12"></div>
+    <div class="col-md-2"><label asp-for="Code" class="form-label"></label><input asp-for="Code" class="form-control" /></div>
+    <div class="col-md-6"><label asp-for="Name" class="form-label"></label><input asp-for="Name" class="form-control" /></div>
+    <div class="col-md-2"><label asp-for="CountryCode" class="form-label">Country</label><input asp-for="CountryCode" class="form-control" /></div>
+    <div class="col-md-2"><label asp-for="InvoiceCurrency" class="form-label">Currency</label><input asp-for="InvoiceCurrency" class="form-control" /></div>
+    <div class="col-md-4"><label asp-for="VatNumber" class="form-label">VAT number</label><input asp-for="VatNumber" class="form-control" /></div>
+    <div class="col-md-4"><label asp-for="Eori" class="form-label">EORI</label><input asp-for="Eori" class="form-control" /></div>
+    <div class="col-md-2"><label asp-for="DomesticSlaDays" class="form-label">SLA days</label><input asp-for="DomesticSlaDays" class="form-control" /></div>
+    <div class="col-md-2"><label asp-for="DiscountPercent" class="form-label">Discount %</label><input asp-for="DiscountPercent" class="form-control" /></div>
+    <div class="col-md-6"><label asp-for="ContactEmail" class="form-label">Contact e-mail</label><input asp-for="ContactEmail" class="form-control" /></div>
+    <div class="col-md-6"><label asp-for="ContactPhone" class="form-label">Contact phone</label><input asp-for="ContactPhone" class="form-control" /></div>
+    <div class="col-md-3 form-check ms-2"><input asp-for="PortalEnabled" class="form-check-input" /><label asp-for="PortalEnabled" class="form-check-label">Customer portal</label></div>
+    <div class="col-md-3 form-check"><input asp-for="CustomsBrokerageAgreed" class="form-check-input" /><label asp-for="CustomsBrokerageAgreed" class="form-check-label">Customs brokerage</label></div>
+    <div class="col-12"><button class="btn btn-primary">Save</button> <a asp-action="Index" class="btn btn-link">Back</a></div>
+</form>

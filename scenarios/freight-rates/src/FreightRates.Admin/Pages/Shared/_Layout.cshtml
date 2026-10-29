@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Freight Rates Admin</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <a class="brand" asp-page="/Index">Contoso Freight Rates</a>
+        <nav>
+            <a asp-page="/Customers/Index">Customers</a>
+            <a asp-page="/Quotes/Index">Quotes</a>
+            <a asp-page="/FuelPrices/Index">Fuel surcharge</a>
+            <a asp-page="/Tariffs/Index">Tariffs</a>
+        </nav>
+        <span class="user">@User.Identity?.Name</span>
+    </header>
+    <main>
+        @if (TempData["Message"] is string message)
+        {
+            <p class="message">@message</p>
+        }
+        @RenderBody()
+    </main>
+</body>
+</html>

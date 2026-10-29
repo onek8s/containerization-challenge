@@ -1,0 +1,9 @@
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
+  <s:Body>
+    <GetProjectsChangedSince xmlns="http://schemas.lucerne-eng.example/erp/projects/2016/03">
+      <sinceUtc>2019-06-13T00:00:00Z</sinceUtc>
+      <page>1</page>
+      <pageSize>2</pageSize>
+    </GetProjectsChangedSince>
+  </s:Body>
+</s:Envelope>

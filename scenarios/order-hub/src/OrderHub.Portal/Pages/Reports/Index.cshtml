@@ -1,0 +1,19 @@
+@page
+@model Litware.OrderHub.Portal.Pages.Reports.IndexModel
+@{ ViewData["Title"] = "Reports"; }
+<h1>Daily sales workbooks</h1>
+<table>
+    <thead><tr><th>Day</th><th>File</th><th>Created</th><th class="num">Size</th></tr></thead>
+    <tbody>
+        @foreach (var f in Model.Files)
+        {
+            <tr>
+                <td>@f.ReportDate.ToString("yyyy-MM-dd")</td>
+                <td><a asp-page-handler="Download" asp-route-name="@f.FileName">@f.FileName</a></td>
+                <td>@f.CreatedUtc.ToLocalTime().ToString("yyyy-MM-dd HH:mm")</td>
+                <td class="num">@((f.Size / 1024.0).ToString("N1")) kB</td>
+            </tr>
+        }
+    </tbody>
+</table>
+@if (Model.Files.Count == 0) { <p>No workbooks yet. They are created every night by the partners service.</p> }

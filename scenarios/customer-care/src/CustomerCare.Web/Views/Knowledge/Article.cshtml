@@ -1,0 +1,22 @@
+@model ArticleModel
+@{
+    ViewBag.Title = Model.Article.Title;
+}
+<h1>@Model.Article.Title @if (Model.CanEdit) { <a class="button" href="@Url.Action("Edit", "Knowledge", new { id = Model.Article.Id })">Edit</a> }</h1>
+<p class="muted">
+    @if (Model.CategoryName != null) { <text>@Model.CategoryName &middot; </text> }
+    Updated @Tailspin.CustomerCare.Web.Services.LocalTime.Format(Model.Article.ModifiedUtc) by @Tailspin.CustomerCare.Web.Security.UserDirectory.DisplayName(Model.Article.ModifiedBy)
+    &middot; @Model.Article.Views views
+</p>
+<article class="kb">
+    @Html.Raw(Model.Article.Body)
+</article>
+@if (Model.Tags.Any())
+{
+    <p>
+        @foreach (var t in Model.Tags)
+        {
+            <a class="tag" href="@Url.RouteUrl("kb", new { q = t })">@t</a>
+        }
+    </p>
+}

@@ -1,0 +1,47 @@
+{
+  "name": "Replace beneficiaries",
+  "changeType": "BeneficiaryChange",
+  "clientVersion": "6.4",
+  "defaultTimeoutSeconds": 15,
+  "steps": [
+    { "action": "window", "title": "PolicyDesk 6.* - *" },
+    { "action": "set", "field": "Policy number", "value": "{Policy}" },
+    { "action": "click", "button": "Open" },
+    { "action": "dialog", "optional": true, "timeoutSeconds": 3, "reject": [ "was not found", "is locked by" ] },
+    { "action": "window", "title": "PolicyDesk - Policy {Policy}" },
+    { "action": "capture", "name": "policy-before" },
+    { "action": "click", "button": "Beneficiaries..." },
+    { "action": "dialog", "optional": true, "timeoutSeconds": 2, "reject": [ "only be named on life policies", "not in force" ] },
+    { "action": "window", "title": "PolicyDesk - Beneficiaries - {Policy}" },
+    { "action": "capture", "name": "beneficiaries-before" },
+    { "action": "set", "field": "Effective date", "value": "{Effective}" },
+    { "action": "click", "button": "Remove all" },
+    { "action": "dialog", "optional": true, "timeoutSeconds": 2, "accept": [ "^Remove all beneficiaries" ], "button": "Yes" },
+    { "action": "grid", "field": "Beneficiaries", "expectRows": "0" },
+    {
+      "action": "forEach",
+      "items": "{Field:Beneficiaries}",
+      "steps": [
+        { "action": "set", "field": "Name", "value": "{Item:0}" },
+        { "action": "set", "field": "Date of birth", "value": "{Item:1|date}" },
+        { "action": "set", "field": "Share %", "value": "{Item:2}" },
+        { "action": "click", "button": "Add" },
+        { "action": "dialog", "optional": true, "timeoutSeconds": 1, "reject": [ "not a valid date", "Share must be" ] }
+      ]
+    },
+    { "action": "grid", "field": "Beneficiaries", "expectRows": "{Count:Beneficiaries}", "store": "Rows" },
+    { "action": "capture", "name": "beneficiaries-entered" },
+    { "action": "click", "button": "Save" },
+    {
+      "action": "dialog",
+      "name": "endorsement",
+      "accept": [ "^Endorsement (?<Endorsement>\\d{7}) created" ],
+      "reject": [ "must total 100", "before the policy start", "not allowed" ]
+    },
+    { "action": "window", "title": "PolicyDesk - Policy {Policy}" },
+    { "action": "click", "button": "Close" }
+  ],
+  "cleanup": [
+    { "action": "dialog", "optional": true, "timeoutSeconds": 1, "accept": [ ".*" ] }
+  ]
+}

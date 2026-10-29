@@ -1,0 +1,7 @@
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
+  <s:Body>
+    <GetProject xmlns="http://schemas.lucerne-eng.example/erp/projects/2016/03">
+      <projectNumber>P18007</projectNumber>
+    </GetProject>
+  </s:Body>
+</s:Envelope>

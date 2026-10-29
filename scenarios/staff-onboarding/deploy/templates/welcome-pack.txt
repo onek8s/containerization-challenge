@@ -1,0 +1,11 @@
+Subject: Welcome to Litware, {FirstName}!
+Your first day is {StartDate} at {Office}.
+
+Your user name:   {SamAccountName}
+Your sign-in:     {UserPrincipalName}
+Your e-mail:      {Mail}
+Your home folder: drive H: ({HomeDirectory})
+
+On your first morning the service desk will meet you to set your password and hand over your laptop.
+
+Request {RequestNumber}

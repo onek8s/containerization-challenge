@@ -1,0 +1,122 @@
+@model QuoteViewModel
+@{
+    ViewBag.Title = "Quote " + Model.QuoteNumber;
+}
+<div class="page-header">
+    <h2>Quote @Model.QuoteNumber <small>@Model.StatusText</small></h2>
+    <p>
+        Created @Model.CreatedUtc.ToLocalTime().ToString("g") by @Model.CreatedBy &middot; valid until @Model.ValidUntil.ToString("d")
+        @if (!string.IsNullOrEmpty(Model.AxQuotationId)) { <text>&middot; Tailspin quotation @Model.AxQuotationId</text> }
+    </p>
+    <p>
+        @Html.ActionLink("Quote document", "Document", new { id = Model.Id }, new { @class = "btn btn-default" })
+        @if (Model.CanEdit)
+        {
+            @Html.ActionLink("Add a machine", "Index", "Configurator", null, new { @class = "btn btn-default" })
+        }
+        @if (Model.OrderId.HasValue)
+        {
+            @Html.ActionLink("Go to the order", "Details", "Orders", new { id = Model.OrderId }, new { @class = "btn btn-default" })
+        }
+    </p>
+</div>
+@if (!string.IsNullOrEmpty(Model.ApprovalComment))
+{
+    <div class="alert alert-info">Sales desk: @Model.ApprovalComment</div>
+}
+<dl class="dl-horizontal">
+    <dt>End customer</dt><dd>@Model.EndCustomerName @Model.EndCustomerCountry</dd>
+    <dt>Your reference</dt><dd>@Model.Reference</dd>
+    <dt>Extra discount</dt><dd>@Model.RequestedExtraDiscount % requested, @Model.ApprovedExtraDiscount % approved</dd>
+</dl>
+<table class="table">
+    <thead><tr><th>#</th><th>Item</th><th>Description</th><th class="text-right">Qty</th><th class="text-right">List</th><th class="text-right">Discount</th><th class="text-right">Net</th><th class="text-right">Amount</th><th>Lead time</th><th></th></tr></thead>
+    <tbody>
+        @foreach (var l in Model.Lines)
+        {
+            <tr>
+                <td>@l.LineNumber</td>
+                <td>@l.ItemId<br /><small class="text-muted">@l.ConfigurationId</small></td>
+                <td>@l.Description
+                    @if (l.OptionList.Count > 0) { <br /><small class="text-muted">@string.Join(", ", l.OptionList)</small> }
+                </td>
+                <td class="text-right">@l.Quantity.ToString("0.##")</td>
+                <td class="text-right">@l.ListPrice.ToString("N2")</td>
+                <td class="text-right">@l.DiscountPercent.ToString("0.##") %</td>
+                <td class="text-right">@l.NetPrice.ToString("N2")</td>
+                <td class="text-right">@l.NetAmount.ToString("N2")</td>
+                <td>@(l.LeadTimeWeeks > 0 ? l.LeadTimeWeeks + " wk" : "")</td>
+                <td>
+                    @if (Model.CanEdit)
+                    {
+                        using (Html.BeginForm("RemoveLine", "Quotes", new { id = Model.Id, lineNumber = l.LineNumber }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <button type="submit" class="btn btn-link btn-xs">Remove</button>
+                        }
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr><th colspan="7">Total</th><th class="text-right">@Model.TotalNet.ToString("N2") @Model.Currency</th><th colspan="2"></th></tr>
+    </tfoot>
+</table>
+<div class="row">
+    @if (Model.CanEdit)
+    {
+        <div class="col-md-4">
+            <h4>Add a part</h4>
+            @using (Html.BeginForm("AddPart", "Quotes", new { id = Model.Id }, FormMethod.Post, new { @class = "form-inline" }))
+            {
+                @Html.AntiForgeryToken()
+                <input name="itemId" class="form-control" placeholder="Item number" required />
+                <input name="quantity" type="number" min="1" value="1" class="form-control" style="width:6em" />
+                <button type="submit" class="btn btn-default">Add</button>
+            }
+        </div>
+        <div class="col-md-4">
+            <h4>Finish the quote</h4>
+            @using (Html.BeginForm("Submit", "Quotes", new { id = Model.Id }, FormMethod.Post, new { @class = "form-inline" }))
+            {
+                @Html.AntiForgeryToken()
+                <label>Extra discount % <input name="extraDiscount" type="number" min="0" max="30" step="0.5" value="@Model.RequestedExtraDiscount" class="form-control" style="width:6em" /></label>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            }
+        </div>
+    }
+    @if (Model.CanAccept)
+    {
+        <div class="col-md-4">
+            <h4>Turn into an order</h4>
+            @using (Html.BeginForm("Accept", "Quotes"))
+            {
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="QuoteId" value="@Model.Id" />
+                <div class="form-group"><label>Your PO number</label><input name="DealerPoNumber" class="form-control" required maxlength="30" /></div>
+                <div class="form-group"><label>Requested delivery</label><input name="RequestedDelivery" type="date" class="form-control" /></div>
+                <div class="form-group">
+                    <label>Deliver to</label>
+                    <select name="DeliveryAddressId" class="form-control">
+                        @foreach (var a in Model.DeliveryAddresses)
+                        {
+                            <option value="@a.Id" selected="@a.IsDefaultDelivery">@a.ToString()</option>
+                        }
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-success">Place order</button>
+            }
+        </div>
+    }
+    @if (Model.CanEdit || Model.Status == QuoteStatus.Approved)
+    {
+        <div class="col-md-12">
+            @using (Html.BeginForm("Cancel", "Quotes", new { id = Model.Id }, FormMethod.Post, new { onsubmit = "return confirm('Cancel this quote?');" }))
+            {
+                @Html.AntiForgeryToken()
+                <button type="submit" class="btn btn-link text-danger">Cancel the quote</button>
+            }
+        </div>
+    }
+</div>

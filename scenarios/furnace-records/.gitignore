@@ -1,0 +1,4 @@
+App_Data/
+
+# Output of the dotnet publish commands in README.md
+publish/

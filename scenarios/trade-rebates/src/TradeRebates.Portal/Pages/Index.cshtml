@@ -1,0 +1,45 @@
+@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Overview";
+    var s = Model.Dashboard.Summary;
+}
+<h1>Overview</h1>
+<div class="cards">
+    <div class="card"><a asp-page="/Claims/Index" asp-route-status="V">Claims to review</a><b>@s.ClaimsToReview</b>@s.ClaimsWithWarnings with warnings</div>
+    <div class="card">Active agreements<b>@s.ActiveAgreements</b></div>
+    <div class="card">Accrued this year<b>@s.AccruedThisYear.ToString("N2")</b></div>
+    <div class="card">Not yet on a statement<b>@s.OpenAccruals.ToString("N2")</b></div>
+    <div class="card"><a asp-page="/Statements/Index">Statements</a><b>@s.StatementsInProgress</b>in progress, @s.StatementsFailed failed</div>
+</div>
+
+<h2>Closest to the next tier</h2>
+<table>
+    <thead><tr><th>Agreement</th><th>Distributor</th><th>Basis</th><th>Period</th><th class="n">Year to date</th><th class="n">Rate %</th><th class="n">To next tier</th><th class="n">Next rate %</th></tr></thead>
+    <tbody>
+    @foreach (var t in Model.Dashboard.NearNextTier)
+    {
+        <tr>
+            <td><a asp-page="/Agreements/Details" asp-route-id="@t.AgreementId">@t.AgreementNo</a></td>
+            <td>@t.DistributorName</td>
+            <td>@AgreementStatus.BasisName(t.Basis)</td>
+            <td>@Periods.Format(t.Period)</td>
+            <td class="n">@(t.Basis == "Q" ? t.YtdQuantity.ToString("N0") : t.YtdNetAmount.ToString("N2"))</td>
+            <td class="n">@t.RatePercent.ToString("0.00")</td>
+            <td class="n">@t.ToNextTier?.ToString(t.Basis == "Q" ? "N0" : "N2")</td>
+            <td class="n">@t.NextRate?.ToString("0.00")</td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+<h2>Effective rate this year</h2>
+<table>
+    <thead><tr><th>Distributor</th><th class="n">Net value</th><th class="n">Accrued</th><th class="n">Average rate %</th></tr></thead>
+    <tbody>
+    @foreach (var r in Model.Dashboard.Rates)
+    {
+        <tr><td>@r.Name (@r.Code)</td><td class="n">@r.NetAmount.ToString("N2")</td><td class="n">@r.Accrued.ToString("N2")</td><td class="n">@r.AverageRate?.ToString("0.00")</td></tr>
+    }
+    </tbody>
+</table>

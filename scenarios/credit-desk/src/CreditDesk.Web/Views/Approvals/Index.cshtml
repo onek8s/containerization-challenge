@@ -1,0 +1,23 @@
+@model IList<CreditDesk.Core.CreditRequest>
+@{ ViewBag.Title = "Approvals"; }
+<h1>Waiting for approval</h1>
+@if (Model.Count == 0)
+{
+    <p class="muted">Nothing waiting for you.</p>
+}
+@foreach (var r in Model)
+{
+    <section class="card">
+        <h2>@Html.ActionLink("#" + r.RequestId, "Details", "Requests", new { id = r.RequestId }, null) @r.AccountNumber &ndash; @r.CustomerName</h2>
+        <p>@r.CurrentLimit.ToString("N0") &rarr; <strong>@r.RequestedLimit.ToString("N0")</strong> &middot; level @r.RequiredLevel &middot; @r.RequestedBy, @r.RequestedAt.ToString("g")</p>
+        <p class="reason">@r.Reason</p>
+        @using (Html.BeginForm("Decide", "Approvals"))
+        {
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="RequestId" value="@r.RequestId" />
+            <textarea name="Comment" rows="2" cols="60" placeholder="Comment (required for rejections, printed on the letter)"></textarea>
+            <button type="submit" name="Approve" value="true">Approve</button>
+            <button type="submit" name="Approve" value="false" class="secondary">Reject</button>
+        }
+    </section>
+}

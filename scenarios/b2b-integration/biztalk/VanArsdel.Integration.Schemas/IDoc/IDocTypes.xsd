@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.vanarsdel.com/erp/idoc/2013" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" elementFormDefault="unqualified" targetNamespace="http://schemas.vanarsdel.com/erp/idoc/2013" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:annotation>
+    <xs:documentation>Control record and common segments of the ERP's XML IDoc file port (release 700). Only the fields we fill or read are declared; the ERP ignores missing optional fields.</xs:documentation>
+  </xs:annotation>
+  <xs:complexType name="EDI_DC40">
+    <xs:sequence>
+      <xs:element name="TABNAM" type="xs:string" fixed="EDI_DC40" />
+      <xs:element minOccurs="0" name="MANDT" type="xs:string" />
+      <xs:element minOccurs="0" name="DOCNUM" type="xs:string" />
+      <xs:element name="DIRECT" type="xs:string" />
+      <xs:element name="IDOCTYP" type="xs:string" />
+      <xs:element name="MESTYP" type="xs:string" />
+      <xs:element name="SNDPOR" type="xs:string" />
+      <xs:element name="SNDPRT" type="xs:string" />
+      <xs:element name="SNDPRN" type="xs:string" />
+      <xs:element name="RCVPOR" type="xs:string" />
+      <xs:element name="RCVPRT" type="xs:string" />
+      <xs:element name="RCVPRN" type="xs:string" />
+      <xs:element minOccurs="0" name="CREDAT" type="xs:string" />
+      <xs:element minOccurs="0" name="CRETIM" type="xs:string" />
+      <xs:element minOccurs="0" name="REFINT" type="xs:string" />
+    </xs:sequence>
+    <xs:attribute name="SEGMENT" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="E1EDKA1">
+    <xs:sequence>
+      <xs:element name="PARVW" type="xs:string" />
+      <xs:element minOccurs="0" name="PARTN" type="xs:string" />
+      <xs:element minOccurs="0" name="ILNNR" type="xs:string" />
+      <xs:element minOccurs="0" name="NAME1" type="xs:string" />
+      <xs:element minOccurs="0" name="NAME2" type="xs:string" />
+      <xs:element minOccurs="0" name="STRAS" type="xs:string" />
+      <xs:element minOccurs="0" name="STRS2" type="xs:string" />
+      <xs:element minOccurs="0" name="ORT01" type="xs:string" />
+      <xs:element minOccurs="0" name="PSTLZ" type="xs:string" />
+      <xs:element minOccurs="0" name="REGIO" type="xs:string" />
+      <xs:element minOccurs="0" name="LAND1" type="xs:string" />
+      <xs:element minOccurs="0" name="IHREZ" type="xs:string" />
+      <xs:element minOccurs="0" name="STCEG" type="xs:string" />
+    </xs:sequence>
+    <xs:attribute name="SEGMENT" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="E1EDK02">
+    <xs:sequence>
+      <xs:element name="QUALF" type="xs:string" />
+      <xs:element name="BELNR" type="xs:string" />
+      <xs:element minOccurs="0" name="DATUM" type="xs:string" />
+    </xs:sequence>
+    <xs:attribute name="SEGMENT" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="E1EDK03">
+    <xs:sequence>
+      <xs:element name="IDDAT" type="xs:string" />
+      <xs:element name="DATUM" type="xs:string" />
+    </xs:sequence>
+    <xs:attribute name="SEGMENT" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="E1EDP19">
+    <xs:sequence>
+      <xs:element name="QUALF" type="xs:string" />
+      <xs:element name="IDTNR" type="xs:string" />
+      <xs:element minOccurs="0" name="KTEXT" type="xs:string" />
+    </xs:sequence>
+    <xs:attribute name="SEGMENT" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="E1EDS01">
+    <xs:sequence>
+      <xs:element name="SUMID" type="xs:string" />
+      <xs:element name="SUMME" type="xs:string" />
+      <xs:element minOccurs="0" name="WAERQ" type="xs:string" />
+    </xs:sequence>
+    <xs:attribute name="SEGMENT" type="xs:string" use="required" />
+  </xs:complexType>
+</xs:schema>

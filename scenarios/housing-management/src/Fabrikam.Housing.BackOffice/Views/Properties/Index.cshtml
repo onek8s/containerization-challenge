@@ -1,0 +1,68 @@
+@model PropertySearchViewModel
+@{
+    ViewData["Title"] = "Properties";
+    var pages = (int)Math.Ceiling(Model.Total / 25.0);
+}
+<h1 class="h3">Properties</h1>
+<form method="get" class="form-row align-items-end mb-3">
+    <div class="col-md-4"><label>Search</label><input name="q" value="@Model.Q" class="form-control" placeholder="Reference, address or postcode" /></div>
+    <div class="col-md-2">
+        <label>Estate</label>
+        <select name="estate" class="form-control">
+            <option value="">All</option>
+            @foreach (var e in Model.Estates)
+            {
+                <option value="@e.Code" selected="@(Model.Estate == e.Code)">@e.Name</option>
+            }
+        </select>
+    </div>
+    <div class="col-md-2">
+        <label>Patch</label>
+        <select name="patch" class="form-control">
+            <option value="">All</option>
+            @foreach (var p in new[] { "NORTH", "SOUTH", "EAST" })
+            {
+                <option value="@p" selected="@(Model.Patch == p)">@p</option>
+            }
+        </select>
+    </div>
+    <div class="col-md-2">
+        <label>Status</label>
+        <select name="status" class="form-control" asp-items="Html.GetEnumSelectList<PropertyStatus>()"><option value="">All</option></select>
+    </div>
+    <div class="col-md-2"><button class="btn btn-primary btn-block">Search</button></div>
+</form>
+
+<p class="text-muted">@Model.Total properties</p>
+<table class="table table-sm table-striped">
+    <thead><tr><th>Ref</th><th>Address</th><th>Postcode</th><th>Estate</th><th>Patch</th><th>Type</th><th>Beds</th><th>Status</th><th class="text-right">Weekly charge</th></tr></thead>
+    <tbody>
+        @foreach (var p in Model.Results)
+        {
+            <tr>
+                <td><a asp-action="Details" asp-route-id="@p.Id">@p.Reference</a></td>
+                <td>@p.AddressLine1</td>
+                <td>@p.Postcode</td>
+                <td>@p.EstateName</td>
+                <td>@p.PatchCode</td>
+                <td>@p.Type</td>
+                <td>@p.Bedrooms</td>
+                <td>@p.Status</td>
+                <td class="text-right">@Money.Format(p.WeeklyTotalCharge)</td>
+            </tr>
+        }
+    </tbody>
+</table>
+@if (pages > 1)
+{
+    <nav>
+        <ul class="pagination pagination-sm">
+            @for (var i = 1; i <= pages; i++)
+            {
+                <li class="page-item @(i == Model.Page ? "active" : "")">
+                    <a class="page-link" asp-route-q="@Model.Q" asp-route-estate="@Model.Estate" asp-route-patch="@Model.Patch" asp-route-status="@Model.Status" asp-route-page="@i">@i</a>
+                </li>
+            }
+        </ul>
+    </nav>
+}

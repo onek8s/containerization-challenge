@@ -1,0 +1,49 @@
+@inherits RazorLight.TemplatePage<Proseware.ControlTower.Documents.ShipmentDocumentModel>
+@{
+    var s = Model.Shipment;
+    var sea = s.Legs.OrderBy(l => l.Sequence).FirstOrDefault(l => l.Mode == Proseware.ControlTower.Domain.TransportMode.Sea);
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@Model.Title @s.Number</title>
+    @{ await IncludeAsync("_Styles", Model); }
+</head>
+<body>
+    @{ await IncludeAsync("_Header", Model); }
+    <table class="grid">
+        <tr>
+            <td style="width:50%"><span class="box-label">Shipper</span>@s.ShipperName<br />@s.Origin?.DisplayAddress</td>
+            <td><span class="box-label">House B/L No.</span><strong>@Model.DocumentNumber</strong><br /><span class="box-label">Master B/L</span>@(sea?.CarrierReference ?? "")</td>
+        </tr>
+        <tr>
+            <td><span class="box-label">Consignee</span>@s.ConsigneeName<br />@s.Destination?.DisplayAddress</td>
+            <td><span class="box-label">Notify party</span>@s.ConsigneeName @s.NotifyPhone</td>
+        </tr>
+        <tr>
+            <td><span class="box-label">Vessel / voyage</span>@(sea?.VesselOrFlight ?? "")</td>
+            <td><span class="box-label">Ocean carrier</span>@(sea?.Carrier?.Name ?? "")</td>
+        </tr>
+        <tr>
+            <td><span class="box-label">Port of loading</span>@(sea?.From?.Name ?? "") (@sea?.From?.Code)</td>
+            <td><span class="box-label">Port of discharge</span>@(sea?.To?.Name ?? "") (@sea?.To?.Code)</td>
+        </tr>
+        <tr>
+            <td><span class="box-label">Place of receipt</span>@s.Origin?.City, @s.Origin?.CountryCode</td>
+            <td><span class="box-label">Place of delivery</span>@s.Destination?.City, @s.Destination?.CountryCode</td>
+        </tr>
+        <tr>
+            <td colspan="2"><span class="box-label">Description of goods (said to contain)</span>@s.GoodsDescription &middot; Freight @(Model.Shipment.Incoterm.SellerPaysMainCarriage ? "prepaid" : "collect") &middot; Incoterms® 2020 @s.IncotermCode</td>
+        </tr>
+    </table>
+    @{ await IncludeAsync("_Packages", Model); }
+    <p class="small">Received in apparent good order and condition unless otherwise noted, the goods to be carried subject to Proseware Freight's terms and conditions and the NSAB 2015 general conditions. Three original house bills of lading issued, one of which being accomplished, the others to stand void.</p>
+    <table class="grid">
+        <tr>
+            <td style="width:50%"><span class="box-label">Place and date of issue</span>@Model.Issuer.City, @Model.IssuedAt.ToString("yyyy-MM-dd")</td>
+            <td><span class="box-label">Signed for the carrier</span><div class="signature"></div></td>
+        </tr>
+    </table>
+</body>
+</html>

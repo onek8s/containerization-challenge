@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"] - Lending Back Office</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+<header>
+    <a class="brand" asp-controller="Home" asp-action="Index">Lucerne Lending</a>
+    @if (User.Identity?.IsAuthenticated == true)
+    {
+        <nav>
+            <a asp-controller="Applications" asp-action="Index" asp-route-queue="referred">Referred</a>
+            <a asp-controller="Applications" asp-action="Index" asp-route-queue="booking">Booking</a>
+            <a asp-controller="Applications" asp-action="Index" asp-route-queue="inprogress">In progress</a>
+            <a asp-controller="Applications" asp-action="Index" asp-route-queue="all">All</a>
+            <a asp-controller="Collections" asp-action="Index">Collections</a>
+            <a asp-controller="Customers" asp-action="Index">Customers</a>
+        </nav>
+        <span class="user">@User.DisplayName() | <a asp-controller="Account" asp-action="Logout">Sign out</a></span>
+    }
+</header>
+<main>
+    @if (TempData["Message"] is string msg) { <div class="msg ok">@msg</div> }
+    @if (TempData["Error"] is string err) { <div class="msg err">@err</div> }
+    @RenderBody()
+</main>
+</body>
+</html>

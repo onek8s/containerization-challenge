@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.vanarsdel.com/integration/canonical/2014" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" elementFormDefault="qualified" targetNamespace="http://schemas.vanarsdel.com/integration/canonical/2014" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:annotation>
+    <xs:appinfo>
+      <b:schemaInfo is_envelope="no" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" />
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:complexType name="Party">
+    <xs:sequence>
+      <xs:element name="Role" type="xs:string" />
+      <xs:element name="PartnerCode" minOccurs="0" type="xs:string" />
+      <xs:element name="Gln" minOccurs="0" type="xs:string" />
+      <xs:element name="InternalId" minOccurs="0" type="xs:string" />
+      <xs:element name="Name" minOccurs="0" type="xs:string" />
+      <xs:element name="Street1" minOccurs="0" type="xs:string" />
+      <xs:element name="Street2" minOccurs="0" type="xs:string" />
+      <xs:element name="City" minOccurs="0" type="xs:string" />
+      <xs:element name="Region" minOccurs="0" type="xs:string" />
+      <xs:element name="PostalCode" minOccurs="0" type="xs:string" />
+      <xs:element name="Country" minOccurs="0" type="xs:string" />
+      <xs:element name="VatNumber" minOccurs="0" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="OrderHeader">
+    <xs:sequence>
+      <xs:element name="OrderNumber" type="xs:string" />
+      <xs:element name="Kind" type="xs:string" />
+      <xs:element name="PartnerId" type="xs:string" />
+      <xs:element name="OrderDate" type="xs:date" />
+      <xs:element name="RequestedDeliveryDate" minOccurs="0" type="xs:date" />
+      <xs:element name="OrderType" minOccurs="0" type="xs:string" />
+      <xs:element name="Currency" type="xs:string" />
+      <xs:element name="ShipVia" minOccurs="0" type="xs:string" />
+      <xs:element name="ErpPartnerNumber" minOccurs="0" type="xs:string" />
+      <xs:element name="ErpOrderNumber" minOccurs="0" type="xs:string" />
+      <xs:element name="InterchangeControlNumber" minOccurs="0" type="xs:string" />
+      <xs:element name="CustomerReference" minOccurs="0" type="xs:string" />
+      <xs:element name="Notes" minOccurs="0" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="OrderLine">
+    <xs:sequence>
+      <xs:element name="LineNumber" type="xs:int" />
+      <xs:element name="PartnerItem" minOccurs="0" type="xs:string" />
+      <xs:element name="Gtin" minOccurs="0" type="xs:string" />
+      <xs:element name="Item" minOccurs="0" type="xs:string" />
+      <xs:element name="Description" minOccurs="0" type="xs:string" />
+      <xs:element name="Quantity" type="xs:decimal" />
+      <xs:element name="Uom" type="xs:string" />
+      <xs:element name="UnitPrice" minOccurs="0" type="xs:decimal" />
+      <xs:element name="PriceBasis" minOccurs="0" type="xs:decimal" />
+      <xs:element name="RequestedDate" minOccurs="0" type="xs:date" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="OrderSummary">
+    <xs:sequence>
+      <xs:element name="LineCount" type="xs:int" />
+      <xs:element name="TotalAmount" minOccurs="0" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Order">
+    <xs:sequence>
+      <xs:element name="Header" type="tns:OrderHeader" />
+      <xs:element name="Parties">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="Party" type="tns:Party" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Lines">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="Line" type="tns:OrderLine" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Summary" minOccurs="0" type="tns:OrderSummary" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="InvoiceHeader">
+    <xs:sequence>
+      <xs:element name="InvoiceNumber" type="xs:string" />
+      <xs:element name="Kind" type="xs:string" />
+      <xs:element name="PartnerId" type="xs:string" />
+      <xs:element name="InvoiceDate" type="xs:date" />
+      <xs:element name="OrderNumber" minOccurs="0" type="xs:string" />
+      <xs:element name="ErpOrderNumber" minOccurs="0" type="xs:string" />
+      <xs:element name="DespatchNumber" minOccurs="0" type="xs:string" />
+      <xs:element name="Currency" type="xs:string" />
+      <xs:element name="PaymentTermsDays" minOccurs="0" type="xs:int" />
+      <xs:element name="DueDate" minOccurs="0" type="xs:date" />
+      <xs:element name="ErpPartnerNumber" minOccurs="0" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="InvoiceLine">
+    <xs:sequence>
+      <xs:element name="LineNumber" type="xs:int" />
+      <xs:element name="OrderLineNumber" minOccurs="0" type="xs:int" />
+      <xs:element name="Item" minOccurs="0" type="xs:string" />
+      <xs:element name="PartnerItem" minOccurs="0" type="xs:string" />
+      <xs:element name="Gtin" minOccurs="0" type="xs:string" />
+      <xs:element name="Description" minOccurs="0" type="xs:string" />
+      <xs:element name="Quantity" type="xs:decimal" />
+      <xs:element name="Uom" type="xs:string" />
+      <xs:element name="UnitPrice" type="xs:decimal" />
+      <xs:element name="PriceBasis" minOccurs="0" type="xs:decimal" />
+      <xs:element name="LineAmount" type="xs:decimal" />
+      <xs:element name="TaxRate" minOccurs="0" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TaxAmount">
+    <xs:sequence>
+      <xs:element name="Rate" type="xs:decimal" />
+      <xs:element name="Base" type="xs:decimal" />
+      <xs:element name="Amount" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="InvoiceSummary">
+    <xs:sequence>
+      <xs:element name="LineCount" type="xs:int" />
+      <xs:element name="LineTotal" type="xs:decimal" />
+      <xs:element name="TaxTotal" type="xs:decimal" />
+      <xs:element name="GrandTotal" type="xs:decimal" />
+      <xs:element name="Taxes" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="Tax" type="tns:TaxAmount" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Invoice">
+    <xs:sequence>
+      <xs:element name="Header" type="tns:InvoiceHeader" />
+      <xs:element name="Parties">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="Party" type="tns:Party" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Lines">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="Line" type="tns:InvoiceLine" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Summary" type="tns:InvoiceSummary" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="DespatchHeader">
+    <xs:sequence>
+      <xs:element name="DespatchNumber" type="xs:string" />
+      <xs:element name="PartnerId" type="xs:string" />
+      <xs:element name="ShipDate" type="xs:date" />
+      <xs:element name="EstimatedDeliveryDate" minOccurs="0" type="xs:date" />
+      <xs:element name="OrderNumber" type="xs:string" />
+      <xs:element name="ErpOrderNumber" minOccurs="0" type="xs:string" />
+      <xs:element name="Carrier" minOccurs="0" type="xs:string" />
+      <xs:element name="TrackingNumber" minOccurs="0" type="xs:string" />
+      <xs:element name="GrossWeightKg" minOccurs="0" type="xs:decimal" />
+      <xs:element name="PackageCount" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="DespatchLine">
+    <xs:sequence>
+      <xs:element name="LineNumber" type="xs:int" />
+      <xs:element name="OrderLineNumber" minOccurs="0" type="xs:int" />
+      <xs:element name="Item" minOccurs="0" type="xs:string" />
+      <xs:element name="PartnerItem" minOccurs="0" type="xs:string" />
+      <xs:element name="Gtin" minOccurs="0" type="xs:string" />
+      <xs:element name="Description" minOccurs="0" type="xs:string" />
+      <xs:element name="Quantity" type="xs:decimal" />
+      <xs:element name="Uom" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Package">
+    <xs:sequence>
+      <xs:element name="Sscc" type="xs:string" />
+      <xs:element name="Lines">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="Line" type="tns:DespatchLine" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Despatch">
+    <xs:sequence>
+      <xs:element name="Header" type="tns:DespatchHeader" />
+      <xs:element name="Parties">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="Party" type="tns:Party" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Packages">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="Package" type="tns:Package" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="AckError">
+    <xs:sequence>
+      <xs:element name="Segment" minOccurs="0" type="xs:string" />
+      <xs:element name="Position" minOccurs="0" type="xs:int" />
+      <xs:element name="Code" type="xs:string" />
+      <xs:element name="Text" minOccurs="0" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="FunctionalAck">
+    <xs:sequence>
+      <xs:element name="PartnerId" type="xs:string" />
+      <xs:element name="Standard" type="xs:string" />
+      <xs:element name="AcknowledgedControlNumber" type="xs:string" />
+      <xs:element name="AcknowledgedGroupNumber" minOccurs="0" type="xs:string" />
+      <xs:element name="Status" type="xs:string" />
+      <xs:element name="ReceivedUtc" type="xs:dateTime" />
+      <xs:element name="Errors" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="Error" type="tns:AckError" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

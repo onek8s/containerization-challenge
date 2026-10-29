@@ -1,0 +1,22 @@
+@page
+@model LoginWith2faModel
+@{ ViewData["Title"] = "Two-factor authentication"; }
+<div class="login-card card shadow-sm">
+    <div class="card-body">
+        <h1 class="h4 mb-3">Authenticator code</h1>
+        <p class="small">Enter the six-digit code from your authenticator app.</p>
+        <form method="post">
+            <input type="hidden" asp-for="ReturnUrl" />
+            <input type="hidden" asp-for="RememberMe" />
+            <div asp-validation-summary="All" class="text-danger small"></div>
+            <div class="mb-3">
+                <input asp-for="Code" class="form-control form-control-lg text-center" autocomplete="one-time-code" inputmode="numeric" autofocus />
+            </div>
+            <div class="form-check mb-3">
+                <input asp-for="RememberMachine" class="form-check-input" />
+                <label asp-for="RememberMachine" class="form-check-label">Remember this computer for 14 days</label>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Verify</button>
+        </form>
+    </div>
+</div>

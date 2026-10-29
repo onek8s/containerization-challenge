@@ -1,0 +1,19 @@
+@model StatusLookupModel
+@{
+    ViewData["Title"] = "Return status";
+}
+<h1>Return status</h1>
+@if (TempData["Error"] is string error)
+{
+    <div class="errors">@error</div>
+}
+<form asp-action="Status" method="post" class="card narrow">
+    <div asp-validation-summary="ModelOnly" class="errors"></div>
+    <label asp-for="RmaNumber"></label>
+    <input asp-for="RmaNumber" placeholder="R2410-004711-3" autocomplete="off" />
+    <span asp-validation-for="RmaNumber" class="field-error"></span>
+    <label asp-for="Email"></label>
+    <input asp-for="Email" type="email" />
+    <span asp-validation-for="Email" class="field-error"></span>
+    <button type="submit">Show status</button>
+</form>

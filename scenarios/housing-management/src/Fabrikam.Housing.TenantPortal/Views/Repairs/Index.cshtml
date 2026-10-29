@@ -1,0 +1,7 @@
+@model IList<RepairSummary>
+@{ ViewData["Title"] = "Repairs"; }
+<div class="d-flex justify-content-between align-items-center">
+    <h1 class="h3">Repairs</h1>
+    <a class="btn btn-primary" asp-controller="ReportRepair" asp-action="Index">Report a repair</a>
+</div>
+<partial name="_RepairTable" model="Model" />

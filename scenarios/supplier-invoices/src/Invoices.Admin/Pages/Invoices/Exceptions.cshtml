@@ -1,0 +1,20 @@
+@page
+@model Wingtip.Invoices.Admin.Pages.Invoices.ExceptionsModel
+@{
+    ViewData["Title"] = "Exceptions";
+}
+<h1>Exceptions@(Model.Code == null ? "" : ": " + Model.Code)</h1>
+
+<p class="filters">
+    <a asp-page="/Invoices/Exceptions" class="@(Model.Code == null ? "active" : "")">All</a>
+    @foreach (var i in Model.Issues)
+    {
+        <a asp-page="/Invoices/Exceptions" asp-route-code="@i.Code" class="@(Model.Code == i.Code ? "active" : "")">@i.Code (@i.Count)</a>
+    }
+</p>
+
+<partial name="_InvoiceTable" model="Model.Rows" />
+@if (Model.Total > Model.Rows.Count)
+{
+    <p class="muted">Showing the newest @Model.Rows.Count of @Model.Total.</p>
+}

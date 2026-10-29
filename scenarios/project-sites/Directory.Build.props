@@ -1,0 +1,20 @@
+<Project>
+
+  <PropertyGroup>
+    <LangVersion>7.3</LangVersion>
+    <Company>Lucerne Engineering</Company>
+    <Product>Lucerne Project Sites</Product>
+    <Version>5.3.1</Version>
+    <Copyright>Copyright © Lucerne Engineering 2014-2019</Copyright>
+    <Deterministic>true</Deterministic>
+    <!-- The farm solution deploys these assemblies and their dependencies to the GAC -->
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)Lucerne.snk</AssemblyOriginatorKeyFile>
+    <NoWarn>$(NoWarn);CS1591;NU1901;NU1902;NU1903;NU1904</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup Condition="$(TargetFramework.StartsWith('net4'))">
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="all" />
+  </ItemGroup>
+
+</Project>

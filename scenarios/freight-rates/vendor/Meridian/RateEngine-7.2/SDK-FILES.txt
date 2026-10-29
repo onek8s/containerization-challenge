@@ -1,0 +1,16 @@
+Meridian Rating Systems RateEngine 7.2 (build 7.2.1184)
+
+Installed by the vendor setup (MRS_RateEngine_7.2.1184_x86.msi) to
+C:\Program Files (x86)\Meridian\RateEngine 7.2\
+
+  bin\MRSRATE32.DLL      rating engine
+  bin\MRSKEY32.DLL       licence key runtime (loaded by MRSRATE32.DLL)
+  bin\mrsutil.exe        tariff and licence utility
+  drivers\               licence key device driver package
+
+Tariff data (CZ-series and carrier tariffs, *.mrt and *.mrx) is delivered
+monthly on the Meridian customer portal and is installed under the data path
+configured for the rating host (default D:\MRS\Tariffs).
+
+The licence file (*.mrl) is issued by Meridian for the serial number of the
+licence key. Only the header and export list are kept in source control.

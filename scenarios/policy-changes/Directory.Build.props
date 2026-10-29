@@ -1,0 +1,10 @@
+<Project>
+  <PropertyGroup>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <Company>Tailspin Mutual Insurance</Company>
+    <Product>Policy Changes</Product>
+    <Version>2.3.0</Version>
+  </PropertyGroup>
+</Project>

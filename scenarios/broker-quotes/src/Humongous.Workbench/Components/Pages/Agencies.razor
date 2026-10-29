@@ -1,0 +1,66 @@
+@page "/agencies"
+@inject QuoteApiClient Api
+@inject AuthenticationStateProvider Auth
+
+<PageTitle>Agencies</PageTitle>
+<h1>Agencies</h1>
+@if (message is not null) { <div class="info">@message</div> }
+<table class="list">
+    <thead><tr><th>Code</th><th>Name</th><th>FCA number</th><th>Commission %</th><th>Documents to</th><th>Active</th><th></th></tr></thead>
+    <tbody>
+        @foreach (var a in agencies)
+        {
+            var edit = edits[a.Code];
+            <tr>
+                <td>@a.Code</td>
+                <td>@a.Name</td>
+                <td>@a.FcaNumber</td>
+                <td>@if (senior) { <input class="small" type="number" step="0.5" @bind="edit.Commission" /> } else { @((a.CommissionRate * 100).ToString("0.0")) }</td>
+                <td>@if (senior) { <input @bind="edit.Email" /> } else { @a.DocumentEmail }</td>
+                <td>@if (senior) { <input type="checkbox" @bind="edit.Active" /> } else { @(a.Active ? "Yes" : "No") }</td>
+                <td>@if (senior) { <button @onclick="() => SaveAsync(a.Code)">Save</button> }</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@code {
+    private sealed class Edit
+    {
+        public decimal Commission { get; set; }
+        public string Email { get; set; } = "";
+        public bool Active { get; set; }
+    }
+
+    private List<AgencyInfo> agencies = [];
+    private Dictionary<string, Edit> edits = [];
+    private bool senior;
+    private string? message;
+
+    protected override async Task OnInitializedAsync()
+    {
+        senior = (await Auth.GetAuthenticationStateAsync()).User.IsInRole("SeniorUnderwriter");
+        await LoadAsync();
+    }
+
+    private async Task LoadAsync()
+    {
+        agencies = await Api.AgenciesAsync();
+        edits = agencies.ToDictionary(a => a.Code, a => new Edit { Commission = a.CommissionRate * 100, Email = a.DocumentEmail, Active = a.Active });
+    }
+
+    private async Task SaveAsync(string code)
+    {
+        var e = edits[code];
+        try
+        {
+            await Api.UpdateAgencyAsync(code, new AgencyUpdate { CommissionRate = e.Commission / 100, Active = e.Active, DocumentEmail = e.Email });
+            message = $"{code} saved.";
+            await LoadAsync();
+        }
+        catch (ApiProblemException ex)
+        {
+            message = ex.Message;
+        }
+    }
+}

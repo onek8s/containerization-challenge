@@ -1,0 +1,22 @@
+body { font-family: "Segoe UI", Arial, sans-serif; margin: 0; color: #222; font-size: 14px; }
+header { background: #00466e; color: #fff; padding: 8px 16px; display: flex; gap: 24px; align-items: center; }
+header a { color: #fff; text-decoration: none; margin-right: 14px; }
+header .brand { font-weight: bold; font-size: 16px; }
+header .user { margin-left: auto; }
+main { padding: 16px 24px; }
+table { border-collapse: collapse; width: 100%; margin-bottom: 16px; }
+th, td { text-align: left; padding: 4px 8px; border-bottom: 1px solid #ddd; vertical-align: top; }
+th { background: #eef3f7; }
+td.num, th.num { text-align: right; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); gap: 16px; }
+.card { border: 1px solid #d5dde3; border-radius: 4px; padding: 10px 14px; }
+.card h3 { margin-top: 0; color: #00466e; }
+.msg { padding: 8px 12px; margin-bottom: 12px; border-radius: 3px; }
+.msg.ok { background: #e3f4e1; } .msg.err { background: #fbe3e3; }
+.tag { display: inline-block; padding: 1px 6px; border-radius: 3px; background: #e8edf1; font-size: 12px; }
+.tag.Approve { background: #d8f0d4; } .tag.Decline { background: #f6d6d6; } .tag.Refer { background: #fbefd0; }
+form.inline { display: inline; }
+label { display: inline-block; min-width: 140px; }
+input, select, textarea { padding: 3px; }
+button { padding: 4px 12px; }
+.warn { color: #a33; font-weight: bold; }

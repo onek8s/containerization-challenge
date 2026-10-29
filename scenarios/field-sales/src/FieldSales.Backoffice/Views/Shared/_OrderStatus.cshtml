@@ -1,0 +1,6 @@
+@model int
+@{
+    var text = ((Wingtip.FieldSales.Core.OrderStatus)Model).ToString();
+    if (Model == 2) { text = "Waiting for approval"; }
+}
+<span class="label label-@Model">@text</span>

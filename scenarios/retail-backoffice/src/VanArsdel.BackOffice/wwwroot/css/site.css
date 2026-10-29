@@ -1,0 +1,38 @@
+:root { --brand: #1f3864; --muted: #6b7280; --line: #e5e7eb; --danger: #b91c1c; }
+* { box-sizing: border-box; }
+body { margin: 0; font-family: "Segoe UI", Roboto, Arial, sans-serif; font-size: 14px; color: #111827; }
+.page { display: flex; min-height: 100vh; }
+.sidebar { width: 200px; background: var(--brand); padding: 16px 0; }
+.sidebar .brand { color: #fff; font-size: 18px; font-weight: 600; padding: 0 16px 16px; }
+.sidebar .brand small { font-weight: 400; opacity: .7; }
+.sidebar a { display: block; color: #dbe4f3; padding: 8px 16px; text-decoration: none; }
+.sidebar a.active, .sidebar a:hover { background: rgba(255,255,255,.12); color: #fff; }
+main { flex: 1; }
+.top-row { display: flex; justify-content: flex-end; padding: 10px 24px; border-bottom: 1px solid var(--line); color: var(--muted); }
+article { padding: 16px 24px; }
+h1 { font-size: 22px; margin: 4px 0 16px; }
+h2 { font-size: 16px; margin: 24px 0 8px; }
+table { border-collapse: collapse; width: 100%; }
+th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line); }
+th { background: #f9fafb; font-weight: 600; }
+.num { text-align: right; font-variant-numeric: tabular-nums; }
+.filters { display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
+input, select, button { font: inherit; padding: 5px 8px; }
+button { background: var(--brand); color: #fff; border: 0; border-radius: 3px; cursor: pointer; }
+button:disabled { opacity: .5; cursor: default; }
+button.danger { background: var(--danger); }
+.error { background: #fee2e2; color: var(--danger); padding: 8px 12px; margin-bottom: 12px; }
+.muted { color: var(--muted); }
+.tiles { display: flex; gap: 16px; }
+.tile { border: 1px solid var(--line); padding: 12px 16px; min-width: 180px; }
+.tile span { display: block; color: var(--muted); }
+.tile b { font-size: 22px; }
+.columns { display: flex; gap: 48px; }
+dl { display: grid; grid-template-columns: 110px auto; gap: 4px 12px; }
+dt { color: var(--muted); }
+dd { margin: 0; }
+.timeline { list-style: none; padding: 0; }
+.timeline li { padding: 3px 0; }
+.timeline time { color: var(--muted); margin-right: 8px; }
+.pager { display: flex; gap: 12px; align-items: center; margin-top: 12px; }
+#blazor-error-ui { background: lightyellow; bottom: 0; box-shadow: 0 -1px 2px rgba(0,0,0,.2); display: none; left: 0; padding: .6rem 1.25rem; position: fixed; width: 100%; z-index: 1000; }

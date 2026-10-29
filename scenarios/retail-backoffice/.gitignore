@@ -1,0 +1,12 @@
+node_modules/
+src/VanArsdel.StoreManager/wwwroot/app/
+publish/
+.devdata/
+.labdata/
+D:*/
+D:*
+C:*
+*.db
+*.db-shm
+*.db-wal
+*.rdb

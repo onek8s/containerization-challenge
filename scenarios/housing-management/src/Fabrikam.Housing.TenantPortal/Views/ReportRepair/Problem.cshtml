@@ -1,0 +1,17 @@
+@model ProblemStepViewModel
+@{ ViewData["Title"] = "Report a repair"; }
+<h1 class="h3">Report a repair: @Model.Area</h1>
+<partial name="_Wizard" model="1" />
+<form asp-action="Problem" method="post" class="option-list col-md-7 px-0">
+    <p>Which of these best describes the problem?</p>
+    @foreach (var o in Model.Options)
+    {
+        <label><input type="radio" name="OptionKey" value="@o.Key" checked="@(Model.OptionKey == o.Key)" /> @o.Text</label>
+    }
+    <span asp-validation-for="OptionKey" class="field-validation-error"></span>
+    <p class="small mt-2">Not listed? <a asp-controller="Messages" asp-action="New" asp-route-topic="Repairs">Send us a message</a> instead.</p>
+    <div class="mt-3">
+        <a asp-action="Area" class="btn btn-link">Back</a>
+        <button type="submit" class="btn btn-primary">Next</button>
+    </div>
+</form>

@@ -1,0 +1,39 @@
+@model UserViewModel
+@{
+    ViewBag.Title = string.IsNullOrEmpty(Model.Id) ? "New user" : "User " + Model.UserName;
+}
+<h2>@ViewBag.Title</h2>
+<div class="row">
+    <div class="col-md-6">
+        @using (Html.BeginForm("Save", "Users"))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(m => m.Id)
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(m => m.UserName)
+                @if (string.IsNullOrEmpty(Model.Id)) { @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" }) }
+                else { @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @readonly = "readonly" }) }
+            </div>
+            <div class="form-group">@Html.LabelFor(m => m.DisplayName) @Html.TextBoxFor(m => m.DisplayName, new { @class = "form-control" })</div>
+            <div class="form-group">@Html.LabelFor(m => m.Email) @Html.TextBoxFor(m => m.Email, new { @class = "form-control", type = "email" })</div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.LanguageCode)
+                @Html.DropDownListFor(m => m.LanguageCode, new SelectList(new[] { "en", "fi", "sv", "de" }), new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label>Roles</label>
+                @foreach (var role in PortalRoles.All)
+                {
+                    <div class="checkbox"><label><input type="checkbox" name="roles" value="@role" checked="@Model.Roles.Contains(role)" /> @role</label></div>
+                }
+            </div>
+            if (!string.IsNullOrEmpty(Model.Id))
+            {
+                <div class="checkbox"><label>@Html.CheckBoxFor(m => m.Disabled) Disabled</label></div>
+            }
+            <button type="submit" class="btn btn-primary">Save</button>
+            @Html.ActionLink("Back", "Index", null, new { @class = "btn btn-link" })
+        }
+    </div>
+</div>

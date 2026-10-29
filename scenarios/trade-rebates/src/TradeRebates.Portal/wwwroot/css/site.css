@@ -1,0 +1,24 @@
+body { font-family: "Segoe UI", Arial, sans-serif; font-size: 14px; margin: 0; color: #222; background: #f6f6f4; }
+header { background: #3b2a20; color: #fff; padding: 10px 20px; display: flex; gap: 24px; align-items: center; }
+header a { color: #fff; text-decoration: none; }
+header .brand { font-weight: 600; }
+header nav { display: flex; gap: 16px; flex: 1; }
+header .user { opacity: .8; }
+main { padding: 16px 20px; }
+table { border-collapse: collapse; width: 100%; background: #fff; }
+th, td { border-bottom: 1px solid #ddd; padding: 5px 8px; text-align: left; vertical-align: top; }
+th { background: #eee8e2; }
+td.n, th.n { text-align: right; }
+.notice { background: #e4f3e4; padding: 8px; border-left: 4px solid #3a7a3a; }
+.error, .field-validation-error, .validation-summary-errors { color: #a01818; }
+p.error { background: #fbe9e9; padding: 8px; border-left: 4px solid #a01818; }
+.status-W { background: #fff4d6; }
+.status-X { background: #fbe9e9; color: #777; }
+.cards { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
+.card { background: #fff; padding: 12px 16px; min-width: 160px; border: 1px solid #ddd; }
+.card b { display: block; font-size: 22px; }
+form.inline { display: inline; }
+fieldset { border: 1px solid #ddd; background: #fff; margin-bottom: 12px; }
+label { display: inline-block; min-width: 140px; }
+input[type=text], input[type=date], input[type=number], select, textarea { padding: 3px; min-width: 220px; }
+.muted { color: #777; }

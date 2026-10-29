@@ -1,0 +1,27 @@
+@model QueueModel
+@{ ViewData["Title"] = "Applications"; }
+<h2>Applications: @Model.Queue</h2>
+<form method="get">
+    <input type="hidden" name="queue" value="@Model.Queue" />
+    <input name="q" value="@Model.Search" placeholder="Reference, last name or personal identity code" size="40" />
+    <button>Search</button>
+</form>
+<table>
+    <tr><th>Reference</th><th>Applicant</th><th>Product</th><th class="num">Amount</th><th class="num">Term</th><th>Status</th><th>Decision</th><th>Assigned</th><th>Updated</th></tr>
+    @foreach (var a in Model.Items)
+    {
+        <tr>
+            <td><a asp-action="Details" asp-route-id="@a.Reference">@a.Reference</a></td>
+            <td>@a.ApplicantName<br /><small>@PersonalIdentityCode.Mask(a.PersonalIdentityCode)</small></td>
+            <td>@a.ProductCode</td>
+            <td class="num">@a.Amount.ToString("N2")</td>
+            <td class="num">@a.TermMonths</td>
+            <td>@((ApplicationStatus)a.Status)</td>
+            <td>@if (a.Outcome != null) { <span class="tag @a.Outcome">@a.Outcome @a.RiskGrade</span> }</td>
+            <td>@a.AssignedTo</td>
+            <td>@a.UpdatedUtc.ToLocalTime().ToString("d.M.yyyy HH:mm")</td>
+        </tr>
+    }
+</table>
+@if (Model.Page > 0) { <a asp-route-queue="@Model.Queue" asp-route-q="@Model.Search" asp-route-page="@(Model.Page - 1)">Previous</a> }
+@if (Model.Items.Count == 25) { <a asp-route-queue="@Model.Queue" asp-route-q="@Model.Search" asp-route-page="@(Model.Page + 1)">Next</a> }

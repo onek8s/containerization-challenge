@@ -1,0 +1,13 @@
+body { font-size: 13px; }
+.navbar-brand .env { font-size: 11px; text-transform: uppercase; background: #c9302c; color: #fff; padding: 2px 6px; border-radius: 3px; margin-left: 6px; }
+.tiles { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 16px; }
+.tile { border: 1px solid #ddd; border-radius: 4px; padding: 10px 14px; min-width: 160px; }
+.tile .n { font-size: 26px; font-weight: bold; }
+.tile.bad { border-color: #d9534f; color: #a94442; }
+.state-Running { color: #3c763d; font-weight: bold; }
+.state-Stopped, .state-Unknown { color: #a94442; font-weight: bold; }
+.state-Started, .state-Enlisted { color: #3c763d; }
+.body-view { font-family: Consolas, "Courier New", monospace; font-size: 12px; width: 100%; }
+.error { color: #a94442; }
+table.table td { vertical-align: top; }
+.filters input, .filters select { display: inline-block; width: auto; margin-right: 6px; }

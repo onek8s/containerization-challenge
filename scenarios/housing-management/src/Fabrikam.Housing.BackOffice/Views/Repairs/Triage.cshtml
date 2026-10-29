@@ -1,0 +1,5 @@
+@model IList<WorkOrderListItem>
+@{ ViewData["Title"] = "Triage"; }
+<h1 class="h3">Triage queue</h1>
+<p class="text-muted">Repairs reported by tenants and the contact centre that have not been passed to a contractor. Emergencies must be assigned within one hour of reporting.</p>
+<partial name="_WorkOrderTable" model="Model" />

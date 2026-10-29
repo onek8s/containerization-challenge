@@ -1,0 +1,26 @@
+@model InspectionForm
+@{
+    ViewBag.Title = "New inspection";
+}
+<h1>New inspection</h1>
+@if (ViewBag.DraftSaved == true)
+{
+    <p class="notice">Draft kept. You can come back to this form during this session.</p>
+}
+@using (Html.BeginForm("Create", "Inspections", FormMethod.Post, new { @class = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <label>@Html.DisplayNameFor(m => m.ClaimNumber) @Html.TextBoxFor(m => m.ClaimNumber, new { placeholder = "HO-2024-004512" }) @Html.ValidationMessageFor(m => m.ClaimNumber)</label>
+    <label>@Html.DisplayNameFor(m => m.PolicyHolder) @Html.TextBoxFor(m => m.PolicyHolder) @Html.ValidationMessageFor(m => m.PolicyHolder)</label>
+    <label>@Html.DisplayNameFor(m => m.PropertyAddress) @Html.TextBoxFor(m => m.PropertyAddress) @Html.ValidationMessageFor(m => m.PropertyAddress)</label>
+    <label>@Html.DisplayNameFor(m => m.PerilCode) @Html.DropDownListFor(m => m.PerilCode, (SelectList)ViewBag.Perils, "Choose") @Html.ValidationMessageFor(m => m.PerilCode)</label>
+    <label>@Html.DisplayNameFor(m => m.InspectedOn) @Html.TextBoxFor(m => m.InspectedOn, "{0:yyyy-MM-dd}", new { type = "date" }) @Html.ValidationMessageFor(m => m.InspectedOn)</label>
+    <label>@Html.DisplayNameFor(m => m.HandlerEmail) @Html.TextBoxFor(m => m.HandlerEmail, new { type = "email" }) @Html.ValidationMessageFor(m => m.HandlerEmail)</label>
+    <label>@Html.DisplayNameFor(m => m.EstimatedLoss) @Html.TextBoxFor(m => m.EstimatedLoss) @Html.ValidationMessageFor(m => m.EstimatedLoss)</label>
+    <label>@Html.DisplayNameFor(m => m.Notes) @Html.TextAreaFor(m => m.Notes, 6, 60, null)</label>
+    <div class="buttons">
+        <button type="submit">Create inspection</button>
+        <button type="submit" name="saveDraft" value="1" class="secondary">Keep as draft</button>
+    </div>
+}

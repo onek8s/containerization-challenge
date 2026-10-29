@@ -1,0 +1,123 @@
+@model PropertyDetailViewModel
+@{
+    var p = Model.Property;
+    ViewData["Title"] = p.Reference;
+}
+@section Styles {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.css" />
+}
+<div class="d-flex justify-content-between align-items-start">
+    <div>
+        <h1 class="h3 mb-0">@p.AddressLine1</h1>
+        <p class="text-muted">@p.SingleLineAddress &middot; @p.Reference &middot; UPRN @p.Uprn</p>
+    </div>
+    <div>
+        <a class="btn btn-sm btn-primary" asp-controller="Repairs" asp-action="Raise" asp-route-propertyId="@p.Id">Raise repair</a>
+        <a class="btn btn-sm btn-outline-primary" asp-controller="Compliance" asp-action="Upload" asp-route-propertyId="@p.Id">Add certificate</a>
+        <a class="btn btn-sm btn-outline-secondary" asp-controller="Documents" asp-action="Upload" asp-route-propertyId="@p.Id">Upload document</a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-4">
+        <div class="card mb-3">
+            <div class="card-header">Property</div>
+            <dl class="row card-body mb-0">
+                <dt class="col-6">Estate</dt><dd class="col-6">@p.Estate.Name</dd>
+                <dt class="col-6">Patch</dt><dd class="col-6">@p.PatchCode</dd>
+                <dt class="col-6">Type</dt><dd class="col-6">@p.Type, @p.Bedrooms bed</dd>
+                <dt class="col-6">Built</dt><dd class="col-6">@p.YearBuilt</dd>
+                <dt class="col-6">Status</dt><dd class="col-6">@p.Status</dd>
+                <dt class="col-6">Gas supply</dt><dd class="col-6">@(p.HasGasSupply ? "Yes" : "No")</dd>
+                <dt class="col-6">Asbestos</dt><dd class="col-6">@(p.AsbestosPresent ? "Present (managed)" : "None recorded")</dd>
+                <dt class="col-6">Net rent</dt><dd class="col-6">@Money.Format(p.WeeklyNetRent)</dd>
+                <dt class="col-6">Service charge</dt><dd class="col-6">@Money.Format(p.WeeklyServiceCharge)</dd>
+                <dt class="col-6">Water</dt><dd class="col-6">@Money.Format(p.WeeklyWaterCharge)</dd>
+            </dl>
+        </div>
+        <div class="card mb-3">
+            <div class="card-header d-flex justify-content-between">
+                <span>Location</span>
+                <form asp-action="Geocode" asp-route-id="@p.Id" method="post"><button class="btn btn-sm btn-link p-0">Look up from postcode</button></form>
+            </div>
+            @if (p.Latitude.HasValue && p.Longitude.HasValue)
+            {
+                <div id="map" class="property-map" data-lat="@p.Latitude.Value.ToString(System.Globalization.CultureInfo.InvariantCulture)" data-lon="@p.Longitude.Value.ToString(System.Globalization.CultureInfo.InvariantCulture)" data-label="@p.AddressLine1"></div>
+            }
+            else
+            {
+                <div class="card-body text-muted">Not geocoded yet.</div>
+            }
+        </div>
+    </div>
+    <div class="col-lg-8">
+        <div class="card mb-3">
+            <div class="card-header">Tenancy</div>
+            <div class="card-body">
+                @if (Model.Tenancy == null)
+                {
+                    <p class="mb-0 text-muted">No current tenancy (void).</p>
+                }
+                else
+                {
+                    <p class="mb-1">
+                        <a asp-controller="Tenancies" asp-action="Details" asp-route-id="@Model.Tenancy.Id"><strong>@Model.Tenancy.Reference</strong></a>
+                        &middot; @Model.Tenancy.Type since @Model.Tenancy.StartDate.ToString("dd/MM/yyyy")
+                        &middot; @string.Join(" & ", Model.Tenancy.Tenants.Select(t => t.FullName))
+                    </p>
+                    <p class="mb-0">Balance <strong class="@(Model.Balance > 0 ? "text-danger" : "text-success")">@Money.Format(Model.Balance ?? 0)</strong> (weekly charge @Money.Format(Model.Tenancy.WeeklyCharge))</p>
+                }
+            </div>
+        </div>
+
+        <div class="card mb-3">
+            <div class="card-header">Compliance</div>
+            <table class="table table-sm mb-0">
+                <thead><tr><th>Check</th><th>Status</th><th>Certificate</th><th>Inspected</th><th>Expires</th><th>Outcome</th></tr></thead>
+                <tbody>
+                    @foreach (var c in Model.Compliance)
+                    {
+                        <tr>
+                            <td>@c.Type</td>
+                            <td><partial name="_StatusBadge" model="c.Status" /></td>
+                            <td>@c.Latest?.CertificateNumber</td>
+                            <td>@c.Latest?.InspectedOn.ToString("dd/MM/yyyy")</td>
+                            <td>@c.Latest?.ExpiresOn.ToString("dd/MM/yyyy")</td>
+                            <td>@c.Latest?.Outcome @if (!string.IsNullOrEmpty(c.Latest?.Observations)) { <small class="text-muted d-block">@c.Latest.Observations</small> }</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div class="card mb-3">
+            <div class="card-header">Repairs</div>
+            <partial name="_WorkOrderTable" model="Model.Repairs" />
+        </div>
+
+        <div class="card mb-3">
+            <div class="card-header">Documents</div>
+            @if (Model.DocumentError != null)
+            {
+                <div class="card-body text-warning">@Model.DocumentError</div>
+            }
+            <ul class="list-group list-group-flush">
+                @foreach (var d in Model.Documents)
+                {
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span><a asp-controller="Documents" asp-action="Download" asp-route-id="@d.DocumentKey">@d.Title</a> <span class="badge badge-light">@d.Category</span></span>
+                        <small class="text-muted">@d.UploadedAt.ToString("dd/MM/yyyy")</small>
+                    </li>
+                }
+                @if (Model.Documents.Count == 0 && Model.DocumentError == null)
+                {
+                    <li class="list-group-item text-muted">No documents.</li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.js"></script>
+    <script>housing.propertyMap('map');</script>
+}

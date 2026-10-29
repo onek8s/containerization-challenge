@@ -1,0 +1,28 @@
+@model CertificateUploadInput
+@{ ViewData["Title"] = "Record certificate"; }
+<h1 class="h3">Record a certificate</h1>
+<p class="text-muted">@Model.PropertyAddress</p>
+<form asp-action="Upload" method="post" enctype="multipart/form-data" class="col-lg-8 px-0">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <input type="hidden" asp-for="PropertyId" />
+    <div class="form-row">
+        <div class="form-group col-md-4"><label asp-for="Type"></label><select asp-for="Type" class="form-control" asp-items="Html.GetEnumSelectList<ComplianceType>()"></select></div>
+        <div class="form-group col-md-4"><label asp-for="CertificateNumber">Certificate number</label><input asp-for="CertificateNumber" class="form-control" /></div>
+        <div class="form-group col-md-4"><label asp-for="InspectedOn">Inspection date</label><input asp-for="InspectedOn" type="date" class="form-control" /></div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-4"><label asp-for="Outcome"></label><select asp-for="Outcome" class="form-control" asp-items="Html.GetEnumSelectList<CertificateOutcome>()"></select></div>
+        <div class="form-group col-md-4"><label asp-for="EngineerName">Engineer</label><input asp-for="EngineerName" class="form-control" /></div>
+        <div class="form-group col-md-4"><label asp-for="EngineerRegistration">Gas Safe / NICEIC number</label><input asp-for="EngineerRegistration" class="form-control" /></div>
+    </div>
+    <div class="form-group">
+        <label asp-for="ContractorId">Contractor</label>
+        <select asp-for="ContractorId" class="form-control">
+            <option value="">(other)</option>
+            @foreach (var c in Model.Contractors) { <option value="@c.Id">@c.Name</option> }
+        </select>
+    </div>
+    <div class="form-group"><label asp-for="Observations">Observations / defects (C1, C2, AR, ID)</label><textarea asp-for="Observations" rows="2" class="form-control"></textarea></div>
+    <div class="form-group"><label>Certificate PDF</label><input type="file" name="file" accept=".pdf" class="form-control-file" /></div>
+    <button class="btn btn-primary">Save certificate</button>
+</form>

@@ -1,0 +1,26 @@
+@model IList<WorkOrderListItem>
+<table class="table table-sm table-hover">
+    <thead>
+        <tr><th>Ref</th><th>Address</th><th>Patch</th><th>Description</th><th>Priority</th><th>Status</th><th>Contractor</th><th>Reported</th><th>Target</th></tr>
+    </thead>
+    <tbody>
+        @foreach (var w in Model)
+        {
+            <tr class="@(w.Overdue ? "table-danger" : "")">
+                <td><a asp-controller="Repairs" asp-action="Details" asp-route-id="@w.Id">@w.Reference</a></td>
+                <td>@w.PropertyAddress</td>
+                <td>@w.PatchCode</td>
+                <td>@w.Description</td>
+                <td><span class="badge priority-@w.Priority.ToString().ToLower()">@w.Priority</span></td>
+                <td>@w.Status</td>
+                <td>@w.ContractorCode</td>
+                <td>@w.ReportedAt.ToString("dd/MM/yyyy HH:mm")</td>
+                <td>@w.TargetDate.ToString("dd/MM/yyyy HH:mm")</td>
+            </tr>
+        }
+        @if (Model.Count == 0)
+        {
+            <tr><td colspan="9" class="text-muted">No work orders.</td></tr>
+        }
+    </tbody>
+</table>

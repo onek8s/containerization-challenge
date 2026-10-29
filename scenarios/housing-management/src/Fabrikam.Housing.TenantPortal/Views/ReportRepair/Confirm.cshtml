@@ -1,0 +1,21 @@
+@model ConfirmStepViewModel
+@{ ViewData["Title"] = "Report a repair"; }
+<h1 class="h3">Check and send</h1>
+<partial name="_Wizard" model="5" />
+<dl class="row">
+    <dt class="col-sm-3">Address</dt><dd class="col-sm-9">@Model.Address</dd>
+    <dt class="col-sm-3">Problem</dt><dd class="col-sm-9">@Model.Option.Text</dd>
+    <dt class="col-sm-3">Where</dt><dd class="col-sm-9">@Model.Draft.Location</dd>
+    <dt class="col-sm-3">Details</dt><dd class="col-sm-9">@Model.Draft.Description</dd>
+    <dt class="col-sm-3">Photos</dt><dd class="col-sm-9">@(Model.Draft.Photos.Count == 0 ? "None" : string.Join(", ", Model.Draft.Photos.Select(p => p.FileName)))</dd>
+    <dt class="col-sm-3">Appointment</dt>
+    <dd class="col-sm-9">
+        @if (Model.Priority == RepairPriority.Emergency) { <text>Emergency: within 24 hours</text> }
+        else { <text>@Model.Draft.AppointmentDate.Value.ToString("dddd d MMMM"), @SlotText.For(Model.Draft.Slot)</text> }
+    </dd>
+    <dt class="col-sm-3">We aim to finish by</dt><dd class="col-sm-9">@Model.TargetDate.ToString("d MMMM yyyy")</dd>
+</dl>
+<form asp-action="Confirm" method="post">
+    <a asp-action="Area" class="btn btn-link">Start again</a>
+    <button type="submit" class="btn btn-primary">Send repair request</button>
+</form>

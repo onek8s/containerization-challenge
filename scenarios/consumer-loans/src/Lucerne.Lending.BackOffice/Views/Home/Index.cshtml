@@ -1,0 +1,36 @@
+@model DashboardModel
+@{ ViewData["Title"] = "Dashboard"; }
+<h2>Dashboard</h2>
+<div class="grid">
+    <div class="card">
+        <h3>Applications by status</h3>
+        <table>
+            @foreach (var s in Enum.GetValues<ApplicationStatus>())
+            {
+                if (Model.ByStatus.TryGetValue(s, out var n))
+                {
+                    <tr><td>@s</td><td class="num">@n</td></tr>
+                }
+            }
+        </table>
+        <p>Open collection cases: <b>@Model.OpenCollectionCases</b>. Documents waiting: <b>@Model.PendingDocuments</b>.</p>
+    </div>
+    <div class="card">
+        <h3>Assigned to me</h3>
+        <table>
+            @foreach (var a in Model.Mine)
+            {
+                <tr><td><a asp-controller="Applications" asp-action="Details" asp-route-id="@a.Reference">@a.Reference</a></td><td>@a.ApplicantName</td><td>@((ApplicationStatus)a.Status)</td></tr>
+            }
+        </table>
+    </div>
+    <div class="card">
+        <h3>Background jobs</h3>
+        <table>
+            @foreach (var j in Model.Jobs)
+            {
+                <tr><td>@j.Job</td><td>@j.StartedUtc.ToLocalTime().ToString("d.M. HH:mm")</td><td>@j.Status</td><td>@j.Detail</td></tr>
+            }
+        </table>
+    </div>
+</div>

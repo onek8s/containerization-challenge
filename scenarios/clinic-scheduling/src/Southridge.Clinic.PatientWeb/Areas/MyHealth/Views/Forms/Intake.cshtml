@@ -1,0 +1,46 @@
+@model IntakeFormModel
+@{
+    ViewBag.Title = "Pre-visit form";
+}
+<h1>Pre-visit form</h1>
+@if (Model.AppointmentText != null)
+{
+    <p>For your @Model.AppointmentText.</p>
+}
+<p>Filling this in before your visit shortens your time at the front desk.</p>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(m => m.AppointmentId)
+    <div class="field">
+        @Html.LabelFor(m => m.ReasonForVisit)
+        @Html.TextAreaFor(m => m.ReasonForVisit, 3, 60, null)
+        @Html.ValidationMessageFor(m => m.ReasonForVisit)
+    </div>
+    <div class="field">
+        @Html.LabelFor(m => m.Medications)
+        @Html.TextAreaFor(m => m.Medications, 4, 60, null)
+        @Html.ValidationMessageFor(m => m.Medications)
+    </div>
+    <div class="field">
+        @Html.LabelFor(m => m.Allergies)
+        @Html.TextAreaFor(m => m.Allergies, 2, 60, null)
+    </div>
+    <div class="field">
+        @Html.LabelFor(m => m.Conditions)
+        @Html.TextAreaFor(m => m.Conditions, 3, 60, null)
+    </div>
+    <div class="field">
+        @Html.LabelFor(m => m.PharmacyName)
+        @Html.TextBoxFor(m => m.PharmacyName, new { size = 40 })
+        @Html.LabelFor(m => m.PharmacyPhone)
+        @Html.TextBoxFor(m => m.PharmacyPhone, new { size = 14 })
+        @Html.ValidationMessageFor(m => m.PharmacyPhone)
+    </div>
+    <p><input type="submit" value="Send to the clinic" /></p>
+}
+@section scripts {
+    <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.10.0/jquery.validate.min.js" type="text/javascript"></script>
+    <script src="//ajax.aspnetcdn.com/ajax/mvc/4.0/jquery.validate.unobtrusive.min.js" type="text/javascript"></script>
+}

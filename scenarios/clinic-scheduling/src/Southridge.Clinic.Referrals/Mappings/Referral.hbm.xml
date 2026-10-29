@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="Southridge.Clinic.Referrals" namespace="Southridge.Clinic.Referrals" default-access="property">
+
+  <class name="Referral" table="Referral" schema="dbo" dynamic-update="true">
+    <id name="Id" column="ReferralId" type="Int32">
+      <generator class="identity" />
+    </id>
+    <version name="Version" column="Version" type="Int32" unsaved-value="0" />
+
+    <property name="ReferralNumber" length="20" not-null="true" unique="true" update="false" />
+    <many-to-one name="Patient" class="ReferralPatient" column="PatientId" not-null="true" fetch="join" />
+    <property name="ReferringProviderName" length="100" not-null="true" />
+    <property name="ReferringProviderNpi" type="AnsiString" length="10" />
+    <property name="ReferringPractice" length="100" />
+    <property name="ReferringPhone" type="AnsiString" length="20" />
+    <property name="SpecialtyCode" type="AnsiString" length="10" not-null="true" />
+    <property name="RequestedProviderId" />
+    <property name="Priority" type="Southridge.Clinic.Domain.ReferralPriority, Southridge.Clinic.Domain" not-null="true" />
+    <property name="Reason" length="1000" not-null="true" />
+    <property name="DiagnosisCode" type="AnsiString" length="8" />
+    <property name="Status" type="Southridge.Clinic.Domain.ReferralStatus, Southridge.Clinic.Domain" not-null="true" />
+    <property name="Source" type="AnsiString" length="20" not-null="true" />
+    <property name="AuthorizationNumber" type="AnsiString" length="30" />
+    <property name="VisitsAuthorized" />
+    <property name="ReceivedOn" type="DateTime" not-null="true" />
+    <property name="DueBy" type="DateTime" not-null="true" />
+    <property name="DecidedBy" length="256" />
+    <property name="DecidedOn" type="DateTime" />
+    <property name="DecisionNote" length="1000" />
+    <property name="AppointmentId" />
+    <property name="WorkflowInstanceId" />
+    <property name="ExpiresOn" type="Date" />
+
+    <bag name="Notes" inverse="true" cascade="all-delete-orphan" order-by="CreatedOn" batch-size="20">
+      <key column="ReferralId" />
+      <one-to-many class="ReferralNote" />
+    </bag>
+
+    <bag name="Documents" inverse="true" cascade="all-delete-orphan" order-by="UploadedOn" batch-size="20">
+      <key column="ReferralId" />
+      <one-to-many class="ReferralDocument" />
+    </bag>
+  </class>
+
+  <class name="ReferralNote" table="ReferralNote" schema="dbo">
+    <id name="Id" column="ReferralNoteId" type="Int32">
+      <generator class="identity" />
+    </id>
+    <many-to-one name="Referral" column="ReferralId" not-null="true" />
+    <property name="Author" length="256" not-null="true" />
+    <property name="Text" length="2000" not-null="true" />
+    <property name="CreatedOn" type="DateTime" not-null="true" />
+  </class>
+
+  <class name="ReferralDocument" table="ReferralDocument" schema="dbo">
+    <id name="Id" column="ReferralDocumentId" type="Int32">
+      <generator class="identity" />
+    </id>
+    <many-to-one name="Referral" column="ReferralId" not-null="true" />
+    <property name="FileName" length="260" not-null="true" />
+    <property name="ContentType" type="AnsiString" length="100" not-null="true" />
+    <property name="Content" type="BinaryBlob" length="2147483647" not-null="true" lazy="true" />
+    <property name="UploadedBy" length="256" not-null="true" />
+    <property name="UploadedOn" type="DateTime" not-null="true" />
+  </class>
+
+  <class name="ReferralPatient" table="Patient" schema="dbo" mutable="false">
+    <id name="Id" column="PatientId" type="Int32">
+      <generator class="assigned" />
+    </id>
+    <property name="Mrn" type="AnsiString" />
+    <property name="FirstName" />
+    <property name="LastName" />
+    <property name="DateOfBirth" type="Date" />
+    <property name="MobilePhone" type="AnsiString" />
+  </class>
+
+  <sql-query name="NextReferralNumber">
+    <return-scalar column="NextValue" type="Int64" />
+    <![CDATA[
+      DECLARE @v bigint;
+      EXEC dbo.usp_NextNumber @Name = 'Referral', @Count = 1, @FirstValue = @v OUTPUT;
+      SELECT @v AS NextValue;
+    ]]>
+  </sql-query>
+
+</hibernate-mapping>

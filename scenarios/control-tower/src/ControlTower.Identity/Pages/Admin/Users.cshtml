@@ -1,0 +1,48 @@
+@page
+@model UsersModel
+@{ ViewData["Title"] = "Users"; }
+<h1 class="h4">Users</h1>
+@if (Model.StatusMessage is not null) { <div class="alert alert-info">@Model.StatusMessage</div> }
+<form method="get" class="row g-2 mb-3">
+    <div class="col-auto"><input name="q" value="@Model.Query" class="form-control" placeholder="Name, user name or e-mail" /></div>
+    <div class="col-auto"><button class="btn btn-outline-secondary">Search</button></div>
+</form>
+<table class="table table-sm">
+    <thead><tr><th>User name</th><th>Name</th><th>E-mail</th><th>Roles</th><th>Customer</th><th>2FA</th><th>Last sign-in</th><th></th></tr></thead>
+    <tbody>
+    @foreach (var u in Model.Users)
+    {
+        <tr class="@(u.Disabled ? "text-muted" : "")">
+            <td>@u.UserName</td>
+            <td>@u.DisplayName</td>
+            <td>@u.Email</td>
+            <td>@u.Roles</td>
+            <td>@u.CustomerId</td>
+            <td>@(u.TwoFactor ? "yes" : "")</td>
+            <td>@u.LastLogin?.ToString("yyyy-MM-dd HH:mm")</td>
+            <td class="text-nowrap">
+                <form method="post" class="d-inline"><input type="hidden" name="id" value="@u.Id" />
+                    <button asp-page-handler="ToggleDisabled" class="btn btn-link btn-sm p-0">@(u.Disabled ? "Enable" : "Disable")</button>
+                    @if (u.TwoFactor) { <button asp-page-handler="Reset2fa" class="btn btn-link btn-sm p-0 ms-2">Reset 2FA</button> }
+                </form>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+<h2 class="h5 mt-4">New user</h2>
+<form method="post" asp-page-handler="Create" class="row g-2" style="max-width:900px">
+    <div asp-validation-summary="All" class="text-danger small col-12"></div>
+    <div class="col-md-4"><input asp-for="NewUser.UserName" class="form-control" placeholder="User name" /></div>
+    <div class="col-md-4"><input asp-for="NewUser.DisplayName" class="form-control" placeholder="Name" /></div>
+    <div class="col-md-4"><input asp-for="NewUser.Email" class="form-control" placeholder="E-mail" /></div>
+    <div class="col-md-4">
+        <select asp-for="NewUser.Role" class="form-select">
+            @foreach (var r in Roles.All) { <option value="@r">@r</option> }
+        </select>
+    </div>
+    <div class="col-md-4"><input asp-for="NewUser.CustomerId" class="form-control" placeholder="Customer id (portal users)" /></div>
+    <div class="col-md-4"><input asp-for="NewUser.Password" class="form-control" placeholder="Initial password" /></div>
+    <div class="col-12"><button class="btn btn-primary">Create</button></div>
+</form>

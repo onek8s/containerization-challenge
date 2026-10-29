@@ -1,0 +1,7 @@
+Subject: AX error on order {OrderNumber} ({DealerName})
+
+The AX connector could not process {Command} for order {OrderNumber} of {DealerName} ({Account}).
+
+{Error}
+
+The order is in status Error. Fix the data in AX or in the sales desk and resubmit the order: {Link}

@@ -1,0 +1,45 @@
+@model ReportCatalogModel
+@{
+    ViewBag.Title = "Reports";
+}
+<h1>Reports</h1>
+<p>Open a report in the viewer, or download it directly. Customer statements and invoice copies are on the customer page.</p>
+@foreach (var r in Model.Reports.Where(x => x.Code != ReportCodes.StatementRun))
+{
+    <section class="report">
+        <h2>@r.Title <span class="muted">@r.Category</span></h2>
+        <form method="get" action="@Url.Action("Download")" class="inline">
+            <input type="hidden" name="code" value="@r.Code" />
+            @if (r.Parameters.Contains("AsOf"))
+            {
+                <label>As of <input type="date" name="asOf" value="@Model.DefaultAsOf.ToString("yyyy-MM-dd")" /></label>
+            }
+            @if (r.Parameters.Contains("From"))
+            {
+                <label>From <input type="date" name="from" value="@Model.DefaultAsOf.ToString("yyyy-MM-dd")" /></label>
+                <label>To <input type="date" name="to" value="@Model.DefaultAsOf.ToString("yyyy-MM-dd")" /></label>
+            }
+            @if (r.Parameters.Contains("CreditController"))
+            {
+                <label>
+                    Credit controller
+                    <select name="creditController">
+                        <option value="">(all)</option>
+                        @foreach (var c in Model.CreditControllers)
+                        {
+                            <option value="@c">@c</option>
+                        }
+                    </select>
+                </label>
+            }
+            @foreach (var f in r.Formats)
+            {
+                <button type="submit" name="format" value="@f.ToString().ToLowerInvariant()" class="button">@f</button>
+            }
+            @if (r.ResourceName != null)
+            {
+                <a class="button secondary" href="@Url.Content("~/Reports/ReportViewer.aspx?report=" + r.Code)">Open in viewer</a>
+            }
+        </form>
+    </section>
+}

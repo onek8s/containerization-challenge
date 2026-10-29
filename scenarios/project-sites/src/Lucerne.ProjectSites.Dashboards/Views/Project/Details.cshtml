@@ -1,0 +1,85 @@
+@model ProjectViewModel
+@{
+    ViewBag.Title = Model.Project.Number + " " + Model.Project.Name;
+    var s = Model.Status;
+}
+<p>
+    @Model.Project.ClientName &middot; @Model.Project.OfficeCode &middot; @Model.Project.Stage &middot; @Model.Project.PercentComplete.ToString("0")% complete
+    @if (!string.IsNullOrEmpty(Model.Project.SiteUrl))
+    {
+        <a href="@Model.Project.SiteUrl" target="_top">Open project site</a>
+    }
+</p>
+
+@if (s != null)
+{
+    <div class="row luc-tiles">
+        <div class="col-sm-3"><div class="luc-tile luc-rag-@s.Overall.ToString().ToLowerInvariant()">Overall: @s.Overall</div></div>
+        <div class="col-sm-3"><div class="luc-tile luc-rag-@s.Schedule.ToString().ToLowerInvariant()">Schedule: @s.Schedule</div></div>
+        <div class="col-sm-3"><div class="luc-tile luc-rag-@s.Budget.ToString().ToLowerInvariant()">Budget: @s.Budget</div></div>
+        <div class="col-sm-3"><div class="luc-tile luc-rag-@s.Risk.ToString().ToLowerInvariant()">Risk: @s.Risk</div></div>
+    </div>
+    <p class="luc-summary">@s.Summary (assessed @s.AssessedUtc.ToString("yyyy-MM-dd"))</p>
+}
+
+@if (Model.History.Length > 1)
+{
+    <h3>Hours and burn over the last 12 months</h3>
+    <canvas id="burnChart" height="70"></canvas>
+}
+
+@if (Model.CanSeeSite)
+{
+    <h3>Open deliverables <small><a href="@Url.Action("Register", "Export", new { id = Model.Project.Number })">Excel</a></small></h3>
+    <table class="table table-condensed">
+        <tr><th>Number</th><th>Title</th><th>Rev</th><th>Status</th><th>Planned</th><th>Forecast</th></tr>
+        @foreach (var d in Model.Deliverables.Where(x => x.Status != DeliverableStatus.Issued && x.Status != DeliverableStatus.Superseded).OrderBy(x => x.ForecastDate ?? x.PlannedDate))
+        {
+            <tr class="@(d.IsOverdue(DateTime.Today) ? "danger" : "")">
+                <td>@d.DocumentNumber</td><td>@d.Title</td><td>@d.Revision</td><td>@d.Status</td>
+                <td>@(d.PlannedDate.HasValue ? d.PlannedDate.Value.ToString("yyyy-MM-dd") : "")</td>
+                <td>@(d.ForecastDate.HasValue ? d.ForecastDate.Value.ToString("yyyy-MM-dd") : "")</td>
+            </tr>
+        }
+    </table>
+    <h3>Open risks</h3>
+    <ul>
+        @foreach (var r in Model.Risks)
+        {
+            <li><strong>@r.Severity</strong> @r.Title</li>
+        }
+    </ul>
+}
+else
+{
+    <p class="alert alert-info">You are not a member of this project site, so deliverables and risks are not shown.</p>
+}
+
+@if (!Model.Subscribed)
+{
+    using (Html.BeginForm("Subscribe", "Project", new { number = Model.Project.Number }, FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <select name="frequency"><option>Weekly</option><option>Monthly</option></select>
+        <button type="submit" class="btn btn-default btn-sm">Subscribe to status mail</button>
+    }
+}
+
+@section scripts {
+    @if (Model.History.Length > 1)
+    {
+        <script>
+            new Chart(document.getElementById('burnChart'), {
+                type: 'line',
+                data: {
+                    labels: [@Html.Raw(string.Join(",", Model.History.Select(h => "'" + h.SnapshotDate.ToString("yyyy-MM-dd") + "'")))],
+                    datasets: [
+                        { label: 'Hours', yAxisID: 'h', data: [@string.Join(",", Model.History.Select(h => h.HoursToDate.ToString(System.Globalization.CultureInfo.InvariantCulture)))], borderColor: '#2e75b6', fill: false },
+                        { label: 'Burn ratio', yAxisID: 'b', data: [@string.Join(",", Model.History.Select(h => h.BurnRatio.ToString(System.Globalization.CultureInfo.InvariantCulture)))], borderColor: '#c00000', fill: false }
+                    ]
+                },
+                options: { scales: { yAxes: [{ id: 'h', position: 'left' }, { id: 'b', position: 'right' }] } }
+            });
+        </script>
+    }
+}

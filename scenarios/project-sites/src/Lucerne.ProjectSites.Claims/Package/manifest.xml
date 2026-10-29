@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Solution manifest of Lucerne.ProjectSites.Claims.wsp (see New-SolutionPackage.ps1). -->
+<Solution xmlns="http://schemas.microsoft.com/sharepoint/"
+          SolutionId="6E2B7F3C-8D40-4B9F-AC15-2D3E4F5A6B71"
+          SharePointProductVersion="16.0"
+          DeploymentServerType="WebFrontEnd"
+          ResetWebServer="TRUE">
+  <Assemblies>
+    <Assembly Location="Lucerne.ProjectSites.Claims.dll" DeploymentTarget="GlobalAssemblyCache" />
+    <!-- ADDITIONAL_ASSEMBLIES -->
+  </Assemblies>
+  <FeatureManifests>
+    <FeatureManifest Location="Lucerne.ProjectSites.Claims_ClaimsProvider\Feature.xml" />
+    <FeatureManifest Location="Lucerne.ProjectSites.Claims_DirectoryCacheJob\Feature.xml" />
+  </FeatureManifests>
+</Solution>

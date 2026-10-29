@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Feature xmlns="http://schemas.microsoft.com/sharepoint/"
+         Id="{4C7E3A52-91D8-4F0B-A6E1-2B9D58C0F713}"
+         Title="Lucerne Project Sites - Project Web Template"
+         Description="Web template used for new project sites."
+         Scope="Farm"
+         Version="5.3.1.0"
+         Hidden="FALSE">
+  <ElementManifests>
+    <ElementManifest Location="Elements.xml" />
+    <ElementFile Location="LucerneProject/onet.xml" />
+  </ElementManifests>
+</Feature>

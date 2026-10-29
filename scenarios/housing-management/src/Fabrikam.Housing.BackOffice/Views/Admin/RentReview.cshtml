@@ -1,0 +1,22 @@
+@model RentReviewViewModel
+@{ ViewData["Title"] = "Rent review " + Model.Year; }
+<h1 class="h3">Annual rent review @Model.Year/@((Model.Year + 1) % 100)</h1>
+<p class="text-muted">New rents take effect from Monday @Model.EffectiveFrom.ToString("d MMMM yyyy"). Increase limited to CPI (previous September) + 1% and to the formula rent cap for the number of bedrooms. Tenants must receive 28 days' notice.</p>
+<form method="get" class="form-inline mb-3">
+    <label class="mr-2">CPI September (%)</label>
+    <input name="cpi" value="@Model.CpiPercent" class="form-control form-control-sm mr-2" style="width:80px" />
+    <button class="btn btn-sm btn-outline-primary">Preview</button>
+</form>
+<p>Weekly rent roll: @Money.Format(Model.CurrentTotal) &rarr; <strong>@Money.Format(Model.NewTotal)</strong> (@((Model.CurrentTotal == 0 ? 0 : (Model.NewTotal - Model.CurrentTotal) / Model.CurrentTotal * 100).ToString("0.00"))%), @Model.Lines.Count(l => l.Capped) homes capped.</p>
+<form asp-action="ApplyRentReview" method="post" class="form-inline mb-3">
+    <input type="hidden" name="cpi" value="@Model.CpiPercent" />
+    <div class="form-check mr-2"><input type="checkbox" name="confirm" value="true" class="form-check-input" id="confirm" /><label class="form-check-label" for="confirm">I have checked the new rents and the board has approved the increase</label></div>
+    <button class="btn btn-danger btn-sm">Apply new rents and queue letters</button>
+</form>
+<table class="table table-sm table-striped">
+    <thead><tr><th>Property</th><th>Address</th><th>Beds</th><th class="text-right">Current</th><th class="text-right">New</th><th></th></tr></thead>
+    @foreach (var l in Model.Lines)
+    {
+        <tr><td>@l.Reference</td><td>@l.Address</td><td>@l.Bedrooms</td><td class="text-right">@l.CurrentRent.ToString("N2")</td><td class="text-right">@l.NewRent.ToString("N2")</td><td>@(l.Capped ? "capped" : "")</td></tr>
+    }
+</table>

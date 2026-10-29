@@ -1,0 +1,55 @@
+@page "/"
+@inject RetailApi Api
+
+<h1>Today</h1>
+<ErrorBanner Message="@error" />
+
+@if (days == null)
+{
+    <p>Loading…</p>
+}
+else
+{
+    <div class="tiles">
+        <div class="tile"><span>Yesterday, stores</span><b>@Sum(DateTime.Today.AddDays(-1), "Store").ToString("N0") €</b></div>
+        <div class="tile"><span>Yesterday, web</span><b>@Sum(DateTime.Today.AddDays(-1), "Web").ToString("N0") €</b></div>
+        <div class="tile"><span>Today so far</span><b>@(Sum(DateTime.Today, "Store") + Sum(DateTime.Today, "Web")) €</b></div>
+    </div>
+
+    <h2>Last 14 days</h2>
+    <table>
+        <thead><tr><th>Date</th><th class="num">Stores €</th><th class="num">Web €</th><th class="num">Units</th></tr></thead>
+        <tbody>
+            @foreach (var day in days.GroupBy(d => d.BusinessDate.Date).OrderByDescending(g => g.Key))
+            {
+                <tr>
+                    <td>@day.Key.ToString("ddd d.M.")</td>
+                    <td class="num">@day.Where(d => d.Channel == "Store").Sum(d => d.NetEur).ToString("N2")</td>
+                    <td class="num">@day.Where(d => d.Channel == "Web").Sum(d => d.NetEur).ToString("N2")</td>
+                    <td class="num">@day.Sum(d => d.Units)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<DayTotal> days;
+    private string error;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            days = await Api.DailySalesAsync(14);
+        }
+        catch (ApiException ex)
+        {
+            error = ex.Message;
+            days = new();
+        }
+    }
+
+    private decimal Sum(DateTime date, string channel) =>
+        days.Where(d => d.BusinessDate.Date == date && d.Channel == channel).Sum(d => d.NetEur);
+}

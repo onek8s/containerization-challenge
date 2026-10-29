@@ -1,0 +1,26 @@
+@model IList<StoredDocument>
+@{
+    ViewBag.Title = "Documents";
+}
+<h2>Documents</h2>
+<p>
+    @Html.ActionLink("Download current price list (Excel)", "PriceList", null, new { @class = "btn btn-default" })
+    @if (User.IsInRole(PortalRoles.DealerAdmin))
+    {
+        @Html.ActionLink("Dealer agreement " + DateTime.Today.Year, "Agreement", new { year = DateTime.Today.Year }, new { @class = "btn btn-default" })
+    }
+</p>
+<table class="table table-striped">
+    <thead><tr><th>Document</th><th>Kind</th><th>Created</th><th>By</th></tr></thead>
+    <tbody>
+        @foreach (var d in Model)
+        {
+            <tr>
+                <td>@Html.ActionLink(d.FileName, "Download", new { id = d.Id })</td>
+                <td>@d.Kind</td>
+                <td>@d.CreatedUtc.ToLocalTime().ToString("g")</td>
+                <td>@d.CreatedBy</td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,11 @@
+Subject: Quote {QuoteNumber} not approved
+
+Dear {DealerName},
+
+the extra discount requested on quote {QuoteNumber} could not be approved.
+
+{Comment}
+
+You can change the quote and submit it again: {Link}
+
+Tailspin Machinery dealer sales

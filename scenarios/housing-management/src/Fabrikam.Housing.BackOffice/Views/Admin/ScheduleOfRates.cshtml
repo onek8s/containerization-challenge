@@ -1,0 +1,13 @@
+@model IList<ScheduleOfRatesItem>
+@{ ViewData["Title"] = "Schedule of Rates"; }
+<div class="d-flex justify-content-between"><h1 class="h3">Schedule of Rates</h1><a class="btn btn-sm btn-primary align-self-center" asp-action="EditRate">New code</a></div>
+<table class="table table-sm table-striped">
+    <thead><tr><th>Code</th><th>Description</th><th>Trade</th><th>Default priority</th><th class="text-right">Price</th><th>Unit</th><th>Active</th></tr></thead>
+    @foreach (var s in Model)
+    {
+        <tr class="@(s.Active ? "" : "text-muted")">
+            <td><a asp-action="EditRate" asp-route-id="@s.Id">@s.Code</a></td><td>@s.Description</td><td>@s.Trade</td><td>@s.DefaultPriority</td>
+            <td class="text-right">@s.UnitPrice.ToString("N2")</td><td>@s.Unit</td><td>@(s.Active ? "Yes" : "No")</td>
+        </tr>
+    }
+</table>

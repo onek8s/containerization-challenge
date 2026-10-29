@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.vanarsdel.com/integration/canonical/2014" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" xmlns:ns0="https://VanArsdel.Integration.Schemas.PropertySchema" elementFormDefault="qualified" targetNamespace="http://schemas.vanarsdel.com/integration/canonical/2014" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:include schemaLocation="CanonicalTypes.xsd" />
+  <xs:annotation>
+    <xs:appinfo>
+      <b:schemaInfo root_reference="Invoice" standard="XML" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" />
+      <b:imports xmlns:b="http://schemas.microsoft.com/BizTalk/2003">
+        <b:namespace prefix="ns0" uri="https://VanArsdel.Integration.Schemas.PropertySchema" location="VanArsdel.Integration.Schemas.PropertySchema" />
+      </b:imports>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="Invoice" type="tns:Invoice">
+    <xs:annotation>
+      <xs:appinfo>
+        <b:properties>
+        <b:property distinguished="false" name="ns0:PartnerId" xpath="/*[local-name()='Invoice']/*[local-name()='Header']/*[local-name()='PartnerId']" />
+        <b:property distinguished="false" name="ns0:OrderNumber" xpath="/*[local-name()='Invoice']/*[local-name()='Header']/*[local-name()='OrderNumber']" />
+        <b:property distinguished="false" name="ns0:MessageKind" xpath="/*[local-name()='Invoice']/*[local-name()='Header']/*[local-name()='Kind']" />
+        </b:properties>
+      </xs:appinfo>
+    </xs:annotation>
+  </xs:element>
+</xs:schema>

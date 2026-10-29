@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net452</TargetFramework>
+    <RootNamespace>Southridge.Clinic.Infrastructure</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EnterpriseLibrary.Common" Version="5.0.505" />
+    <PackageReference Include="EnterpriseLibrary.Logging" Version="5.0.505.1" />
+    <PackageReference Include="EnterpriseLibrary.ExceptionHandling" Version="5.0.505" />
+    <PackageReference Include="EnterpriseLibrary.ExceptionHandling.Logging" Version="5.0.505" />
+    <PackageReference Include="Unity" Version="2.1.505.2" />
+    <PackageReference Include="log4net" Version="1.2.10" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Southridge.Clinic.Domain\Southridge.Clinic.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,29 @@
+@page "{id:int}"
+@model FurnaceRecords.Portal.Pages.Furnaces.ChannelModel
+@{
+    ViewData["Title"] = "Sensor " + Model.Input.Name;
+}
+<h1>Channel @Model.ChannelNumber of @Model.FurnaceCode</h1>
+@if (Model.Errors.Count > 0)
+{
+    <div class="errors"><ul>@foreach (var e in Model.Errors) { <li>@e</li> }</ul></div>
+}
+<form method="post">
+    <div class="row"><label asp-for="Input.Name">Name</label><input asp-for="Input.Name" /></div>
+    <div class="row"><label asp-for="Input.Role">Role</label><select asp-for="Input.Role" asp-items="Html.GetEnumSelectList<ChannelRole>()"></select></div>
+    <div class="row"><label asp-for="Input.Type">Thermocouple type</label><select asp-for="Input.Type" asp-items="Html.GetEnumSelectList<ThermocoupleType>()"></select></div>
+    <div class="row"><label asp-for="Input.SensorSerial">Sensor serial</label><input asp-for="Input.SensorSerial" /></div>
+    <div class="row"><label asp-for="Input.CalibratedOn">Calibrated on</label><input asp-for="Input.CalibratedOn" type="date" /></div>
+    <div class="row"><label asp-for="Input.CalibrationDue">Calibration due</label><input asp-for="Input.CalibrationDue" type="date" /></div>
+    <div class="row"><label asp-for="Input.Enabled">Enabled</label><input asp-for="Input.Enabled" /></div>
+    <h2>Corrections</h2>
+    <table>
+        <tr><th>At °C</th><th>Correction °C</th></tr>
+        @for (var i = 0; i < Model.Input.Corrections.Count; i++)
+        {
+            <tr><td><input asp-for="Input.Corrections[i].AtCelsius" /></td><td><input asp-for="Input.Corrections[i].CorrectionCelsius" /></td></tr>
+        }
+    </table>
+    <p class="muted">Leave a row empty to remove it.</p>
+    <button type="submit">Save</button>
+</form>

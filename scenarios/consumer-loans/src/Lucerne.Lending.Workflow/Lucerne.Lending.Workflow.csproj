@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Lucerne.Lending.Contracts\Lucerne.Lending.Contracts.csproj" />
+    <ProjectReference Include="..\Lucerne.Lending.CoreBanking.IbmI\Lucerne.Lending.CoreBanking.IbmI.csproj" />
+    <ProjectReference Include="..\Lucerne.Lending.CoreBanking.Simulator\Lucerne.Lending.CoreBanking.Simulator.csproj" />
+    <ProjectReference Include="..\Lucerne.Lending.Data\Lucerne.Lending.Data.csproj" />
+    <ProjectReference Include="..\Lucerne.Lending.Decisioning\Lucerne.Lending.Decisioning.csproj" />
+    <ProjectReference Include="..\Lucerne.Lending.Integration\Lucerne.Lending.Integration.csproj" />
+  </ItemGroup>
+
+</Project>

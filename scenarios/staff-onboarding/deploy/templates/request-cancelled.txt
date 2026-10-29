@@ -1,0 +1,10 @@
+Subject: Request {RequestNumber} for {Subject} was cancelled
+Hello,
+
+Request {RequestNumber} for {Subject} was cancelled by {CancelledBy}.
+
+Reason: {Reason}
+
+If an account was already created it has been disabled.
+
+Staff Onboarding

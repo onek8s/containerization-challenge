@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Job schedule of the price sync service. Times are server local time (Finland). Changes are picked up within two minutes. -->
+<job-scheduling-data xmlns="http://quartznet.sourceforge.net/JobSchedulingData" version="2.0">
+  <processing-directives>
+    <overwrite-existing-data>true</overwrite-existing-data>
+  </processing-directives>
+  <schedule>
+    <job>
+      <name>prices</name>
+      <group>ax</group>
+      <description>Trade agreement prices (PriceDiscTable) to cache.Price</description>
+      <job-type>Tailspin.DealerOrders.PriceSync.Jobs.PriceListJob, Tailspin.DealerOrders.PriceSync</job-type>
+      <durable>true</durable>
+      <recover>false</recover>
+    </job>
+    <trigger>
+      <cron>
+        <name>prices-nightly</name>
+        <group>ax</group>
+        <job-name>prices</job-name>
+        <job-group>ax</job-group>
+        <misfire-instruction>FireOnceNow</misfire-instruction>
+        <cron-expression>0 15 2 * * ?</cron-expression>
+      </cron>
+    </trigger>
+    <trigger>
+      <cron>
+        <name>prices-midday</name>
+        <group>ax</group>
+        <job-name>prices</job-name>
+        <job-group>ax</job-group>
+        <cron-expression>0 0 12 ? * MON-FRI</cron-expression>
+      </cron>
+    </trigger>
+
+    <job>
+      <name>stock</name>
+      <group>ax</group>
+      <description>On-hand and reservations (InventSum) to cache.Stock</description>
+      <job-type>Tailspin.DealerOrders.PriceSync.Jobs.StockJob, Tailspin.DealerOrders.PriceSync</job-type>
+      <durable>true</durable>
+      <recover>false</recover>
+    </job>
+    <trigger>
+      <simple>
+        <name>stock-every-10-minutes</name>
+        <group>ax</group>
+        <job-name>stock</job-name>
+        <job-group>ax</job-group>
+        <misfire-instruction>RescheduleNextWithRemainingCount</misfire-instruction>
+        <repeat-count>-1</repeat-count>
+        <repeat-interval>600000</repeat-interval>
+      </simple>
+    </trigger>
+
+    <job>
+      <name>balances</name>
+      <group>ax</group>
+      <description>Customer balances, credit limits and holds to dlr.Dealer</description>
+      <job-type>Tailspin.DealerOrders.PriceSync.Jobs.DealerBalanceJob, Tailspin.DealerOrders.PriceSync</job-type>
+      <durable>true</durable>
+      <recover>false</recover>
+    </job>
+    <trigger>
+      <cron>
+        <name>balances-hourly</name>
+        <group>ax</group>
+        <job-name>balances</job-name>
+        <job-group>ax</job-group>
+        <cron-expression>0 5 6-20 ? * MON-FRI</cron-expression>
+      </cron>
+    </trigger>
+
+    <job>
+      <name>rates</name>
+      <group>ax</group>
+      <description>Exchange rates to cache.ExchangeRate</description>
+      <job-type>Tailspin.DealerOrders.PriceSync.Jobs.ExchangeRateJob, Tailspin.DealerOrders.PriceSync</job-type>
+      <durable>true</durable>
+      <recover>false</recover>
+    </job>
+    <trigger>
+      <cron>
+        <name>rates-daily</name>
+        <group>ax</group>
+        <job-name>rates</job-name>
+        <job-group>ax</job-group>
+        <cron-expression>0 30 1 * * ?</cron-expression>
+      </cron>
+    </trigger>
+
+    <job>
+      <name>items</name>
+      <group>ax</group>
+      <description>Dealer-orderable items to cache.Item</description>
+      <job-type>Tailspin.DealerOrders.PriceSync.Jobs.ItemJob, Tailspin.DealerOrders.PriceSync</job-type>
+      <durable>true</durable>
+      <recover>false</recover>
+    </job>
+    <trigger>
+      <cron>
+        <name>items-nightly</name>
+        <group>ax</group>
+        <job-name>items</job-name>
+        <job-group>ax</job-group>
+        <cron-expression>0 0 2 * * ?</cron-expression>
+      </cron>
+    </trigger>
+
+    <job>
+      <name>quote-expiry</name>
+      <group>portal</group>
+      <job-type>Tailspin.DealerOrders.PriceSync.Jobs.QuoteExpiryJob, Tailspin.DealerOrders.PriceSync</job-type>
+      <durable>true</durable>
+      <recover>false</recover>
+    </job>
+    <trigger>
+      <cron>
+        <name>quote-expiry-nightly</name>
+        <group>portal</group>
+        <job-name>quote-expiry</job-name>
+        <job-group>portal</job-group>
+        <cron-expression>0 5 0 * * ?</cron-expression>
+      </cron>
+    </trigger>
+
+    <job>
+      <name>digest</name>
+      <group>portal</group>
+      <description>Morning open order digest to dealers</description>
+      <job-type>Tailspin.DealerOrders.PriceSync.Jobs.DailyDigestJob, Tailspin.DealerOrders.PriceSync</job-type>
+      <durable>true</durable>
+      <recover>false</recover>
+    </job>
+    <trigger>
+      <cron>
+        <name>digest-weekdays</name>
+        <group>portal</group>
+        <job-name>digest</job-name>
+        <job-group>portal</job-group>
+        <cron-expression>0 0 6 ? * MON-FRI</cron-expression>
+      </cron>
+    </trigger>
+
+    <job>
+      <name>document-purge</name>
+      <group>portal</group>
+      <job-type>Tailspin.DealerOrders.PriceSync.Jobs.DocumentPurgeJob, Tailspin.DealerOrders.PriceSync</job-type>
+      <durable>true</durable>
+      <recover>false</recover>
+    </job>
+    <trigger>
+      <cron>
+        <name>document-purge-sunday</name>
+        <group>portal</group>
+        <job-name>document-purge</job-name>
+        <job-group>portal</job-group>
+        <cron-expression>0 0 4 ? * SUN</cron-expression>
+      </cron>
+    </trigger>
+  </schedule>
+</job-scheduling-data>

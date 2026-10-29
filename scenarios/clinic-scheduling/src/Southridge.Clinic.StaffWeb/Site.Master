@@ -1,0 +1,57 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.Master.cs" Inherits="Southridge.Clinic.StaffWeb.SiteMaster" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Southridge Clinic</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=8" />
+    <link href="~/Content/clinic.css" rel="stylesheet" type="text/css" />
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server" />
+</head>
+<body>
+    <form id="MainForm" runat="server">
+    <ajaxToolkit:ToolkitScriptManager ID="ScriptManager" runat="server" EnablePartialRendering="true" CombineScripts="false" AsyncPostBackTimeout="120">
+        <Scripts>
+            <asp:ScriptReference Path="~/Scripts/clinic.js" />
+        </Scripts>
+        <Services>
+            <asp:ServiceReference Path="~/Services/PatientLookup.asmx" />
+        </Services>
+    </ajaxToolkit:ToolkitScriptManager>
+    <div id="page">
+        <div id="header">
+            <div id="brand">
+                <asp:HyperLink ID="HomeLink" runat="server" NavigateUrl="~/Default.aspx">Southridge Medical Group</asp:HyperLink>
+                <span class="env"><asp:Literal ID="EnvironmentLabel" runat="server" /></span>
+            </div>
+            <div id="userbar">
+                <asp:LoginView ID="UserView" runat="server">
+                    <LoggedInTemplate>
+                        Site
+                        <asp:DropDownList ID="SiteList" runat="server" AutoPostBack="true" OnSelectedIndexChanged="SiteList_SelectedIndexChanged"
+                            DataTextField="Text" DataValueField="Value" CssClass="site-switch" />
+                        | <asp:HyperLink ID="ProfileLink" runat="server" NavigateUrl="~/Account/Profile.aspx"><asp:LoginName ID="UserName" runat="server" /></asp:HyperLink>
+                        | <asp:LoginStatus ID="LoginStatus" runat="server" LogoutAction="Redirect" LogoutPageUrl="~/Login.aspx" OnLoggingOut="LoginStatus_LoggingOut" />
+                    </LoggedInTemplate>
+                </asp:LoginView>
+            </div>
+            <asp:SiteMapDataSource ID="MenuSource" runat="server" ShowStartingNode="false" />
+            <asp:Menu ID="MainMenu" runat="server" DataSourceID="MenuSource" Orientation="Horizontal" CssClass="menu"
+                StaticDisplayLevels="1" MaximumDynamicDisplayLevels="1" RenderingMode="List" IncludeStyleBlock="false" />
+        </div>
+        <div id="clientError" class="message error"></div>
+        <asp:Panel ID="MessagePanel" runat="server" Visible="false" CssClass="message" EnableViewState="false">
+            <asp:Literal ID="MessageText" runat="server" EnableViewState="false" />
+        </asp:Panel>
+        <div id="content">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+        </div>
+        <div id="footer">
+            Southridge Clinic Systems <asp:Literal ID="VersionLabel" runat="server" /> &middot; Patient information is confidential.
+        </div>
+    </div>
+    <asp:UpdateProgress ID="GlobalProgress" runat="server" DisplayAfter="400">
+        <ProgressTemplate><div class="busy">Working&hellip;</div></ProgressTemplate>
+    </asp:UpdateProgress>
+    </form>
+</body>
+</html>

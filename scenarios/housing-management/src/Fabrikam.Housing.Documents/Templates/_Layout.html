@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<style>
+  body { font-family: Arial, Helvetica, sans-serif; font-size: 11pt; color: #222; }
+  body.large-print { font-size: 16pt; }
+  .header { border-bottom: 3px solid #00576b; padding-bottom: 6px; margin-bottom: 18px; }
+  .org { color: #00576b; font-size: 18pt; font-weight: bold; }
+  .return { font-size: 8pt; color: #555; }
+  .address { margin: 24px 0 18px 0; }
+  .meta td { padding: 1px 12px 1px 0; }
+  table.amounts { border-collapse: collapse; margin: 12px 0; }
+  table.amounts td { border: 1px solid #999; padding: 4px 10px; }
+  .notice { border: 2px solid #b00; padding: 8px; margin: 12px 0; }
+  .sign { margin-top: 30px; }
+</style>
+</head>
+<body class="{{BodyClass}}">
+<div class="header">
+  <span class="org">Fabrikam Homes</span><br/>
+  <span class="return">Fabrikam House, 12 Temple Gate, Bristol BS1 6PL &middot; 0300 123 4567 &middot; fabrikamhomes.co.uk</span>
+</div>
+<div class="address">{{RecipientName}}<br/>{{AddressBlock}}</div>
+<table class="meta">
+  <tr><td>Date:</td><td>{{Date}}</td></tr>
+  <tr><td>Our reference:</td><td>{{Reference}}</td></tr>
+</table>
+{{Content}}
+</body>
+</html>

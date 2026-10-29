@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Feature xmlns="http://schemas.microsoft.com/sharepoint/"
+         Id="{F8A6CBD7-5E91-40CF-82DA-6D7E8F9AABB6}"
+         Title="Lucerne Project Sites - Claims Provider"
+         Description="Office, discipline and all-staff claims and people picker entries."
+         Scope="Farm"
+         Version="5.3.1.0"
+         Hidden="FALSE"
+         ReceiverAssembly="Lucerne.ProjectSites.Claims, Version=1.0.0.0, Culture=neutral, PublicKeyToken=$SharePoint.Project.AssemblyPublicKeyToken$"
+         ReceiverClass="Lucerne.ProjectSites.Claims.ClaimsProviderFeatureReceiver">
+  <ElementManifests />
+</Feature>

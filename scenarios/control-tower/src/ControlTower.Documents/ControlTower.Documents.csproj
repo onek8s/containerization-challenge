@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <RootNamespace>Proseware.ControlTower.Documents</RootNamespace>
+    <PreserveCompilationContext>true</PreserveCompilationContext>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="RazorLight" Version="2.3.1" />
+    <PackageReference Include="DinkToPdf" Version="1.0.8" />
+    <PackageReference Include="QRCoder" Version="1.4.3" />
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Templates\**\*.cshtml" />
+    <Compile Remove="Templates\**\*.cshtml" />
+    <Content Remove="Templates\**\*.cshtml" />
+    <None Remove="Templates\**\*.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ControlTower.Domain\ControlTower.Domain.csproj" />
+    <ProjectReference Include="..\ControlTower.Data\ControlTower.Data.csproj" />
+    <ProjectReference Include="..\ControlTower.Integration\ControlTower.Integration.csproj" />
+  </ItemGroup>
+
+</Project>

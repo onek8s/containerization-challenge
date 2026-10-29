@@ -1,0 +1,13 @@
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
+  <s:Body>
+    <SubmitDeclarationResponse xmlns="urn:customs.example:declaration:service:v2">
+      <SubmitDeclarationResult xmlns:a="urn:customs.example:declaration:data:v2">
+        <a:MessageId>8f0d5c2b4b9e4b0f9a1d2c3e4f506172</a:MessageId>
+        <a:Accepted>true</a:Accepted>
+        <a:Mrn>26FI000000412E7H00</a:Mrn>
+        <a:AcceptanceDate>2026-10-29T06:41:12.000Z</a:AcceptanceDate>
+        <a:Errors />
+      </SubmitDeclarationResult>
+    </SubmitDeclarationResponse>
+  </s:Body>
+</s:Envelope>

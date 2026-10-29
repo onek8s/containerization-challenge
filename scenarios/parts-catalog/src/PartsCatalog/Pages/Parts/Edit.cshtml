@@ -1,0 +1,14 @@
+@page "{id:int}"
+@model PartsCatalog.Pages.Parts.EditModel
+@{
+    ViewData["Title"] = "Edit part";
+}
+<h1>Edit @Model.Part.PartNumber</h1>
+<p class="muted">Last updated @Model.Part.LastUpdated.ToLocalTime().ToString("g")</p>
+<form method="post" class="edit">
+    <input type="hidden" asp-for="Part.Id" />
+    <partial name="_PartFields" for="Part" />
+    <button type="submit">Save</button>
+    <button type="submit" asp-page-handler="Delete" onclick="return confirm('Delete this part?');">Delete</button>
+    <a asp-page="Index">Cancel</a>
+</form>

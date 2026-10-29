@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\BizTalk.References.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net462</TargetFramework>
+    <RootNamespace>VanArsdel.Integration.PipelineComponents</RootNamespace>
+    <Description>Custom pipeline components (GAC and Pipeline Components folder on the BizTalk servers).</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <BizTalkReference Include="Microsoft.BizTalk.Pipeline" />
+    <BizTalkReference Include="Microsoft.BizTalk.Streaming" />
+    <BizTalkReference Include="Microsoft.BizTalk.Bam.EventObservation" />
+    <BizTalkReference Include="Microsoft.XLANGs.BaseTypes" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\VanArsdel.Integration.Runtime\VanArsdel.Integration.Runtime.csproj" />
+  </ItemGroup>
+
+</Project>

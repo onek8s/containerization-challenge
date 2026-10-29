@@ -1,0 +1,13 @@
+Subject: Order {OrderNumber} shipped
+
+Dear {DealerName},
+
+order {OrderNumber} (your reference {DealerPo}) left the factory on {ShipDate}.
+Packing slip: {PackingSlip}
+Carrier: {Carrier}  Tracking: {Tracking}
+
+{Lines}
+
+{Link}
+
+Tailspin Machinery dealer sales

@@ -1,0 +1,13 @@
+@model LoggedOutViewModel
+@{ ViewData["Title"] = "Signed out"; }
+<div class="card card-narrow"><div class="card-body">
+    <h1 class="h4">You are signed out</h1>
+    @if (Model.PostLogoutRedirectUri != null)
+    {
+        <p>Return to <a href="@Model.PostLogoutRedirectUri">@Model.ClientName</a>.</p>
+    }
+    @if (Model.SignOutIframeUrl != null)
+    {
+        <iframe width="0" height="0" class="d-none" src="@Model.SignOutIframeUrl"></iframe>
+    }
+</div></div>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WcfServiceDescription xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="PartnerOrders" TargetNamespace="http://schemas.vanarsdel.com/biztalk/receive/2016" xmlns="http://schemas.microsoft.com/BizTalk/2006/01/Adapters/WCF-properties">
+  <LocationSettings Location="http://localhost:8081/B2BReceive" Overwrite="true" AuthAnonymous="false" />
+  <ApplicationSettings CreateReceiveLocations="true" ApplicationName="VanArsdel.B2B.Customers" />
+  <AdapterSettings AdapterName="WCF-BasicHttp" />
+  <MessageType>
+    <Name>SubmitOrderBatch</Name>
+    <SchemaRef AssemblyName="VanArsdel.Integration.Schemas, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cfedfd825850e71" TypeName="VanArsdel.Integration.Schemas.Partner.PartnerOrders" RootName="OrderBatch" />
+  </MessageType>
+  <WcfServices>
+    <WcfService Name="PartnerOrders">
+      <WcfOperation Name="SubmitOrderBatch" Flow="OneWay">
+        <WcfMessage Name="Request" Direction="Input">
+          <WcfMessagePart Name="part" TypeName="VanArsdel.Integration.Schemas.Partner.PartnerOrders" RootName="OrderBatch" />
+        </WcfMessage>
+      </WcfOperation>
+    </WcfService>
+  </WcfServices>
+</WcfServiceDescription>

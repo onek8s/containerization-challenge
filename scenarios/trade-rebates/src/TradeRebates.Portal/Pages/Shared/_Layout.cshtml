@@ -1,0 +1,41 @@
+@using Microsoft.AspNetCore.Authorization
+@inject Microsoft.AspNetCore.Authorization.IAuthorizationService Auth
+@{
+    bool isAdmin = (await Auth.AuthorizeAsync(User, Policies.Admin)).Succeeded;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Trade Rebates</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <a class="brand" asp-page="/Index">Contoso Foods · Trade Rebates</a>
+        <nav>
+            <a asp-page="/Claims/Index">Claims</a>
+            <a asp-page="/Agreements/Index">Agreements</a>
+            <a asp-page="/Statements/Index">Statements</a>
+            @if (isAdmin)
+            {
+                <a asp-page="/Distributors/Index">Distributors</a>
+                <a asp-page="/Audit/Index">Audit</a>
+            }
+        </nav>
+        <span class="user">@User.Identity?.Name</span>
+    </header>
+    <main>
+        @if (TempData["Message"] is string message)
+        {
+            <p class="notice">@message</p>
+        }
+        @if (TempData["Error"] is string error)
+        {
+            <p class="error">@error</p>
+        }
+        @RenderBody()
+    </main>
+</body>
+</html>

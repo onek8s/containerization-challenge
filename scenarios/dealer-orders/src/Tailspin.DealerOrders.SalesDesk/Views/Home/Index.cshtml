@@ -1,0 +1,33 @@
+@model Tailspin.DealerOrders.SalesDesk.Models.DeskDashboard
+@{
+    ViewBag.Title = "Overview";
+}
+<div class="row tiles">
+    <div class="col-sm-2"><div class="tile"><b>@Model.Approvals.Count</b> approvals waiting</div></div>
+    <div class="col-sm-2"><div class="tile @(Model.OrdersInError.Count > 0 ? "bad" : "")"><b>@Model.OrdersInError.Count</b> orders in error</div></div>
+    <div class="col-sm-2"><div class="tile"><b>@(Model.Queue.Pending ?? 0)</b> pending / <b>@(Model.Queue.Retrying ?? 0)</b> retrying in AX queue</div></div>
+    <div class="col-sm-2"><div class="tile @((Model.Queue.Failed ?? 0) > 0 ? "bad" : "")"><b>@(Model.Queue.Failed ?? 0)</b> failed AX commands</div></div>
+    <div class="col-sm-2"><div class="tile @(Model.EdiProblems > 0 ? "bad" : "")"><b>@Model.EdiProblems</b> EDI problems (2 days)</div></div>
+    <div class="col-sm-2"><div class="tile">Stock sync @(Model.LastStockSync?.ToLocalTime().ToString("t") ?? "never")<br />Price sync @(Model.LastPriceSync?.ToLocalTime().ToString("g") ?? "never")</div></div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <h3>Approvals</h3>
+        <table class="table table-condensed">
+            @foreach (var a in Model.Approvals)
+            {
+                <tr><td>@a.DealerAccount</td><td>@(a.QuoteNumber ?? a.OrderNumber)</td><td>@a.Reason</td><td class="text-right">@a.Amount.ToString("N0") @a.Currency</td><td>@a.RequestedUtc.ToLocalTime().ToString("g")</td></tr>
+            }
+        </table>
+        @Html.ActionLink("Decide", "Index", "Approvals", null, new { @class = "btn btn-primary btn-sm" })
+    </div>
+    <div class="col-md-6">
+        <h3>Orders in error</h3>
+        <table class="table table-condensed">
+            @foreach (var o in Model.OrdersInError)
+            {
+                <tr><td>@Html.ActionLink(o.OrderNumber, "Details", "Orders", new { id = o.Id }, null)</td><td>@o.DealerAccount</td><td>@o.DealerName</td><td>@o.CreatedUtc.ToLocalTime().ToString("g")</td></tr>
+            }
+        </table>
+    </div>
+</div>

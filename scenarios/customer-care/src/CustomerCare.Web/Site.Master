@@ -1,0 +1,51 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.Master.cs" Inherits="Tailspin.CustomerCare.Web.SiteMaster" %>
+<!DOCTYPE html>
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title><%: Page.Title %> - Customer Care</title>
+    <link href="~/Content/site.css" rel="stylesheet" type="text/css" />
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server" />
+</head>
+<body>
+    <form id="MainForm" runat="server">
+        <header class="top">
+            <a class="brand" href="<%: ResolveUrl("~/") %>">Tailspin Energy <span>Customer Care</span></a>
+            <nav>
+                <a href="<%: ResolveUrl("~/") %>">Dashboard</a>
+                <a href="<%: ResolveUrl("~/cases") %>">Cases</a>
+                <a href="<%: ResolveUrl("~/cases/new") %>">New case</a>
+                <a href="<%: ResolveUrl("~/customers") %>">Customers</a>
+                <a href="<%: ResolveUrl("~/board") %>">Queue board</a>
+                <a href="<%: ResolveUrl("~/kb") %>">Knowledge base</a>
+                <asp:PlaceHolder ID="SupervisorMenu" runat="server" Visible="false">
+                    <a href="<%: ResolveUrl("~/Reports/Sla.aspx") %>">SLA report</a>
+                    <a href="<%: ResolveUrl("~/admin/jobs") %>">Jobs</a>
+                </asp:PlaceHolder>
+                <asp:PlaceHolder ID="AdminMenu" runat="server" Visible="false">
+                    <a href="<%: ResolveUrl("~/Admin/Queues.aspx") %>">Queues</a>
+                    <a href="<%: ResolveUrl("~/Admin/Settings.aspx") %>">Settings</a>
+                </asp:PlaceHolder>
+            </nav>
+            <div class="search">
+                <asp:TextBox ID="SearchBox" runat="server" placeholder="Case number, customer, account..." MaxLength="100" />
+                <asp:Button ID="SearchButton" runat="server" Text="Search" OnClick="SearchButton_Click" CausesValidation="false" UseSubmitBehavior="false" />
+            </div>
+            <div class="user"><asp:Literal ID="UserName" runat="server" /></div>
+        </header>
+        <asp:Panel ID="MessagePanel" runat="server" CssClass="message" Visible="false">
+            <asp:Literal ID="MessageText" runat="server" Mode="Encode" />
+        </asp:Panel>
+        <main>
+            <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+        </main>
+        <footer>Customer Care <%: typeof(Tailspin.CustomerCare.Web.SiteMaster).Assembly.GetName().Version %> &middot; <%: Environment.MachineName %></footer>
+    </form>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.7.1.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/signalr/jquery.signalr-2.4.3.min.js"></script>
+    <script src="<%: ResolveUrl("~/signalr/hubs") %>"></script>
+    <script src="<%: ResolveUrl("~/Scripts/care.js") %>"></script>
+    <asp:ContentPlaceHolder ID="ScriptsContent" runat="server" />
+</body>
+</html>

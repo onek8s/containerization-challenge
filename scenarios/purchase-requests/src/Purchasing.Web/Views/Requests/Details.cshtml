@@ -1,0 +1,102 @@
+@model RequestView
+@{
+    var r = Model.Request;
+    ViewBag.Title = r.Number;
+}
+<h1>@r.Number &ndash; @r.Title</h1>
+<p><span class="status status-@r.Status.ToString().ToLowerInvariant()">@r.Status</span>
+    @if (Model.NextStep.HasValue) { <text>waiting for <strong>@Model.NextStep</strong> approval</text> }
+    @if (r.PoNumber != null) { <text>ordered on PO <strong>@r.PoNumber</strong></text> }
+</p>
+
+<dl class="facts">
+    <dt>Requester</dt><dd>@r.RequesterName</dd>
+    <dt>Cost center</dt><dd>@r.CostCenterCode @r.CostCenterName</dd>
+    <dt>Supplier</dt><dd>@r.SupplierName</dd>
+    <dt>Category</dt><dd>@RequestCategory.DisplayName(r.Category)</dd>
+    <dt>Needed by</dt><dd>@(r.NeededBy.HasValue ? r.NeededBy.Value.ToString("d") : "-")</dd>
+    <dt>Created</dt><dd>@r.CreatedAt.ToString("g")</dd>
+    <dt>Approval chain</dt><dd>@(string.Join(" > ", Model.RequiredSteps))</dd>
+</dl>
+
+@if (!string.IsNullOrEmpty(r.Justification))
+{
+    <h2>Justification</h2>
+    <p class="pre">@r.Justification</p>
+}
+
+<h2>Lines</h2>
+<table class="grid">
+    <thead><tr><th>#</th><th>Description</th><th class="num">Qty</th><th>Unit</th><th class="num">Unit price</th><th class="num">Net</th><th class="num">VAT</th></tr></thead>
+    <tbody>
+        @foreach (var l in r.Lines)
+        {
+            <tr><td>@l.LineNo</td><td>@l.Description</td><td class="num">@l.Quantity.ToString("0.###")</td><td>@l.Unit</td><td class="num">@l.UnitPrice.ToString("N2")</td><td class="num">@l.NetAmount.ToString("N2")</td><td class="num">@l.VatAmount.ToString("N2")</td></tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr><td colspan="5">Total @r.Currency</td><td class="num">@r.NetTotal.ToString("N2")</td><td class="num">@r.VatTotal.ToString("N2")</td></tr>
+    </tfoot>
+</table>
+
+<h2>Attachments</h2>
+<ul>
+    @foreach (var a in r.Attachments)
+    {
+        <li><a href="@Url.Action("Attachment", new { id = a.Id })">@a.FileName</a> <span class="muted">(@(a.SizeBytes / 1024) KB, @a.UploadedBy)</span></li>
+    }
+</ul>
+@using (Html.BeginForm("Attach", "Requests", new { id = r.Id }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <input type="file" name="file" />
+    <button type="submit">Attach quote</button>
+}
+
+@if (r.Approvals.Any())
+{
+    <h2>History</h2>
+    <table class="grid">
+        <thead><tr><th>Step</th><th>By</th><th>Decision</th><th>Comment</th><th>When</th></tr></thead>
+        <tbody>
+            @foreach (var a in r.Approvals)
+            {
+                <tr><td>@a.Step</td><td>@a.ApproverName</td><td>@a.Decision</td><td>@a.Comment</td><td>@a.DecidedAt.ToString("g")</td></tr>
+            }
+        </tbody>
+    </table>
+}
+
+<div class="actions">
+    @if (Model.CanEdit)
+    {
+        <a class="button" href="@Url.Action("Edit", new { id = r.Id })">Edit</a>
+        using (Html.BeginForm("Submit", "Requests", new { id = r.Id }, FormMethod.Post, new { @class = "inline" }))
+        {
+            @Html.AntiForgeryToken()
+            <button type="submit" class="primary">Send for approval</button>
+        }
+    }
+    @if (Model.CanDecide)
+    {
+        using (Html.BeginForm("Decide", "Approvals", new { id = r.Id }, FormMethod.Post, new { @class = "decision" }))
+        {
+            @Html.AntiForgeryToken()
+            <textarea name="comment" rows="2" cols="60" placeholder="Comment (required when rejecting)"></textarea>
+            <button type="submit" name="decision" value="approve" class="primary">Approve</button>
+            <button type="submit" name="decision" value="reject">Reject</button>
+        }
+    }
+    @if (Model.CanOrder)
+    {
+        <a class="button primary" href="@Url.Action("Create", "Orders", new { requestId = r.Id })">Create purchase order</a>
+    }
+    @if (Model.CanEdit || r.Status == RequestStatus.InApproval)
+    {
+        using (Html.BeginForm("Cancel", "Requests", new { id = r.Id }, FormMethod.Post, new { @class = "inline" }))
+        {
+            @Html.AntiForgeryToken()
+            <button type="submit" class="link" onclick="return confirm('Cancel this request?');">Cancel request</button>
+        }
+    }
+</div>

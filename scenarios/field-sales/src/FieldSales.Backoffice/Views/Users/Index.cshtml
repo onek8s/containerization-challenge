@@ -1,0 +1,26 @@
+@model IEnumerable<UserRow>
+@{
+    ViewBag.Title = "Users";
+}
+<h1>Users <a class="btn btn-primary" href="@Url.Action("Create")">New user</a></h1>
+<div class="panel">
+    <table class="table">
+        <tr><th>User</th><th>Name</th><th>Rep code</th><th class="text-right">Discount limit %</th><th>Roles</th><th></th></tr>
+        @foreach (var u in Model)
+        {
+            <tr>
+                <td><a href="@Url.Action("Edit", new { id = u.Id })">@u.UserName</a></td><td>@u.DisplayName</td><td>@u.RepCode</td>
+                <td class="text-right">@u.DiscountLimitPercent.ToString("0.##")</td><td>@u.Roles</td>
+                <td>
+                    @if (u.LockedOut)
+                    {
+                        using (Html.BeginForm("Unlock", "Users", new { id = u.Id }, FormMethod.Post, new { @class = "inline" }))
+                        { @Html.AntiForgeryToken() <button type="submit" class="btn">Unlock</button> }
+                    }
+                    @using (Html.BeginForm("SignOutEverywhere", "Users", new { id = u.Id }, FormMethod.Post, new { @class = "inline" }))
+                    { @Html.AntiForgeryToken() <button type="submit" class="btn">Sign out devices</button> }
+                </td>
+            </tr>
+        }
+    </table>
+</div>

@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\SharePoint.References.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net462</TargetFramework>
+    <RootNamespace>Lucerne.ProjectSites.Farm</RootNamespace>
+    <PlatformTarget>x64</PlatformTarget>
+    <!-- SharePoint assembly-qualified names in the feature XML use this exact version -->
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>5.3.1.0</FileVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Configuration" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Lucerne.ProjectSites.ServerObjectModel\Lucerne.ProjectSites.ServerObjectModel.csproj" />
+    <ProjectReference Include="..\Lucerne.ProjectSites.Documents\Lucerne.ProjectSites.Documents.csproj" />
+  </ItemGroup>
+
+  <!-- Solution package content (features, templates, layouts files); packaged by deploy\New-SolutionPackage.ps1 -->
+  <ItemGroup>
+    <None Include="Package\**;Features\**\*.xml;Features\**\*.webpart;Layouts\**" />
+  </ItemGroup>
+
+</Project>

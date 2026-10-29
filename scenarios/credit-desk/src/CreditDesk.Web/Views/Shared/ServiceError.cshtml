@@ -1,0 +1,9 @@
+@model CreditDesk.Web.Models.ServiceErrorModel
+@{ ViewBag.Title = "Unable to complete"; }
+<h1>Unable to complete the action</h1>
+<p class="error">@Model.Message</p>
+@if (Model.Errors != null && Model.Errors.Length > 0)
+{
+    <ul>@foreach (var e in Model.Errors) { <li>@e</li> }</ul>
+}
+<p><a href="javascript:history.back()">Back</a></p>

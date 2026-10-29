@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "DocControl.Packager": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

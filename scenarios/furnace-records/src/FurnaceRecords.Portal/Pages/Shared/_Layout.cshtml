@@ -1,0 +1,31 @@
+@inject PortalOptions Portal
+@{
+    var isAdmin = User.IsInRole(Portal.AdminsGroup);
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewData["Title"] - Furnace Records</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <header class="no-print">
+        <nav>
+            <a class="brand" asp-page="/Index">Furnace Records</a>
+            <a asp-page="/Loads/Index">Loads</a>
+            <a asp-page="/Loads/Plan">Plan load</a>
+            @if (isAdmin)
+            {
+                <a asp-page="/Recipes/Index">Recipes</a>
+                <a asp-page="/Furnaces/Index">Furnaces</a>
+            }
+            <span class="user">@User.Identity?.Name</span>
+        </nav>
+    </header>
+    <main>
+        @RenderBody()
+    </main>
+</body>
+</html>

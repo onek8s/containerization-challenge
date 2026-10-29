@@ -1,0 +1,27 @@
+@model BookingStepViewModel
+@{ ViewData["Title"] = "New booking"; var d = Model.Draft; }
+<partial name="_Steps" model="1" />
+<form method="post" class="row g-3" style="max-width:1100px">
+    <div asp-validation-summary="All" class="text-danger col-12"></div>
+    <div class="col-md-6"><label class="form-label">Customer</label><select name="CustomerId" class="form-select" asp-items="@(new Microsoft.AspNetCore.Mvc.Rendering.SelectList(Model.Customers, "Value", "Text", d.CustomerId))"><option value="">-</option></select></div>
+    <div class="col-md-3"><label class="form-label">Customer reference</label><input name="CustomerReference" value="@d.CustomerReference" class="form-control" /></div>
+    <div class="col-md-3"><label class="form-label">Mode</label><select name="Mode" class="form-select" asp-items="@Html.GetEnumSelectList<TransportMode>().Select(i => { i.Selected = i.Value == ((int)d.Mode).ToString(); return i; })"></select></div>
+    <div class="col-md-6"><label class="form-label">Pickup location</label><select name="OriginId" class="form-select" asp-items="@(new Microsoft.AspNetCore.Mvc.Rendering.SelectList(Model.Locations, "Value", "Text", d.OriginId))"><option value="">-</option></select></div>
+    <div class="col-md-6"><label class="form-label">Delivery location</label><select name="DestinationId" class="form-select" asp-items="@(new Microsoft.AspNetCore.Mvc.Rendering.SelectList(Model.Locations, "Value", "Text", d.DestinationId))"><option value="">-</option></select></div>
+    <div class="col-md-6"><label class="form-label">Shipper</label><input name="ShipperName" value="@d.ShipperName" class="form-control" /></div>
+    <div class="col-md-6"><label class="form-label">Consignee</label><input name="ConsigneeName" value="@d.ConsigneeName" class="form-control" /></div>
+    <div class="col-md-4"><label class="form-label">Consignee e-mail</label><input name="ConsigneeEmail" value="@d.ConsigneeEmail" class="form-control" /></div>
+    <div class="col-md-4"><label class="form-label">Notify phone</label><input name="NotifyPhone" value="@d.NotifyPhone" class="form-control" /></div>
+    <div class="col-md-4"><label class="form-label">Incoterms 2020</label><select name="IncotermCode" class="form-select" asp-items="@(new Microsoft.AspNetCore.Mvc.Rendering.SelectList(Model.Incoterms, "Value", "Text", d.IncotermCode))"></select></div>
+    <div class="col-md-3"><label class="form-label">Pickup date</label><input name="PickupDate" type="date" value="@d.PickupDate.ToString("yyyy-MM-dd")" class="form-control" /></div>
+    <div class="col-md-3"><label class="form-label">Pickup time (local)</label><input name="PickupTime" type="time" value="@d.PickupTime.ToString(@"hh\:mm")" class="form-control" /></div>
+    <div class="col-md-6"><label class="form-label">Goods description</label><input name="GoodsDescription" value="@d.GoodsDescription" class="form-control" /></div>
+    <div class="col-md-3"><label class="form-label">Declared value (EUR)</label><input name="DeclaredValue" value="@d.DeclaredValue" class="form-control" /></div>
+    <div class="col-md-3"><label class="form-label">Temperature min °C</label><input name="TemperatureMin" value="@d.TemperatureMin" class="form-control" /></div>
+    <div class="col-md-3"><label class="form-label">Temperature max °C</label><input name="TemperatureMax" value="@d.TemperatureMax" class="form-control" /></div>
+    <div class="col-md-3 pt-4">
+        <div class="form-check"><input type="checkbox" name="CustomsClearance" value="true" class="form-check-input" @(d.CustomsClearance ? "checked" : "") /><label class="form-check-label">Customs clearance</label></div>
+        <div class="form-check"><input type="checkbox" name="Insurance" value="true" class="form-check-input" @(d.Insurance ? "checked" : "") /><label class="form-check-label">Cargo insurance</label></div>
+    </div>
+    <div class="col-12"><button class="btn btn-primary">Next: packages</button></div>
+</form>

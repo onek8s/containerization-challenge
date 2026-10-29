@@ -1,0 +1,7 @@
+{
+  "shipmentId": "BX900003",
+  "orderReference": "PF26-0000039-2",
+  "status": "ACCEPTED",
+  "plannedPickup": "2026-10-30T06:30:00Z",
+  "message": "Pickup booked on tour TLL-HEL-07"
+}

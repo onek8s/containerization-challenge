@@ -1,0 +1,53 @@
+@page "{id:int}"
+@model ContosoFoods.TradeRebates.Portal.Pages.Agreements.DetailsModel
+@{
+    var a = Model.Agreement!;
+    ViewData["Title"] = a.AgreementNo;
+}
+<h1>@a.AgreementNo · @a.DistributorName</h1>
+<p>@a.Description</p>
+<table style="width:auto">
+    <tr><th>Status</th><td>@AgreementStatus.Name(a.Status) @if (a.ApprovedBy is not null) { <span class="muted">approved by @a.ApprovedBy @a.ApprovedAt?.ToString("yyyy-MM-dd")</span> }</td></tr>
+    <tr><th>Basis</th><td>@AgreementStatus.BasisName(a.Basis)</td></tr>
+    <tr><th>Category</th><td>@(a.Category ?? "All categories")</td></tr>
+    <tr><th>Tiers</th><td><code>@a.TiersText</code></td></tr>
+    <tr><th>Valid</th><td>@a.ValidFrom.ToString("yyyy-MM-dd") – @a.ValidTo.ToString("yyyy-MM-dd")</td></tr>
+    <tr><th>Cap</th><td>@a.CapAmount?.ToString("N2")</td></tr>
+    <tr><th>Changed</th><td>@a.ModifiedBy @a.ModifiedAt.ToString("yyyy-MM-dd HH:mm")</td></tr>
+</table>
+<p>
+    @if (a.Status == "D")
+    {
+        <a asp-page="Edit" asp-route-id="@a.AgreementId">Edit</a>
+        @if (Model.CanApprove)
+        {
+            <form method="post" asp-page-handler="Status" asp-route-status="A" class="inline"><button type="submit">Activate</button></form>
+        }
+    }
+    @if (a.Status == "A" && Model.CanApprove)
+    {
+        <form method="post" asp-page-handler="Status" asp-route-status="C" class="inline"><button type="submit">Close</button></form>
+    }
+</p>
+
+<h2>Accruals</h2>
+<table>
+    <thead><tr><th>Period</th><th class="n">Quantity</th><th class="n">Net value</th><th class="n">YTD quantity</th><th class="n">YTD net value</th><th class="n">Rate %</th><th class="n">YTD rebate</th><th class="n">Accrued</th><th class="n">To next tier</th><th>Statement</th></tr></thead>
+    <tbody>
+    @foreach (var x in Model.Accruals)
+    {
+        <tr>
+            <td>@Periods.Format(x.Period)</td>
+            <td class="n">@x.Quantity.ToString("N0")</td>
+            <td class="n">@x.NetAmount.ToString("N2")</td>
+            <td class="n">@x.YtdQuantity.ToString("N0")</td>
+            <td class="n">@x.YtdNetAmount.ToString("N2")</td>
+            <td class="n">@x.RatePercent.ToString("0.00")</td>
+            <td class="n">@x.YtdRebate.ToString("N2")</td>
+            <td class="n">@x.AccruedAmount.ToString("N2")</td>
+            <td class="n">@x.ToNextTier?.ToString("N2")</td>
+            <td>@x.StatementId</td>
+        </tr>
+    }
+    </tbody>
+</table>

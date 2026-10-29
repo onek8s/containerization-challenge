@@ -1,0 +1,57 @@
+@{
+    ViewBag.Title = "Configure " + ViewBag.ModelName;
+}
+<div id="configurator" data-model="@ViewBag.ModelCode" data-quote-id="@ViewBag.QuoteId"
+     data-model-url="@Url.Action("Model", new { id = ViewBag.ModelCode })" data-evaluate-url="@Url.Action("Evaluate")" data-save-url="@Url.Action("Save")">
+    <h2>@ViewBag.ModelName</h2>
+    <div class="row">
+        <div class="col-md-7">
+            <!-- ko foreach: groups -->
+            <div class="panel panel-default">
+                <div class="panel-heading"><strong data-bind="text: name"></strong></div>
+                <div class="list-group">
+                    <!-- ko foreach: options -->
+                    <label class="list-group-item option" data-bind="css: { active: $root.isSelected(code), 'option-auto': $root.isAdded(code) }">
+                        <input data-bind="attr: { type: $parent.kind === 'Single' ? 'radio' : 'checkbox', name: $parent.code }, checked: $root.isSelected(code), click: function () { $root.toggle($parent, code); return true; }" />
+                        <span data-bind="text: name"></span>
+                        <span class="pull-right" data-bind="text: price > 0 ? $root.money(price) : 'included'"></span>
+                    </label>
+                    <!-- /ko -->
+                </div>
+            </div>
+            <!-- /ko -->
+        </div>
+        <div class="col-md-5">
+            <div class="panel panel-primary summary" data-bind="with: result">
+                <div class="panel-heading">Your machine <small data-bind="text: configurationId"></small></div>
+                <div class="panel-body">
+                    <div class="alert alert-danger" data-bind="visible: errors.length > 0"><ul data-bind="foreach: errors"><li data-bind="text: $data"></li></ul></div>
+                    <div class="alert alert-info" data-bind="visible: addedByRules.length > 0">Added by the rules: <span data-bind="text: addedByRules.join(', ')"></span></div>
+                    <div class="alert alert-warning" data-bind="visible: warnings.length > 0"><ul data-bind="foreach: warnings"><li data-bind="text: $data"></li></ul></div>
+                    <table class="table table-condensed">
+                        <tbody data-bind="foreach: priceLines">
+                            <tr><td data-bind="text: description"></td><td class="text-right" data-bind="text: $root.money(netPrice)"></td></tr>
+                        </tbody>
+                        <tfoot>
+                            <tr><th>List price</th><th class="text-right" data-bind="text: $root.money(listTotal)"></th></tr>
+                            <tr><th>Your discount</th><th class="text-right" data-bind="text: $root.money(discountTotal)"></th></tr>
+                            <tr data-bind="visible: freight > 0"><th>Freight</th><th class="text-right" data-bind="text: $root.money(freight)"></th></tr>
+                            <tr class="info"><th>Net</th><th class="text-right" data-bind="text: $root.money(netTotal + freight)"></th></tr>
+                        </tfoot>
+                    </table>
+                    <p>Lead time <strong data-bind="text: leadTimeWeeks"></strong> weeks, earliest delivery <strong data-bind="text: earliestDelivery"></strong>.</p>
+                </div>
+            </div>
+            <div class="form-group"><label>Quantity</label><input type="number" min="1" class="form-control" data-bind="value: quantity" /></div>
+            <div class="form-group"><label>Extra discount %</label><input type="number" min="0" max="30" step="0.5" class="form-control" data-bind="value: extraDiscount" />
+                <span class="help-block" data-bind="visible: result() && result().needsApproval">Needs approval from the Tailspin sales desk.</span></div>
+            <div class="form-group"><label>End customer</label><input class="form-control" data-bind="value: endCustomer" /></div>
+            <div class="form-group"><label>Your reference</label><input class="form-control" data-bind="value: reference" /></div>
+            <button class="btn btn-primary" data-bind="enable: canSave, click: save, text: quoteId ? 'Add to quote' : 'Create quote'"></button>
+            <span class="text-danger" data-bind="text: saveError"></span>
+        </div>
+    </div>
+</div>
+@section scripts {
+    @Scripts.Render("~/bundles/configurator")
+}

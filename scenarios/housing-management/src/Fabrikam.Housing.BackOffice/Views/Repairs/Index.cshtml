@@ -1,0 +1,19 @@
+@model IList<WorkOrderListItem>
+@{ ViewData["Title"] = "Work orders"; }
+<h1 class="h3">Work orders</h1>
+<form method="get" class="form-row align-items-end mb-3">
+    <div class="col-md-3"><label>Reference or address</label><input name="q" value="@ViewBag.Q" class="form-control form-control-sm" /></div>
+    <div class="col-md-2"><label>Status</label><select name="status" class="form-control form-control-sm" asp-items="Html.GetEnumSelectList<WorkOrderStatus>()"><option value="">Open</option></select></div>
+    <div class="col-md-2"><label>Priority</label><select name="priority" class="form-control form-control-sm" asp-items="Html.GetEnumSelectList<RepairPriority>()"><option value="">All</option></select></div>
+    <div class="col-md-2">
+        <label>Patch</label>
+        <select name="patch" class="form-control form-control-sm">
+            <option value="">All</option>
+            @foreach (var p in new[] { "NORTH", "SOUTH", "EAST" }) { <option value="@p" selected="@(ViewBag.Patch == p)">@p</option> }
+        </select>
+    </div>
+    <div class="col-md-2"><div class="form-check"><input type="checkbox" name="overdue" value="true" class="form-check-input" id="overdue" checked="@((bool)ViewBag.Overdue)" /><label class="form-check-label" for="overdue">Past target only</label></div></div>
+    <div class="col-md-1"><button class="btn btn-sm btn-primary btn-block">Filter</button></div>
+</form>
+<p class="text-muted">@Model.Count work orders (max 200 shown)</p>
+<partial name="_WorkOrderTable" model="Model" />

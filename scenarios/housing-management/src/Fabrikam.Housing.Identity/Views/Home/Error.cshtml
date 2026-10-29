@@ -1,0 +1,10 @@
+@model ErrorViewModel
+@{ ViewData["Title"] = "Error"; }
+<div class="card card-narrow"><div class="card-body">
+    <h1 class="h4">Sorry, something went wrong</h1>
+    @if (!string.IsNullOrEmpty(Model.Error))
+    {
+        <p><strong>@Model.Error</strong> @Model.Description</p>
+    }
+    <p class="small text-muted">Reference: @Model.RequestId</p>
+</div></div>

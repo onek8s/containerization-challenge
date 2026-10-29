@@ -1,0 +1,10 @@
+Litware-tilauksesi {{orderNumber}} on matkalla
+<html><body style="font-family: Arial, sans-serif; color: #222">
+<p>Hei {{name}},</p>
+<p>Tilauksesi <b>{{orderNumber}}</b> on lähtenyt varastoltamme ja kuljetusyhtiö on {{carrier}}.</p>
+{{#if trackingUrl}}<p><a href="{{trackingUrl}}">Seuraa lähetystä</a> ({{trackingNumber}})</p>{{else}}<p>{{trackingNumber}}</p>{{/if}}
+<table cellpadding="4" style="border-collapse: collapse">
+{{#each lines}}<tr><td>{{Quantity}} x</td><td>{{Description}}</td><td style="color:#888">{{Sku}}</td></tr>
+{{/each}}</table>
+<p>Kiitos, että asioit Litware Outdoorilla!</p>
+</body></html>

@@ -1,0 +1,16 @@
+<nav class="navbar navbar-expand navbar-dark bg-dark mb-4">
+  <div class="container">
+    <a class="navbar-brand" routerLink="/claims">Lamna Healthcare <small>Expense Claims</small></a>
+    <ul class="navbar-nav me-auto" *ngIf="me$ | async as me">
+      <li class="nav-item"><a class="nav-link" routerLink="/claims" routerLinkActive="active">My claims</a></li>
+      <li class="nav-item" *ngIf="me.isApprover"><a class="nav-link" routerLink="/approvals" routerLinkActive="active">Approvals</a></li>
+      <li class="nav-item" *ngIf="me.isFinance"><a class="nav-link" routerLink="/finance" routerLinkActive="active">Finance</a></li>
+      <li class="nav-item" *ngIf="me.isAdministrator"><a class="nav-link" routerLink="/admin/cards" routerLinkActive="active">Company cards</a></li>
+    </ul>
+    <span class="navbar-text me-3" *ngIf="me$ | async as me">{{ me.displayName }}</span>
+    <button class="btn btn-sm btn-outline-light" *ngIf="auth.isAuthenticated$ | async" (click)="auth.logout()">Sign out</button>
+  </div>
+</nav>
+<main class="container">
+  <router-outlet></router-outlet>
+</main>

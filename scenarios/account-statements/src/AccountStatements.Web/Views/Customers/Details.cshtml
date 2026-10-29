@@ -1,0 +1,127 @@
+@model CustomerDetailsModel
+@{
+    ViewBag.Title = Model.Customer.CustomerNo;
+    var c = Model.Customer;
+    var st = Model.Current;
+}
+<p><a href="@ViewBag.BackUrl">&larr; Customers</a></p>
+<h1>@c.CustomerNo @c.Name @if (c.OnHold) { <span class="tag">on hold</span> }</h1>
+<div class="cards">
+    <div class="card">
+        <h2>Customer</h2>
+        <p>@Html.Raw(string.Join("<br />", c.AddressLines().Select(l => Html.Encode(l))))</p>
+        <p>Language @c.Language &middot; Currency @c.CurrencyCode<br />Credit controller @c.CreditController<br />Credit limit @c.CreditLimit.ToString("#,0") @c.CurrencyCode</p>
+    </div>
+    <div class="card">
+        <h2>Balance @st.StatementDate.ToString("dd.MM.yyyy")</h2>
+        <table class="aging">
+            <tr><th>Not due</th><td class="num">@st.Aging.NotDue.ToString("#,0.00")</td></tr>
+            <tr><th>1-30</th><td class="num">@st.Aging.Days1To30.ToString("#,0.00")</td></tr>
+            <tr><th>31-60</th><td class="num">@st.Aging.Days31To60.ToString("#,0.00")</td></tr>
+            <tr><th>61-90</th><td class="num">@st.Aging.Days61To90.ToString("#,0.00")</td></tr>
+            <tr><th>Over 90</th><td class="num @(st.Aging.Over90 > 0 ? "bad" : "")">@st.Aging.Over90.ToString("#,0.00")</td></tr>
+            <tr><th>Unallocated</th><td class="num">@st.Aging.Unallocated.ToString("#,0.00")</td></tr>
+            <tr class="total"><th>Total</th><td class="num">@st.Aging.Total.ToString("#,0.00")</td></tr>
+        </table>
+        @if (st.DunningLevel > 0)
+        {
+            <p class="bad">Reminder level @st.DunningLevel</p>
+        }
+    </div>
+    <div class="card">
+        <h2>Statement</h2>
+        <form method="get" action="@Url.Action("Statement", new { id = c.CustomerNo })">
+            <label>From <input type="date" name="periodStart" value="@Model.DefaultPeriodStart.ToString("yyyy-MM-dd")" /></label>
+            <label>To <input type="date" name="statementDate" value="@Model.DefaultStatementDate.ToString("yyyy-MM-dd")" /></label>
+            <label>Format
+                <select name="format"><option value="pdf">PDF</option><option value="xlsx">Excel</option><option value="docx">Word</option></select>
+            </label>
+            <button type="submit" class="button">Create statement</button>
+        </form>
+    </div>
+</div>
+
+<div class="cards">
+    <div class="card wide">
+        <h2>Statement delivery</h2>
+        @if (Model.CanEditDelivery)
+        {
+            using (Html.BeginForm("Delivery", "Customers", FormMethod.Post, new { @class = "inline" }))
+            {
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="CustomerNo" value="@c.CustomerNo" />
+                <select name="Delivery">
+                    @foreach (StatementDelivery d in Enum.GetValues(typeof(StatementDelivery)))
+                    {
+                        <option value="@d" selected="@(d == c.Delivery)">@d</option>
+                    }
+                </select>
+                <input type="email" name="Email" value="@c.Email" placeholder="E-mail" />
+                <input type="text" name="DropFolder" value="@c.DropFolder" placeholder="Drop folder on the statement share" />
+                <button type="submit" class="button">Save</button>
+            }
+        }
+        else
+        {
+            <p>@c.Delivery @(c.Delivery == StatementDelivery.Email ? c.Email : c.Delivery == StatementDelivery.Share ? c.DropFolder : "")</p>
+        }
+    </div>
+</div>
+
+<h2>Open items</h2>
+<table class="grid">
+    <thead><tr><th>Type</th><th>Document</th><th>Contract</th><th>Date</th><th>Due</th><th class="num">Days overdue</th><th class="num">Original</th><th class="num">Open</th><th></th></tr></thead>
+    <tbody>
+        @foreach (var i in st.OpenItems)
+        {
+            <tr>
+                <td>@i.EntryType</td>
+                <td>@i.DocumentNo</td>
+                <td>@i.ContractNo</td>
+                <td>@i.PostingDate.ToString("dd.MM.yyyy")</td>
+                <td>@i.DueDate.ToString("dd.MM.yyyy")</td>
+                <td class="num @(i.DaysOverdue > 30 ? "bad" : "")">@(i.DaysOverdue > 0 ? i.DaysOverdue.ToString() : "")</td>
+                <td class="num">@i.OriginalAmount.ToString("#,0.00")</td>
+                <td class="num">@i.OpenAmount.ToString("#,0.00")</td>
+                <td>@if (i.EntryType == EntryTypes.Invoice) { @Html.ActionLink("Invoice copy", "Invoice", new { id = i.DocumentNo }) }</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h2>Contracts</h2>
+<table class="grid">
+    <thead><tr><th>Contract</th><th>Asset</th><th>Category</th><th>Start</th><th>End</th><th class="num">Monthly rent</th><th>Status</th></tr></thead>
+    <tbody>
+        @foreach (var k in Model.Contracts)
+        {
+            <tr>
+                <td>@k.ContractNo</td>
+                <td>@k.AssetDescription</td>
+                <td>@k.AssetCategory</td>
+                <td>@k.StartDate.ToString("dd.MM.yyyy")</td>
+                <td>@k.EndDate.ToString("dd.MM.yyyy")</td>
+                <td class="num">@k.MonthlyRent.ToString("#,0.00")</td>
+                <td>@k.Status</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h2>Sent statements and documents</h2>
+<table class="grid">
+    <thead><tr><th>Created</th><th>Subscription</th><th>Document</th><th>Method</th><th>Target</th><th>Status</th></tr></thead>
+    <tbody>
+        @foreach (var d in Model.Deliveries)
+        {
+            <tr>
+                <td>@d.CreatedAt.ToString("dd.MM.yyyy HH:mm")</td>
+                <td>@d.SubscriptionName</td>
+                <td>@d.DocumentName</td>
+                <td>@d.Method</td>
+                <td class="path">@d.Target</td>
+                <td class="status-@d.Status.ToLowerInvariant()" title="@d.LastError">@d.Status</td>
+            </tr>
+        }
+    </tbody>
+</table>

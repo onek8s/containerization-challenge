@@ -1,0 +1,13 @@
+<Project>
+
+  <PropertyGroup>
+    <LangVersion>7.3</LangVersion>
+    <Company>Tailspin Machinery</Company>
+    <Product>Dealer Orders</Product>
+    <Version>4.6.2</Version>
+    <Copyright>Copyright © Tailspin Machinery 2014-2019</Copyright>
+    <Deterministic>true</Deterministic>
+    <NoWarn>$(NoWarn);NU1901;NU1902;NU1903;NU1904</NoWarn>
+  </PropertyGroup>
+
+</Project>

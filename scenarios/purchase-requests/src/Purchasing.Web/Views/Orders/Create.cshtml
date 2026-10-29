@@ -1,0 +1,16 @@
+@model OrderForm
+@{
+    var r = Model.Request.Request;
+    ViewBag.Title = "Order " + r.Number;
+}
+<h1>Create purchase order for @r.Number</h1>
+<p>@r.Title &middot; @r.SupplierName &middot; @r.NetTotal.ToString("N2") @r.Currency net</p>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(false, "", new { @class = "errors" })
+    @Html.HiddenFor(m => m.RequestId)
+    <label class="full">Delivery address @Html.TextAreaFor(m => m.DeliveryAddress, 4, 60, new { })</label>
+    <p class="actions"><button type="submit" class="primary">Create order</button></p>
+}

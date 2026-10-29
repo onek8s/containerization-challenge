@@ -1,0 +1,7 @@
+Subject: Order {OrderNumber} on credit hold
+
+Dear {DealerName},
+
+order {OrderNumber} (your reference {DealerPo}) is waiting for a credit review by our finance team. We will contact you shortly.
+
+Tailspin Machinery dealer sales

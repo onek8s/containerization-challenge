@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net462</TargetFramework>
+    <RootNamespace>VanArsdel.Integration.WcfExtensions</RootNamespace>
+    <Description>WCF-Custom endpoint behaviour for the ERP order management service send port.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\VanArsdel.Integration.Runtime\VanArsdel.Integration.Runtime.csproj" />
+  </ItemGroup>
+
+</Project>

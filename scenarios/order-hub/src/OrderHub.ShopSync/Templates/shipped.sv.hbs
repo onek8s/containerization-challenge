@@ -1,0 +1,10 @@
+Din Litware-beställning {{orderNumber}} är på väg
+<html><body style="font-family: Arial, sans-serif; color: #222">
+<p>Hej {{name}},</p>
+<p>Din beställning <b>{{orderNumber}}</b> har lämnat vårt lager och skickas med {{carrier}}.</p>
+{{#if trackingUrl}}<p><a href="{{trackingUrl}}">Spåra ditt paket</a> ({{trackingNumber}})</p>{{else}}<p>{{trackingNumber}}</p>{{/if}}
+<table cellpadding="4" style="border-collapse: collapse">
+{{#each lines}}<tr><td>{{Quantity}} x</td><td>{{Description}}</td><td style="color:#888">{{Sku}}</td></tr>
+{{/each}}</table>
+<p>Tack för att du handlar hos Litware Outdoor!</p>
+</body></html>

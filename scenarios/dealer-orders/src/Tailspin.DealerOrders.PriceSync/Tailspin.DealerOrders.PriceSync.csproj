@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net472</TargetFramework>
+    <RootNamespace>Tailspin.DealerOrders.PriceSync</RootNamespace>
+    <AssemblyName>Tailspin.DealerOrders.PriceSync</AssemblyName>
+    <PlatformTarget>x64</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="all" />
+    <PackageReference Include="Topshelf" Version="4.2.1" />
+    <PackageReference Include="Topshelf.Log4Net" Version="4.2.1" />
+    <PackageReference Include="Quartz" Version="2.6.2" />
+    <PackageReference Include="Common.Logging.Log4Net208" Version="3.4.1" />
+    <PackageReference Include="Unity" Version="5.8.11" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System.Configuration" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Tailspin.DealerOrders.AxIntegration\Tailspin.DealerOrders.AxIntegration.csproj" />
+    <ProjectReference Include="..\Tailspin.DealerOrders.Infrastructure\Tailspin.DealerOrders.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="quartz_jobs.xml" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="..\..\catalog\**\*.json" LinkBase="catalog" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+</Project>

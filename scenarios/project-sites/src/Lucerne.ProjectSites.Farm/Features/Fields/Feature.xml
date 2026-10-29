@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Feature xmlns="http://schemas.microsoft.com/sharepoint/"
+         Id="{A3B1D6E2-0F4C-4B7A-9D85-1E2F3A4B5C61}"
+         Title="Lucerne Project Sites - Columns and Content Types"
+         Description="Site columns and content types for engineering projects."
+         Scope="Site"
+         Version="5.3.1.0"
+         Hidden="FALSE">
+  <ElementManifests>
+    <ElementManifest Location="Fields.xml" />
+    <ElementManifest Location="ContentTypes.xml" />
+  </ElementManifests>
+</Feature>

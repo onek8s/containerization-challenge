@@ -1,0 +1,31 @@
+Dynamics AX 2012 R3 objects in the TSDealerOrders model (layer CUS, model file TSDealerOrders.axmodel)
+
+Classes
+  TSDealerOrderService        Business Connector entry point (Class_TSDealerOrderService.xpo); also
+                              createQuotation, convertQuotation, updateSalesOrder, releaseReservation
+  TSDealerConfigBom           adds option items to the configuration BOM version
+  TSDealerChangeTracker       stamps SalesTable.TSDealerChangedDateTime on status, delivery date and packing slip changes
+
+Tables and fields
+  TSDealerMessageLog          MessageId (unique), Method, Result, CreatedDateTime; cleaned up after 90 days by batch
+  SalesTable                  TSEndCustomerName, TSCancelReason, TSDealerChangedDateTime (index)
+  SalesLine                   TSDealerLineRef
+
+Queries (published through the AX Query Service, QueryServiceClient)
+  TSDealerSalesPrices         PriceDiscTable, relation PriceSalesItem, price groups LIST, DLR-*
+  TSDealerOnHand              InventSum joined to InventDim (warehouses KON, FRA, MIL), view TSDealerOnHandView
+  TSDealerCustBalance         CustTable + view TSDealerCustBalanceView over CustTransOpen
+  TSDealerExchangeRates       ExchangeRate + ExchangeRateCurrencyPair, rate type DEFAULT
+  TSDealerItems               InventTable, EcoResProduct translation, item groups MACHINE, OPTION, PARTS
+  TSDealerOrderChanges        built at runtime by the connector (QueryMetadata) over SalesTable.TSDealerChangedDateTime
+  TSDealerShipments           built at runtime over CustPackingSlipJour / CustPackingSlipTrans
+
+AIF
+  Inbound port TSDealerServices on net.tcp://aos01:8201 (Windows authentication, adapter NetTcp) exposing
+  SalesSalesOrderService.read, CustCustomerService.read, InventInventSumService.find
+
+Security
+  Duty TSDealerIntegrationMaintain, privilege TSDealerIntegrationService; role "Dealer integration" given to
+  CORP\svc-dealer-ax (AX connector and sync service account) and to the sales desk users (they act through LogonAs).
+  CORP\svc-ax-bcproxy is the Business Connector proxy account set in System administration > Setup > System > System
+  service accounts.

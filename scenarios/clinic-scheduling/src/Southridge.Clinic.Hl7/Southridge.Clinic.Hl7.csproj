@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net35</TargetFramework>
+    <RootNamespace>Southridge.Clinic.Hl7</RootNamespace>
+  </PropertyGroup>
+
+</Project>

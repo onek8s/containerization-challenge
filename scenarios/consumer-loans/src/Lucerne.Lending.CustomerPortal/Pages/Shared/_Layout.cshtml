@@ -1,0 +1,18 @@
+@inject PortalOptions Portal
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewData["Title"] - @Portal.BankName</title>
+    <link rel="stylesheet" href="~/css/account.css" asp-append-version="true" />
+</head>
+<body>
+    <header><span class="brand">@Portal.BankName</span> <span class="sub">Loans online</span></header>
+    <main class="card">
+        <h1>@ViewData["Title"]</h1>
+        @RenderBody()
+    </main>
+    <footer>Customer service @Portal.SupportPhone (Mon-Fri 8-18)</footer>
+</body>
+</html>

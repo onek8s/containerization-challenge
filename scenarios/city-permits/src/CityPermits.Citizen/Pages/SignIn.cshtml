@@ -1,0 +1,20 @@
+@page
+@model CityPermits.Citizen.Pages.SignInModel
+@{ ViewData["Title"] = "Sign in"; }
+<h1>Sign in</h1>
+@if (Model.DevelopmentMode)
+{
+    <p>Development sign-in: choose a test identity.</p>
+    <form method="post">
+        <select name="subject">
+            @foreach (var a in Model.TestIdentities) { <option value="@a.EidSubject">@a.DisplayName (@a.EidSubject)</option> }
+            <option value="eid-p-new">New person (eid-p-new)</option>
+        </select>
+        <input type="hidden" name="returnUrl" value="@Model.ReturnUrl" />
+        <button class="btn">Sign in</button>
+    </form>
+}
+else
+{
+    <p><a class="btn" href="@Url.Content("~/Saml2/SignIn")?ReturnUrl=@Uri.EscapeDataString(Model.ReturnUrl ?? "/Cases")">Continue to national digital identity</a></p>
+}

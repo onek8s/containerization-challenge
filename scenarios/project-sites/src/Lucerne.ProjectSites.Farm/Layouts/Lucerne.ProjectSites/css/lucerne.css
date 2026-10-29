@@ -1,0 +1,15 @@
+/* Lucerne Project Sites */
+.luc-page { max-width: 1100px; }
+.luc-note { color: #666; font-size: 0.9em; }
+.luc-summary { font-style: italic; }
+.luc-rag { font-weight: bold; padding: 2px 8px; text-align: center; }
+.luc-rag-green { background-color: #c6efce; color: #006100; }
+.luc-rag-amber { background-color: #ffeb9c; color: #9c5700; }
+.luc-rag-red { background-color: #ffc7ce; color: #9c0006; }
+.luc-rag-notassessed { background-color: #ededed; color: #555; }
+table.luc-health, table.luc-deliverables { border-collapse: collapse; width: 100%; }
+table.luc-health th, table.luc-deliverables th { background: #1f4e79; color: #fff; text-align: left; padding: 4px; }
+table.luc-health td, table.luc-deliverables td { border-bottom: 1px solid #ddd; padding: 4px; }
+tr.luc-overdue td { background-color: #fff2f2; }
+td.luc-badnumber { outline: 2px dashed #c00; }
+#luc-status-banner { padding: 6px 12px; margin-bottom: 10px; }

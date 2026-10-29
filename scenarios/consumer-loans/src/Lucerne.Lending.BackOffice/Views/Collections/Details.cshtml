@@ -1,0 +1,47 @@
+@model CollectionDetailsModel
+@{ var c = Model.Case; ViewData["Title"] = c.Reference; }
+<h2>@c.Reference <span class="tag">@c.StatusValue</span> <span class="tag">@c.StageValue</span></h2>
+<p>Loan @c.AccountNumber, customer @c.CustomerNumber @(Model.Customer?.Name), arrears <b>@c.Arrears.ToString("N2") EUR</b>, @c.DaysPastDue days past due,
+   reminder fees charged @c.FeesCharged. Assigned: @(c.AssignedTo ?? "-")
+   @if (c.PromiseDate != null) { <text><br />Promise: @(c.PromiseAmount?.ToString("N2")) EUR by @(c.PromiseDate?.ToString("d.M.yyyy"))</text> }
+</p>
+@if (Model.CoreError != null) { <p class="warn">Core system: @Model.CoreError</p> }
+<form class="inline" method="post" asp-action="Assign" asp-route-id="@c.Id"><button>Assign to me</button></form>
+<div class="grid" style="margin-top:12px">
+    <div class="card">
+        <h3>Loan in core</h3>
+        @if (Model.Loan is { } l)
+        {
+            <table>
+                <tr><th>Product</th><td>@l.ProductCode</td></tr>
+                <tr><th>Original / balance</th><td>@l.OriginalAmount.ToString("N2") / @l.Balance.ToString("N2")</td></tr>
+                <tr><th>Rate</th><td>@l.NominalRatePercent.ToString("0.00") %</td></tr>
+                <tr><th>Next due</th><td>@l.NextDueDate?.ToString("d.M.yyyy") @l.NextInstalment.ToString("N2")</td></tr>
+                <tr><th>Status</th><td>@l.Status</td></tr>
+                <tr><th>Payment reference</th><td>@PaymentReference.ForLoanAccount(l.AccountNumber)</td></tr>
+            </table>
+        }
+        <h3>Payments (12 months)</h3>
+        <table>
+            <tr><th>Date</th><th>Type</th><th class="num">Amount</th><th class="num">Balance</th></tr>
+            @foreach (var p in Model.Payments) { <tr><td>@p.BookingDate.ToString("d.M.yyyy")</td><td>@p.Type</td><td class="num">@p.Amount.ToString("N2")</td><td class="num">@p.BalanceAfter.ToString("N2")</td></tr> }
+        </table>
+    </div>
+    <div class="card">
+        <h3>Actions</h3>
+        <form method="post" asp-action="Promise" asp-route-id="@c.Id">
+            <label>Promise to pay</label><input type="date" name="date" /> <input name="amount" size="8" placeholder="EUR" /> <button>Record</button>
+        </form>
+        <form method="post" asp-action="Plan" asp-route-id="@c.Id">
+            <label>Payment plan</label><select name="months">@for (var m = 2; m <= 12; m++) { <option>@m</option> }</select> months <button>Create plan</button>
+        </form>
+        <table style="margin-top:10px">
+            @foreach (var a in Model.Actions) { <tr><td>@a.CreatedUtc.ToLocalTime().ToString("d.M.yyyy HH:mm")</td><td>@a.ActionType</td><td>@a.Actor</td><td>@a.Detail</td></tr> }
+        </table>
+        <h3>Letters</h3>
+        <table>
+            @foreach (var d in Model.Documents) { <tr><td><a asp-controller="Applications" asp-action="Document" asp-route-id="@d.Id">@d.FileName</a></td><td>@d.CreatedUtc.ToLocalTime().ToString("d.M.yyyy")</td></tr> }
+        </table>
+        @foreach (var p in Model.Plans) { <p>Plan @p.Months months, @p.Status, by @p.CreatedBy @p.CreatedUtc.ToLocalTime().ToString("d.M.yyyy")</p> }
+    </div>
+</div>

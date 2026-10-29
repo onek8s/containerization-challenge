@@ -1,0 +1,25 @@
+@model IEnumerable<Proseware.ControlTower.Data.ShipmentRow>
+<table class="table table-sm table-hover align-middle">
+    <thead>
+        <tr><th>Number</th><th>Customer</th><th>Reference</th><th>Mode</th><th>Status</th><th>From</th><th>To</th><th>Pickup</th><th>Delivery</th><th>ETA</th><th></th></tr>
+    </thead>
+    <tbody>
+    @foreach (var s in Model)
+    {
+        var late = s.Eta is { } eta && eta > s.PlannedDelivery.AddHours(2);
+        <tr>
+            <td><a asp-controller="Shipments" asp-action="Details" asp-route-id="@s.Id">@s.Number</a></td>
+            <td>@s.Customer</td>
+            <td>@s.CustomerReference</td>
+            <td>@s.Mode</td>
+            <td><partial name="_StatusBadge" model="s.Status" /></td>
+            <td>@s.Origin</td>
+            <td>@s.Destination</td>
+            <td>@s.PlannedPickup.ToString("dd.MM. HH:mm")</td>
+            <td>@s.PlannedDelivery.ToString("dd.MM. HH:mm")</td>
+            <td class="@(late ? "text-danger fw-bold" : "")">@s.Eta?.ToString("dd.MM. HH:mm")</td>
+            <td>@if (s.OpenAlerts > 0) { <span class="badge bg-danger">@s.OpenAlerts</span> }</td>
+        </tr>
+    }
+    </tbody>
+</table>

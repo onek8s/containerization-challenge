@@ -1,0 +1,261 @@
+﻿#if __DESIGNER_DATA
+#error Do not define __DESIGNER_DATA.
+<?xml version="1.0" encoding="utf-8"?>
+<om:MetaModel MajorVersion="1" MinorVersion="3" Core="2b131234-7959-458d-834f-2dc0769ce683" ScheduleModel="66366196-361d-448d-976f-cab5e87496d2" xmlns:om="http://schemas.microsoft.com/BizTalk/2003/DesignerData">
+    <om:Property Name="DisplayName" Value="ProcessFunctionalAck" />
+    <om:Element Type="Module" OID="0ee31c82-e4b0-57a8-b7fd-b27c6c3c9ba6">
+        <om:Property Name="ReportToAnalyst" Value="True" />
+        <om:Property Name="Name" Value="VanArsdel.Integration.Orchestrations" />
+        <om:Property Name="Signal" Value="False" />
+        <om:Element Type="PortType" OID="493a7b5b-a9f4-5e55-99e0-07f5da1be69e" ParentLink="Module_PortType">
+            <om:Property Name="Synchronous" Value="False" />
+            <om:Property Name="TypeModifier" Value="Internal" />
+            <om:Property Name="ReportToAnalyst" Value="True" />
+            <om:Property Name="Name" Value="FunctionalAckInType" />
+            <om:Property Name="Signal" Value="False" />
+            <om:Element Type="OperationDeclaration" OID="e876e604-5268-5c4c-bc2a-89e3fad2a93a" ParentLink="PortType_OperationDeclaration">
+                <om:Property Name="OperationType" Value="OneWay" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="Receive" />
+                <om:Property Name="Signal" Value="False" />
+                <om:Element Type="MessageRef" OID="4b3d7613-e92b-5190-ae49-77d2036809de" ParentLink="OperationDeclaration_RequestMessageRef">
+                    <om:Property Name="Ref" Value="VanArsdel.Integration.Schemas.Canonical.CanonicalFunctionalAck" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="Request" />
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+            </om:Element>
+        </om:Element>
+        <om:Element Type="PortType" OID="e245ec68-6e76-582f-9287-f5dcc7bdabad" ParentLink="Module_PortType">
+            <om:Property Name="Synchronous" Value="False" />
+            <om:Property Name="TypeModifier" Value="Internal" />
+            <om:Property Name="ReportToAnalyst" Value="True" />
+            <om:Property Name="Name" Value="NotifyType" />
+            <om:Property Name="Signal" Value="False" />
+            <om:Element Type="OperationDeclaration" OID="6f3fd9b2-2d9d-556c-bd81-8e2635f1ef87" ParentLink="PortType_OperationDeclaration">
+                <om:Property Name="OperationType" Value="OneWay" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="Send" />
+                <om:Property Name="Signal" Value="False" />
+                <om:Element Type="MessageRef" OID="471b0416-3aef-51ba-94b7-bff98910ade1" ParentLink="OperationDeclaration_RequestMessageRef">
+                    <om:Property Name="Ref" Value="System.Xml.XmlDocument" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="Request" />
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+            </om:Element>
+        </om:Element>
+        <om:Element Type="ServiceDeclaration" OID="cefef0ff-cb29-5617-a0de-e8d92aed3237" ParentLink="Module_ServiceDeclaration">
+            <om:Property Name="InitializedTransactionType" Value="False" />
+            <om:Property Name="IsInvokable" Value="False" />
+            <om:Property Name="TypeModifier" Value="Internal" />
+            <om:Property Name="ReportToAnalyst" Value="True" />
+            <om:Property Name="Name" Value="ProcessFunctionalAck" />
+            <om:Property Name="Signal" Value="False" />
+            <om:Element Type="MessageDeclaration" OID="7077b9ea-8334-5b8b-b636-8b49baa56c00" ParentLink="ServiceDeclaration_MessageDeclaration">
+                <om:Property Name="Type" Value="System.Xml.XmlDocument" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="NotifyMsg" />
+                <om:Property Name="Signal" Value="True" />
+            </om:Element>
+            <om:Element Type="MessageDeclaration" OID="c8cf94c5-02d3-5c79-86b0-847456700a4f" ParentLink="ServiceDeclaration_MessageDeclaration">
+                <om:Property Name="Type" Value="VanArsdel.Integration.Schemas.Canonical.CanonicalFunctionalAck" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="AckMsg" />
+                <om:Property Name="Signal" Value="True" />
+            </om:Element>
+            <om:Element Type="VariableDeclaration" OID="992b1843-3337-5ae1-8980-1b4ca2d26e91" ParentLink="ServiceDeclaration_VariableDeclaration">
+                <om:Property Name="UseDefaultConstructor" Value="False" />
+                <om:Property Name="Type" Value="System.String" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="partnerId" />
+                <om:Property Name="Signal" Value="True" />
+            </om:Element>
+            <om:Element Type="VariableDeclaration" OID="783c14d6-796d-59d3-804c-1cc9e18d2a02" ParentLink="ServiceDeclaration_VariableDeclaration">
+                <om:Property Name="UseDefaultConstructor" Value="False" />
+                <om:Property Name="Type" Value="System.String" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="documentNumber" />
+                <om:Property Name="Signal" Value="True" />
+            </om:Element>
+            <om:Element Type="VariableDeclaration" OID="f11409e0-a4b5-515b-a682-03faf0861d36" ParentLink="ServiceDeclaration_VariableDeclaration">
+                <om:Property Name="UseDefaultConstructor" Value="False" />
+                <om:Property Name="Type" Value="System.String" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="status" />
+                <om:Property Name="Signal" Value="True" />
+            </om:Element>
+            <om:Element Type="VariableDeclaration" OID="faf810df-868b-5c19-9d6c-c8bcd4405ba6" ParentLink="ServiceDeclaration_VariableDeclaration">
+                <om:Property Name="UseDefaultConstructor" Value="False" />
+                <om:Property Name="Type" Value="System.Boolean" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="matched" />
+                <om:Property Name="Signal" Value="True" />
+            </om:Element>
+            <om:Element Type="PortDeclaration" OID="af84f37c-5024-5d54-989d-a5447f0f75d5" ParentLink="ServiceDeclaration_PortDeclaration">
+                <om:Property Name="PortModifier" Value="Implements" />
+                <om:Property Name="Orientation" Value="Receive" />
+                <om:Property Name="PortIndex" Value="0" />
+                <om:Property Name="IsWebPort" Value="False" />
+                <om:Property Name="OrderedDelivery" Value="False" />
+                <om:Property Name="Type" Value="VanArsdel.Integration.Orchestrations.FunctionalAckInType" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="AckIn" />
+                <om:Property Name="Signal" Value="False" />
+                <om:Element Type="DirectBindingAttribute" OID="7d36ede6-c818-5b0c-9b79-b3f1be34ba59" ParentLink="PortDeclaration_CLRAttribute">
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+            </om:Element>
+            <om:Element Type="PortDeclaration" OID="727cbd6b-a6c2-591f-81d5-3216aefae7f8" ParentLink="ServiceDeclaration_PortDeclaration">
+                <om:Property Name="PortModifier" Value="Uses" />
+                <om:Property Name="Orientation" Value="Send" />
+                <om:Property Name="PortIndex" Value="1" />
+                <om:Property Name="IsWebPort" Value="False" />
+                <om:Property Name="OrderedDelivery" Value="False" />
+                <om:Property Name="Type" Value="VanArsdel.Integration.Orchestrations.NotifyType" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="Notify" />
+                <om:Property Name="Signal" Value="False" />
+                <om:Element Type="PhysicalBindingAttribute" OID="8f7cdc0a-487e-5371-ba4b-7b42dccbe556" ParentLink="PortDeclaration_CLRAttribute">
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+            </om:Element>
+            <om:Element Type="ServiceBody" OID="50778202-7fc2-51a8-a52e-0ab3ee26e1a5" ParentLink="ServiceDeclaration_ServiceBody">
+                <om:Property Name="Signal" Value="False" />
+                <om:Element Type="Receive" OID="25f1e266-28e4-528e-9c16-d22419707fbf" ParentLink="ServiceBody_Statement">
+                    <om:Property Name="Activate" Value="True" />
+                    <om:Property Name="PortName" Value="AckIn" />
+                    <om:Property Name="MessageName" Value="AckMsg" />
+                    <om:Property Name="OperationName" Value="Receive" />
+                    <om:Property Name="OperationMessageName" Value="Request" />
+                    <om:Property Name="Filter" Value='BTS.MessageType == "http://schemas.vanarsdel.com/integration/canonical/2014#FunctionalAck" &amp;&amp; VanArsdel.Integration.Schemas.MessageKind != "PurchaseOrderAck"' />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="ReceiveAck" />
+                    <om:Property Name="Signal" Value="True" />
+                </om:Element>
+                <om:Element Type="VariableAssignment" OID="f02756d9-41c0-55ec-8fa6-9f3c9333d8b8" ParentLink="ServiceBody_Statement">
+                    <om:Property Name="Expression" Value="partnerId = AckMsg(VanArsdel.Integration.Schemas.PartnerId);&#10;documentNumber = AckMsg(VanArsdel.Integration.Schemas.AckControlNumber);&#10;status = xpath(AckMsg, &quot;string(/*[local-name()='FunctionalAck']/*[local-name()='Status'])&quot;);&#10;matched = VanArsdel.Integration.Runtime.Interchanges.InterchangeRegistry.ApplyAck(partnerId, documentNumber, status, System.DateTime.UtcNow);" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="ApplyAck" />
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+                <om:Element Type="Decision" OID="2b64c098-6e8d-56e0-aa04-ed456547f9f7" ParentLink="ServiceBody_Statement">
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="IsRejected" />
+                    <om:Property Name="Signal" Value="False" />
+                    <om:Element Type="DecisionBranch" OID="ece2acb6-081b-5cf9-aee7-018fc2cbac19" ParentLink="ReallyComplexStatement_Branch">
+                        <om:Property Name="Expression" Value='status == "Rejected" || status == "AcceptedWithErrors" || !matched' />
+                        <om:Property Name="IsGhostBranch" Value="False" />
+                        <om:Property Name="ReportToAnalyst" Value="True" />
+                        <om:Property Name="Name" Value="Rejected" />
+                        <om:Property Name="Signal" Value="False" />
+                        <om:Element Type="Construct" OID="6c1ba41b-f483-557d-9e13-b5c965aecef5" ParentLink="ComplexStatement_Statement">
+                            <om:Property Name="ReportToAnalyst" Value="True" />
+                            <om:Property Name="Name" Value="BuildNotice" />
+                            <om:Property Name="Signal" Value="False" />
+                            <om:Element Type="MessageAssignment" OID="c19c3fdd-09b2-5b21-87d8-795e5a398270" ParentLink="ComplexStatement_Statement">
+                                <om:Property Name="Expression" Value='NotifyMsg = new System.Xml.XmlDocument();&#10;NotifyMsg.LoadXml("&lt;Notice/&gt;");&#10;NotifyMsg.DocumentElement.InnerText = "Partner " + partnerId + " acknowledged control number " + documentNumber + " with " + status + (matched ? "" : " (no matching interchange)");&#10;NotifyMsg(SMTP.Subject) = VanArsdel.Integration.Runtime.Orchestration.OrderProcess.Subject("Acknowledgement problem", partnerId, documentNumber);' />
+                                <om:Property Name="ReportToAnalyst" Value="False" />
+                                <om:Property Name="Name" Value="Assign_BuildNotice" />
+                                <om:Property Name="Signal" Value="False" />
+                            </om:Element>
+                            <om:Element Type="MessageRef" OID="f5808a05-f582-5172-9dea-72ae906e1dd2" ParentLink="Construct_MessageRef">
+                                <om:Property Name="Ref" Value="NotifyMsg" />
+                                <om:Property Name="ReportToAnalyst" Value="True" />
+                                <om:Property Name="Signal" Value="False" />
+                            </om:Element>
+                        </om:Element>
+                        <om:Element Type="VariableAssignment" OID="d650fecf-f6f3-577e-afcb-d111a6c6c866" ParentLink="ComplexStatement_Statement">
+                            <om:Property Name="Expression" Value='Notify(Microsoft.XLANGs.BaseTypes.Address) = VanArsdel.Integration.Runtime.Orchestration.OrderProcess.MailTo("Integration");' />
+                            <om:Property Name="ReportToAnalyst" Value="True" />
+                            <om:Property Name="Name" Value="SetMailTo" />
+                            <om:Property Name="Signal" Value="False" />
+                        </om:Element>
+                        <om:Element Type="Send" OID="d730c9d0-58be-5ce9-a581-515ffefd91ba" ParentLink="ComplexStatement_Statement">
+                            <om:Property Name="PortName" Value="Notify" />
+                            <om:Property Name="MessageName" Value="NotifyMsg" />
+                            <om:Property Name="OperationName" Value="Send" />
+                            <om:Property Name="OperationMessageName" Value="Request" />
+                            <om:Property Name="ReportToAnalyst" Value="True" />
+                            <om:Property Name="Name" Value="SendNotice" />
+                            <om:Property Name="Signal" Value="True" />
+                        </om:Element>
+                    </om:Element>
+                    <om:Element Type="DecisionBranch" OID="e9ead4ec-9475-5123-8946-84b2379a1970" ParentLink="ReallyComplexStatement_Branch">
+                        <om:Property Name="IsGhostBranch" Value="True" />
+                        <om:Property Name="ReportToAnalyst" Value="True" />
+                        <om:Property Name="Name" Value="Else" />
+                        <om:Property Name="Signal" Value="False" />
+                    </om:Element>
+                </om:Element>
+            </om:Element>
+        </om:Element>
+    </om:Element>
+</om:MetaModel>
+#endif // __DESIGNER_DATA
+module VanArsdel.Integration.Orchestrations
+{
+    internal porttype FunctionalAckInType
+    {
+        oneway Receive
+        {
+            VanArsdel.Integration.Schemas.Canonical.CanonicalFunctionalAck
+        };
+    };
+    internal porttype NotifyType
+    {
+        oneway Send
+        {
+            System.Xml.XmlDocument
+        };
+    };
+    [Microsoft.XLANGs.BaseTypes.BPELExportable(false)]
+    internal service ProcessFunctionalAck
+    {
+        [Microsoft.XLANGs.BaseTypes.DirectBinding()]
+        port implements FunctionalAckInType AckIn;
+        [Microsoft.XLANGs.BaseTypes.PhysicalBinding(typeof(Microsoft.BizTalk.DefaultPipelines.PassThruTransmit))]
+        port uses dynamic NotifyType Notify;
+        message System.Xml.XmlDocument NotifyMsg;
+        message VanArsdel.Integration.Schemas.Canonical.CanonicalFunctionalAck AckMsg;
+        System.String partnerId;
+        System.String documentNumber;
+        System.String status;
+        System.Boolean matched;
+        body ()
+        {
+            [Microsoft.XLANGs.BaseTypes.DesignerPosition("25f1e266-28e4-528e-9c16-d22419707fbf")]
+            activate (BTS.MessageType == "http://schemas.vanarsdel.com/integration/canonical/2014#FunctionalAck" && VanArsdel.Integration.Schemas.MessageKind != "PurchaseOrderAck") receive (AckIn.Receive, AckMsg);
+            [Microsoft.XLANGs.BaseTypes.DesignerPosition("f02756d9-41c0-55ec-8fa6-9f3c9333d8b8")]
+            partnerId = AckMsg(VanArsdel.Integration.Schemas.PartnerId);
+            documentNumber = AckMsg(VanArsdel.Integration.Schemas.AckControlNumber);
+            status = xpath(AckMsg, "string(/*[local-name()='FunctionalAck']/*[local-name()='Status'])");
+            matched = VanArsdel.Integration.Runtime.Interchanges.InterchangeRegistry.ApplyAck(partnerId, documentNumber, status, System.DateTime.UtcNow);
+            [Microsoft.XLANGs.BaseTypes.DesignerPosition("2b64c098-6e8d-56e0-aa04-ed456547f9f7")]
+            if (status == "Rejected" || status == "AcceptedWithErrors" || !matched)
+            {
+                [Microsoft.XLANGs.BaseTypes.DesignerPosition("6c1ba41b-f483-557d-9e13-b5c965aecef5")]
+                construct NotifyMsg
+                {
+                    [Microsoft.XLANGs.BaseTypes.DesignerPosition("fb9c4da1-0f11-500b-9889-b0bc134f30ec")]
+                    NotifyMsg = new System.Xml.XmlDocument();
+                    NotifyMsg.LoadXml("<Notice/>");
+                    NotifyMsg.DocumentElement.InnerText = "Partner " + partnerId + " acknowledged control number " + documentNumber + " with " + status + (matched ? "" : " (no matching interchange)");
+                    NotifyMsg(SMTP.Subject) = VanArsdel.Integration.Runtime.Orchestration.OrderProcess.Subject("Acknowledgement problem", partnerId, documentNumber);
+                }
+                [Microsoft.XLANGs.BaseTypes.DesignerPosition("d650fecf-f6f3-577e-afcb-d111a6c6c866")]
+                Notify(Microsoft.XLANGs.BaseTypes.Address) = VanArsdel.Integration.Runtime.Orchestration.OrderProcess.MailTo("Integration");
+                [Microsoft.XLANGs.BaseTypes.DesignerPosition("d730c9d0-58be-5ce9-a581-515ffefd91ba")]
+                send (Notify.Send, NotifyMsg);
+            }
+        }
+    }
+}

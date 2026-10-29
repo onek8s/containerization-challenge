@@ -1,0 +1,17 @@
+@model StartReturnModel
+@{
+    ViewData["Title"] = "Start a return";
+}
+<h1>Return an item</h1>
+<p>You can return most items within 30 days of delivery. Enter your order number and the e-mail address you used when ordering.</p>
+<form asp-action="Index" method="post" class="card narrow">
+    <div asp-validation-summary="ModelOnly" class="errors"></div>
+    <label asp-for="OrderNumber"></label>
+    <input asp-for="OrderNumber" placeholder="SO-1048213" autocomplete="off" />
+    <span asp-validation-for="OrderNumber" class="field-error"></span>
+    <label asp-for="Email"></label>
+    <input asp-for="Email" type="email" />
+    <span asp-validation-for="Email" class="field-error"></span>
+    <button type="submit">Find my order</button>
+</form>
+<p class="muted">Already started a return? <a asp-controller="Return" asp-action="Status">Check the status</a>.</p>

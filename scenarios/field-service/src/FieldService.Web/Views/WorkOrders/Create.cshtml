@@ -1,0 +1,45 @@
+@model CreateWorkOrderViewModel
+@{
+    ViewData["Title"] = "New work order";
+}
+<h2>New work order</h2>
+<form asp-action="Create" method="post" class="col-md-8">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="mb-3">
+        <label asp-for="CustomerAccount" class="form-label"></label>
+        <select asp-for="CustomerAccount" class="form-select" asp-items="(IEnumerable<Microsoft.AspNetCore.Mvc.Rendering.SelectListItem>)ViewBag.Customers">
+            <option value="">-- choose --</option>
+        </select>
+        <span asp-validation-for="CustomerAccount" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="SiteAddress" class="form-label"></label>
+        <input asp-for="SiteAddress" class="form-control" />
+        <span asp-validation-for="SiteAddress" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Summary" class="form-label"></label>
+        <input asp-for="Summary" class="form-control" />
+        <span asp-validation-for="Summary" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Description" class="form-label"></label>
+        <textarea asp-for="Description" class="form-control" rows="4"></textarea>
+    </div>
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <label asp-for="Priority" class="form-label"></label>
+            <select asp-for="Priority" class="form-select" asp-items="Html.GetEnumSelectList<WorkOrderPriority>()"></select>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label asp-for="CustomerReference" class="form-label"></label>
+            <input asp-for="CustomerReference" class="form-control" />
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Create</button>
+    <a asp-action="Index" class="btn btn-link">Back</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

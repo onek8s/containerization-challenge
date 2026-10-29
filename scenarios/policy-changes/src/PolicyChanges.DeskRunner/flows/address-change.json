@@ -1,0 +1,37 @@
+{
+  "name": "Change address",
+  "changeType": "AddressChange",
+  "clientVersion": "6.4",
+  "defaultTimeoutSeconds": 15,
+  "steps": [
+    { "action": "window", "title": "PolicyDesk 6.* - *" },
+    { "action": "set", "field": "Policy number", "value": "{Policy}" },
+    { "action": "click", "button": "Open" },
+    { "action": "dialog", "optional": true, "timeoutSeconds": 3, "reject": [ "was not found", "is locked by" ] },
+    { "action": "window", "title": "PolicyDesk - Policy {Policy}" },
+    { "action": "capture", "name": "policy-before" },
+    { "action": "click", "button": "Change address..." },
+    { "action": "dialog", "optional": true, "timeoutSeconds": 2, "reject": [ "not in force" ] },
+    { "action": "window", "title": "PolicyDesk - Change address - {Policy}" },
+    { "action": "set", "field": "Effective date", "value": "{Effective}" },
+    { "action": "set", "field": "Street", "value": "{Field:Street}" },
+    { "action": "set", "field": "Postal code", "value": "{Field:PostalCode}" },
+    { "action": "set", "field": "City", "value": "{Field:City|upper}" },
+    { "action": "select", "field": "Country", "value": "{Field:Country}" },
+    { "action": "capture", "name": "address-entered" },
+    { "action": "click", "button": "Save" },
+    {
+      "action": "dialog",
+      "name": "endorsement",
+      "accept": [ "^Endorsement (?<Endorsement>\\d{7}) created" ],
+      "reject": [ "not in force", "before the policy start", "is not valid for", "not allowed" ]
+    },
+    { "action": "window", "title": "PolicyDesk - Policy {Policy}" },
+    { "action": "verify", "field": "Address", "value": "{Field:Street}, {Field:PostalCode} {Field:City|upper}, {Field:Country}" },
+    { "action": "capture", "name": "policy-after" },
+    { "action": "click", "button": "Close" }
+  ],
+  "cleanup": [
+    { "action": "dialog", "optional": true, "timeoutSeconds": 1, "accept": [ ".*" ] }
+  ]
+}

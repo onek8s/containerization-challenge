@@ -1,0 +1,50 @@
+{
+  "name": "Cancel policy",
+  "changeType": "Cancellation",
+  "clientVersion": "6.4",
+  "defaultTimeoutSeconds": 20,
+  "steps": [
+    { "action": "window", "title": "PolicyDesk 6.* - *" },
+    { "action": "set", "field": "Policy number", "value": "{Policy}" },
+    { "action": "click", "button": "Open" },
+    { "action": "dialog", "optional": true, "timeoutSeconds": 3, "reject": [ "was not found", "is locked by" ] },
+    { "action": "window", "title": "PolicyDesk - Policy {Policy}" },
+    { "action": "capture", "name": "policy-before" },
+    { "action": "click", "button": "Cancel policy..." },
+    { "action": "dialog", "optional": true, "timeoutSeconds": 2, "reject": [ "not in force" ] },
+    { "action": "window", "title": "PolicyDesk - Cancel policy - {Policy}" },
+    { "action": "set", "field": "Effective date", "value": "{Effective}" },
+    {
+      "action": "select",
+      "field": "Reason",
+      "value": "{Field:Reason}",
+      "map": {
+        "CustomerRequest": "Customer request",
+        "VehicleSold": "Vehicle sold",
+        "Death": "Death of policyholder",
+        "Duplicate": "Duplicate policy"
+      }
+    },
+    { "action": "set", "field": "Refund IBAN", "value": "{Field:RefundIban|iban}" },
+    { "action": "click", "button": "Calculate" },
+    { "action": "dialog", "optional": true, "timeoutSeconds": 2, "reject": [ "only valid for motor", "before the policy start" ] },
+    { "action": "read", "field": "Refund", "store": "Refund" },
+    { "action": "capture", "name": "cancellation-entered" },
+    { "action": "click", "button": "Save" },
+    { "action": "dialog", "accept": [ "^Cancel policy" ], "button": "Yes", "reject": [ "only valid for motor", "not in force" ] },
+    {
+      "action": "dialog",
+      "name": "endorsement",
+      "timeoutSeconds": 30,
+      "accept": [ "^Endorsement (?<Endorsement>\\d{7}) created" ],
+      "reject": [ "not in force", "before the policy start", "not allowed" ]
+    },
+    { "action": "window", "title": "PolicyDesk - Policy {Policy}" },
+    { "action": "verify", "field": "Status", "value": "Cancelled" },
+    { "action": "capture", "name": "policy-after" },
+    { "action": "click", "button": "Close" }
+  ],
+  "cleanup": [
+    { "action": "dialog", "optional": true, "timeoutSeconds": 1, "accept": [ ".*" ] }
+  ]
+}

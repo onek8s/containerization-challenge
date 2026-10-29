@@ -1,0 +1,38 @@
+@{
+    var user = ViewBag.CurrentUser as UserContext;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewBag.Title - Purchase Requests</title>
+    <link href="~/Content/site.css" rel="stylesheet" />
+</head>
+<body>
+    <header class="top">
+        <a class="brand" href="@Url.Action("Index", "Home")">Contoso Purchase Requests</a>
+        <nav>
+            <a href="@Url.Action("Index", "Requests")">My requests</a>
+            <a href="@Url.Action("Create", "Requests")">New request</a>
+            @if (user != null && (user.IsManager || user.IsFinance || user.IsDirector))
+            {
+                <a href="@Url.Action("Index", "Approvals")">Approvals</a>
+            }
+            @if (user != null && (user.IsBuyer || user.IsFinance))
+            {
+                <a href="@Url.Action("Index", "Orders")">Orders</a>
+            }
+        </nav>
+        <span class="who">@(user != null ? user.DisplayName : User.Identity.Name)</span>
+    </header>
+    <main>
+        @if (TempData["Flash"] != null)
+        {
+            <div class="flash">@TempData["Flash"]</div>
+        }
+        @RenderBody()
+    </main>
+    <footer>Contoso Manufacturing &middot; Procurement &middot; @Environment.MachineName</footer>
+</body>
+</html>

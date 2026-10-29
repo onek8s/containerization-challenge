@@ -1,0 +1,12 @@
+Subject: Tilaus {OrderNumber} vahvistettu, toimitus {DeliveryDate}
+
+Hyvä {DealerName},
+
+tilauksenne {OrderNumber} (viitteenne {DealerPo}) on vahvistettu tilausnumerolla {AxSalesId}.
+Vahvistettu toimituspäivä: {DeliveryDate}.
+
+{Lines}
+
+Tilausvahvistus on saatavilla jälleenmyyjäportaalissa: {Link}
+
+Tailspin Machinery jälleenmyyntipalvelu

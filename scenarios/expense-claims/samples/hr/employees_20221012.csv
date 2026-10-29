@@ -1,0 +1,9 @@
+﻿PersonnelNumber;UserPrincipalName;FirstName;LastName;Email;CostCenter;SupervisorNumber;BankAccount;BankBic;EmploymentEnd
+100001;helena.lindqvist@lamnahealthcare.com;Helena;Lindqvist;helena.lindqvist@lamnahealthcare.com;1000;;FI49 5000 9420 0287 30;OKOYFIHH;
+100014;mikko.salonen@lamnahealthcare.com;Mikko;Salonen;mikko.salonen@lamnahealthcare.com;1100;100001;FI21 1234 5600 0007 85;NDEAFIHH;
+100027;laura.niemi@lamnahealthcare.com;Laura;Niemi;laura.niemi@lamnahealthcare.com;1100;100014;FI55 4234 5670 0000 81;HELSFIHH;
+100102;sanna.koskinen@lamnahealthcare.com;Sanna;Koskinen;sanna.koskinen@lamnahealthcare.com;2100;100001;FI14 1009 3000 1234 58;NDEAFIHH;
+100150;jari.makinen@lamnahealthcare.com;Jari;Mäkinen;jari.makinen@lamnahealthcare.com;2140;100102;FI37 1590 3000 0007 76;NDEAFIHH;
+100233;aino.laine@lamnahealthcare.com;Aino;Laine;aino.laine@lamnahealthcare.com;2140;100150;FI14 4738 0010 0090 51;POPFFI22;
+100241;oskari.heikkinen@lamnahealthcare.com;Oskari;Heikkinen;oskari.heikkinen@lamnahealthcare.com;2140;100150;;;
+100255;emilia.virtanen@lamnahealthcare.com;Emilia;Virtanen;emilia.virtanen@lamnahealthcare.com;2140;100150;FI12 3456 7890 1234 56;;31.10.2022

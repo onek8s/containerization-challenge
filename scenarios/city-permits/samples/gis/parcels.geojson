@@ -1,0 +1,7307 @@
+{
+ "type": "FeatureCollection",
+ "crs": {
+  "type": "name",
+  "properties": {
+   "name": "urn:ogc:def:crs:EPSG::27700"
+  }
+ },
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       600800,
+       142200
+      ],
+      [
+       600820,
+       142200
+      ],
+      [
+       600820,
+       142255
+      ],
+      [
+       600800,
+       142255
+      ],
+      [
+       600800,
+       142200
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00001",
+    "UPRN": "100062550013",
+    "ADDRESS": "1 Bank Street",
+    "POSTCODE": "TN23 1AL",
+    "WARD": "Victoria",
+    "BUILT_M2": 82.3
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       600820,
+       142200
+      ],
+      [
+       600840,
+       142200
+      ],
+      [
+       600840,
+       142255
+      ],
+      [
+       600820,
+       142255
+      ],
+      [
+       600820,
+       142200
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00002",
+    "UPRN": "100062550027",
+    "ADDRESS": "2 Bank Street",
+    "POSTCODE": "TN23 1BL",
+    "WARD": "Victoria",
+    "BUILT_M2": 115.0
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       600840,
+       142200
+      ],
+      [
+       600860,
+       142200
+      ],
+      [
+       600860,
+       142255
+      ],
+      [
+       600840,
+       142255
+      ],
+      [
+       600840,
+       142200
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00003",
+    "UPRN": "100062550033",
+    "ADDRESS": "3 Bank Street",
+    "POSTCODE": "TN23 1DL",
+    "WARD": "Victoria",
+    "BUILT_M2": 87.9
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       600860,
+       142200
+      ],
+      [
+       600880,
+       142200
+      ],
+      [
+       600880,
+       142255
+      ],
+      [
+       600860,
+       142255
+      ],
+      [
+       600860,
+       142200
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00004",
+    "UPRN": "100062550037",
+    "ADDRESS": "4 Bank Street",
+    "POSTCODE": "TN23 1EL",
+    "WARD": "Victoria",
+    "BUILT_M2": 195.3
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       600880,
+       142200
+      ],
+      [
+       600900,
+       142200
+      ],
+      [
+       600900,
+       142255
+      ],
+      [
+       600880,
+       142255
+      ],
+      [
+       600880,
+       142200
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00005",
+    "UPRN": "100062550054",
+    "ADDRESS": "5 Bank Street",
+    "POSTCODE": "TN23 1FL",
+    "WARD": "Victoria",
+    "BUILT_M2": 169.1
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       600900,
+       142200
+      ],
+      [
+       600920,
+       142200
+      ],
+      [
+       600920,
+       142255
+      ],
+      [
+       600900,
+       142255
+      ],
+      [
+       600900,
+       142200
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00006",
+    "UPRN": "100062550066",
+    "ADDRESS": "6 Bank Street",
+    "POSTCODE": "TN23 1GL",
+    "WARD": "Victoria",
+    "BUILT_M2": 144.4
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       600920,
+       142200
+      ],
+      [
+       600940,
+       142200
+      ],
+      [
+       600940,
+       142255
+      ],
+      [
+       600920,
+       142255
+      ],
+      [
+       600920,
+       142200
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00007",
+    "UPRN": "100062550069",
+    "ADDRESS": "7 Bank Street",
+    "POSTCODE": "TN23 1HL",
+    "WARD": "Victoria",
+    "BUILT_M2": 78.7
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       600940,
+       142200
+      ],
+      [
+       600960,
+       142200
+      ],
+      [
+       600960,
+       142255
+      ],
+      [
+       600940,
+       142255
+      ],
+      [
+       600940,
+       142200
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00008",
+    "UPRN": "100062550075",
+    "ADDRESS": "8 Bank Street",
+    "POSTCODE": "TN23 1JL",
+    "WARD": "Victoria",
+    "BUILT_M2": 161.1
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       600800,
+       142255
+      ],
+      [
+       600820,
+       142255
+      ],
+      [
+       600820,
+       142310
+      ],
+      [
+       600800,
+       142310
+      ],
+      [
+       600800,
+       142255
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00009",
+    "UPRN": "100062550078",
+    "ADDRESS": "9 Bank Street",
+    "POSTCODE": "TN23 1AR",
+    "WARD": "Victoria",
+    "BUILT_M2": 172.2
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       600820,
+       142255
+      ],
+      [
+       600840,
+       142255
+      ],
+      [
+       600840,
+       142310
+      ],
+      [
+       600820,
+       142310
+      ],
+      [
+       600820,
+       142255
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00010",
+    "UPRN": "100062550092",
+    "ADDRESS": "10 Bank Street",
+    "POSTCODE": "TN23 1BR",
+    "WARD": "Victoria",
+    "BUILT_M2": 190.0
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       600840,
+       142255
+      ],
+      [
+       600860,
+       142255
+      ],
+      [
+       600860,
+       142310
+      ],
+      [
+       600840,
+       142310
+      ],
+      [
+       600840,
+       142255
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00011",
+    "UPRN": "100062550103",
+    "ADDRESS": "11 Bank Street",
+    "POSTCODE": "TN23 1DR",
+    "WARD": "Victoria",
+    "BUILT_M2": 143.9
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       600860,
+       142255
+      ],
+      [
+       600880,
+       142255
+      ],
+      [
+       600880,
+       142310
+      ],
+      [
+       600860,
+       142310
+      ],
+      [
+       600860,
+       142255
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00012",
+    "UPRN": "100062550113",
+    "ADDRESS": "12 Bank Street",
+    "POSTCODE": "TN23 1ER",
+    "WARD": "Victoria",
+    "BUILT_M2": 177.9
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       600880,
+       142255
+      ],
+      [
+       600900,
+       142255
+      ],
+      [
+       600900,
+       142310
+      ],
+      [
+       600880,
+       142310
+      ],
+      [
+       600880,
+       142255
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00013",
+    "UPRN": "100062550128",
+    "ADDRESS": "13 Bank Street",
+    "POSTCODE": "TN23 1FR",
+    "WARD": "Victoria",
+    "BUILT_M2": 233.9
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       600900,
+       142255
+      ],
+      [
+       600920,
+       142255
+      ],
+      [
+       600920,
+       142310
+      ],
+      [
+       600900,
+       142310
+      ],
+      [
+       600900,
+       142255
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00014",
+    "UPRN": "100062550143",
+    "ADDRESS": "14 Bank Street",
+    "POSTCODE": "TN23 1GR",
+    "WARD": "Victoria",
+    "BUILT_M2": 221.2
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       600920,
+       142255
+      ],
+      [
+       600940,
+       142255
+      ],
+      [
+       600940,
+       142310
+      ],
+      [
+       600920,
+       142310
+      ],
+      [
+       600920,
+       142255
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00015",
+    "UPRN": "100062550157",
+    "ADDRESS": "15 Bank Street",
+    "POSTCODE": "TN23 1HR",
+    "WARD": "Victoria",
+    "BUILT_M2": 144.5
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       600940,
+       142255
+      ],
+      [
+       600960,
+       142255
+      ],
+      [
+       600960,
+       142310
+      ],
+      [
+       600940,
+       142310
+      ],
+      [
+       600940,
+       142255
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00016",
+    "UPRN": "100062550164",
+    "ADDRESS": "16 Bank Street",
+    "POSTCODE": "TN23 1JR",
+    "WARD": "Victoria",
+    "BUILT_M2": 91.1
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       600800,
+       142330
+      ],
+      [
+       600820,
+       142330
+      ],
+      [
+       600820,
+       142385
+      ],
+      [
+       600800,
+       142385
+      ],
+      [
+       600800,
+       142330
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00017",
+    "UPRN": "100062550179",
+    "ADDRESS": "1 Castle Street",
+    "POSTCODE": "TN23 2AL",
+    "WARD": "Victoria",
+    "BUILT_M2": 127.3
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       600820,
+       142330
+      ],
+      [
+       600840,
+       142330
+      ],
+      [
+       600840,
+       142385
+      ],
+      [
+       600820,
+       142385
+      ],
+      [
+       600820,
+       142330
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00018",
+    "UPRN": "100062550183",
+    "ADDRESS": "2 Castle Street",
+    "POSTCODE": "TN23 2BL",
+    "WARD": "Victoria",
+    "BUILT_M2": 136.0
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       600840,
+       142330
+      ],
+      [
+       600860,
+       142330
+      ],
+      [
+       600860,
+       142385
+      ],
+      [
+       600840,
+       142385
+      ],
+      [
+       600840,
+       142330
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00019",
+    "UPRN": "100062550191",
+    "ADDRESS": "3 Castle Street",
+    "POSTCODE": "TN23 2DL",
+    "WARD": "Victoria",
+    "BUILT_M2": 229.5
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       600860,
+       142330
+      ],
+      [
+       600880,
+       142330
+      ],
+      [
+       600880,
+       142385
+      ],
+      [
+       600860,
+       142385
+      ],
+      [
+       600860,
+       142330
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00020",
+    "UPRN": "100062550203",
+    "ADDRESS": "4 Castle Street",
+    "POSTCODE": "TN23 2EL",
+    "WARD": "Victoria",
+    "BUILT_M2": 112.9
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       600880,
+       142330
+      ],
+      [
+       600900,
+       142330
+      ],
+      [
+       600900,
+       142385
+      ],
+      [
+       600880,
+       142385
+      ],
+      [
+       600880,
+       142330
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00021",
+    "UPRN": "100062550206",
+    "ADDRESS": "5 Castle Street",
+    "POSTCODE": "TN23 2FL",
+    "WARD": "Victoria",
+    "BUILT_M2": 205.9
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       600900,
+       142330
+      ],
+      [
+       600920,
+       142330
+      ],
+      [
+       600920,
+       142385
+      ],
+      [
+       600900,
+       142385
+      ],
+      [
+       600900,
+       142330
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00022",
+    "UPRN": "100062550217",
+    "ADDRESS": "6 Castle Street",
+    "POSTCODE": "TN23 2GL",
+    "WARD": "Victoria",
+    "BUILT_M2": 85.0
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       600920,
+       142330
+      ],
+      [
+       600940,
+       142330
+      ],
+      [
+       600940,
+       142385
+      ],
+      [
+       600920,
+       142385
+      ],
+      [
+       600920,
+       142330
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00023",
+    "UPRN": "100062550234",
+    "ADDRESS": "7 Castle Street",
+    "POSTCODE": "TN23 2HL",
+    "WARD": "Victoria",
+    "BUILT_M2": 135.7
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       600940,
+       142330
+      ],
+      [
+       600960,
+       142330
+      ],
+      [
+       600960,
+       142385
+      ],
+      [
+       600940,
+       142385
+      ],
+      [
+       600940,
+       142330
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00024",
+    "UPRN": "100062550245",
+    "ADDRESS": "8 Castle Street",
+    "POSTCODE": "TN23 2JL",
+    "WARD": "Victoria",
+    "BUILT_M2": 118.6
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       600800,
+       142385
+      ],
+      [
+       600820,
+       142385
+      ],
+      [
+       600820,
+       142440
+      ],
+      [
+       600800,
+       142440
+      ],
+      [
+       600800,
+       142385
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00025",
+    "UPRN": "100062550258",
+    "ADDRESS": "9 Castle Street",
+    "POSTCODE": "TN23 2AR",
+    "WARD": "Victoria",
+    "BUILT_M2": 183.7
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       600820,
+       142385
+      ],
+      [
+       600840,
+       142385
+      ],
+      [
+       600840,
+       142440
+      ],
+      [
+       600820,
+       142440
+      ],
+      [
+       600820,
+       142385
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00026",
+    "UPRN": "100062550274",
+    "ADDRESS": "10 Castle Street",
+    "POSTCODE": "TN23 2BR",
+    "WARD": "Victoria",
+    "BUILT_M2": 132.3
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       600840,
+       142385
+      ],
+      [
+       600860,
+       142385
+      ],
+      [
+       600860,
+       142440
+      ],
+      [
+       600840,
+       142440
+      ],
+      [
+       600840,
+       142385
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00027",
+    "UPRN": "100062550280",
+    "ADDRESS": "11 Castle Street",
+    "POSTCODE": "TN23 2DR",
+    "WARD": "Victoria",
+    "BUILT_M2": 200.9
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       600860,
+       142385
+      ],
+      [
+       600880,
+       142385
+      ],
+      [
+       600880,
+       142440
+      ],
+      [
+       600860,
+       142440
+      ],
+      [
+       600860,
+       142385
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00028",
+    "UPRN": "100062550283",
+    "ADDRESS": "12 Castle Street",
+    "POSTCODE": "TN23 2ER",
+    "WARD": "Victoria",
+    "BUILT_M2": 192.3
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       600880,
+       142385
+      ],
+      [
+       600900,
+       142385
+      ],
+      [
+       600900,
+       142440
+      ],
+      [
+       600880,
+       142440
+      ],
+      [
+       600880,
+       142385
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00029",
+    "UPRN": "100062550298",
+    "ADDRESS": "13 Castle Street",
+    "POSTCODE": "TN23 2FR",
+    "WARD": "Victoria",
+    "BUILT_M2": 117.9
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       600900,
+       142385
+      ],
+      [
+       600920,
+       142385
+      ],
+      [
+       600920,
+       142440
+      ],
+      [
+       600900,
+       142440
+      ],
+      [
+       600900,
+       142385
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00030",
+    "UPRN": "100062550302",
+    "ADDRESS": "14 Castle Street",
+    "POSTCODE": "TN23 2GR",
+    "WARD": "Victoria",
+    "BUILT_M2": 231.1
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       600920,
+       142385
+      ],
+      [
+       600940,
+       142385
+      ],
+      [
+       600940,
+       142440
+      ],
+      [
+       600920,
+       142440
+      ],
+      [
+       600920,
+       142385
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00031",
+    "UPRN": "100062550318",
+    "ADDRESS": "15 Castle Street",
+    "POSTCODE": "TN23 2HR",
+    "WARD": "Victoria",
+    "BUILT_M2": 80.2
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       600940,
+       142385
+      ],
+      [
+       600960,
+       142385
+      ],
+      [
+       600960,
+       142440
+      ],
+      [
+       600940,
+       142440
+      ],
+      [
+       600940,
+       142385
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00032",
+    "UPRN": "100062550325",
+    "ADDRESS": "16 Castle Street",
+    "POSTCODE": "TN23 2JR",
+    "WARD": "Victoria",
+    "BUILT_M2": 150.7
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       600800,
+       142460
+      ],
+      [
+       600820,
+       142460
+      ],
+      [
+       600820,
+       142515
+      ],
+      [
+       600800,
+       142515
+      ],
+      [
+       600800,
+       142460
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00033",
+    "UPRN": "100062550341",
+    "ADDRESS": "1 Elwick Road",
+    "POSTCODE": "TN23 3AL",
+    "WARD": "Victoria",
+    "BUILT_M2": 133.0
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       600820,
+       142460
+      ],
+      [
+       600840,
+       142460
+      ],
+      [
+       600840,
+       142515
+      ],
+      [
+       600820,
+       142515
+      ],
+      [
+       600820,
+       142460
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00034",
+    "UPRN": "100062550349",
+    "ADDRESS": "2 Elwick Road",
+    "POSTCODE": "TN23 3BL",
+    "WARD": "Victoria",
+    "BUILT_M2": 131.1
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       600840,
+       142460
+      ],
+      [
+       600860,
+       142460
+      ],
+      [
+       600860,
+       142515
+      ],
+      [
+       600840,
+       142515
+      ],
+      [
+       600840,
+       142460
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00035",
+    "UPRN": "100062550362",
+    "ADDRESS": "3 Elwick Road",
+    "POSTCODE": "TN23 3DL",
+    "WARD": "Victoria",
+    "BUILT_M2": 113.4
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       600860,
+       142460
+      ],
+      [
+       600880,
+       142460
+      ],
+      [
+       600880,
+       142515
+      ],
+      [
+       600860,
+       142515
+      ],
+      [
+       600860,
+       142460
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00036",
+    "UPRN": "100062550379",
+    "ADDRESS": "4 Elwick Road",
+    "POSTCODE": "TN23 3EL",
+    "WARD": "Victoria",
+    "BUILT_M2": 196.7
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       600880,
+       142460
+      ],
+      [
+       600900,
+       142460
+      ],
+      [
+       600900,
+       142515
+      ],
+      [
+       600880,
+       142515
+      ],
+      [
+       600880,
+       142460
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00037",
+    "UPRN": "100062550383",
+    "ADDRESS": "5 Elwick Road",
+    "POSTCODE": "TN23 3FL",
+    "WARD": "Victoria",
+    "BUILT_M2": 181.8
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       600900,
+       142460
+      ],
+      [
+       600920,
+       142460
+      ],
+      [
+       600920,
+       142515
+      ],
+      [
+       600900,
+       142515
+      ],
+      [
+       600900,
+       142460
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00038",
+    "UPRN": "100062550388",
+    "ADDRESS": "6 Elwick Road",
+    "POSTCODE": "TN23 3GL",
+    "WARD": "Victoria",
+    "BUILT_M2": 166.8
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       600920,
+       142460
+      ],
+      [
+       600940,
+       142460
+      ],
+      [
+       600940,
+       142515
+      ],
+      [
+       600920,
+       142515
+      ],
+      [
+       600920,
+       142460
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00039",
+    "UPRN": "100062550394",
+    "ADDRESS": "7 Elwick Road",
+    "POSTCODE": "TN23 3HL",
+    "WARD": "Victoria",
+    "BUILT_M2": 92.7
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       600940,
+       142460
+      ],
+      [
+       600960,
+       142460
+      ],
+      [
+       600960,
+       142515
+      ],
+      [
+       600940,
+       142515
+      ],
+      [
+       600940,
+       142460
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00040",
+    "UPRN": "100062550403",
+    "ADDRESS": "8 Elwick Road",
+    "POSTCODE": "TN23 3JL",
+    "WARD": "Victoria",
+    "BUILT_M2": 114.0
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       600800,
+       142515
+      ],
+      [
+       600820,
+       142515
+      ],
+      [
+       600820,
+       142570
+      ],
+      [
+       600800,
+       142570
+      ],
+      [
+       600800,
+       142515
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00041",
+    "UPRN": "100062550420",
+    "ADDRESS": "9 Elwick Road",
+    "POSTCODE": "TN23 3AR",
+    "WARD": "Victoria",
+    "BUILT_M2": 188.0
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       600820,
+       142515
+      ],
+      [
+       600840,
+       142515
+      ],
+      [
+       600840,
+       142570
+      ],
+      [
+       600820,
+       142570
+      ],
+      [
+       600820,
+       142515
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00042",
+    "UPRN": "100062550431",
+    "ADDRESS": "10 Elwick Road",
+    "POSTCODE": "TN23 3BR",
+    "WARD": "Victoria",
+    "BUILT_M2": 103.9
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       600840,
+       142515
+      ],
+      [
+       600860,
+       142515
+      ],
+      [
+       600860,
+       142570
+      ],
+      [
+       600840,
+       142570
+      ],
+      [
+       600840,
+       142515
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00043",
+    "UPRN": "100062550439",
+    "ADDRESS": "11 Elwick Road",
+    "POSTCODE": "TN23 3DR",
+    "WARD": "Victoria",
+    "BUILT_M2": 228.6
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       600860,
+       142515
+      ],
+      [
+       600880,
+       142515
+      ],
+      [
+       600880,
+       142570
+      ],
+      [
+       600860,
+       142570
+      ],
+      [
+       600860,
+       142515
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00044",
+    "UPRN": "100062550454",
+    "ADDRESS": "12 Elwick Road",
+    "POSTCODE": "TN23 3ER",
+    "WARD": "Victoria",
+    "BUILT_M2": 71.2
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       600880,
+       142515
+      ],
+      [
+       600900,
+       142515
+      ],
+      [
+       600900,
+       142570
+      ],
+      [
+       600880,
+       142570
+      ],
+      [
+       600880,
+       142515
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00045",
+    "UPRN": "100062550470",
+    "ADDRESS": "13 Elwick Road",
+    "POSTCODE": "TN23 3FR",
+    "WARD": "Victoria",
+    "BUILT_M2": 66.4
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       600900,
+       142515
+      ],
+      [
+       600920,
+       142515
+      ],
+      [
+       600920,
+       142570
+      ],
+      [
+       600900,
+       142570
+      ],
+      [
+       600900,
+       142515
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00046",
+    "UPRN": "100062550478",
+    "ADDRESS": "14 Elwick Road",
+    "POSTCODE": "TN23 3GR",
+    "WARD": "Victoria",
+    "BUILT_M2": 140.2
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       600920,
+       142515
+      ],
+      [
+       600940,
+       142515
+      ],
+      [
+       600940,
+       142570
+      ],
+      [
+       600920,
+       142570
+      ],
+      [
+       600920,
+       142515
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00047",
+    "UPRN": "100062550482",
+    "ADDRESS": "15 Elwick Road",
+    "POSTCODE": "TN23 3HR",
+    "WARD": "Victoria",
+    "BUILT_M2": 102.2
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       600940,
+       142515
+      ],
+      [
+       600960,
+       142515
+      ],
+      [
+       600960,
+       142570
+      ],
+      [
+       600940,
+       142570
+      ],
+      [
+       600940,
+       142515
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00048",
+    "UPRN": "100062550494",
+    "ADDRESS": "16 Elwick Road",
+    "POSTCODE": "TN23 3JR",
+    "WARD": "Victoria",
+    "BUILT_M2": 235.3
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       600980,
+       142200
+      ],
+      [
+       601000,
+       142200
+      ],
+      [
+       601000,
+       142255
+      ],
+      [
+       600980,
+       142255
+      ],
+      [
+       600980,
+       142200
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00049",
+    "UPRN": "100062550502",
+    "ADDRESS": "1 Tufton Street",
+    "POSTCODE": "TN24 1AN",
+    "WARD": "Beaver",
+    "BUILT_M2": 102.5
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601000,
+       142200
+      ],
+      [
+       601020,
+       142200
+      ],
+      [
+       601020,
+       142255
+      ],
+      [
+       601000,
+       142255
+      ],
+      [
+       601000,
+       142200
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00050",
+    "UPRN": "100062550512",
+    "ADDRESS": "2 Tufton Street",
+    "POSTCODE": "TN24 1BN",
+    "WARD": "Beaver",
+    "BUILT_M2": 139.1
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601020,
+       142200
+      ],
+      [
+       601040,
+       142200
+      ],
+      [
+       601040,
+       142255
+      ],
+      [
+       601020,
+       142255
+      ],
+      [
+       601020,
+       142200
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00051",
+    "UPRN": "100062550529",
+    "ADDRESS": "3 Tufton Street",
+    "POSTCODE": "TN24 1DN",
+    "WARD": "Beaver",
+    "BUILT_M2": 188.6
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601040,
+       142200
+      ],
+      [
+       601060,
+       142200
+      ],
+      [
+       601060,
+       142255
+      ],
+      [
+       601040,
+       142255
+      ],
+      [
+       601040,
+       142200
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00052",
+    "UPRN": "100062550534",
+    "ADDRESS": "4 Tufton Street",
+    "POSTCODE": "TN24 1EN",
+    "WARD": "Beaver",
+    "BUILT_M2": 113.0
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601060,
+       142200
+      ],
+      [
+       601080,
+       142200
+      ],
+      [
+       601080,
+       142255
+      ],
+      [
+       601060,
+       142255
+      ],
+      [
+       601060,
+       142200
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00053",
+    "UPRN": "100062550540",
+    "ADDRESS": "5 Tufton Street",
+    "POSTCODE": "TN24 1FN",
+    "WARD": "Beaver",
+    "BUILT_M2": 209.0
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601080,
+       142200
+      ],
+      [
+       601100,
+       142200
+      ],
+      [
+       601100,
+       142255
+      ],
+      [
+       601080,
+       142255
+      ],
+      [
+       601080,
+       142200
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00054",
+    "UPRN": "100062550551",
+    "ADDRESS": "6 Tufton Street",
+    "POSTCODE": "TN24 1GN",
+    "WARD": "Beaver",
+    "BUILT_M2": 112.5
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601100,
+       142200
+      ],
+      [
+       601120,
+       142200
+      ],
+      [
+       601120,
+       142255
+      ],
+      [
+       601100,
+       142255
+      ],
+      [
+       601100,
+       142200
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00055",
+    "UPRN": "100062550563",
+    "ADDRESS": "7 Tufton Street",
+    "POSTCODE": "TN24 1HN",
+    "WARD": "Beaver",
+    "BUILT_M2": 145.7
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601120,
+       142200
+      ],
+      [
+       601140,
+       142200
+      ],
+      [
+       601140,
+       142255
+      ],
+      [
+       601120,
+       142255
+      ],
+      [
+       601120,
+       142200
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00056",
+    "UPRN": "100062550575",
+    "ADDRESS": "8 Tufton Street",
+    "POSTCODE": "TN24 1JN",
+    "WARD": "Beaver",
+    "BUILT_M2": 139.9
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       600980,
+       142255
+      ],
+      [
+       601000,
+       142255
+      ],
+      [
+       601000,
+       142310
+      ],
+      [
+       600980,
+       142310
+      ],
+      [
+       600980,
+       142255
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00057",
+    "UPRN": "100062550581",
+    "ADDRESS": "9 Tufton Street",
+    "POSTCODE": "TN24 1AS",
+    "WARD": "Beaver",
+    "BUILT_M2": 259.5
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601000,
+       142255
+      ],
+      [
+       601020,
+       142255
+      ],
+      [
+       601020,
+       142310
+      ],
+      [
+       601000,
+       142310
+      ],
+      [
+       601000,
+       142255
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00058",
+    "UPRN": "100062550586",
+    "ADDRESS": "10 Tufton Street",
+    "POSTCODE": "TN24 1BS",
+    "WARD": "Beaver",
+    "BUILT_M2": 161.9
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601020,
+       142255
+      ],
+      [
+       601040,
+       142255
+      ],
+      [
+       601040,
+       142310
+      ],
+      [
+       601020,
+       142310
+      ],
+      [
+       601020,
+       142255
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00059",
+    "UPRN": "100062550590",
+    "ADDRESS": "11 Tufton Street",
+    "POSTCODE": "TN24 1DS",
+    "WARD": "Beaver",
+    "BUILT_M2": 211.2
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601040,
+       142255
+      ],
+      [
+       601060,
+       142255
+      ],
+      [
+       601060,
+       142310
+      ],
+      [
+       601040,
+       142310
+      ],
+      [
+       601040,
+       142255
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00060",
+    "UPRN": "100062550606",
+    "ADDRESS": "12 Tufton Street",
+    "POSTCODE": "TN24 1ES",
+    "WARD": "Beaver",
+    "BUILT_M2": 81.9
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601060,
+       142255
+      ],
+      [
+       601080,
+       142255
+      ],
+      [
+       601080,
+       142310
+      ],
+      [
+       601060,
+       142310
+      ],
+      [
+       601060,
+       142255
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00061",
+    "UPRN": "100062550619",
+    "ADDRESS": "13 Tufton Street",
+    "POSTCODE": "TN24 1FS",
+    "WARD": "Beaver",
+    "BUILT_M2": 92.0
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601080,
+       142255
+      ],
+      [
+       601100,
+       142255
+      ],
+      [
+       601100,
+       142310
+      ],
+      [
+       601080,
+       142310
+      ],
+      [
+       601080,
+       142255
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00062",
+    "UPRN": "100062550632",
+    "ADDRESS": "14 Tufton Street",
+    "POSTCODE": "TN24 1GS",
+    "WARD": "Beaver",
+    "BUILT_M2": 144.4
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601100,
+       142255
+      ],
+      [
+       601120,
+       142255
+      ],
+      [
+       601120,
+       142310
+      ],
+      [
+       601100,
+       142310
+      ],
+      [
+       601100,
+       142255
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00063",
+    "UPRN": "100062550636",
+    "ADDRESS": "15 Tufton Street",
+    "POSTCODE": "TN24 1HS",
+    "WARD": "Beaver",
+    "BUILT_M2": 137.0
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601120,
+       142255
+      ],
+      [
+       601140,
+       142255
+      ],
+      [
+       601140,
+       142310
+      ],
+      [
+       601120,
+       142310
+      ],
+      [
+       601120,
+       142255
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00064",
+    "UPRN": "100062550648",
+    "ADDRESS": "16 Tufton Street",
+    "POSTCODE": "TN24 1JS",
+    "WARD": "Beaver",
+    "BUILT_M2": 259.2
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       600980,
+       142330
+      ],
+      [
+       601000,
+       142330
+      ],
+      [
+       601000,
+       142385
+      ],
+      [
+       600980,
+       142385
+      ],
+      [
+       600980,
+       142330
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00065",
+    "UPRN": "100062550659",
+    "ADDRESS": "1 Station Road",
+    "POSTCODE": "TN24 2AN",
+    "WARD": "Beaver",
+    "BUILT_M2": 110.3
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601000,
+       142330
+      ],
+      [
+       601020,
+       142330
+      ],
+      [
+       601020,
+       142385
+      ],
+      [
+       601000,
+       142385
+      ],
+      [
+       601000,
+       142330
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00066",
+    "UPRN": "100062550670",
+    "ADDRESS": "2 Station Road",
+    "POSTCODE": "TN24 2BN",
+    "WARD": "Beaver",
+    "BUILT_M2": 232.2
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601020,
+       142330
+      ],
+      [
+       601040,
+       142330
+      ],
+      [
+       601040,
+       142385
+      ],
+      [
+       601020,
+       142385
+      ],
+      [
+       601020,
+       142330
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00067",
+    "UPRN": "100062550673",
+    "ADDRESS": "3 Station Road",
+    "POSTCODE": "TN24 2DN",
+    "WARD": "Beaver",
+    "BUILT_M2": 196.1
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601040,
+       142330
+      ],
+      [
+       601060,
+       142330
+      ],
+      [
+       601060,
+       142385
+      ],
+      [
+       601040,
+       142385
+      ],
+      [
+       601040,
+       142330
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00068",
+    "UPRN": "100062550677",
+    "ADDRESS": "4 Station Road",
+    "POSTCODE": "TN24 2EN",
+    "WARD": "Beaver",
+    "BUILT_M2": 196.3
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601060,
+       142330
+      ],
+      [
+       601080,
+       142330
+      ],
+      [
+       601080,
+       142385
+      ],
+      [
+       601060,
+       142385
+      ],
+      [
+       601060,
+       142330
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00069",
+    "UPRN": "100062550688",
+    "ADDRESS": "5 Station Road",
+    "POSTCODE": "TN24 2FN",
+    "WARD": "Beaver",
+    "BUILT_M2": 210.2
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601080,
+       142330
+      ],
+      [
+       601100,
+       142330
+      ],
+      [
+       601100,
+       142385
+      ],
+      [
+       601080,
+       142385
+      ],
+      [
+       601080,
+       142330
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00070",
+    "UPRN": "100062550703",
+    "ADDRESS": "6 Station Road",
+    "POSTCODE": "TN24 2GN",
+    "WARD": "Beaver",
+    "BUILT_M2": 188.2
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601100,
+       142330
+      ],
+      [
+       601120,
+       142330
+      ],
+      [
+       601120,
+       142385
+      ],
+      [
+       601100,
+       142385
+      ],
+      [
+       601100,
+       142330
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00071",
+    "UPRN": "100062550707",
+    "ADDRESS": "7 Station Road",
+    "POSTCODE": "TN24 2HN",
+    "WARD": "Beaver",
+    "BUILT_M2": 118.7
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601120,
+       142330
+      ],
+      [
+       601140,
+       142330
+      ],
+      [
+       601140,
+       142385
+      ],
+      [
+       601120,
+       142385
+      ],
+      [
+       601120,
+       142330
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00072",
+    "UPRN": "100062550712",
+    "ADDRESS": "8 Station Road",
+    "POSTCODE": "TN24 2JN",
+    "WARD": "Beaver",
+    "BUILT_M2": 150.7
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       600980,
+       142385
+      ],
+      [
+       601000,
+       142385
+      ],
+      [
+       601000,
+       142440
+      ],
+      [
+       600980,
+       142440
+      ],
+      [
+       600980,
+       142385
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00073",
+    "UPRN": "100062550726",
+    "ADDRESS": "9 Station Road",
+    "POSTCODE": "TN24 2AS",
+    "WARD": "Beaver",
+    "BUILT_M2": 235.2
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601000,
+       142385
+      ],
+      [
+       601020,
+       142385
+      ],
+      [
+       601020,
+       142440
+      ],
+      [
+       601000,
+       142440
+      ],
+      [
+       601000,
+       142385
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00074",
+    "UPRN": "100062550733",
+    "ADDRESS": "10 Station Road",
+    "POSTCODE": "TN24 2BS",
+    "WARD": "Beaver",
+    "BUILT_M2": 254.4
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601020,
+       142385
+      ],
+      [
+       601040,
+       142385
+      ],
+      [
+       601040,
+       142440
+      ],
+      [
+       601020,
+       142440
+      ],
+      [
+       601020,
+       142385
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00075",
+    "UPRN": "100062550748",
+    "ADDRESS": "11 Station Road",
+    "POSTCODE": "TN24 2DS",
+    "WARD": "Beaver",
+    "BUILT_M2": 95.7
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601040,
+       142385
+      ],
+      [
+       601060,
+       142385
+      ],
+      [
+       601060,
+       142440
+      ],
+      [
+       601040,
+       142440
+      ],
+      [
+       601040,
+       142385
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00076",
+    "UPRN": "100062550765",
+    "ADDRESS": "12 Station Road",
+    "POSTCODE": "TN24 2ES",
+    "WARD": "Beaver",
+    "BUILT_M2": 81.3
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601060,
+       142385
+      ],
+      [
+       601080,
+       142385
+      ],
+      [
+       601080,
+       142440
+      ],
+      [
+       601060,
+       142440
+      ],
+      [
+       601060,
+       142385
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00077",
+    "UPRN": "100062550778",
+    "ADDRESS": "13 Station Road",
+    "POSTCODE": "TN24 2FS",
+    "WARD": "Beaver",
+    "BUILT_M2": 119.7
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601080,
+       142385
+      ],
+      [
+       601100,
+       142385
+      ],
+      [
+       601100,
+       142440
+      ],
+      [
+       601080,
+       142440
+      ],
+      [
+       601080,
+       142385
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00078",
+    "UPRN": "100062550791",
+    "ADDRESS": "14 Station Road",
+    "POSTCODE": "TN24 2GS",
+    "WARD": "Beaver",
+    "BUILT_M2": 161.5
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601100,
+       142385
+      ],
+      [
+       601120,
+       142385
+      ],
+      [
+       601120,
+       142440
+      ],
+      [
+       601100,
+       142440
+      ],
+      [
+       601100,
+       142385
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00079",
+    "UPRN": "100062550797",
+    "ADDRESS": "15 Station Road",
+    "POSTCODE": "TN24 2HS",
+    "WARD": "Beaver",
+    "BUILT_M2": 90.6
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601120,
+       142385
+      ],
+      [
+       601140,
+       142385
+      ],
+      [
+       601140,
+       142440
+      ],
+      [
+       601120,
+       142440
+      ],
+      [
+       601120,
+       142385
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00080",
+    "UPRN": "100062550812",
+    "ADDRESS": "16 Station Road",
+    "POSTCODE": "TN24 2JS",
+    "WARD": "Beaver",
+    "BUILT_M2": 92.3
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       600980,
+       142460
+      ],
+      [
+       601000,
+       142460
+      ],
+      [
+       601000,
+       142515
+      ],
+      [
+       600980,
+       142515
+      ],
+      [
+       600980,
+       142460
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00081",
+    "UPRN": "100062550827",
+    "ADDRESS": "1 Godinton Road",
+    "POSTCODE": "TN24 3AN",
+    "WARD": "Beaver",
+    "BUILT_M2": 244.5
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601000,
+       142460
+      ],
+      [
+       601020,
+       142460
+      ],
+      [
+       601020,
+       142515
+      ],
+      [
+       601000,
+       142515
+      ],
+      [
+       601000,
+       142460
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00082",
+    "UPRN": "100062550844",
+    "ADDRESS": "2 Godinton Road",
+    "POSTCODE": "TN24 3BN",
+    "WARD": "Beaver",
+    "BUILT_M2": 60.1
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601020,
+       142460
+      ],
+      [
+       601040,
+       142460
+      ],
+      [
+       601040,
+       142515
+      ],
+      [
+       601020,
+       142515
+      ],
+      [
+       601020,
+       142460
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00083",
+    "UPRN": "100062550852",
+    "ADDRESS": "3 Godinton Road",
+    "POSTCODE": "TN24 3DN",
+    "WARD": "Beaver",
+    "BUILT_M2": 157.7
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601040,
+       142460
+      ],
+      [
+       601060,
+       142460
+      ],
+      [
+       601060,
+       142515
+      ],
+      [
+       601040,
+       142515
+      ],
+      [
+       601040,
+       142460
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00084",
+    "UPRN": "100062550856",
+    "ADDRESS": "4 Godinton Road",
+    "POSTCODE": "TN24 3EN",
+    "WARD": "Beaver",
+    "BUILT_M2": 245.8
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601060,
+       142460
+      ],
+      [
+       601080,
+       142460
+      ],
+      [
+       601080,
+       142515
+      ],
+      [
+       601060,
+       142515
+      ],
+      [
+       601060,
+       142460
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00085",
+    "UPRN": "100062550873",
+    "ADDRESS": "5 Godinton Road",
+    "POSTCODE": "TN24 3FN",
+    "WARD": "Beaver",
+    "BUILT_M2": 257.1
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601080,
+       142460
+      ],
+      [
+       601100,
+       142460
+      ],
+      [
+       601100,
+       142515
+      ],
+      [
+       601080,
+       142515
+      ],
+      [
+       601080,
+       142460
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00086",
+    "UPRN": "100062550888",
+    "ADDRESS": "6 Godinton Road",
+    "POSTCODE": "TN24 3GN",
+    "WARD": "Beaver",
+    "BUILT_M2": 121.5
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601100,
+       142460
+      ],
+      [
+       601120,
+       142460
+      ],
+      [
+       601120,
+       142515
+      ],
+      [
+       601100,
+       142515
+      ],
+      [
+       601100,
+       142460
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00087",
+    "UPRN": "100062550891",
+    "ADDRESS": "7 Godinton Road",
+    "POSTCODE": "TN24 3HN",
+    "WARD": "Beaver",
+    "BUILT_M2": 108.2
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601120,
+       142460
+      ],
+      [
+       601140,
+       142460
+      ],
+      [
+       601140,
+       142515
+      ],
+      [
+       601120,
+       142515
+      ],
+      [
+       601120,
+       142460
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00088",
+    "UPRN": "100062550903",
+    "ADDRESS": "8 Godinton Road",
+    "POSTCODE": "TN24 3JN",
+    "WARD": "Beaver",
+    "BUILT_M2": 249.4
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       600980,
+       142515
+      ],
+      [
+       601000,
+       142515
+      ],
+      [
+       601000,
+       142570
+      ],
+      [
+       600980,
+       142570
+      ],
+      [
+       600980,
+       142515
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00089",
+    "UPRN": "100062550907",
+    "ADDRESS": "9 Godinton Road",
+    "POSTCODE": "TN24 3AS",
+    "WARD": "Beaver",
+    "BUILT_M2": 206.4
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601000,
+       142515
+      ],
+      [
+       601020,
+       142515
+      ],
+      [
+       601020,
+       142570
+      ],
+      [
+       601000,
+       142570
+      ],
+      [
+       601000,
+       142515
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00090",
+    "UPRN": "100062550923",
+    "ADDRESS": "10 Godinton Road",
+    "POSTCODE": "TN24 3BS",
+    "WARD": "Beaver",
+    "BUILT_M2": 73.8
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601020,
+       142515
+      ],
+      [
+       601040,
+       142515
+      ],
+      [
+       601040,
+       142570
+      ],
+      [
+       601020,
+       142570
+      ],
+      [
+       601020,
+       142515
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00091",
+    "UPRN": "100062550938",
+    "ADDRESS": "11 Godinton Road",
+    "POSTCODE": "TN24 3DS",
+    "WARD": "Beaver",
+    "BUILT_M2": 166.5
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601040,
+       142515
+      ],
+      [
+       601060,
+       142515
+      ],
+      [
+       601060,
+       142570
+      ],
+      [
+       601040,
+       142570
+      ],
+      [
+       601040,
+       142515
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00092",
+    "UPRN": "100062550943",
+    "ADDRESS": "12 Godinton Road",
+    "POSTCODE": "TN24 3ES",
+    "WARD": "Beaver",
+    "BUILT_M2": 85.7
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601060,
+       142515
+      ],
+      [
+       601080,
+       142515
+      ],
+      [
+       601080,
+       142570
+      ],
+      [
+       601060,
+       142570
+      ],
+      [
+       601060,
+       142515
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00093",
+    "UPRN": "100062550953",
+    "ADDRESS": "13 Godinton Road",
+    "POSTCODE": "TN24 3FS",
+    "WARD": "Beaver",
+    "BUILT_M2": 249.4
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601080,
+       142515
+      ],
+      [
+       601100,
+       142515
+      ],
+      [
+       601100,
+       142570
+      ],
+      [
+       601080,
+       142570
+      ],
+      [
+       601080,
+       142515
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00094",
+    "UPRN": "100062550958",
+    "ADDRESS": "14 Godinton Road",
+    "POSTCODE": "TN24 3GS",
+    "WARD": "Beaver",
+    "BUILT_M2": 113.0
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601100,
+       142515
+      ],
+      [
+       601120,
+       142515
+      ],
+      [
+       601120,
+       142570
+      ],
+      [
+       601100,
+       142570
+      ],
+      [
+       601100,
+       142515
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00095",
+    "UPRN": "100062550974",
+    "ADDRESS": "15 Godinton Road",
+    "POSTCODE": "TN24 3HS",
+    "WARD": "Beaver",
+    "BUILT_M2": 181.3
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601120,
+       142515
+      ],
+      [
+       601140,
+       142515
+      ],
+      [
+       601140,
+       142570
+      ],
+      [
+       601120,
+       142570
+      ],
+      [
+       601120,
+       142515
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00096",
+    "UPRN": "100062550980",
+    "ADDRESS": "16 Godinton Road",
+    "POSTCODE": "TN24 3JS",
+    "WARD": "Beaver",
+    "BUILT_M2": 245.8
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601160,
+       142200
+      ],
+      [
+       601180,
+       142200
+      ],
+      [
+       601180,
+       142255
+      ],
+      [
+       601160,
+       142255
+      ],
+      [
+       601160,
+       142200
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00097",
+    "UPRN": "100062550995",
+    "ADDRESS": "1 Hythe Road",
+    "POSTCODE": "TN23 1AP",
+    "WARD": "Highfield",
+    "BUILT_M2": 206.0
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601180,
+       142200
+      ],
+      [
+       601200,
+       142200
+      ],
+      [
+       601200,
+       142255
+      ],
+      [
+       601180,
+       142255
+      ],
+      [
+       601180,
+       142200
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00098",
+    "UPRN": "100062551001",
+    "ADDRESS": "2 Hythe Road",
+    "POSTCODE": "TN23 1BP",
+    "WARD": "Highfield",
+    "BUILT_M2": 202.6
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601200,
+       142200
+      ],
+      [
+       601220,
+       142200
+      ],
+      [
+       601220,
+       142255
+      ],
+      [
+       601200,
+       142255
+      ],
+      [
+       601200,
+       142200
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00099",
+    "UPRN": "100062551010",
+    "ADDRESS": "3 Hythe Road",
+    "POSTCODE": "TN23 1DP",
+    "WARD": "Highfield",
+    "BUILT_M2": 259.0
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601220,
+       142200
+      ],
+      [
+       601240,
+       142200
+      ],
+      [
+       601240,
+       142255
+      ],
+      [
+       601220,
+       142255
+      ],
+      [
+       601220,
+       142200
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00100",
+    "UPRN": "100062551023",
+    "ADDRESS": "4 Hythe Road",
+    "POSTCODE": "TN23 1EP",
+    "WARD": "Highfield",
+    "BUILT_M2": 134.7
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601240,
+       142200
+      ],
+      [
+       601260,
+       142200
+      ],
+      [
+       601260,
+       142255
+      ],
+      [
+       601240,
+       142255
+      ],
+      [
+       601240,
+       142200
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00101",
+    "UPRN": "100062551040",
+    "ADDRESS": "5 Hythe Road",
+    "POSTCODE": "TN23 1FP",
+    "WARD": "Highfield",
+    "BUILT_M2": 163.5
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601260,
+       142200
+      ],
+      [
+       601280,
+       142200
+      ],
+      [
+       601280,
+       142255
+      ],
+      [
+       601260,
+       142255
+      ],
+      [
+       601260,
+       142200
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00102",
+    "UPRN": "100062551044",
+    "ADDRESS": "6 Hythe Road",
+    "POSTCODE": "TN23 1GP",
+    "WARD": "Highfield",
+    "BUILT_M2": 109.6
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601280,
+       142200
+      ],
+      [
+       601300,
+       142200
+      ],
+      [
+       601300,
+       142255
+      ],
+      [
+       601280,
+       142255
+      ],
+      [
+       601280,
+       142200
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00103",
+    "UPRN": "100062551048",
+    "ADDRESS": "7 Hythe Road",
+    "POSTCODE": "TN23 1HP",
+    "WARD": "Highfield",
+    "BUILT_M2": 127.6
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601300,
+       142200
+      ],
+      [
+       601320,
+       142200
+      ],
+      [
+       601320,
+       142255
+      ],
+      [
+       601300,
+       142255
+      ],
+      [
+       601300,
+       142200
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00104",
+    "UPRN": "100062551060",
+    "ADDRESS": "8 Hythe Road",
+    "POSTCODE": "TN23 1JP",
+    "WARD": "Highfield",
+    "BUILT_M2": 170.8
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601160,
+       142255
+      ],
+      [
+       601180,
+       142255
+      ],
+      [
+       601180,
+       142310
+      ],
+      [
+       601160,
+       142310
+      ],
+      [
+       601160,
+       142255
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00105",
+    "UPRN": "100062551072",
+    "ADDRESS": "9 Hythe Road",
+    "POSTCODE": "TN23 1AT",
+    "WARD": "Highfield",
+    "BUILT_M2": 104.0
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601180,
+       142255
+      ],
+      [
+       601200,
+       142255
+      ],
+      [
+       601200,
+       142310
+      ],
+      [
+       601180,
+       142310
+      ],
+      [
+       601180,
+       142255
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00106",
+    "UPRN": "100062551076",
+    "ADDRESS": "10 Hythe Road",
+    "POSTCODE": "TN23 1BT",
+    "WARD": "Highfield",
+    "BUILT_M2": 201.6
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601200,
+       142255
+      ],
+      [
+       601220,
+       142255
+      ],
+      [
+       601220,
+       142310
+      ],
+      [
+       601200,
+       142310
+      ],
+      [
+       601200,
+       142255
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00107",
+    "UPRN": "100062551079",
+    "ADDRESS": "11 Hythe Road",
+    "POSTCODE": "TN23 1DT",
+    "WARD": "Highfield",
+    "BUILT_M2": 105.8
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601220,
+       142255
+      ],
+      [
+       601240,
+       142255
+      ],
+      [
+       601240,
+       142310
+      ],
+      [
+       601220,
+       142310
+      ],
+      [
+       601220,
+       142255
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00108",
+    "UPRN": "100062551096",
+    "ADDRESS": "12 Hythe Road",
+    "POSTCODE": "TN23 1ET",
+    "WARD": "Highfield",
+    "BUILT_M2": 66.3
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601240,
+       142255
+      ],
+      [
+       601260,
+       142255
+      ],
+      [
+       601260,
+       142310
+      ],
+      [
+       601240,
+       142310
+      ],
+      [
+       601240,
+       142255
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00109",
+    "UPRN": "100062551104",
+    "ADDRESS": "13 Hythe Road",
+    "POSTCODE": "TN23 1FT",
+    "WARD": "Highfield",
+    "BUILT_M2": 74.2
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601260,
+       142255
+      ],
+      [
+       601280,
+       142255
+      ],
+      [
+       601280,
+       142310
+      ],
+      [
+       601260,
+       142310
+      ],
+      [
+       601260,
+       142255
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00110",
+    "UPRN": "100062551110",
+    "ADDRESS": "14 Hythe Road",
+    "POSTCODE": "TN23 1GT",
+    "WARD": "Highfield",
+    "BUILT_M2": 115.7
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601280,
+       142255
+      ],
+      [
+       601300,
+       142255
+      ],
+      [
+       601300,
+       142310
+      ],
+      [
+       601280,
+       142310
+      ],
+      [
+       601280,
+       142255
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00111",
+    "UPRN": "100062551120",
+    "ADDRESS": "15 Hythe Road",
+    "POSTCODE": "TN23 1HT",
+    "WARD": "Highfield",
+    "BUILT_M2": 102.8
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601300,
+       142255
+      ],
+      [
+       601320,
+       142255
+      ],
+      [
+       601320,
+       142310
+      ],
+      [
+       601300,
+       142310
+      ],
+      [
+       601300,
+       142255
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00112",
+    "UPRN": "100062551125",
+    "ADDRESS": "16 Hythe Road",
+    "POSTCODE": "TN23 1JT",
+    "WARD": "Highfield",
+    "BUILT_M2": 204.7
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601160,
+       142330
+      ],
+      [
+       601180,
+       142330
+      ],
+      [
+       601180,
+       142385
+      ],
+      [
+       601160,
+       142385
+      ],
+      [
+       601160,
+       142330
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00113",
+    "UPRN": "100062551142",
+    "ADDRESS": "1 Beaver Road",
+    "POSTCODE": "TN23 2AP",
+    "WARD": "Highfield",
+    "BUILT_M2": 174.2
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601180,
+       142330
+      ],
+      [
+       601200,
+       142330
+      ],
+      [
+       601200,
+       142385
+      ],
+      [
+       601180,
+       142385
+      ],
+      [
+       601180,
+       142330
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00114",
+    "UPRN": "100062551152",
+    "ADDRESS": "2 Beaver Road",
+    "POSTCODE": "TN23 2BP",
+    "WARD": "Highfield",
+    "BUILT_M2": 108.6
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601200,
+       142330
+      ],
+      [
+       601220,
+       142330
+      ],
+      [
+       601220,
+       142385
+      ],
+      [
+       601200,
+       142385
+      ],
+      [
+       601200,
+       142330
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00115",
+    "UPRN": "100062551162",
+    "ADDRESS": "3 Beaver Road",
+    "POSTCODE": "TN23 2DP",
+    "WARD": "Highfield",
+    "BUILT_M2": 221.5
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601220,
+       142330
+      ],
+      [
+       601240,
+       142330
+      ],
+      [
+       601240,
+       142385
+      ],
+      [
+       601220,
+       142385
+      ],
+      [
+       601220,
+       142330
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00116",
+    "UPRN": "100062551168",
+    "ADDRESS": "4 Beaver Road",
+    "POSTCODE": "TN23 2EP",
+    "WARD": "Highfield",
+    "BUILT_M2": 78.9
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601240,
+       142330
+      ],
+      [
+       601260,
+       142330
+      ],
+      [
+       601260,
+       142385
+      ],
+      [
+       601240,
+       142385
+      ],
+      [
+       601240,
+       142330
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00117",
+    "UPRN": "100062551181",
+    "ADDRESS": "5 Beaver Road",
+    "POSTCODE": "TN23 2FP",
+    "WARD": "Highfield",
+    "BUILT_M2": 146.2
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601260,
+       142330
+      ],
+      [
+       601280,
+       142330
+      ],
+      [
+       601280,
+       142385
+      ],
+      [
+       601260,
+       142385
+      ],
+      [
+       601260,
+       142330
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00118",
+    "UPRN": "100062551190",
+    "ADDRESS": "6 Beaver Road",
+    "POSTCODE": "TN23 2GP",
+    "WARD": "Highfield",
+    "BUILT_M2": 142.2
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601280,
+       142330
+      ],
+      [
+       601300,
+       142330
+      ],
+      [
+       601300,
+       142385
+      ],
+      [
+       601280,
+       142385
+      ],
+      [
+       601280,
+       142330
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00119",
+    "UPRN": "100062551206",
+    "ADDRESS": "7 Beaver Road",
+    "POSTCODE": "TN23 2HP",
+    "WARD": "Highfield",
+    "BUILT_M2": 205.8
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601300,
+       142330
+      ],
+      [
+       601320,
+       142330
+      ],
+      [
+       601320,
+       142385
+      ],
+      [
+       601300,
+       142385
+      ],
+      [
+       601300,
+       142330
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00120",
+    "UPRN": "100062551219",
+    "ADDRESS": "8 Beaver Road",
+    "POSTCODE": "TN23 2JP",
+    "WARD": "Highfield",
+    "BUILT_M2": 190.7
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601160,
+       142385
+      ],
+      [
+       601180,
+       142385
+      ],
+      [
+       601180,
+       142440
+      ],
+      [
+       601160,
+       142440
+      ],
+      [
+       601160,
+       142385
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00121",
+    "UPRN": "100062551232",
+    "ADDRESS": "9 Beaver Road",
+    "POSTCODE": "TN23 2AT",
+    "WARD": "Highfield",
+    "BUILT_M2": 79.7
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601180,
+       142385
+      ],
+      [
+       601200,
+       142385
+      ],
+      [
+       601200,
+       142440
+      ],
+      [
+       601180,
+       142440
+      ],
+      [
+       601180,
+       142385
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00122",
+    "UPRN": "100062551241",
+    "ADDRESS": "10 Beaver Road",
+    "POSTCODE": "TN23 2BT",
+    "WARD": "Highfield",
+    "BUILT_M2": 205.6
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601200,
+       142385
+      ],
+      [
+       601220,
+       142385
+      ],
+      [
+       601220,
+       142440
+      ],
+      [
+       601200,
+       142440
+      ],
+      [
+       601200,
+       142385
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00123",
+    "UPRN": "100062551256",
+    "ADDRESS": "11 Beaver Road",
+    "POSTCODE": "TN23 2DT",
+    "WARD": "Highfield",
+    "BUILT_M2": 232.3
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601220,
+       142385
+      ],
+      [
+       601240,
+       142385
+      ],
+      [
+       601240,
+       142440
+      ],
+      [
+       601220,
+       142440
+      ],
+      [
+       601220,
+       142385
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00124",
+    "UPRN": "100062551262",
+    "ADDRESS": "12 Beaver Road",
+    "POSTCODE": "TN23 2ET",
+    "WARD": "Highfield",
+    "BUILT_M2": 98.3
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601240,
+       142385
+      ],
+      [
+       601260,
+       142385
+      ],
+      [
+       601260,
+       142440
+      ],
+      [
+       601240,
+       142440
+      ],
+      [
+       601240,
+       142385
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00125",
+    "UPRN": "100062551273",
+    "ADDRESS": "13 Beaver Road",
+    "POSTCODE": "TN23 2FT",
+    "WARD": "Highfield",
+    "BUILT_M2": 149.7
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601260,
+       142385
+      ],
+      [
+       601280,
+       142385
+      ],
+      [
+       601280,
+       142440
+      ],
+      [
+       601260,
+       142440
+      ],
+      [
+       601260,
+       142385
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00126",
+    "UPRN": "100062551282",
+    "ADDRESS": "14 Beaver Road",
+    "POSTCODE": "TN23 2GT",
+    "WARD": "Highfield",
+    "BUILT_M2": 96.7
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601280,
+       142385
+      ],
+      [
+       601300,
+       142385
+      ],
+      [
+       601300,
+       142440
+      ],
+      [
+       601280,
+       142440
+      ],
+      [
+       601280,
+       142385
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00127",
+    "UPRN": "100062551292",
+    "ADDRESS": "15 Beaver Road",
+    "POSTCODE": "TN23 2HT",
+    "WARD": "Highfield",
+    "BUILT_M2": 110.0
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601300,
+       142385
+      ],
+      [
+       601320,
+       142385
+      ],
+      [
+       601320,
+       142440
+      ],
+      [
+       601300,
+       142440
+      ],
+      [
+       601300,
+       142385
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00128",
+    "UPRN": "100062551309",
+    "ADDRESS": "16 Beaver Road",
+    "POSTCODE": "TN23 2JT",
+    "WARD": "Highfield",
+    "BUILT_M2": 75.1
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601160,
+       142460
+      ],
+      [
+       601180,
+       142460
+      ],
+      [
+       601180,
+       142515
+      ],
+      [
+       601160,
+       142515
+      ],
+      [
+       601160,
+       142460
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00129",
+    "UPRN": "100062551324",
+    "ADDRESS": "1 Chart Road",
+    "POSTCODE": "TN23 3AP",
+    "WARD": "Highfield",
+    "BUILT_M2": 232.3
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601180,
+       142460
+      ],
+      [
+       601200,
+       142460
+      ],
+      [
+       601200,
+       142515
+      ],
+      [
+       601180,
+       142515
+      ],
+      [
+       601180,
+       142460
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00130",
+    "UPRN": "100062551335",
+    "ADDRESS": "2 Chart Road",
+    "POSTCODE": "TN23 3BP",
+    "WARD": "Highfield",
+    "BUILT_M2": 79.6
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601200,
+       142460
+      ],
+      [
+       601220,
+       142460
+      ],
+      [
+       601220,
+       142515
+      ],
+      [
+       601200,
+       142515
+      ],
+      [
+       601200,
+       142460
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00131",
+    "UPRN": "100062551348",
+    "ADDRESS": "3 Chart Road",
+    "POSTCODE": "TN23 3DP",
+    "WARD": "Highfield",
+    "BUILT_M2": 259.9
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601220,
+       142460
+      ],
+      [
+       601240,
+       142460
+      ],
+      [
+       601240,
+       142515
+      ],
+      [
+       601220,
+       142515
+      ],
+      [
+       601220,
+       142460
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00132",
+    "UPRN": "100062551364",
+    "ADDRESS": "4 Chart Road",
+    "POSTCODE": "TN23 3EP",
+    "WARD": "Highfield",
+    "BUILT_M2": 63.0
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601240,
+       142460
+      ],
+      [
+       601260,
+       142460
+      ],
+      [
+       601260,
+       142515
+      ],
+      [
+       601240,
+       142515
+      ],
+      [
+       601240,
+       142460
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00133",
+    "UPRN": "100062551368",
+    "ADDRESS": "5 Chart Road",
+    "POSTCODE": "TN23 3FP",
+    "WARD": "Highfield",
+    "BUILT_M2": 245.3
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601260,
+       142460
+      ],
+      [
+       601280,
+       142460
+      ],
+      [
+       601280,
+       142515
+      ],
+      [
+       601260,
+       142515
+      ],
+      [
+       601260,
+       142460
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00134",
+    "UPRN": "100062551384",
+    "ADDRESS": "6 Chart Road",
+    "POSTCODE": "TN23 3GP",
+    "WARD": "Highfield",
+    "BUILT_M2": 107.3
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601280,
+       142460
+      ],
+      [
+       601300,
+       142460
+      ],
+      [
+       601300,
+       142515
+      ],
+      [
+       601280,
+       142515
+      ],
+      [
+       601280,
+       142460
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00135",
+    "UPRN": "100062551393",
+    "ADDRESS": "7 Chart Road",
+    "POSTCODE": "TN23 3HP",
+    "WARD": "Highfield",
+    "BUILT_M2": 157.1
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601300,
+       142460
+      ],
+      [
+       601320,
+       142460
+      ],
+      [
+       601320,
+       142515
+      ],
+      [
+       601300,
+       142515
+      ],
+      [
+       601300,
+       142460
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00136",
+    "UPRN": "100062551399",
+    "ADDRESS": "8 Chart Road",
+    "POSTCODE": "TN23 3JP",
+    "WARD": "Highfield",
+    "BUILT_M2": 232.9
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601160,
+       142515
+      ],
+      [
+       601180,
+       142515
+      ],
+      [
+       601180,
+       142570
+      ],
+      [
+       601160,
+       142570
+      ],
+      [
+       601160,
+       142515
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00137",
+    "UPRN": "100062551416",
+    "ADDRESS": "9 Chart Road",
+    "POSTCODE": "TN23 3AT",
+    "WARD": "Highfield",
+    "BUILT_M2": 71.7
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601180,
+       142515
+      ],
+      [
+       601200,
+       142515
+      ],
+      [
+       601200,
+       142570
+      ],
+      [
+       601180,
+       142570
+      ],
+      [
+       601180,
+       142515
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00138",
+    "UPRN": "100062551425",
+    "ADDRESS": "10 Chart Road",
+    "POSTCODE": "TN23 3BT",
+    "WARD": "Highfield",
+    "BUILT_M2": 60.4
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601200,
+       142515
+      ],
+      [
+       601220,
+       142515
+      ],
+      [
+       601220,
+       142570
+      ],
+      [
+       601200,
+       142570
+      ],
+      [
+       601200,
+       142515
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00139",
+    "UPRN": "100062551434",
+    "ADDRESS": "11 Chart Road",
+    "POSTCODE": "TN23 3DT",
+    "WARD": "Highfield",
+    "BUILT_M2": 113.0
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601220,
+       142515
+      ],
+      [
+       601240,
+       142515
+      ],
+      [
+       601240,
+       142570
+      ],
+      [
+       601220,
+       142570
+      ],
+      [
+       601220,
+       142515
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00140",
+    "UPRN": "100062551449",
+    "ADDRESS": "12 Chart Road",
+    "POSTCODE": "TN23 3ET",
+    "WARD": "Highfield",
+    "BUILT_M2": 217.0
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601240,
+       142515
+      ],
+      [
+       601260,
+       142515
+      ],
+      [
+       601260,
+       142570
+      ],
+      [
+       601240,
+       142570
+      ],
+      [
+       601240,
+       142515
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00141",
+    "UPRN": "100062551456",
+    "ADDRESS": "13 Chart Road",
+    "POSTCODE": "TN23 3FT",
+    "WARD": "Highfield",
+    "BUILT_M2": 144.6
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601260,
+       142515
+      ],
+      [
+       601280,
+       142515
+      ],
+      [
+       601280,
+       142570
+      ],
+      [
+       601260,
+       142570
+      ],
+      [
+       601260,
+       142515
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00142",
+    "UPRN": "100062551470",
+    "ADDRESS": "14 Chart Road",
+    "POSTCODE": "TN23 3GT",
+    "WARD": "Highfield",
+    "BUILT_M2": 259.1
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601280,
+       142515
+      ],
+      [
+       601300,
+       142515
+      ],
+      [
+       601300,
+       142570
+      ],
+      [
+       601280,
+       142570
+      ],
+      [
+       601280,
+       142515
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00143",
+    "UPRN": "100062551481",
+    "ADDRESS": "15 Chart Road",
+    "POSTCODE": "TN23 3HT",
+    "WARD": "Highfield",
+    "BUILT_M2": 192.4
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601300,
+       142515
+      ],
+      [
+       601320,
+       142515
+      ],
+      [
+       601320,
+       142570
+      ],
+      [
+       601300,
+       142570
+      ],
+      [
+       601300,
+       142515
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00144",
+    "UPRN": "100062551491",
+    "ADDRESS": "16 Chart Road",
+    "POSTCODE": "TN23 3JT",
+    "WARD": "Highfield",
+    "BUILT_M2": 91.0
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601340,
+       142200
+      ],
+      [
+       601360,
+       142200
+      ],
+      [
+       601360,
+       142255
+      ],
+      [
+       601340,
+       142255
+      ],
+      [
+       601340,
+       142200
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00145",
+    "UPRN": "100062551498",
+    "ADDRESS": "1 Canterbury Road",
+    "POSTCODE": "TN24 1AQ",
+    "WARD": "Godinton",
+    "BUILT_M2": 103.5
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601360,
+       142200
+      ],
+      [
+       601380,
+       142200
+      ],
+      [
+       601380,
+       142255
+      ],
+      [
+       601360,
+       142255
+      ],
+      [
+       601360,
+       142200
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00146",
+    "UPRN": "100062551501",
+    "ADDRESS": "2 Canterbury Road",
+    "POSTCODE": "TN24 1BQ",
+    "WARD": "Godinton",
+    "BUILT_M2": 175.8
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601380,
+       142200
+      ],
+      [
+       601400,
+       142200
+      ],
+      [
+       601400,
+       142255
+      ],
+      [
+       601380,
+       142255
+      ],
+      [
+       601380,
+       142200
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00147",
+    "UPRN": "100062551512",
+    "ADDRESS": "3 Canterbury Road",
+    "POSTCODE": "TN24 1DQ",
+    "WARD": "Godinton",
+    "BUILT_M2": 72.2
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601400,
+       142200
+      ],
+      [
+       601420,
+       142200
+      ],
+      [
+       601420,
+       142255
+      ],
+      [
+       601400,
+       142255
+      ],
+      [
+       601400,
+       142200
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00148",
+    "UPRN": "100062551520",
+    "ADDRESS": "4 Canterbury Road",
+    "POSTCODE": "TN24 1EQ",
+    "WARD": "Godinton",
+    "BUILT_M2": 71.4
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601420,
+       142200
+      ],
+      [
+       601440,
+       142200
+      ],
+      [
+       601440,
+       142255
+      ],
+      [
+       601420,
+       142255
+      ],
+      [
+       601420,
+       142200
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00149",
+    "UPRN": "100062551532",
+    "ADDRESS": "5 Canterbury Road",
+    "POSTCODE": "TN24 1FQ",
+    "WARD": "Godinton",
+    "BUILT_M2": 155.4
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601440,
+       142200
+      ],
+      [
+       601460,
+       142200
+      ],
+      [
+       601460,
+       142255
+      ],
+      [
+       601440,
+       142255
+      ],
+      [
+       601440,
+       142200
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00150",
+    "UPRN": "100062551549",
+    "ADDRESS": "6 Canterbury Road",
+    "POSTCODE": "TN24 1GQ",
+    "WARD": "Godinton",
+    "BUILT_M2": 230.5
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601460,
+       142200
+      ],
+      [
+       601480,
+       142200
+      ],
+      [
+       601480,
+       142255
+      ],
+      [
+       601460,
+       142255
+      ],
+      [
+       601460,
+       142200
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00151",
+    "UPRN": "100062551554",
+    "ADDRESS": "7 Canterbury Road",
+    "POSTCODE": "TN24 1HQ",
+    "WARD": "Godinton",
+    "BUILT_M2": 71.4
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601480,
+       142200
+      ],
+      [
+       601500,
+       142200
+      ],
+      [
+       601500,
+       142255
+      ],
+      [
+       601480,
+       142255
+      ],
+      [
+       601480,
+       142200
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00152",
+    "UPRN": "100062551565",
+    "ADDRESS": "8 Canterbury Road",
+    "POSTCODE": "TN24 1JQ",
+    "WARD": "Godinton",
+    "BUILT_M2": 76.0
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601340,
+       142255
+      ],
+      [
+       601360,
+       142255
+      ],
+      [
+       601360,
+       142310
+      ],
+      [
+       601340,
+       142310
+      ],
+      [
+       601340,
+       142255
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00153",
+    "UPRN": "100062551570",
+    "ADDRESS": "9 Canterbury Road",
+    "POSTCODE": "TN24 1AU",
+    "WARD": "Godinton",
+    "BUILT_M2": 73.7
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601360,
+       142255
+      ],
+      [
+       601380,
+       142255
+      ],
+      [
+       601380,
+       142310
+      ],
+      [
+       601360,
+       142310
+      ],
+      [
+       601360,
+       142255
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00154",
+    "UPRN": "100062551574",
+    "ADDRESS": "10 Canterbury Road",
+    "POSTCODE": "TN24 1BU",
+    "WARD": "Godinton",
+    "BUILT_M2": 195.0
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601380,
+       142255
+      ],
+      [
+       601400,
+       142255
+      ],
+      [
+       601400,
+       142310
+      ],
+      [
+       601380,
+       142310
+      ],
+      [
+       601380,
+       142255
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00155",
+    "UPRN": "100062551580",
+    "ADDRESS": "11 Canterbury Road",
+    "POSTCODE": "TN24 1DU",
+    "WARD": "Godinton",
+    "BUILT_M2": 140.8
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601400,
+       142255
+      ],
+      [
+       601420,
+       142255
+      ],
+      [
+       601420,
+       142310
+      ],
+      [
+       601400,
+       142310
+      ],
+      [
+       601400,
+       142255
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00156",
+    "UPRN": "100062551597",
+    "ADDRESS": "12 Canterbury Road",
+    "POSTCODE": "TN24 1EU",
+    "WARD": "Godinton",
+    "BUILT_M2": 173.9
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601420,
+       142255
+      ],
+      [
+       601440,
+       142255
+      ],
+      [
+       601440,
+       142310
+      ],
+      [
+       601420,
+       142310
+      ],
+      [
+       601420,
+       142255
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00157",
+    "UPRN": "100062551609",
+    "ADDRESS": "13 Canterbury Road",
+    "POSTCODE": "TN24 1FU",
+    "WARD": "Godinton",
+    "BUILT_M2": 178.9
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601440,
+       142255
+      ],
+      [
+       601460,
+       142255
+      ],
+      [
+       601460,
+       142310
+      ],
+      [
+       601440,
+       142310
+      ],
+      [
+       601440,
+       142255
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00158",
+    "UPRN": "100062551621",
+    "ADDRESS": "14 Canterbury Road",
+    "POSTCODE": "TN24 1GU",
+    "WARD": "Godinton",
+    "BUILT_M2": 76.4
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601460,
+       142255
+      ],
+      [
+       601480,
+       142255
+      ],
+      [
+       601480,
+       142310
+      ],
+      [
+       601460,
+       142310
+      ],
+      [
+       601460,
+       142255
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00159",
+    "UPRN": "100062551634",
+    "ADDRESS": "15 Canterbury Road",
+    "POSTCODE": "TN24 1HU",
+    "WARD": "Godinton",
+    "BUILT_M2": 176.7
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601480,
+       142255
+      ],
+      [
+       601500,
+       142255
+      ],
+      [
+       601500,
+       142310
+      ],
+      [
+       601480,
+       142310
+      ],
+      [
+       601480,
+       142255
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00160",
+    "UPRN": "100062551645",
+    "ADDRESS": "16 Canterbury Road",
+    "POSTCODE": "TN24 1JU",
+    "WARD": "Godinton",
+    "BUILT_M2": 123.3
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601340,
+       142330
+      ],
+      [
+       601360,
+       142330
+      ],
+      [
+       601360,
+       142385
+      ],
+      [
+       601340,
+       142385
+      ],
+      [
+       601340,
+       142330
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00161",
+    "UPRN": "100062551652",
+    "ADDRESS": "1 Kingsnorth Road",
+    "POSTCODE": "TN24 2AQ",
+    "WARD": "Godinton",
+    "BUILT_M2": 100.9
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601360,
+       142330
+      ],
+      [
+       601380,
+       142330
+      ],
+      [
+       601380,
+       142385
+      ],
+      [
+       601360,
+       142385
+      ],
+      [
+       601360,
+       142330
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00162",
+    "UPRN": "100062551666",
+    "ADDRESS": "2 Kingsnorth Road",
+    "POSTCODE": "TN24 2BQ",
+    "WARD": "Godinton",
+    "BUILT_M2": 122.8
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601380,
+       142330
+      ],
+      [
+       601400,
+       142330
+      ],
+      [
+       601400,
+       142385
+      ],
+      [
+       601380,
+       142385
+      ],
+      [
+       601380,
+       142330
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00163",
+    "UPRN": "100062551673",
+    "ADDRESS": "3 Kingsnorth Road",
+    "POSTCODE": "TN24 2DQ",
+    "WARD": "Godinton",
+    "BUILT_M2": 139.2
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601400,
+       142330
+      ],
+      [
+       601420,
+       142330
+      ],
+      [
+       601420,
+       142385
+      ],
+      [
+       601400,
+       142385
+      ],
+      [
+       601400,
+       142330
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00164",
+    "UPRN": "100062551686",
+    "ADDRESS": "4 Kingsnorth Road",
+    "POSTCODE": "TN24 2EQ",
+    "WARD": "Godinton",
+    "BUILT_M2": 189.1
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601420,
+       142330
+      ],
+      [
+       601440,
+       142330
+      ],
+      [
+       601440,
+       142385
+      ],
+      [
+       601420,
+       142385
+      ],
+      [
+       601420,
+       142330
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00165",
+    "UPRN": "100062551696",
+    "ADDRESS": "5 Kingsnorth Road",
+    "POSTCODE": "TN24 2FQ",
+    "WARD": "Godinton",
+    "BUILT_M2": 123.2
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601440,
+       142330
+      ],
+      [
+       601460,
+       142330
+      ],
+      [
+       601460,
+       142385
+      ],
+      [
+       601440,
+       142385
+      ],
+      [
+       601440,
+       142330
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00166",
+    "UPRN": "100062551711",
+    "ADDRESS": "6 Kingsnorth Road",
+    "POSTCODE": "TN24 2GQ",
+    "WARD": "Godinton",
+    "BUILT_M2": 247.1
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601460,
+       142330
+      ],
+      [
+       601480,
+       142330
+      ],
+      [
+       601480,
+       142385
+      ],
+      [
+       601460,
+       142385
+      ],
+      [
+       601460,
+       142330
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00167",
+    "UPRN": "100062551714",
+    "ADDRESS": "7 Kingsnorth Road",
+    "POSTCODE": "TN24 2HQ",
+    "WARD": "Godinton",
+    "BUILT_M2": 151.7
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601480,
+       142330
+      ],
+      [
+       601500,
+       142330
+      ],
+      [
+       601500,
+       142385
+      ],
+      [
+       601480,
+       142385
+      ],
+      [
+       601480,
+       142330
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00168",
+    "UPRN": "100062551726",
+    "ADDRESS": "8 Kingsnorth Road",
+    "POSTCODE": "TN24 2JQ",
+    "WARD": "Godinton",
+    "BUILT_M2": 259.2
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601340,
+       142385
+      ],
+      [
+       601360,
+       142385
+      ],
+      [
+       601360,
+       142440
+      ],
+      [
+       601340,
+       142440
+      ],
+      [
+       601340,
+       142385
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00169",
+    "UPRN": "100062551730",
+    "ADDRESS": "9 Kingsnorth Road",
+    "POSTCODE": "TN24 2AU",
+    "WARD": "Godinton",
+    "BUILT_M2": 167.5
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601360,
+       142385
+      ],
+      [
+       601380,
+       142385
+      ],
+      [
+       601380,
+       142440
+      ],
+      [
+       601360,
+       142440
+      ],
+      [
+       601360,
+       142385
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00170",
+    "UPRN": "100062551741",
+    "ADDRESS": "10 Kingsnorth Road",
+    "POSTCODE": "TN24 2BU",
+    "WARD": "Godinton",
+    "BUILT_M2": 113.0
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601380,
+       142385
+      ],
+      [
+       601400,
+       142385
+      ],
+      [
+       601400,
+       142440
+      ],
+      [
+       601380,
+       142440
+      ],
+      [
+       601380,
+       142385
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00171",
+    "UPRN": "100062551758",
+    "ADDRESS": "11 Kingsnorth Road",
+    "POSTCODE": "TN24 2DU",
+    "WARD": "Godinton",
+    "BUILT_M2": 129.8
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601400,
+       142385
+      ],
+      [
+       601420,
+       142385
+      ],
+      [
+       601420,
+       142440
+      ],
+      [
+       601400,
+       142440
+      ],
+      [
+       601400,
+       142385
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00172",
+    "UPRN": "100062551762",
+    "ADDRESS": "12 Kingsnorth Road",
+    "POSTCODE": "TN24 2EU",
+    "WARD": "Godinton",
+    "BUILT_M2": 235.9
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601420,
+       142385
+      ],
+      [
+       601440,
+       142385
+      ],
+      [
+       601440,
+       142440
+      ],
+      [
+       601420,
+       142440
+      ],
+      [
+       601420,
+       142385
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00173",
+    "UPRN": "100062551770",
+    "ADDRESS": "13 Kingsnorth Road",
+    "POSTCODE": "TN24 2FU",
+    "WARD": "Godinton",
+    "BUILT_M2": 117.0
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601440,
+       142385
+      ],
+      [
+       601460,
+       142385
+      ],
+      [
+       601460,
+       142440
+      ],
+      [
+       601440,
+       142440
+      ],
+      [
+       601440,
+       142385
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00174",
+    "UPRN": "100062551780",
+    "ADDRESS": "14 Kingsnorth Road",
+    "POSTCODE": "TN24 2GU",
+    "WARD": "Godinton",
+    "BUILT_M2": 226.7
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601460,
+       142385
+      ],
+      [
+       601480,
+       142385
+      ],
+      [
+       601480,
+       142440
+      ],
+      [
+       601460,
+       142440
+      ],
+      [
+       601460,
+       142385
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00175",
+    "UPRN": "100062551794",
+    "ADDRESS": "15 Kingsnorth Road",
+    "POSTCODE": "TN24 2HU",
+    "WARD": "Godinton",
+    "BUILT_M2": 120.5
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601480,
+       142385
+      ],
+      [
+       601500,
+       142385
+      ],
+      [
+       601500,
+       142440
+      ],
+      [
+       601480,
+       142440
+      ],
+      [
+       601480,
+       142385
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00176",
+    "UPRN": "100062551809",
+    "ADDRESS": "16 Kingsnorth Road",
+    "POSTCODE": "TN24 2JU",
+    "WARD": "Godinton",
+    "BUILT_M2": 190.8
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601340,
+       142460
+      ],
+      [
+       601360,
+       142460
+      ],
+      [
+       601360,
+       142515
+      ],
+      [
+       601340,
+       142515
+      ],
+      [
+       601340,
+       142460
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00177",
+    "UPRN": "100062551812",
+    "ADDRESS": "1 Romney Marsh Road",
+    "POSTCODE": "TN24 3AQ",
+    "WARD": "Godinton",
+    "BUILT_M2": 193.6
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601360,
+       142460
+      ],
+      [
+       601380,
+       142460
+      ],
+      [
+       601380,
+       142515
+      ],
+      [
+       601360,
+       142515
+      ],
+      [
+       601360,
+       142460
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00178",
+    "UPRN": "100062551823",
+    "ADDRESS": "2 Romney Marsh Road",
+    "POSTCODE": "TN24 3BQ",
+    "WARD": "Godinton",
+    "BUILT_M2": 119.9
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601380,
+       142460
+      ],
+      [
+       601400,
+       142460
+      ],
+      [
+       601400,
+       142515
+      ],
+      [
+       601380,
+       142515
+      ],
+      [
+       601380,
+       142460
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00179",
+    "UPRN": "100062551836",
+    "ADDRESS": "3 Romney Marsh Road",
+    "POSTCODE": "TN24 3DQ",
+    "WARD": "Godinton",
+    "BUILT_M2": 80.7
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601400,
+       142460
+      ],
+      [
+       601420,
+       142460
+      ],
+      [
+       601420,
+       142515
+      ],
+      [
+       601400,
+       142515
+      ],
+      [
+       601400,
+       142460
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00180",
+    "UPRN": "100062551853",
+    "ADDRESS": "4 Romney Marsh Road",
+    "POSTCODE": "TN24 3EQ",
+    "WARD": "Godinton",
+    "BUILT_M2": 86.9
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601420,
+       142460
+      ],
+      [
+       601440,
+       142460
+      ],
+      [
+       601440,
+       142515
+      ],
+      [
+       601420,
+       142515
+      ],
+      [
+       601420,
+       142460
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00181",
+    "UPRN": "100062551857",
+    "ADDRESS": "5 Romney Marsh Road",
+    "POSTCODE": "TN24 3FQ",
+    "WARD": "Godinton",
+    "BUILT_M2": 237.9
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601440,
+       142460
+      ],
+      [
+       601460,
+       142460
+      ],
+      [
+       601460,
+       142515
+      ],
+      [
+       601440,
+       142515
+      ],
+      [
+       601440,
+       142460
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00182",
+    "UPRN": "100062551871",
+    "ADDRESS": "6 Romney Marsh Road",
+    "POSTCODE": "TN24 3GQ",
+    "WARD": "Godinton",
+    "BUILT_M2": 170.6
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601460,
+       142460
+      ],
+      [
+       601480,
+       142460
+      ],
+      [
+       601480,
+       142515
+      ],
+      [
+       601460,
+       142515
+      ],
+      [
+       601460,
+       142460
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00183",
+    "UPRN": "100062551878",
+    "ADDRESS": "7 Romney Marsh Road",
+    "POSTCODE": "TN24 3HQ",
+    "WARD": "Godinton",
+    "BUILT_M2": 116.4
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601480,
+       142460
+      ],
+      [
+       601500,
+       142460
+      ],
+      [
+       601500,
+       142515
+      ],
+      [
+       601480,
+       142515
+      ],
+      [
+       601480,
+       142460
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00184",
+    "UPRN": "100062551884",
+    "ADDRESS": "8 Romney Marsh Road",
+    "POSTCODE": "TN24 3JQ",
+    "WARD": "Godinton",
+    "BUILT_M2": 203.5
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601340,
+       142515
+      ],
+      [
+       601360,
+       142515
+      ],
+      [
+       601360,
+       142570
+      ],
+      [
+       601340,
+       142570
+      ],
+      [
+       601340,
+       142515
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00185",
+    "UPRN": "100062551890",
+    "ADDRESS": "9 Romney Marsh Road",
+    "POSTCODE": "TN24 3AU",
+    "WARD": "Godinton",
+    "BUILT_M2": 197.5
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601360,
+       142515
+      ],
+      [
+       601380,
+       142515
+      ],
+      [
+       601380,
+       142570
+      ],
+      [
+       601360,
+       142570
+      ],
+      [
+       601360,
+       142515
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00186",
+    "UPRN": "100062551906",
+    "ADDRESS": "10 Romney Marsh Road",
+    "POSTCODE": "TN24 3BU",
+    "WARD": "Godinton",
+    "BUILT_M2": 112.8
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601380,
+       142515
+      ],
+      [
+       601400,
+       142515
+      ],
+      [
+       601400,
+       142570
+      ],
+      [
+       601380,
+       142570
+      ],
+      [
+       601380,
+       142515
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00187",
+    "UPRN": "100062551916",
+    "ADDRESS": "11 Romney Marsh Road",
+    "POSTCODE": "TN24 3DU",
+    "WARD": "Godinton",
+    "BUILT_M2": 110.2
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601400,
+       142515
+      ],
+      [
+       601420,
+       142515
+      ],
+      [
+       601420,
+       142570
+      ],
+      [
+       601400,
+       142570
+      ],
+      [
+       601400,
+       142515
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00188",
+    "UPRN": "100062551933",
+    "ADDRESS": "12 Romney Marsh Road",
+    "POSTCODE": "TN24 3EU",
+    "WARD": "Godinton",
+    "BUILT_M2": 229.2
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601420,
+       142515
+      ],
+      [
+       601440,
+       142515
+      ],
+      [
+       601440,
+       142570
+      ],
+      [
+       601420,
+       142570
+      ],
+      [
+       601420,
+       142515
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00189",
+    "UPRN": "100062551937",
+    "ADDRESS": "13 Romney Marsh Road",
+    "POSTCODE": "TN24 3FU",
+    "WARD": "Godinton",
+    "BUILT_M2": 186.9
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601440,
+       142515
+      ],
+      [
+       601460,
+       142515
+      ],
+      [
+       601460,
+       142570
+      ],
+      [
+       601440,
+       142570
+      ],
+      [
+       601440,
+       142515
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00190",
+    "UPRN": "100062551953",
+    "ADDRESS": "14 Romney Marsh Road",
+    "POSTCODE": "TN24 3GU",
+    "WARD": "Godinton",
+    "BUILT_M2": 115.3
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601460,
+       142515
+      ],
+      [
+       601480,
+       142515
+      ],
+      [
+       601480,
+       142570
+      ],
+      [
+       601460,
+       142570
+      ],
+      [
+       601460,
+       142515
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00191",
+    "UPRN": "100062551956",
+    "ADDRESS": "15 Romney Marsh Road",
+    "POSTCODE": "TN24 3HU",
+    "WARD": "Godinton",
+    "BUILT_M2": 126.7
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601480,
+       142515
+      ],
+      [
+       601500,
+       142515
+      ],
+      [
+       601500,
+       142570
+      ],
+      [
+       601480,
+       142570
+      ],
+      [
+       601480,
+       142515
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "PARCEL_ID": "ASH-00192",
+    "UPRN": "100062551961",
+    "ADDRESS": "16 Romney Marsh Road",
+    "POSTCODE": "TN24 3JU",
+    "WARD": "Godinton",
+    "BUILT_M2": 187.4
+   }
+  }
+ ]
+}

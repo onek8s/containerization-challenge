@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Loaded into SQL Server (rebate schema types, functions and aggregates). PERMISSION_SET = SAFE. -->
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <RootNamespace>ContosoFoods.TradeRebates.SqlClr</RootNamespace>
+    <AssemblyName>TradeRebates.SqlClr</AssemblyName>
+    <Nullable>annotations</Nullable>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\TradeRebates.Rules\TierSchedule.cs" Link="Rules\TierSchedule.cs" />
+    <Compile Include="..\TradeRebates.Rules\Gtin.cs" Link="Rules\Gtin.cs" />
+    <Compile Include="..\TradeRebates.Rules\Iban.cs" Link="Rules\Iban.cs" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,6 @@
+[
+  { "statusCode": "BKD", "eventTime": "2026-10-28T09:12:00Z", "airport": "PVG", "pieces": 3 },
+  { "statusCode": "RCS", "eventTime": "2026-10-29T03:40:00Z", "airport": "PVG", "pieces": 3 },
+  { "statusCode": "MAN", "eventTime": "2026-10-29T12:05:00Z", "airport": "PVG", "flight": "AF3119", "pieces": 3 },
+  { "statusCode": "DEP", "eventTime": "2026-10-29T14:22:00Z", "airport": "PVG", "flight": "AF3119", "pieces": 3 }
+]

@@ -1,0 +1,67 @@
+@page "{id:guid}"
+@model Litware.OrderHub.Portal.Pages.Orders.DetailsModel
+@{
+    var o = Model.Order;
+    var d = o.Document;
+    ViewData["Title"] = o.OrderNumber ?? o.ExternalRef;
+}
+<h1>@(o.OrderNumber ?? "Order without number") <partial name="_StatusBadge" model="o.Status" /></h1>
+@if (o.StatusReason != null) { <p class="reason">@o.StatusReason</p> }
+
+<div class="columns">
+    <dl>
+        <dt>Channel</dt><dd>@o.Channel</dd>
+        <dt>Channel reference</dt><dd>@o.ExternalRef</dd>
+        <dt>Customer reference</dt><dd>@d.CustomerReference</dd>
+        <dt>Received</dt><dd>@o.ReceivedUtc.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss")</dd>
+        <dt>Customer</dt><dd>@d.CustomerName<br />@d.CustomerEmail<br />@d.Phone</dd>
+    </dl>
+    <dl>
+        <dt>Deliver to</dt>
+        <dd>@d.ShipTo?.Name<br />@d.ShipTo?.Street @d.ShipTo?.Street2<br />@d.ShipTo?.PostalCode @d.ShipTo?.City<br />@d.ShipTo?.CountryCode</dd>
+        <dt>Shipping</dt><dd>@d.ShippingMethod, @d.ShippingAmount.ToString("N2") @d.Currency</dd>
+        <dt>Warehouse file</dt><dd>@o.WarehouseFile</dd>
+        <dt>Shipment</dt><dd>@o.Carrier @o.TrackingNumber @(o.ShippedUtc?.ToLocalTime().ToString("yyyy-MM-dd HH:mm"))</dd>
+        <dt>Invoice</dt>
+        <dd>
+            @if (o.InvoiceNumber != null)
+            {
+                <a asp-page-handler="Invoice" asp-route-id="@o.OrderId">@o.InvoiceNumber (PDF)</a>
+            }
+        </dd>
+    </dl>
+</div>
+
+<h2>Lines</h2>
+<table>
+    <thead><tr><th>SKU</th><th>Description</th><th class="num">Qty</th><th class="num">Unit price</th><th class="num">Amount</th></tr></thead>
+    <tbody>
+        @foreach (var l in d.Lines)
+        {
+            <tr><td>@l.Sku</td><td>@l.Description</td><td class="num">@l.Quantity</td><td class="num">@l.UnitPrice.ToString("N2")</td><td class="num">@((l.Quantity * l.UnitPrice).ToString("N2"))</td></tr>
+        }
+        <tr class="total"><td colspan="4">Total @d.Currency</td><td class="num">@((o.LinesTotal + d.ShippingAmount).ToString("N2"))</td></tr>
+    </tbody>
+</table>
+
+<div class="actions">
+    @if (o.Status == OrderStatus.Rejected)
+    {
+        <form method="post" asp-page-handler="Resubmit" asp-route-id="@o.OrderId"><button type="submit">Validate again</button></form>
+    }
+    @if (o.OrderNumber != null && (o.Status == OrderStatus.Accepted || o.Status == OrderStatus.SentToWarehouse))
+    {
+        <form method="post" asp-page-handler="Resend" asp-route-id="@o.OrderId"><button type="submit">Send to warehouse again</button></form>
+    }
+</div>
+
+<h2>History</h2>
+<table>
+    <thead><tr><th>Time</th><th>Event</th><th>Detail</th></tr></thead>
+    <tbody>
+        @foreach (var e in Model.Events)
+        {
+            <tr><td>@e.AtUtc.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss")</td><td>@e.EventType</td><td>@e.Detail</td></tr>
+        }
+    </tbody>
+</table>

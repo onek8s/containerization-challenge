@@ -1,0 +1,34 @@
+@model CreditDesk.Web.Models.CustomerSearchModel
+@{ ViewBag.Title = "Customers"; }
+<h1>Customers</h1>
+<form method="get" class="search">
+    <input type="search" name="q" value="@Model.Query" placeholder="Account number or name" autofocus />
+    <button type="submit">Search</button>
+</form>
+@if (Model.Results != null)
+{
+    if (Model.Results.Count == 0)
+    {
+        <p class="muted">No customers match '@Model.Query'.</p>
+    }
+    else
+    {
+        <table>
+            <thead><tr><th>Account</th><th>Name</th><th>City</th><th class="num">Limit</th><th class="num">Open</th><th class="num">Overdue</th><th>Sales rep</th></tr></thead>
+            <tbody>
+                @foreach (var c in Model.Results)
+                {
+                    <tr class="@(c.OnStop ? "onstop" : "")">
+                        <td>@Html.ActionLink(c.AccountNumber, "Details", new { id = c.AccountNumber })</td>
+                        <td>@c.Name</td>
+                        <td>@c.City</td>
+                        <td class="num">@c.CreditLimit.ToString("N0")</td>
+                        <td class="num">@c.OpenBalance.ToString("N0")</td>
+                        <td class="num">@c.OverdueBalance.ToString("N0")</td>
+                        <td>@c.SalesRep</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+}

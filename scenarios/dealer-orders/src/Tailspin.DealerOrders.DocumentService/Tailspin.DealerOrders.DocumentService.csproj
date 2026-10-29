@@ -1,0 +1,34 @@
+<Project Sdk="MSBuild.SDK.SystemWeb">
+
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+    <RootNamespace>Tailspin.DealerOrders.DocumentService</RootNamespace>
+    <AssemblyName>Tailspin.DealerOrders.DocumentService</AssemblyName>
+    <AppConfig>Web.config</AppConfig>
+    <GeneratedBindingRedirectsAction>None</GeneratedBindingRedirectsAction>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="all" />
+    <PackageReference Include="MSBuild.Microsoft.VisualStudio.Web.targets" Version="14.0.0.3" PrivateAssets="all" />
+    <PackageReference Include="Unity" Version="5.8.11" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Activation" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="*.svc" />
+    <None Include="..\..\templates\*.docx" LinkBase="templates" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="..\..\catalog\**\*.json" LinkBase="catalog" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Tailspin.DealerOrders.Infrastructure\Tailspin.DealerOrders.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>

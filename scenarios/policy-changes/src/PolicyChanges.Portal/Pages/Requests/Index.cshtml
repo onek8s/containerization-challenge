@@ -1,0 +1,16 @@
+@page
+@model PolicyChanges.Portal.Pages.Requests.IndexModel
+@{
+    ViewData["Title"] = "Changes";
+}
+<h1>Changes</h1>
+
+<form method="get">
+    <select asp-for="Status" asp-items="Html.GetEnumSelectList<ChangeStatus>()">
+        <option value="">All statuses</option>
+    </select>
+    <input asp-for="Search" placeholder="Reference, policy or endorsement" />
+    <button type="submit">Filter</button>
+</form>
+
+<partial name="_List" model="Model.Requests" />

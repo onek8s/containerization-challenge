@@ -1,0 +1,23 @@
+body { font-size: .9rem; background: #f5f6f8; }
+.bg-fabrikam { background-color: #1d4f6e; }
+.card-header { font-weight: 600; background: #fff; }
+.kpi { display: block; color: inherit; }
+.kpi:hover { box-shadow: 0 2px 6px rgba(0,0,0,.15); }
+.kpi-value { font-size: 2rem; font-weight: 600; line-height: 1.1; }
+.kpi-label { font-size: .8rem; }
+.display-balance { font-size: 2rem; font-weight: 600; }
+.property-map { height: 260px; }
+.doc-thumb { width: 64px; height: 64px; object-fit: cover; background: #eee; }
+.priority-emergency { background: #c0392b; color: #fff; }
+.priority-urgent { background: #e67e22; color: #fff; }
+.priority-routine { background: #2980b9; color: #fff; }
+.priority-planned { background: #7f8c8d; color: #fff; }
+.board { flex-wrap: nowrap; overflow-x: auto; }
+.board-column { min-width: 180px; background: #e9ecef; border-radius: 4px; margin: 0 3px; padding: 6px; }
+.board-card { background: #fff; border-left: 4px solid #2980b9; border-radius: 3px; padding: 4px 6px; margin-bottom: 4px; font-size: .8rem; }
+.board-card.emergency { border-left-color: #c0392b; }
+.board-card.urgent { border-left-color: #e67e22; }
+.board-card.overdue { background: #fdecea; }
+.board-card.flash { animation: flash 2s; }
+@keyframes flash { from { background: #fff3cd; } to { background: #fff; } }
+.footer { background: #fff; }

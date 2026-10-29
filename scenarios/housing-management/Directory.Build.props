@@ -1,0 +1,11 @@
+<Project>
+  <PropertyGroup>
+    <LangVersion>8.0</LangVersion>
+    <Company>Fabrikam Homes</Company>
+    <Product>Fabrikam Housing</Product>
+    <Copyright>Copyright © Fabrikam Homes 2019-2021</Copyright>
+    <Version>2.7.0</Version>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <NoWarn>$(NoWarn);CS1591</NoWarn>
+  </PropertyGroup>
+</Project>

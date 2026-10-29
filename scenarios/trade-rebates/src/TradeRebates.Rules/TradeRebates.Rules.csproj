@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>ContosoFoods.TradeRebates.Rules</RootNamespace>
+    <AssemblyName>ContosoFoods.TradeRebates.Rules</AssemblyName>
+  </PropertyGroup>
+
+</Project>

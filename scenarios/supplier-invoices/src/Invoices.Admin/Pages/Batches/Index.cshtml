@@ -1,0 +1,27 @@
+@page
+@model Wingtip.Invoices.Admin.Pages.Batches.IndexModel
+@{
+    ViewData["Title"] = "ERP batches";
+}
+<h1>ERP import batches</h1>
+<table>
+    <thead>
+        <tr><th>Batch</th><th>Created</th><th>File</th><th class="num">Invoices</th><th class="num">Gross</th><th>Status</th><th class="num">Posted</th><th class="num">Rejected</th><th>Acknowledged</th></tr>
+    </thead>
+    <tbody>
+        @foreach (var b in Model.Batches)
+        {
+            <tr class="@(b.Rejected > 0 ? "bad" : "")">
+                <td>@b.BatchId</td>
+                <td>@b.CreatedAt.ToString("d.M.yyyy HH:mm")</td>
+                <td>@b.FileName</td>
+                <td class="num">@b.InvoiceCount</td>
+                <td class="num">@b.GrossTotal?.ToString("N2")</td>
+                <td>@b.Status</td>
+                <td class="num">@b.Posted</td>
+                <td class="num">@if (b.Rejected > 0) { <a asp-page="/Invoices/Index" asp-route-status="@((byte)InvoiceStatus.PostingFailed)">@b.Rejected</a> } else { @b.Rejected }</td>
+                <td>@b.AckAt?.ToString("d.M.yyyy HH:mm") <span class="muted">@b.AckFile</span></td>
+            </tr>
+        }
+    </tbody>
+</table>

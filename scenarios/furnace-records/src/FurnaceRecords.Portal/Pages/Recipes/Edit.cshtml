@@ -1,0 +1,25 @@
+@page "{id:int?}"
+@model FurnaceRecords.Portal.Pages.Recipes.EditModel
+@{
+    ViewData["Title"] = Model.Recipe.Id == 0 ? "New recipe" : "Recipe " + Model.Recipe.Code;
+}
+<h1>@ViewData["Title"]</h1>
+@if (Model.Errors.Count > 0)
+{
+    <div class="errors"><ul>@foreach (var e in Model.Errors) { <li>@e</li> }</ul></div>
+}
+<form method="post">
+    <input type="hidden" asp-for="Recipe.Id" />
+    <div class="row"><label asp-for="Recipe.Code">Code</label><input asp-for="Recipe.Code" readonly="@(Model.Recipe.Id != 0)" /></div>
+    <div class="row"><label asp-for="Recipe.Name">Name</label><input asp-for="Recipe.Name" size="40" /></div>
+    <div class="row"><label asp-for="Recipe.Specification">Specification</label><input asp-for="Recipe.Specification" /></div>
+    <div class="row"><label asp-for="Recipe.SetpointCelsius">Setpoint °C</label><input asp-for="Recipe.SetpointCelsius" /></div>
+    <div class="row"><label asp-for="Recipe.ToleranceMinusCelsius">Tolerance minus °C</label><input asp-for="Recipe.ToleranceMinusCelsius" /></div>
+    <div class="row"><label asp-for="Recipe.TolerancePlusCelsius">Tolerance plus °C</label><input asp-for="Recipe.TolerancePlusCelsius" /></div>
+    <div class="row"><label asp-for="Recipe.SoakMinutes">Soak minutes</label><input asp-for="Recipe.SoakMinutes" /></div>
+    <div class="row"><label asp-for="Recipe.MaxSoakMinutes">Maximum soak minutes</label><input asp-for="Recipe.MaxSoakMinutes" /></div>
+    <div class="row"><label asp-for="Recipe.MaxRampCelsiusPerMinute">Maximum heating °C/min</label><input asp-for="Recipe.MaxRampCelsiusPerMinute" /></div>
+    <div class="row"><label asp-for="Recipe.MaxQuenchDelaySeconds">Maximum quench delay s</label><input asp-for="Recipe.MaxQuenchDelaySeconds" /></div>
+    <div class="row"><label asp-for="Recipe.Active">Active</label><input asp-for="Recipe.Active" /></div>
+    <button type="submit">Save</button>
+</form>

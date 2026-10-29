@@ -1,0 +1,19 @@
+@model IReadOnlyList<CollectionCaseRow>
+@{ ViewData["Title"] = "Collections"; }
+<h2>Collection cases</h2>
+<p>
+    <a asp-action="Index">Open</a> |
+    @foreach (var s in Enum.GetValues<CollectionStatus>()) { <a asp-action="Index" asp-route-status="@s">@s</a> @(" ") }
+</p>
+<table>
+    <tr><th>Case</th><th>Loan</th><th>Customer</th><th>Stage</th><th>Status</th><th class="num">Arrears</th><th class="num">DPD</th><th>Assigned</th><th>Last action</th></tr>
+    @foreach (var c in Model)
+    {
+        <tr>
+            <td><a asp-action="Details" asp-route-id="@c.Id">@c.Reference</a></td>
+            <td>@c.AccountNumber</td><td>@c.CustomerNumber</td><td>@c.StageValue</td><td>@c.StatusValue</td>
+            <td class="num">@c.Arrears.ToString("N2")</td><td class="num">@c.DaysPastDue</td><td>@c.AssignedTo</td>
+            <td>@c.LastActionUtc?.ToLocalTime().ToString("d.M.yyyy")</td>
+        </tr>
+    }
+</table>

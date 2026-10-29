@@ -1,0 +1,81 @@
+{
+ "type": "FeatureCollection",
+ "crs": {
+  "type": "name",
+  "properties": {
+   "name": "urn:ogc:def:crs:EPSG::27700"
+  }
+ },
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       600980,
+       142240
+      ],
+      [
+       601140,
+       142240
+      ],
+      [
+       601140,
+       142244
+      ],
+      [
+       600980,
+       142244
+      ],
+      [
+       600980,
+       142240
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "EASEMENT_ID": "EAS-0118",
+    "OWNER": "Ashford Water",
+    "TYPE": "Trunk sewer 600mm"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       601210,
+       142460
+      ],
+      [
+       601214,
+       142460
+      ],
+      [
+       601214,
+       142570
+      ],
+      [
+       601210,
+       142570
+      ],
+      [
+       601210,
+       142460
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "EASEMENT_ID": "EAS-0233",
+    "OWNER": "UK Power Networks",
+    "TYPE": "11kV cable"
+   }
+  }
+ ]
+}

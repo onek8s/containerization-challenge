@@ -1,0 +1,10 @@
+LIBRARY MRSRATE32
+EXPORTS
+    MR_Initialize@16        @1
+    MR_Terminate@4          @2
+    MR_RateShipment@20      @3
+    MR_GetTariffInfo@16     @4
+    MR_ReloadTariffs@4      @5
+    MR_GetKeyStatus@4       @6
+    MR_GetVersion@8         @7
+    MR_GetLastErrorText@12  @8

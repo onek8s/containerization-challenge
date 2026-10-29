@@ -1,0 +1,8 @@
+body { background: #f6f7f9; color: #1d2733; }
+.brand-bar { background: #00594f; color: #fff; padding: .8rem 0; }
+.brand { font-weight: 700; font-size: 1.3rem; letter-spacing: .02em; }
+.brand-sub { opacity: .8; margin-left: .5rem; }
+.card-narrow { max-width: 520px; margin: 0 auto; }
+.btn-primary { background: #00594f; border-color: #00594f; }
+.btn-primary:hover { background: #00443c; border-color: #00443c; }
+.field-validation-error, .validation-summary-errors { color: #b00020; }

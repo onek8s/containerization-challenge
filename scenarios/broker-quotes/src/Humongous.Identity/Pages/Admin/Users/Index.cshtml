@@ -1,0 +1,39 @@
+@page
+@model UsersModel
+@{ ViewData["Title"] = "Users"; }
+<h1>Users</h1>
+@if (Model.Message is not null) { <p>@Model.Message</p> }
+<table>
+    <thead><tr><th>Name</th><th>Email</th><th>Agency</th><th>Roles</th><th>Last sign in</th><th></th></tr></thead>
+    <tbody>
+    @foreach (var u in Model.Users)
+    {
+        <tr>
+            <td>@u.Name</td>
+            <td>@u.Email</td>
+            <td>@u.Agency</td>
+            <td>@string.Join(", ", u.Roles)</td>
+            <td>@u.LastSignIn?.ToLocalTime().ToString("dd/MM/yyyy HH:mm")</td>
+            <td>
+                <form method="post" asp-page-handler="Lock" asp-route-id="@u.Id">
+                    <button type="submit">@(u.Locked ? "Unlock" : "Lock")</button>
+                </form>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+<h2>New user</h2>
+<form method="post" asp-page-handler="Create">
+    <label asp-for="Input.Name">Name</label><input asp-for="Input.Name" />
+    <label asp-for="Input.Email">Email</label><input asp-for="Input.Email" />
+    @if (User.IsInRole(Roles.Administrator))
+    {
+        <label asp-for="Input.Agency">Agency code (empty for Humongous staff)</label><input asp-for="Input.Agency" />
+        <label asp-for="Input.Role">Role</label>
+        <select asp-for="Input.Role" asp-items="@(new SelectList(Roles.All))"></select>
+    }
+    <label asp-for="Input.Password">Initial password</label><input asp-for="Input.Password" type="password" />
+    <button type="submit" class="primary">Create</button>
+</form>

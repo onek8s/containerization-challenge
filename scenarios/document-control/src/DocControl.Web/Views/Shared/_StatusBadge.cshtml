@@ -1,0 +1,5 @@
+@model RevisionStatus?
+@if (Model is not null)
+{
+    <span class="badge s-@Model.ToString()!.ToLowerInvariant()">@Model</span>
+}

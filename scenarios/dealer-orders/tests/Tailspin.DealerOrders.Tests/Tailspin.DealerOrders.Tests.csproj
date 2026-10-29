@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <IsPackable>false</IsPackable>
+    <RootNamespace>Tailspin.DealerOrders.Tests</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />
+    <PackageReference Include="xunit" Version="2.9.2" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.8.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Tailspin.DealerOrders.Configurator\Tailspin.DealerOrders.Configurator.csproj" />
+    <ProjectReference Include="..\..\src\Tailspin.DealerOrders.Documents\Tailspin.DealerOrders.Documents.csproj" />
+    <ProjectReference Include="..\..\src\Tailspin.DealerOrders.Edi\Tailspin.DealerOrders.Edi.csproj" />
+    <ProjectReference Include="..\..\src\Tailspin.DealerOrders.Processing\Tailspin.DealerOrders.Processing.csproj" />
+    <ProjectReference Include="..\..\src\Tailspin.DealerOrders.LabStubs\Tailspin.DealerOrders.LabStubs.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\catalog\**\*.json" LinkBase="catalog" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="..\..\templates\*.docx" LinkBase="templates" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="..\..\samples\**\*" LinkBase="samples" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,121 @@
+@model ApplicationDetailsModel
+@using System.Text.Json
+@{
+    var app = Model.Application.Row;
+    ViewData["Title"] = app.Reference;
+    var latest = Model.Decisions.LastOrDefault();
+}
+<h2>@app.Reference <span class="tag">@app.StatusValue</span></h2>
+<p>@Model.Product.Name, <b>@app.Amount.ToString("N2") EUR</b> / @app.TermMonths months, purpose @((LoanPurpose)app.Purpose), due day @app.DueDay,
+   channel @((Channel)app.Channel). Assigned: @(app.AssignedTo ?? "-")
+   @if (app.LastError != null) { <br /><span class="warn">Last error (@app.Attempts attempts): @app.LastError</span> }
+</p>
+<form class="inline" method="post" asp-action="Assign" asp-route-id="@app.Reference"><button>Assign to me</button></form>
+@if (Model.CanBook)
+{
+    <form class="inline" method="post" asp-action="Book" asp-route-id="@app.Reference"><button>Book and disburse</button></form>
+}
+<div class="grid" style="margin-top:12px">
+    @foreach (var c in Model.Customers)
+    {
+        <div class="card">
+            <h3>@(c.Applicant.IsMain ? "Applicant" : "Co-applicant"): @c.Applicant.FullName</h3>
+            <table>
+                <tr><th>Personal identity code</th><td>@c.Applicant.PersonalIdentityCode</td></tr>
+                <tr><th>Address</th><td>@c.Applicant.StreetAddress, @c.Applicant.PostalCode @c.Applicant.City</td></tr>
+                <tr><th>Employment</th><td>@c.Applicant.Employment @c.Applicant.Employer @(c.Applicant.EmployedSince?.ToString("M/yyyy")) @(c.Applicant.OnProbation ? "(probation)" : "")</td></tr>
+                <tr><th>Income gross / net</th><td>@c.Applicant.GrossMonthlyIncome.ToString("N2") / @c.Applicant.NetMonthlyIncome.ToString("N2")</td></tr>
+                <tr><th>Housing</th><td>@c.Applicant.Housing, @c.Applicant.HousingCostMonthly.ToString("N2") / month, household @c.Applicant.Adults + @c.Applicant.Children</td></tr>
+                <tr><th>Other loans</th><td>@c.Applicant.OtherLoanBalance.ToString("N2") (@c.Applicant.OtherLoanPaymentsMonthly.ToString("N2") / month)</td></tr>
+            </table>
+            @if (c.CoreError != null) { <p class="warn">Core system: @c.CoreError</p> }
+            else if (c.Core == null) { <p>Not a customer in the core system.</p> }
+            else
+            {
+                <h4>Core customer @c.Core.CustomerNumber</h4>
+                <p>@c.Core.Name, segment @c.Core.Segment, since @c.Core.CustomerSince.ToString("d.M.yyyy"), rating @c.Core.InternalRating,
+                   KYC @c.Core.KycStatus @(c.Core.Blocked ? "BLOCKED" : "") branch @c.Core.BranchCode</p>
+                <table>
+                    <tr><th>Account</th><th>Type</th><th class="num">Balance</th></tr>
+                    @foreach (var acc in c.Accounts) { <tr><td>@Iban.Format(acc.Iban)</td><td>@acc.Type</td><td class="num">@acc.Balance.ToString("N2")</td></tr> }
+                </table>
+                @if (c.Exposure != null)
+                {
+                    <table>
+                        <tr><th>Loan</th><th>Product</th><th class="num">Balance</th><th class="num">Arrears</th><th class="num">DPD</th><th>Status</th></tr>
+                        @foreach (var l in c.Exposure.Loans) { <tr><td>@l.AccountNumber</td><td>@l.ProductCode</td><td class="num">@l.Balance.ToString("N2")</td><td class="num">@l.Arrears.ToString("N2")</td><td class="num">@l.DaysPastDue</td><td>@l.Status</td></tr> }
+                    </table>
+                }
+            }
+        </div>
+    }
+    <div class="card">
+        <h3>Decisions</h3>
+        @foreach (var d in Model.Decisions)
+        {
+            <p><span class="tag @d.Outcome">@d.Outcome</span> grade @d.RiskGrade, score @d.Score, @d.DecidedBy @d.CreatedUtc.ToLocalTime().ToString("d.M.yyyy HH:mm")
+               @(d.IsOverride ? "(override)" : "") <br /><small>@d.ReasonCodes @d.Comment @d.PolicyVersion</small></p>
+        }
+        @if (latest != null && latest.DecidedBy == "SYSTEM")
+        {
+            var lines = JsonSerializer.Deserialize<List<Lucerne.Lending.Decisioning.ScoreLine>>(latest.ScorecardJson) ?? new();
+            <table>
+                <tr><th>Characteristic</th><th>Value</th><th class="num">Points</th></tr>
+                @foreach (var l in lines) { <tr><td>@l.Characteristic</td><td>@l.Value</td><td class="num">@l.Points</td></tr> }
+            </table>
+            <details><summary>Affordability and rule trace</summary><pre>@latest.AffordabilityJson</pre><pre>@latest.RuleTraceJson</pre></details>
+        }
+        @foreach (var b in Model.BureauReports)
+        {
+            <p>Bureau @b.Provider @b.RequestId: score @(b.Score?.ToString() ?? "-"), defaults @b.DefaultCount @(b.CreditBlock ? "CREDIT BLOCK" : "") @(b.DebtRestructuring ? "DEBT RESTRUCTURING" : "")</p>
+        }
+    </div>
+    @if (Model.CanDecide)
+    {
+        <div class="card">
+            <h3>Underwriting decision</h3>
+            <form method="post" asp-action="Decide">
+                <input type="hidden" name="Reference" value="@app.Reference" />
+                <input type="hidden" name="Version" value="@app.Version" />
+                <p><label>Decision</label><select name="Approve"><option value="true">Approve</option><option value="false">Decline</option></select></p>
+                <p><label>Risk grade</label><select name="Grade"><option value="">(scorecard)</option>@foreach (var g in new[] { "A", "B", "C", "D", "E" }) { <option>@g</option> }</select></p>
+                <p><label>Amount</label><input name="Amount" placeholder="@app.Amount" /></p>
+                <p><label>Term (months)</label><input name="TermMonths" placeholder="@app.TermMonths" /></p>
+                <p><label>Margin override %</label><input name="MarginOverridePercent" /> <small>senior only</small></p>
+                <p><label>Comment</label><textarea name="Comment" rows="3" cols="50" required></textarea></p>
+                <button>Save decision</button>
+            </form>
+        </div>
+    }
+    <div class="card">
+        <h3>Offer</h3>
+        @if (Model.Offer is { } o)
+        {
+            <table>
+                <tr><th>Status</th><td>@o.Status (valid until @o.ValidUntilUtc.ToLocalTime().ToString("d.M.yyyy"))</td></tr>
+                <tr><th>Amount / term</th><td>@o.Amount.ToString("N2") / @o.TermMonths</td></tr>
+                <tr><th>Rate</th><td>@o.ReferenceRateCode @o.ReferenceRatePercent.ToString("0.000") + @o.MarginPercent.ToString("0.00") = @o.NominalRatePercent.ToString("0.00") %, APR @o.AprPercent.ToString("0.00") %</td></tr>
+                <tr><th>Instalment</th><td>@o.MonthlyPayment.ToString("N2") + fee @o.MonthlyFee.ToString("N2")</td></tr>
+                <tr><th>Disbursement account</th><td>@(app.DisbursementIban == null ? "-" : Iban.Format(app.DisbursementIban))</td></tr>
+                <tr><th>Core account</th><td>@(app.CoreAccountNumber ?? "-")</td></tr>
+            </table>
+        }
+        else { <p>No offer.</p> }
+        <h3>Documents</h3>
+        <table>
+            @foreach (var d in Model.Documents)
+            {
+                <tr><td><a asp-action="Document" asp-route-id="@d.Id">@d.FileName</a></td><td>@d.Kind</td><td>@d.Status</td><td>@d.CreatedUtc.ToLocalTime().ToString("d.M. HH:mm")</td></tr>
+            }
+        </table>
+    </div>
+    <div class="card">
+        <h3>Notes</h3>
+        <form method="post" asp-action="Note" asp-route-id="@app.Reference"><textarea name="text" rows="2" cols="50"></textarea><br /><button>Add note</button></form>
+        @foreach (var n in Model.Notes) { <p><b>@n.Author</b> @n.CreatedUtc.ToLocalTime().ToString("d.M.yyyy HH:mm")<br />@n.Text</p> }
+        <h3>Audit trail</h3>
+        <table>
+            @foreach (var e in Model.Audit) { <tr><td>@e.CreatedUtc.ToLocalTime().ToString("d.M. HH:mm:ss")</td><td>@e.EventType</td><td>@e.Actor</td><td>@e.Detail</td></tr> }
+        </table>
+    </div>
+</div>

@@ -1,0 +1,54 @@
+@page "{id}"
+@using FurnaceRecords.Data
+@model FurnaceRecords.Portal.Pages.Loads.CertificateModel
+@{
+    var l = Model.Load;
+    var r = l.Recipe!;
+    ViewData["Title"] = "Certificate " + l.LoadNumber;
+}
+<p class="no-print"><a asp-page="Details" asp-route-id="@l.LoadNumber">Back to load</a> · <a href="javascript:window.print()">Print</a></p>
+<div class="certificate">
+    @if (l.Kind == LoadKind.Survey)
+    {
+        <h1>Temperature Uniformity Survey Report TUS-@l.LoadNumber</h1>
+    }
+    else
+    {
+        <h1>Heat Treatment Certificate HT-@l.LoadNumber</h1>
+    }
+    <p>Adatum Thermal Processing</p>
+    <dl>
+        <dt>Specification</dt><dd>@r.Specification</dd>
+        <dt>Process</dt><dd>@r.Code @r.Name</dd>
+        <dt>Soak temperature</dt><dd>@r.SetpointCelsius °C (-@r.ToleranceMinusCelsius/+@r.TolerancePlusCelsius °C)</dd>
+        <dt>Furnace</dt><dd>@l.Furnace!.Code @l.Furnace.Name, class @l.Furnace.FurnaceClass, instrumentation type @l.Furnace.Instrumentation</dd>
+        <dt>Cycle</dt><dd>@Model.Local(l.StartedAtUtc!.Value).ToString("yyyy-MM-dd HH:mm") - @Model.Local(l.EndedAtUtc!.Value).ToString("yyyy-MM-dd HH:mm")</dd>
+        @if (l.Kind == LoadKind.Survey)
+        {
+            <dt>Survey time</dt><dd>@l.SoakMinutes min after stabilisation</dd>
+            <dt>Uniformity</dt><dd>@l.UniformityCelsius °C spread, tolerance ±@FurnaceClass.UniformityTolerance(l.Furnace.FurnaceClass) °C</dd>
+        }
+        else
+        {
+            <dt>Time at temperature</dt><dd>@l.SoakMinutes min (required @r.SoakMinutes min)</dd>
+        }
+        @if (l.QuenchDelaySeconds is { } q) { <dt>Quench delay</dt><dd>@q s (max @r.MaxQuenchDelaySeconds s)</dd> }
+        <dt>Released by</dt><dd>@l.DecidedBy, @Model.Local(l.DecidedAtUtc!.Value).ToString("yyyy-MM-dd HH:mm")</dd>
+        @if (!string.IsNullOrEmpty(l.DecisionComment)) { <dt>Remarks</dt><dd>@l.DecisionComment</dd> }
+    </dl>
+    @if (l.Kind == LoadKind.Survey)
+    {
+        <table>
+            <tr><th>Ch</th><th class="num">Min °C</th><th class="num">Max °C</th><th class="num">Max deviation</th></tr>
+            @foreach (var sensor in LoadService.SurveySensors(l))
+            {
+                <tr><td>@sensor.Channel</td><td class="num">@sensor.Min.ToString("0.0")</td><td class="num">@sensor.Max.ToString("0.0")</td><td class="num">@sensor.MaxDeviation.ToString("0.0")</td></tr>
+            }
+        </table>
+    }
+    <table>
+        <tr><th>Work order</th><th>Part number</th><th>Lot</th><th class="num">Qty</th></tr>
+        @foreach (var p in l.Parts) { <tr><td>@p.WorkOrder</td><td>@p.PartNumber</td><td>@p.Lot</td><td class="num">@p.Quantity</td></tr> }
+    </table>
+    <p>@(l.Kind == LoadKind.Survey ? "The furnace was surveyed at the temperature above." : "The parts listed were heat treated in accordance with the specification above.") Temperature records are retained for the period required by the customer.</p>
+</div>

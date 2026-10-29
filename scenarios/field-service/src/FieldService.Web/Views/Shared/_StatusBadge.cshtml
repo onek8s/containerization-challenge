@@ -1,0 +1,17 @@
+@model WorkOrder
+@{
+    var css = Model.Status switch
+    {
+        WorkOrderStatus.New => "bg-secondary",
+        WorkOrderStatus.Assigned => "bg-info text-dark",
+        WorkOrderStatus.InProgress => "bg-primary",
+        WorkOrderStatus.Completed => "bg-success",
+        WorkOrderStatus.Invoiced => "bg-dark",
+        _ => "bg-light text-dark"
+    };
+}
+<span class="badge @css">@Model.Status</span>
+@if (Model.IsOverdue(DateTime.UtcNow))
+{
+    <span class="badge bg-danger">Overdue</span>
+}

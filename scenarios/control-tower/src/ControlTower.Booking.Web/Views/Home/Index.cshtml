@@ -1,0 +1,15 @@
+@model DashboardViewModel
+@{ ViewData["Title"] = "Overview"; }
+<div class="row g-3 mb-3">
+    @foreach (var (label, value, css) in new[] {
+        ("Open shipments", Model.OpenShipments, "primary"), ("Booking requests", Model.Requested, "warning"),
+        ("Pickups today", Model.PickupsToday, "info"), ("Deliveries today", Model.DeliveriesToday, "info"),
+        ("Open alerts", Model.OpenAlerts, "danger"), ("Customs to handle", Model.CustomsPending, "secondary") })
+    {
+        <div class="col-md-2">
+            <div class="card border-@css"><div class="card-body"><div class="small text-muted">@label</div><div class="fs-3">@value</div></div></div>
+        </div>
+    }
+</div>
+<h2 class="h5">Latest open shipments</h2>
+<partial name="_ShipmentTable" model="Model.Recent" />

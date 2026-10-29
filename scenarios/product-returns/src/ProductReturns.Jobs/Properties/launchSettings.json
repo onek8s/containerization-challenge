@@ -1,0 +1,18 @@
+{
+  "profiles": {
+    "refunds": {
+      "commandName": "Project",
+      "commandLineArgs": "refunds",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    },
+    "reminders": {
+      "commandName": "Project",
+      "commandLineArgs": "reminders",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

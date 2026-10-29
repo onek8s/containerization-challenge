@@ -1,0 +1,56 @@
+ItemNo;Name;Category;Unit;CaseSize;ListPrice;VatRate;MinOrderQty;Active
+10010;Coffee dark roast 500 g;DRY;CS;12;50,86;14;1;1
+10017;Coffee medium roast 500 g;DRY;CS;12;46,50;14;1;1
+10024;Tea black 100 bags;DRY;CS;10;32,00;14;1;1
+10031;Oat flakes 1 kg;DRY;CS;8;14,40;14;1;1
+10038;Wheat flour 2 kg;DRY;CS;6;11,10;14;1;1
+10045;Rice jasmine 1 kg;DRY;CS;10;22,36;14;1;1
+10052;Pasta penne 500 g;DRY;CS;20;19,80;14;1;1
+10059;Pasta spaghetti 500 g;DRY;CS;20;19,20;14;1;1
+10066;Tomato crushed 400 g;DRY;CS;24;22,80;14;1;1
+10073;Sugar 1 kg;DRY;CS;10;13,90;14;1;1
+10080;Muesli berry 750 g;DRY;CS;8;28,70;14;1;1
+10087;Rye crispbread 250 g;DRY;CS;16;25,60;14;1;1
+10094;Sunflower oil 1 l;DRY;CS;12;34,80;14;1;1
+10101;Ketchup 1 kg;DRY;CS;10;28,00;14;1;1
+10108;Mustard 450 g;DRY;CS;12;19,10;14;1;1
+20010;Milk 1 l;DAIRY;CS;10;10,19;14;2;1
+20017;Milk lactose free 1 l;DAIRY;CS;10;13,60;14;2;1
+20024;Butter 500 g;DAIRY;CS;12;46,80;14;2;1
+20031;Yoghurt natural 1 kg;DAIRY;CS;6;13,20;14;2;1
+20038;Cheese Edam 1 kg;DAIRY;CS;6;61,20;14;2;1
+20045;Cream 2 dl;DAIRY;CS;20;23,92;14;2;1
+20052;Quark 250 g;DAIRY;CS;16;18,40;14;2;1
+20059;Oat drink 1 l;DAIRY;CS;8;15,20;14;2;1
+20066;Sour milk 1 l;DAIRY;CS;10;11,50;14;2;1
+30010;Peas frozen 1 kg;FROZEN;CS;8;22,40;14;1;1
+30017;Mixed vegetables 2.5 kg;FROZEN;CS;4;25,79;14;1;1
+30024;Fish fingers 1 kg;FROZEN;CS;6;43,20;14;1;1
+30031;Blueberries frozen 1 kg;FROZEN;CS;8;52,00;14;1;1
+30038;Meatballs 1 kg;FROZEN;CS;6;49,80;14;1;1
+30045;Pizza margherita 6 pcs;FROZEN;CS;4;30,40;14;1;1
+30052;Ice cream vanilla 2 l;FROZEN;CS;6;39,94;14;1;1
+40010;Mineral water 0.5 l;BEV;CS;24;14,40;14;1;1
+40017;Orange juice 1 l;BEV;CS;12;22,80;14;1;1
+40024;Apple juice 1 l;BEV;CS;12;21,60;14;1;1
+40031;Cola 1.5 l;BEV;CS;8;15,20;14;1;1
+40038;Energy drink 0.33 l;BEV;CS;24;32,45;14;1;1
+40045;Lemonade 0.33 l;BEV;CS;24;18,00;14;1;1
+40052;Coffee drink 0.25 l;BEV;CS;12;19,80;14;1;1
+50010;Potato crisps 275 g;SNACK;CS;12;30,00;14;1;1
+50017;Milk chocolate 200 g;SNACK;CS;16;35,20;14;1;1
+50024;Salted peanuts 300 g;SNACK;CS;12;29,95;14;1;1
+50031;Liquorice 350 g;SNACK;CS;14;30,80;14;1;1
+50038;Cookies oat 300 g;SNACK;CS;12;22,80;14;1;1
+50045;Popcorn 90 g;SNACK;CS;20;19,00;14;1;1
+50052;Fruit gums 280 g;SNACK;CS;14;25,20;14;1;1
+60010;Dish soap 500 ml;CLEAN;CS;12;23,71;24;1;1
+60017;Laundry detergent 3 kg;CLEAN;CS;3;29,70;24;1;1
+60024;Paper towel 4 rolls;CLEAN;CS;6;27,00;24;1;1
+60031;Toilet paper 8 rolls;CLEAN;CS;6;33,60;24;1;1
+60038;Surface cleaner 1 l;CLEAN;CS;12;30,00;24;1;1
+60045;Bin bags 30 l 40 pcs;CLEAN;CS;20;30,16;24;1;1
+70010;Display stand rental;SERV;EA;1;15,00;24;1;1
+10500;Coffee decaf 500 g;DRY;CS;12;49,90;14;1;1
+20500;Skyr vanilla 150 g;DAIRY;CS;12;14,40;14;2;1
+40500;Sports drink 0,5 l;BEV;CS;12;17,40;14;1;0

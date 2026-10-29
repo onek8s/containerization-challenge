@@ -1,0 +1,2 @@
+samples/*.csv -text
+samples/*.edi -text

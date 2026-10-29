@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>Tailspin.DealerOrders.Processing</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Template names end in a language code; without WithCulture=false they would go to satellite assemblies. -->
+    <EmbeddedResource Include="Templates\*.txt" WithCulture="false" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+    <PackageReference Include="log4net" Version="2.0.8" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Tailspin.DealerOrders.Domain\Tailspin.DealerOrders.Domain.csproj" />
+    <ProjectReference Include="..\Tailspin.DealerOrders.Contracts\Tailspin.DealerOrders.Contracts.csproj" />
+    <ProjectReference Include="..\Tailspin.DealerOrders.Configurator\Tailspin.DealerOrders.Configurator.csproj" />
+    <ProjectReference Include="..\Tailspin.DealerOrders.Edi\Tailspin.DealerOrders.Edi.csproj" />
+  </ItemGroup>
+
+</Project>

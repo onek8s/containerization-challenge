@@ -1,0 +1,28 @@
+@page "/account/manage/two-factor"
+@model Lucerne.Lending.CustomerPortal.Pages.Account.Manage.TwoFactorModel
+@{ ViewData["Title"] = "Authenticator app"; }
+@if (Model.Enabled)
+{
+    <p>Sign-in confirmation with an authenticator app is in use for your account.</p>
+    <form method="post" asp-page-handler="Reset">
+        <p class="muted">Lost your phone? Resetting removes the current app; you will set up a new one on the next page.</p>
+        <button type="submit">Reset authenticator</button>
+    </form>
+    <p><a href="/">Continue to the online service</a></p>
+}
+else
+{
+    <p>To protect your loan information, confirm your sign-ins with an authenticator app (for example Microsoft Authenticator or Google Authenticator).</p>
+    <ol>
+        <li>Add a new account in the app and enter this key:<code class="key">@Model.SharedKey</code>
+            <span class="muted">or open <a href="@Model.AuthenticatorUri">the set-up link</a> on your phone.</span></li>
+        <li>Enter the six digit code shown by the app.</li>
+    </ol>
+    <form method="post">
+        <div asp-validation-summary="All" class="validation"></div>
+        <input type="hidden" asp-for="ReturnUrl" />
+        <label asp-for="Code">Code</label>
+        <input asp-for="Code" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="7" />
+        <button type="submit">Confirm</button>
+    </form>
+}

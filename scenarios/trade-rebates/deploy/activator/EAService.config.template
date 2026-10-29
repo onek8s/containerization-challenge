@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Service Broker External Activator configuration for Trade Rebates (written by install-activator.ps1). -->
+<Activator xmlns="http://schemas.microsoft.com/sqlserver/2008/10/servicebroker/externalactivator"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://schemas.microsoft.com/sqlserver/2008/10/servicebroker/externalactivator EAServiceConfig.xsd">
+  <NotificationServiceList>
+    <NotificationService name="//contosofoods.com/TradeRebates/ExternalActivator" id="100" enabled="true">
+      <Description>Trade Rebates statement requests</Description>
+      <ConnectionString>
+        <Unencrypted>server={SqlInstance};database={DatabaseName};Application Name=External Activator;Integrated Security=true;</Unencrypted>
+      </ConnectionString>
+    </NotificationService>
+  </NotificationServiceList>
+  <ApplicationServiceList>
+    <ApplicationService name="TradeRebatesStatementWorker" enabled="true">
+      <OnNotification>
+        <!-- Must match @@SERVERNAME of the instance exactly (e.g. HOST01\SQLEXPRESS), not the DNS alias. -->
+        <ServerName>{ServerName}</ServerName>
+        <DatabaseName>{DatabaseName}</DatabaseName>
+        <SchemaName>rebate</SchemaName>
+        <QueueName>StatementRequestQueue</QueueName>
+      </OnNotification>
+      <LaunchInfo>
+        <ImagePath>{WorkerPath}\TradeRebates.StatementWorker.exe</ImagePath>
+        <CmdLineArgs></CmdLineArgs>
+        <WorkDir>{WorkerPath}</WorkDir>
+      </LaunchInfo>
+      <Concurrency min="1" max="{MaxWorkers}" />
+    </ApplicationService>
+  </ApplicationServiceList>
+  <LogSettings>
+    <LogFilter>
+      <TraceFlag>All Levels</TraceFlag>
+      <TraceFlag>All Modules</TraceFlag>
+      <TraceFlag>All Entities</TraceFlag>
+    </LogFilter>
+  </LogSettings>
+</Activator>

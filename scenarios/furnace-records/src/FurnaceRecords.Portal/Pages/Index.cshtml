@@ -1,0 +1,61 @@
+@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Furnaces";
+}
+<h1>Furnaces</h1>
+@if (Model.Live is null)
+{
+    <p class="warning">Live readings are not available: the acquisition service cannot be reached.</p>
+}
+<div class="cards">
+@foreach (var f in Model.Furnaces)
+{
+    var live = Model.Live?.FirstOrDefault(l => l.Code == f.Code);
+    <section class="card">
+        <h2>@f.Code <small>@f.Name</small></h2>
+        <p class="muted">Class @f.FurnaceClass (±@FurnaceClass.UniformityTolerance(f.FurnaceClass) °C), type @f.Instrumentation.
+            Survey due @f.UniformitySurveyDue, SAT due @f.AccuracyTestDue</p>
+        @if (live is not null)
+        {
+            <p>
+                <span class="badge @(live.Status == "Running" ? "ok" : "bad")">@live.Status</span>
+                @if (live.CycleActive) { <span class="badge info">Cycle @(live.LoadNumber ?? "(not recorded)")</span> }
+                @if (live.DoorOpen) { <span class="badge warn">Door open</span> }
+                @if (!live.ControllerConnected) { <span class="badge bad">Controller offline</span> }
+            </p>
+            <p>Setpoint @(live.SetpointCelsius?.ToString("0.0") ?? "-") °C, control @(live.ControlCelsius?.ToString("0.0") ?? "-") °C</p>
+            <table class="compact">
+                <tr><th>Ch</th><th>Sensor</th><th>Role</th><th class="num">°C</th></tr>
+                @foreach (var c in live.Channels)
+                {
+                    <tr class="@(c.Open ? "bad" : "")"><td>@c.Channel</td><td>@c.Name</td><td>@c.Role</td><td class="num">@(c.Open ? "open" : c.Celsius?.ToString("0.0"))</td></tr>
+                }
+            </table>
+            @if (live.LastError is not null) { <p class="warning">@live.LastError</p> }
+            <p class="muted">@live.Board, updated @Model.Local(live.UpdatedUtc).ToString("HH:mm:ss")</p>
+        }
+    </section>
+}
+</div>
+
+<h2>Waiting for decision</h2>
+@if (Model.ToDecide.Count == 0)
+{
+    <p class="muted">No completed loads waiting.</p>
+}
+else
+{
+    <table>
+        <tr><th>Load</th><th>Furnace</th><th>Recipe</th><th>Ended</th><th>Result</th></tr>
+        @foreach (var l in Model.ToDecide)
+        {
+            <tr>
+                <td><a asp-page="/Loads/Details" asp-route-id="@l.LoadNumber">@l.LoadNumber</a></td>
+                <td>@l.Furnace!.Code</td><td>@l.Recipe!.Code</td>
+                <td>@(l.EndedAtUtc is { } e ? Model.Local(e).ToString("yyyy-MM-dd HH:mm") : "")</td>
+                <td><span class="badge @(l.Passed == true ? "ok" : "bad")">@(l.Passed == true ? "Pass" : "Findings")</span></td>
+            </tr>
+        }
+    </table>
+}

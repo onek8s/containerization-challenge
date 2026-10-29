@@ -1,0 +1,37 @@
+@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService Authorization
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Policy Changes</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <a class="brand" asp-page="/Index">Tailspin Policy Changes</a>
+        <nav>
+            <a asp-page="/Requests/New">New change</a>
+            <a asp-page="/Requests/Index">Changes</a>
+            <a asp-page="/Requests/Index" asp-route-status="NeedsReview">Review</a>
+            @if ((await Authorization.AuthorizeAsync(User, PolicyChanges.Portal.Services.Policies.Leads)).Succeeded)
+            {
+                <a asp-page="/Partners/Index">Partners</a>
+            }
+        </nav>
+        <span class="user">@User.Identity?.Name</span>
+    </header>
+    <main>
+        @if (TempData["Message"] is string message)
+        {
+            <p class="message">@message</p>
+        }
+        @if (TempData["Error"] is string error)
+        {
+            <p class="error">@error</p>
+        }
+        @RenderBody()
+    </main>
+</body>
+</html>

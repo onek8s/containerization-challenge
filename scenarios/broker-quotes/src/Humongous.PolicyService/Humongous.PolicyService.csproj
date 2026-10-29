@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <RootNamespace>Humongous.PolicyService</RootNamespace>
+    <PlatformTarget>x86</PlatformTarget>
+    <UserSecretsId>humongous-policy-service</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Cronos" Version="0.8.4" />
+    <PackageReference Include="EPPlus" Version="4.5.3.3" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.WindowsServices" Version="8.0.1" />
+    <PackageReference Include="Serilog.Extensions.Hosting" Version="8.0.0" />
+    <PackageReference Include="Serilog.Settings.Configuration" Version="8.0.4" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="6.0.0" />
+    <PackageReference Include="Serilog.Sinks.File" Version="6.0.0" />
+    <PackageReference Include="SSH.NET" Version="2026.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Humongous.Quoting.Domain\Humongous.Quoting.Domain.csproj" />
+    <ProjectReference Include="..\Humongous.Quoting.Contracts\Humongous.Quoting.Contracts.csproj" />
+    <ProjectReference Include="..\Humongous.Quoting.Data\Humongous.Quoting.Data.csproj" />
+    <ProjectReference Include="..\Humongous.Quoting.Rating\Humongous.Quoting.Rating.csproj" />
+    <ProjectReference Include="..\Humongous.Quoting.Messaging\Humongous.Quoting.Messaging.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Humongous.Documents": {
+      "commandName": "Project",
+      "environmentVariables": { "DOTNET_ENVIRONMENT": "Development" }
+    }
+  }
+}

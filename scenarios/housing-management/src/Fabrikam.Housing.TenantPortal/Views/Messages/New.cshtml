@@ -1,0 +1,22 @@
+@model NewEnquiryViewModel
+@{ ViewData["Title"] = "Send us a message"; }
+<h1 class="h3">Send us a message</h1>
+<p>For repairs, please use <a asp-controller="ReportRepair" asp-action="Index">report a repair</a> so we can book it straight away.</p>
+<form asp-action="New" method="post" class="col-md-7 px-0">
+    <div class="form-group">
+        <label asp-for="Topic">What is it about?</label>
+        <select asp-for="Topic" asp-items="Html.GetEnumSelectList<EnquiryTopic>()" class="form-control"><option value="">Choose</option></select>
+        <span asp-validation-for="Topic" class="field-validation-error"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Subject"></label>
+        <input asp-for="Subject" class="form-control" />
+        <span asp-validation-for="Subject" class="field-validation-error"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Message"></label>
+        <textarea asp-for="Message" class="form-control" rows="6"></textarea>
+        <span asp-validation-for="Message" class="field-validation-error"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Send</button>
+</form>

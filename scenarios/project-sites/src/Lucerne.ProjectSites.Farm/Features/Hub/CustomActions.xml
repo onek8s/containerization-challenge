@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <CustomAction Id="Lucerne.ProjectSites.Hub.Scripts" Location="ScriptLink" ScriptSrc="~site/_layouts/15/Lucerne.ProjectSites/js/jquery-1.12.4.min.js" Sequence="100" />
+  <CustomAction Id="Lucerne.ProjectSites.Hub.Helpers" Location="ScriptLink" ScriptSrc="~site/_layouts/15/Lucerne.ProjectSites/js/lucerne.hub.js" Sequence="110" />
+</Elements>

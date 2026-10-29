@@ -1,0 +1,40 @@
+<Project Sdk="MSBuild.SDK.SystemWeb">
+
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+    <LangVersion>7.3</LangVersion>
+    <RootNamespace>Wingtip.FieldSales.Api</RootNamespace>
+    <AssemblyName>FieldSales.Api</AssemblyName>
+    <AppConfig>Web.config</AppConfig>
+    <Version>3.2.0</Version>
+    <Company>Wingtip Foods</Company>
+    <Product>Field Sales</Product>
+    <GeneratedBindingRedirectsAction>None</GeneratedBindingRedirectsAction>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.AspNet.WebApi.Owin" Version="5.2.9" />
+    <PackageReference Include="Microsoft.Owin.Host.SystemWeb" Version="4.2.2" />
+    <PackageReference Include="Microsoft.Owin.Security.OAuth" Version="4.2.2" />
+    <PackageReference Include="Microsoft.AspNet.Identity.Owin" Version="2.2.4" />
+    <PackageReference Include="Autofac.WebApi2.Owin" Version="6.2.0" />
+    <PackageReference Include="Autofac.WebApi2" Version="6.1.1" />
+    <PackageReference Include="log4net" Version="3.5.0" />
+    <PackageReference Include="Polly" Version="7.2.4" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Runtime.Caching" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FieldSales.Core\FieldSales.Core.csproj" />
+    <ProjectReference Include="..\FieldSales.Contracts\FieldSales.Contracts.csproj" />
+    <ProjectReference Include="..\FieldSales.Data\FieldSales.Data.csproj" />
+  </ItemGroup>
+
+</Project>

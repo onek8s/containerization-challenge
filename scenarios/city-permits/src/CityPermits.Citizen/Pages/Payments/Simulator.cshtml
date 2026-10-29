@@ -1,0 +1,9 @@
+@page
+@model CityPermits.Citizen.Pages.Payments.SimulatorModel
+@{ ViewData["Title"] = "Payment simulator"; }
+<h1>Payment simulator</h1>
+<p>Training environment: no card is charged.</p>
+<p>Amount: £@Model.Payment?.Amount.ToString("N2")</p>
+<form method="post"><input type="hidden" name="session" value="@Model.Session" />
+<button class="btn" name="outcome" value="ok">Approve payment</button>
+<button class="btn" name="outcome" value="fail" style="background:#d4351c">Decline</button></form>

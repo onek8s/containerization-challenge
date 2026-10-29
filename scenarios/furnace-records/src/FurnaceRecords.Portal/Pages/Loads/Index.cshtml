@@ -1,0 +1,26 @@
+@page
+@model FurnaceRecords.Portal.Pages.Loads.IndexModel
+@{
+    ViewData["Title"] = "Loads";
+}
+<h1>Loads</h1>
+<form method="get" class="row">
+    <select name="furnace" asp-items="Model.FurnaceOptions"><option value="">All furnaces</option></select>
+    <select name="status" asp-items="Html.GetEnumSelectList<LoadStatus>()" asp-for="Status"><option value="">All statuses</option></select>
+    <button type="submit">Filter</button>
+</form>
+<table>
+    <tr><th>Load</th><th>Furnace</th><th>Recipe</th><th>Status</th><th>Planned</th><th>Ended</th><th>Result</th></tr>
+    @foreach (var l in Model.Loads)
+    {
+        <tr>
+            <td><a asp-page="Details" asp-route-id="@l.LoadNumber">@l.LoadNumber</a></td>
+            <td>@l.Furnace!.Code</td>
+            <td>@l.Recipe!.Code</td>
+            <td>@l.Status</td>
+            <td>@Model.Local(l.PlannedAtUtc).ToString("yyyy-MM-dd HH:mm")</td>
+            <td>@(l.EndedAtUtc is { } e ? Model.Local(e).ToString("yyyy-MM-dd HH:mm") : "")</td>
+            <td>@(l.Passed is null ? "" : l.Passed.Value ? "Pass" : "Findings")</td>
+        </tr>
+    }
+</table>

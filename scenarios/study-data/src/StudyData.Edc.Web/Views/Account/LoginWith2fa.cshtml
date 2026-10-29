@@ -1,0 +1,11 @@
+@model TwoFactorModel
+@{ ViewData["Title"] = "Verification code"; }
+<div class="narrow">
+    <h1>Verification code</h1>
+    <form method="post">
+        <div asp-validation-summary="All" class="validation"></div>
+        <input type="hidden" asp-for="ReturnUrl" />
+        <label>Code from your authenticator app <input asp-for="Code" autocomplete="one-time-code" inputmode="numeric" /></label>
+        <button type="submit">Verify</button>
+    </form>
+</div>

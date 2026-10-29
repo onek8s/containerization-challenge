@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>@ViewBag.Title - Project Dashboards</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Content/dashboards.css" />
+</head>
+<body>
+    @if (ViewBag.HostUrl != null)
+    {
+        <!-- SharePoint chrome control: host web navigation inside the add-in -->
+        <div id="chrome_ctrl_placeholder" data-hosturl="@ViewBag.HostUrl"></div>
+    }
+    <div class="container-fluid">
+        <h1 class="luc-title">@ViewBag.Title</h1>
+        @RenderBody()
+        <footer class="luc-footer">Lucerne Engineering &middot; Project Dashboards</footer>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+    @if (ViewBag.HostUrl != null)
+    {
+        <script src="@ViewBag.HostUrl/_layouts/15/SP.UI.Controls.js"></script>
+        <script>
+            $(function () {
+                var host = $('#chrome_ctrl_placeholder').data('hosturl');
+                new SP.UI.Controls.Navigation('chrome_ctrl_placeholder', { appTitle: 'Project Dashboards', siteUrl: host });
+            });
+        </script>
+    }
+    @RenderSection("scripts", required: false)
+</body>
+</html>

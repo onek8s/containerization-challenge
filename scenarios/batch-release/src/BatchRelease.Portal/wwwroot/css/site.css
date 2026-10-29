@@ -1,0 +1,19 @@
+body { font-family: "Segoe UI", Arial, sans-serif; margin: 0; color: #1f2933; background: #f7f8fa; }
+header nav { display: flex; gap: 1.5rem; align-items: center; padding: .75rem 1.5rem; background: #0b4f6c; }
+header nav a { color: #fff; text-decoration: none; }
+header nav .brand { font-weight: 600; margin-right: 1rem; }
+header nav .user { margin-left: auto; color: #cde7f0; }
+main { padding: 1.5rem; max-width: 1200px; }
+footer { padding: 1rem 1.5rem; color: #7b8794; font-size: .85rem; }
+table { border-collapse: collapse; width: 100%; background: #fff; margin-bottom: 1.5rem; }
+th, td { text-align: left; padding: .4rem .6rem; border-bottom: 1px solid #e4e7eb; font-size: .92rem; }
+th { background: #eef2f5; }
+.status { padding: .1rem .5rem; border-radius: .6rem; font-size: .8rem; background: #e4e7eb; }
+.status-Released { background: #d1f2d9; } .status-Rejected { background: #f9d7d7; } .status-OnHold { background: #fde9c4; } .status-Reviewed { background: #d7e8f9; }
+.finding-Blocking { color: #a61b1b; } .finding-Warning { color: #8a5a00; }
+.message { background: #e3f4ea; padding: .6rem 1rem; border-left: 4px solid #2f9e59; }
+.error { background: #fbe9e9; padding: .6rem 1rem; border-left: 4px solid #c53030; }
+.meaning { background: #fff; border: 1px solid #cbd2d9; padding: 1rem; font-style: italic; }
+form.sign label { display: block; margin-top: .8rem; }
+form.sign input[type=text], form.sign input[type=password], form.sign textarea { width: 28rem; padding: .35rem; }
+.actions a { margin-right: 1rem; }

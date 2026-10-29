@@ -1,0 +1,27 @@
+@page
+@model BookModel
+@{ ViewData["Title"] = "Book a pickup"; var r = Model.Request; }
+<h1 class="h4">Book a pickup</h1>
+<p class="text-muted small">Customer service confirms the booking and the price during office hours. Bookings received by 12:00 are picked up the next working day.</p>
+<form method="post" class="row g-2" style="max-width:900px">
+    @if (Model.Errors.Count > 0) { <div class="alert alert-danger col-12"><ul class="mb-0">@foreach (var e in Model.Errors) { <li>@e</li> }</ul></div> }
+    <div class="col-md-6"><label class="form-label">Pickup from</label><select name="Request.OriginId" class="form-select" asp-items="@(new Microsoft.AspNetCore.Mvc.Rendering.SelectList(Model.Locations, "Value", "Text", r.OriginId))"></select></div>
+    <div class="col-md-6"><label class="form-label">Deliver to</label><select name="Request.DestinationId" class="form-select" asp-items="@(new Microsoft.AspNetCore.Mvc.Rendering.SelectList(Model.Locations, "Value", "Text", r.DestinationId))"></select></div>
+    <div class="col-md-4"><label class="form-label">Consignee</label><input name="Request.ConsigneeName" value="@r.ConsigneeName" class="form-control" /></div>
+    <div class="col-md-4"><label class="form-label">Consignee e-mail</label><input name="Request.ConsigneeEmail" value="@r.ConsigneeEmail" class="form-control" /></div>
+    <div class="col-md-4"><label class="form-label">Phone for delivery</label><input name="Request.NotifyPhone" value="@r.NotifyPhone" class="form-control" /></div>
+    <div class="col-md-3"><label class="form-label">Mode</label><select name="Request.Mode" class="form-select" asp-items="@Html.GetEnumSelectList<TransportMode>().Select(i => { i.Selected = i.Value == ((int)r.Mode).ToString(); return i; })"></select></div>
+    <div class="col-md-3"><label class="form-label">Delivery terms</label><select name="Request.IncotermCode" class="form-select">@foreach (var i in Incoterm.All) { <option value="@i.Code" selected="@(i.Code == r.IncotermCode)">@i.Code - @i.Name</option> }</select></div>
+    <div class="col-md-3"><label class="form-label">Pickup date</label><input type="date" name="Request.PickupDate" value="@r.PickupDate.ToString("yyyy-MM-dd")" class="form-control" /></div>
+    <div class="col-md-3"><label class="form-label">Your reference</label><input name="Request.CustomerReference" value="@r.CustomerReference" class="form-control" /></div>
+    <div class="col-md-12"><label class="form-label">Goods</label><input name="Request.GoodsDescription" value="@r.GoodsDescription" class="form-control" /></div>
+    <div class="col-md-3"><label class="form-label">Package type</label><select name="Request.PackageKind" class="form-select" asp-items="@Html.GetEnumSelectList<PackageKind>().Select(i => { i.Selected = i.Value == ((int)r.PackageKind).ToString(); return i; })"></select></div>
+    <div class="col-md-2"><label class="form-label">Packages</label><input name="Request.PackageCount" value="@r.PackageCount" class="form-control" /></div>
+    <div class="col-md-2"><label class="form-label">kg / package</label><input name="Request.WeightPerPackageKg" value="@r.WeightPerPackageKg" class="form-control" /></div>
+    <div class="col-md-5"><label class="form-label">L x W x H cm</label>
+        <div class="d-flex"><input name="Request.LengthCm" value="@r.LengthCm" class="form-control me-1" /><input name="Request.WidthCm" value="@r.WidthCm" class="form-control me-1" /><input name="Request.HeightCm" value="@r.HeightCm" class="form-control" /></div>
+    </div>
+    <div class="col-md-12 form-check ms-2"><input type="checkbox" name="Request.Stackable" value="true" class="form-check-input" @(r.Stackable ? "checked" : "") /><label class="form-check-label">Packages can be stacked</label></div>
+    <div class="col-md-12"><label class="form-label">Remarks</label><textarea name="Request.Remarks" class="form-control" rows="2">@r.Remarks</textarea></div>
+    <div class="col-12"><button class="btn btn-primary">Send booking request</button></div>
+</form>

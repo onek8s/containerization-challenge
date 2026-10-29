@@ -1,0 +1,42 @@
+@model CompleteWorkOrderViewModel
+@{
+    ViewData["Title"] = "Complete " + Model.Number;
+}
+<h2>Complete @Model.Number <small class="text-muted">@Model.Summary</small></h2>
+<form asp-action="Complete" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="Number" />
+    <input type="hidden" asp-for="Summary" />
+    <div class="row">
+        <div class="col-md-3 mb-3">
+            <label asp-for="LaborHours" class="form-label"></label>
+            <input asp-for="LaborHours" class="form-control" step="0.25" />
+            <span asp-validation-for="LaborHours" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="mb-3">
+        <label asp-for="ResolutionNotes" class="form-label"></label>
+        <textarea asp-for="ResolutionNotes" class="form-control" rows="3"></textarea>
+    </div>
+    <h5>Parts used</h5>
+    <table class="table table-sm">
+        <thead><tr><th>Part number</th><th>Description</th><th>Qty</th><th>Unit price</th></tr></thead>
+        <tbody>
+        @for (var i = 0; i < Model.Parts.Count; i++)
+        {
+            <tr>
+                <td><input asp-for="Parts[i].PartNumber" class="form-control form-control-sm" /></td>
+                <td><input asp-for="Parts[i].Description" class="form-control form-control-sm" /></td>
+                <td><input asp-for="Parts[i].Quantity" class="form-control form-control-sm" /></td>
+                <td><input asp-for="Parts[i].UnitPrice" class="form-control form-control-sm" step="0.01" /></td>
+            </tr>
+        }
+        </tbody>
+    </table>
+    <button type="submit" class="btn btn-success">Complete work order</button>
+    <a asp-action="Details" asp-route-id="@Model.Number" class="btn btn-link">Back</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

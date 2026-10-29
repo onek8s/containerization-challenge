@@ -1,0 +1,51 @@
+@model DashboardViewModel
+@{ ViewData["Title"] = "Home"; }
+<h1>Document control</h1>
+
+<section class="cards">
+    @foreach (var p in Model.Projects)
+    {
+        <a class="card" asp-controller="Register" asp-action="Index" asp-route-project="@p.Code">
+            <strong>@p.Code</strong>
+            <span>@p.Name</span>
+            <small>@p.Client</small>
+        </a>
+    }
+</section>
+
+<h2>Waiting for review (@Model.PendingReview.Count)</h2>
+@if (Model.PendingReview.Count == 0)
+{
+    <p class="muted">Nothing waiting.</p>
+}
+else
+{
+    <table>
+        <tr><th>Document</th><th>Rev</th><th>Title</th><th>Submitted by</th><th>Submitted</th></tr>
+        @foreach (var r in Model.PendingReview.Take(15))
+        {
+            <tr>
+                <td><a asp-controller="Register" asp-action="Document" asp-route-number="@r.DocumentNumber">@r.DocumentNumber</a></td>
+                <td>@r.Code</td>
+                <td>@r.DocumentTitle</td>
+                <td>@r.SubmittedBy</td>
+                <td>@r.SubmittedUtc.ToLocalTime().ToString("yyyy-MM-dd HH:mm")</td>
+            </tr>
+        }
+    </table>
+}
+
+<h2>Recent transmittals</h2>
+<table>
+    <tr><th>Number</th><th>Purpose</th><th>Recipient</th><th>Status</th><th>Created</th></tr>
+    @foreach (var t in Model.RecentTransmittals)
+    {
+        <tr>
+            <td><a asp-controller="Transmittals" asp-action="Details" asp-route-id="@t.Id">@t.Number</a></td>
+            <td>@t.Purpose.Code()</td>
+            <td>@t.RecipientCompany</td>
+            <td>@t.Status</td>
+            <td>@t.CreatedUtc.ToLocalTime().ToString("yyyy-MM-dd HH:mm")</td>
+        </tr>
+    }
+</table>

@@ -1,0 +1,45 @@
+@page "/policies/{Id:guid}"
+@inject QuoteApiClient Api
+
+@if (policy is null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <PageTitle>@policy.PolicyNumber</PageTitle>
+    <h1>@policy.PolicyNumber <span class="badge">@policy.Status</span></h1>
+    <dl>
+        <dt>Insured</dt><dd>@policy.Risk.Insured.Name, @policy.Risk.Insured.Postcode</dd>
+        <dt>Agency</dt><dd>@policy.AgencyCode</dd>
+        <dt>Period</dt><dd>@policy.InceptionDate.ToString("dd MMM yyyy") - @policy.ExpiryDate.ToString("dd MMM yyyy")</dd>
+        <dt>Product</dt><dd>BC @policy.ProductVersion</dd>
+        <dt>Clauses</dt><dd>@string.Join(", ", policy.Clauses)</dd>
+        <dt>Quote</dt><dd><a href="quotes/@policy.QuoteId">Original quote</a>@if (policy.RenewalQuoteId is { } r) { <span>, <a href="quotes/@r">renewal quote</a></span> }</dd>
+    </dl>
+    <h2>Transactions</h2>
+    <table class="list">
+        <thead><tr><th>Type</th><th>Effective</th><th>Reason</th><th class="num">Gross</th><th class="num">IPT</th><th class="num">Commission</th><th>Processed</th></tr></thead>
+        <tbody>
+            @foreach (var t in policy.Transactions)
+            {
+                <tr><td>@t.Type</td><td>@t.EffectiveDate.ToString("dd MMM yyyy")</td><td>@t.Reason</td><td class="num">@t.GrossPremium.ToString("N2")</td>
+                    <td class="num">@t.Ipt.ToString("N2")</td><td class="num">@t.Commission.ToString("N2")</td><td>@t.CreatedUtc.ToLocalTime().ToString("dd MMM yyyy HH:mm")</td></tr>
+            }
+        </tbody>
+    </table>
+    <h2>Documents</h2>
+    <ul>
+        @foreach (var d in policy.Documents)
+        {
+            <li><a href="files/documents/@d.Id" target="_blank">@d.FileName</a></li>
+        }
+    </ul>
+}
+
+@code {
+    [Parameter] public Guid Id { get; set; }
+    private PolicyDetail? policy;
+
+    protected override async Task OnParametersSetAsync() => policy = await Api.PolicyAsync(Id);
+}

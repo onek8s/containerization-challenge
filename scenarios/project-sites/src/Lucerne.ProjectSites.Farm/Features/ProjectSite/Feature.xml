@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Feature xmlns="http://schemas.microsoft.com/sharepoint/"
+         Id="{C5D3F8A4-2B6E-4D9C-9FA7-3A4B5C6D7E83}"
+         Title="Lucerne Project Sites - Project Site"
+         Description="Lists, discipline libraries and document rules of a project site."
+         Scope="Web"
+         Version="5.3.1.0"
+         Hidden="TRUE"
+         ReceiverAssembly="Lucerne.ProjectSites.Farm, Version=1.0.0.0, Culture=neutral, PublicKeyToken=$SharePoint.Project.AssemblyPublicKeyToken$"
+         ReceiverClass="Lucerne.ProjectSites.Farm.Features.ProjectSiteFeatureReceiver">
+  <ActivationDependencies>
+    <ActivationDependency FeatureId="{A3B1D6E2-0F4C-4B7A-9D85-1E2F3A4B5C61}" />
+  </ActivationDependencies>
+  <ElementManifests>
+    <ElementManifest Location="Lists.xml" />
+    <ElementManifest Location="CustomActions.xml" />
+  </ElementManifests>
+</Feature>

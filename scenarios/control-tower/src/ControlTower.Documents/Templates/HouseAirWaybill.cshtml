@@ -1,0 +1,40 @@
+@inherits RazorLight.TemplatePage<Proseware.ControlTower.Documents.ShipmentDocumentModel>
+@{
+    var s = Model.Shipment;
+    var air = s.Legs.OrderBy(l => l.Sequence).FirstOrDefault(l => l.Mode == Proseware.ControlTower.Domain.TransportMode.Air);
+    var chargeable = Proseware.ControlTower.Domain.Pricing.ChargeableWeight.For(Proseware.ControlTower.Domain.TransportMode.Air, s.Packages);
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@Model.Title @s.Number</title>
+    @{ await IncludeAsync("_Styles", Model); }
+</head>
+<body>
+    @{ await IncludeAsync("_Header", Model); }
+    <table class="grid">
+        <tr>
+            <td style="width:50%"><span class="box-label">Shipper's name and address</span>@s.ShipperName<br />@s.Origin?.DisplayAddress</td>
+            <td><span class="box-label">HAWB / MAWB</span><strong>@Model.DocumentNumber</strong> / @(air?.CarrierReference ?? "")</td>
+        </tr>
+        <tr>
+            <td><span class="box-label">Consignee's name and address</span>@s.ConsigneeName<br />@s.Destination?.DisplayAddress</td>
+            <td><span class="box-label">Issuing carrier's agent</span>@Model.Issuer.Name, @Model.Issuer.City</td>
+        </tr>
+        <tr>
+            <td><span class="box-label">Airport of departure</span>@(air?.From?.Name ?? "")</td>
+            <td><span class="box-label">Airport of destination / flight</span>@(air?.To?.Name ?? "") &middot; @(air?.VesselOrFlight ?? "")</td>
+        </tr>
+        <tr>
+            <td><span class="box-label">Handling information</span>@(s.IsReefer ? "Keep cool. " : "")@(s.IsDangerousGoods ? "Dangerous goods as per attached shipper's declaration." : "")</td>
+            <td><span class="box-label">Chargeable weight</span>@chargeable.ToString("0.0") kg</td>
+        </tr>
+        <tr>
+            <td colspan="2"><span class="box-label">Nature and quantity of goods</span>@s.GoodsDescription</td>
+        </tr>
+    </table>
+    @{ await IncludeAsync("_Packages", Model); }
+    <p class="small">It is agreed that the goods described herein are accepted in apparent good order and condition for carriage subject to the conditions of contract. The shipper certifies that the particulars on the face hereof are correct.</p>
+</body>
+</html>

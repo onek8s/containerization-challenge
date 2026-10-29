@@ -1,0 +1,323 @@
+Exportfile for AOT version 1.0 or later
+Formatversion: 1
+
+***Element: CLS
+
+; Microsoft Dynamics AX Class: TSDealerOrderService unloaded
+; --------------------------------------------------------------------------------
+  CLSVERSION 1
+  
+  CLASS #TSDealerOrderService
+    PROPERTIES
+      Name                #TSDealerOrderService
+      Extends             #
+      RunOn               #Server
+    ENDPROPERTIES
+    
+    METHODS
+      SOURCE #classDeclaration
+        #// Dealer Orders integration. Called through the .NET Business Connector by the AX connector service
+        #// (Tailspin.DealerOrders.AxConnector) with XML in and XML out. Every method runs in its own transaction
+        #// and returns <result ok="1"> or <result ok="0"> with the infolog lines as <info> elements.
+        #// Calls carry the portal message id; TSDealerMessageLog keeps it so a retried call returns the earlier result.
+        #class TSDealerOrderService
+        #{
+        #    #define.Company('TSM')
+        #    #define.DealerCustGroup('DEALER')
+        #    #define.SalesOriginPortal('PORTAL')
+        #    #define.SalesOriginEdi('EDI')
+        #}
+      ENDSOURCE
+      SOURCE #ensureCustomer
+        #// Creates or updates the dealer's customer account (CustTable, DirParty, delivery addresses).
+        #server static str ensureCustomer(str _xml, str _messageId)
+        #{
+        #    XmlDocument     doc = XmlDocument::newXml(_xml);
+        #    XmlElement      cust = doc.documentElement();
+        #    XmlNodeList     addresses = cust.selectNodes('address');
+        #    XmlElement      address;
+        #    CustTable       custTable;
+        #    DirPartyTable   party;
+        #    LogisticsPostalAddress postal;
+        #    TSDealerMessageLog log;
+        #    str             result;
+        #    boolean         created;
+        #    int             i;
+        #
+        #    log = TSDealerMessageLog::find(_messageId);
+        #    if (log)
+        #        return log.Result;
+        #
+        #    try
+        #    {
+        #        ttsBegin;
+        #        custTable = CustTable::find(cust.getAttribute('accountNum'), true);
+        #        if (!custTable)
+        #        {
+        #            party = DirPartyTable::createNew(DirPartyType::Organization, cust.getAttribute('name'));
+        #            custTable.initValue();
+        #            custTable.AccountNum   = cust.getAttribute('accountNum');
+        #            custTable.Party        = party.RecId;
+        #            custTable.CustGroup    = #DealerCustGroup;
+        #            created = true;
+        #        }
+        #        custTable.Currency         = cust.getAttribute('currency');
+        #        custTable.LanguageId       = cust.getAttribute('languageId');
+        #        custTable.PriceGroup       = cust.getAttribute('priceGroup');
+        #        custTable.PaymTermId       = cust.getAttribute('paymTermId');
+        #        custTable.DlvTerm          = cust.getAttribute('dlvTerm');
+        #        custTable.InventLocation   = cust.getAttribute('inventLocation');
+        #        custTable.SalesDistrictId  = cust.getAttribute('salesDistrictId');
+        #        custTable.CreditMax        = str2num(cust.getAttribute('creditMax'));
+        #        custTable.Blocked          = cust.getAttribute('blocked') == '1' ? CustVendorBlocked::Invoice : CustVendorBlocked::No;
+        #        if (created)
+        #            custTable.insert();
+        #        else
+        #            custTable.update();
+        #
+        #        result = strFmt('<result ok="1" id="%1" created="%2">', custTable.AccountNum, created ? '1' : '0');
+        #        for (i = 0; i < addresses.length(); i++)
+        #        {
+        #            address = addresses.item(i);
+        #            postal = TSDealerOrderService::ensureAddress(custTable, address);
+        #            result += strFmt('<address externalCode="%1" locationId="%2"/>', address.getAttribute('externalCode'),
+        #                LogisticsLocation::find(postal.Location).LocationId);
+        #        }
+        #        result += '</result>';
+        #        TSDealerMessageLog::write(_messageId, funcName(), result);
+        #        ttsCommit;
+        #    }
+        #    catch (Exception::Error)
+        #    {
+        #        result = TSDealerOrderService::errorResult();
+        #    }
+        #    return result;
+        #}
+      ENDSOURCE
+      SOURCE #ensureAddress
+        #private server static LogisticsPostalAddress ensureAddress(CustTable _custTable, XmlElement _address)
+        #{
+        #    DirParty                    dirParty = DirParty::constructFromCommon(_custTable);
+        #    DirPartyPostalAddressView   view;
+        #    LogisticsPostalAddress      existing;
+        #    LogisticsLocation           location;
+        #
+        #    location = LogisticsLocation::find(_address.getAttribute('locationId'));
+        #    if (location)
+        #    {
+        #        existing = LogisticsPostalAddress::findByLocation(location.RecId, true);
+        #        if (existing.Street == _address.getAttribute('street') && existing.City == _address.getAttribute('city'))
+        #            return existing;
+        #    }
+        #
+        #    view.LocationName     = _address.getAttribute('name');
+        #    view.Street           = _address.getAttribute('street');
+        #    view.ZipCode          = _address.getAttribute('zipCode');
+        #    view.City             = _address.getAttribute('city');
+        #    view.State            = _address.getAttribute('state');
+        #    view.CountryRegionId  = _address.getAttribute('countryRegionId');
+        #    view.IsPrimary        = _address.getAttribute('primaryDelivery') == '1';
+        #    view = dirParty.createOrUpdatePostalAddress(view, [LogisticsLocationRole::findBytype(LogisticsLocationRoleType::Delivery).RecId]);
+        #    return LogisticsPostalAddress::findRecId(view.PostalAddress);
+        #}
+      ENDSOURCE
+      SOURCE #ensureConfiguration
+        #// Creates the configuration (InventDimCombination) for a configured machine and its BOM version.
+        #server static str ensureConfiguration(str _xml)
+        #{
+        #    XmlElement           cfg = XmlDocument::newXml(_xml).documentElement();
+        #    ItemId               itemId = cfg.getAttribute('itemId');
+        #    ConfigId             configId = cfg.getAttribute('configId');
+        #    InventDim            inventDim;
+        #    InventDimCombination combination;
+        #    XmlNodeList          options = cfg.selectNodes('option');
+        #    int                  i;
+        #
+        #    try
+        #    {
+        #        ttsBegin;
+        #        if (!ConfigTable::exist(itemId, configId))
+        #        {
+        #            ConfigTable::createConfig(itemId, configId, strFmt('Dealer configuration %1', configId));
+        #            for (i = 0; i < options.length(); i++)
+        #                TSDealerConfigBom::addComponent(itemId, configId, options.item(i).text());
+        #        }
+        #        inventDim.ConfigId = configId;
+        #        inventDim = InventDim::findOrCreate(inventDim);
+        #        combination = InventDimCombination::findByInventDim(itemId, inventDim);
+        #        if (!combination)
+        #        {
+        #            combination.ItemId = itemId;
+        #            combination.InventDimId = inventDim.inventDimId;
+        #            combination.insert();
+        #        }
+        #        ttsCommit;
+        #    }
+        #    catch (Exception::Error)
+        #    {
+        #        return TSDealerOrderService::errorResult();
+        #    }
+        #    return strFmt('<result ok="1" id="%1"/>', configId);
+        #}
+      ENDSOURCE
+      SOURCE #createSalesOrder
+        #// Creates a sales order from the portal order. Lines carry the configuration and the portal net price;
+        #// trade agreements are not re-evaluated (the portal priced the order with the synced price lists).
+        #server static str createSalesOrder(str _xml, str _messageId)
+        #{
+        #    XmlElement          doc = XmlDocument::newXml(_xml).documentElement();
+        #    XmlNodeList         lines = doc.selectNodes('line');
+        #    XmlElement          line;
+        #    SalesTable          salesTable;
+        #    SalesLine           salesLine;
+        #    InventDim           inventDim;
+        #    TSDealerMessageLog  log;
+        #    NumberSeq           numberSeq;
+        #    str                 result;
+        #    int                 i;
+        #
+        #    log = TSDealerMessageLog::find(_messageId);
+        #    if (log)
+        #        return log.Result;
+        #
+        #    try
+        #    {
+        #        ttsBegin;
+        #        numberSeq = NumberSeq::newGetNum(SalesParameters::numRefSalesId());
+        #        salesTable.SalesId = numberSeq.num();
+        #        salesTable.initValue();
+        #        salesTable.CustAccount = doc.getAttribute('custAccount');
+        #        salesTable.initFromCustTable();
+        #        salesTable.PurchOrderFormNum = doc.getAttribute('purchOrderFormNum');
+        #        salesTable.CustomerRef       = doc.getAttribute('customerRef');
+        #        salesTable.SalesOriginId     = doc.getAttribute('salesOriginId');
+        #        salesTable.DeliveryDate      = str2Date(doc.getAttribute('deliveryDate'), 321);
+        #        salesTable.ReceiptDateRequested = salesTable.DeliveryDate;
+        #        salesTable.DlvTerm           = doc.getAttribute('dlvTerm');
+        #        salesTable.TSEndCustomerName = doc.getAttribute('endCustomer');
+        #        salesTable.DeliveryPostalAddress = LogisticsPostalAddress::findByLocation(
+        #            LogisticsLocation::find(doc.getAttribute('deliveryLocation')).RecId).RecId;
+        #        salesTable.insert();
+        #
+        #        for (i = 0; i < lines.length(); i++)
+        #        {
+        #            line = lines.item(i);
+        #            salesLine.clear();
+        #            salesLine.initFromSalesTable(salesTable);
+        #            salesLine.ItemId = line.getAttribute('itemId');
+        #            salesLine.initFromInventTable(InventTable::find(salesLine.ItemId));
+        #            inventDim.clear();
+        #            inventDim.InventLocationId = line.getAttribute('inventLocationId');
+        #            inventDim.InventSiteId     = InventLocation::find(inventDim.InventLocationId).InventSiteId;
+        #            inventDim.ConfigId         = line.getAttribute('configId');
+        #            salesLine.InventDimId      = InventDim::findOrCreate(inventDim).inventDimId;
+        #            salesLine.SalesQty         = str2num(line.getAttribute('qty'));
+        #            salesLine.SalesPrice       = str2num(line.getAttribute('salesPrice'));
+        #            salesLine.LinePercent      = str2num(line.getAttribute('linePercent'));
+        #            salesLine.ExternalItemId   = line.getAttribute('externalItemId');
+        #            salesLine.TSDealerLineRef  = line.getAttribute('num');
+        #            salesLine.createLine(NoYes::Yes, NoYes::No, NoYes::No, NoYes::Yes, NoYes::No, NoYes::No);
+        #        }
+        #
+        #        result = TSDealerOrderService::documentResult(salesTable);
+        #        TSDealerMessageLog::write(_messageId, funcName(), result);
+        #        ttsCommit;
+        #    }
+        #    catch (Exception::Error)
+        #    {
+        #        result = TSDealerOrderService::errorResult();
+        #    }
+        #    catch (Exception::UpdateConflict)
+        #    {
+        #        if (appl.ttsLevel() == 0 && xSession::currentRetryCount() < 3)
+        #            retry;
+        #        result = TSDealerOrderService::errorResult();
+        #    }
+        #    return result;
+        #}
+      ENDSOURCE
+      SOURCE #cancelSalesOrder
+        #server static str cancelSalesOrder(SalesId _salesId, str _reason)
+        #{
+        #    SalesTable  salesTable = SalesTable::find(_salesId, true);
+        #    SalesLine   salesLine;
+        #
+        #    if (!salesTable)
+        #        return '<result ok="0"><info>Sales order not found</info></result>';
+        #    if (salesTable.SalesStatus != SalesStatus::Backorder)
+        #        return strFmt('<result ok="0"><info>Sales order %1 is %2 and cannot be cancelled</info></result>', _salesId, salesTable.SalesStatus);
+        #    try
+        #    {
+        #        ttsBegin;
+        #        while select forUpdate salesLine where salesLine.SalesId == _salesId
+        #        {
+        #            salesLine.RemainSalesPhysical = 0;
+        #            salesLine.RemainInventPhysical = 0;
+        #            salesLine.SalesStatus = SalesStatus::Canceled;
+        #            salesLine.update();
+        #        }
+        #        salesTable.SalesStatus = SalesStatus::Canceled;
+        #        salesTable.TSCancelReason = _reason;
+        #        salesTable.update();
+        #        ttsCommit;
+        #    }
+        #    catch (Exception::Error)
+        #    {
+        #        return TSDealerOrderService::errorResult();
+        #    }
+        #    return '<result ok="1"/>';
+        #}
+      ENDSOURCE
+      SOURCE #reserveSalesOrder
+        #// Reserves on-hand stock for part lines (machines are built to order and never reserved).
+        #server static str reserveSalesOrder(SalesId _salesId)
+        #{
+        #    SalesLine           salesLine;
+        #    InventUpd_Reservation reservation;
+        #    InventTransIdSum    sum;
+        #    str                 result = '<result ok="1">';
+        #
+        #    ttsBegin;
+        #    while select forUpdate salesLine
+        #        where salesLine.SalesId == _salesId
+        #           && salesLine.SalesStatus == SalesStatus::Backorder
+        #        exists join InventTable where InventTable.ItemId == salesLine.ItemId && InventTable.ItemGroupId == 'PARTS'
+        #    {
+        #        reservation = InventUpd_Reservation::newMovement(InventMovement::construct(salesLine), -salesLine.RemainInventPhysical, true);
+        #        reservation.updateNow();
+        #        sum = InventTransIdSum::newStandard(salesLine.InventTransId);
+        #        result += strFmt('<line inventTransId="%1" itemId="%2" qty="%3" reserved="%4" expected="%5"/>', salesLine.InventTransId,
+        #            salesLine.ItemId, num2str(salesLine.QtyOrdered, 0, 2, 1, 0), num2str(-sum.reservPhysical(), 0, 2, 1, 0),
+        #            sum.reservPhysical() == -salesLine.QtyOrdered ? '' : date2str(salesLine.ConfirmedDlv, 321, 2, 3, 2, 3, 4));
+        #    }
+        #    ttsCommit;
+        #    return result + '</result>';
+        #}
+      ENDSOURCE
+      SOURCE #documentResult
+        #private server static str documentResult(SalesTable _salesTable)
+        #{
+        #    SalesLine salesLine;
+        #    str       result = strFmt('<result ok="1" id="%1">', _salesTable.SalesId);
+        #
+        #    while select salesLine where salesLine.SalesId == _salesTable.SalesId
+        #        result += strFmt('<line num="%1" inventTransId="%2"/>', salesLine.TSDealerLineRef, salesLine.InventTransId);
+        #    return result + '</result>';
+        #}
+      ENDSOURCE
+      SOURCE #errorResult
+        #// Turns the infolog into the error result; the connector shows the lines to the sales desk.
+        #private server static str errorResult()
+        #{
+        #    SysInfologEnumerator  enumerator = SysInfologEnumerator::newData(infolog.cut());
+        #    str                   result = '<result ok="0">';
+        #
+        #    while (enumerator.moveNext())
+        #        result += strFmt('<info>%1</info>', SysInfologMessageStruct::construct(enumerator.currentMessage()).message());
+        #    return result + '</result>';
+        #}
+      ENDSOURCE
+    ENDMETHODS
+  ENDCLASS
+
+***Element: END

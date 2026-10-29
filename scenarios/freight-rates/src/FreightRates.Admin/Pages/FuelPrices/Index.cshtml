@@ -1,0 +1,21 @@
+@page
+@model FreightRates.Admin.Pages.FuelPrices.IndexModel
+@{
+    ViewData["Title"] = "Fuel surcharge";
+}
+<h1>Fuel surcharge</h1>
+<p>Weekly national average on-highway diesel price. The price applies to shipments in the week starting on the given Monday.</p>
+<form method="post">
+    <div asp-validation-summary="All" class="error"></div>
+    <label>Week starting (Monday) <input asp-for="WeekStarting" type="date" /></label>
+    <label>Diesel price USD/gal <input asp-for="DieselPrice" /></label>
+    <button type="submit">Save price</button>
+</form>
+<h2>Recent weeks</h2>
+<table>
+    <tr><th>Week starting</th><th class="num">Diesel</th><th class="num">Surcharge %</th></tr>
+    @foreach (var row in Model.Rows)
+    {
+        <tr><td>@row.Week.ToString("yyyy-MM-dd")</td><td class="num">@row.Price.ToString("0.000")</td><td class="num">@row.Percent.ToString("0.0")</td></tr>
+    }
+</table>

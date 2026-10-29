@@ -1,0 +1,16 @@
+{
+  "GEN01": { "title": "General conditions", "text": "This policy is subject to the General Conditions of the Humongous Business Combined policy wording HBC-W-2024. The insured must take all reasonable precautions to prevent loss, damage and injury." },
+  "GEN02": { "title": "Premium payment", "text": "Cover is conditional on payment of the premium to the broker within 30 days of inception." },
+  "MD01": { "title": "Material damage basis", "text": "Buildings are insured on a reinstatement basis. Stock is insured at cost price. Sums insured are subject to the average condition." },
+  "MD05": { "title": "Minimum security", "text": "All external doors must be secured by a five lever mortice deadlock and all accessible windows by key operated locks whenever the premises are closed for business." },
+  "MD07": { "title": "Intruder alarm condition", "text": "The intruder alarm must be set whenever the premises are unattended and maintained under a contract with an NSI or SSAIB approved company." },
+  "MD12": { "title": "Flood excess", "text": "The excess for loss or damage caused by flood is 2,500 for each and every loss." },
+  "MD14": { "title": "Subsidence excess", "text": "The excess for loss or damage caused by subsidence, heave or landslip is 1,000 for each and every loss." },
+  "MD20": { "title": "Unoccupancy", "text": "Cover for theft, malicious damage and escape of water ceases if the premises are unoccupied for more than 30 consecutive days unless agreed by underwriters." },
+  "BI01": { "title": "Gross profit basis", "text": "Business interruption is insured on a gross profit basis for the indemnity period shown in the schedule." },
+  "EL01": { "title": "Employers' liability limit", "text": "The limit of indemnity is 10,000,000 inclusive of costs, any one occurrence, reduced to 5,000,000 for acts of terrorism." },
+  "EL04": { "title": "Heat application", "text": "The insured must comply with the heat application conditions when using any blow lamp, torch or welding equipment away from the premises." },
+  "PL01": { "title": "Public liability limit", "text": "The limit of indemnity shown in the schedule applies any one occurrence and in the aggregate for products." },
+  "PL03": { "title": "Work at height", "text": "No cover applies for work at a height of more than 10 metres above ground level." },
+  "PL08": { "title": "Food hygiene", "text": "The insured must hold a current food hygiene rating of 3 or above." }
+}

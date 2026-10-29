@@ -1,0 +1,18 @@
+@model ArticleEditModel
+@{
+    ViewBag.Title = Model.Id == 0 ? "New article" : "Edit article";
+}
+<h1>@ViewBag.Title</h1>
+@using (Html.BeginForm("Edit", "Knowledge", FormMethod.Post, new { @class = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.Id)
+    @Html.ValidationSummary(true, "", new { @class = "error" })
+    <label>Title @Html.TextBoxFor(m => m.Title, new { @class = "wide", maxlength = 200 }) @Html.ValidationMessageFor(m => m.Title, "", new { @class = "error" })</label>
+    <label>Category @Html.DropDownListFor(m => m.CategoryCode, Model.Categories)</label>
+    <label>Tags (comma separated) @Html.TextBoxFor(m => m.Tags, new { @class = "wide", maxlength = 400 })</label>
+    <label>Text (HTML) @Html.TextAreaFor(m => m.Body, 18, 100, new { @class = "wide code" }) @Html.ValidationMessageFor(m => m.Body, "", new { @class = "error" })</label>
+    <label>@Html.CheckBoxFor(m => m.IsPublished) Published</label>
+    <button type="submit">Save</button>
+    <a href="@Url.RouteUrl("kb")">Cancel</a>
+}

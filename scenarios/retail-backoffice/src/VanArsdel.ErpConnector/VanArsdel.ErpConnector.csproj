@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <UserSecretsId>vanarsdel-erpconnector</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Security.Cryptography.ProtectedData" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\VanArsdel.BuildingBlocks\VanArsdel.BuildingBlocks.csproj" />
+    <ProjectReference Include="..\VanArsdel.Contracts\VanArsdel.Contracts.csproj" />
+    <ProjectReference Include="..\VanArsdel.Integration\VanArsdel.Integration.csproj" />
+  </ItemGroup>
+
+</Project>

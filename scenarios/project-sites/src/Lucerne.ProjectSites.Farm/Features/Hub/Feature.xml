@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Feature xmlns="http://schemas.microsoft.com/sharepoint/"
+         Id="{B4C2E7F3-1A5D-4C8B-8E96-2F3A4B5C6D72}"
+         Title="Lucerne Project Sites - Hub"
+         Description="Project register, status roll-up, site requests and staff directory."
+         Scope="Web"
+         Version="5.3.1.0"
+         Hidden="FALSE"
+         ReceiverAssembly="Lucerne.ProjectSites.Farm, Version=1.0.0.0, Culture=neutral, PublicKeyToken=$SharePoint.Project.AssemblyPublicKeyToken$"
+         ReceiverClass="Lucerne.ProjectSites.Farm.Features.HubFeatureReceiver">
+  <ActivationDependencies>
+    <ActivationDependency FeatureId="{A3B1D6E2-0F4C-4B7A-9D85-1E2F3A4B5C61}" />
+  </ActivationDependencies>
+  <ElementManifests>
+    <ElementManifest Location="Lists.xml" />
+    <ElementManifest Location="CustomActions.xml" />
+    <ElementManifest Location="WebParts.xml" />
+  </ElementManifests>
+</Feature>

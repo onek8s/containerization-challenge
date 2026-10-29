@@ -1,0 +1,23 @@
+@page
+@model Lucerne.Lending.CustomerPortal.Pages.Account.RegisterModel
+@{ ViewData["Title"] = "Create an account"; }
+<form method="post">
+    <div asp-validation-summary="All" class="validation"></div>
+    <input type="hidden" asp-for="ReturnUrl" />
+    <label asp-for="Input.FirstName">First name</label>
+    <input asp-for="Input.FirstName" type="text" autocomplete="given-name" />
+    <label asp-for="Input.LastName">Last name</label>
+    <input asp-for="Input.LastName" type="text" autocomplete="family-name" />
+    <label asp-for="Input.PersonalIdentityCode">Personal identity code</label>
+    <input asp-for="Input.PersonalIdentityCode" type="text" placeholder="DDMMYY-NNNC" />
+    <label asp-for="Input.Email">E-mail</label>
+    <input asp-for="Input.Email" type="email" autocomplete="email" />
+    <label asp-for="Input.Phone">Mobile phone</label>
+    <input asp-for="Input.Phone" type="tel" autocomplete="tel" />
+    <label asp-for="Input.Password">Password (at least 10 characters)</label>
+    <input asp-for="Input.Password" type="password" autocomplete="new-password" />
+    <label asp-for="Input.ConfirmPassword">Repeat password</label>
+    <input asp-for="Input.ConfirmPassword" type="password" autocomplete="new-password" />
+    <button type="submit">Create account</button>
+</form>
+<p class="muted">Already registered? <a asp-page="Login">Sign in</a></p>

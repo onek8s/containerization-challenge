@@ -1,0 +1,57 @@
+@model SelectLinesModel
+@{
+    ViewData["Title"] = "Select items";
+}
+<h1>Order @Model.Order.OrderNumber</h1>
+<p>Delivered @(Model.Order.DeliveredDate?.ToString("d MMMM yyyy") ?? "-"). Select the items you want to return.</p>
+@if (TempData["Error"] is string error)
+{
+    <div class="errors">@error</div>
+}
+<form asp-action="Select" method="post">
+    <div asp-validation-summary="ModelOnly" class="errors"></div>
+    <table class="grid">
+        <thead>
+            <tr><th>Item</th><th>Price</th><th>Return by</th><th>Quantity</th><th>Reason</th><th>Comment</th></tr>
+        </thead>
+        <tbody>
+        @for (var i = 0; i < Model.Order.Lines.Count; i++)
+        {
+            var line = Model.Order.Lines[i];
+            var selection = Model.Selections.FirstOrDefault(s => s.LineNumber == line.LineNumber) ?? new LineSelection { LineNumber = line.LineNumber };
+            <tr class="@(line.IsReturnable ? "" : "disabled")">
+                <td>@line.Description<br /><small>@line.Sku</small></td>
+                <td>@line.UnitPrice.ToString("0.00") @Model.Order.Currency</td>
+                <td>@(line.ReturnByDate?.ToString("d MMM yyyy") ?? "-")</td>
+                @if (line.IsReturnable)
+                {
+                    <td>
+                        <input type="hidden" name="selections[@i].LineNumber" value="@line.LineNumber" />
+                        <select name="selections[@i].Quantity">
+                            @for (var q = 0; q <= line.ReturnableQuantity; q++)
+                            {
+                                <option value="@q" selected="@(q == selection.Quantity)">@q</option>
+                            }
+                        </select>
+                    </td>
+                    <td>
+                        <select name="selections[@i].ReasonCode">
+                            <option value="">Choose...</option>
+                            @foreach (var reason in ReturnReasons.All)
+                            {
+                                <option value="@reason.Code" selected="@(reason.Code == selection.ReasonCode)">@reason.Text</option>
+                            }
+                        </select>
+                    </td>
+                    <td><input type="text" name="selections[@i].Comment" value="@selection.Comment" maxlength="1000" /></td>
+                }
+                else
+                {
+                    <td colspan="3" class="muted">@line.NotReturnableReason</td>
+                }
+            </tr>
+        }
+        </tbody>
+    </table>
+    <button type="submit">Continue</button>
+</form>

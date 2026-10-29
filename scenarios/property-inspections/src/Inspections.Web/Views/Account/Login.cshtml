@@ -1,0 +1,16 @@
+@model LoginModel
+@{
+    ViewBag.Title = "Sign in";
+}
+<h1>Sign in</h1>
+<p>Property Inspections is for Northwind Insurance staff and appointed loss adjusters.</p>
+@using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "form narrow" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(m => m.ReturnUrl)
+    <label>@Html.DisplayNameFor(m => m.Login) @Html.TextBoxFor(m => m.Login, new { autofocus = "autofocus" })</label>
+    <label>@Html.DisplayNameFor(m => m.Password) @Html.PasswordFor(m => m.Password)</label>
+    <label class="check">@Html.CheckBoxFor(m => m.Remember) @Html.DisplayNameFor(m => m.Remember)</label>
+    <button type="submit">Sign in</button>
+}

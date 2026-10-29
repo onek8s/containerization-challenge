@@ -1,0 +1,70 @@
+{
+  "id": 10483,
+  "parent_id": 0,
+  "number": "10483",
+  "order_key": "wc_order_P0lx9eLrT4c",
+  "created_via": "checkout",
+  "version": "4.9.2",
+  "status": "processing",
+  "currency": "SEK",
+  "date_created": "2026-10-29T14:12:09",
+  "date_created_gmt": "2026-10-29T12:12:09",
+  "discount_total": "0.00",
+  "shipping_total": "59.00",
+  "shipping_tax": "1.65",
+  "total": "1049.00",
+  "total_tax": "75.43",
+  "prices_include_tax": true,
+  "customer_id": 2231,
+  "customer_note": "",
+  "billing": {
+    "first_name": "Erik",
+    "last_name": "Lindqvist",
+    "company": "",
+    "address_1": "Storgatan 4",
+    "address_2": "",
+    "city": "Uppsala",
+    "state": "",
+    "postcode": "753 20",
+    "country": "SE",
+    "email": "erik.lindqvist@example.com",
+    "phone": "+46701234567"
+  },
+  "shipping": {
+    "first_name": "Erik",
+    "last_name": "Lindqvist",
+    "company": "",
+    "address_1": "Storgatan 4",
+    "address_2": "",
+    "city": "Uppsala",
+    "state": "",
+    "postcode": "753 20",
+    "country": "SE"
+  },
+  "payment_method": "paytrail",
+  "payment_method_title": "Paytrail",
+  "transaction_id": "a3f1e8d2-91c4-4a55-bb31-0c2f6a9e1d77",
+  "line_items": [
+    {
+      "id": 8820,
+      "name": "Trek 40 backpack, red (2017)",
+      "product_id": 290,
+      "variation_id": 0,
+      "quantity": 1,
+      "tax_class": "",
+      "subtotal": "990.00",
+      "total": "990.00",
+      "sku": "LW-PK-40-RED",
+      "price": 990
+    }
+  ],
+  "shipping_lines": [
+    {
+      "id": 8814,
+      "method_title": "Posti SmartPOST",
+      "method_id": "flat_rate",
+      "total": "6.90"
+    }
+  ],
+  "meta_data": []
+}

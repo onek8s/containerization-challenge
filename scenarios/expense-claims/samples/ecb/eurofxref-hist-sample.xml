@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gesmes:Envelope xmlns:gesmes="http://www.gesmes.org/xml/2002-08-01" xmlns="http://www.ecb.int/vocabulary/2002-08-01/eurofxref">
+	<gesmes:subject>Reference rates</gesmes:subject>
+	<gesmes:Sender>
+		<gesmes:name>European Central Bank</gesmes:name>
+	</gesmes:Sender>
+	<Cube>
+		<Cube time="2022-10-12">
+			<Cube currency="USD" rate="0.9706"/>
+			<Cube currency="GBP" rate="0.87690"/>
+			<Cube currency="NOK" rate="10.3653"/>
+			<Cube currency="SEK" rate="10.9240"/>
+			<Cube currency="DKK" rate="7.4380"/>
+		</Cube>
+		<Cube time="2022-10-11">
+			<Cube currency="USD" rate="0.9725"/>
+			<Cube currency="GBP" rate="0.88060"/>
+			<Cube currency="NOK" rate="10.3913"/>
+			<Cube currency="SEK" rate="10.9315"/>
+			<Cube currency="DKK" rate="7.4387"/>
+		</Cube>
+		<Cube time="2022-10-10">
+			<Cube currency="USD" rate="0.9739"/>
+			<Cube currency="GBP" rate="0.88030"/>
+			<Cube currency="NOK" rate="10.4400"/>
+			<Cube currency="SEK" rate="10.9518"/>
+			<Cube currency="DKK" rate="7.4392"/>
+		</Cube>
+	</Cube>
+</gesmes:Envelope>

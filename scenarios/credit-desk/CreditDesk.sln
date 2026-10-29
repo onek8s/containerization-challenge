@@ -1,0 +1,64 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{715FC4C7-B9C8-4E32-A3F0-60379D5ECF32}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CreditDesk.Core", "src\CreditDesk.Core\CreditDesk.Core.csproj", "{8B5E6D5F-D0AF-4737-A99E-B22C7F400116}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CreditDesk.Contracts", "src\CreditDesk.Contracts\CreditDesk.Contracts.csproj", "{E4CA253C-C02A-459C-BA00-1A2575E5E358}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CreditDesk.CreditService", "src\CreditDesk.CreditService\CreditDesk.CreditService.csproj", "{6119D598-A5EC-405E-A45E-B2FB09012916}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CreditDesk.LetterService", "src\CreditDesk.LetterService\CreditDesk.LetterService.csproj", "{4A98B499-A7AA-444E-A8F2-E633BCEBC762}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CreditDesk.Web", "src\CreditDesk.Web\CreditDesk.Web.csproj", "{FA33A16C-F6D9-48E6-91F8-4A68B92AE21E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{5B2EEBC8-C31E-4AE0-B746-8079E6523FB2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CreditDesk.Tests", "tests\CreditDesk.Tests\CreditDesk.Tests.csproj", "{C7DEE542-47FA-4CFA-B72A-D5A533B6AA69}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8B5E6D5F-D0AF-4737-A99E-B22C7F400116}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B5E6D5F-D0AF-4737-A99E-B22C7F400116}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B5E6D5F-D0AF-4737-A99E-B22C7F400116}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B5E6D5F-D0AF-4737-A99E-B22C7F400116}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E4CA253C-C02A-459C-BA00-1A2575E5E358}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4CA253C-C02A-459C-BA00-1A2575E5E358}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4CA253C-C02A-459C-BA00-1A2575E5E358}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4CA253C-C02A-459C-BA00-1A2575E5E358}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6119D598-A5EC-405E-A45E-B2FB09012916}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6119D598-A5EC-405E-A45E-B2FB09012916}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6119D598-A5EC-405E-A45E-B2FB09012916}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6119D598-A5EC-405E-A45E-B2FB09012916}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A98B499-A7AA-444E-A8F2-E633BCEBC762}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A98B499-A7AA-444E-A8F2-E633BCEBC762}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A98B499-A7AA-444E-A8F2-E633BCEBC762}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A98B499-A7AA-444E-A8F2-E633BCEBC762}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA33A16C-F6D9-48E6-91F8-4A68B92AE21E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA33A16C-F6D9-48E6-91F8-4A68B92AE21E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA33A16C-F6D9-48E6-91F8-4A68B92AE21E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA33A16C-F6D9-48E6-91F8-4A68B92AE21E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7DEE542-47FA-4CFA-B72A-D5A533B6AA69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7DEE542-47FA-4CFA-B72A-D5A533B6AA69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7DEE542-47FA-4CFA-B72A-D5A533B6AA69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7DEE542-47FA-4CFA-B72A-D5A533B6AA69}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8B5E6D5F-D0AF-4737-A99E-B22C7F400116} = {715FC4C7-B9C8-4E32-A3F0-60379D5ECF32}
+		{E4CA253C-C02A-459C-BA00-1A2575E5E358} = {715FC4C7-B9C8-4E32-A3F0-60379D5ECF32}
+		{6119D598-A5EC-405E-A45E-B2FB09012916} = {715FC4C7-B9C8-4E32-A3F0-60379D5ECF32}
+		{4A98B499-A7AA-444E-A8F2-E633BCEBC762} = {715FC4C7-B9C8-4E32-A3F0-60379D5ECF32}
+		{FA33A16C-F6D9-48E6-91F8-4A68B92AE21E} = {715FC4C7-B9C8-4E32-A3F0-60379D5ECF32}
+		{C7DEE542-47FA-4CFA-B72A-D5A533B6AA69} = {5B2EEBC8-C31E-4AE0-B746-8079E6523FB2}
+	EndGlobalSection
+EndGlobal

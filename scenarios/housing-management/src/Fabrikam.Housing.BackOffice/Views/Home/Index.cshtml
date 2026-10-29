@@ -1,0 +1,95 @@
+@model DashboardViewModel
+@{
+    ViewData["Title"] = "Dashboard";
+    var tiles = new[]
+    {
+        ("OpenRepairs", "Open repairs", "Repairs", "Index", "primary"),
+        ("Emergencies", "Open emergencies", "Repairs", "Index", "danger"),
+        ("OverdueRepairs", "Repairs past target", "Repairs", "Index", "warning"),
+        ("AwaitingTriage", "Awaiting triage", "Repairs", "Triage", "info"),
+        ("OverdueCertificates", "Expired certificates", "Compliance", "Index", "danger"),
+        ("OpenEnquiries", "Unanswered enquiries", "Tenancies", "Index", "secondary"),
+        ("InvoicesToApprove", "Invoices to approve", "Contractors", "Invoices", "dark")
+    };
+}
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h1 class="h3 mb-0">Good @(DateTime.Now.Hour < 12 ? "morning" : DateTime.Now.Hour < 18 ? "afternoon" : "evening"), @User.DisplayName()</h1>
+    <form method="get" class="form-inline">
+        <label class="mr-2">Patch</label>
+        <select name="patch" class="form-control form-control-sm" onchange="this.form.submit()">
+            <option value="">All patches</option>
+            @foreach (var p in new[] { "NORTH", "SOUTH", "EAST" })
+            {
+                <option value="@p" selected="@(Model.Patch == p)">@p</option>
+            }
+        </select>
+    </form>
+</div>
+
+<div class="row">
+    @foreach (var (key, label, controller, action, colour) in tiles)
+    {
+        <div class="col-6 col-md-3 col-xl mb-3">
+            <a class="card kpi border-@colour text-decoration-none" asp-controller="@controller" asp-action="@action" asp-route-overdue="@(key == "OverdueRepairs" ? "true" : null)" asp-route-priority="@(key == "Emergencies" ? "Emergency" : null)">
+                <div class="card-body">
+                    <div class="kpi-value text-@colour">@(Model.Counts.TryGetValue(key, out var n) ? n : 0)</div>
+                    <div class="kpi-label text-muted">@label</div>
+                </div>
+            </a>
+        </div>
+    }
+</div>
+
+<div class="row">
+    <div class="col-lg-6">
+        <div class="card mb-3">
+            <div class="card-header d-flex justify-content-between">
+                <span>Highest arrears @(Model.Patch == null ? "" : "in " + Model.Patch)</span>
+                <a asp-controller="Reports" asp-action="Arrears" asp-route-patch="@Model.Patch">Export</a>
+            </div>
+            <table class="table table-sm mb-0">
+                <thead><tr><th>Tenancy</th><th>Address</th><th>Tenant</th><th class="text-right">Balance</th><th class="text-right">Weeks</th><th>Stage</th></tr></thead>
+                <tbody>
+                    @foreach (var a in Model.TopArrears)
+                    {
+                        <tr>
+                            <td>@a.TenancyReference</td>
+                            <td>@a.Address</td>
+                            <td>@a.LeadTenant @if (a.UniversalCredit) { <span class="badge badge-info">UC</span> } @if (a.HousingBenefit) { <span class="badge badge-info">HB</span> }</td>
+                            <td class="text-right">@Money.Format(a.Balance)</td>
+                            <td class="text-right">@a.WeeksInArrears</td>
+                            <td>@((ArrearsStage)a.Stage)</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="card mb-3">
+            <div class="card-header">Open emergencies</div>
+            <partial name="_WorkOrderTable" model="Model.Emergencies" />
+        </div>
+        <div class="card mb-3">
+            <div class="card-header">Enquiries waiting for a reply</div>
+            <ul class="list-group list-group-flush">
+                @foreach (var e in Model.OpenEnquiries)
+                {
+                    var due = new WorkingCalendar().AddWorkingDays(e.CreatedAt, e.TargetWorkingDays);
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>
+                            <a asp-controller="Tenancies" asp-action="Details" asp-route-id="@e.TenancyId">@e.Tenancy.Reference</a>
+                            &middot; @e.Topic &middot; @e.Subject
+                            <br /><small class="text-muted">@e.CreatedBy, @e.Tenancy.Property.AddressLine1</small>
+                        </span>
+                        <span class="@(due < DateTime.Now ? "text-danger" : "text-muted") small">reply by @due.ToString("dd/MM")</span>
+                    </li>
+                }
+                @if (Model.OpenEnquiries.Count == 0)
+                {
+                    <li class="list-group-item text-muted">Nothing waiting.</li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,41 @@
+<Project Sdk="MSBuild.SDK.SystemWeb">
+
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+    <RootNamespace>VanArsdel.Integration.Gateway</RootNamespace>
+    <AssemblyName>VanArsdel.Integration.Gateway</AssemblyName>
+    <AppConfig>Web.config</AppConfig>
+    <GeneratedBindingRedirectsAction>None</GeneratedBindingRedirectsAction>
+    <SignAssembly>false</SignAssembly>
+    <!-- Release precompiles the pages and views with aspnet_compiler, which needs the .NET Framework MSBuild -->
+    <MvcBuildViews Condition="'$(MSBuildRuntimeType)' != 'Full'">false</MvcBuildViews>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MSBuild.Microsoft.VisualStudio.Web.targets" Version="14.0.0.3" PrivateAssets="all" />
+    <PackageReference Include="log4net" Version="2.0.8" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Activation" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="*.svc;B2BReceive\**\*" />
+    <None Include="Web.Lab.config;Web.Prod.config" />
+    <!-- the gateway validates batches with the same schema BizTalk deploys -->
+    <None Include="..\..\biztalk\VanArsdel.Integration.Schemas\Partner\PartnerOrders.xsd" Link="Schemas\PartnerOrders.xsd" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\VanArsdel.Integration.Contracts\VanArsdel.Integration.Contracts.csproj" />
+    <ProjectReference Include="..\VanArsdel.Integration.Data\VanArsdel.Integration.Data.csproj" />
+  </ItemGroup>
+
+</Project>

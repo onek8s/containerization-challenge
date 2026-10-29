@@ -1,0 +1,4 @@
+     A*  BUSDATE  Business date (one row), advanced by LNEOD    LNLIB
+     A          R BUSDATR
+     A            BDDATE          L         TEXT('Business date')
+     A            BDPREV          L         TEXT('Previous business date')

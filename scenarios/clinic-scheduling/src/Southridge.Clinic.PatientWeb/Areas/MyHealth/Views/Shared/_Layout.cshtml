@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title - Southridge Medical Group</title>
+    <link href="@Url.Content("~/Content/patients.css")" rel="stylesheet" type="text/css" />
+    <script src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js" type="text/javascript"></script>
+</head>
+<body>
+    <div id="page">
+        <div id="header">
+            <a id="brand" href="@Url.Content("~/")">Southridge Medical Group</a>
+            <div id="account">
+                @if (Request.IsAuthenticated)
+                {
+                    <span>Signed in as @(ViewBag.PatientName ?? User.Identity.Name)</span>
+                    <a href="@Url.Content("~/Account/Logout.aspx")">Sign out</a>
+                }
+            </div>
+        </div>
+        <ul id="nav">
+            <li><a href="@Url.Content("~/Book/Default.aspx")">Book a visit</a></li>
+            <li>@Html.ActionLink("My appointments", "Index", "Appointments", new { area = "MyHealth" }, null)</li>
+            <li>@Html.ActionLink("Bills and payments", "Index", "Statements", new { area = "MyHealth" }, null)</li>
+            <li>@Html.ActionLink("Pre-visit form", "Intake", "Forms", new { area = "MyHealth" }, null)</li>
+        </ul>
+        <div id="content">
+            @if (TempData["Message"] != null)
+            {
+                <div class="message">@TempData["Message"]</div>
+            }
+            @RenderBody()
+        </div>
+        <div id="footer">Questions about your visit or bill? Call your clinic. In an emergency call 911.</div>
+    </div>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

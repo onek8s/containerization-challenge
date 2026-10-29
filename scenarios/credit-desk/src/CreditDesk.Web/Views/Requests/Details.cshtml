@@ -1,0 +1,33 @@
+@model CreditDesk.Core.CreditRequest
+@{ ViewBag.Title = "Request " + Model.RequestId; }
+<h1>Request @Model.RequestId <span class="status status-@Model.Status.ToString().ToLowerInvariant()">@Model.Status</span></h1>
+<table class="kv">
+    <tr><th>Customer</th><td>@Html.ActionLink(Model.AccountNumber + " - " + Model.CustomerName, "Details", "Customers", new { id = Model.AccountNumber }, null)</td></tr>
+    <tr><th>Current limit</th><td>@Model.CurrentLimit.ToString("N2")</td></tr>
+    <tr><th>Requested limit</th><td>@Model.RequestedLimit.ToString("N2") (@Model.Change.ToString("+#,##0.00;-#,##0.00"))</td></tr>
+    <tr><th>Approval level</th><td>@Model.RequiredLevel</td></tr>
+    <tr><th>Reason</th><td>@Model.Reason</td></tr>
+    <tr><th>Requested</th><td>@Model.RequestedAt.ToString("g") by @Model.RequestedBy</td></tr>
+    @if (Model.DecidedAt.HasValue)
+    {
+        <tr><th>Decided</th><td>@Model.DecidedAt.Value.ToString("g") by @Model.DecidedBy</td></tr>
+        <tr><th>Comment</th><td>@Model.DecisionComment</td></tr>
+    }
+    @if (Model.ValidUntil.HasValue)
+    {
+        <tr><th>Valid until</th><td>@Model.ValidUntil.Value.ToString("d")</td></tr>
+    }
+    @if (!string.IsNullOrEmpty(Model.LetterPath))
+    {
+        <tr><th>Letter</th><td><a href="file:@Model.LetterPath.Replace('\\', '/')">@Model.LetterPath</a></td></tr>
+    }
+</table>
+@if ((Model.Status == CreditDesk.Core.RequestStatus.Submitted || Model.Status == CreditDesk.Core.RequestStatus.Escalated)
+     && string.Equals(Model.RequestedBy, User.Identity.Name, StringComparison.OrdinalIgnoreCase))
+{
+    using (Html.BeginForm("Withdraw", "Requests", new { id = Model.RequestId }))
+    {
+        @Html.AntiForgeryToken()
+        <button type="submit" class="secondary">Withdraw request</button>
+    }
+}

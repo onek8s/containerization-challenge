@@ -1,0 +1,46 @@
+@page
+@model IndexModel
+@{
+    ViewData["Title"] = "My tasks";
+}
+<h1>My tasks</h1>
+@if (Model.Tasks.Count == 0)
+{
+    <p>You have no open tasks.</p>
+}
+else
+{
+    <table>
+        <tr><th>Request</th><th>Task</th><th>Employee</th><th>Assigned to</th><th>Due</th><th>Reminders</th><th></th></tr>
+        @foreach (var t in Model.Tasks)
+        {
+            <tr>
+                <td>@t.RequestNumber</td>
+                <td>@IndexModel.Describe(t.Kind)</td>
+                <td>@t.Subject</td>
+                <td>@t.AssignedTo</td>
+                <td>@t.DueAtUtc.ToLocalTime().ToString("dd.MM.yyyy HH:mm")</td>
+                <td>@t.Reminders</td>
+                <td><a asp-page="/Tasks/Details" asp-route-id="@t.TaskId">Open</a></td>
+            </tr>
+        }
+    </table>
+}
+
+@if (Model.MyRequests.Count > 0)
+{
+    <h2>Requests I submitted</h2>
+    <table>
+        <tr><th>Request</th><th>Employee</th><th>Date</th><th>Status</th><th>Next step</th></tr>
+        @foreach (var r in Model.MyRequests)
+        {
+            <tr>
+                <td><a asp-page="/Requests/Details" asp-route-number="@r.RequestNumber">@r.RequestNumber</a></td>
+                <td>@r.Subject</td>
+                <td>@r.EffectiveDate.ToString("dd.MM.yyyy")</td>
+                <td><partial name="_StatusBadge" model="r.Status" /></td>
+                <td>@r.NextStep @(r.NextStepAtUtc?.ToLocalTime().ToString("dd.MM.yyyy HH:mm"))</td>
+            </tr>
+        }
+    </table>
+}

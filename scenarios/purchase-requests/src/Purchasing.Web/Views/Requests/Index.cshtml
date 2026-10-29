@@ -1,0 +1,7 @@
+@model IEnumerable<RequestSummary>
+@{
+    ViewBag.Title = "My requests";
+}
+<h1>My requests</h1>
+<p><a class="button" href="@Url.Action("Create")">New purchase request</a></p>
+@Html.Partial("_RequestTable", Model)

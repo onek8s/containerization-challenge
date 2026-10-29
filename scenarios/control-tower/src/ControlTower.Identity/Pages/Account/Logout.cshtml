@@ -1,0 +1,13 @@
+@page
+@model LogoutModel
+@{ ViewData["Title"] = "Sign out"; }
+<div class="login-card card shadow-sm">
+    <div class="card-body">
+        <h1 class="h4">Sign out</h1>
+        <p>Do you want to sign out of all Proseware applications?</p>
+        <form method="post">
+            <input type="hidden" asp-for="LogoutId" />
+            <button class="btn btn-primary">Sign out</button>
+        </form>
+    </div>
+</div>

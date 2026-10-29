@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <RootNamespace>CreditDesk.Contracts</RootNamespace>
+    <Version>3.2.0</Version>
+    <Company>Fabrikam Wholesale</Company>
+    <Product>Credit Desk</Product>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CreditDesk.Core\CreditDesk.Core.csproj" />
+  </ItemGroup>
+
+</Project>

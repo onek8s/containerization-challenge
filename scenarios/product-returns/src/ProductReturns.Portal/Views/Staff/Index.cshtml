@@ -1,0 +1,54 @@
+@model StaffQueueModel
+@{
+    ViewData["Title"] = "Returns queue";
+}
+<h1>Returns queue</h1>
+<ul class="tabs">
+    @foreach (var status in Enum.GetValues(typeof(ReturnStatus)).Cast<ReturnStatus>())
+    {
+        <li class="@(Model.Filter.Status == status ? "active" : "")">
+            <a asp-action="Index" asp-route-status="@status" asp-route-query="@Model.Filter.Query">@status (@(Model.Counts.TryGetValue(status.ToString(), out var c) ? c : 0))</a>
+        </li>
+    }
+    <li class="@(Model.Filter.Status == null ? "active" : "")"><a asp-action="Index" asp-route-reset="true" asp-route-query="@Model.Filter.Query" asp-route-status="">All</a></li>
+</ul>
+<form method="get" asp-action="Index" class="search">
+    <input type="hidden" name="status" value="@Model.Filter.Status" />
+    <input type="text" name="query" value="@Model.Filter.Query" placeholder="RMA, order, customer or tracking number" />
+    <button type="submit">Search</button>
+</form>
+@if (Model.Error != null)
+{
+    <div class="errors">@Model.Error</div>
+}
+@if (Model.Result != null)
+{
+    <table class="grid">
+        <thead><tr><th>Return</th><th>Order</th><th>Customer</th><th>Status</th><th>Items</th><th>Value</th><th>Created</th></tr></thead>
+        <tbody>
+        @foreach (var r in Model.Result.Items)
+        {
+            <tr>
+                <td><a asp-action="Detail" asp-route-id="@r.RmaNumber">@r.RmaNumber</a></td>
+                <td>@r.OrderNumber</td>
+                <td>@r.CustomerName<br /><small>@r.CustomerEmail</small></td>
+                <td>@r.Status</td>
+                <td>@r.Items</td>
+                <td>@r.Value.ToString("0.00")</td>
+                <td>@r.CreatedUtc.ToLocalTime().ToString("dd.MM.yyyy HH:mm")</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+    var pages = (int)Math.Ceiling(Model.Result.Total / (double)Math.Max(1, Model.Result.PageSize));
+    if (pages > 1)
+    {
+        <p class="pager">
+            @for (var p = 1; p <= pages; p++)
+            {
+                <a asp-action="Index" asp-route-status="@Model.Filter.Status" asp-route-query="@Model.Filter.Query" asp-route-page="@p" class="@(p == Model.Result.Page ? "active" : "")">@p</a>
+            }
+        </p>
+    }
+    <p class="muted">@Model.Result.Total returns</p>
+}

@@ -1,0 +1,42 @@
+@model SalesOrderEntity
+<div class="panel">
+    <h2>@Model.OrderNo <span class="muted">(@Model.RepReference)</span> @Html.Partial("_OrderStatus", Model.Status)</h2>
+    <table class="table">
+        <tr><td style="width:50%">
+            <strong>@Model.Customer.Name</strong> (@Model.CustomerNo)<br />
+            @Model.Customer.Street<br />@Model.Customer.PostalCode @Model.Customer.City<br />
+            Price group @Model.Customer.PriceGroup
+        </td><td>
+            Sales rep: @Model.RepCode (@Model.SubmittedBy)<br />
+            Written: @Model.CreatedAt.ToString("g") &middot; Received: @Model.ReceivedAt.ToString("g")<br />
+            Delivery: @Model.RequestedDelivery.ToString("dddd d.M.yyyy")<br />
+            Client version: @Model.ClientVersion
+        </td></tr>
+    </table>
+    <table class="table">
+        <tr><th>#</th><th>Item</th><th>Name</th><th class="text-right">Qty</th><th class="text-right">Unit price</th><th class="text-right">Discount %</th><th class="text-right">VAT %</th><th class="text-right">Total</th></tr>
+        @foreach (var l in Model.Lines.OrderBy(l => l.LineNo))
+        {
+            <tr>
+                <td>@l.LineNo</td><td>@l.ItemNo</td><td>@l.ItemName</td><td class="text-right">@l.Quantity</td>
+                <td class="text-right">@l.UnitPrice.ToString("N2")</td>
+                <td class="text-right">@(l.LineDiscountPercent > 0 ? l.LineDiscountPercent.ToString("0.##") : "")</td>
+                <td class="text-right">@l.VatRate.ToString("0.##")</td><td class="text-right">@l.LineTotal.ToString("N2")</td>
+            </tr>
+        }
+        <tr><td colspan="7" class="text-right">Excl. VAT (manual discount @Model.ManualDiscountPercent.ToString("0.##") %)</td><td class="text-right"><strong>@Model.NetTotal.ToString("N2")</strong></td></tr>
+        <tr><td colspan="7" class="text-right">VAT</td><td class="text-right">@Model.VatTotal.ToString("N2")</td></tr>
+    </table>
+    @if (!string.IsNullOrEmpty(Model.Comment))
+    {
+        <p><strong>Comment from rep:</strong> @Model.Comment</p>
+    }
+    @if (Model.DecidedAt.HasValue)
+    {
+        <p><strong>Decision:</strong> @Model.DecidedBy, @Model.DecidedAt.Value.ToString("g"). @Model.DecisionComment</p>
+    }
+    @if (Model.ConfirmationSentAt.HasValue)
+    {
+        <p class="muted">Confirmation e-mailed to @Model.Customer.Email at @Model.ConfirmationSentAt.Value.ToString("g").</p>
+    }
+</div>

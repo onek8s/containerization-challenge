@@ -1,0 +1,35 @@
+<Project Sdk="MSBuild.SDK.SystemWeb">
+
+  <PropertyGroup>
+    <TargetFramework>net452</TargetFramework>
+    <RootNamespace>Southridge.Clinic.WebServices</RootNamespace>
+    <AppConfig>Web.config</AppConfig>
+    <GeneratedBindingRedirectsAction>None</GeneratedBindingRedirectsAction>
+    <Configurations>Debug;Release;Lab</Configurations>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MSBuild.Microsoft.VisualStudio.Web.targets" Version="14.0.0.3" PrivateAssets="all" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="*.asmx;Global.asax" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Southridge.Clinic.Domain\Southridge.Clinic.Domain.csproj" />
+    <ProjectReference Include="..\Southridge.Clinic.Hl7\Southridge.Clinic.Hl7.csproj" />
+    <ProjectReference Include="..\Southridge.Clinic.Infrastructure\Southridge.Clinic.Infrastructure.csproj" />
+    <ProjectReference Include="..\Southridge.Clinic.Data\Southridge.Clinic.Data.csproj" />
+    <ProjectReference Include="..\Southridge.Clinic.Scheduling\Southridge.Clinic.Scheduling.csproj" />
+    <ProjectReference Include="..\Southridge.Clinic.Documents\Southridge.Clinic.Documents.csproj" />
+  </ItemGroup>
+
+</Project>

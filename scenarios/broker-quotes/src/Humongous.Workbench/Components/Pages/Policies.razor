@@ -1,0 +1,31 @@
+@page "/policies"
+@inject QuoteApiClient Api
+
+<PageTitle>Policies</PageTitle>
+<h1>Policies</h1>
+<div class="filters"><input placeholder="Policy number, insured or postcode" @bind="search" @bind:event="oninput" @bind:after="LoadAsync" /></div>
+<table class="list">
+    <thead><tr><th>Policy</th><th>Agency</th><th>Insured</th><th>Period</th><th>Status</th><th class="num">Annual gross</th></tr></thead>
+    <tbody>
+        @foreach (var p in policies)
+        {
+            <tr>
+                <td><a href="policies/@p.Id">@p.PolicyNumber</a></td>
+                <td>@p.AgencyCode</td>
+                <td>@p.InsuredName</td>
+                <td>@p.InceptionDate.ToString("dd/MM/yy") - @p.ExpiryDate.ToString("dd/MM/yy")</td>
+                <td>@p.Status</td>
+                <td class="num">@p.AnnualGrossPremium.ToString("N2")</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@code {
+    private List<PolicySummary> policies = [];
+    private string? search;
+
+    protected override Task OnInitializedAsync() => LoadAsync();
+
+    private async Task LoadAsync() => policies = await Api.PoliciesAsync(search);
+}

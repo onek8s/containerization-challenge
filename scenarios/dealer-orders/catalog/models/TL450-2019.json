@@ -1,0 +1,165 @@
+{
+  "modelCode": "TL450",
+  "itemId": "TL450",
+  "name": "Tailspin TL450 compact loader",
+  "family": "CompactLoader",
+  "modelYear": 2019,
+  "validFrom": "2018-01-01",
+  "validTo": null,
+  "leadTimeWeeks": 6,
+  "imageUrl": "/Content/img/tl450.jpg",
+  "exportControlClass": null,
+  "markets": [],
+  "optionGroups": [
+    {
+      "code": "ENGINE",
+      "name": "Engine",
+      "kind": "SingleRequired",
+      "sortOrder": 10,
+      "options": [
+        {
+          "code": "ENG-55",
+          "name": "Engine 55 kW",
+          "itemId": "OPT-ENG55",
+          "isDefault": true,
+          "markets": [],
+          "extraLeadTimeWeeks": 0,
+          "discountGroup": null
+        }
+      ]
+    },
+    {
+      "code": "BOOM",
+      "name": "Boom",
+      "kind": "SingleRequired",
+      "sortOrder": 20,
+      "options": [
+        {
+          "code": "BOOM-STD",
+          "name": "Standard boom",
+          "itemId": "",
+          "isDefault": true,
+          "markets": [],
+          "extraLeadTimeWeeks": 0,
+          "discountGroup": null
+        },
+        {
+          "code": "BOOM-TELE",
+          "name": "Telescopic boom",
+          "itemId": "OPT-BOOMTEL",
+          "isDefault": false,
+          "markets": [],
+          "extraLeadTimeWeeks": 0,
+          "discountGroup": null
+        }
+      ]
+    },
+    {
+      "code": "HITCH",
+      "name": "Attachment bracket",
+      "kind": "SingleRequired",
+      "sortOrder": 30,
+      "options": [
+        {
+          "code": "HITCH-EURO",
+          "name": "Euro bracket",
+          "itemId": "",
+          "isDefault": true,
+          "markets": [],
+          "extraLeadTimeWeeks": 0,
+          "discountGroup": null
+        },
+        {
+          "code": "HITCH-SKID",
+          "name": "Skid steer bracket",
+          "itemId": "OPT-HSKID",
+          "isDefault": false,
+          "markets": [],
+          "extraLeadTimeWeeks": 0,
+          "discountGroup": null
+        }
+      ]
+    },
+    {
+      "code": "ATTACH",
+      "name": "Attachments",
+      "kind": "Multiple",
+      "sortOrder": 40,
+      "options": [
+        {
+          "code": "BUCKET-GP",
+          "name": "General purpose bucket 1.2 m",
+          "itemId": "OPT-BKTGP",
+          "isDefault": false,
+          "markets": [],
+          "extraLeadTimeWeeks": 0,
+          "discountGroup": "ATTACHMENT"
+        },
+        {
+          "code": "FORKS",
+          "name": "Pallet forks 1,200 mm",
+          "itemId": "OPT-FORKS",
+          "isDefault": false,
+          "markets": [],
+          "extraLeadTimeWeeks": 0,
+          "discountGroup": "ATTACHMENT"
+        },
+        {
+          "code": "SWEEPER",
+          "name": "Rotary sweeper 1.8 m",
+          "itemId": "OPT-SWEEP",
+          "isDefault": false,
+          "markets": [],
+          "extraLeadTimeWeeks": 0,
+          "discountGroup": "ATTACHMENT"
+        },
+        {
+          "code": "SNOW-BLADE",
+          "name": "Snow blade 2.2 m",
+          "itemId": "OPT-SNOW",
+          "isDefault": false,
+          "markets": [
+            "FI",
+            "SE",
+            "NO",
+            "DE",
+            "AT",
+            "US",
+            "CA"
+          ],
+          "extraLeadTimeWeeks": 0,
+          "discountGroup": "ATTACHMENT"
+        },
+        {
+          "code": "CAB-HEATER",
+          "name": "Cab heater",
+          "itemId": "OPT-HEAT",
+          "isDefault": false,
+          "markets": [],
+          "extraLeadTimeWeeks": 0,
+          "discountGroup": null
+        }
+      ]
+    }
+  ],
+  "rules": [
+    {
+      "id": "TL450-R1",
+      "kind": "Requires",
+      "option": "SWEEPER",
+      "targets": [
+        "HITCH-EURO"
+      ],
+      "expression": null,
+      "message": "The sweeper is only available with the Euro bracket."
+    },
+    {
+      "id": "TL450-R2",
+      "kind": "Condition",
+      "option": null,
+      "targets": [],
+      "expression": "BOOM-TELE and SNOW-BLADE => invalid",
+      "message": "The snow blade cannot be used with the telescopic boom."
+    }
+  ]
+}

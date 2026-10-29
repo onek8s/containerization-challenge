@@ -1,0 +1,16 @@
+body { font-family: Segoe UI, Arial, sans-serif; margin: 0; color: #222; background: #f7f7f7; }
+header { background: #2b4a6f; padding: 0.6em 1em; }
+nav a { color: #fff; text-decoration: none; margin-right: 1.2em; }
+nav a.brand { font-weight: bold; }
+main { padding: 1em 1.5em; background: #fff; min-height: 70vh; }
+footer { padding: 0.8em 1.5em; font-size: 0.85em; color: #666; }
+table { border-collapse: collapse; width: 100%; }
+th, td { border-bottom: 1px solid #ddd; padding: 0.35em 0.5em; text-align: left; }
+td.num, th.num { text-align: right; }
+tr.low td { background: #fff3cd; }
+form.filter { margin-bottom: 1em; }
+form.edit { display: grid; grid-template-columns: max-content 20em; gap: 0.4em 1em; align-items: center; }
+form.edit .errors, form.edit button, form.edit a { grid-column: 2; }
+.errors { color: #b00020; font-size: 0.9em; }
+.muted { color: #777; }
+.stats li { margin: 0.3em 0; }

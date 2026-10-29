@@ -1,0 +1,39 @@
+@inject CurrentUser CurrentUser
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Supplier Invoices</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <a class="brand" asp-page="/Index">Wingtip Supplier Invoices</a>
+        <nav>
+            <a asp-page="/Index">Overview</a>
+            <a asp-page="/Invoices/Index">Invoices</a>
+            <a asp-page="/Invoices/Exceptions">Exceptions</a>
+            <a asp-page="/Files/Index">Files</a>
+            <a asp-page="/Batches/Index">ERP batches</a>
+            @if (await CurrentUser.IsAdminAsync())
+            {
+                <a asp-page="/Suppliers/Index">Suppliers</a>
+            }
+        </nav>
+        <span class="user" title="@CurrentUser.Account">@CurrentUser.DisplayName</span>
+    </header>
+    <main>
+        @if (TempData["Message"] is string message)
+        {
+            <p class="notice">@message</p>
+        }
+        @if (TempData["Error"] is string error)
+        {
+            <p class="notice error">@error</p>
+        }
+        @RenderBody()
+    </main>
+    <footer>Accounts payable · Wingtip Supply Oy</footer>
+</body>
+</html>

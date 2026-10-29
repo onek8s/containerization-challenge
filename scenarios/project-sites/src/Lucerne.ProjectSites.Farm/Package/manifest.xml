@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Solution manifest of Lucerne.ProjectSites.wsp. New-SolutionPackage.ps1 replaces the public key token,
+  adds the third-party and framework facade assemblies from the build output at the ADDITIONAL_ASSEMBLIES
+  marker and builds the cabinet with makecab.
+-->
+<Solution xmlns="http://schemas.microsoft.com/sharepoint/"
+          SolutionId="5D1A6E2B-7C3F-4A8E-9B04-1C2D3E4F5A60"
+          SharePointProductVersion="16.0"
+          DeploymentServerType="WebFrontEnd"
+          ResetWebServer="TRUE">
+  <Assemblies>
+    <Assembly Location="Lucerne.ProjectSites.Farm.dll" DeploymentTarget="GlobalAssemblyCache">
+      <SafeControls>
+        <SafeControl Assembly="Lucerne.ProjectSites.Farm, Version=1.0.0.0, Culture=neutral, PublicKeyToken=$SharePoint.Project.AssemblyPublicKeyToken$" Namespace="Lucerne.ProjectSites.Farm.WebParts" TypeName="*" Safe="True" SafeAgainstScript="False" />
+      </SafeControls>
+    </Assembly>
+    <Assembly Location="Lucerne.ProjectSites.ServerObjectModel.dll" DeploymentTarget="GlobalAssemblyCache" />
+    <Assembly Location="Lucerne.ProjectSites.Core.dll" DeploymentTarget="GlobalAssemblyCache" />
+    <Assembly Location="Lucerne.ProjectSites.SharePoint.dll" DeploymentTarget="GlobalAssemblyCache" />
+    <Assembly Location="Lucerne.ProjectSites.Contracts.dll" DeploymentTarget="GlobalAssemblyCache" />
+    <Assembly Location="Lucerne.ProjectSites.Domain.dll" DeploymentTarget="GlobalAssemblyCache" />
+    <Assembly Location="Lucerne.ProjectSites.Documents.dll" DeploymentTarget="GlobalAssemblyCache" />
+    <!-- ADDITIONAL_ASSEMBLIES -->
+  </Assemblies>
+  <FeatureManifests>
+    <FeatureManifest Location="Lucerne.ProjectSites_Fields\Feature.xml" />
+    <FeatureManifest Location="Lucerne.ProjectSites_Hub\Feature.xml" />
+    <FeatureManifest Location="Lucerne.ProjectSites_ProjectSite\Feature.xml" />
+    <FeatureManifest Location="Lucerne.ProjectSites_WebTemplate\Feature.xml" />
+    <FeatureManifest Location="Lucerne.ProjectSites_TimerJobs\Feature.xml" />
+    <FeatureManifest Location="Lucerne.ProjectSites_WebParts\Feature.xml" />
+  </FeatureManifests>
+  <TemplateFiles>
+    <TemplateFile Location="LAYOUTS\Lucerne.ProjectSites\StatusReport.aspx" />
+    <TemplateFile Location="LAYOUTS\Lucerne.ProjectSites\RetentionPreview.aspx" />
+    <TemplateFile Location="LAYOUTS\Lucerne.ProjectSites\ManualStatus.aspx" />
+    <TemplateFile Location="LAYOUTS\Lucerne.ProjectSites\js\jquery-1.12.4.min.js" />
+    <TemplateFile Location="LAYOUTS\Lucerne.ProjectSites\js\lucerne.projectsites.js" />
+    <TemplateFile Location="LAYOUTS\Lucerne.ProjectSites\js\lucerne.hub.js" />
+    <TemplateFile Location="LAYOUTS\Lucerne.ProjectSites\css\lucerne.css" />
+  </TemplateFiles>
+</Solution>

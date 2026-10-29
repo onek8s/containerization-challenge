@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>Lucerne.ProjectSites.Core</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Lucerne.ProjectSites.Domain\Lucerne.ProjectSites.Domain.csproj" />
+    <ProjectReference Include="..\Lucerne.ProjectSites.Contracts\Lucerne.ProjectSites.Contracts.csproj" />
+    <ProjectReference Include="..\Lucerne.ProjectSites.SharePoint\Lucerne.ProjectSites.SharePoint.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,11 @@
+Subject: Order {OrderNumber} not accepted
+
+Dear {DealerName},
+
+we could not accept order {OrderNumber} (your reference {DealerPo}).
+
+Reason: {Reason}
+
+Please contact the sales desk if you have questions.
+
+Tailspin Machinery dealer sales

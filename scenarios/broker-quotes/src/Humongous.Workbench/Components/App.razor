@@ -1,0 +1,33 @@
+@using Microsoft.AspNetCore.Authentication
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <base href="/" />
+    <link rel="stylesheet" href="workbench.css" />
+    <title>Underwriting workbench</title>
+    <HeadOutlet @rendermode="InteractiveServer" />
+</head>
+<body>
+    <Routes @rendermode="InteractiveServer" Tokens="tokens" />
+    <script src="_framework/blazor.web.js"></script>
+</body>
+</html>
+
+@code {
+    [CascadingParameter] private HttpContext HttpContext { get; set; } = default!;
+
+    private InitialTokens tokens = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Captured once from the HTTP request; the circuit keeps and refreshes them (UserTokens).
+        tokens = new InitialTokens
+        {
+            AccessToken = await HttpContext.GetTokenAsync("access_token"),
+            RefreshToken = await HttpContext.GetTokenAsync("refresh_token"),
+            ExpiresAt = await HttpContext.GetTokenAsync("expires_at")
+        };
+    }
+}

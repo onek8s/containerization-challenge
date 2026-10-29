@@ -1,0 +1,32 @@
+body { font-family: "Segoe UI", Arial, sans-serif; font-size: 14px; margin: 0; color: #222; background: #f6f7f9; }
+header { background: #123c69; color: #fff; padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; }
+header a { color: #fff; text-decoration: none; margin-left: 14px; }
+header .brand { margin-left: 0; font-weight: 600; }
+main { padding: 20px; max-width: 1200px; margin: 0 auto; background: #fff; min-height: 70vh; }
+footer { text-align: center; color: #888; padding: 12px; font-size: 12px; }
+.inline { display: inline; }
+button { background: #123c69; color: #fff; border: 0; padding: 6px 14px; cursor: pointer; }
+button.secondary { background: #6c7a89; }
+button.danger { background: #a12b2b; }
+button.link { background: none; color: #fff; padding: 0; margin-left: 14px; }
+a.button { background: #123c69; color: #fff; padding: 6px 14px; text-decoration: none; }
+.form label { display: block; margin: 8px 0; }
+.form input[type=text], .form input[type=email], .form input[type=password], .form input[type=date], .form select, .form textarea { display: block; width: 100%; max-width: 520px; padding: 5px; }
+.form.narrow { max-width: 360px; }
+.form .check input { display: inline; width: auto; }
+.field-validation-error, .validation-summary-errors { color: #a12b2b; }
+.notice { background: #fff8d6; border-left: 4px solid #e0b100; padding: 6px 10px; }
+.grid { border-collapse: collapse; width: 100%; }
+.grid th, .grid td { border-bottom: 1px solid #ddd; padding: 6px; text-align: left; }
+.num { text-align: right; }
+.status { font-size: 12px; padding: 2px 6px; border-radius: 3px; background: #ccc; }
+.status.s1 { background: #cfe3ff; } .status.s2 { background: #ffe7b3; } .status.s3 { background: #c9efc9; } .status.s4 { background: #ddd; }
+.facts { display: grid; grid-template-columns: 160px 1fr; }
+.facts dt { color: #666; }
+.photos { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 14px; }
+.photos li { width: 330px; }
+.photos img { max-width: 320px; max-height: 320px; display: block; }
+.photos .meta { font-size: 12px; color: #555; }
+.purged { width: 320px; height: 120px; background: #eee; color: #777; display: flex; align-items: center; justify-content: center; }
+.hint { color: #777; margin-left: 10px; }
+.history { color: #555; font-size: 13px; }

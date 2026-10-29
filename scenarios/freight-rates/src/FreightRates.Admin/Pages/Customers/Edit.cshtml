@@ -1,0 +1,33 @@
+@page "{id:int?}"
+@model FreightRates.Admin.Pages.Customers.EditModel
+@{
+    ViewData["Title"] = Model.Input.Id == 0 ? "New customer" : $"Customer {Model.Input.Code}";
+}
+<h1>@ViewData["Title"]</h1>
+
+@if (Model.NewApiKey is not null)
+{
+    <p>New API key for @Model.Input.Code. Copy it now; it is not shown again.</p>
+    <p class="key">@Model.NewApiKey</p>
+}
+
+<form method="post">
+    <div asp-validation-summary="All" class="error"></div>
+    <input type="hidden" asp-for="Input.Id" />
+    <label>Code <input asp-for="Input.Code" readonly="@(Model.Input.Id != 0)" /></label>
+    <label>Name <input asp-for="Input.Name" size="50" /></label>
+    <label>Discount % <input asp-for="Input.DiscountPercent" /></label>
+    <label>Minimum charge (0 = tariff minimum) <input asp-for="Input.MinimumCharge" /></label>
+    <label>Fuel surcharge override % <input asp-for="Input.FuelSurchargeOverridePercent" /></label>
+    <label><input asp-for="Input.Active" /> Active</label>
+    <button type="submit">Save</button>
+</form>
+
+@if (Model.Input.Id != 0)
+{
+    <form method="post" asp-page-handler="RotateKey">
+        <input type="hidden" name="id" value="@Model.Input.Id" />
+        <button type="submit" onclick="return confirm('The current API key stops working immediately. Continue?')">Issue new API key</button>
+    </form>
+    <p>Last changed @Model.Input.ModifiedUtc?.ToLocalTime().ToString("g") by @Model.Input.ModifiedBy</p>
+}
